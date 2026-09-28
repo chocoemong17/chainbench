@@ -30,6 +30,14 @@ PMLR: https://proceedings.mlr.press/v28/jaggi13.html
 
 The bundled check uses the classical curvature-based sublinear primal-gap guarantee with the standard step schedule.
 
+## Proximal point
+
+R. T. Rockafellar, **“Monotone Operators and the Proximal Point Algorithm.”**
+*SIAM Journal on Control and Optimization*, 14(5), 877–898, 1976.  
+DOI: https://doi.org/10.1137/0314056
+
+The bundled check specializes the exact proximal-point update to a strongly convex quadratic, where the resolvent contraction can be computed directly.
+
 ## FISTA
 
 A. Beck and M. Teboulle, **“A Fast Iterative Shrinkage-Thresholding Algorithm for Linear Inverse Problems.”**
