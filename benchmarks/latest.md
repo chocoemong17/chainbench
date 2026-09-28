@@ -9,6 +9,7 @@ Deterministic numerical consistency checks for public, published results.
 | polyak-1964 | CONSISTENT | 0.01692285 | 0.08 | relative error: observed tail ratio vs predicted rho |
 | hestenes-stiefel-1952 | CONSISTENT | 0.5 | 1 | max_k \|\|e_k\|\|_Q / (2 rho^k \|\|e_0\|\|_Q) |
 | jaggi-2013 | CONSISTENT | 0.3675 | 1 | max_k gap_k / (2 C_f / (k+2)) |
+| rockafellar-1976 | CONSISTENT | 0.9783261 | 1 | max_k \\|\\|e_(k+1)\\|\\| / (q \\|\\|e_k\\|\\|) |
 | beck-teboulle-2009 | CONSISTENT | 0.1425624 | 1 | max_k gap_k / bound_k |
 | ista-vs-fista | CONSISTENT | 0.009192292 | 1 | FISTA final gap / ISTA final gap |
 
