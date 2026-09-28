@@ -12,6 +12,7 @@ from .methods import (
     gradient_descent,
     heavy_ball,
     ista,
+    proximal_point,
 )
 from .problems import (
     diagonal_lasso,
@@ -149,6 +150,29 @@ def check_frank_wolfe(steps: int = 80) -> CheckResult:
     )
 
 
+def check_proximal_point(steps: int = 30, proximal_parameter: float = 1.0) -> CheckResult:
+    p = strongly_convex_quadratic(dim=40, mu=0.1, L=1.0)
+    trace = proximal_point(p, steps=steps, proximal_parameter=proximal_parameter)
+    errors = np.asarray([np.linalg.norm(x - p.x_star) for x in trace.iterates])
+    contraction = 1.0 / (1.0 + proximal_parameter * p.mu)
+    scaled_ratios = errors[1:] / np.maximum(contraction * errors[:-1], 1e-300)
+    worst = float(np.max(scaled_ratios))
+    return CheckResult(
+        "rockafellar-1976",
+        "Proximal point",
+        "R. T. Rockafellar (1976), Monotone Operators and the Proximal Point Algorithm",
+        "Successive errors respect the strongly-convex resolvent contraction on this quadratic.",
+        "max_k ||e_(k+1)|| / (q ||e_k||)",
+        worst,
+        1.0,
+        worst <= 1.0 + 1e-10,
+        (
+            f"proximal parameter={proximal_parameter:.6g}, mu={p.mu:.6g}, "
+            f"q={contraction:.6g}."
+        ),
+    )
+
+
 def check_fista(steps: int = 80) -> CheckResult:
     p = diagonal_lasso()
     x0 = np.zeros(p.dim)
@@ -197,6 +221,7 @@ CHECKS = {
     "polyak-1964": check_polyak,
     "hestenes-stiefel-1952": check_conjugate_gradient,
     "jaggi-2013": check_frank_wolfe,
+    "rockafellar-1976": check_proximal_point,
     "beck-teboulle-2009": check_fista,
     "ista-vs-fista": check_ista_vs_fista,
 }
