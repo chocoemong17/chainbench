@@ -11,6 +11,7 @@ Instead of introducing new theory, it implements well-known algorithms from the 
 - Does Polyak's heavy-ball method exhibit the contraction predicted by its quadratic spectral analysis?
 - Does conjugate gradient respect its classical condition-number convergence envelope?
 - Does Frank-Wolfe exhibit its curvature-based `O(1/k)` behavior on a simplex problem?
+- Does the proximal point method exhibit the contraction predicted by strong convexity?
 - Does FISTA satisfy its standard objective-gap bound on a LASSO instance whose exact optimum is known?
 
 ChainBench deliberately uses the word **check**, not *proof*. A finite numerical experiment can catch implementation mistakes and reproduce a published phenomenon, but it cannot establish a theorem.
@@ -23,6 +24,7 @@ ChainBench deliberately uses the word **check**, not *proof*. A finite numerical
 | `polyak-1964` | Polyak heavy-ball | Tail contraction versus the quadratic spectral-radius prediction |
 | `hestenes-stiefel-1952` | Conjugate gradient | Classical A-norm error envelope on a deterministic SPD quadratic |
 | `jaggi-2013` | Frank-Wolfe | Curvature-based `O(1/k)` gap envelope on an exact-solvable simplex quadratic |
+| `rockafellar-1976` | Proximal point | Strongly-convex resolvent contraction on an exact-solvable quadratic |
 | `beck-teboulle-2009` | FISTA | Standard `O(1/k^2)` composite-objective gap bound on diagonal LASSO |
 | `ista-vs-fista` | ISTA/FISTA | Same-budget empirical comparison on the bundled LASSO instance |
 | `gd-baseline` | Gradient descent | Standard `O(1/k)` smooth-convex gap bound |
