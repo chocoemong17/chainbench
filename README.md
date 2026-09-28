@@ -3,12 +3,13 @@
 [![tests](https://github.com/chocoemong17/chainbench/actions/workflows/tests.yml/badge.svg)](https://github.com/chocoemong17/chainbench/actions/workflows/tests.yml)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
 
-**ChainBench** is a small, transparent reproducibility project for classic results in first-order optimization.
+**ChainBench** is a small, transparent reproducibility project for classic results in optimization and iterative numerical methods.
 
 Instead of introducing new theory, it implements well-known algorithms from the literature and runs deterministic numerical **consistency checks** on problems with exact solutions. The goal is to make it easy to answer questions such as:
 
 - Does a standard accelerated-gradient implementation respect the familiar `O(1/k^2)` bound on a concrete smooth convex problem?
 - Does Polyak's heavy-ball method exhibit the contraction predicted by its quadratic spectral analysis?
+- Does conjugate gradient respect its classical condition-number convergence envelope?
 - Does FISTA satisfy its standard objective-gap bound on a LASSO instance whose exact optimum is known?
 
 ChainBench deliberately uses the word **check**, not *proof*. A finite numerical experiment can catch implementation mistakes and reproduce a published phenomenon, but it cannot establish a theorem.
@@ -19,6 +20,7 @@ ChainBench deliberately uses the word **check**, not *proof*. A finite numerical
 |---|---|---|
 | `nesterov-1983` | Nesterov acceleration | Standard `O(1/k^2)` smooth-convex gap bound on a deterministic quadratic |
 | `polyak-1964` | Polyak heavy-ball | Tail contraction versus the quadratic spectral-radius prediction |
+| `hestenes-stiefel-1952` | Conjugate gradient | Classical A-norm error envelope on a deterministic SPD quadratic |
 | `beck-teboulle-2009` | FISTA | Standard `O(1/k^2)` composite-objective gap bound on diagonal LASSO |
 | `ista-vs-fista` | ISTA/FISTA | Same-budget empirical comparison on the bundled LASSO instance |
 | `gd-baseline` | Gradient descent | Standard `O(1/k)` smooth-convex gap bound |

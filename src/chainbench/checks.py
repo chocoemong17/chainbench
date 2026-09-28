@@ -4,7 +4,14 @@ from dataclasses import dataclass
 
 import numpy as np
 
-from .methods import accelerated_gradient, fista, gradient_descent, heavy_ball, ista
+from .methods import (
+    accelerated_gradient,
+    conjugate_gradient,
+    fista,
+    gradient_descent,
+    heavy_ball,
+    ista,
+)
 from .problems import diagonal_lasso, smooth_convex_quadratic, strongly_convex_quadratic
 
 
@@ -34,11 +41,17 @@ def check_nesterov(steps: int = 80) -> CheckResult:
     ks = np.arange(1, steps + 1, dtype=float)
     bound = 2.0 * p.L * d2 / (ks + 1.0) ** 2
     worst = float(np.max(gaps[1:] / bound))
-    return CheckResult("nesterov-1983", "Nesterov acceleration",
+    return CheckResult(
+        "nesterov-1983",
+        "Nesterov acceleration",
         "Yu. E. Nesterov (1983), convergence rate O(1/k^2)",
         "Accelerated iterates stay below the standard O(1/k^2) gap bound on this instance.",
-        "max_k gap_k / bound_k", worst, 1.0, worst <= 1.0 + 1e-10,
-        "Finite-instance consistency check; not a proof.")
+        "max_k gap_k / bound_k",
+        worst,
+        1.0,
+        worst <= 1.0 + 1e-10,
+        "Finite-instance consistency check; not a proof.",
+    )
 
 
 def check_gradient_descent(steps: int = 80) -> CheckResult:
@@ -50,11 +63,17 @@ def check_gradient_descent(steps: int = 80) -> CheckResult:
     ks = np.arange(1, steps + 1, dtype=float)
     bound = p.L * d2 / (2.0 * ks)
     worst = float(np.max(gaps[1:] / bound))
-    return CheckResult("gd-baseline", "Gradient-descent baseline",
+    return CheckResult(
+        "gd-baseline",
+        "Gradient-descent baseline",
         "Classical gradient descent with step 1/L",
         "Iterates stay below the standard O(1/k) gap bound on this instance.",
-        "max_k gap_k / bound_k", worst, 1.0, worst <= 1.0 + 1e-10,
-        "Baseline for the accelerated checks.")
+        "max_k gap_k / bound_k",
+        worst,
+        1.0,
+        worst <= 1.0 + 1e-10,
+        "Baseline for the accelerated checks.",
+    )
 
 
 def check_polyak(steps: int = 180) -> CheckResult:
@@ -66,11 +85,42 @@ def check_polyak(steps: int = 180) -> CheckResult:
     observed_ratio = float(np.median(valid[-20:]))
     rho = (np.sqrt(p.L) - np.sqrt(p.mu)) / (np.sqrt(p.L) + np.sqrt(p.mu))
     rel = abs(observed_ratio - rho) / rho
-    return CheckResult("polyak-1964", "Polyak heavy-ball",
+    return CheckResult(
+        "polyak-1964",
+        "Polyak heavy-ball",
         "B. T. Polyak (1964), Some methods of speeding up the convergence of iteration methods",
         "Observed tail contraction is compared with the quadratic spectral-radius prediction.",
-        "relative error: observed tail ratio vs predicted rho", rel, 0.08, rel <= 0.08,
-        f"alpha={alpha:.6g}, beta={beta:.6g}, rho={rho:.6g}, observed={observed_ratio:.6g}.")
+        "relative error: observed tail ratio vs predicted rho",
+        rel,
+        0.08,
+        rel <= 0.08,
+        f"alpha={alpha:.6g}, beta={beta:.6g}, rho={rho:.6g}, observed={observed_ratio:.6g}.",
+    )
+
+
+def check_conjugate_gradient(steps: int = 20) -> CheckResult:
+    p = strongly_convex_quadratic(dim=30, mu=0.1, L=1.0)
+    x0 = np.zeros(p.dim)
+    trace = conjugate_gradient(p, steps=steps, x0=x0)
+    errors = np.asarray(
+        [np.sqrt((x - p.x_star) @ p.Q @ (x - p.x_star)) for x in trace.iterates]
+    )
+    kappa = p.L / p.mu
+    rho = (np.sqrt(kappa) - 1.0) / (np.sqrt(kappa) + 1.0)
+    ks = np.arange(len(errors), dtype=float)
+    bound = 2.0 * (rho**ks) * errors[0]
+    worst = float(np.max(errors / bound))
+    return CheckResult(
+        "hestenes-stiefel-1952",
+        "Conjugate gradient",
+        "M. R. Hestenes and E. Stiefel (1952), Methods of Conjugate Gradients",
+        "A-norm errors stay below the classical condition-number convergence envelope.",
+        "max_k ||e_k||_Q / (2 rho^k ||e_0||_Q)",
+        worst,
+        1.0,
+        worst <= 1.0 + 1e-10,
+        f"kappa={kappa:.6g}, rho={rho:.6g}; checked {len(errors) - 1} iterations.",
+    )
 
 
 def check_fista(steps: int = 80) -> CheckResult:
@@ -82,11 +132,17 @@ def check_fista(steps: int = 80) -> CheckResult:
     ks = np.arange(1, steps + 1, dtype=float)
     bound = 2.0 * p.L * d2 / (ks + 1.0) ** 2
     worst = float(np.max(gaps[1:] / bound))
-    return CheckResult("beck-teboulle-2009", "FISTA",
+    return CheckResult(
+        "beck-teboulle-2009",
+        "FISTA",
         "A. Beck and M. Teboulle (2009), FISTA",
         "FISTA stays below the standard O(1/k^2) composite objective-gap bound.",
-        "max_k gap_k / bound_k", worst, 1.0, worst <= 1.0 + 1e-10,
-        "Diagonal LASSO has an exact coordinatewise optimum.")
+        "max_k gap_k / bound_k",
+        worst,
+        1.0,
+        worst <= 1.0 + 1e-10,
+        "Diagonal LASSO has an exact coordinatewise optimum.",
+    )
 
 
 def check_ista_vs_fista(steps: int = 80) -> CheckResult:
@@ -96,16 +152,24 @@ def check_ista_vs_fista(steps: int = 80) -> CheckResult:
     gap_i = max(float(i.values[-1] - p.f_star), 1e-300)
     gap_f = max(float(f.values[-1] - p.f_star), 0.0)
     ratio = gap_f / gap_i
-    return CheckResult("ista-vs-fista", "ISTA vs FISTA", "Beck--Teboulle (2009)",
+    return CheckResult(
+        "ista-vs-fista",
+        "ISTA vs FISTA",
+        "Beck--Teboulle (2009)",
         "Compare final objective gaps after the same iteration budget.",
-        "FISTA final gap / ISTA final gap", float(ratio), 1.0, ratio <= 1.0,
-        "Empirical comparison on one instance; not a universal dominance claim.")
+        "FISTA final gap / ISTA final gap",
+        float(ratio),
+        1.0,
+        ratio <= 1.0,
+        "Empirical comparison on one instance; not a universal dominance claim.",
+    )
 
 
 CHECKS = {
     "gd-baseline": check_gradient_descent,
     "nesterov-1983": check_nesterov,
     "polyak-1964": check_polyak,
+    "hestenes-stiefel-1952": check_conjugate_gradient,
     "beck-teboulle-2009": check_fista,
     "ista-vs-fista": check_ista_vs_fista,
 }
