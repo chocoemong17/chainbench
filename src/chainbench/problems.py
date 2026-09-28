@@ -56,6 +56,51 @@ class QuadraticProblem:
 
 
 @dataclass(frozen=True)
+class SimplexQuadraticProblem:
+    target: np.ndarray
+
+    def __post_init__(self) -> None:
+        target = np.asarray(self.target, dtype=float)
+        if target.ndim != 1 or target.size < 2:
+            raise ValueError("target must be a one-dimensional vector with at least two entries")
+        if np.any(target < 0.0) or not np.isclose(np.sum(target), 1.0, atol=1e-12):
+            raise ValueError("target must lie on the probability simplex")
+        object.__setattr__(self, "target", target)
+
+    @property
+    def dim(self) -> int:
+        return self.target.size
+
+    @property
+    def x_star(self) -> np.ndarray:
+        return self.target.copy()
+
+    @property
+    def f_star(self) -> float:
+        return 0.0
+
+    @property
+    def curvature_upper_bound(self) -> float:
+        # For f(x)=0.5||x-target||^2 on the simplex, L=1 and diameter^2=2.
+        return 2.0
+
+    def value(self, x: np.ndarray) -> float:
+        delta = np.asarray(x, dtype=float) - self.target
+        return float(0.5 * delta @ delta)
+
+    def grad(self, x: np.ndarray) -> np.ndarray:
+        return np.asarray(x, dtype=float) - self.target
+
+    def linear_minimizer(self, gradient: np.ndarray) -> np.ndarray:
+        gradient = np.asarray(gradient, dtype=float)
+        if gradient.shape != (self.dim,):
+            raise ValueError("gradient shape must match the simplex dimension")
+        vertex = np.zeros(self.dim)
+        vertex[int(np.argmin(gradient))] = 1.0
+        return vertex
+
+
+@dataclass(frozen=True)
 class DiagonalLassoProblem:
     a: np.ndarray
     b: np.ndarray
@@ -129,6 +174,12 @@ def strongly_convex_quadratic(dim: int = 60, mu: float = 0.04, L: float = 1.0) -
     x_star = np.sin(np.arange(dim, dtype=float) * 0.29) + 0.25
     b = q @ x_star
     return QuadraticProblem(q, b, x_star)
+
+
+def simplex_quadratic(dim: int = 50) -> SimplexQuadraticProblem:
+    if dim < 2:
+        raise ValueError("dim must be at least 2")
+    return SimplexQuadraticProblem(target=np.full(dim, 1.0 / dim))
 
 
 def diagonal_lasso(dim: int = 80, lam: float = 0.12) -> DiagonalLassoProblem:
