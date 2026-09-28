@@ -1,5 +1,6 @@
 import csv
 import io
+from pathlib import Path
 
 from chainbench.checks import CHECKS, run_all
 from chainbench.cli import main
@@ -25,3 +26,8 @@ def test_cli_report_writes_markdown(tmp_path):
     text = destination.read_text(encoding="utf-8")
     assert text.startswith("# ChainBench benchmark report")
     assert "nesterov-1983" in text
+
+
+def test_checked_in_snapshot_matches_current_suite():
+    snapshot = Path("benchmarks/latest.md").read_text(encoding="utf-8")
+    assert snapshot == render_markdown(run_all())
