@@ -8,11 +8,17 @@ from .methods import (
     accelerated_gradient,
     conjugate_gradient,
     fista,
+    frank_wolfe,
     gradient_descent,
     heavy_ball,
     ista,
 )
-from .problems import diagonal_lasso, smooth_convex_quadratic, strongly_convex_quadratic
+from .problems import (
+    diagonal_lasso,
+    simplex_quadratic,
+    smooth_convex_quadratic,
+    strongly_convex_quadratic,
+)
 
 
 @dataclass(frozen=True)
@@ -123,6 +129,26 @@ def check_conjugate_gradient(steps: int = 20) -> CheckResult:
     )
 
 
+def check_frank_wolfe(steps: int = 80) -> CheckResult:
+    p = simplex_quadratic(dim=50)
+    trace = frank_wolfe(p, steps=steps)
+    gaps = _safe_gap(trace.values, p.f_star)
+    ks = np.arange(len(gaps), dtype=float)
+    bound = 2.0 * p.curvature_upper_bound / (ks + 2.0)
+    worst = float(np.max(gaps / bound))
+    return CheckResult(
+        "jaggi-2013",
+        "Frank-Wolfe",
+        "M. Jaggi (2013), Revisiting Frank-Wolfe: Projection-Free Sparse Convex Optimization",
+        "Primal gaps stay below the standard curvature-based O(1/k) envelope.",
+        "max_k gap_k / (2 C_f / (k+2))",
+        worst,
+        1.0,
+        worst <= 1.0 + 1e-10,
+        f"C_f upper bound={p.curvature_upper_bound:.6g}; deterministic simplex quadratic.",
+    )
+
+
 def check_fista(steps: int = 80) -> CheckResult:
     p = diagonal_lasso()
     x0 = np.zeros(p.dim)
@@ -170,6 +196,7 @@ CHECKS = {
     "nesterov-1983": check_nesterov,
     "polyak-1964": check_polyak,
     "hestenes-stiefel-1952": check_conjugate_gradient,
+    "jaggi-2013": check_frank_wolfe,
     "beck-teboulle-2009": check_fista,
     "ista-vs-fista": check_ista_vs_fista,
 }
