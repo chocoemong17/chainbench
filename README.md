@@ -2,7 +2,7 @@
 
 [![tests](https://github.com/chocoemong17/chainbench/actions/workflows/tests.yml/badge.svg)](https://github.com/chocoemong17/chainbench/actions/workflows/tests.yml)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
-[![release](https://img.shields.io/badge/release-v0.1.0-informational.svg)](https://github.com/chocoemong17/chainbench/releases)
+![status](https://img.shields.io/badge/status-alpha-informational.svg)
 
 **ChainBench** is a small, transparent reproducibility project for classic results in optimization and iterative numerical methods.
 
