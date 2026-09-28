@@ -68,6 +68,15 @@ Machine-readable output:
 chainbench check all --json
 ```
 
+Export the complete suite as a reproducible report:
+
+```bash
+chainbench report --format markdown --output report.md
+chainbench report --format csv --output report.csv
+```
+
+See [benchmarks/latest.md](benchmarks/latest.md) for the checked-in deterministic snapshot and [docs/REPORTS.md](docs/REPORTS.md) for report formats.
+
 The command exits with a non-zero status if a bundled quantitative consistency condition fails, so it can also be used in CI.
 
 ## Why exact-solvable instances?
@@ -104,7 +113,7 @@ Future contributions can add another paper when the check is:
 
 ## Contributing
 
-Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md). A good contribution adds one public reference, one small implementation or experiment, and tests that make the reproduction auditable.
+Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md), [docs/METHODOLOGY.md](docs/METHODOLOGY.md), and [docs/ADDING_A_CHECK.md](docs/ADDING_A_CHECK.md). A good contribution adds one public reference, one small implementation or experiment, and tests that make the reproduction auditable.
 
 ## License
 
