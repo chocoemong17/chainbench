@@ -22,6 +22,14 @@ NIST scan: https://nvlpubs.nist.gov/nistpubs/jres/049/jresv49n6p409_A1b.pdf
 
 The bundled check uses the standard SPD quadratic A-norm convergence envelope commonly stated in modern numerical linear algebra treatments of conjugate gradient.
 
+## Frank-Wolfe / conditional gradient
+
+M. Jaggi, **“Revisiting Frank-Wolfe: Projection-Free Sparse Convex Optimization.”**
+*Proceedings of the 30th International Conference on Machine Learning*, PMLR 28(1), 427–435, 2013.  
+PMLR: https://proceedings.mlr.press/v28/jaggi13.html
+
+The bundled check uses the classical curvature-based sublinear primal-gap guarantee with the standard step schedule.
+
 ## FISTA
 
 A. Beck and M. Teboulle, **“A Fast Iterative Shrinkage-Thresholding Algorithm for Linear Inverse Problems.”**
