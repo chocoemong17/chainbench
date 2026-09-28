@@ -131,6 +131,28 @@ def frank_wolfe(
     return Trace(xs, _values(problem, xs))
 
 
+def proximal_point(
+    problem: QuadraticProblem,
+    steps: int,
+    proximal_parameter: float = 1.0,
+    x0: np.ndarray | None = None,
+) -> Trace:
+    """Run exact proximal-point iterations on a convex quadratic."""
+    if steps < 0:
+        raise ValueError("steps must be nonnegative")
+    if proximal_parameter <= 0.0:
+        raise ValueError("proximal_parameter must be positive")
+
+    x = np.zeros(problem.dim) if x0 is None else np.asarray(x0, dtype=float).copy()
+    system = np.eye(problem.dim) + proximal_parameter * problem.Q
+    xs = [x.copy()]
+    for _ in range(steps):
+        rhs = x + proximal_parameter * problem.b
+        x = np.linalg.solve(system, rhs)
+        xs.append(x.copy())
+    return Trace(xs, _values(problem, xs))
+
+
 def ista(problem: DiagonalLassoProblem, steps: int, x0: np.ndarray | None = None) -> Trace:
     x = np.zeros(problem.dim) if x0 is None else np.asarray(x0, dtype=float).copy()
     step = 1.0 / problem.L
