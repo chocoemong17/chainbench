@@ -4,7 +4,7 @@ from dataclasses import dataclass
 
 import numpy as np
 
-from .problems import DiagonalLassoProblem, QuadraticProblem
+from .problems import DiagonalLassoProblem, QuadraticProblem, SimplexQuadraticProblem
 
 
 @dataclass(frozen=True)
@@ -103,6 +103,31 @@ def conjugate_gradient(
         direction = r + beta * direction
         residual_sq = next_residual_sq
 
+    return Trace(xs, _values(problem, xs))
+
+
+def frank_wolfe(
+    problem: SimplexQuadraticProblem, steps: int, x0: np.ndarray | None = None
+) -> Trace:
+    """Run the classical Frank-Wolfe update on a simplex quadratic."""
+    if steps < 0:
+        raise ValueError("steps must be nonnegative")
+    if x0 is None:
+        x = np.zeros(problem.dim)
+        x[0] = 1.0
+    else:
+        x = np.asarray(x0, dtype=float).copy()
+    if x.shape != (problem.dim,):
+        raise ValueError("x0 shape must match the simplex dimension")
+    if np.any(x < -1e-12) or not np.isclose(np.sum(x), 1.0, atol=1e-12):
+        raise ValueError("x0 must lie on the probability simplex")
+
+    xs = [x.copy()]
+    for k in range(steps):
+        vertex = problem.linear_minimizer(problem.grad(x))
+        gamma = 2.0 / (k + 2.0)
+        x = (1.0 - gamma) * x + gamma * vertex
+        xs.append(x.copy())
     return Trace(xs, _values(problem, xs))
 
 
