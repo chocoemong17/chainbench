@@ -2,6 +2,7 @@
 
 [![tests](https://github.com/chocoemong17/chainbench/actions/workflows/tests.yml/badge.svg)](https://github.com/chocoemong17/chainbench/actions/workflows/tests.yml)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
+[![release](https://img.shields.io/badge/release-v0.1.0-informational.svg)](https://github.com/chocoemong17/chainbench/releases)
 
 **ChainBench** is a small, transparent reproducibility project for classic results in optimization and iterative numerical methods.
 
@@ -32,6 +33,14 @@ ChainBench deliberately uses the word **check**, not *proof*. A finite numerical
 See [REFERENCES.md](REFERENCES.md) for bibliographic details and links to the original sources.
 
 ## Install
+
+From a source checkout:
+
+```bash
+python -m pip install .
+```
+
+For editable development:
 
 ```bash
 python -m pip install -e .
