@@ -9,6 +9,7 @@ from .methods import (
     gradient_descent,
     heavy_ball,
     ista,
+    proximal_point,
 )
 from .problems import (
     DiagonalLassoProblem,
@@ -33,6 +34,7 @@ __all__ = [
     "gradient_descent",
     "heavy_ball",
     "ista",
+    "proximal_point",
     "run_all",
     "run_check",
     "simplex_quadratic",
