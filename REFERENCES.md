@@ -14,6 +14,14 @@ Yu. E. Nesterov, **“A method of solving a convex programming problem with conv
 *Doklady Akademii Nauk SSSR*, 269(3), 543–547, 1983.  
 Bibliographic page: https://www.mathnet.ru/eng/dan46009
 
+## Conjugate gradient
+
+M. R. Hestenes and E. Stiefel, **“Methods of Conjugate Gradients for Solving Linear Systems.”**
+*Journal of Research of the National Bureau of Standards*, 49(6), 409–436, 1952.  
+NIST scan: https://nvlpubs.nist.gov/nistpubs/jres/049/jresv49n6p409_A1b.pdf
+
+The bundled check uses the standard SPD quadratic A-norm convergence envelope commonly stated in modern numerical linear algebra treatments of conjugate gradient.
+
 ## FISTA
 
 A. Beck and M. Teboulle, **“A Fast Iterative Shrinkage-Thresholding Algorithm for Linear Inverse Problems.”**
