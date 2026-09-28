@@ -67,14 +67,14 @@ def render_markdown(results: list[CheckResult]) -> str:
         "|---|---|---:|---:|---|",
     ]
     for result in results:
-        threshold = "n/a" if result.threshold is None else f"{result.threshold:.8g}"
+        threshold = "n/a" if result.threshold is None else f"{result.threshold:.7g}"
         lines.append(
             "| "
             + " | ".join(
                 [
                     _markdown_cell(result.slug),
                     _markdown_cell(result_status(result)),
-                    f"{result.observed:.8g}",
+                    f"{result.observed:.7g}",
                     threshold,
                     _markdown_cell(result.metric),
                 ]
