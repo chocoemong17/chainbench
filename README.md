@@ -3,7 +3,7 @@
 [![tests](https://github.com/chocoemong17/chainbench/actions/workflows/tests.yml/badge.svg)](https://github.com/chocoemong17/chainbench/actions/workflows/tests.yml)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
 
-**ChainBench** is a small, transparent reproducibility project for classic results in first-order optimization.
+**ChainBench** is a small, transparent reproducibility project for classic results in optimization and iterative numerical methods.
 
 Instead of introducing new theory, it implements well-known algorithms from the literature and runs deterministic numerical **consistency checks** on problems with exact solutions. The goal is to make it easy to answer questions such as:
 
