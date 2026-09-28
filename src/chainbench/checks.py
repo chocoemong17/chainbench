@@ -162,7 +162,7 @@ def check_proximal_point(steps: int = 30, proximal_parameter: float = 1.0) -> Ch
         "Proximal point",
         "R. T. Rockafellar (1976), Monotone Operators and the Proximal Point Algorithm",
         "Successive errors respect the strongly-convex resolvent contraction on this quadratic.",
-        "max_k ||e_(k+1)|| / (q ||e_k||)",
+        "max_k error_(k+1) / (q * error_k)",
         worst,
         1.0,
         worst <= 1.0 + 1e-10,
