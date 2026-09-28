@@ -1,0 +1,26 @@
+name: Propose a literature check
+description: Suggest a public optimization result to reproduce
+title: "[paper] "
+labels: ["enhancement"]
+body:
+  - type: input
+    id: citation
+    attributes:
+      label: Public reference
+      description: DOI, arXiv, publisher, or stable bibliographic URL.
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: Result to reproduce
+      description: State the published quantitative or qualitative prediction.
+    validations:
+      required: true
+  - type: textarea
+    id: instance
+    attributes:
+      label: Deterministic test instance
+      description: Explain how the reference value or optimum can be verified independently.
+    validations:
+      required: true

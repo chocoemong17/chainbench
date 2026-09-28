@@ -10,7 +10,26 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
 authors = [{ name = "chocoemong17" }]
-keywords = ["optimization", "reproducibility", "nesterov", "fista", "heavy-ball", "benchmark"]
+keywords = [
+  "optimization",
+  "reproducibility",
+  "numerical-analysis",
+  "nesterov",
+  "fista",
+  "heavy-ball",
+  "benchmark",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Mathematics",
+]
 dependencies = ["numpy>=1.24"]
 
 [project.optional-dependencies]
@@ -23,6 +42,7 @@ chainbench = "chainbench.cli:main"
 Homepage = "https://github.com/chocoemong17/chainbench"
 Repository = "https://github.com/chocoemong17/chainbench"
 Issues = "https://github.com/chocoemong17/chainbench/issues"
+Changelog = "https://github.com/chocoemong17/chainbench/blob/main/CHANGELOG.md"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/chainbench"]
