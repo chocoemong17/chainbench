@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Add a conjugate-gradient implementation and deterministic check of its classical SPD A-norm convergence envelope.
+- Add public-maintenance metadata, issue/PR templates, Dependabot configuration, and release guidance.
+
 ## 0.1.0
 
 - Initial public release.
