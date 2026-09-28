@@ -46,7 +46,9 @@ def accelerated_gradient(problem: QuadraticProblem, steps: int, x0: np.ndarray |
     return Trace(xs, _values(problem, xs))
 
 
-def heavy_ball(problem: QuadraticProblem, steps: int, x0: np.ndarray | None = None) -> tuple[Trace, float, float]:
+def heavy_ball(
+    problem: QuadraticProblem, steps: int, x0: np.ndarray | None = None
+) -> tuple[Trace, float, float]:
     if problem.mu <= 0:
         raise ValueError("heavy-ball classical tuning requires mu > 0")
     x = np.zeros(problem.dim) if x0 is None else np.asarray(x0, dtype=float).copy()
@@ -61,6 +63,47 @@ def heavy_ball(problem: QuadraticProblem, steps: int, x0: np.ndarray | None = No
         x_prev, x = x, x_next
         xs.append(x.copy())
     return Trace(xs, _values(problem, xs)), alpha, beta
+
+
+def conjugate_gradient(
+    problem: QuadraticProblem, steps: int | None = None, x0: np.ndarray | None = None
+) -> Trace:
+    """Run linear conjugate gradient on an SPD quadratic.
+
+    The quadratic stationarity equation is Q x = b. This implementation is
+    intentionally small and dependency-free so the literature check is easy to audit.
+    """
+    if problem.mu <= 0:
+        raise ValueError("conjugate gradient requires a positive-definite quadratic")
+    max_steps = problem.dim if steps is None else steps
+    if max_steps < 0:
+        raise ValueError("steps must be nonnegative")
+
+    x = np.zeros(problem.dim) if x0 is None else np.asarray(x0, dtype=float).copy()
+    r = problem.b - problem.Q @ x
+    direction = r.copy()
+    residual_sq = float(r @ r)
+    xs = [x.copy()]
+
+    for _ in range(max_steps):
+        if residual_sq <= np.finfo(float).eps**2:
+            break
+        q_direction = problem.Q @ direction
+        denom = float(direction @ q_direction)
+        if denom <= 0.0:
+            raise ValueError("conjugate gradient encountered a non-positive curvature direction")
+        alpha = residual_sq / denom
+        x = x + alpha * direction
+        r = r - alpha * q_direction
+        next_residual_sq = float(r @ r)
+        xs.append(x.copy())
+        if next_residual_sq <= np.finfo(float).eps**2:
+            break
+        beta = next_residual_sq / residual_sq
+        direction = r + beta * direction
+        residual_sq = next_residual_sq
+
+    return Trace(xs, _values(problem, xs))
 
 
 def ista(problem: DiagonalLassoProblem, steps: int, x0: np.ndarray | None = None) -> Trace:
