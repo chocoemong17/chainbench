@@ -1,0 +1,35 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "chainbench"
+version = "0.1.0"
+description = "Reproducible numerical checks for classic first-order optimization results."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "chocoemong17" }]
+keywords = ["optimization", "reproducibility", "nesterov", "fista", "heavy-ball", "benchmark"]
+dependencies = ["numpy>=1.24"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.6"]
+
+[project.scripts]
+chainbench = "chainbench.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/chocoemong17/chainbench"
+Repository = "https://github.com/chocoemong17/chainbench"
+Issues = "https://github.com/chocoemong17/chainbench/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/chainbench"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
