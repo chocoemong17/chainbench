@@ -10,6 +10,7 @@ Instead of introducing new theory, it implements well-known algorithms from the 
 - Does a standard accelerated-gradient implementation respect the familiar `O(1/k^2)` bound on a concrete smooth convex problem?
 - Does Polyak's heavy-ball method exhibit the contraction predicted by its quadratic spectral analysis?
 - Does conjugate gradient respect its classical condition-number convergence envelope?
+- Does Frank-Wolfe exhibit its curvature-based `O(1/k)` behavior on a simplex problem?
 - Does FISTA satisfy its standard objective-gap bound on a LASSO instance whose exact optimum is known?
 
 ChainBench deliberately uses the word **check**, not *proof*. A finite numerical experiment can catch implementation mistakes and reproduce a published phenomenon, but it cannot establish a theorem.
@@ -21,6 +22,7 @@ ChainBench deliberately uses the word **check**, not *proof*. A finite numerical
 | `nesterov-1983` | Nesterov acceleration | Standard `O(1/k^2)` smooth-convex gap bound on a deterministic quadratic |
 | `polyak-1964` | Polyak heavy-ball | Tail contraction versus the quadratic spectral-radius prediction |
 | `hestenes-stiefel-1952` | Conjugate gradient | Classical A-norm error envelope on a deterministic SPD quadratic |
+| `jaggi-2013` | Frank-Wolfe | Curvature-based `O(1/k)` gap envelope on an exact-solvable simplex quadratic |
 | `beck-teboulle-2009` | FISTA | Standard `O(1/k^2)` composite-objective gap bound on diagonal LASSO |
 | `ista-vs-fista` | ISTA/FISTA | Same-budget empirical comparison on the bundled LASSO instance |
 | `gd-baseline` | Gradient descent | Standard `O(1/k)` smooth-convex gap bound |
@@ -73,7 +75,8 @@ The command exits with a non-zero status if a bundled quantitative consistency c
 A numerical reproduction is much easier to interpret if the reference optimum is not itself estimated numerically. ChainBench therefore starts with:
 
 - diagonal smooth convex quadratics with a known optimizer, and
-- diagonal-design LASSO problems whose minimizer is available coordinatewise by soft thresholding.
+- diagonal-design LASSO problems whose minimizer is available coordinatewise by soft thresholding, and
+- a simplex quadratic whose exact optimizer and curvature upper bound are known analytically.
 
 This keeps the checks deterministic, dependency-light, and auditable.
 
@@ -92,7 +95,7 @@ Threshold : 1
 
 ChainBench contains **implementations and reproducibility experiments for published methods only**. It does not contain unpublished optimization results, private derivations, or claims of new optimality/uniqueness results.
 
-The initial release focuses on three widely cited algorithmic ideas. Future contributions can add another paper when the check is:
+Future contributions can add another paper when the check is:
 
 1. tied to a clear public reference,
 2. reproducible from a deterministic instance,
