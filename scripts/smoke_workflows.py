@@ -107,8 +107,63 @@ def exercise_workflows(cli, work, env, version, run):
     if extract_record(html) != reproduction or html.count('data-repro-case=') != 10:
         raise RuntimeError('published-example HTML differs from installed calculations')
 
+    geometry_args = [cli, 'geometry', 'frank-wolfe', '--steps', '8']
+    geometry = json.loads(run(geometry_args + ['--format', 'json'], work, env))
+    html = run(geometry_args + ['--lang', 'ko'], work, env)
+    validate_simplex_geometry(geometry)
+    if extract_record(html) != geometry or html.count('data-fw-case=') != 12:
+        raise RuntimeError('simplex geometry HTML differs from installed calculations')
+
     return {'learning':'matched','sweep':'matched','replay':'matched','gd_tight':'matched',
-            'stress':'matched','landscape':'matched','shewchuk_reproduction':'matched'}
+            'stress':'matched','landscape':'matched','shewchuk_reproduction':'matched',
+            'simplex_geometry':'matched'}
+
+
+def validate_simplex_geometry(result):
+    """Recompute certificates and transitions with scalar arithmetic, outside the package."""
+    if (result['kind'] != 'chainbench.simplex-geometry'
+            or result['evidence_level'] != 'controlled-geometric-illustrations'):
+        raise RuntimeError('invalid simplex evidence identity')
+    targets = ((.2, .3, .5), (.7, .3, 0.), (.84, .1, .06))
+    starts = ((1., 0., 0.), (0., 1., 0.), (0., 0., 1.), (1/3, 1/3, 1/3))
+    cases, steps = result['cases'], result['parameters']['steps']
+    if (len(cases) != 12 or {(tuple(c['target']), tuple(c['start'])) for c in cases}
+            != {(t, s) for t in targets for s in starts}
+            or result['problem']['curvature'] != 2):
+        raise RuntimeError('simplex case design differs')
+    if result['bound'] != {'iterations': list(range(1, steps+1)),
+                           'values': [4/(k+2) for k in range(1, steps+1)]}:
+        raise RuntimeError('simplex theorem curve differs')
+    for case in cases:
+        target, rows = case['target'], case['rows']
+        digest = hashlib.sha256(struct.pack('<6d', *target, *case['start'])).hexdigest()
+        if (case['input_sha256'] != digest or len(rows) != steps+1
+                or case['updates'] != steps or case['termination'] != 'fixed_budget'
+                or rows[0]['x'] != case['start']):
+            raise RuntimeError('simplex input fingerprint or budget differs')
+        for k, row in enumerate(rows):
+            x = row['x']
+            if (len(x) != 3 or not all(math.isfinite(v) and v >= 0 for v in x)
+                    or not math.isclose(sum(x), 1, abs_tol=1e-14)):
+                raise RuntimeError('iterate is not in the simplex')
+            gradient = [v-t for v, t in zip(x, target)]
+            index = min(range(3), key=lambda i: gradient[i])
+            vertex = [float(i == index) for i in range(3)]
+            gap = sum(v*v for v in gradient)/2
+            dual = sum(g*v for g, v in zip(gradient, x)) - min(gradient)
+            gamma = 2/(k+2) if k < steps else None
+            if (row['iteration'] != k or row['vertex_index'] != index
+                    or row['vertex'] != vertex or row['gradient'] != gradient
+                    or row['gamma'] != gamma or row['support'] != sum(v > 0 for v in x)
+                    or not math.isclose(row['gap'], gap, abs_tol=1e-14)
+                    or not math.isclose(row['dual_gap'], dual, abs_tol=1e-14)
+                    or gap > dual + 1e-14 or (k >= 1 and gap > 4/(k+2) + 1e-14)):
+                raise RuntimeError('simplex oracle, metric or certificate differs')
+            if gamma is not None:
+                expected = [(1-gamma)*v + gamma*s for v, s in zip(x, vertex)]
+                if any(not math.isclose(a, b, abs_tol=1e-14)
+                       for a, b in zip(expected, rows[k+1]['x'])):
+                    raise RuntimeError('simplex update differs from the convex combination')
 
 
 def validate_reproduction(result):

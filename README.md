@@ -25,6 +25,18 @@ source figures; the nine variations are labelled separately. See the
 [source/setup/validation contract](docs/SHEWCHUK_REPRODUCTION.md).
 The command requires a source install; it is not in the frozen v0.5.0 wheel below.
 
+For constrained motion, inspect Frank–Wolfe's chosen vertex and feasible update
+segment on a triangle, alongside the same points on a 3D objective surface:
+
+```bash
+python -m chainbench geometry frank-wolfe --lang ko --output simplex.html
+```
+
+All 12 declared target/start combinations are inspectable. The objective gap, dual
+certificate and theorem curve have distinct meanings, and one example explains why
+a scheduled step can increase the objective. See the [source and geometry contract](docs/SIMPLEX_GEOMETRY.md).
+This command also requires the development source after v0.5.0.
+
 For the full eight-topic learning atlas:
 
 ```bash

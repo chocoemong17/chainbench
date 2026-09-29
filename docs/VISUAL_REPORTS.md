@@ -90,3 +90,9 @@ not independent external use, endorsements or support-program qualification.
 ## v0.5.0: canonical plot, sampled breadth and geometry are separate
 
 The learning/report pages now identify a one-fixture plot as a **canonical illustration**. Use `chainbench stress <topic>` for many seeded instances and `chainbench landscape` for contour/3D path geometry. These outputs answer different questions and should not be substituted for each other. See [EVIDENCE_LAYERS.md](EVIDENCE_LAYERS.md).
+
+The development `geometry frank-wolfe` page places each recorded iterate and oracle
+on a feasible triangle and projected objective surface. The selected step controls
+both projections; the complete gap/certificate chart remains available below them.
+All twelve cases, static paths and numeric tables work offline. See the [source and
+visual contract](SIMPLEX_GEOMETRY.md), including why the 3D chord is not a surface curve.

@@ -35,6 +35,11 @@ are labelled **controlled variations**, all on the same matrix. See the
 
 `chainbench landscape` places the **same numerical run** on a contour map, a 3D objective surface and a convergence chart. It is designed to explain zig-zagging, momentum, conjugate directions and implicit steps. The 2D problem is deliberately chosen for visual clarity, so it belongs to the illustration layer rather than the stress layer.
 
+The development command `geometry frank-wolfe` provides twelve **controlled
+geometric illustrations** of simplex constraints, linear oracle choices and feasible
+updates. All cases are declared in advance and inspectable. A larger count of
+illustrations is still not representative random sampling. See [the case design](SIMPLEX_GEOMETRY.md).
+
 ## Recommended reading order
 
 1. Read the question and assumptions in `chainbench learn`.

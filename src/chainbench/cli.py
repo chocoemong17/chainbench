@@ -23,6 +23,7 @@ from .learning import learning_html
 from .reporting import render_json, render_report, result_status
 from .reproduction_views import reproduction_html
 from .reproductions import run_reproduction
+from .simplex_geometry import run_simplex_geometry, simplex_html
 from .stress import TOPICS as STRESS_TOPICS
 from .stress import run_stress, stress_html
 from .visuals import render_check_svg
@@ -289,6 +290,14 @@ def main(argv: list[str] | None = None) -> int:
     reproduce.add_argument("--output", type=Path)
     reproduce.add_argument("--force", action="store_true")
 
+    geometry = sub.add_parser("geometry", help="inspect constrained oracle choices and updates")
+    geometry.add_argument("name", choices=["frank-wolfe"])
+    geometry.add_argument("--steps", type=int, default=18)
+    geometry.add_argument("--lang", choices=["en", "ko"], default="en")
+    geometry.add_argument("--format", choices=["html", "json"], default="html")
+    geometry.add_argument("--output", type=Path)
+    geometry.add_argument("--force", action="store_true")
+
     case = sub.add_parser("case-study", help="reproduce a specific public tight GD example")
     case.add_argument("name", choices=["gd-tight"])
     case.add_argument("--horizon", type=int, default=20)
@@ -351,6 +360,12 @@ def main(argv: list[str] | None = None) -> int:
                 if args.format == "html"
                 else json.dumps(result, indent=2, allow_nan=False)
             )
+            _write(args.output, text, args.force)
+            return 0
+        if args.command == "geometry":
+            result = run_simplex_geometry(args.steps)
+            text = (simplex_html(result, args.lang) if args.format == "html"
+                    else json.dumps(result, indent=2, allow_nan=False))
             _write(args.output, text, args.force)
             return 0
         if args.command == "reproduce":

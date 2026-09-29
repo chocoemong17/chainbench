@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Add `geometry frank-wolfe`: triangle, projected 3D surface, chosen oracle vertex,
+  convex-combination update and gap/certificate curves for all 12 declared cases.
+  Explain scheduled-step nonmonotonicity and separate objective bounds from dual gaps.
+- Validate geometry samples independently in tests and installed distributions;
+  exercise all case controls and JSON downloads in the offline browser CI job.
+
 - Recompute the published 2D setup in Shewchuk (1994), Figures 8 and 30, using exact
   line-search steepest descent and existing CG. New `reproduce shewchuk-1994` exports
   bilingual offline HTML or full JSON with inputs, metrics, termination and hashes.

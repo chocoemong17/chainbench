@@ -72,6 +72,14 @@ The envelope is Eq. (52). See [source locations, mathematical inputs, difference
 license scope and validation](SHEWCHUK_REPRODUCTION.md). The nine additional starts,
 3D view and energy chart are ChainBench additions, not original-paper figures.
 
+## Separate simplex geometry (development source after v0.5.0)
+
+The development command `geometry frank-wolfe` links Jaggi (2013) Algorithm 1,
+Eq. (2) and Theorem 1 to a three-coordinate probability simplex. Its twelve
+target/start fixtures are controlled illustrations, not original-paper figures.
+See [the exact recurrence, curvature, projection and scope](SIMPLEX_GEOMETRY.md).
+The `4/(k+2)` curve bounds objective gap for k>=1, not pointwise dual gap.
+
 ## Post-release validation notes (v0.1.1)
 
 The quadratic constructor requires stationarity to relative floating precision, without an absolute tolerance floor; callers should build `b=Q@x_star` from their supplied symmetric matrix. `gap` is the energy error relative to that reference, and its interpretation as an optimality gap assumes a valid reference solution. This numeric reference check is not symbolic certification.

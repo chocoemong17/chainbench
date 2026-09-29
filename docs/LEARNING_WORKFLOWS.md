@@ -108,3 +108,8 @@ also support JSON. Generated pages use only system fonts and embedded SVGs.
 ## Many cases and geometry (v0.5.0)
 
 A learning page now labels its first plot as a canonical illustration. To reduce cherry-picking concerns, run the same paper-linked measurement over seeded instances with `chainbench stress <topic>`. To understand *why* trajectories differ on an ill-conditioned quadratic, use `chainbench landscape`, which renders the same run as contour, 3D surface and loss views. See [EVIDENCE_LAYERS.md](EVIDENCE_LAYERS.md).
+
+Development source adds `geometry frank-wolfe` to the Jaggi learning card: inspect
+the linear oracle, next feasible point and computable dual certificate across all
+twelve target/start combinations. The barycenter example also shows that the
+scheduled step need not decrease the objective. See [SIMPLEX_GEOMETRY.md](SIMPLEX_GEOMETRY.md).

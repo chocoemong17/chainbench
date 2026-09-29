@@ -38,7 +38,7 @@ def evidence(tmp_path, monkeypatch):
             "checks": 2, "slugs": ["condition", "observation"], "statuses": ["CONSISTENT", "INFO"],
             "installed_outside_checkout": True, "pip_check": "passed",
             "exports": ["html", "markdown", "csv", "json"], "plot_svg": "passed", "visual_evidence": "matched",
-            "advanced_workflows": {"learning": "matched", "sweep": "matched", "replay": "matched", "gd_tight": "matched", "stress": "matched", "landscape": "matched", "shewchuk_reproduction": "matched"},
+            "advanced_workflows": {"learning": "matched", "sweep": "matched", "replay": "matched", "gd_tight": "matched", "stress": "matched", "landscape": "matched", "shewchuk_reproduction": "matched", "simplex_geometry": "matched"},
             "instance_controls": {
                 "direct_override": "passed",
                 "seeded_config_sha256": "c" * 64,
@@ -67,9 +67,10 @@ def test_valid_publication_evidence(evidence):
     assert len(module.verified_files(VERSION, SHA)) == 5
 
 
-def test_reproduction_install_evidence_is_required(evidence):
+@pytest.mark.parametrize('workflow', ['shewchuk_reproduction', 'simplex_geometry'])
+def test_reproduction_install_evidence_is_required(evidence, workflow):
     module, dist, report = evidence
-    del report['artifacts'][0]['advanced_workflows']['shewchuk_reproduction']
+    del report['artifacts'][0]['advanced_workflows'][workflow]
     (dist/'verification.json').write_text(json.dumps(report), encoding='utf8')
     write_sums(dist)
     with pytest.raises(RuntimeError, match='learning-workflow'):
