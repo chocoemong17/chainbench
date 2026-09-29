@@ -53,6 +53,9 @@ def exercise_workflows(cli, work, env, version, run):
             or text.count('class="method-flow"') != 8
             or text.count('data-mechanism=') != 8):
         raise RuntimeError('learning mechanism maps are missing from the installed report')
+    if text.count('class="instance-context"') != 8 or any(
+            chart.get('instance', {}).get('kind') != 'canonical-fixed-instance' for chart in learning['charts'].values()):
+        raise RuntimeError('learning canonical inputs are missing from the installed report')
     # Selected default-normalized curves independently reproduce bound ratios.
     for slug in ('gd-baseline', 'nesterov-1983', 'beck-teboulle-2009', 'jaggi-2013'):
         figure = learning['charts'][slug]

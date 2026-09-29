@@ -63,6 +63,9 @@ Development source also adds symbolic update flows, a two-method comparison of
 operations and memory, and links between related ideas. These diagrams explain
 the algorithms; the adjoining audited curves supply numerical observations.
 See [the learning guide](docs/LEARNING_WORKFLOWS.md) for focused exports and scope.
+Each canonical plot also identifies its actual problem, start and budget, with
+expandable input arrays and method settings. A standalone SVG keeps both a visible
+setup caption and exact input metadata; see [the data contract](docs/CANONICAL_CONTEXT.md).
 
 Prefer a compact fixed-suite dashboard or one figure?
 

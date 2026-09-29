@@ -1,11 +1,12 @@
 from __future__ import annotations
 
 import math
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from html import escape
 
 import numpy as np
 
+from ._canonical import caption_lines, instance_record
 from .methods import (
     accelerated_gradient,
     conjugate_gradient,
@@ -39,6 +40,7 @@ class ChartSpec:
     y_label: str
     series: tuple[LineSeries, ...]
     y_scale: str = "log"
+    instance: dict | None = None
 
 
 def _series(label: str, x, y, role: str = "observed") -> LineSeries:
@@ -58,68 +60,76 @@ def _gaps(problem, trace) -> np.ndarray:
 
 
 def build_check_chart(slug: str) -> ChartSpec:
+    def finish(chart, runs, parameters):
+        record = instance_record(slug, p, steps, runs, parameters)
+        record['plotted_quantity'] = chart.y_label
+        record['plotted_samples'] = [{'label': s.label, 'count': len(s.x),
+                                      'first_k': s.x[0], 'last_k': s.x[-1]} for s in chart.series]
+        return replace(chart, instance=record)
+
     if slug == "gd-baseline":
         steps = 80
         p = smooth_convex_quadratic()
         t = gradient_descent(p, steps)
         k = np.arange(1, steps + 1, dtype=float)
         bound = p.L * float(p.x_star @ p.x_star) / (2 * k)
-        return ChartSpec(
+        return finish(ChartSpec(
             "Observed gap vs O(1/k) envelope", "iteration k", "objective gap",
             (_series("observed gap", k, _gaps(p, t)[1:]),
              _series("O(1/k) envelope", k, bound, "bound")),
-        )
+        ), {'gd': t}, {'gd': {'step': 1/p.L}})
     if slug == "nesterov-1983":
         steps = 80
         p = smooth_convex_quadratic()
         t = accelerated_gradient(p, steps)
         k = np.arange(1, steps + 1, dtype=float)
         bound = 2 * p.L * float(p.x_star @ p.x_star) / (k + 1) ** 2
-        return ChartSpec(
+        return finish(ChartSpec(
             "Accelerated gap vs O(1/k^2) envelope", "iteration k", "objective gap",
             (_series("smooth FISTA gap", k, _gaps(p, t)[1:]),
              _series("O(1/k^2) envelope", k, bound, "bound")),
-        )
+        ), {'smooth-fista': t}, {'smooth-fista': {'step': 1/p.L, 'initial_t': 1.,
+                                                'recurrence': 'fixed-L FISTA, g=0'}})
     if slug == "polyak-1964":
         steps = 180
         p = strongly_convex_quadratic()
-        t, _, _ = heavy_ball(p, steps)
+        t, alpha, beta = heavy_ball(p, steps)
         errors = np.asarray([np.linalg.norm(x - p.x_star) for x in t.iterates])
         valid = errors[:-1] > 1e-10
         idx = np.flatnonzero(valid) + 1
         ratios = errors[1:][valid] / errors[:-1][valid]
         rho = (np.sqrt(p.L) - np.sqrt(p.mu)) / (np.sqrt(p.L) + np.sqrt(p.mu))
-        return ChartSpec(
+        return finish(ChartSpec(
             "Consecutive error ratios vs spectral prediction", "iteration k",
             "||e_k|| / ||e_(k-1)||",
             (_series("observed ratio", idx, ratios),
              _series("predicted rho", idx, np.full(idx.size, rho), "reference")),
             "linear",
-        )
+        ), {'heavy-ball': t}, {'heavy-ball': {'alpha': alpha, 'beta': beta, 'initial_previous': 'x0'}})
     if slug == "hestenes-stiefel-1952":
         steps = 20
         p = strongly_convex_quadratic(30, 0.1, 1.0)
-        t = conjugate_gradient(p, steps)
+        t = conjugate_gradient(p, steps, rtol=1e-12, atol=0.)
         errors = np.sqrt(2 * _gaps(p, t))
         k = np.arange(errors.size, dtype=float)
         rho = (np.sqrt(p.L / p.mu) - 1) / (np.sqrt(p.L / p.mu) + 1)
         bound = 2 * rho ** k * errors[0]
-        return ChartSpec(
+        return finish(ChartSpec(
             "CG energy error vs condition-number envelope", "iteration k", "Q-norm error",
             (_series("observed Q-norm error", k, errors),
              _series("classical envelope", k, bound, "bound")),
-        )
+        ), {'cg': t}, {'cg': {'rtol': 1e-12, 'atol': 0., 'tolerance_reference': 'initial true residual'}})
     if slug == "jaggi-2013":
         steps = 80
         p = simplex_quadratic(50)
         t = frank_wolfe(p, steps)
         k = np.arange(1, steps + 1, dtype=float)
         bound = 2 * p.curvature_upper_bound / (k + 2)
-        return ChartSpec(
+        return finish(ChartSpec(
             "Frank-Wolfe gap vs curvature envelope", "iteration k", "primal gap",
             (_series("observed primal gap", k, _gaps(p, t)[1:]),
              _series("curvature envelope", k, bound, "bound")),
-        )
+        ), {'frank-wolfe': t}, {'frank-wolfe': {'gamma': '2/(k+2)', 'oracle': 'first minimum gradient coordinate'}})
     if slug == "rockafellar-1976":
         steps = 30
         c = 1.0
@@ -129,33 +139,34 @@ def build_check_chart(slug: str) -> ChartSpec:
         k = np.arange(errors.size, dtype=float)
         q = 1 / (1 + c * p.mu)
         bound = errors[0] * q ** k
-        return ChartSpec(
+        return finish(ChartSpec(
             "Proximal-point error vs geometric contraction", "iteration k",
             "distance to optimizer",
             (_series("observed error", k, errors),
              _series("q^k envelope", k, bound, "bound")),
-        )
+        ), {'proximal-point': t}, {'proximal-point': {'c': c, 'subproblem': 'exact quadratic linear solve'}})
     if slug == "beck-teboulle-2009":
         steps = 80
         p = diagonal_lasso()
         t = fista(p, steps)
         k = np.arange(1, steps + 1, dtype=float)
         bound = 2 * p.L * float(p.x_star @ p.x_star) / (k + 1) ** 2
-        return ChartSpec(
+        return finish(ChartSpec(
             "FISTA composite gap vs O(1/k^2) envelope", "iteration k",
             "composite objective gap",
             (_series("observed FISTA gap", k, _gaps(p, t)[1:]),
              _series("O(1/k^2) envelope", k, bound, "bound")),
-        )
+        ), {'fista': t}, {'fista': {'step': 1/p.L, 'initial_t': 1., 'prox': 'soft(z, lambda/L)'}})
     if slug == "ista-vs-fista":
         steps = 80
         p = diagonal_lasso()
         ti, tf = ista(p, steps), fista(p, steps)
         k = np.arange(steps + 1, dtype=float)
-        return ChartSpec(
+        return finish(ChartSpec(
             "ISTA and FISTA on the same fixture", "iteration k", "objective gap",
             (_series("ISTA", k, _gaps(p, ti)), _series("FISTA", k, _gaps(p, tf))),
-        )
+        ), {'ista': ti, 'fista': tf}, {'ista': {'step': 1/p.L, 'prox': 'soft(z, lambda/L)'},
+                                     'fista': {'step': 1/p.L, 'initial_t': 1., 'prox': 'soft(z, lambda/L)'}})
     raise ValueError(f"unknown visual check: {slug}")
 
 
@@ -177,7 +188,7 @@ def _fmt(value: float) -> str:
 
 
 def render_line_chart(spec: ChartSpec, width: int = 760, height: int = 400,
-                      *, colors: tuple[str, ...] | None = None) -> str:
+                      *, colors: tuple[str, ...] | None = None, show_instance: bool = True) -> str:
     """Render finite samples without inventing positive values for logarithmic zeros."""
     import json
     import re
@@ -210,6 +221,11 @@ def render_line_chart(spec: ChartSpec, width: int = 760, height: int = 400,
     legend_rows = math.ceil(len(spec.series) / columns)
     top = 30 * len(title_lines) + 24 * legend_rows + 15
     height = max(height, top + 230)
+    context_lines = []
+    if show_instance and spec.instance is not None:
+        for line in [*caption_lines(spec.instance), 'Source: '+spec.instance['source_url']]:
+            context_lines.extend(textwrap.wrap(line, max(24, (width-104)//6)))
+    svg_height = height + (30 + 14*len(context_lines) if context_lines else 0)
     left, right, bottom = 82., 22., 72.
     plot_w, plot_h = width - left - right, height - top - bottom
     positive = all_y[all_y > 0]
@@ -242,11 +258,11 @@ def render_line_chart(spec: ChartSpec, width: int = 760, height: int = 400,
     def text(x, y, value, size=12, anchor="start", weight=400):
         return (f'<text x="{x:.2f}" y="{y:.2f}" text-anchor="{anchor}" '
                 f'fill="#334155" font-size="{size}" font-weight="{weight}">{escape(str(value))}</text>')
-    parts = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" '
+    parts = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {svg_height}" '
              f'role="img" aria-label="{escape(spec.title)}" font-family="system-ui,sans-serif">',
              f'<title>{escape(spec.title)}</title><desc>{escape(note)}</desc>',
              '<metadata>' + escape(json.dumps(asdict(spec), allow_nan=False)) + '</metadata>',
-             f'<rect width="{width}" height="{height}" rx="12" fill="white"/>']
+             f'<rect width="{width}" height="{svg_height}" rx="12" fill="white"/>']
     for i, line in enumerate(title_lines):
         parts.append(text(left, 24 + 27 * i, line, 16, weight=650))
     for tick in np.linspace(xmin, xmax, 5):
@@ -303,6 +319,10 @@ def render_line_chart(spec: ChartSpec, width: int = 760, height: int = 400,
         parts.append(text(lx + 30, ly + 4, series.label))
     for i, line in enumerate(textwrap.wrap(note, max(24, (width - 95) // 5))):
         parts.append(text(left, height - 20 + 11 * i, line, 10))
+    if context_lines:
+        parts.append(f'<path d="M32,{height+3} H{width-32}" stroke="#d7e2ed"/>')
+        for i, line in enumerate(context_lines):
+            parts.append(text(32, height+22+14*i, line, 10))
     parts.append('</svg>')
     return ''.join(parts)
 

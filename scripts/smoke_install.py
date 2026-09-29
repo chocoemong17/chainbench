@@ -8,12 +8,137 @@ import math
 import os
 import platform
 import re
+import struct
 import subprocess
 import tempfile
 import venv
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def validate_canonical_plot(figure):
+    """Check retained inputs, constants, first update and reference curves without package imports."""
+    c = figure.get('instance')
+    if not c or c.get('kind') != 'canonical-fixed-instance' or c.get('seed') is not None:
+        raise RuntimeError('Missing canonical instance context')
+    arrays, n, constants = c['inputs'], c['dimension'], c['constants']
+    digest = hashlib.sha256()
+    for name, value in sorted(arrays.items()):
+        matrix = bool(value) and isinstance(value[0], list)
+        shape = [len(value), len(value[0])] if matrix else [len(value)]
+        flat = [v for row in value for v in row] if matrix else value
+        if any(not math.isfinite(v) for v in flat) or (matrix and any(len(row) != shape[1] for row in value)):
+            raise RuntimeError('Invalid canonical input array')
+        digest.update(name.encode('ascii')+b'\0'+json.dumps(shape, separators=(',', ':')).encode('ascii')+b'\0')
+        digest.update(struct.pack('<'+str(len(flat))+'d', *flat))
+    if digest.hexdigest() != c['input_sha256'] or len(arrays['x0']) != n:
+        raise RuntimeError('Canonical input fingerprint or dimension differs')
+    def close(a, b):
+        if not math.isfinite(a) or not math.isfinite(b) or not math.isclose(a, b, rel_tol=2e-9, abs_tol=1e-12):
+            raise RuntimeError('Canonical calculation disagrees with inputs or plotted samples')
+    def dot(a, b):
+        return sum(x*y for x, y in zip(a, b))
+    def soft(z, threshold):
+        return math.copysign(max(abs(z)-threshold, 0.), z)
+    x0, star = arrays['x0'], c['optimizer']
+    if c['family'] == 'quadratic':
+        Q, b = arrays['Q'], arrays['b']
+        if len(Q) != n or len(b) != n or any(len(row) != n for row in Q):
+            raise RuntimeError('Canonical matrix dimensions differ')
+        if any(Q[i][j] != 0 for i in range(n) for j in range(n) if i != j):
+            raise RuntimeError('Fixed canonical quadratics are diagonal')
+        eigenvalues = [Q[i][i] for i in range(n)]
+        L, mu = max(eigenvalues), min(eigenvalues)
+        close(constants['L'], L)
+        close(constants['mu'], mu)
+        if mu == 0:
+            if constants['condition_number'] is not None:
+                raise RuntimeError('Singular canonical conditioning must remain undefined')
+        else:
+            close(constants['condition_number'], L/mu)
+        for i in range(n):
+            close(b[i], eigenvalues[i]*star[i])
+        def grad(x):
+            return [eigenvalues[i]*x[i]-b[i] for i in range(n)]
+        def gap(x):
+            return .5*sum(eigenvalues[i]*(x[i]-star[i])**2 for i in range(n))
+    elif c['family'] == 'diagonal-lasso':
+        a, b, lam = arrays['a'], arrays['b'], arrays['lam'][0]
+        if len(a) != n or len(b) != n:
+            raise RuntimeError('Canonical LASSO dimensions differ')
+        L = max(v*v for v in a)
+        close(constants['L'], L)
+        close(constants['lambda'], lam)
+        for i in range(n):
+            close(star[i], soft(a[i]*b[i], lam)/a[i]**2)
+        def grad(x):
+            return [a[i]*(a[i]*x[i]-b[i]) for i in range(n)]
+        def gap(x):
+            return (.5*sum((a[i]*(x[i]-star[i]))**2 for i in range(n))
+                    + lam*sum(abs(x[i])-max(-1, min(1, a[i]*b[i]/lam))*x[i] for i in range(n)))
+    elif c['family'] == 'simplex-quadratic':
+        target = arrays['target']
+        if len(target) != n or min(x0) < 0:
+            raise RuntimeError('Invalid canonical simplex')
+        close(sum(x0), 1.)
+        close(constants['curvature'], 2.)
+        def grad(x):
+            return [x[i]-target[i] for i in range(n)]
+        def gap(x):
+            return .5*sum((x[i]-target[i])**2 for i in range(n))
+    else:
+        raise RuntimeError('Unknown canonical family')
+    radius2 = sum((x0[i]-star[i])**2 for i in range(n))
+    close(constants['radius_squared'], radius2)
+    slug, options = c['topic'], c['method_parameters']
+    for method, state in c['runs'].items():
+        if not 1 <= state['updates'] <= c['budget'] or (method != 'cg' and state['updates'] != c['budget']):
+            raise RuntimeError('Canonical update count exceeds its budget')
+        g = grad(x0)
+        if method in ('gd', 'smooth-fista', 'ista', 'fista'):
+            step = options[method]['step']
+            close(step, 1/L)
+            xn = [x0[i]-step*g[i] for i in range(n)]
+            if method in ('ista', 'fista'):
+                xn = [soft(x, arrays['lam'][0]*step) for x in xn]
+        elif method == 'heavy-ball':
+            xn = [x0[i]-options[method]['alpha']*g[i] for i in range(n)]
+        elif method == 'cg':
+            residual = [-v for v in g]
+            alpha = dot(residual, residual)/sum(eigenvalues[i]*residual[i]**2 for i in range(n))
+            xn = [x0[i]+alpha*residual[i] for i in range(n)]
+        elif method == 'proximal-point':
+            parameter = options[method]['c']
+            xn = [(x0[i]+parameter*b[i])/(1+parameter*eigenvalues[i]) for i in range(n)]
+        elif method == 'frank-wolfe':
+            chosen = min(range(n), key=lambda i: g[i])
+            xn = [float(i == chosen) for i in range(n)]  # gamma[0]=1
+        else:
+            raise RuntimeError('Unknown canonical method')
+        observed = figure['series'][1 if slug == 'ista-vs-fista' and method == 'fista' else 0]
+        expected = gap(xn)
+        if method == 'cg':
+            expected = math.sqrt(2*expected)
+        elif method in ('heavy-ball', 'proximal-point'):
+            expected = math.sqrt(sum((xn[i]-star[i])**2 for i in range(n)))
+            if method == 'heavy-ball':
+                expected /= math.sqrt(radius2)
+        close(observed['y'][observed['x'].index(1)], expected)
+    if slug != 'ista-vs-fista':
+        for k, value in zip(figure['series'][1]['x'], figure['series'][1]['y']):
+            if slug == 'gd-baseline':
+                expected = L*radius2/(2*k)
+            elif slug in ('nesterov-1983', 'beck-teboulle-2009'):
+                expected = 2*L*radius2/(k+1)**2
+            elif slug == 'jaggi-2013':
+                expected = 4/(k+2)
+            elif slug == 'rockafellar-1976':
+                expected = math.sqrt(radius2)/(1+options['proximal-point']['c']*mu)**k
+            else:
+                rho = (math.sqrt(L)-math.sqrt(mu))/(math.sqrt(L)+math.sqrt(mu))
+                expected = rho if slug == 'polyak-1964' else 2*rho**k*math.sqrt(2*gap(x0))
+            close(value, expected)
 
 
 def run(args: list[str], cwd: Path, env: dict[str, str]) -> str:
@@ -109,6 +234,7 @@ def validate_html(text: str, expected, *, experiment: bool = False) -> None:
         for result, figure in zip(expected, figures):
             if figure != record['charts'][result['slug']]:
                 raise RuntimeError('Fixed SVG samples differ from exported evidence')
+            validate_canonical_plot(figure)
 
 
 
@@ -295,6 +421,9 @@ def main() -> None:
             run([cli, "plot", "nesterov-1983", "--output", str(plot)], work, env)
             if "<svg" not in plot.read_text(encoding="utf-8"):
                 raise RuntimeError("Standalone plot export is not SVG")
+            import xml.etree.ElementTree as ET
+            svg_record = ET.fromstring(plot.read_text(encoding='utf8')).find('{http://www.w3.org/2000/svg}metadata')
+            validate_canonical_plot(json.loads(svg_record.text))
             experiments = exercise_experiments(cli, work, env, expected)
             instance_controls = exercise_instance_controls(cli, work, env)
             from smoke_workflows import exercise_workflows

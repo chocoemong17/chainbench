@@ -7,6 +7,8 @@ from html import escape
 
 import numpy as np
 
+from ._canonical import CSS as INSTANCE_CSS
+from ._canonical import context_html
 from ._pages import bi, evidence, page
 from ._plot_audit import evidence_record, validate_chart_result
 from .checks import CHECKS, run_check
@@ -228,7 +230,7 @@ def learning_html(focus: str | None = None, lang: str = 'en') -> str:
         lesson, chart = LESSONS[slug], charts[slug]
         deep = DEEP_CONTEXT[slug]
         validate_chart_result(result, chart)
-        svg = render_line_chart(chart)
+        svg = render_line_chart(chart, show_instance=False)
         thumbnail = base64.b64encode(svg.encode()).decode()
         search = escape(' '.join((slug, lesson['name'], lesson['category'], *lesson['question'])), quote=True)
         cards.append(f'<a class="card" href="#{slug}" data-search="{search}"><div><span class="badge">'
@@ -254,7 +256,7 @@ def learning_html(focus: str | None = None, lang: str = 'en') -> str:
                         + '<article><h3>' + bi('강점', 'Strength') + '</h3><p>' + bi(*deep['strength']) + '</p></article>'
                         + '<article><h3>' + bi('대가·약점', 'Trade-off') + '</h3><p>' + bi(*deep['tradeoff']) + '</p></article>'
                         + '<article><h3>' + bi('무엇과 비교해야 하나?', 'What to compare it with') + '</h3><p>' + bi(*deep['compare']) + '</p></article></div>'
-                        + '<div class="plot">' + svg + '</div>'
+                        + context_html(chart.instance) + '<div class="plot">' + svg + '</div>'
                         + '<p class="callout">' + bi(*lesson['reading']) + '</p>' + ratio_html
                         + '<p><span class="badge">' + result_status(result) + '</span> '
                         + bi('이 실행의 검사 통계', 'Statistic from this run') + f': {result.observed:.6g}</p>'
@@ -291,7 +293,7 @@ def learning_html(focus: str | None = None, lang: str = 'en') -> str:
              + '<div class="controls"><label for="lesson-filter">' + bi('방법·키워드 찾기', 'Find a method or keyword')
              + '</label><input id="lesson-filter" type="search" placeholder="FISTA / CG / 기울기"></div>')
     glossary = '<details class="panel"><summary>' + bi('처음 보는 용어', 'A small glossary') + '</summary><p>' + bi('gap: 현재 목적함수 값과 최적값의 차이. bound: 조건을 만족하는 문제들에 대한 보장 상계. κ: 이차함수의 최대/최소 곡률 비. residual: 방정식을 얼마나 만족하는지. INFO: 관측일 뿐, 통과 판정이 아님.', 'Gap: objective error relative to an optimum. Bound: guaranteed upper envelope under stated assumptions. Kappa: largest/smallest curvature ratio. Residual: equation error. INFO: observation without a pass/fail guarantee.') + '</p></details>'
-    return page('From paper to understanding', intro, '<style>' + MECHANISM_CSS + '</style>'
+    return page('From paper to understanding', intro, '<style>' + MECHANISM_CSS + INSTANCE_CSS + '</style>'
                 + guide + '<div class="cards">' + ''.join(cards) + '</div>' + glossary
                 + ''.join(sections) + evidence(record, 'learning-evidence.json')
                 + '<script>' + MECHANISM_SCRIPT + '</script>', lang=lang)

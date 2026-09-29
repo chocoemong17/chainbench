@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Attach computation-derived instance context to every canonical learning/report
+  chart and standalone SVG: exact inputs/hash, dimension, constants, actual start,
+  method parameters, budget, completed updates and stopping. Keep singular
+  quadratic conditioning explicitly undefined instead of inventing a finite value.
+- Recompute all canonical observations from retained inputs in tests; independently
+  verify input fingerprints, first updates and reference curves in wheel/sdist smoke.
+
 - Add bilingual symbolic update flows and a two-method operation/state comparison
   to the learning atlas. Related-method navigation clears filters; focused exports
   provide runnable commands for omitted topics. Clarify Frank–Wolfe's 1956 origin

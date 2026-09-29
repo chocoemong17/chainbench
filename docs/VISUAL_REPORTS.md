@@ -40,6 +40,11 @@ chainbench plot hestenes-stiefel-1952 --output cg.svg
 
 SVG is used so plots stay sharp, inspectable and dependency-free.
 
+Development source after v0.5.0 adds a visible setup caption and full instance
+metadata to standalone SVGs. Learning/report pages show the same setup in an
+adjacent panel, with expandable inputs, method settings and input hash. See
+[CANONICAL_CONTEXT.md](CANONICAL_CONTEXT.md) for fields and validation.
+
 ## Configurable experiments
 
 ```bash

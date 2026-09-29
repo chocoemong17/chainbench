@@ -19,6 +19,8 @@
   topics, an operation/state comparison and linked method relationships. Historical
   attribution is separated from mathematical specialization and measured evidence.
 - The new commands are not yet a release; previous tags/assets remain unchanged.
+- Canonical `learn`/`report`/`plot` views now retain their computation-derived
+  inputs and settings too; see [the instance contract](docs/CANONICAL_CONTEXT.md).
 
 ## v0.5.0: evidence breadth and geometry
 

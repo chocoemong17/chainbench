@@ -21,6 +21,11 @@ A topic explains motivation, assumptions, the implemented recurrence, a selected
 published guarantee, the actual observation and what it does not establish.
 Source links are optional links; no remote resource is loaded by the report.
 
+Development source also shows the actual deterministic instance beside each curve:
+dimension, objective, constants, start, budget, completed updates and termination.
+Expand the panel for full input arrays and method settings. These records come
+from the objects used to calculate the plot; see [the contract](CANONICAL_CONTEXT.md).
+
 The six inequality topics include a normalized ratio plot with threshold 1.
 Heavy-ball is instead an empirical tail comparison, and ISTA/FISTA is INFO only;
 neither gets a misleading pointwise bound plot. Underlying samples and verdicts
