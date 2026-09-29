@@ -8,6 +8,8 @@ from pathlib import Path
 from . import __version__
 from .case_studies import case_html, gd_tight_case
 from .checks import CHECKS, CheckResult, run_all, run_check
+from .deblur_views import deblur_html
+from .deblurring import run_deblurring
 from .experiment_reporting import render_experiment
 from .experiments import (
     MAX_CONFIG_BYTES,
@@ -300,9 +302,9 @@ def main(argv: list[str] | None = None) -> int:
     landscape.add_argument("--output", type=Path)
     landscape.add_argument("--force", action="store_true")
 
-    reproduce = sub.add_parser("reproduce", help="recompute an exact published numerical example")
-    reproduce.add_argument("name", choices=["shewchuk-1994"])
-    reproduce.add_argument("--steps", type=int, default=12)
+    reproduce = sub.add_parser("reproduce", help="recompute a published example or declared experiment protocol")
+    reproduce.add_argument("name", choices=["shewchuk-1994", "fista-deblurring"])
+    reproduce.add_argument("--steps", type=int, help="default: 12 for Shewchuk, 10000 for noiseless FISTA")
     reproduce.add_argument("--lang", choices=["en", "ko"], default="en")
     reproduce.add_argument("--format", choices=["html", "json"], default="html")
     reproduce.add_argument("--output", type=Path)
@@ -399,8 +401,11 @@ def main(argv: list[str] | None = None) -> int:
             _write(args.output, text, args.force)
             return 0
         if args.command == "reproduce":
-            result = run_reproduction(args.steps)
-            text = (reproduction_html(result, args.lang) if args.format == "html"
+            image_case = args.name == "fista-deblurring"
+            steps = args.steps if args.steps is not None else (10000 if image_case else 12)
+            result = run_deblurring(steps) if image_case else run_reproduction(steps)
+            renderer = deblur_html if image_case else reproduction_html
+            text = (renderer(result, args.lang) if args.format == "html"
                     else json.dumps(result, indent=2, allow_nan=False))
             _write(args.output, text, args.force)
             return 0

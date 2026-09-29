@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- Recompute the noiseless 64×64 ISTA/FISTA subset of Beck–Teboulle Figure 5,
+  using a permission-preserving port of the public procedural image. Retain every
+  scalar observation, declared full-precision snapshots, source differences and
+  both objective/image error; do not treat source magnitudes as exact targets.
+- Stream the existing proximal recurrence for the 10,000-step experiment while
+  preserving public Trace outputs. Independently check operators, coordinates,
+  installs and displayed pixels; keep long final-axis labels inside SVG bounds.
+
 - Resolve the narrow quadratic centre of the tight-GD construction with samples
   at its exact joins and a normalized inset. Inspect every actual GD point and
   its constant gradient; explain algebraic attainment separately from the bound.

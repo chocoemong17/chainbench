@@ -158,10 +158,18 @@ def exercise_workflows(cli, work, env, version, run):
     if tour_records['stress-ista-vs-fista.html']['rows'][24] != unresolved['case']:
         raise RuntimeError('tour dropped or changed the unresolved sampled case')
 
+    from smoke_deblurring import validate_deblurring
+    deblur_args = [cli, 'reproduce', 'fista-deblurring']
+    deblur = json.loads(run(deblur_args + ['--format', 'json'], work, env))
+    validate_deblurring(deblur)
+    deblur_html = run(deblur_args + ['--lang', 'ko'], work, env)
+    if extract_record(deblur_html) != deblur or deblur['parameters']['steps'] != 10000:
+        raise RuntimeError('installed deblurring HTML differs from the full published budget')
+
     return {'learning':'matched','sweep':'matched','replay':'matched','gd_tight':'matched',
             'stress':'matched','landscape':'matched','shewchuk_reproduction':'matched',
             'simplex_geometry':'matched', 'inspectable_stress':'matched', 'proximal_geometry':'matched',
-            'offline_tour':'matched'}
+            'offline_tour':'matched', 'fista_deblurring':'matched'}
 
 
 def validate_tour(folder):

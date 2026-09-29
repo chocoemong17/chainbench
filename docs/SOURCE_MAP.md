@@ -123,3 +123,14 @@ ranking is introduced by this interface.
 ## Learning and the separate tight-GD case (v0.4.0)
 
 The `learn` pages explain selected existing results rather than expanding the eight fixed checks. The new `case-study gd-tight` is separately sourced to Drori--Teboulle preprint Theorems 3.1 and 3.2. See [GD_TIGHT_CASE.md](GD_TIGHT_CASE.md): a horizon-dependent Huber function attains LR²/(4Nh+2) for GD step h/L, restricted to 0<h<=1. The theorem supplies extremality; a floating-point match does not prove it.
+
+
+## Noiseless image experiment (development source after v0.5.0)
+
+`reproduce fista-deblurring` follows Beck–Teboulle Section 5.2 / Figure 5's noiseless
+64×64 setup for the ISTA/FISTA subset. It uses the **full** squared residual with
+L=2, lambda=0, known optimal value zero and 10,000 updates. At zero penalty,
+orthonormal Haar coordinates and image coordinates yield equivalent iterates;
+the implementation uses the latter. The source image version and all differences
+are explicit in [FISTA_DEBLURRING.md](FISTA_DEBLURRING.md). Source-reported endpoint
+magnitudes are not pass thresholds; MTWIST and the noisy experiment are omitted.

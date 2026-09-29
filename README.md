@@ -184,6 +184,18 @@ specified tolerances and identical input-byte fingerprints. `INPUT_DIFFERENCE` a
 `MISMATCH` remain visible. A match is not authentication of the author or proof that
 an independent person ran the original. Missing/non-finite evidence is an error.
 
+## Recompute the noiseless FISTA image experiment
+
+```bash
+python -m chainbench reproduce fista-deblurring --lang ko --output deblur.html
+```
+
+Recompute the ISTA/FISTA subset of Beck–Teboulle Figure 5: a public 64×64 synthetic
+image, explicit Gaussian blur, no noise, lambda=0 and all 10,000 updates. Compare
+actual reconstructed images, objective error and pixel error at shared snapshots.
+The page states source-version and coordinate differences; it does not claim exact
+original endpoint values. See [input provenance, permission and formulas](docs/FISTA_DEBLURRING.md).
+
 ## 4. Inspect one public tight example
 
 ```bash
@@ -246,4 +258,5 @@ baseline, not the latest package. Prior releases are preserved.
 
 Only public literature and independent code belong here. No private research,
 unpublished derivations, private datasets or real-name maintainer metadata are needed.
-MIT license. Public maintainer: **chocoemong17**.
+MIT license for ChainBench; the attributed image-generator port retains its
+[ReguTools permission notice](docs/licenses/REGUTOOLS.txt). Public maintainer: **chocoemong17**.

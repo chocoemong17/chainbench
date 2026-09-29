@@ -268,7 +268,8 @@ def render_line_chart(spec: ChartSpec, width: int = 760, height: int = 400,
     for tick in np.linspace(xmin, xmax, 5):
         x = sx(float(tick))
         parts.append(f'<path d="M{x:.2f},{top} V{top + plot_h}" stroke="#e2e8f0"/>')
-        parts.append(text(x, top + plot_h + 20, _fmt(float(tick)), anchor="middle"))
+        parts.append(text(x, top + plot_h + 20, _fmt(float(tick)),
+                          anchor="end" if tick == xmax else "middle"))
     for value, label in ticks:
         y = top + (ymax - value) / (ymax - ymin) * plot_h
         parts.append(f'<path d="M{left},{y:.2f} H{left + plot_w}" stroke="#e2e8f0"/>')

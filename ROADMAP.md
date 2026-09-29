@@ -19,9 +19,10 @@
 - Implemented on the development branch: ISTA/FISTA composite contours and 3D
   heights, extrapolation/gradient/shrinkage inspection, and all nine lambda/start
   cases. See [proximal geometry](docs/PROXIMAL_GEOMETRY.md).
-- FISTA image deblurring remains a candidate requiring an audit of the exact source
-  image's reuse terms and boundary/wavelet/noise conventions. A substitute image must
-  not be called the original paper's reproduced figure.
+- Implemented in development: the noiseless 64×64 ISTA/FISTA subset of Figure 5,
+  using the attributed public procedural image, explicit operator and lambda=0
+  coordinate equivalence. See [source differences](docs/FISTA_DEBLURRING.md).
+  The noisy 256×256 experiment remains deferred; its exact noise draw is unspecified.
 - Implemented on the development branch: symbolic update flows for all eight
   topics, an operation/state comparison and linked method relationships. Historical
   attribution is separated from mathematical specialization and measured evidence.
