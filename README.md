@@ -11,30 +11,55 @@ A numerical experiment can be **consistent with** a published result; it does no
 
 ## Install and run
 
-Python 3.10 or newer is required. From a terminal with Git:
+Python 3.10 or newer is required. Use a fresh virtual environment:
 
 ```bash
-git clone https://github.com/chocoemong17/chainbench.git
-cd chainbench
 python -m venv .venv
 ```
 
-Activate with `source .venv/bin/activate` on Linux/macOS, or `.venv\Scripts\Activate.ps1` in Windows PowerShell. Then:
+Activate with `source .venv/bin/activate` on Linux/macOS, or run
+`.venv\Scripts\python.exe` directly in Windows without changing execution policy.
+The release wheel can be installed without Git:
 
 ```bash
-python -m pip install .
-chainbench --version
-chainbench list
-chainbench check all
+python -m pip install https://github.com/chocoemong17/chainbench/releases/download/v0.2.0/chainbench-0.2.0-py3-none-any.whl
+python -m chainbench --version
+python -m chainbench check all
 ```
 
-A console-script-independent alternative is `python -m chainbench check all`.
+Alternatively, download the wheel from [GitHub Releases](https://github.com/chocoemong17/chainbench/releases)
+and install its local filename. A source checkout also works: clone this repository,
+enter its folder, and run `python -m pip install .`. The `chainbench` console command
+and `python -m chainbench` address the same interface.
 
-Release distributions, when published, are under [GitHub Releases](https://github.com/chocoemong17/chainbench/releases). Install the downloaded wheel with `python -m pip install ./chainbench-0.1.1-py3-none-any.whl`. Do not assume a package named `chainbench` on an unrelated registry is this project; no PyPI publication is configured.
+Do not assume a package named `chainbench` on an unrelated registry is this project;
+no PyPI publication is configured. For a complete first run and a hand-checkable CG
+example, see [the quickstart](docs/QUICKSTART.md).
 
-For a complete first run, a hand-checkable CG example and trajectory export, see [the quickstart](docs/QUICKSTART.md).
+## Change settings without editing Python
 
-## Bundled experiments
+The installed package contains three configurable presets. No source checkout,
+API key or remote service is needed after installation:
+
+```bash
+python -m chainbench experiment --preset quadratic --format markdown --output experiment.md
+python -m chainbench experiment --preset diagonal-lasso --output lasso.json
+python -m chainbench preset quadratic --output config.json
+python -m chainbench experiment --config config.json --format csv --output trajectory.csv
+```
+
+Edit `config.json` to change dimensions, condition numbers, iteration budgets or
+compatible methods. JSON, CSV and Markdown retain the resolved settings, input and
+configuration hashes, software versions and trajectories. Each problem family uses
+an explicitly named stationarity metric. `budget_complete` means the requested
+updates ran, not convergence; CG separately reports `converged` or `max_steps`.
+Equal iteration budgets are **not** equal computational work.
+
+See [configurable experiments](docs/EXPERIMENTS.md) for valid fields, resource limits,
+output schemas and reproducibility caveats. Experiments are observations; the
+separate fixed suite below checks specific published inequalities.
+
+## Bundled consistency checks
 
 | CLI name | Algorithm / source | Interpretation |
 |---|---|---|
@@ -86,7 +111,9 @@ python -m build
 python scripts/smoke_install.py
 ```
 
-CI covers Python 3.10-3.12 on Ubuntu, Python 3.12 on Windows/macOS, and a Python 3.10 environment with NumPy 1.24.0, pytest 8.0.0 and Ruff 0.6.0. Tests include invalid inputs, deterministic rotated SPD problems, several condition numbers and regularization parameters, near-optimal gaps, CLI errors and report formats. The package job installs **both wheel and sdist in separate clean virtual environments outside the checkout** before running their CLIs.
+CI covers Python 3.10-3.12 on Ubuntu, Python 3.12 on Windows/macOS, and a Python 3.10 environment with NumPy 1.24.0, pytest 8.0.0 and Ruff 0.6.0. Tests include invalid inputs, deterministic rotated SPD problems, several condition numbers and regularization parameters, near-optimal gaps, CLI errors and report formats. The package job installs **both wheel and sdist in separate clean virtual environments outside the checkout** before running their CLIs, all three experiment presets, saved-config reruns and every export format.
+
+For an actual external reproduction attempt, see [the reviewer guide](docs/REVIEWER_GUIDE.md) and use the reproducibility feedback issue form.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md), [methodology](docs/METHODOLOGY.md), [adding a check](docs/ADDING_A_CHECK.md) and [release procedure](RELEASING.md). Contributions should improve reproducibility, clarity, or correctness; adding more algorithms is not itself a quality measure.
 

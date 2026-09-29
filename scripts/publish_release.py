@@ -57,7 +57,22 @@ def verified_files(version: str, sha: str) -> list[Path]:
             or record.get("exports") != ["markdown", "csv", "json"]
         ):
             raise RuntimeError("Invalid or unsuccessful installed-package evidence")
-        summary = (slugs, statuses)
+        experiments = record.get("experiments")
+        expected_methods = {
+            "quadratic": ["gd", "smooth-fista", "heavy-ball", "cg", "proximal-point"],
+            "diagonal-lasso": ["ista", "fista"], "simplex": ["frank-wolfe"],
+        }
+        if not isinstance(experiments, list) or len(experiments) != len(expected_methods):
+            raise RuntimeError("Missing installed experiment evidence")
+        for experiment, (preset, methods) in zip(experiments, expected_methods.items()):
+            if (not isinstance(experiment, dict) or experiment.get("preset") != preset
+                    or experiment.get("methods") != methods
+                    or type(experiment.get("rows")) is not int or experiment["rows"] < len(methods)
+                    or experiment.get("exports") != ["json", "csv", "markdown"]
+                    or experiment.get("saved_config_rerun") != "matched"
+                    or not re.fullmatch(r"[0-9a-f]{64}", str(experiment.get("config_sha256", "")))):
+                raise RuntimeError("Invalid installed experiment evidence")
+        summary = (slugs, statuses, experiments)
         if baseline is not None and summary != baseline:
             raise RuntimeError("Wheel and sdist results disagree")
         baseline = summary

@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-VERSION, SHA = "0.1.1", "a" * 40
+VERSION, SHA = "0.2.0", "a" * 40
 
 
 def load_script(name):
@@ -38,6 +38,14 @@ def evidence(tmp_path, monkeypatch):
             "checks": 2, "slugs": ["condition", "observation"], "statuses": ["CONSISTENT", "INFO"],
             "installed_outside_checkout": True, "pip_check": "passed",
             "exports": ["markdown", "csv", "json"],
+            "experiments": [
+                {"preset": name, "methods": methods, "config_sha256": "a"*64, "rows": 100,
+                 "exports": ["json", "csv", "markdown"], "saved_config_rerun": "matched"}
+                for name, methods in {
+                    "quadratic": ["gd", "smooth-fista", "heavy-ball", "cg", "proximal-point"],
+                    "diagonal-lasso": ["ista", "fista"], "simplex": ["frank-wolfe"],
+                }.items()
+            ],
         })
     report = {"source_commit": SHA, "artifacts": artifacts}
     (dist / "verification.json").write_text(json.dumps(report), encoding="utf-8")
@@ -65,6 +73,7 @@ def test_reject_distribution_changed_after_smoke_test(evidence):
     ("version", "9.9.9"), ("artifact", "../outside.whl"), ("checks", True),
     ("statuses", ["CONSISTENT", "NOT CONSISTENT"]), ("statuses", ["INFO", "INFO"]),
     ("statuses", ["CONSISTENT", "UNKNOWN"]), ("slugs", ["same", "same"]),
+    ("experiments", None), ("experiments", []),
     ("installed_outside_checkout", False), ("pip_check", "failed"), ("exports", []),
 ])
 def test_reject_malformed_or_failed_verification(evidence, field, value):
@@ -97,6 +106,7 @@ def test_duplicate_artifact_record_rejected(evidence):
 def test_unlisted_file_rejected(evidence):
     module, dist, _ = evidence
     (dist / "not-a-release-asset.txt").write_text("unlisted")
+    write_sums(dist)
     with pytest.raises(RuntimeError, match="only the verified"):
         module.verified_files(VERSION, SHA)
 
@@ -206,3 +216,25 @@ def test_api_failure_is_not_treated_as_tag_absence(monkeypatch):
     monkeypatch.setattr(module, "command", fail)
     with pytest.raises(subprocess.CalledProcessError):
         module.tag_commit("owner/repo", "v0.1.1")
+
+
+@pytest.mark.parametrize("field,value", [
+    ("rows", 0), ("rows", True), ("methods", []), ("preset", "other"),
+    ("exports", []), ("saved_config_rerun", "skipped"), ("config_sha256", None),
+])
+def test_invalid_experiment_evidence_prevents_publication(evidence, field, value):
+    module, dist, report = evidence
+    report["artifacts"][0]["experiments"][0][field] = value
+    (dist / "verification.json").write_text(json.dumps(report), encoding="utf-8")
+    write_sums(dist)
+    with pytest.raises(RuntimeError, match="experiment evidence"):
+        module.verified_files(VERSION, SHA)
+
+
+def test_wheel_and_sdist_experiment_records_must_agree(evidence):
+    module, dist, report = evidence
+    report["artifacts"][0]["experiments"][0]["config_sha256"] = "b"*64
+    (dist / "verification.json").write_text(json.dumps(report), encoding="utf-8")
+    write_sums(dist)
+    with pytest.raises(RuntimeError, match="results disagree"):
+        module.verified_files(VERSION, SHA)

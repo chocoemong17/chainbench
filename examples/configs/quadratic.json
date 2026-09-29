@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "problem": {
+    "kind": "quadratic",
+    "dimension": 12,
+    "condition_number": 10.0,
+    "L": 1.0,
+    "rotation": "householder"
+  },
+  "steps": 30,
+  "methods": [
+    "gd",
+    "smooth-fista",
+    "heavy-ball",
+    "cg",
+    "proximal-point"
+  ],
+  "method_options": {
+    "cg": {
+      "rtol": 1e-12,
+      "atol": 0.0
+    },
+    "proximal-point": {
+      "proximal_parameter": 1.0
+    }
+  },
+  "include_iterates": false
+}
