@@ -12,13 +12,15 @@ from .problems import DiagonalLassoProblem, QuadraticProblem, SimplexQuadraticPr
 class Trace:
     iterates: list[np.ndarray]
     values: np.ndarray
+    termination: str | None = None
+    residual_norm: float | None = None
 
 
-def _trace(problem, xs: list[np.ndarray]) -> Trace:
+def _trace(problem, xs: list[np.ndarray], **metadata) -> Trace:
     values = np.asarray([problem.value(x) for x in xs], dtype=float)
     if not np.all(np.isfinite(values)):
         raise FloatingPointError("non-finite objective; reduce problem scale")
-    return Trace(xs, values)
+    return Trace(xs, values, **metadata)
 
 
 def gradient_descent(problem: QuadraticProblem, steps: int, x0: np.ndarray | None = None) -> Trace:
@@ -68,35 +70,79 @@ def heavy_ball(
     return _trace(problem, xs), float(alpha), float(beta)
 
 
+def _norm(x: np.ndarray) -> float:
+    """Euclidean norm without directly squaring the unscaled coordinates."""
+    if not np.all(np.isfinite(x)):
+        raise FloatingPointError("non-finite residual; reduce problem scale")
+    with np.errstate(over="raise", invalid="raise"):
+        return float(np.hypot.reduce(x))
+
+
 def conjugate_gradient(
     problem: QuadraticProblem, steps: int | None = None, x0: np.ndarray | None = None,
     *, rtol: float = 1e-12, atol: float = 0.0,
 ) -> Trace:
-    """Linear CG, with a scale-aware residual stopping rule."""
+    """CG on a scaled correction equation, with true-residual stopping.
+
+    Stop when ||b-Qx|| <= max(atol, rtol*||b-Qx0||). This relative-to-initial
+    convention is retained from 0.1.0 (it is not SciPy's relative-to-b rule).
+    ``termination`` distinguishes convergence from exhaustion of ``steps``.
+    """
     steps = count(problem.dim if steps is None else steps)
     rtol, atol = scalar(rtol, "rtol"), scalar(atol, "atol")
     if problem.mu <= 0:
         raise ValueError("conjugate gradient requires a positive-definite quadratic")
     x = initial(problem.dim, x0)
-    r = problem.b - problem.Q @ x
-    direction, rr, xs = r.copy(), float(r @ r), [x.copy()]
-    tolerance = max(atol, rtol * float(np.linalg.norm(r)))
-    for _ in range(steps):
-        if np.linalg.norm(r) <= tolerance:
-            break
-        qd = problem.Q @ direction
-        denominator = float(direction @ qd)
-        if not np.isfinite(denominator) or denominator <= 0:
-            raise FloatingPointError("CG encountered nonpositive or non-finite curvature")
-        alpha = rr / denominator
-        x, r = x + alpha * direction, r - alpha * qd
-        rr_next = float(r @ r)
-        xs.append(x.copy())
-        if np.linalg.norm(r) <= tolerance:
-            break
-        direction = r + (rr_next / rr) * direction
-        rr = rr_next
-    return _trace(problem, xs)
+    start, xs = x.copy(), [x.copy()]
+    with np.errstate(over="raise", invalid="raise", divide="raise"):
+        raw = problem.b - problem.Q @ x
+        initial_norm = _norm(raw)
+        tolerance = max(atol, rtol * initial_norm)
+        if initial_norm <= tolerance or steps == 0:
+            return _trace(problem, xs, residual_norm=initial_norm,
+                          termination="converged" if initial_norm <= tolerance else "max_steps")
+
+        # Solve (Q/L) z = (b-Q*x0)/(L*scale), then x=x0+scale*z.
+        # Normalize in two divisions, avoiding overflow in L*scale.
+        operator = problem.Q / problem.L
+        residual = raw / problem.L
+        scale = float(np.max(np.abs(residual)))
+        if not np.isfinite(scale) or scale == 0:
+            raise FloatingPointError("CG correction cannot be represented at this scale")
+        residual = residual / scale
+        direction = residual.copy()
+        rr = float(residual @ residual)
+        correction = np.zeros(problem.dim)
+        residual_norm = initial_norm
+        termination = "max_steps"
+        for _ in range(steps):
+            qd = operator @ direction
+            denominator = float(direction @ qd)
+            if not np.isfinite(denominator) or denominator <= 0 or rr <= 0:
+                raise FloatingPointError("CG encountered nonpositive or non-finite curvature")
+            alpha = rr / denominator
+            correction = correction + alpha * direction
+            x = start + scale * correction
+            xs.append(x.copy())
+            # Never declare convergence from the recursively updated residual alone.
+            raw = problem.b - problem.Q @ x
+            residual_norm = _norm(raw)
+            if residual_norm <= tolerance:
+                termination = "converged"
+                break
+            residual = residual - alpha * qd
+            rr_next = float(residual @ residual)
+            if rr_next == 0:
+                # A recurrence can round to zero while the true residual remains nonzero.
+                residual = (raw / problem.L) / scale
+                rr_next = float(residual @ residual)
+                direction = residual.copy()
+            else:
+                direction = residual + (rr_next / rr) * direction
+            if not np.isfinite(rr_next) or rr_next <= 0:
+                raise FloatingPointError("CG residual lost numerical resolution before convergence")
+            rr = rr_next
+    return _trace(problem, xs, termination=termination, residual_norm=residual_norm)
 
 
 def frank_wolfe(

@@ -1,10 +1,11 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from numbers import Real
 
 import numpy as np
 
-from ._validation import count
+from ._validation import array, count
 from .methods import (
     accelerated_gradient,
     conjugate_gradient,
@@ -36,9 +37,13 @@ class CheckResult:
     note: str
 
     def __post_init__(self) -> None:
+        if self.observed is None:
+            raise ValueError("observed is required; missing evidence is not a result")
         for name in ("observed", "threshold"):
             value = getattr(self, name)
             if value is not None:
+                if isinstance(value, (bool, np.bool_)) or not isinstance(value, Real):
+                    raise ValueError(f"{name} must be a finite real number")
                 value = float(value)
                 if not np.isfinite(value):
                     raise ValueError(f"{name} must be finite; a non-finite check is invalid")
@@ -47,6 +52,8 @@ class CheckResult:
             if not isinstance(self.consistent, (bool, np.bool_)):
                 raise ValueError("consistent must be bool or None")
             object.__setattr__(self, "consistent", bool(self.consistent))
+        if (self.consistent is None) != (self.threshold is None):
+            raise ValueError("INFO requires no threshold; a quantitative result requires one")
 
 
 def _gaps(problem, trace) -> np.ndarray:
@@ -57,6 +64,9 @@ def _gaps(problem, trace) -> np.ndarray:
 
 
 def _bound_result(slug, title, reference, statement, metric, ratios, note) -> CheckResult:
+    ratios = array(ratios, "ratios")
+    if ratios.ndim != 1 or not ratios.size or np.any(ratios < 0):
+        raise ValueError("ratios must be a nonempty vector of finite nonnegative samples")
     worst = float(np.max(ratios))
     return CheckResult(slug, title, reference, statement, metric, worst, 1.0,
                        worst <= 1.0 + 1e-10, note)

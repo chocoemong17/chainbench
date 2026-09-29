@@ -4,6 +4,7 @@ from __future__ import annotations
 import csv
 import hashlib
 import json
+import math
 import os
 import platform
 import subprocess
@@ -19,6 +20,32 @@ def run(args: list[str], cwd: Path, env: dict[str, str]) -> str:
     if result.returncode:
         raise RuntimeError(f"Command failed: {args}\n{result.stdout}\n{result.stderr}")
     return result.stdout
+
+
+def validate_rows(rows: list[dict], listing: list[str]) -> None:
+    """Validate evidence, not just the absence of a recognized failure label."""
+    if not listing or len(set(listing)) != len(listing):
+        raise RuntimeError("Empty or duplicate check registry")
+    if not isinstance(rows, list) or len(rows) != len(listing):
+        raise RuntimeError("CLI registry and report disagree")
+    if [r.get("slug") for r in rows] != listing:
+        raise RuntimeError("CLI registry and report disagree")
+    quantitative = 0
+    for row in rows:
+        value = row.get("observed")
+        if type(value) not in (float, int) or not math.isfinite(value):
+            raise RuntimeError("Missing or non-finite installed check observation")
+        status, threshold = row.get("status"), row.get("threshold")
+        if status == "CONSISTENT":
+            if type(threshold) not in (float, int) or not math.isfinite(threshold):
+                raise RuntimeError("Missing quantitative threshold")
+            if value > threshold + 1e-10:
+                raise RuntimeError("Quantitative check exceeds its threshold")
+            quantitative += 1
+        elif status != "INFO" or threshold is not None:
+            raise RuntimeError("Failed or unrecognized installed check status")
+    if not quantitative:
+        raise RuntimeError("No quantitative evidence in installed suite")
 
 
 def main() -> None:
@@ -55,10 +82,7 @@ def main() -> None:
                 raise RuntimeError("Installed version does not match the release manifest")
             listing = run([cli, "list"], work, env).splitlines()
             rows = json.loads(run([cli, "check", "all", "--json"], work, env))
-            if [r["slug"] for r in rows] != listing:
-                raise RuntimeError("CLI registry and report disagree")
-            if any(r["status"] == "NOT CONSISTENT" for r in rows):
-                raise RuntimeError("Installed numerical suite failed")
+            validate_rows(rows, listing)
             run([python, "-I", "-m", "chainbench", "--version"], work, env)
             for format_name in ("markdown", "json", "csv"):
                 target = work / f"report.{format_name}"
@@ -66,27 +90,35 @@ def main() -> None:
                 if not target.stat().st_size:
                     raise RuntimeError("Empty exported report")
                 if format_name == "json":
-                    assert len(json.loads(target.read_text())) == len(rows)
+                    exported = json.loads(target.read_text(encoding="utf-8"))
+                    validate_rows(exported, listing)
+                    if exported != rows:
+                        raise RuntimeError("JSON report differs from installed checks")
                 elif format_name == "csv":
                     with target.open(newline="") as f:
-                        assert len(list(csv.DictReader(f))) == len(rows)
+                        exported = list(csv.DictReader(f))
+                    if [r["slug"] for r in exported] != listing:
+                        raise RuntimeError("CSV registry differs from installed checks")
+                    if [r["status"] for r in exported] != [r["status"] for r in rows]:
+                        raise RuntimeError("CSV statuses differ from installed checks")
             records.append({
                 "artifact": artifact.name,
                 "sha256": hashlib.sha256(artifact.read_bytes()).hexdigest(),
                 "version": expected,
-                "checks": len(rows),
+                "checks": len(rows), "slugs": listing,
                 "statuses": [r["status"] for r in rows],
                 "installed_outside_checkout": True,
                 "pip_check": "passed", "exports": ["markdown", "csv", "json"],
             })
             print(f"CLEAN INSTALL PASSED: {artifact.name}", flush=True)
-    report = {"python": platform.python_version(), "artifacts": records}
-    (dist / "verification.json").write_text(json.dumps(report, indent=2) + "\n")
+    report = {"python": platform.python_version(), "artifacts": records,
+              "source_commit": os.environ.get("GITHUB_SHA")}
+    (dist / "verification.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     sums = [
         f"{hashlib.sha256(p.read_bytes()).hexdigest()}  {p.name}"
         for p in sorted(dist.iterdir()) if p.is_file() and p.name != "SHA256SUMS"
     ]
-    (dist / "SHA256SUMS").write_text("\n".join(sums) + "\n")
+    (dist / "SHA256SUMS").write_text("\n".join(sums) + "\n", encoding="utf-8")
 
 
 if __name__ == "__main__":
