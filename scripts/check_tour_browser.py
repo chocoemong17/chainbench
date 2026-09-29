@@ -27,11 +27,12 @@ def main():
             page.on('request', lambda r: evidence['network_requests'].append(r.url)
                     if r.url.startswith(('http:', 'https:')) else None)
             page.goto(url)
-            assert page.locator('img').count() == 6
+            assert page.locator('img').count() == 7
             assert page.locator('img').evaluate_all('(els)=>els.every(e=>e.complete&&e.naturalWidth>0)')
             assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
             page.screenshot(path=str(args.output/f'index-{width}.png'), full_page=True)
             page.locator('#image-experiment').screenshot(path=str(args.output/f'image-experiment-{width}.png'))
+            page.locator('#counterexample').screenshot(path=str(args.output/f'counterexample-{width}.png'))
             page.locator('#geometry').screenshot(path=str(args.output/f'geometry-{width}.png'))
             page.locator('#breadth').screenshot(path=str(args.output/f'breadth-{width}.png'))
             for artifact in manifest['artifacts']:
@@ -59,12 +60,18 @@ def main():
                     page.locator('[data-tour-related]').click()
                     page.wait_for_url('**/deblur.html', wait_until='load')
                     assert page.url.endswith('/deblur.html')
+                if filename == 'heavy-ball.html':
+                    record = json.loads(page.locator('#chainbench-evidence').text_content())
+                    assert record['parameters']['steps'] == 50 and len(record['cases']) == 9
+                    page.locator('[data-tour-related]').click()
+                    page.wait_for_url('**/atlas.html#polyak-1964', wait_until='load')
+                    assert page.locator('#polyak-1964').is_visible()
                 page.locator('[data-tour-home]').click()
                 assert page.url == url
             page.locator('[data-action="language"]').click()
             assert page.locator('html').get_attribute('lang') == 'en'
             assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
-            evidence['viewports'].append({'width': width, 'reports_opened': 14,
+            evidence['viewports'].append({'width': width, 'reports_opened': 15,
                 'return_links': 'passed', 'preview_images': 'loaded', 'all_seeds': 'retained',
                 'unresolved_seed24': 'retained', 'language': 'passed', 'overflow': False})
             context.close()

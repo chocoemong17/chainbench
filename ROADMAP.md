@@ -1,5 +1,10 @@
 ## After v0.5.0: published examples before algorithm counts
 
+- Recompute the public Lessard–Recht–Packard heavy-ball counterexample, with the
+  original start, all eight declared variations, actual state geometry and the
+  source's rational cycle. Separate its scope from the quadratic check and the
+  full IQC framework. See [source and differences](docs/HEAVY_BALL_COUNTEREXAMPLE.md).
+
 - Tight-GD now resolves its shrinking quadratic centre, exposes every actual
   step and constant gradient, and explains the algebraic attainment separately
   from the class-wide bound. See [source and scope](docs/GD_TIGHT_CASE.md).

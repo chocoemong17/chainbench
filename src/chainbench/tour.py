@@ -18,6 +18,8 @@ from .case_studies import case_html, gd_tight_case
 from .checks import CHECKS
 from .deblur_views import deblur_html
 from .deblurring import run_deblurring
+from .heavy_ball_cycle import run_heavy_ball_cycle
+from .heavy_ball_views import heavy_ball_cycle_html
 from .learning import LESSONS, learning_html
 from .mechanisms import CSS as MECHANISM_CSS
 from .mechanisms import flow_html
@@ -45,6 +47,11 @@ def _reports(lang):
         'layer': 'published-experiment protocol rerun; declared source differences',
         'command': ['reproduce', 'fista-deblurring', '--steps', '10000', '--lang', lang],
         'source': result['source'], 'steps': 10000, 'dimension': 4096, 'noise_std': 0, 'lambda': 0}
+    result = run_heavy_ball_cycle()
+    yield 'heavy-ball.html', heavy_ball_cycle_html(result, lang), {
+        'layer': 'published counterexample + controlled variations',
+        'command': ['reproduce', 'lessard-2016', '--steps', '50', '--lang', lang],
+        'source': result['source'], 'steps': 50, 'cases': len(result['cases'])}
     result = run_simplex_geometry(18)
     yield 'simplex.html', simplex_html(result, lang), {
         'layer': 'controlled geometric illustrations',
@@ -76,6 +83,8 @@ def _with_navigation(html, filename=None):
         'deblur.html': ('proximal.html', '양의 λ에서 soft threshold는 어떻게 작동할까?', 'How does soft thresholding work at positive lambda?'),
         'proximal.html': ('deblur.html', 'λ=0인 논문의 영상 실험 보기', 'Open the source image experiment at lambda=0'),
         'atlas.html': ('deblur.html', 'FISTA의 공개 영상 실험 열기', 'Open the published FISTA image experiment'),
+        'heavy-ball.html': ('atlas.html#polyak-1964', '이차함수에서의 heavy-ball 가정과 비교', 'Compare the heavy-ball assumptions for quadratics'),
+        'stress-polyak-1964.html': ('heavy-ball.html', '이차함수 밖의 공개 반례 보기', 'Inspect a published counterexample beyond quadratics'),
     }
     if filename in related:
         target,ko,en = related[filename]
@@ -132,6 +141,13 @@ def _index(artifacts, previews, lang):
         'Reading question: does a tiny objective error mean that the clean image was recovered exactly?')+'</p><p>'+bi('이 실험은 잡음과 정규화 항이 없는 λ=0 설정입니다. 아래 2D proximal 예제는 양의 λ가 좌표를 0으로 만드는 원리를 설명합니다. 서로 다른 질문을 다룹니다.',
         'This image experiment has no noise and lambda=0. The 2D proximal view below explains how positive lambda can zero a coordinate. The two reports answer different questions.')+'</p><p>'+bi('미리보기는 실제 10,000회 FISTA 복원 영상입니다. 모든 영상이 같은 [0,1] 회색조를 사용하며 전체 수치 배열은 보고서에서 확인합니다.',
         'The preview is the actual FISTA reconstruction at 10,000 steps. Every image uses the same [0,1] grayscale; full numeric arrays are in the report.')+'</p></div></div></section>'
+    body += '<section id="counterexample"><h2>'+bi('수렴 설명은 어디까지 적용될까?', 'Where does a convergence claim stop applying?')+'</h2><div class="tour-grid">'
+    body += card('heavy-ball.html', ('강볼록 함수에서 나타나는 주기 궤도', 'A limit cycle on a strongly convex function'),
+        ('Lessard–Recht–Packard의 공개 heavy-ball 반례를 재계산합니다. 원 시작점 3.3과 8개 추가 시작점에서 위치·기억 상태·기울기를 비교합니다.',
+         'Recompute the Lessard–Recht–Packard heavy-ball counterexample. Compare position, memory state and gradient at the original start 3.3 and eight added starts.'), 'PUBLISHED COUNTEREXAMPLE + VARIATIONS')
+    body += '<div><p class="callout">'+bi('읽을 질문: 세 단계마다 거의 같은 점을 방문하면 최적해에 수렴한 것일까요?',
+        'Reading question: does returning close to the same point every three steps mean convergence to the optimum?')+'</p><p>'+bi('이 함수는 매끄럽고 강볼록이지만 하나의 이차함수는 아닙니다. 모멘텀의 이전 상태를 위상 평면에서 보고, 반복 주기와 기울기 0을 구분합니다. IQC/SDP 계산 전체를 재현하는 범위는 아닙니다.',
+        'The function is smooth and strongly convex, but not one quadratic. Inspect momentum’s memory in the state plane and distinguish repetition from zero gradient. This does not reproduce the full IQC/SDP analysis.')+'</p></div></div></section>'
     body += '<section id="geometry"><h2>'+bi('다른 문제 구조에서는 어떻게 움직일까?', 'How do updates change with the problem structure?')+'</h2><div class="tour-grid">'
     body += card('simplex.html', ('가능한 삼각형 안에서 이동', 'Move inside a feasible triangle'),
         ('Frank–Wolfe의 꼭짓점 선택과 선분 갱신을 12개 조합에서 봅니다. 목적함수가 증가하는 첫 단계도 그대로 남깁니다.',
@@ -182,7 +198,7 @@ def build_tour(output: Path, lang: str = 'en') -> dict:
     with tempfile.TemporaryDirectory(prefix='.chainbench-tour-', dir=destination.parent) as temporary:
         stage = Path(temporary)
         for filename, html, metadata in _reports(lang):
-            if filename in ('shewchuk.html', 'simplex.html', 'proximal.html', 'tight-gd.html'):
+            if filename in ('shewchuk.html', 'simplex.html', 'proximal.html', 'tight-gd.html', 'heavy-ball.html'):
                 previews[filename] = _thumbnail(html, 1 if filename == 'proximal.html' else 0)
             if filename == 'shewchuk.html':
                 previews['shewchuk-surface'] = _thumbnail(html, 1)

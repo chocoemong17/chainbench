@@ -17,6 +17,7 @@ def validator():
     with patch.object(sys, 'path', [str(Path(__file__).resolve().parents[1]/'scripts'), *sys.path]):
         spec.loader.exec_module(module)
         importlib.import_module('smoke_deblurring')
+        importlib.import_module('smoke_heavy_ball_cycle')
     return module.validate_tour
 
 
@@ -29,7 +30,8 @@ def tour_folder(tmp_path_factory):
 
 def test_generated_tour_hashes_links_coverage_and_independent_numerics(tour_folder):
     records = validator()(tour_folder)
-    assert len(records) == 14
+    assert len(records) == 15
+    assert records['heavy-ball.html']['parameters']['steps'] == 50
     assert len(records['atlas.html']['results']) == 8
     assert records['deblur.html']['parameters']['full_paper_budget']
     assert len(records['deblur.html']['runs']['fista']['rows']) == 10001

@@ -19,6 +19,8 @@ from .experiments import (
     preset_config,
     run_experiment,
 )
+from .heavy_ball_cycle import run_heavy_ball_cycle
+from .heavy_ball_views import heavy_ball_cycle_html
 from .landscape import METHODS as LANDSCAPE_METHODS
 from .landscape import landscape_html, run_landscape
 from .learning import learning_html
@@ -303,8 +305,8 @@ def main(argv: list[str] | None = None) -> int:
     landscape.add_argument("--force", action="store_true")
 
     reproduce = sub.add_parser("reproduce", help="recompute a published example or declared experiment protocol")
-    reproduce.add_argument("name", choices=["shewchuk-1994", "fista-deblurring"])
-    reproduce.add_argument("--steps", type=int, help="default: 12 for Shewchuk, 10000 for noiseless FISTA")
+    reproduce.add_argument("name", choices=["shewchuk-1994", "fista-deblurring", "lessard-2016"])
+    reproduce.add_argument("--steps", type=int, help="default: Shewchuk 12, noiseless FISTA 10000, Lessard 50")
     reproduce.add_argument("--lang", choices=["en", "ko"], default="en")
     reproduce.add_argument("--format", choices=["html", "json"], default="html")
     reproduce.add_argument("--output", type=Path)
@@ -401,10 +403,13 @@ def main(argv: list[str] | None = None) -> int:
             _write(args.output, text, args.force)
             return 0
         if args.command == "reproduce":
-            image_case = args.name == "fista-deblurring"
-            steps = args.steps if args.steps is not None else (10000 if image_case else 12)
-            result = run_deblurring(steps) if image_case else run_reproduction(steps)
-            renderer = deblur_html if image_case else reproduction_html
+            compute, renderer, default_steps = {
+                'shewchuk-1994': (run_reproduction, reproduction_html, 12),
+                'fista-deblurring': (run_deblurring, deblur_html, 10000),
+                'lessard-2016': (run_heavy_ball_cycle, heavy_ball_cycle_html, 50),
+            }[args.name]
+            steps = args.steps if args.steps is not None else default_steps
+            result = compute(steps)
             text = (renderer(result, args.lang) if args.format == "html"
                     else json.dumps(result, indent=2, allow_nan=False))
             _write(args.output, text, args.force)

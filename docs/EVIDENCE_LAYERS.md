@@ -43,6 +43,13 @@ the source does not pin the original toolbox version. This is a **protocol rerun
 with declared differences**, not an exact match to the original endpoint numbers
 or evidence across representative images. [Source and scope](FISTA_DEBLURRING.md).
 
+`reproduce lessard-2016` recomputes the exact published heavy-ball counterexample
+from Eq. (4.11), Figures 6–7 and Appendix B. The piecewise objective is smooth and
+strongly convex, but not quadratic; the classical quadratic tuning approaches a
+nonstationary cycle from the published start. Eight added starts and GD are labelled
+as controlled additions. The source's analytical cycle/attraction argument is
+separate from the finite observations. [Source and scope](HEAVY_BALL_COUNTEREXAMPLE.md).
+
 ## Geometry is a fifth view, not a fifth proof
 
 `chainbench landscape` places the **same numerical run** on a contour map, a 3D objective surface and a convergence chart. It is designed to explain zig-zagging, momentum, conjugate directions and implicit steps. The 2D problem is deliberately chosen for visual clarity, so it belongs to the illustration layer rather than the stress layer.

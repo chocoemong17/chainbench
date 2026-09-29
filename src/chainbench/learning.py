@@ -271,6 +271,7 @@ def learning_html(focus: str | None = None, lang: str = 'en') -> str:
                         + ('\n\n# simplex, oracle vertex and feasible updates\nchainbench geometry frank-wolfe --lang ko --output simplex.html' if slug == 'jaggi-2013' else '')
                         + ('\n\n# extrapolate, gradient step, soft threshold\nchainbench geometry ista-fista --lang ko --output proximal.html' if slug in ('beck-teboulle-2009', 'ista-vs-fista') else '')
                         + ('\n\n# published noiseless image protocol; lambda=0, 10000 updates\nchainbench reproduce fista-deblurring --lang ko --output deblur.html' if slug in ('beck-teboulle-2009', 'ista-vs-fista') else '')
+                        + ('\n\n# published nonquadratic counterexample; separate from this quadratic fixture\nchainbench reproduce lessard-2016 --lang ko --output cycle.html' if slug == 'polyak-1964' else '')
                         + '</pre></details><p class="small"><a href="'
                         + SOURCE_LINKS[slug] + '">' + escape(result.reference) + '</a></p></section>')
     record = evidence_record(results, charts)

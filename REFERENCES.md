@@ -15,6 +15,13 @@ https://doi.org/10.1137/080716542
 B. T. Polyak (1964). Some methods of speeding up the convergence of iteration methods. USSR Computational Mathematics and Mathematical Physics, 4(5), 1-17.
 https://doi.org/10.1016/0041-5553(64)90137-5
 
+L. Lessard, B. Recht and A. Packard (2016). Analysis and Design of Optimization
+Algorithms via Integral Quadratic Constraints. SIAM Journal on Optimization,
+26(1), 57–95. Source for the separate public heavy-ball counterexample, not an
+implementation of the full IQC framework. [DOI](https://doi.org/10.1137/15M1009597);
+exact implemented source: [arXiv:1408.3595v7](https://arxiv.org/pdf/1408.3595v7),
+§4.6, Figures 6–7 and Appendix B.
+
 ## Conjugate gradient
 
 M. R. Hestenes and E. Stiefel (1952). Methods of Conjugate Gradients for Solving Linear Systems. Journal of Research of the National Bureau of Standards, 49(6), 409-436. Historical algorithm source.

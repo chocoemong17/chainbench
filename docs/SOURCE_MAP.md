@@ -1,6 +1,6 @@
 # Source-to-experiment map
 
-This document separates the historical source of a method, the particular recurrence implemented, and the finite numerical condition checked. All bundled fixtures are constructed by ChainBench; none purports to reproduce an original paper's full dataset or experimental section.
+This document separates the historical source of a method, the particular recurrence implemented, and the finite numerical condition checked. Fixed-suite fixtures are constructed by ChainBench; separate published-example workflows identify their exact inputs and differences. None purports to reproduce an original paper's full dataset or experimental section.
 
 Write R = ||x0-x*||_2 and k for the number of completed updates. Quadratics use f(x)=0.5*x^T Q x-b^T x, with Q symmetric positive semidefinite, and b=Q*x*. For strongly convex checks, mu and L are the smallest and largest eigenvalues of Q.
 
@@ -138,3 +138,14 @@ orthonormal Haar coordinates and image coordinates yield equivalent iterates;
 the implementation uses the latter. The source image version and all differences
 are explicit in [FISTA_DEBLURRING.md](FISTA_DEBLURRING.md). Source-reported endpoint
 magnitudes are not pass thresholds; MTWIST and the noisy experiment are omitted.
+
+## Heavy-ball's public nonquadratic counterexample
+
+`reproduce lessard-2016` uses Lessard–Recht–Packard (2016), arXiv:1408.3595v7,
+§4.6 Eq. (4.11), Figures 6–7 and Appendix B Eqs. (B.1)–(B.3). The existing
+heavy-ball recurrence runs with mu=1, L=25, alpha=1/9, beta=4/9 and x[-1]=x[0]=3.3
+on the published piecewise-gradient objective. Its exact rational three-cycle is
+an analytical reference, not a fitted output. See [inputs, indexing, geometry and
+scope](HEAVY_BALL_COUNTEREXAMPLE.md). Eight extra starts and GD at 1/L are labelled
+additions. The IQC programs and parameter searches are outside scope; the fixed
+quadratic check and its empirical tolerance remain unchanged.

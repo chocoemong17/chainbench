@@ -5,7 +5,7 @@ equal-scale coordinates, projected 3D objective gaps, energy errors and full num
 records. Original-paper setup and added controlled variations have separate labels.
 
 For a guided entry point, use the [review guide](REVIEW_GUIDE.md) and
-[offline tour](OFFLINE_TOUR.md). The tour connects fifteen local HTML pages,
+[offline tour](OFFLINE_TOUR.md). The tour connects sixteen local HTML pages,
 including the full image protocol, both new geometries and all sampled cases.
 
 The HTML report is the primary human-readable ChainBench output (tracked in issue #34). It is designed to
@@ -128,3 +128,9 @@ The README preview is generated from the full JSON record by
 values and source permission. It is a static preview of the same computation, not
 an image copied from the paper. Use the full HTML to inspect intermediate snapshots,
 curves, source differences and numerical evidence.
+
+The [heavy-ball counterexample](HEAVY_BALL_COUNTEREXAMPLE.md) keeps signed iterates,
+the actual objective graph and the two-state `(x[k-1],x[k])` plane together. The
+published rational cycle is a source reference; objective gap, gradient norm and
+three-step difference remain distinct quantities. Its nine cases include every
+declared added start, and the last selected point explicitly has no next update.

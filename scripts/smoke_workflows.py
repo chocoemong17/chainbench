@@ -168,10 +168,19 @@ def exercise_workflows(cli, work, env, version, run):
     if extract_record(deblur_html) != deblur or deblur['parameters']['steps'] != 10000:
         raise RuntimeError('installed deblurring HTML differs from the full published budget')
 
+    from smoke_heavy_ball_cycle import validate_heavy_ball_cycle
+    cycle_args = [cli, 'reproduce', 'lessard-2016']
+    cycle = json.loads(run(cycle_args + ['--format', 'json'], work, env))
+    validate_heavy_ball_cycle(cycle)
+    if cycle != tour_records['heavy-ball.html'] or cycle['parameters']['steps'] != 50:
+        raise RuntimeError('tour counterexample differs from the source-budget standalone run')
+    if extract_record(run(cycle_args + ['--lang', 'ko'], work, env)) != cycle:
+        raise RuntimeError('installed counterexample HTML differs from JSON')
+
     return {'learning':'matched','sweep':'matched','replay':'matched','gd_tight':'matched',
             'stress':'matched','landscape':'matched','shewchuk_reproduction':'matched',
             'simplex_geometry':'matched', 'inspectable_stress':'matched', 'proximal_geometry':'matched',
-            'offline_tour':'matched', 'fista_deblurring':'matched'}
+            'offline_tour':'matched', 'fista_deblurring':'matched', 'heavy_ball_counterexample':'matched'}
 
 
 def validate_tour(folder):
@@ -179,7 +188,7 @@ def validate_tour(folder):
     manifest = json.loads((folder/'manifest.json').read_text(encoding='utf8'))
     topics = {'gd-baseline', 'nesterov-1983', 'polyak-1964', 'hestenes-stiefel-1952',
               'jaggi-2013', 'rockafellar-1976', 'beck-teboulle-2009', 'ista-vs-fista'}
-    expected = {'index.html', 'atlas.html', 'shewchuk.html', 'simplex.html', 'proximal.html', 'tight-gd.html', 'deblur.html'}
+    expected = {'index.html', 'atlas.html', 'shewchuk.html', 'simplex.html', 'proximal.html', 'tight-gd.html', 'deblur.html', 'heavy-ball.html'}
     expected.update('stress-'+topic+'.html' for topic in topics)
     if (manifest.get('kind') != 'chainbench.offline-tour' or manifest.get('start') != 'index.html'
             or len(manifest['artifacts']) != len(expected)
@@ -237,6 +246,10 @@ def validate_tour(folder):
     validate_deblurring(records['deblur.html'])
     if records['deblur.html']['parameters']['steps'] != 10000:
         raise RuntimeError('tour omitted the full published image budget')
+    from smoke_heavy_ball_cycle import validate_heavy_ball_cycle
+    validate_heavy_ball_cycle(records['heavy-ball.html'])
+    if records['heavy-ball.html']['parameters']['steps'] != 50:
+        raise RuntimeError('tour omitted the counterexample source budget')
     info = records['stress-ista-vs-fista.html']
     if info['rows'][24]['metric'] is not None or info['rows'][24]['status'] != 'unresolved':
         raise RuntimeError('tour must retain the unresolved case')

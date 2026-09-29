@@ -47,12 +47,12 @@ python -m chainbench tour --lang ko --output tour
 ```
 
 For a fresh checkout, follow the [pinned installation steps](docs/REVIEW_GUIDE.md#run-the-tested-development-snapshot).
-Open `tour/index.html`. It connects **15 offline HTML pages**: the reading guide,
-eight-topic atlas, two published-example workflows, two geometry views, eight
+Open `tour/index.html`. It connects **16 offline HTML pages**: the reading guide,
+eight-topic atlas, three published-example workflows, two geometry views, eight
 stress reports and one public tight case. Each report keeps its numerical evidence
 and links back to the guide. The recipient needs no server, account or Python.
 
-Use a new destination directory. The whole folder is about 43 MB uncompressed;
+Use a new destination directory. The whole folder is about 45 MB uncompressed;
 copy the folder to preserve its links. [Contents, settings and hashes](docs/OFFLINE_TOUR.md).
 
 ## Choose the question you want to answer
@@ -61,6 +61,7 @@ copy the folder to preserve its links. [Contents, settings and hashes](docs/OFFL
 | --- | --- | --- |
 | How do SD and CG move on a published example? | `shewchuk.html` | Exact stated 2D setup; nine additional starts labelled separately |
 | Does fitting blurred data recover the clean image? | `deblur.html` | One declared image protocol; all 10,001 objective/RMSE observations per method |
+| Can quadratic tuning fail on a smooth strongly convex function? | `heavy-ball.html` | Lessard–Recht–Packard's published counterexample; eight separately labelled added starts |
 | How does an oracle respect a constraint? | `simplex.html` | Twelve controlled Frank–Wolfe target/start cases |
 | What do momentum and soft thresholding do? | `proximal.html` | Nine controlled lambda/start cases with actual intermediate stages |
 | Does a claim survive more sampled inputs? | `stress-<topic>.html` | All 32 seeds per topic, including unresolved ratios |
@@ -86,6 +87,7 @@ constructions answer different questions. [Read the evidence distinctions](docs/
 ```bash
 python -m chainbench reproduce shewchuk-1994 --lang ko --output paper.html
 python -m chainbench reproduce fista-deblurring --lang ko --output deblur.html
+python -m chainbench reproduce lessard-2016 --lang ko --output cycle.html
 python -m chainbench geometry frank-wolfe --lang ko --output simplex.html
 python -m chainbench geometry ista-fista --lang ko --output proximal.html
 python -m chainbench learn --lang ko --output learn.html
@@ -97,6 +99,11 @@ Reports support Korean and English, local controls, raw records and reading with
 JavaScript disabled. Controls inspect stored computations; they do not run an
 optimizer in the browser. Standalone SVGs retain setup captions and input metadata.
 [Visual formats](docs/VISUAL_REPORTS.md) · [Learning workflows](docs/LEARNING_WORKFLOWS.md).
+
+The [heavy-ball counterexample](docs/HEAVY_BALL_COUNTEREXAMPLE.md) connects the
+actual function, signed iterates and `(previous, current)` state plane. Its published
+three-cycle explains why a small repeat difference can coexist with a nonzero
+gradient. The same method's successful quadratic fixture remains a separate story.
 
 ## Change a condition and replay a calculation
 

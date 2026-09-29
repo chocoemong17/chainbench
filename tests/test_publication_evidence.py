@@ -38,7 +38,7 @@ def evidence(tmp_path, monkeypatch):
             "checks": 2, "slugs": ["condition", "observation"], "statuses": ["CONSISTENT", "INFO"],
             "installed_outside_checkout": True, "pip_check": "passed",
             "exports": ["html", "markdown", "csv", "json"], "plot_svg": "passed", "visual_evidence": "matched",
-            "advanced_workflows": {"learning": "matched", "sweep": "matched", "replay": "matched", "gd_tight": "matched", "stress": "matched", "landscape": "matched", "shewchuk_reproduction": "matched", "simplex_geometry": "matched", "inspectable_stress": "matched", "proximal_geometry": "matched", "offline_tour": "matched", "fista_deblurring": "matched"},
+            "advanced_workflows": {"learning": "matched", "sweep": "matched", "replay": "matched", "gd_tight": "matched", "stress": "matched", "landscape": "matched", "shewchuk_reproduction": "matched", "simplex_geometry": "matched", "inspectable_stress": "matched", "proximal_geometry": "matched", "offline_tour": "matched", "fista_deblurring": "matched", "heavy_ball_counterexample": "matched"},
             "instance_controls": {
                 "direct_override": "passed",
                 "seeded_config_sha256": "c" * 64,
@@ -67,7 +67,7 @@ def test_valid_publication_evidence(evidence):
     assert len(module.verified_files(VERSION, SHA)) == 5
 
 
-@pytest.mark.parametrize('workflow', ['shewchuk_reproduction', 'simplex_geometry', 'inspectable_stress', 'proximal_geometry', 'offline_tour', 'fista_deblurring'])
+@pytest.mark.parametrize('workflow', ['shewchuk_reproduction', 'simplex_geometry', 'inspectable_stress', 'proximal_geometry', 'offline_tour', 'fista_deblurring', 'heavy_ball_counterexample'])
 def test_reproduction_install_evidence_is_required(evidence, workflow):
     module, dist, report = evidence
     del report['artifacts'][0]['advanced_workflows'][workflow]

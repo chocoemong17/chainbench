@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Recompute Lessard–Recht–Packard's public heavy-ball counterexample with the
+  existing recurrence. Connect signed iterates, objective heights and two-state
+  geometry; retain every added grid start, the exact source cycle and separate
+  stationarity/repetition diagnostics. Add it to the tour, atlas and installed
+  evidence gate without changing the eight fixed checks.
+
 - Connect Frank–Wolfe's exact oracle to its affine lower model and optimal-value
   bracket. Show actual vertex values, both endpoints and the dual-gap width for
   all twelve controlled cases; retain final-row evidence and verify the displays

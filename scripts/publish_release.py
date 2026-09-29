@@ -91,6 +91,7 @@ def verified_files(version: str, sha: str) -> list[Path]:
             "proximal_geometry": "matched",
             "offline_tour": "matched",
             "fista_deblurring": "matched",
+            "heavy_ball_counterexample": "matched",
         }:
             raise RuntimeError("Missing installed learning-workflow evidence")
         summary = (slugs, statuses, experiments, controls, advanced)
