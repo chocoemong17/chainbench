@@ -46,7 +46,8 @@ def main(argv: list[str] | None = None) -> int:
         for k, x in enumerate(trace.iterates):
             writer.writerow([
                 method, k, problem.gap(x), float(np.hypot.reduce(problem.grad(x))),
-                trace.termination or "", args.dim, args.condition,
+                (trace.termination or "") if k == len(trace.iterates) - 1 else "",
+                args.dim, args.condition,
             ])
     return 0
 

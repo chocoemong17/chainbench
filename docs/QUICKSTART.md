@@ -54,7 +54,7 @@ python -m pip install .
 python examples/compare_quadratic.py --dim 12 --condition 10 --steps 20
 ```
 
-The example writes CSV to standard output, with method, iteration, analytical gap, true residual norm and CG termination. Change `--condition` or `--steps` to inspect a different deterministic experiment. It uses a fixed Householder rotation, so it exercises non-diagonal matrix products without randomness.
+The example writes CSV to standard output, with method, iteration, analytical gap, true residual norm and CG termination. The termination label is populated only on the final row of that run; earlier iterates are not labeled as converged. Change `--condition` or `--steps` to inspect a different deterministic experiment. It uses a fixed Householder rotation, so it exercises non-diagonal matrix products without randomness.
 
 This is not a timing benchmark or an equal-oracle-cost competition: CG may terminate early and its stopping check uses an additional matrix-vector product. Equal iteration budgets do not imply equal computation costs. Do not interpret one CSV as a universal algorithm ranking.
 

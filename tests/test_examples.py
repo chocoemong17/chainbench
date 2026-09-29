@@ -21,6 +21,7 @@ def test_comparison_example_produces_parseable_trajectories(capsys):
     assert all(float(row["gap"]) >= 0 for row in rows)
     cg = [row for row in rows if row["method"] == "cg"]
     assert cg[-1]["cg_termination"] == "converged"
+    assert all(row["cg_termination"] == "" for row in cg[:-1])
     assert float(cg[-1]["residual_norm"]) < 1e-10
 
 
