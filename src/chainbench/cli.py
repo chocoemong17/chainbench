@@ -18,7 +18,9 @@ from .experiments import (
     run_experiment,
 )
 from .learning import learning_html
+from .landscape import METHODS as LANDSCAPE_METHODS, landscape_html, run_landscape
 from .reporting import render_json, render_report, result_status
+from .stress import TOPICS as STRESS_TOPICS, run_stress, stress_html
 from .visuals import render_check_svg
 from .workflows import (
     MAX_REPORT_BYTES,
@@ -80,7 +82,7 @@ Choose a supported instance directly:
   chainbench experiment --preset quadratic --dimension 20 --condition-number 100 \
       --steps 50 --methods gd smooth-fista cg --format html --output custom.html
 
-Also try 'sweep', 'replay' and 'case-study gd-tight'.\nUse 'chainbench --help' for all commands. JSON/CSV remain available for auditing.
+Also try 'stress', 'landscape', 'sweep', 'replay' and 'case-study gd-tight'.\nUse 'chainbench --help' for all commands. JSON/CSV remain available for auditing.
 """
 
 
@@ -250,6 +252,31 @@ def main(argv: list[str] | None = None) -> int:
     replay.add_argument("--output", type=Path)
     replay.add_argument("--force", action="store_true")
 
+    stress = sub.add_parser(
+        "stress", help="run the same paper-linked measurement on many seeded instances"
+    )
+    stress.add_argument("topic", choices=STRESS_TOPICS)
+    stress.add_argument("--trials", type=int, default=24)
+    stress.add_argument("--seed", type=int, default=0)
+    stress.add_argument("--lang", choices=["en", "ko"], default="en")
+    stress.add_argument("--format", choices=["html", "json"], default="html")
+    stress.add_argument("--output", type=Path)
+    stress.add_argument("--force", action="store_true")
+
+    landscape = sub.add_parser(
+        "landscape", help="compare quadratic methods on contour and 3D surface views"
+    )
+    landscape.add_argument("--condition-number", type=float, default=20.0)
+    landscape.add_argument("--angle", type=float, default=32.0)
+    landscape.add_argument("--steps", type=int, default=18)
+    landscape.add_argument(
+        "--methods", nargs="+", choices=LANDSCAPE_METHODS, default=list(LANDSCAPE_METHODS)
+    )
+    landscape.add_argument("--lang", choices=["en", "ko"], default="en")
+    landscape.add_argument("--format", choices=["html", "json"], default="html")
+    landscape.add_argument("--output", type=Path)
+    landscape.add_argument("--force", action="store_true")
+
     case = sub.add_parser("case-study", help="reproduce a specific public tight GD example")
     case.add_argument("name", choices=["gd-tight"])
     case.add_argument("--horizon", type=int, default=20)
@@ -294,6 +321,26 @@ def main(argv: list[str] | None = None) -> int:
             text = replay_html(result, args.lang) if args.format == "html" else json.dumps(result, indent=2, allow_nan=False)
             _write(args.output, text, args.force)
             return 0 if result["status"] == "MATCH" else 1
+        if args.command == "stress":
+            result = run_stress(args.topic, args.trials, args.seed)
+            text = (
+                stress_html(result, args.lang)
+                if args.format == "html"
+                else json.dumps(result, indent=2, allow_nan=False)
+            )
+            _write(args.output, text, args.force)
+            return 0
+        if args.command == "landscape":
+            result = run_landscape(
+                args.condition_number, args.angle, args.steps, tuple(args.methods)
+            )
+            text = (
+                landscape_html(result, args.lang)
+                if args.format == "html"
+                else json.dumps(result, indent=2, allow_nan=False)
+            )
+            _write(args.output, text, args.force)
+            return 0
         if args.command == "case-study":
             result = gd_tight_case(args.horizon, args.L, args.R, args.h)
             text = case_html(result, args.lang) if args.format == "html" else json.dumps(result, indent=2, allow_nan=False)
