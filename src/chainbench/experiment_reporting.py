@@ -31,14 +31,7 @@ def _render_html(result: dict) -> str:
             f'<p><strong>Final stationarity</strong><br>{row["stationarity"]:.7g}</p>'
             '<p><strong>Termination</strong><br>' + escape(run["termination"]) + '</p></article>'
         )
-    raw = escape(json.dumps(
-        {
-            "config": result["config"],
-            "environment": result["environment"],
-            "fixture": result["fixture"],
-        },
-        indent=2,
-    ))
+    raw = escape(json.dumps(result, indent=2, allow_nan=False))
     css = """
 :root{font-family:Inter,ui-sans-serif,system-ui,sans-serif;color:#172033;background:#f6f8fb}
 *{box-sizing:border-box}body{margin:0}main{max-width:1100px;margin:auto;padding:36px 22px 70px}
@@ -61,15 +54,15 @@ padding:14px;font-size:12px}summary{cursor:pointer;font-weight:700}
         f'<p>Problem: <strong>{escape(result["fixture"]["kind"])}</strong> · '
         f'Dimension: <strong>{result["fixture"]["dimension"]}</strong> · '
         f'Budget: <strong>{result["config"]["steps"]}</strong> updates</p></header>'
-        '<section><h2>Final observations</h2><div class="grid">' + "".join(cards)
-        + '</div></section><section class="panel"><h2>How the objective gap changes</h2>'
+        '<section class="panel"><h2>How the objective gap changes</h2>'
         '<div class="scroll">' + gap + '</div></section>'
         '<section class="panel"><h2>How stationarity changes</h2><div class="scroll">'
         + stationarity + '</div></section>'
+        + '<section><h2>Final observations</h2><div class="grid">' + ''.join(cards) + '</div></section>'
         '<p class="note"><code>budget_complete</code> means the requested update budget ran; '
         'it does not certify convergence. Different methods can have very different work per update.'
-        '</p><details class="panel"><summary>Configuration, environment and fixture provenance'
-        '</summary><pre>' + raw + '</pre></details></main></body></html>'
+        '</p><details class="panel"><summary>Exact configuration, provenance and every recorded sample'
+        '</summary><pre id="chainbench-evidence">' + raw + '</pre></details></main></body></html>'
     )
 
 

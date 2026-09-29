@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "Please cite this software and the original papers relevant to the experiment you use."
 title: "ChainBench"
 type: software
-version: 0.2.1
+version: 0.3.0
 authors:
   - name: "chocoemong17"
 repository-code: "https://github.com/chocoemong17/chainbench"

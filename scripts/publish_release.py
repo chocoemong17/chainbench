@@ -56,6 +56,7 @@ def verified_files(version: str, sha: str) -> list[Path]:
             or record.get("pip_check") != "passed"
             or record.get("exports") != ["html", "markdown", "csv", "json"]
             or record.get("plot_svg") != "passed"
+            or record.get("visual_evidence") != "matched"
         ):
             raise RuntimeError("Invalid or unsuccessful installed-package evidence")
         experiments = record.get("experiments")

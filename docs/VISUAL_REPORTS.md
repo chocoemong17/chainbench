@@ -55,3 +55,29 @@ never replaces the numerical record.
 
 A curve lying under a bound on a finite deterministic fixture is not a proof of the
 theorem, an endorsement of the software, or evidence of broad external adoption.
+
+## Release reading contract (v0.3.0)
+
+The title of a paper is not a claim to reproduce its entire contribution or dataset.
+Each story selects one public result and identifies the implementation specialization.
+A faster-looking curve is not a fitted convergence-rate proof. Spectral radius need
+not be the limit of every consecutive heavy-ball norm ratio.
+
+Overview previews use the same samples as the detailed plots. `report` now defaults
+to HTML; use `--format markdown` in scripts needing the old behavior. `experiment`
+still defaults to JSON. HTML and SVG use no JavaScript, CDNs, web fonts or telemetry.
+
+The SVG metadata and HTML `chainbench-evidence` block retain the original floating
+values. Fixed HTML checks that its supplied summaries agree with its plotted default
+samples; nondefault/mismatched summaries are rejected rather than mixed with new
+plots. Configurable HTML retains the whole run, including parameters and every row.
+
+Positive log samples are plotted without clipping. Exact zeros interrupt a log line
+and appear as triangles at the baseline; they are not positive points on that axis.
+An all-zero plot switches to a labelled linear zero view. Series legends wrap, and
+line patterns supplement color. Figure labels show whether the axis is log or linear.
+The default log view is not an estimate of an asymptotic power-law exponent.
+
+Installation checks independently parse the actual generated HTML and compare the
+embedded records with CLI JSON results. These are maintainer-controlled validation,
+not independent external use, endorsements or support-program qualification.

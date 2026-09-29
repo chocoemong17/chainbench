@@ -176,111 +176,122 @@ def _fmt(value: float) -> str:
     return f"{value:.4g}"
 
 
-def render_line_chart(spec: ChartSpec, width: int = 760, height: int = 360) -> str:
-    if spec.y_scale not in ("linear", "log"):
-        raise ValueError("chart y_scale must be linear or log")
-    left, right, top, bottom = 76.0, 24.0, 48.0, 58.0
-    plot_w, plot_h = width - left - right, height - top - bottom
+def render_line_chart(spec: ChartSpec, width: int = 760, height: int = 400) -> str:
+    """Render finite samples without inventing positive values for logarithmic zeros."""
+    import json
+    import textwrap
+    from dataclasses import asdict
+
+    if (type(width) is not int or type(height) is not int
+            or not 380 <= width <= 2400 or not 260 <= height <= 1600):
+        raise ValueError("chart dimensions must be bounded integers")
+    if spec.y_scale not in ("linear", "log") or not spec.series:
+        raise ValueError("chart needs series and a linear or log y_scale")
+    for series in spec.series:
+        _series(series.label, series.x, series.y, series.role)
+        if any(b <= a for a, b in zip(series.x, series.x[1:])):
+            raise ValueError("chart x samples must be strictly increasing")
+        if series.role not in ("observed", "bound", "reference"):
+            raise ValueError("unknown chart series role")
     all_x = np.asarray([v for s in spec.series for v in s.x], dtype=float)
     all_y = np.asarray([v for s in spec.series for v in s.y], dtype=float)
-    if not np.all(np.isfinite(all_x)) or not np.all(np.isfinite(all_y)):
-        raise ValueError("chart contains non-finite values")
     xmin, xmax = float(all_x.min()), float(all_x.max())
+    if not math.isfinite(xmax - xmin):
+        raise ValueError("chart x range exceeds floating point")
     if xmax == xmin:
-        xmax = xmin + 1.0
-
-    if spec.y_scale == "log":
-        positive = all_y[all_y > 0]
-        if not positive.size:
-            raise ValueError("log chart requires at least one positive value")
-        floor = float(positive.min()) * 0.5
-        transformed = np.log10(np.maximum(all_y, floor))
-        ymin, ymax = float(transformed.min()), float(transformed.max())
-        if ymax == ymin:
-            ymin -= 0.5
-            ymax += 0.5
-
-        def ty(value: float) -> float:
-            return math.log10(max(value, floor))
-
-        def y_label(value: float) -> str:
-            return _fmt(10 ** value)
+        xmin, xmax = xmin - .5, xmax + .5
+    title_lines = textwrap.wrap(spec.title, max(24, (width - 100) // 8)) or [""]
+    columns = max(1, (width - 95) // 235)
+    legend_rows = math.ceil(len(spec.series) / columns)
+    top = 30 * len(title_lines) + 24 * legend_rows + 15
+    height = max(height, top + 230)
+    left, right, bottom = 82., 22., 72.
+    plot_w, plot_h = width - left - right, height - top - bottom
+    positive = all_y[all_y > 0]
+    use_log = spec.y_scale == "log" and bool(positive.size)
+    zeros = int(np.count_nonzero(all_y == 0))
+    if use_log:
+        ymin, ymax = float(np.log10(positive.min())), float(np.log10(positive.max()))
+        if ymin == ymax:
+            ymin, ymax = ymin - .5, ymax + .5
+        note = "Log10 y-axis."
+        if zeros:
+            note += f" {zeros} zero samples shown as triangles at baseline, not positive values."
+        def sy(value):
+            return top + (ymax - math.log10(value)) / (ymax - ymin) * plot_h
+        ticks = [(v, f"10^{v:.1f}") for v in np.linspace(ymin, ymax, 5)]
+        # Prefer integral powers when the range permits them.
+        powers = list(range(math.ceil(ymin), math.floor(ymax) + 1))
+        if len(powers) >= 2:
+            powers = powers[::max(1, math.ceil(len(powers) / 6))]
+            ticks = [(float(v), f"10^{v}") for v in powers]
     else:
-        ymin, ymax = float(all_y.min()), float(all_y.max())
-        pad = 0.05 * (ymax - ymin if ymax > ymin else max(abs(ymax), 1.0))
-        ymin, ymax = ymin - pad, ymax + pad
-
-        def ty(value: float) -> float:
-            return value
-
-        def y_label(value: float) -> str:
-            return _fmt(value)
-
-    def px(value: float) -> float:
+        scale = float(all_y.max()) or 1.
+        ymin, ymax = 0., 1.
+        note = "Linear y-axis. All recorded values are zero." if not positive.size else "Linear y-axis."
+        def sy(value):
+            return top + (1 - value / scale) * plot_h
+        ticks = [(float(v), _fmt(float(v) * scale)) for v in np.linspace(0, 1, 5)]
+    def sx(value):
         return left + (value - xmin) / (xmax - xmin) * plot_w
-
-    def py(value: float) -> float:
-        return top + (ymax - ty(value)) / (ymax - ymin) * plot_h
-
+    def text(x, y, value, size=12, anchor="start", weight=400):
+        return (f'<text x="{x:.2f}" y="{y:.2f}" text-anchor="{anchor}" '
+                f'fill="#334155" font-size="{size}" font-weight="{weight}">{escape(str(value))}</text>')
+    parts = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" '
+             f'role="img" aria-label="{escape(spec.title)}" font-family="system-ui,sans-serif">',
+             f'<title>{escape(spec.title)}</title><desc>{escape(note)}</desc>',
+             '<metadata>' + escape(json.dumps(asdict(spec), allow_nan=False)) + '</metadata>',
+             f'<rect width="{width}" height="{height}" rx="12" fill="white"/>']
+    for i, line in enumerate(title_lines):
+        parts.append(text(left, 24 + 27 * i, line, 16, weight=650))
+    for tick in np.linspace(xmin, xmax, 5):
+        x = sx(float(tick))
+        parts.append(f'<path d="M{x:.2f},{top} V{top + plot_h}" stroke="#e2e8f0"/>')
+        parts.append(text(x, top + plot_h + 20, _fmt(float(tick)), anchor="middle"))
+    for value, label in ticks:
+        y = top + (ymax - value) / (ymax - ymin) * plot_h
+        parts.append(f'<path d="M{left},{y:.2f} H{left + plot_w}" stroke="#e2e8f0"/>')
+        parts.append(text(left - 10, y + 4, label, anchor="end"))
+    parts.append(f'<path d="M{left},{top} V{top + plot_h} H{left + plot_w}" '
+                 'fill="none" stroke="#64748b"/>')
+    parts.append(text(left + plot_w / 2, height - 31, spec.x_label, 13, "middle"))
+    parts.append(f'<text transform="translate(18 {top + plot_h / 2}) rotate(-90)" '
+                 f'text-anchor="middle" fill="#334155" font-size="12">{escape(spec.y_label)}</text>')
     palette = ("#2563eb", "#dc2626", "#059669", "#7c3aed", "#d97706", "#0891b2")
-    x_ticks = np.linspace(xmin, xmax, 5)
-    y_ticks = np.linspace(ymin, ymax, 5)
-    parts = [
-        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" '
-        f'role="img" aria-label="{escape(spec.title)}">',
-        "<style>"
-        ".bg{fill:#fff}.grid{stroke:#e5e7eb;stroke-width:1}.axis{stroke:#6b7280;stroke-width:1.2}"
-        ".tick{fill:#4b5563;font:12px system-ui,sans-serif}.label{fill:#374151;"
-        "font:13px system-ui,sans-serif}.title{fill:#111827;font:600 16px system-ui,sans-serif}"
-        ".legend{fill:#374151;font:12px system-ui,sans-serif}</style>",
-        f'<rect class="bg" width="{width}" height="{height}" rx="12"/>',
-        f'<text class="title" x="{left}" y="24">{escape(spec.title)}</text>',
-    ]
-    for xt in x_ticks:
-        x = px(float(xt))
-        parts.append(
-            f'<line class="grid" x1="{x:.2f}" x2="{x:.2f}" y1="{top}" y2="{top + plot_h}"/>'
-        )
-        parts.append(
-            f'<text class="tick" x="{x:.2f}" y="{top + plot_h + 21}" '
-            f'text-anchor="middle">{escape(_fmt(float(xt)))}</text>'
-        )
-    for yt in y_ticks:
-        y = top + (ymax - float(yt)) / (ymax - ymin) * plot_h
-        parts.append(
-            f'<line class="grid" x1="{left}" x2="{left + plot_w}" y1="{y:.2f}" y2="{y:.2f}"/>'
-        )
-        parts.append(
-            f'<text class="tick" x="{left - 10}" y="{y + 4:.2f}" '
-            f'text-anchor="end">{escape(y_label(float(yt)))}</text>'
-        )
-    parts.extend([
-        f'<line class="axis" x1="{left}" x2="{left + plot_w}" y1="{top + plot_h}" '
-        f'y2="{top + plot_h}"/>',
-        f'<line class="axis" x1="{left}" x2="{left}" y1="{top}" y2="{top + plot_h}"/>',
-        f'<text class="label" x="{left + plot_w / 2:.2f}" y="{height - 12}" '
-        f'text-anchor="middle">{escape(spec.x_label)}</text>',
-        f'<text class="label" transform="translate(17 {top + plot_h / 2:.2f}) rotate(-90)" '
-        f'text-anchor="middle">{escape(spec.y_label)}</text>',
-    ])
-    for index, series in enumerate(spec.series):
-        color = palette[index % len(palette)]
-        dash = ' stroke-dasharray="8 6"' if series.role in ("bound", "reference") else ""
-        points = " ".join(f"{px(x):.2f},{py(y):.2f}" for x, y in zip(series.x, series.y))
-        parts.append(
-            f'<polyline points="{points}" fill="none" stroke="{color}" stroke-width="2.3" '
-            f'stroke-linejoin="round" stroke-linecap="round"{dash}/>'
-        )
-        lx = left + index * 185
-        parts.append(
-            f'<line x1="{lx}" x2="{lx + 25}" y1="39" y2="39" stroke="{color}" '
-            f'stroke-width="2.3"{dash}/>'
-        )
-        parts.append(
-            f'<text class="legend" x="{lx + 31}" y="43">{escape(series.label)}</text>'
-        )
-    parts.append("</svg>")
-    return "".join(parts)
+    patterns = ("", "7 4", "2 3", "9 3 2 3", "12 4", "4 2")
+    for i, series in enumerate(spec.series):
+        color = palette[i % len(palette)]
+        pattern = "8 5" if series.role in ("bound", "reference") else patterns[i % len(patterns)]
+        dash = f' stroke-dasharray="{pattern}"' if pattern else ""
+        segments, segment = [], []
+        for x, y in zip(series.x, series.y):
+            if use_log and y == 0:
+                if segment:
+                    segments.append(segment)
+                    segment = []
+                px, py = sx(x), top + plot_h
+                parts.append(f'<path d="M{px-4:.2f},{py-7:.2f} L{px+4:.2f},{py-7:.2f} '
+                             f'L{px:.2f},{py:.2f} Z" fill="{color}"><title>'
+                             f'{escape(series.label)}: k={x:g}, value=0</title></path>')
+            else:
+                segment.append((sx(x), sy(y)))
+        if segment:
+            segments.append(segment)
+        for segment in segments:
+            points = " ".join(f"{x:.2f},{y:.2f}" for x, y in segment)
+            parts.append(f'<polyline points="{points}" fill="none" stroke="{color}" '
+                         f'stroke-width="2.3"{dash}/>')
+            if len(segment) == 1:
+                x, y = segment[0]
+                parts.append(f'<circle cx="{x:.2f}" cy="{y:.2f}" r="3" fill="{color}"/>')
+        lx = left + (i % columns) * ((width - left - right) / columns)
+        ly = 30 * len(title_lines) + 12 + (i // columns) * 24
+        parts.append(f'<path d="M{lx},{ly} h24" stroke="{color}" stroke-width="2.3"{dash}/>')
+        parts.append(text(lx + 30, ly + 4, series.label))
+    for i, line in enumerate(textwrap.wrap(note, max(24, (width - 95) // 5))):
+        parts.append(text(left, height - 20 + 11 * i, line, 10))
+    parts.append('</svg>')
+    return ''.join(parts)
 
 
 def render_check_svg(slug: str) -> str:

@@ -1,5 +1,5 @@
 {
-  "version": "0.2.1",
+  "version": "0.3.0",
   "channel": "alpha",
-  "description": "Float32-safe exact-reference construction guidance and concrete reproducibility workflows"
+  "description": "Visual paper-focused reports with auditable plots and configurable instances"
 }
