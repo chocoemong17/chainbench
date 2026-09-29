@@ -12,6 +12,29 @@ solver, a theorem prover, or a reproduction of every experiment in the cited pap
 
 ## 1. Start with a question, not a table
 
+**One guided folder from the development source:**
+
+```bash
+python -m chainbench tour --lang ko --output tour
+```
+
+Open `tour/index.html`. Follow a published setup, inspect 2D/3D update geometry,
+read the method atlas, then open all 32 seeded cases for each of the eight topics.
+The whole folder works offline after generation; recipients only need a browser.
+Every page retains its evidence and links back to the guide. See the
+[tour contents, settings and file verification](docs/OFFLINE_TOUR.md).
+Choose a new destination directory; existing folders are never overwritten.
+
+| Feasible simplex updates | Composite objective heights |
+| --- | --- |
+| ![Actual Frank–Wolfe simplex trajectory](docs/images/tour-simplex.svg) | ![Actual ISTA/FISTA trajectories at their composite objective heights](docs/images/tour-proximal.svg) |
+
+These are controlled illustrations from the tour: simplex target (0.2,0.3,0.5),
+start e1, C_f=2; diagonal LASSO a=(1,3), b=(1.4,-2.4), lambda=0.8,
+start (-1.8,1.2), L=9. Both use 18 updates. The 3D chords connect actual samples;
+they are not continuous paths on the surface. Open the reports for all cases and
+exact settings. These commands are not included in the frozen v0.5.0 wheel.
+
 **New in the development source (after v0.5.0):** independently recompute the
 published setup behind Shewchuk's Figures 8 and 30, with linked contours, 3D heights,
 actual iterate inspection and all nine additional starting points:

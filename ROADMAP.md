@@ -1,5 +1,8 @@
 ## After v0.5.0: published examples before algorithm counts
 
+- The development-source `tour` command connects these reports through one offline
+  reading path, with explicit evidence levels, all seeded cases and file hashes.
+  See [the bounded bundle](docs/OFFLINE_TOUR.md).
 - Implemented on the development branch: exact-setup numerical reproduction of
   Shewchuk Figures 8 and 30, linked geometry/energy views, and every start in a declared
   nine-point grid. See [the source and scope](docs/SHEWCHUK_REPRODUCTION.md).

@@ -10,6 +10,7 @@ import json
 import math
 import struct
 from html.parser import HTMLParser
+from urllib.parse import urlsplit
 
 
 def extract_record(text: str) -> dict:
@@ -142,9 +143,86 @@ def exercise_workflows(cli, work, env, version, run):
     if extract_record(html) != proximal or html.count('data-prox-case=') != 9:
         raise RuntimeError('proximal geometry HTML differs from installed calculations')
 
+    folder = work/'tour'
+    run([cli, 'tour', '--lang', 'ko', '--output', str(folder)], work, env)
+    tour_records = validate_tour(folder)
+    for filename, command in [('shewchuk.html', ['reproduce', 'shewchuk-1994', '--steps', '12']),
+                              ('proximal.html', ['geometry', 'ista-fista', '--steps', '18'])]:
+        direct = json.loads(run([cli, *command, '--format', 'json'], work, env))
+        if direct != tour_records[filename]:
+            raise RuntimeError('tour page differs from the installed standalone workflow')
+    unresolved = json.loads(run([cli, 'stress-case', 'ista-vs-fista', '--seed', '24', '--format', 'json'], work, env))
+    if tour_records['stress-ista-vs-fista.html']['rows'][24] != unresolved['case']:
+        raise RuntimeError('tour dropped or changed the unresolved sampled case')
+
     return {'learning':'matched','sweep':'matched','replay':'matched','gd_tight':'matched',
             'stress':'matched','landscape':'matched','shewchuk_reproduction':'matched',
-            'simplex_geometry':'matched', 'inspectable_stress':'matched', 'proximal_geometry':'matched'}
+            'simplex_geometry':'matched', 'inspectable_stress':'matched', 'proximal_geometry':'matched',
+            'offline_tour':'matched'}
+
+
+def validate_tour(folder):
+    """Read only the generated folder; verify hashes, links, coverage and raw records."""
+    manifest = json.loads((folder/'manifest.json').read_text(encoding='utf8'))
+    topics = {'gd-baseline', 'nesterov-1983', 'polyak-1964', 'hestenes-stiefel-1952',
+              'jaggi-2013', 'rockafellar-1976', 'beck-teboulle-2009', 'ista-vs-fista'}
+    expected = {'index.html', 'atlas.html', 'shewchuk.html', 'simplex.html', 'proximal.html', 'tight-gd.html'}
+    expected.update('stress-'+topic+'.html' for topic in topics)
+    if (manifest.get('kind') != 'chainbench.offline-tour' or manifest.get('start') != 'index.html'
+            or len(manifest['artifacts']) != len(expected)
+            or {a['path'] for a in manifest['artifacts']} != expected
+            or {p.name for p in folder.iterdir()} != expected|{'manifest.json'}):
+        raise RuntimeError('tour artifact coverage differs')
+    class Links(HTMLParser):
+        def __init__(self, text):
+            super().__init__()
+            self.ids, self.links = set(), []
+            self.feed(text)
+        def handle_starttag(self, tag, attrs):
+            attrs = dict(attrs)
+            if 'id' in attrs:
+                self.ids.add(attrs['id'])
+            if tag == 'a' and 'href' in attrs:
+                self.links.append(attrs['href'])
+    parsed, records = {}, {}
+    for artifact in manifest['artifacts']:
+        name = artifact['path']
+        raw = (folder/name).read_bytes()
+        if len(raw) != artifact['bytes'] or hashlib.sha256(raw).hexdigest() != artifact['sha256']:
+            raise RuntimeError('tour file hash differs')
+        text = raw.decode('utf8')
+        parsed[name] = Links(text)
+        if name != 'index.html':
+            if 'index.html' not in parsed[name].links:
+                raise RuntimeError('tour report has no return link')
+            records[name] = extract_record(text)
+        if name.startswith('stress-'):
+            result = records[name]
+            topic = name[len('stress-'):-len('.html')]
+            if (result['topic'] != topic or artifact['topic'] != topic
+                    or result['seed'] != 0 or result['trials'] != 32
+                    or [r['seed'] for r in result['rows']] != list(range(32))
+                    or result['summary'] != artifact['summary']):
+                raise RuntimeError('tour omitted or changed sampled cases')
+    for name, document in parsed.items():
+        for link in document.links:
+            url = urlsplit(link)
+            if url.scheme in ('https', 'http'):
+                continue
+            if url.scheme or url.netloc or url.query:
+                raise RuntimeError('unexpected tour link')
+            target = url.path or name
+            if target == 'manifest.json' and not url.fragment:
+                continue
+            if target not in parsed or (url.fragment and url.fragment not in parsed[target].ids):
+                raise RuntimeError('tour local link has no target')
+    validate_reproduction(records['shewchuk.html'])
+    validate_simplex_geometry(records['simplex.html'])
+    validate_proximal_geometry(records['proximal.html'])
+    info = records['stress-ista-vs-fista.html']
+    if info['rows'][24]['metric'] is not None or info['rows'][24]['status'] != 'unresolved':
+        raise RuntimeError('tour must retain the unresolved case')
+    return records
 
 
 def validate_proximal_geometry(result):

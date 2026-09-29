@@ -28,6 +28,7 @@ from .reproductions import run_reproduction
 from .simplex_geometry import run_simplex_geometry, simplex_html
 from .stress import TOPICS as STRESS_TOPICS
 from .stress import run_stress, run_stress_case, stress_case_html, stress_html
+from .tour import build_tour
 from .visuals import render_check_svg
 from .workflows import (
     MAX_REPORT_BYTES,
@@ -73,6 +74,9 @@ def _welcome() -> str:
 See what classic optimization results are saying, not just their raw numbers.
 
 Start here:
+  chainbench tour --lang ko --output tour
+      Generate a guided offline folder; open tour/index.html in a browser.
+
   chainbench learn --lang ko --output learn.html
       Read each method's question, assumptions, recurrence and plot.
 
@@ -238,6 +242,10 @@ def main(argv: list[str] | None = None) -> int:
     learn.add_argument("--output", type=Path)
     learn.add_argument("--force", action="store_true")
 
+    tour = sub.add_parser('tour', help='export a guided offline folder using all existing evidence layers')
+    tour.add_argument('--output', type=Path, required=True)
+    tour.add_argument('--lang', choices=['en', 'ko'], default='en')
+
     sweep = sub.add_parser("sweep", help="vary one supported setting with a shared work budget")
     sweep.add_argument("--preset", choices=PRESETS, required=True)
     sweep.add_argument("--parameter", choices=PARAMETERS, required=True)
@@ -328,6 +336,10 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     try:
+        if args.command == 'tour':
+            manifest = build_tour(args.output, args.lang)
+            print(f'Created {len(manifest["artifacts"])} HTML files. Open {args.output / "index.html"}')
+            return 0
         if args.command == "learn":
             _write(args.output, learning_html(args.focus, args.lang), args.force)
             return 0

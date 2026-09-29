@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Add `tour --output NEW_DIRECTORY`: a guided offline index with actual SVG previews,
+  the learning atlas, published example, both geometry views, all eight stress topics
+  at seeds 0–31 and the public tight-GD case. Keep all raw records and return links.
+- Stage the reports, refuse existing destinations, retain file/settings hashes in
+  a manifest, and clean failed writes. Require installed tour evidence and offline
+  navigation checks before publication; no browser-side solver or server is added.
+
 - Attach computation-derived instance context to every canonical learning/report
   chart and standalone SVG: exact inputs/hash, dimension, constants, actual start,
   method parameters, budget, completed updates and stopping. Keep singular

@@ -100,6 +100,8 @@ jobs:
       - run: python -m chainbench report --output canonical-report.html
       - run: python -m chainbench plot nesterov-1983 --output canonical.svg
       - run: python scripts/check_canonical_browser.py --report canonical-report.html --learning focused.html --svg canonical.svg --output browser-check/canonical
+      - run: python -m chainbench tour --lang ko --output tour
+      - run: python scripts/check_tour_browser.py --tour tour --output browser-check/tour
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: always()
         with:
