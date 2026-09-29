@@ -206,7 +206,7 @@ def main() -> None:
                         raise RuntimeError("CSV registry differs from installed checks")
                     if [r["status"] for r in exported] != [r["status"] for r in rows]:
                         raise RuntimeError("CSV statuses differ from installed checks")
-                elif "<svg" not in target.read_text(encoding="utf-8"):
+                elif format_name == "html" and "<svg" not in target.read_text(encoding="utf-8"):
                     raise RuntimeError("HTML report did not contain visual plots")
             plot = work / "nesterov.svg"
             run([cli, "plot", "nesterov-1983", "--output", str(plot)], work, env)
