@@ -1,9 +1,9 @@
 from __future__ import annotations
 
 import csv
-from html import escape
 import io
 import json
+from html import escape
 
 from .checks import CheckResult
 from .stories import STORIES
