@@ -11,13 +11,12 @@ A numerical experiment can be **consistent with** a published result; it does no
 
 ## Help review the released version
 
-For general use, install the latest **v0.2.1** maintenance release. The
+For general use, install the latest **v0.3.0** visual release. The
 [fixed v0.2.0 review kit](review/README.md) remains a deliberately frozen historical
 baseline for cross-machine comparison; it is not the latest package. The helper
 never uploads data. [Report an actual success, failure or confusing step in issue #28](https://github.com/chocoemong17/chainbench/issues/28).
 
-v0.2.1 addresses the float32 exact-reference construction usability issue found
-during evaluation without loosening the strict constructor. Internal reports and CI
+v0.3.0 keeps the v0.2.1 float32 construction fix and adds the visual/reporting and instance-control redesign requested after outside reproduction attempts. Internal reports and CI
 are maintainer-assisted evidence, not outside users or endorsements. No star or
 favorable review is requested.
 
@@ -63,7 +62,7 @@ Activate with `source .venv/bin/activate` on Linux/macOS, or run
 The release wheel can be installed without Git:
 
 ```bash
-python -m pip install https://github.com/chocoemong17/chainbench/releases/download/v0.2.1/chainbench-0.2.1-py3-none-any.whl
+python -m pip install https://github.com/chocoemong17/chainbench/releases/download/v0.3.0/chainbench-0.3.0-py3-none-any.whl
 python -m chainbench --version
 python -m chainbench check all
 ```
