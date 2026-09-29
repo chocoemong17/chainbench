@@ -107,6 +107,10 @@ on a feasible triangle and projected objective surface. The selected step contro
 both projections; the complete gap/certificate chart remains available below them.
 All twelve cases, static paths and numeric tables work offline. See the [source and
 visual contract](SIMPLEX_GEOMETRY.md), including why the 3D chord is not a surface curve.
+Two linked certificate diagrams also show the affine model at each vertex and the
+resulting optimal-value bracket. They use actual stored values and a fixed scale
+within each case; the full table includes the final certificate. Affine vertex
+values are distinguished from the objective surface heights.
 
 The [proximal view](PROXIMAL_GEOMETRY.md) follows the same computed extrapolation,
 gradient and shrinkage stages in two coordinate views, with every case available.

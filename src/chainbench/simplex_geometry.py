@@ -13,6 +13,7 @@ from html import escape
 import numpy as np
 
 from . import __version__
+from ._fw_certificate import certificate_svg
 from ._pages import bi, evidence, page
 from .methods import frank_wolfe
 from .problems import SimplexQuadraticProblem
@@ -36,12 +37,17 @@ def run_simplex_geometry(steps: int = 18) -> dict:
             for k, x in enumerate(trace.iterates):
                 gradient = problem.grad(x)
                 vertex = problem.linear_minimizer(gradient)
+                value = problem.value(x)
+                affine = value + (np.eye(3)-x) @ gradient
                 rows.append({'iteration': k, 'x': x.tolist(), 'gap': problem.gap(x),
                              'gradient': gradient.tolist(), 'vertex': vertex.tolist(),
                              'vertex_index': int(np.argmax(vertex)),
                              'dual_gap': float(gradient @ (x - vertex)),
                              'gamma': 2/(k+2) if k < steps else None,
-                             'support': int(np.count_nonzero(x > 0))})
+                             'support': int(np.count_nonzero(x > 0)),
+                             'certificate': {'affine_vertices': affine.tolist(),
+                                             'lower': float(affine[int(np.argmax(vertex))]),
+                                             'upper': value}})
             actual = np.array([*target, *start], dtype='<f8').tobytes()
             cases.append({'id': f'{target_name}-{start_name}', 'target_name': target_name,
                           'target': list(target), 'start_name': start_name, 'start': list(start),
@@ -193,6 +199,12 @@ SCRIPT = """
    panel.querySelector('[data-values]').textContent=
     `f(x_k)−f* = ${row.gap.toExponential(4)} · g_FW(x_k) = ${row.dual_gap.toExponential(4)}`
     + ` · f(x_(k+1))−f* = ${next.gap.toExponential(4)}`;
+   const cert=row.certificate;
+   panel.querySelector('[data-certificate-values]').textContent=
+    `ℓ(e₁), ℓ(e₂), ℓ(e₃) = (${fmt(cert.affine_vertices)})`;
+   panel.querySelector('[data-certificate-interval]').textContent=
+    `${cert.lower.toExponential(5)} ≤ f* ≤ ${cert.upper.toExponential(5)}`
+    + ` · width = g_FW = ${row.dual_gap.toExponential(5)} · k = ${k}`;
   };
   const stop=()=>{clearInterval(timer);timer=null;button.textContent='▶';button.setAttribute('aria-pressed','false');};
   slider.addEventListener('input',()=>{stop();update();});
@@ -234,13 +246,27 @@ def _case_html(case: dict, bound: dict) -> str:
     text += f'∇f(x₀) = {first["gradient"]} → s₀ = e{first["vertex_index"]+1}</p>'
     text += f'<p data-update>γ₀ = 1 · x₁ = {rows[1]["x"]}</p>'
     text += f'<p data-values>f(x₀)−f* = {first["gap"]:.5g} · g_FW(x₀) = {first["dual_gap"]:.5g}</p></div>'
+    text += '<h3>' + bi('오라클이 만드는 최적값 구간', 'The optimal-value bracket from the oracle') + '</h3>'
+    text += '<div class="fw-certificate-grid"><div>' + certificate_svg(case) + '</div>'
+    text += '<div>' + certificate_svg(case, bracket=True) + '</div></div>'
+    cert = first['certificate']
+    text += '<div class="fw-readout" aria-live="polite"><p data-certificate-values>'
+    text += 'ℓ(e₁), ℓ(e₂), ℓ(e₃) = ' + str(cert['affine_vertices']) + '</p>'
+    text += f'<p data-certificate-interval>{cert["lower"]:.6g} ≤ f* ≤ {cert["upper"]:.6g}'
+    text += f' · width = g_FW = {first["dual_gap"]:.6g} · k = 0</p></div>'
+    text += '<p class="small">' + bi(
+        '같은 단계 선택기로 두 그림도 바뀝니다. JavaScript가 없으면 k=0의 구간을 보여주며, 모든 단계의 값은 아래 표에 있습니다. 각 조합 안에서 세로축 범위를 고정했습니다.',
+        'The same step control updates these diagrams. Without JavaScript they show k=0; the table retains every step. The vertical scale stays fixed within each case.') + '</p>'
     text += '<div class="plot">' + chart + '</div>'
     text += '<details><summary>' + bi('모든 반복점·오라클·갱신 비율', 'All iterates, oracle choices and step sizes')
-    text += '</summary><div class="scroll"><table><tr><th>k</th><th>x</th><th>f−f*</th><th>g_FW</th><th>s</th><th>γ</th></tr>'
+    text += '</summary><div class="scroll"><table><tr><th>k</th><th>x</th><th>f−f*</th><th>g_FW</th><th>s</th><th>γ</th><th>ℓ(e₁), ℓ(e₂), ℓ(e₃)</th><th>lower ≤ f* ≤ upper</th></tr>'
     for row in rows:
         text += f'<tr><td>{row["iteration"]}</td><td>{", ".join(f"{x:.6g}" for x in row["x"])}</td>'
         text += f'<td>{row["gap"]:.6g}</td><td>{row["dual_gap"]:.6g}</td><td>e{row["vertex_index"]+1}</td>'
-        text += f'<td>{row["gamma"] if row["gamma"] is not None else "—"}</td></tr>'
+        text += f'<td>{row["gamma"] if row["gamma"] is not None else "—"}</td>'
+        cert = row['certificate']
+        text += '<td>' + ', '.join(f'{v:.6g}' for v in cert['affine_vertices']) + '</td>'
+        text += f'<td>{cert["lower"]:.6g} ≤ f* ≤ {cert["upper"]:.6g}</td></tr>'
     text += '</table></div><p class="small">input SHA-256: <code>' + case['input_sha256'] + '</code></p></details></div>'
     return text
 
@@ -254,6 +280,9 @@ def simplex_html(result: dict, lang: str = 'en') -> str:
     .fw-js .fw-player{display:flex}.fw-player input{flex:1;min-width:120px;padding:0}
     .fw-readout{padding:12px 16px;background:#edf4f7;border-radius:12px;font-size:14px;overflow-wrap:anywhere}
     .fw-readout p{margin:5px 0}.fw-case{border-top:1px solid #ddd;padding:14px 0}
+    .fw-certificate-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    .fw-certificate-grid svg{width:100%;height:auto;display:block}
+    @media(max-width:720px){.fw-certificate-grid{grid-template-columns:1fr}}
     @media print{.fw-js .fw-player{display:none}}</style>'''
     body += '<div class="evidence-banner"><span class="evidence-tag">GEOMETRIC ILLUSTRATIONS</span>'
     body += bi('3개 목표점 × 4개 시작점. 논문 그림 재현이 아닌 공개 알고리즘의 통제된 설명용 예시입니다.',
@@ -273,6 +302,14 @@ def simplex_html(result: dict, lang: str = 'en') -> str:
     ):
         body += '<article><h3>' + title + '</h3><p>' + bi(ko, en) + '</p></article>'
     body += '</div><p class="small"><a href="' + SOURCE + '">Jaggi (2013), Algorithm 1 · Eq. (2) · Theorem 1</a></p></section>'
+    body += '<section><h2>' + bi('최적해를 모르는데 어떻게 오차를 제한할까?', 'How can we bound error without knowing the optimum?') + '</h2>'
+    body += '<div class="formula">ℓₓ(v)=f(x)+∇f(x)ᵀ(v−x) ≤ f(v)<br>lower = minᵥ ℓₓ(v) = ℓₓ(s) = f(x)−g_FW(x)<br>lower ≤ f* ≤ f(x) = upper</div>'
+    body += '<p>' + bi(
+        '볼록성 때문에 접하는 affine 근사는 모든 가능한 점에서 목적함수보다 작거나 같습니다. 심플렉스에서는 꼭짓점 세 개의 근삿값 중 최솟값이 전체 근사의 최솟값입니다. 바로 그 꼭짓점을 기존 오라클이 선택합니다. 현재 점은 실행 가능하므로 f(x)는 최적값의 상계이고, 두 끝점의 차이가 dual gap입니다.',
+        'Convexity puts the affine model below the objective at every feasible point. On the simplex, its minimum is the smallest of its three vertex values—the vertex already chosen by the oracle. The current point is feasible, so f(x) is an upper bound on f*. The interval width is the dual gap.') + '</p>'
+    body += '<p class="callout caution">' + bi(
+        '근사의 하계는 음수일 수 있습니다. 목적함수 자체가 음수라는 뜻이 아닙니다. 이 예제의 알려진 f*=0은 구간을 확인하는 검산용입니다. 구간 계산에는 최적해나 최적값이 필요하지 않습니다. 실수 연산의 수학적 보증을 부동소수점의 엄밀한 구간 연산 인증이라고 부르지는 않습니다.',
+        'The lower model can be negative even though this objective is nonnegative. The known f*=0 audits the interval here; computing its endpoints needs neither the optimizer nor its value. The real-arithmetic guarantee is not a rigorous floating-point interval-arithmetic certificate.') + '</p></section>'
     body += '<section><h2>' + bi('한 걸음의 구조를 먼저 보기', 'Inspect one update first') + '</h2>'
     body += _case_html(result['cases'][0], result['bound']) + '</section>'
     body += '<section><h2>' + bi('항상 내려가는 것은 아닙니다', 'A scheduled step need not decrease the objective') + '</h2>'

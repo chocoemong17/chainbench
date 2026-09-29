@@ -84,6 +84,10 @@ Eq. (2) and Theorem 1 to a three-coordinate probability simplex. Its twelve
 target/start fixtures are controlled illustrations, not original-paper figures.
 See [the exact recurrence, curvature, projection and scope](SIMPLEX_GEOMETRY.md).
 The `4/(k+2)` curve bounds objective gap for k>=1, not pointwise dual gap.
+The same exact oracle minimizes the affine model from Section 2 / Eq. (2).
+Its three vertex values and `[f(x)-g_FW(x), f(x)]` bracket are shown for each actual
+step. The known `f*=0` audits the bracket but is not used to compute its endpoints.
+The lower affine value can be negative while the quadratic objective is nonnegative.
 
 ## Proximal geometry (development source after v0.5.0)
 

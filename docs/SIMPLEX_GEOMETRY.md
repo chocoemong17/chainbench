@@ -55,6 +55,44 @@ is taken. Each input hash is SHA-256 over little-endian float64 target then star
 3. Compare `gap=0.5*||x-target||²` with the computable certificate
    `g_FW=gradientᵀ(x-s)`. Convexity gives `gap<=g_FW`.
 
+## See where the certificate comes from
+
+Jaggi Section 2 / Eq. (2) uses the affine lower model
+`ell_x(v)=f(x)+gradientᵀ(v-x)`. For every feasible v, convexity gives
+`ell_x(v)<=f(v)`. On a simplex, an affine function attains its minimum at a vertex.
+The existing oracle therefore gives the lower endpoint without knowing an optimizer:
+
+```text
+lower = min_i ell_x(e_i) = ell_x(s) = f(x) - g_FW(x)
+lower <= f* <= f(x) = upper
+upper - lower = g_FW(x)
+```
+
+The new diagrams show all three **affine** vertex values and the selected minimum,
+then the optimal-value bracket, on the same objective-value scale. These values
+are not the actual objective heights at the vertices. The existing step control
+updates both diagrams and their numerical readouts. The scale is fixed across a
+case's entire run; different cases may use different ranges.
+
+For the interior target at e1, the three affine values are `(0.49,-0.61,-0.81)`.
+The oracle selects e3 and certifies `-0.81 <= f* <= 0.49`, a width of 1.3. The
+actual objective at e3 is 0.19, not -0.81. A negative lower model does not imply
+a negative objective. The known `f*=0` is drawn only as an audit reference; neither
+endpoint uses it. The interval is intentionally not tightened using the separately
+known nonnegativity of this special objective.
+
+All recorded rows, including the final one with no subsequent update, retain
+`certificate.affine_vertices`, `certificate.lower` and `certificate.upper` in the
+JSON and full table. These are additive fields in the development schema-1 format;
+new validation requires them rather than substituting missing values. The player
+selects transitions k to k+1; the final row's certificate remains available in the
+table. Without JavaScript, the diagrams show k=0 and all rows remain readable.
+
+This is the real-arithmetic convexity argument evaluated with NumPy float64, not
+directed-rounding interval arithmetic. Small residual discrepancies are checked
+with explicit tolerances. The example's known solution helps audit the implementation;
+a finite run does not establish the general theorem.
+
 Starting at e1 with the interior target, the first three new points are e3,
 `(0,2/3,1/3)` and `(1/2,1/3,1/6)`. Starting at the barycenter instead, the first gap
 **increases from 7/300 to 19/100**. The fixed schedule does not promise descent
@@ -88,9 +126,13 @@ An iteration count does not price a linear oracle or compare it with projection.
   gap, certificate, bound and input hash; hand-computed first updates and the explicit
   nonmonotonic example; rejection of corrupt or nonfinite evidence.
 - SVG-coordinate checks against raw samples in both projections.
+- Affine model values, both bracket endpoints and width checked independently for
+  every row. Feasible probe points verify the quadratic tangent defect
+  `f(v)-ell_x(v)=0.5*||v-x||²`; corrupt/missing/nonfinite model evidence is rejected.
 - CLI overwrite protection and HTML/JSON agreement.
 - Installed wheel **and** sdist workflows execute the command and independently
   validate its output; missing evidence blocks release publication.
 - Optional `scripts/check_simplex_browser.py` checks all twelve players at 1440px
-  and 390px, marker positions, keyboard, playback, language, exact downloaded JSON,
+  and 390px, marker positions, every displayed certificate coordinate/readout,
+  unclipped certificate labels, keyboard, playback, language, exact downloaded JSON,
   offline operation and the no-JavaScript fallback; saves actual screenshots.

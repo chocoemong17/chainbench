@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Connect Frank–Wolfe's exact oracle to its affine lower model and optimal-value
+  bracket. Show actual vertex values, both endpoints and the dual-gap width for
+  all twelve controlled cases; retain final-row evidence and verify the displays
+  independently from the existing recurrence.
+
 - Lead the README with actual image evidence, scoped geometry previews and a
   question-to-workflow map. Add a pinned development review route; distinguish its
   commands and commit from the frozen v0.5.0 release. Generate the image preview

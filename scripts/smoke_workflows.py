@@ -449,6 +449,20 @@ def validate_simplex_geometry(result):
                     or not math.isclose(row['dual_gap'], dual, abs_tol=1e-14)
                     or gap > dual + 1e-14 or (k >= 1 and gap > 4/(k+2) + 1e-14)):
                 raise RuntimeError('simplex oracle, metric or certificate differs')
+            cert = row.get('certificate', {})
+            affine = [gap + sum(g*((1. if i == j else 0.)-v)
+                               for i, (g, v) in enumerate(zip(gradient, x)))
+                      for j in range(3)]
+            actual = cert.get('affine_vertices', [])
+            lower, upper = cert.get('lower'), cert.get('upper')
+            if (len(actual) != 3 or lower is None or upper is None
+                    or not all(math.isfinite(v) for v in [*actual, lower, upper])
+                    or any(not math.isclose(a, b, abs_tol=1e-14) for a, b in zip(actual, affine))
+                    or not math.isclose(lower, min(affine), abs_tol=1e-14)
+                    or not math.isclose(upper, gap, abs_tol=1e-14)
+                    or not math.isclose(upper-lower, dual, abs_tol=1e-14)
+                    or lower > 1e-14 or upper < 0):
+                raise RuntimeError('simplex affine model or optimal-value bracket differs')
             if gamma is not None:
                 expected = [(1-gamma)*v + gamma*s for v, s in zip(x, vertex)]
                 if any(not math.isclose(a, b, abs_tol=1e-14)

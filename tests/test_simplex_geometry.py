@@ -8,6 +8,7 @@ from pathlib import Path
 import numpy as np
 import pytest
 
+from chainbench._fw_certificate import certificate_svg
 from chainbench.cli import main
 from chainbench.simplex_geometry import run_simplex_geometry, simplex_html, simplex_svg
 
@@ -122,3 +123,52 @@ def test_installed_validator_rejects_corrupted_evidence(field, value):
 def test_html_rejects_unrelated_record():
     with pytest.raises(ValueError, match='not a simplex'):
         simplex_html({'kind': 'other'})
+
+
+def test_affine_minorant_on_feasible_points_and_independent_bracket():
+    for case in run_simplex_geometry(60)['cases']:
+        target = np.array(case['target'])
+        for row in case['rows']:
+            x = np.array(row['x'])
+            c = row['certificate']
+            # A quadratic's tangent defect is exactly half the squared distance.
+            for v in [*np.eye(3), np.ones(3)/3, target, x, .3*x+.7*target]:
+                actual = .5*sum((v-target)**2)
+                model = float(v @ np.array(c['affine_vertices']))
+                assert actual-model == pytest.approx(.5*sum((v-x)**2), abs=2e-15)
+                assert model <= actual+2e-15
+            assert c['lower'] <= 2e-15 <= c['upper']+2e-15
+            assert c['upper']-c['lower'] == pytest.approx(row['dual_gap'], abs=2e-15)
+    first = run_simplex_geometry(1)['cases'][0]['rows'][0]['certificate']
+    assert first['affine_vertices'] == pytest.approx([.49, -.61, -.81])
+    assert first['lower'] == pytest.approx(-.81)
+    assert first['upper'] == pytest.approx(.49)
+
+
+@pytest.mark.parametrize('key,value', [('lower', .1), ('upper', -.1),
+                                     ('affine_vertices', [1., 2., 3.]),
+                                     ('affine_vertices', []), ('lower', float('nan'))])
+def test_installed_validator_rejects_corrupted_affine_evidence(key, value):
+    result = run_simplex_geometry(3)
+    result['cases'][0]['rows'][-1]['certificate'][key] = value
+    with pytest.raises(RuntimeError, match='affine model'):
+        smoke_module().validate_simplex_geometry(result)
+
+
+@pytest.mark.parametrize('bracket', [False, True])
+def test_certificate_diagram_uses_actual_values_and_one_scale(bracket):
+    ns = {'s': 'http://www.w3.org/2000/svg'}
+    for case in run_simplex_geometry(18)['cases']:
+        svg = ET.fromstring(certificate_svg(case, bracket=bracket))
+        lo, hi = float(svg.attrib['data-y-min']), float(svg.attrib['data-y-max'])
+        def y(value):
+            return 306-220*(value-lo)/(hi-lo)
+        selectors = ([('circle', 'data-certificate-end', name) for name in ('lower','upper')]
+                     if bracket else [('circle', 'data-affine-vertex', str(i)) for i in range(3)])
+        for tag, key, name in selectors:
+            node = svg.find(f'.//s:{tag}[@{key}="{name}"]', ns)
+            actual = [float(v) for v in node.attrib['data-frames'].split('|')]
+            expected = [y(r['certificate'][name] if bracket
+                          else r['certificate']['affine_vertices'][int(name)]) for r in case['rows']]
+            np.testing.assert_allclose(actual, expected, atol=.00051)
+            assert all(86 <= v <= 306 for v in actual)
