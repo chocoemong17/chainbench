@@ -1,6 +1,6 @@
 # Visual reports
 
-The HTML report is the primary human-readable ChainBench output. It is designed to
+The HTML report is the primary human-readable ChainBench output (tracked in issue #34). It is designed to
 answer the question that raw tables do not: **what should I notice about this paper?**
 
 ## First command
