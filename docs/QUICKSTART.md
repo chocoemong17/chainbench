@@ -3,12 +3,12 @@
 ChainBench is a local NumPy tool for small experiments, not a production solver. This walkthrough uses only public algorithms and an exact, deterministic quadratic.
 
 For question-led bilingual pages, one-factor comparisons and saved-result replay,
-see [the v0.4.0 workflow guide](LEARNING_WORKFLOWS.md). This page retains the
+see [the v0.5.0 workflow guide](LEARNING_WORKFLOWS.md). This page retains the
 small hand-checkable Python example and the original fixed-check walkthrough.
 
 ## Install the released version
 
-Download `chainbench-0.4.0-py3-none-any.whl` from the repository's `v0.4.0` GitHub prerelease into your working folder. With Python 3.10 or newer:
+Download `chainbench-0.5.0-py3-none-any.whl` from the repository's `v0.5.0` GitHub prerelease into your working folder. With Python 3.10 or newer:
 
 ```bash
 python -m venv .venv

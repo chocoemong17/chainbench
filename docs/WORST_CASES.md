@@ -42,3 +42,8 @@ labeled.
 ## Implemented in v0.4.0: one explicit tight GD construction
 
 The new `case-study gd-tight` command illustrates Drori--Teboulle's public construction for constant-step GD with 0<h<=1. It is not a general search facility. The matching theorem, function, horizon and limitations are specified in [GD_TIGHT_CASE.md](GD_TIGHT_CASE.md).
+
+
+## v0.5.0: sampled breadth without abusing the word worst-case
+
+`chainbench stress` now generates many reproducible synthetic instances for every bundled topic. This is useful evidence against cherry-picking, but it remains finite sampling. The command deliberately calls its output *stress evidence*, not worst-case evidence. `chainbench landscape` is an even narrower geometric illustration. Only a public extremal construction such as the GD case above is labelled tight.

@@ -1,3 +1,11 @@
+## v0.5.0: evidence breadth and geometry
+
+- Label the first paper plot as a canonical illustration rather than representative evidence.
+- Run reproducible multi-instance stress for all eight bundled topics.
+- Show five quadratic methods on the same contour map, 3D surface and convergence chart.
+- Deepen the bilingual paper atlas with motivation, strengths, trade-offs and method relationships.
+- Keep tight/worst-case language reserved for public extremal constructions.
+
 # Roadmap and priorities
 
 ChainBench remains a small experimental alpha project. Useful and reviewable

@@ -83,4 +83,20 @@ def exercise_workflows(cli, work, env, version, run):
     html = run([cli,'case-study','gd-tight','--horizon','1'],work,env)
     if extract_record(html) != case:
         raise RuntimeError('case-study HTML differs from computed JSON')
-    return {'learning':'matched','sweep':'matched','replay':'matched','gd_tight':'matched'}
+    stress_args = [cli, 'stress', 'nesterov-1983', '--trials', '3', '--seed', '9']
+    stress = json.loads(run(stress_args + ['--format', 'json'], work, env))
+    stress_page = run(stress_args, work, env)
+    if (extract_record(stress_page) != stress or stress['summary'].get('within_threshold') != 3
+            or len(stress['rows']) != 3):
+        raise RuntimeError('seeded stress evidence differs from computed JSON')
+
+    landscape_args = [cli, 'landscape', '--condition-number', '20', '--steps', '6',
+                      '--methods', 'gd', 'smooth-fista', 'cg']
+    landscape = json.loads(run(landscape_args + ['--format', 'json'], work, env))
+    landscape_page = run(landscape_args, work, env)
+    if (extract_record(landscape_page) != landscape or landscape_page.count('<svg') < 6
+            or set(landscape['methods']) != {'gd', 'smooth-fista', 'cg'}):
+        raise RuntimeError('landscape evidence differs from computed JSON')
+
+    return {'learning':'matched','sweep':'matched','replay':'matched','gd_tight':'matched',
+            'stress':'matched','landscape':'matched'}

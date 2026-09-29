@@ -34,7 +34,28 @@ This example is generated from the plotting implementation, not a fabricated res
 or an external review. Source mapping and the scope of each result are explicit in
 [docs/SOURCE_MAP.md](docs/SOURCE_MAP.md).
 
-## Install v0.4.0
+## Evidence before aesthetics: one plot is not enough
+
+Every paper page now labels the evidence level explicitly:
+
+1. **Literature claim** - assumptions and the selected public result.
+2. **Canonical illustration** - one transparent problem chosen for intuition, not representativeness.
+3. **Seeded stress** - many reproducible sampled instances of the same measurement.
+4. **Published tight case** - only when public literature supplies an extremal construction.
+
+```bash
+python -m chainbench stress nesterov-1983 --trials 24 --seed 0 --lang ko --output stress.html
+```
+
+For geometric intuition, compare the **same run** as a contour path, a 3D objective surface and a loss curve:
+
+```bash
+python -m chainbench landscape --condition-number 20 --methods gd smooth-fista heavy-ball cg proximal-point --lang ko --output landscape.html
+```
+
+The 2D landscape is deliberately chosen for clarity and is labelled as an illustration. It is not used as evidence of universal superiority. See [evidence layers](docs/EVIDENCE_LAYERS.md).
+
+## Install v0.5.0
 
 Use Python 3.10+ in a new virtual environment. NumPy is the only runtime dependency;
 no API key, telemetry or paid service is required. Pip may need network access during
@@ -44,7 +65,7 @@ installation; calculations and HTML viewing are local afterward.
 python -m venv .venv
 # Linux/macOS: source .venv/bin/activate
 # Windows: use .venv\Scripts\python.exe in place of python below
-python -m pip install https://github.com/chocoemong17/chainbench/releases/download/v0.4.0/chainbench-0.4.0-py3-none-any.whl
+python -m pip install https://github.com/chocoemong17/chainbench/releases/download/v0.5.0/chainbench-0.5.0-py3-none-any.whl
 python -m chainbench --version
 python -m chainbench learn --lang ko --output learn.html
 ```
@@ -99,6 +120,12 @@ horizon changes the function. The mathematical worst-case assertion comes from t
 public upper bound and matching construction, not a numerical search or a graph.
 See [exact source, formula and limits](docs/GD_TIGHT_CASE.md).
 
+## Read each paper as a research story
+
+The learning page is no longer just "formula + one graph". For every bundled topic it now adds **why the work mattered, strengths, trade-offs, the neighboring method to compare against, and the evidence type**. A small timeline connects CG, heavy-ball, proximal point, Nesterov acceleration, FISTA and Frank-Wolfe instead of presenting them as unrelated cards.
+
+The canonical figure is explicitly labelled as ChainBench-generated. It is not implied to be a figure from the original paper. The source link remains next to the selected theorem/specialization.
+
 ## Scope and evidence
 
 The original suite is unchanged: GD, Nesterov-style smooth FISTA, quadratic heavy-ball,
@@ -133,7 +160,7 @@ checkout; old and new CLI outputs are exercised before release. Tests are eviden
 about implemented cases, not an exhaustive correctness proof or independent adoption.
 
 [Report actual success, failure or confusion in issue #28](https://github.com/chocoemong17/chainbench/issues/28).
-The seven-person feedback there is maintainer-relayed. No star or favorable review is
+The seven-person feedback there is maintainer-relayed and motivated the evidence-layer, stress-sampling and geometry redesign. No star or favorable review is
 requested. The [v0.2.0 review helper](review/README.md) remains a frozen historical
 baseline, not the latest package. Prior releases are preserved.
 

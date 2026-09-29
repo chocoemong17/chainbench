@@ -116,6 +116,83 @@ LESSONS = {
 }
 
 
+DEEP_CONTEXT = {
+    "gd-baseline": {
+        "year": "baseline",
+        "why": ("가장 단순한 1차 방법이라 다른 가속 기법이 무엇을 바꾸는지 비교하는 기준점입니다.", "The simplest first-order baseline makes later acceleration ideas easy to compare."),
+        "strength": ("업데이트가 단순하고 비용 구조가 투명합니다.", "Simple updates and transparent per-step cost."),
+        "tradeoff": ("조건수가 나쁘면 길쭉한 골짜기에서 느리고 지그재그가 나타날 수 있습니다.", "Poor conditioning can create slow zig-zagging in narrow valleys."),
+        "compare": ("Nesterov/FISTA는 이 기준선에 외삽을 더해 class-wide bound를 개선합니다.", "Nesterov/FISTA adds extrapolation to improve the class-wide rate bound."),
+        "evidence": "CANONICAL + STRESS + TIGHT CASE",
+    },
+    "nesterov-1983": {
+        "year": "1983 / 2009 recurrence",
+        "why": ("단순한 gradient step에 메모리를 더해 O(1/k²) 보장을 얻는 가속의 핵심 아이디어를 보여줍니다.", "It captures the central acceleration idea: memory/extrapolation improves the general bound to O(1/k^2)."),
+        "strength": ("매끄러운 볼록 문제에서 강한 worst-case rate를 얻으면서 한 단계 비용은 gradient 기반으로 유지됩니다.", "A strong worst-case rate on smooth convex problems while retaining gradient-based steps."),
+        "tradeoff": ("목적함수가 매 반복 단조롭게 감소한다는 뜻은 아니며, 잘못된 L이나 노이즈에 민감할 수 있습니다.", "It need not decrease the objective monotonically and can be sensitive to an invalid L or noise."),
+        "compare": ("GD와 같은 문제를 풀지만 extrapolated point에서 gradient를 계산합니다. Heavy-ball과는 보장 범위와 튜닝 논리가 다릅니다.", "It solves the same class as GD but evaluates gradients at an extrapolated point; its guarantee differs from heavy-ball tuning."),
+        "evidence": "CANONICAL + STRESS",
+    },
+    "polyak-1964": {
+        "year": "1964",
+        "why": ("momentum이 이차함수의 고유모드에서 어떻게 동역학을 바꾸는지 가장 직접적으로 보여줍니다.", "It is the clearest way to see how momentum changes eigenmode dynamics on quadratics."),
+        "strength": ("잘 튜닝된 이차문제에서는 느린 모드의 수렴을 크게 개선할 수 있습니다.", "With classical quadratic tuning it can accelerate slow modes substantially."),
+        "tradeoff": ("일반 비선형 문제에서 같은 안정성·보장을 자동으로 얻는 것은 아니며 overshoot가 생길 수 있습니다.", "The same tuning does not automatically give general nonlinear guarantees and can overshoot."),
+        "compare": ("Nesterov식 가속과 비슷하게 과거 이동을 쓰지만, 분석과 튜닝 대상이 다릅니다.", "Like Nesterov acceleration it uses history, but the tuning and guarantee are different."),
+        "evidence": "CANONICAL + EMPIRICAL STRESS",
+    },
+    "hestenes-stiefel-1952": {
+        "year": "1952",
+        "why": ("SPD 선형계에서 단순 steepest descent가 반복하는 방향을 피하고 spectrum을 다항식으로 이용합니다.", "For SPD systems it avoids repeatedly undoing steepest-descent work and exploits the spectrum polynomially."),
+        "strength": ("이차문제에서는 매우 적은 반복으로 큰 개선을 만들 수 있고, memory가 제한적입니다.", "On quadratics it can achieve large progress in few iterations with modest memory."),
+        "tradeoff": ("SPD 구조가 핵심이며, 잔차가 작다고 항상 전방오차가 작은 것은 아닙니다.", "SPD structure is essential, and a small residual does not always imply small forward error."),
+        "compare": ("GD는 현재 gradient만 쓰지만 CG는 Q-켤레 방향을 누적해 이전 탐색 정보를 재사용합니다.", "GD uses only the current gradient; CG accumulates Q-conjugate directions to reuse prior search information."),
+        "evidence": "CANONICAL + STRESS + GEOMETRY",
+    },
+    "jaggi-2013": {
+        "year": "2013",
+        "why": ("projection이 비싼 제약문제에서 linear minimization oracle만으로 feasible iterate를 유지하는 관점을 정리합니다.", "It reframes constrained optimization when projection is expensive but a linear minimization oracle is cheap."),
+        "strength": ("simplex·nuclear-norm 구조에서 sparse/low-rank iterate를 자연스럽게 만들 수 있습니다.", "It naturally produces sparse or low-rank iterates on simplex/nuclear-norm domains."),
+        "tradeoff": ("O(1/k) rate와 zig-zagging, active-set identification 문제는 실제 성능 병목이 될 수 있습니다.", "Its O(1/k) rate, zig-zagging and active-set identification can become practical bottlenecks."),
+        "compare": ("projected gradient와 달리 projection 대신 linear oracle을 사용합니다.", "Unlike projected gradient, it replaces projection with a linear minimization oracle."),
+        "evidence": "CANONICAL + STRESS",
+    },
+    "rockafellar-1976": {
+        "year": "1976",
+        "why": ("한 번의 step을 단순 gradient 이동이 아니라 정규화된 subproblem 해결로 보는 proximal 관점을 제공합니다.", "It introduces the proximal viewpoint: one step solves a regularized subproblem rather than taking a raw gradient move."),
+        "strength": ("monotone-operator 관점으로 매우 넓은 문제군을 연결하고 안정적인 implicit step을 제공합니다.", "It connects a broad monotone-operator framework and provides a stable implicit step."),
+        "tradeoff": ("각 step의 subproblem이 비쌀 수 있으므로 iteration count만으로 다른 방법과 비교하면 안 됩니다.", "Each subproblem may be expensive, so iteration count alone is not a fair cost comparison."),
+        "compare": ("explicit gradient step과 달리 resolvent를 계산하는 implicit method입니다.", "Unlike an explicit gradient step it computes a resolvent / implicit update."),
+        "evidence": "QUADRATIC SPECIALIZATION + STRESS",
+    },
+    "beck-teboulle-2009": {
+        "year": "2009",
+        "why": ("nonsmooth regularization이 있는 inverse problem에서도 간단한 prox step과 acceleration을 결합합니다.", "It combines a simple proximal step with acceleration for composite inverse problems."),
+        "strength": ("ISTA와 같은 prox 연산을 유지하면서 O(1/k²) objective-gap 보장을 얻습니다.", "It keeps ISTA's proximal operation while improving the objective-gap bound to O(1/k^2)."),
+        "tradeoff": ("objective monotonicity는 보장되지 않으며, 실제 이미지 복원에서는 operator cost와 stopping rule도 중요합니다.", "Objective monotonicity is not guaranteed; real inverse problems also depend on operator cost and stopping rules."),
+        "compare": ("ISTA와 동일한 prox-gradient 핵심에 extrapolation을 추가합니다.", "It adds extrapolation to the same proximal-gradient core as ISTA."),
+        "evidence": "CANONICAL + STRESS",
+    },
+    "ista-vs-fista": {
+        "year": "controlled comparison",
+        "why": ("좋은 asymptotic/class-wide bound와 특정 finite run의 우열이 서로 다른 질문임을 보여줍니다.", "It makes explicit that a better class-wide bound and a better finite run are different questions."),
+        "strength": ("같은 문제·시작점·budget을 고정해 acceleration 효과를 직접 비교할 수 있습니다.", "Holding problem, start and budget fixed makes the acceleration effect easy to inspect."),
+        "tradeoff": ("한 fixture의 비교를 universal ranking으로 해석하면 안 됩니다.", "A one-fixture comparison must not be turned into a universal ranking."),
+        "compare": ("ISTA는 prox-gradient, FISTA는 거기에 extrapolation을 더합니다.", "ISTA is proximal gradient; FISTA adds extrapolation."),
+        "evidence": "INFO + SAMPLED DISTRIBUTION",
+    },
+}
+
+TIMELINE = (
+    ("1952", "CG", "SPD geometry"),
+    ("1964", "Heavy-ball", "momentum"),
+    ("1976", "PPA", "implicit/proximal"),
+    ("1983", "Nesterov", "acceleration"),
+    ("2009", "FISTA", "composite acceleration"),
+    ("2013", "Frank-Wolfe", "projection-free"),
+)
+
+
 def ratio_chart(slug: str, chart: ChartSpec) -> ChartSpec | None:
     if slug in ('polyak-1964', 'ista-vs-fista'):
         return None  # Empirical tail statistic and informational ratio are not pointwise bounds.
@@ -144,12 +221,14 @@ def learning_html(focus: str | None = None, lang: str = 'en') -> str:
     for result in results:
         slug = result.slug
         lesson, chart = LESSONS[slug], charts[slug]
+        deep = DEEP_CONTEXT[slug]
         validate_chart_result(result, chart)
         svg = render_line_chart(chart)
         thumbnail = base64.b64encode(svg.encode()).decode()
         search = escape(' '.join((slug, lesson['name'], lesson['category'], *lesson['question'])), quote=True)
-        cards.append(f'<a class="card" href="#{slug}" data-search="{search}"><span class="badge">'
-                     + escape(lesson['category']) + '</span><h3>' + escape(lesson['name']) + '</h3><div>'
+        cards.append(f'<a class="card" href="#{slug}" data-search="{search}"><div><span class="badge">'
+                     + escape(lesson['category']) + '</span> <span class="badge">' + escape(deep['evidence'])
+                     + '</span></div><h3>' + escape(lesson['name']) + '</h3><div>'
                      + bi(*lesson['question']) + f'</div><img alt="{escape(lesson["name"])} preview" src="data:image/svg+xml;base64,{thumbnail}"></a>')
         normalized = ratio_chart(slug, chart)
         ratio_html = ''
@@ -162,7 +241,14 @@ def learning_html(focus: str | None = None, lang: str = 'en') -> str:
                         + bi('어떤 조건에서?', 'Under which assumptions?') + '</h3><p>' + bi(*lesson['assumptions'])
                         + '</p></div><div><h3>' + bi('어떤 업데이트인가?', 'Which update?')
                         + '</h3><div class="formula">' + escape(lesson['recurrence']) + '</div></div></div>'
-                        + '<div class="formula">' + escape(lesson['formula']) + '</div><div class="plot">' + svg + '</div>'
+                        + '<div class="formula">' + escape(lesson['formula']) + '</div>'
+                        + '<div class="evidence-banner"><span class="evidence-tag">CANONICAL ILLUSTRATION</span>'
+                        + bi('아래 첫 그래프는 논문 그림을 복사한 것이 아니라, 정리 가정 안의 한 deterministic fixture에서 ChainBench가 만든 설명용 예시입니다. 대표성 주장은 stress에서 따로 봅니다.', 'The first plot below is ChainBench-generated on one deterministic fixture inside the assumptions; it is not a copied paper figure. Breadth is checked separately with seeded stress sampling.') + '</div>'
+                        + '<div class="deep-grid"><article><h3>' + bi('왜 이 논문/방법이 중요했나?', 'Why it mattered') + '</h3><p>' + bi(*deep['why']) + '</p></article>'
+                        + '<article><h3>' + bi('강점', 'Strength') + '</h3><p>' + bi(*deep['strength']) + '</p></article>'
+                        + '<article><h3>' + bi('대가·약점', 'Trade-off') + '</h3><p>' + bi(*deep['tradeoff']) + '</p></article>'
+                        + '<article><h3>' + bi('무엇과 비교해야 하나?', 'What to compare it with') + '</h3><p>' + bi(*deep['compare']) + '</p></article></div>'
+                        + '<div class="plot">' + svg + '</div>'
                         + '<p class="callout">' + bi(*lesson['reading']) + '</p>' + ratio_html
                         + '<p><span class="badge">' + result_status(result) + '</span> '
                         + bi('이 실행의 검사 통계', 'Statistic from this run') + f': {result.observed:.6g}</p>'
@@ -170,14 +256,22 @@ def learning_html(focus: str | None = None, lang: str = 'en') -> str:
                         + '</summary><p>' + bi(*lesson['reason']) + '</p></details>'
                         + '<p class="callout caution">' + bi(*lesson['limit']) + '</p><details><summary>'
                         + bi('다음에 직접 바꿔볼 실험', 'A controlled experiment to try next') + '</summary><pre>'
-                        + escape(lesson['command']) + '</pre></details><p class="small"><a href="'
+                        + escape(lesson['command']) + '\n\n# many seeded cases\nchainbench stress ' + escape(slug) + ' --trials 24 --seed 0 --lang ko --output stress.html'
+                        + ('\n\n# contour + 3D geometry\nchainbench landscape --condition-number 80 --methods gd smooth-fista heavy-ball cg proximal-point --lang ko --output landscape.html' if lesson['category'] in ('smooth','quadratic') else '')
+                        + '</pre></details><p class="small"><a href="'
                         + SOURCE_LINKS[slug] + '">' + escape(result.reference) + '</a></p></section>')
     record = evidence_record(results, charts)
     record['kind'] = 'chainbench.learning'
     record['normalized_charts'] = ratios
     record['source_map'] = {s: SOURCE_LINKS[s] for s in slugs}
     intro = bi('논문 이름이나 숫자보다 먼저 질문을 고르세요. 무엇이 달라지는지, 어떤 조건에서 보장되는지, 실제 곡선에서 무엇을 읽어야 하는지 연결합니다.', 'Start with a question, not a paper title or number. Connect the mechanism, its assumptions and the observation on the plot.')
-    guide = ('<div class="callout">' + bi('읽는 순서: 질문 → 업데이트 → 보장 → 관측. 관측과 기준 곡선은 각 범례로 구분하세요. ISTA/FISTA 비교의 두 선은 모두 관측입니다. 이 페이지에서 새 최적화를 실행하지 않습니다.', 'Read: question → update → guarantee → observation. Use each legend to distinguish observations from reference curves. Both ISTA/FISTA curves are observations. This page does not run a new optimizer.') + '</div>'
+    timeline = '<div class="timeline">' + ''.join('<div><strong>' + escape(year) + ' · ' + escape(name) + '</strong><span>' + escape(theme) + '</span></div>' for year, name, theme in TIMELINE) + '</div>'
+    ladder = ('<div class="evidence-ladder"><div class="evidence-step"><strong>1 · Literature claim</strong><span>assumptions + theorem / selected specialization</span></div>'
+              '<div class="evidence-step"><strong>2 · Canonical illustration</strong><span>one transparent deterministic fixture</span></div>'
+              '<div class="evidence-step"><strong>3 · Seeded stress</strong><span>many reproducible sampled instances</span></div>'
+              '<div class="evidence-step"><strong>4 · Tight case</strong><span>only when public literature supplies extremality</span></div></div>')
+    guide = ('<div class="callout">' + bi('읽는 순서: 논문의 질문 → 가정 → 업데이트 → 정리 → 한 예시 → 여러 표본 → 한계. 한 개의 예시는 직관을 위한 것이고, 대표성이나 worst-case 주장은 별도 증거에서 다룹니다.', 'Read: question → assumptions → update → theorem → one illustration → many sampled cases → limitation. One example is for intuition; breadth and worst-case claims require separate evidence.') + '</div>'
+             + ladder + timeline
              + '<div class="controls"><label for="lesson-filter">' + bi('방법·키워드 찾기', 'Find a method or keyword')
              + '</label><input id="lesson-filter" type="search" placeholder="FISTA / CG / 기울기"></div>')
     glossary = '<details class="panel"><summary>' + bi('처음 보는 용어', 'A small glossary') + '</summary><p>' + bi('gap: 현재 목적함수 값과 최적값의 차이. bound: 조건을 만족하는 문제들에 대한 보장 상계. κ: 이차함수의 최대/최소 곡률 비. residual: 방정식을 얼마나 만족하는지. INFO: 관측일 뿐, 통과 판정이 아님.', 'Gap: objective error relative to an optimum. Bound: guaranteed upper envelope under stated assumptions. Kappa: largest/smallest curvature ratio. Residual: equation error. INFO: observation without a pass/fail guarantee.') + '</p></details>'

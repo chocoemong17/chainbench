@@ -1,4 +1,4 @@
-# Learn, vary one thing, and replay (v0.4.0)
+# Learn, sample many cases, inspect geometry, vary one thing, and replay (v0.5.0)
 
 This release adds four bounded workflows to the existing engine. None requires a
 server, API key, telemetry, a new solver or a new runtime dependency. HTML outputs
@@ -100,3 +100,8 @@ are evaluated. Existing APIs, fixed checks, report exports and the frozen v0.2.0
 review kit remain intact. `report` defaults to HTML as in v0.3.0; `experiment` still
 defaults to JSON. New `sweep`, `replay` and `case-study` commands default to HTML and
 also support JSON. Generated pages use only system fonts and embedded SVGs.
+
+
+## Many cases and geometry (v0.5.0)
+
+A learning page now labels its first plot as a canonical illustration. To reduce cherry-picking concerns, run the same paper-linked measurement over seeded instances with `chainbench stress <topic>`. To understand *why* trajectories differ on an ill-conditioned quadratic, use `chainbench landscape`, which renders the same run as contour, 3D surface and loss views. See [EVIDENCE_LAYERS.md](EVIDENCE_LAYERS.md).

@@ -159,20 +159,20 @@ def render_html(results: list[CheckResult]) -> str:
         )
     css = """
 :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",
-sans-serif;color:#172033;background:#f6f8fb}*{box-sizing:border-box}body{margin:0}
-main{max-width:1220px;margin:auto;padding:38px 22px 80px}.hero{background:linear-gradient(135deg,
-#172554,#1e3a8a);color:white;padding:34px;border-radius:22px;box-shadow:0 16px 44px #17255422}
-.hero h1{margin:0 0 8px;font-size:40px}.hero p{max-width:850px;line-height:1.6}.meta{display:flex;
+sans-serif;color:#172033;background:#f3f1ec}*{box-sizing:border-box}body{margin:0}
+main{max-width:1240px;margin:auto;padding:38px 22px 80px}.hero{background:linear-gradient(135deg,
+#101f39,#1b355b 65%,#244c79);color:white;padding:42px;border-radius:28px;box-shadow:0 24px 60px #0f172a20}
+.hero h1{font-family:Georgia,serif;margin:0 0 10px;font-size:48px;letter-spacing:-.02em}.hero p{max-width:850px;line-height:1.6}.meta{display:flex;
 gap:10px;flex-wrap:wrap;margin-top:18px}.pill,.badge{display:inline-block;border-radius:999px;
 padding:6px 10px;font-size:12px;font-weight:700}.pill{background:#ffffff20}.badge.ok{
 background:#dcfce7;color:#166534}.badge.info{background:#e0f2fe;color:#075985}.badge.bad{
 background:#fee2e2;color:#991b1b}.summary-grid{display:grid;grid-template-columns:
-repeat(auto-fit,minmax(250px,1fr));gap:14px;margin:24px 0 32px}.summary-card{display:flex;
+repeat(auto-fit,minmax(250px,1fr));gap:14px;margin:24px 0 32px}.summary-card{position:relative;display:flex;
 flex-direction:column;gap:9px;padding:17px;border:1px solid #e3e8ef;border-radius:16px;
-background:white;color:inherit;text-decoration:none;box-shadow:0 5px 18px #0f172a0a}
+background:linear-gradient(180deg,#fff,#fbfcff);color:inherit;text-decoration:none;box-shadow:0 7px 22px #1722380a}
 .summary-card{min-width:0;overflow-wrap:anywhere}.summary-card:hover{border-color:#93c5fd}.preview{width:100%;height:auto;display:block;margin-top:auto}.preview-link{font-size:12px;font-weight:700;color:#1d4ed8}.summary-card span:last-child{font-size:13px;
-line-height:1.45;color:#526078}.paper{background:white;border:1px solid #e3e8ef;
-border-radius:20px;padding:25px;margin:22px 0;box-shadow:0 7px 25px #0f172a0a}
+line-height:1.45;color:#526078}.paper{background:white;border:1px solid #ded9cf;
+border-radius:22px;padding:28px;margin:24px 0;box-shadow:0 8px 32px #18253c0b}
 .paper-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
 .paper h2{margin:2px 0 16px}.eyebrow{text-transform:uppercase;letter-spacing:.08em;
 font-size:11px;font-weight:800;color:#64748b;margin:0}.story-grid{display:grid;
@@ -200,7 +200,7 @@ margin-top:26px}.paper,.summary-card{scroll-margin-top:20px}pre{white-space:pre-
         f'<div class="meta"><span class="pill">{len(results)} checks</span>'
         f'<span class="pill">{consistent} quantitative conditions consistent</span>'
         f'<span class="pill">{info} informational comparison</span></div></header>'
-        '<section><h2>At a glance</h2><p class="note">Choose a card to jump directly to the '
+        '<section style="background:linear-gradient(90deg,#ecfdf5,#eff6ff);border:1px solid #cfe8df;border-radius:18px;padding:18px 20px;margin:22px 0"><strong>MULTI-LAYER EVIDENCE</strong><p class="note">The cards below are canonical deterministic illustrations, not claims that one hand-picked curve represents the whole theorem class. Use <code>chainbench stress &lt;topic&gt;</code> for many seeded cases, <code>chainbench landscape</code> for geometry, and the public tight case only where literature establishes extremality.</p></section><section><h2 style="font-family:Georgia,serif">At a glance</h2><p class="note">Choose a card to jump directly to the '
         'claim, plot and limitation.</p><div class="summary-grid">' + "".join(cards)
         + '</div></section>' + "".join(sections)
         + '<details class="appendix"><summary>Raw numerical appendix</summary>'
@@ -213,8 +213,8 @@ margin-top:26px}.paper,.summary-card{scroll-margin-top:20px}pre{white-space:pre-
         + '<pre id="chainbench-evidence">'
         + escape(json.dumps(record, indent=2, allow_nan=False)) + '</pre></details>'
         '<p class="note">For assumptions, formulas and public references, see '
-        '<a href="https://github.com/chocoemong17/chainbench/blob/v0.3.0/docs/SOURCE_MAP.md">source-to-implementation map</a> and '
-        '<a href="https://github.com/chocoemong17/chainbench/blob/v0.3.0/REFERENCES.md">original references</a>. '
+        '<a href="https://github.com/chocoemong17/chainbench/blob/v0.5.0/docs/SOURCE_MAP.md">source-to-implementation map</a> and '
+        '<a href="https://github.com/chocoemong17/chainbench/blob/v0.5.0/REFERENCES.md">original references</a>. '
         'Source links are opened only when selected; this report loads no external resources.</p></main></body></html>'
     )
 

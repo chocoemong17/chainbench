@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.5.0 - 2026-09-29 (experimental alpha)
+
+- Separate four evidence layers: public literature claim, one canonical illustration,
+  seeded multi-instance stress, and a published tight case when one exists.
+- Add `stress` for every bundled topic. Quantitative theorem-linked checks retain their
+  selected threshold, heavy-ball stays explicitly empirical, and ISTA/FISTA stays INFO-only.
+- Add `landscape` for the five quadratic methods: the same numerical trajectories are
+  shown on a contour map, an oblique 3D objective surface, method-specific contour panels
+  and a convergence plot. The teaching problem is labelled as an illustration, not ranking evidence.
+- Deepen the bilingual learning atlas with research motivation, strengths, trade-offs,
+  neighboring-method comparisons, an algorithm timeline and explicit evidence labels.
+- Refresh the offline visual design and keep machine-readable evidence embedded in every
+  new page. No CDN, telemetry, API key or new runtime dependency is added.
+- Extend wheel/sdist smoke and publication evidence to the stress and landscape workflows.
+
+
 ## 0.4.0 - 2026-09-29 (experimental alpha)
 
 - Add bilingual offline learning pages and normalized bound interpretations.

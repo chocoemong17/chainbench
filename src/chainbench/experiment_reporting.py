@@ -33,12 +33,12 @@ def _render_html(result: dict) -> str:
         )
     raw = escape(json.dumps(result, indent=2, allow_nan=False))
     css = """
-:root{font-family:Inter,ui-sans-serif,system-ui,sans-serif;color:#172033;background:#f6f8fb}
+:root{font-family:Inter,ui-sans-serif,system-ui,sans-serif;color:#172033;background:#f3f1ec}
 *{box-sizing:border-box}body{margin:0}main{max-width:1100px;margin:auto;padding:36px 22px 70px}
-.hero{background:#172554;color:white;border-radius:20px;padding:30px}.hero h1{margin:0 0 9px}
+.hero{background:linear-gradient(135deg,#101f39,#244c79);color:white;border-radius:28px;padding:38px;box-shadow:0 20px 48px #0f172a1c}.hero h1{font-family:Georgia,serif;font-size:42px;letter-spacing:-.02em;margin:0 0 9px}
 .hero p{line-height:1.55;max-width:850px}.grid{display:grid;
 grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:20px 0}.method,.panel{
-background:white;border:1px solid #e2e8f0;border-radius:16px;padding:16px}.method h3{margin:0 0 10px}
+background:white;border:1px solid #ded9cf;border-radius:18px;padding:18px;box-shadow:0 7px 24px #1722380a}.method h3{margin:0 0 10px}
 .method p{font-size:13px;line-height:1.45}.panel{margin:20px 0}.panel svg{display:block;width:100%;
 min-width:660px;height:auto}.scroll{overflow-x:auto}.note{font-size:13px;color:#64748b;line-height:1.55}
 pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#0f172a;color:#e2e8f0;border-radius:12px;
@@ -61,7 +61,7 @@ padding:14px;font-size:12px}summary{cursor:pointer;font-weight:700}
         + '<section><h2>Final observations</h2><div class="grid">' + ''.join(cards) + '</div></section>'
         '<p class="note"><code>budget_complete</code> means the requested update budget ran; '
         'it does not certify convergence. Different methods can have very different work per update.'
-        '</p><details class="panel"><summary>Exact configuration, provenance and every recorded sample'
+        '</p><p class="note">For 2D geometric intuition on a rotated quadratic, run <code>chainbench landscape</code>. For breadth beyond one configured example, use <code>chainbench stress &lt;topic&gt;</code>.</p><details class="panel"><summary>Exact configuration, provenance and every recorded sample'
         '</summary><pre id="chainbench-evidence">' + raw + '</pre></details></main></body></html>'
     )
 
