@@ -208,8 +208,10 @@ def test_all_report_formats_retain_full_configuration_and_metadata(name):
     assert result["config_sha256"] in md and result["fixture"]["input_sha256"] in md
     assert json.dumps(config, indent=2) in md
     assert "Equal iteration budgets do not imply equal work" in md
-    with pytest.raises(ValueError):
-        render_experiment(result, "html")
+    html = render_experiment(result, "html")
+    assert "<svg" in html
+    assert "Objective-gap trajectories" in html
+    assert "Stationarity trajectories" in html
 
 
 @pytest.mark.parametrize("name", PRESETS)
