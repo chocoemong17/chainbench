@@ -4,6 +4,14 @@ This is an invitation to inspect a small experimental project, not a claim that 
 independent reviewer has already approved it. Maintainer-assisted tests, automated
 PRs and release downloads by validation jobs are not external adoption evidence.
 
+## One-file review helper
+
+The [fixed-release review kit](../review/README.md) checks the published wheel,
+records public synthetic observations and compares reports without executing their
+contents. It also explains privacy, tolerances and inconclusive input-byte differences.
+Share an actual attempt through [issue #28](https://github.com/chocoemong17/chainbench/issues/28).
+No outside review has been inferred from this invitation or from CI activity.
+
 ## Start with the released package
 
 Use the v0.2.0 GitHub prerelease linked from the repository. Install its wheel in a
