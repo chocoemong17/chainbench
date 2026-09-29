@@ -11,14 +11,15 @@ A numerical experiment can be **consistent with** a published result; it does no
 
 ## Help review the released version
 
-Start with the [fixed v0.2.0 review kit](review/README.md): verify the wheel, collect
-local reproduction evidence, inspect a hand-computed GD case and compare reports.
-The helper never uploads data. [Report an actual success, failure or confusing step
-in issue #28](https://github.com/chocoemong17/chainbench/issues/28).
+For general use, install the latest **v0.2.1** maintenance release. The
+[fixed v0.2.0 review kit](review/README.md) remains a deliberately frozen historical
+baseline for cross-machine comparison; it is not the latest package. The helper
+never uploads data. [Report an actual success, failure or confusing step in issue #28](https://github.com/chocoemong17/chainbench/issues/28).
 
-We are keeping v0.2.0 fixed while seeking first outside feedback. Internal reports
-and CI are maintainer-assisted evidence, not outside users or endorsements.
-No star or favorable review is requested.
+v0.2.1 addresses the float32 exact-reference construction usability issue found
+during evaluation without loosening the strict constructor. Internal reports and CI
+are maintainer-assisted evidence, not outside users or endorsements. No star or
+favorable review is requested.
 
 ## Install and run
 
@@ -33,7 +34,7 @@ Activate with `source .venv/bin/activate` on Linux/macOS, or run
 The release wheel can be installed without Git:
 
 ```bash
-python -m pip install https://github.com/chocoemong17/chainbench/releases/download/v0.2.0/chainbench-0.2.0-py3-none-any.whl
+python -m pip install https://github.com/chocoemong17/chainbench/releases/download/v0.2.1/chainbench-0.2.1-py3-none-any.whl
 python -m chainbench --version
 python -m chainbench check all
 ```
