@@ -12,24 +12,25 @@ a new checkout and pin the implementation behind the previews:
 ```bash
 git clone https://github.com/chocoemong17/chainbench.git chainbench-review
 cd chainbench-review
-git checkout --detach aa7707b4a1545282b9ed4a2d79b730d0a2dea9c4
+git checkout --detach 9b54b09465388604dbd2bcd5183c60650173489c
 python -m pip install .
 git rev-parse HEAD
 python -m chainbench tour --lang ko --output tour
 ```
 
-Open `tour/index.html`. This source revision is the tested head of
-[PR #62](https://github.com/chocoemong17/chainbench/pull/62), including its earlier
-stacked features. [Its exact CI run](https://github.com/chocoemong17/chainbench/actions/runs/36619667705)
-passed eight jobs, including both clean distribution installs and offline browser
-checks. At this snapshot there are 670 tests. This is validation by the maintainer's
-pipeline, not independent review or a guarantee over arbitrary inputs.
+Open `tour/index.html`. This immutable computation snapshot includes every command
+on this page, including the heavy-ball counterexample and earlier stacked features.
+The [development issue](https://github.com/chocoemong17/chainbench/issues/67) links
+its PR and CI evidence, where the exact tested PR-head commit is recorded. The
+implementation snapshot has 700 tests; documentation-only updates can follow it.
+Pipeline checks are maintainer validation, not independent review or a guarantee
+over arbitrary inputs.
 
 The checkout is intentionally detached for an identifiable review. The commands
 do not merge PRs or publish a release. The package version still says 0.5.0, so
 record the commit too. New README edits may postdate this implementation snapshot.
 
-The tour generates fifteen HTML files and a manifest, about 43 MB uncompressed.
+The tour generates sixteen HTML files and a manifest, about 45 MB uncompressed.
 Use a new output directory; existing directories are refused. After generation,
 share the whole folder. It needs no server, account or network to read. The original
 papers' links require a connection; all report content and controls are local.
@@ -65,7 +66,19 @@ or one extrapolate → gradient → shrinkage sequence. Try another declared cas
 The 3D chords join computed samples; their interiors are not trajectories on the
 objective surface. These cases explain movement but are not representative samples.
 
-### 3. Inspect an inconvenient sampled result
+### 3. Look at a published failure of quadratic tuning
+
+Open **Heavy-ball counterexample** (`heavy-ball.html`). At the published start 3.3,
+inspect the signed history and the state plane `(x[k-1],x[k])`. The method approaches
+the source's three-cycle on a smooth strongly convex function that is not quadratic.
+The gradient stays nonzero even while the three-step difference gets small.
+
+Then inspect every added grid start. Some approach the cycle and others approach
+zero. GD is a separately labelled comparison. Neither the cycle nor the convergent
+variations are hidden, and a small three-step difference alone is not called a
+convergence certificate. [Exact source and omitted IQC scope](HEAVY_BALL_COUNTEREXAMPLE.md).
+
+### 4. Inspect an inconvenient sampled result
 
 Open the **ISTA vs FISTA stress** report, then seed 24. Its ratio is unresolved
 because the denominator is below the comparison floor. The row remains present;
@@ -78,7 +91,7 @@ statistics and nearest-rank example cards are different objects. All of this is
 finite synthetic breadth, not a universal method ranking.
 [Sampler contract and migration from v0.5.0](STRESS_SAMPLING.md).
 
-### 4. Find out where a tight claim comes from
+### 5. Find out where a tight claim comes from
 
 Open **Tight GD** (`tight-gd.html`). Follow the iterates and the constant gradient
 on the affine part; inspect the normalized quadratic centre. The public upper
@@ -97,6 +110,7 @@ For example, from the pinned source checkout:
 
 ```bash
 python -m chainbench reproduce fista-deblurring --format json --output deblur.json
+python -m chainbench reproduce lessard-2016 --format json --output cycle.json
 python -m chainbench stress-case ista-vs-fista --seed 24 --format json --output sample-24.json
 python -m chainbench check all --json
 ```
@@ -107,9 +121,7 @@ Its display clips to [0,1]; its stored iterates and measurements do not. The str
 record keeps the unresolved reason and actual run. The fixed check command reports
 seven quantitative checks and one INFO-only comparison; INFO is not a theorem pass.
 
-To regenerate the checked-in README image from a full record, use a checkout
-containing this documentation update. The preview-maintenance script was added
-after the pinned implementation snapshot; the report commands above work at the pin.
+To regenerate the checked-in README image from a full record in the pinned checkout:
 
 ```bash
 python scripts/render_readme_image.py deblur.json --output deblur-preview.svg
@@ -134,6 +146,8 @@ implemented. The geometric cases are controlled illustrations. Stress covers a
 declared family rather than arbitrary datasets. The tight construction applies
 only within its cited assumptions. There is no production-solver claim or universal
 speed ranking; iteration counts do not normalize per-step computational cost.
+The heavy-ball workflow reproduces the selected counterexample, not the paper's
+IQC programs or a claim that all momentum choices fail.
 
 For the released baseline instead, follow [the v0.5.0 installation](../README.md#use-the-frozen-v050-release).
 It has the earlier workflows and sampler, without the new reproduction, geometry
