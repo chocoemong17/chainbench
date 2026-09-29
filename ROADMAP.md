@@ -45,6 +45,10 @@
 
 # Roadmap and priorities
 
+The existing landscape comparison now exposes its actual input, method settings
+and stopped states, uses consistent colors/equal contour scales, and is included
+in the tour. [Scope and verification](docs/LANDSCAPE_CONTEXT.md).
+
 The development Shewchuk view now explains A-conjugacy with the same computed
 steps in x and square-root-metric coordinates. This extends understanding of the
 existing reproduction; it does not add a method or claim preconditioner speedups.

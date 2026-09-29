@@ -1,5 +1,10 @@
 # Visual reports
 
+The development `landscape` view uses consistent colors across reordered method
+subsets, equal contour scales, numeric surface axes and visible computation-derived
+settings/early-stop readouts. The original trajectories remain unchanged. See
+[the projection, input and validation contract](LANDSCAPE_CONTEXT.md).
+
 The development Shewchuk reproduction also connects its actual trajectories to
 the source's ellipse-to-circle explanation. A common player updates the circular
 metric paths and normalized adjacent-step directions for all ten starts, with

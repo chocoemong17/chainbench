@@ -30,7 +30,8 @@ def tour_folder(tmp_path_factory):
 
 def test_generated_tour_hashes_links_coverage_and_independent_numerics(tour_folder):
     records = validator()(tour_folder)
-    assert len(records) == 15
+    assert len(records) == 16
+    assert records['landscape.html']['methods'] == ['gd', 'smooth-fista', 'heavy-ball', 'cg', 'proximal-point']
     assert records['heavy-ball.html']['parameters']['steps'] == 50
     assert len(records['atlas.html']['results']) == 8
     assert records['deblur.html']['parameters']['full_paper_budget']

@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Repair the existing landscape comparison: consistent method colors, equal
+  contour coordinate scales, numeric 3D axes, visible actual inputs/settings and
+  per-method iterate/termination readouts. Retain the original numerical paths,
+  validate all five methods independently, and include the comparison in the tour.
+
 - Connect Shewchuk's ellipse-to-circle explanation to the existing SD/CG paths.
   Show their actual transformed coordinates and adjacent displacement directions,
   with Euclidean/A inner products, undefined pairs and finite-precision limits.

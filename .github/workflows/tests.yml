@@ -108,6 +108,9 @@ jobs:
       - run: python scripts/render_readme_image.py browser-check/deblur/download-1440.json --output browser-check/deblur/readme-preview.svg
       - run: python -m chainbench reproduce lessard-2016 --lang ko --output heavy-ball.html
       - run: python scripts/check_heavy_ball_browser.py --html heavy-ball.html --output browser-check/heavy-ball
+      - run: python -m chainbench landscape --lang ko --output landscape.html
+      - run: python -m chainbench landscape --condition-number 10000 --angle 85 --steps 80 --methods proximal-point cg smooth-fista --lang ko --output landscape-extreme.html
+      - run: python scripts/check_landscape_browser.py --html landscape.html landscape-extreme.html --output browser-check/landscape
       - run: python -m chainbench tour --lang ko --output tour
       - run: python scripts/check_tour_browser.py --tour tour --output browser-check/tour
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1

@@ -13,7 +13,7 @@ links are optional; embedded images, scripts and numerical records load locally.
 
 ## What is included
 
-The command generates sixteen HTML files and one manifest, currently about 45 MB
+The command generates seventeen HTML files and one manifest, currently about 45 MB
 uncompressed. It reuses existing computations with fixed, declared settings:
 
 | Page | Settings | Evidence level |
@@ -25,6 +25,7 @@ uncompressed. It reuses existing computations with fixed, declared settings:
 | `heavy-ball.html` | Published start 3.3 plus eight grid starts; 50 updates | Published counterexample + controlled variations and GD comparison |
 | `simplex.html` | 18 updates; all 12 target/start combinations | Controlled geometry |
 | `proximal.html` | 18 updates; both methods for all nine lambda/start combinations | Controlled geometry |
+| `landscape.html` | Condition number 20, angle 32°, at most 18 updates; all five methods | One controlled quadratic illustration; unequal work per step |
 | `stress-<topic>.html` | Every topic; every seed 0–31; sampler v2 | Finite synthetic breadth |
 | `tight-gd.html` | Horizon 20; h=L=R=1 | Public tight construction within its stated scope |
 
@@ -73,7 +74,7 @@ published example, both geometries, tight case and image experiment; installed s
 selected tour records exactly, including the unresolved case. Missing or changed
 artifacts and injected calculation/write failures are exercised.
 
-Browser CI opens all fifteen reports from the index and returns from each at
+Browser CI opens all sixteen reports from the index and returns from each at
 1440px and 390px, verifies loaded previews, the full image budget, reciprocal geometry links and the
 preserved unresolved row, and
 checks language, overflow, offline operation and a no-JavaScript reading path.

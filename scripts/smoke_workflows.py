@@ -117,12 +117,12 @@ def exercise_workflows(cli, work, env, version, run):
         if topic == 'nesterov-1983' and sampled['case'] != stress['rows'][1]:
             raise RuntimeError('single stress rerun differs from the distribution case')
 
-    landscape_args = [cli, 'landscape', '--condition-number', '20', '--steps', '6',
-                      '--methods', 'gd', 'smooth-fista', 'cg']
+    landscape_args = [cli, 'landscape', '--condition-number', '20', '--steps', '6']
     landscape = json.loads(run(landscape_args + ['--format', 'json'], work, env))
+    validate_landscape(landscape)
     landscape_page = run(landscape_args, work, env)
     if (extract_record(landscape_page) != landscape or landscape_page.count('<svg') < 6
-            or set(landscape['methods']) != {'gd', 'smooth-fista', 'cg'}):
+            or set(landscape['methods']) != {'gd', 'smooth-fista', 'heavy-ball', 'cg', 'proximal-point'}):
         raise RuntimeError('landscape evidence differs from computed JSON')
 
     reproduce_args = [cli, 'reproduce', 'shewchuk-1994', '--steps', '6']
@@ -150,6 +150,7 @@ def exercise_workflows(cli, work, env, version, run):
     run([cli, 'tour', '--lang', 'ko', '--output', str(folder)], work, env)
     tour_records = validate_tour(folder)
     for filename, command in [('shewchuk.html', ['reproduce', 'shewchuk-1994', '--steps', '12']),
+                              ('landscape.html', ['landscape']),
                               ('proximal.html', ['geometry', 'ista-fista', '--steps', '18'])]:
         direct = json.loads(run([cli, *command, '--format', 'json'], work, env))
         if direct != tour_records[filename]:
@@ -188,7 +189,7 @@ def validate_tour(folder):
     manifest = json.loads((folder/'manifest.json').read_text(encoding='utf8'))
     topics = {'gd-baseline', 'nesterov-1983', 'polyak-1964', 'hestenes-stiefel-1952',
               'jaggi-2013', 'rockafellar-1976', 'beck-teboulle-2009', 'ista-vs-fista'}
-    expected = {'index.html', 'atlas.html', 'shewchuk.html', 'simplex.html', 'proximal.html', 'tight-gd.html', 'deblur.html', 'heavy-ball.html'}
+    expected = {'index.html', 'atlas.html', 'shewchuk.html', 'simplex.html', 'proximal.html', 'tight-gd.html', 'deblur.html', 'heavy-ball.html', 'landscape.html'}
     expected.update('stress-'+topic+'.html' for topic in topics)
     if (manifest.get('kind') != 'chainbench.offline-tour' or manifest.get('start') != 'index.html'
             or len(manifest['artifacts']) != len(expected)
@@ -239,6 +240,7 @@ def validate_tour(folder):
             if target not in parsed or (url.fragment and url.fragment not in parsed[target].ids):
                 raise RuntimeError('tour local link has no target')
     validate_reproduction(records['shewchuk.html'])
+    validate_landscape(records['landscape.html'])
     validate_simplex_geometry(records['simplex.html'])
     validate_proximal_geometry(records['proximal.html'])
     validate_tight_geometry(records['tight-gd.html'])
@@ -569,3 +571,103 @@ def validate_metric_geometry(result):
                 den2, dena = math.hypot(*u)*math.hypot(*v), math.hypot(*tu)*math.hypot(*tv)
                 close(pair['cos_euclidean'], dot2/den2 if den2 else None)
                 close(pair['cos_a'], dota/dena if dena else None)
+
+
+def validate_landscape(result):
+    """Independent scalar fixture, metrics, parameters and all five recurrences."""
+    def require(condition):
+        if not condition:
+            raise RuntimeError('landscape evidence differs from actual inputs or recurrence')
+    def close(a, b):
+        require(math.isfinite(a) and math.isclose(a, b, rel_tol=2e-9, abs_tol=2e-11))
+    p = result['problem']
+    q, b, star = p['Q'], p['b'], p['x_star']
+    require(result['kind'] == 'chainbench.landscape' and p['dimension'] == 2
+            and star == [1., -.8] and p['start'] == [-1.55, 1.45]
+            and p['c'] == 0 and p['seed'] is None and p['lambda'] is None)
+    theta = math.radians(p['angle_degrees'])
+    co, si, mu = math.cos(theta), math.sin(theta), 1/p['condition_number']
+    expected = [[co*co*mu+si*si, co*si*(mu-1)], [co*si*(mu-1), si*si*mu+co*co]]
+    for row, ref in zip(q, expected, strict=True):
+        for a, v in zip(row, ref, strict=True):
+            close(a, v)
+    def product(x):
+        return [sum(a*v for a, v in zip(row, x)) for row in q]
+    def gradient(x):
+        return [a-v for a, v in zip(product(x), b)]
+    def dot(x, y):
+        return sum(a*v for a, v in zip(x, y))
+    for actual, expected in zip(b, product(star), strict=True):
+        close(actual, expected)
+    close(p['L'], 1.)
+    close(p['mu'], mu)
+    close(p['actual_condition_number'], p['L']/p['mu'])
+    close(p['f_star'], -.5*dot(star, b))
+    inputs = {'Q': q, 'b': b, 'x_star': star, 'x0': p['start']}
+    digest = hashlib.sha256()
+    for name in sorted(inputs):
+        value = inputs[name]
+        shape = [2, 2] if name == 'Q' else [2]
+        flat = [v for row in value for v in row] if name == 'Q' else value
+        digest.update(name.encode()+b'\0'+json.dumps(shape, separators=(',', ':')).encode()+b'\0')
+        digest.update(struct.pack('<'+str(len(flat))+'d', *flat))
+    require(digest.hexdigest() == result['input_sha256'])
+    for method in result['methods']:
+        xs, gaps, run = result['traces'][method], result['gaps'][method], result['runs'][method]
+        settings = result['method_parameters'][method]
+        require(xs[0] == p['start'] and run['updates'] == len(xs)-1
+                and len(xs) == len(gaps) == len(run['residual_norms']))
+        if method in ('gd', 'smooth-fista'):
+            close(settings['step'], 1/p['L'])
+        if method == 'smooth-fista':
+            require(settings['t0'] == 1 and settings['y0'] == xs[0])
+        if method == 'heavy-ball':
+            close(settings['alpha'], 4/(math.sqrt(p['L'])+math.sqrt(p['mu']))**2)
+            close(settings['beta'], ((math.sqrt(p['L'])-math.sqrt(p['mu']))/(math.sqrt(p['L'])+math.sqrt(p['mu'])))**2)
+            require(settings['x_minus_1'] == xs[0])
+        if method == 'proximal-point':
+            require(settings['proximal_parameter'] == 1.)
+        y, t = xs[0], 1.
+        residual = [-v for v in gradient(xs[0])]
+        direction = residual[:]
+        for k, x in enumerate(xs):
+            e = [a-v for a, v in zip(x, star)]
+            require(gaps[k] >= 0)
+            close(gaps[k], dot(e, product(e))/2)
+            close(run['residual_norms'][k], math.hypot(*gradient(x)))
+            if k == len(xs)-1:
+                continue
+            nxt = xs[k+1]
+            if method == 'gd':
+                expected = [a-g/p['L'] for a, g in zip(x, gradient(x))]
+            elif method == 'smooth-fista':
+                expected = [a-g/p['L'] for a, g in zip(y, gradient(y))]
+                tn = (1+math.sqrt(1+4*t*t))/2
+                y = [a+(t-1)/tn*(a-v) for a, v in zip(nxt, x)]
+                t = tn
+            elif method == 'heavy-ball':
+                old = xs[max(k-1, 0)]
+                expected = [a-settings['alpha']*g+settings['beta']*(a-v)
+                            for a, g, v in zip(x, gradient(x), old)]
+            elif method == 'proximal-point':
+                # Check the implicit equation without using a matrix solver.
+                expected = [a+v-w for a, v, w in zip(x, b, product(nxt))]
+            elif method == 'cg':
+                rr = dot(residual, residual)
+                step = rr/dot(direction, product(direction))
+                expected = [a+step*d for a, d in zip(x, direction)]
+                new = [r-step*v for r, v in zip(residual, product(direction))]
+                beta = dot(new, new)/rr
+                direction = [r+beta*d for r, d in zip(new, direction)]
+                residual = new
+            else:
+                raise RuntimeError('unsupported landscape method')
+            for a, v in zip(nxt, expected, strict=True):
+                close(a, v)
+        if method == 'cg':
+            require(settings['rtol'] == 1e-12 and settings['atol'] == 0.)
+            converged = run['residual_norms'][-1] <= 1e-12*run['residual_norms'][0]
+            require(run['termination'] == ('converged' if converged else 'max_steps'))
+            require(converged or run['updates'] == result['steps'])
+        else:
+            require(run['termination'] == 'fixed_budget' and run['updates'] == result['steps'])

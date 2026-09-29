@@ -72,6 +72,9 @@ document.querySelectorAll('[data-trajectory-player]').forEach(player => {
  const label = player.querySelector('[data-trajectory-label]');
  const play = player.querySelector('[data-trajectory-play]');
  if(!slider || !label || !play) return;
+ document.documentElement.classList.add('trajectory-enabled');
+ const readouts=Array.from(document.querySelectorAll('[data-landscape-readout]'));
+ const record=readouts.length ? JSON.parse(document.getElementById('chainbench-evidence').textContent) : null;
  const lines = Array.from(document.querySelectorAll('[data-trajectory-line]'));
  const markers = Array.from(document.querySelectorAll('[data-trajectory-marker]'));
  const parse = el => el.dataset.trajectoryPoints.split('|').map(pair => pair.split(',').map(Number));
@@ -89,19 +92,26 @@ document.querySelectorAll('[data-trajectory-player]').forEach(player => {
    const index = Math.min(step, points.length - 1);
    el.setAttribute('cx', points[index][0]); el.setAttribute('cy', points[index][1]);
   });
+  readouts.forEach(el=>{
+   const method=el.dataset.landscapeReadout,run=record.runs[method],k=Math.min(step,run.updates);
+   const held=step>run.updates?' (last computed / 마지막 계산점)':'';
+   el.textContent=method+' · k='+k+held+' · x=('+record.traces[method][k].map(v=>v.toPrecision(6)).join(', ')+')'
+    +' · f−f*='+record.gaps[method][k].toExponential(5)+' · ||r||₂='+run.residual_norms[k].toExponential(5);
+  });
  };
- const stop = () => { if(timer) clearInterval(timer); timer = null; play.textContent = '▶'; };
+ const stop = () => { if(timer) clearInterval(timer); timer = null; play.textContent = '▶'; play.setAttribute('aria-pressed','false'); };
  slider.addEventListener('input', () => { stop(); update(); });
  play.addEventListener('click', () => {
   if(timer){ stop(); return; }
   if(Number(slider.value) >= Number(slider.max)) slider.value = '0';
-  play.textContent = '❚❚'; update();
+  play.textContent = '❚❚'; play.setAttribute('aria-pressed','true'); update();
   timer = setInterval(() => {
    const next = Number(slider.value) + 1;
    if(next > Number(slider.max)){ stop(); return; }
    slider.value = String(next); update();
   }, 520);
  });
+ document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();});
  update();
 });
 """

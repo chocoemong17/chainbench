@@ -20,6 +20,7 @@ from .deblur_views import deblur_html
 from .deblurring import run_deblurring
 from .heavy_ball_cycle import run_heavy_ball_cycle
 from .heavy_ball_views import heavy_ball_cycle_html
+from .landscape import landscape_html, run_landscape
 from .learning import LESSONS, learning_html
 from .mechanisms import CSS as MECHANISM_CSS
 from .mechanisms import flow_html
@@ -62,6 +63,11 @@ def _reports(lang):
         'layer': 'controlled geometric illustrations',
         'command': ['geometry', 'ista-fista', '--steps', '18', '--lang', lang],
         'source': result['source'], 'cases': len(result['cases'])}
+    result = run_landscape()
+    yield 'landscape.html', landscape_html(result, lang), {
+        'layer': 'one controlled quadratic illustration; unequal work per iteration',
+        'command': ['landscape', '--condition-number', '20', '--angle', '32', '--steps', '18', '--lang', lang],
+        'sources': result['sources'], 'methods': result['methods'], 'input_sha256': result['input_sha256']}
     for topic in CHECKS:
         result = run_stress(topic, trials=STRESS_TRIALS, seed=0)
         yield f'stress-{topic}.html', stress_html(result, lang), {
@@ -85,6 +91,7 @@ def _with_navigation(html, filename=None):
         'atlas.html': ('deblur.html', 'FISTA의 공개 영상 실험 열기', 'Open the published FISTA image experiment'),
         'heavy-ball.html': ('atlas.html#polyak-1964', '이차함수에서의 heavy-ball 가정과 비교', 'Compare the heavy-ball assumptions for quadratics'),
         'stress-polyak-1964.html': ('heavy-ball.html', '이차함수 밖의 공개 반례 보기', 'Inspect a published counterexample beyond quadratics'),
+        'landscape.html': ('heavy-ball.html', '이차함수의 가정이 빠지면? 공개 반례 보기', 'Without the quadratic assumption: inspect a published counterexample'),
     }
     if filename in related:
         target,ko,en = related[filename]
@@ -155,7 +162,15 @@ def _index(artifacts, previews, lang):
     body += card('proximal.html', ('외삽하고, 이동하고, 수축하기', 'Extrapolate, step, then shrink'),
         ('ISTA/FISTA의 중간점과 soft threshold를 9개 조합에서 확인합니다. λ에 따라 좌표가 0이 되는 이유를 읽어보세요.',
          'Inspect ISTA/FISTA stages and soft thresholding over all nine combinations. Follow why changing lambda can make a coordinate zero.'), 'CONTROLLED GEOMETRY')
-    body += '</div></section><section id="breadth"><h2>'+bi('한 경로에서 끝내지 않기', 'Look beyond one path')+'</h2><p>'+bi(
+    body += '</div></section><section id="quadratic"><h2>'+bi('같은 문제여도, 한 걸음의 비용은 다릅니다', 'Same problem; different work per step')+'</h2><div class="tour-grid">'
+    body += card('landscape.html', ('다섯 방법을 같은 이차함수에서 보기', 'Five methods on the same quadratic'),
+        ('κ=20, 회전 32°, 최대 18회 갱신. 방법별 색상·실제 계산점·종료 표시를 공간과 오차 곡선에서 연결합니다.',
+         'Condition number 20, rotation 32°, at most 18 updates. Match method colors, actual iterates and termination across geometry and gap curves.'), 'ONE CONTROLLED ILLUSTRATION')
+    body += '<div><p class="callout">'+bi('읽을 질문: CG가 두 걸음에 끝나면, 언제나 가장 빠른 알고리즘일까요?',
+        'Reading question: if CG finishes in two updates, is it always the fastest algorithm?')+'</p><p>'+bi(
+        '여기는 2차원 SPD 이차함수입니다. PPA는 한 걸음에 선형계를 풀고, CG는 행렬–벡터 곱과 실제 잔차를 검사합니다. 같은 반복 수를 같은 비용으로 해석하지 마세요. 종료된 점은 새 반복으로 늘리지 않습니다.',
+        'This is one 2D SPD quadratic. PPA solves a linear system each step; CG uses matrix-vector products and true-residual checks. Equal iteration counts do not mean equal cost, and stopped paths receive no invented iterates.')+'</p></div></div></section>'
+    body += '<section id="breadth"><h2>'+bi('한 경로에서 끝내지 않기', 'Look beyond one path')+'</h2><p>'+bi(
         '8개 주제 모두 seed 0–31을 빠짐없이 계산했습니다. 계산 가능한 비율과 unresolved 사례를 구분해 남깁니다. 합성 표본은 대표적인 실제 데이터나 최악 사례 인증이 아닙니다.',
         'Every topic includes every seed 0–31. Resolved ratios and unresolved cases are retained separately. Synthetic sampling is neither representative real data nor a worst-case certificate.')+'</p><div class="scroll"><table class="tour-table"><thead><tr>'
     for ko,en in [('주제', 'Topic'), ('표본', 'Cases'), ('측정 가능', 'Resolved'), ('판정 불가', 'Unresolved')]:
@@ -198,7 +213,7 @@ def build_tour(output: Path, lang: str = 'en') -> dict:
     with tempfile.TemporaryDirectory(prefix='.chainbench-tour-', dir=destination.parent) as temporary:
         stage = Path(temporary)
         for filename, html, metadata in _reports(lang):
-            if filename in ('shewchuk.html', 'simplex.html', 'proximal.html', 'tight-gd.html', 'heavy-ball.html'):
+            if filename in ('shewchuk.html', 'simplex.html', 'proximal.html', 'tight-gd.html', 'heavy-ball.html', 'landscape.html'):
                 previews[filename] = _thumbnail(html, 1 if filename == 'proximal.html' else 0)
             if filename == 'shewchuk.html':
                 previews['shewchuk-surface'] = _thumbnail(html, 1)

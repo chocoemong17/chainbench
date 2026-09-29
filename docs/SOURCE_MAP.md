@@ -1,5 +1,9 @@
 # Source-to-experiment map
 
+The separate five-method `landscape` illustration uses the existing quadratic
+specializations below. Its source links identify each recurrence; the constructed
+rotated 2D inputs are not source-paper data. [Exact settings and projections](LANDSCAPE_CONTEXT.md).
+
 This document separates the historical source of a method, the particular recurrence implemented, and the finite numerical condition checked. Fixed-suite fixtures are constructed by ChainBench; separate published-example workflows identify their exact inputs and differences. None purports to reproduce an original paper's full dataset or experimental section.
 
 Write R = ||x0-x*||_2 and k for the number of completed updates. Quadratics use f(x)=0.5*x^T Q x-b^T x, with Q symmetric positive semidefinite, and b=Q*x*. For strongly convex checks, mu and L are the smallest and largest eigenvalues of Q.

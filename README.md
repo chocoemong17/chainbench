@@ -47,8 +47,8 @@ python -m chainbench tour --lang ko --output tour
 ```
 
 For a fresh checkout, follow the [pinned installation steps](docs/REVIEW_GUIDE.md#run-the-tested-development-snapshot).
-Open `tour/index.html`. It connects **16 offline HTML pages**: the reading guide,
-eight-topic atlas, three published-example workflows, two geometry views, eight
+Open `tour/index.html`. It connects **17 offline HTML pages**: the reading guide,
+eight-topic atlas, three published-example workflows, three geometry views, eight
 stress reports and one public tight case. Each report keeps its numerical evidence
 and links back to the guide. The recipient needs no server, account or Python.
 
@@ -60,6 +60,7 @@ copy the folder to preserve its links. [Contents, settings and hashes](docs/OFFL
 | Question | Open in the tour | What the evidence supports |
 | --- | --- | --- |
 | Why do SD and CG use different notions of a right angle? | `shewchuk.html` | Exact published setup; the same steps in x and A-metric coordinates; nine labelled added starts |
+| Does one iteration mean the same work for every method? | `landscape.html` | Five methods on one stated quadratic; actual settings, equal contour scales and labelled early stopping |
 | Does fitting blurred data recover the clean image? | `deblur.html` | One declared image protocol; all 10,001 objective/RMSE observations per method |
 | Can quadratic tuning fail on a smooth strongly convex function? | `heavy-ball.html` | Lessard–Recht–Packard's published counterexample; eight separately labelled added starts |
 | How does an oracle respect a constraint? | `simplex.html` | Twelve controlled Frank–Wolfe target/start cases |
