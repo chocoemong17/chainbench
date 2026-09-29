@@ -73,7 +73,14 @@ def verified_files(version: str, sha: str) -> list[Path]:
                     or experiment.get("saved_config_rerun") != "matched"
                     or not re.fullmatch(r"[0-9a-f]{64}", str(experiment.get("config_sha256", "")))):
                 raise RuntimeError("Invalid installed experiment evidence")
-        summary = (slugs, statuses, experiments)
+        controls = record.get("instance_controls")
+        if (
+            not isinstance(controls, dict)
+            or controls.get("direct_override") != "passed"
+            or not re.fullmatch(r"[0-9a-f]{64}", str(controls.get("seeded_config_sha256", "")))
+        ):
+            raise RuntimeError("Missing installed instance-control evidence")
+        summary = (slugs, statuses, experiments, controls)
         if baseline is not None and summary != baseline:
             raise RuntimeError("Wheel and sdist results disagree")
         baseline = summary
