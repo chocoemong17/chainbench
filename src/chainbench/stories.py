@@ -32,7 +32,7 @@ STORIES = {
         evidence=(
             "The plot overlays the accelerated trajectory with the 2*L*R^2/(k+1)^2 envelope."
         ),
-        takeaway="The important visual is the faster curved decay and its O(1/k^2) envelope.",
+        takeaway="The curve is a finite observation; the O(1/k^2) statement concerns its upper bound, not a fitted slope.",
         caveat=(
             "The historical CLI slug is retained, but the code follows the fixed-L FISTA-style "
             "recurrence documented in Beck--Teboulle (2009), not a literal 1983 transcription."
@@ -42,7 +42,7 @@ STORIES = {
         source="Polyak heavy-ball on a strongly convex quadratic",
         claim="Classically tuned heavy-ball has a quadratic spectral contraction prediction rho.",
         evidence="ChainBench plots consecutive Euclidean error ratios and the predicted rho line.",
-        takeaway="In the tail, the observed ratios should approach the spectral prediction.",
+        takeaway="Compare the selected tail statistic with rho; individual ratios can oscillate and need not converge to rho.",
         caveat=(
             "The 8% comparison threshold is an explicit empirical regression tolerance, not a "
             "constant from Polyak's theorem."
@@ -63,7 +63,7 @@ STORIES = {
     ),
     "jaggi-2013": CheckStory(
         source="Frank-Wolfe / conditional gradient",
-        claim="With bounded curvature and the standard step schedule, primal gap decays as O(1/k).",
+        claim="Conditional gradient uses a linear oracle instead of projection; this view selects its curvature-based O(1/k) gap bound.",
         evidence=(
             "The simplex experiment overlays the measured primal gap with the curvature-based "
             "2*C_f/(k+2) envelope."
@@ -89,7 +89,7 @@ STORIES = {
     ),
     "beck-teboulle-2009": CheckStory(
         source="Beck--Teboulle FISTA on composite convex optimization",
-        claim="Fixed-L FISTA has an O(1/k^2) composite objective-gap guarantee.",
+        claim="FISTA adds extrapolation to a simple proximal-gradient step, improving the general composite gap bound to O(1/k^2).",
         evidence=(
             "On an exact-solvable diagonal LASSO fixture, the measured composite gap is plotted "
             "against the 2*L*R^2/(k+1)^2 envelope."
@@ -107,7 +107,7 @@ STORIES = {
             "controlled problem."
         ),
         evidence="The plot places ISTA and FISTA objective gaps on the same iteration axis.",
-        takeaway="On this fixture FISTA's gap falls faster, making the acceleration effect easy to see.",
+        takeaway="Compare the two recorded trajectories; a better theoretical bound does not promise pointwise dominance.",
         caveat=(
             "This row is INFO only: the experiment is not a theorem that FISTA beats ISTA at every "
             "iteration, on every problem, or at equal computational cost."

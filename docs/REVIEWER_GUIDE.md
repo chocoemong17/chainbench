@@ -14,7 +14,7 @@ No outside review has been inferred from this invitation or from CI activity.
 
 ## Start with the released package
 
-For a new manual review, prefer the latest v0.2.1 GitHub prerelease. The standalone
+For a new manual review, prefer the latest v0.3.0 GitHub prerelease. The standalone
 `review/` helper is intentionally pinned to v0.2.0 so its historical cross-platform
 baseline does not move underneath existing reports. Install the version you intend
 to review in a new virtual environment, not over an editable source install, then run:

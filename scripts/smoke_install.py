@@ -49,6 +49,68 @@ def validate_rows(rows: list[dict], listing: list[str]) -> None:
         raise RuntimeError("No quantitative evidence in installed suite")
 
 
+def validate_html(text: str, expected, *, experiment: bool = False) -> None:
+    """Read the exported evidence independently; a '<svg' substring is insufficient."""
+    from html.parser import HTMLParser
+
+    class Parser(HTMLParser):
+        def __init__(self):
+            super().__init__(convert_charrefs=True)
+            self.active = None
+            self.record = ''
+            self.figures = []
+            self.svg_count = 0
+        def handle_starttag(self, tag, attrs):
+            if tag == 'script':
+                raise RuntimeError('Unexpected script in offline visual export')
+            if tag == 'svg':
+                self.svg_count += 1
+            if tag == 'metadata':
+                self.active = 'figure'
+                self.figures.append('')
+            if tag == 'pre' and dict(attrs).get('id') == 'chainbench-evidence':
+                self.active = 'record'
+        def handle_endtag(self, tag):
+            if tag in ('metadata', 'pre'):
+                self.active = None
+        def handle_data(self, data):
+            if self.active == 'record':
+                self.record += data
+            elif self.active == 'figure':
+                self.figures[-1] += data
+
+    p = Parser()
+    p.feed(text)
+    try:
+        record = json.loads(p.record)
+        figures = [json.loads(raw) for raw in p.figures]
+    except (ValueError, TypeError) as exc:
+        raise RuntimeError('Missing visual evidence record') from exc
+    if experiment:
+        if record != expected or p.svg_count != 2 or len(figures) != 2:
+            raise RuntimeError('Experiment HTML differs from the actual run')
+        for figure, field in zip(figures, ('gap', 'stationarity')):
+            actual = [(s['label'], s['x'], s['y']) for s in figure['series']]
+            wanted = [(r['method'], [v['iteration'] for v in r['rows']],
+                       [v[field] for v in r['rows']]) for r in expected['runs']]
+            if actual != wanted:
+                raise RuntimeError('Experiment figure lost or changed trajectory samples')
+    else:
+        results = record.get('results', [])
+        normalized = []
+        for result in results:
+            result = dict(result)
+            consistent = result.pop('consistent')
+            result['status'] = ('INFO' if consistent is None else
+                                'CONSISTENT' if consistent else 'NOT CONSISTENT')
+            normalized.append(result)
+        if normalized != expected or p.svg_count != len(expected) or len(figures) != len(expected):
+            raise RuntimeError('Fixed HTML differs from the actual check suite')
+        for result, figure in zip(expected, figures):
+            if figure != record['charts'][result['slug']]:
+                raise RuntimeError('Fixed SVG samples differ from exported evidence')
+
+
 
 PRESET_METHODS = {
     "quadratic": ["gd", "smooth-fista", "heavy-ball", "cg", "proximal-point"],
@@ -142,8 +204,7 @@ def exercise_experiments(cli: str, work: Path, env: dict[str, str], version: str
                             or row["config_sha256"] != result["config_sha256"]):
                         raise RuntimeError("Experiment CSV differs from the actual run")
             elif format_name == "html":
-                if "<svg" not in text or result["fixture"]["kind"] not in text:
-                    raise RuntimeError("Experiment HTML lost its visual result")
+                validate_html(text, result, experiment=True)
             elif result["config_sha256"] not in text or result["fixture"]["input_sha256"] not in text:
                 raise RuntimeError("Experiment Markdown lost its provenance")
         records.append({"preset": name, "config_sha256": result["config_sha256"],
@@ -228,8 +289,8 @@ def main() -> None:
                         raise RuntimeError("CSV registry differs from installed checks")
                     if [r["status"] for r in exported] != [r["status"] for r in rows]:
                         raise RuntimeError("CSV statuses differ from installed checks")
-                elif format_name == "html" and "<svg" not in target.read_text(encoding="utf-8"):
-                    raise RuntimeError("HTML report did not contain visual plots")
+                elif format_name == "html":
+                    validate_html(target.read_text(encoding="utf-8"), rows)
             plot = work / "nesterov.svg"
             run([cli, "plot", "nesterov-1983", "--output", str(plot)], work, env)
             if "<svg" not in plot.read_text(encoding="utf-8"):
@@ -244,7 +305,7 @@ def main() -> None:
                 "statuses": [r["status"] for r in rows],
                 "installed_outside_checkout": True,
                 "pip_check": "passed", "exports": ["html", "markdown", "csv", "json"],
-                "plot_svg": "passed", "experiments": experiments,
+                "plot_svg": "passed", "visual_evidence": "matched", "experiments": experiments,
                 "instance_controls": instance_controls,
             })
             print(f"CLEAN INSTALL PASSED: {artifact.name}", flush=True)

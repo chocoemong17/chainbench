@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.3.0 - 2026-09-29 (experimental alpha)
+
+- Make HTML the default fixed-suite report: overview previews, selected paper messages,
+  observed/reference SVG plots, measured outcomes, limitations and linked public sources.
+- Add standalone `plot <check>` SVG and configurable experiment HTML. Preserve full
+  raw samples, settings and environment in expandable, machine-readable evidence.
+- Add no-argument onboarding and direct preset controls for dimension, methods,
+  budget and supported parameters. `--random-seed` samples supported config knobs;
+  it is neither arbitrary random-data generation nor worst-case certification.
+- Fix clipped five-method legends, long chart headings and valid all-zero plots.
+  Logarithmic zeros are explicit baseline markers, never silently positive epsilon values.
+- Bind fixed-report verdicts to the plotted samples; reject inconsistent/duplicate results.
+  Distinguish finite curve shape, rate guarantees and empirical heavy-ball ratios.
+- Extend clean wheel/sdist installation gates to HTML/SVG, exact visual evidence,
+  direct instance controls and repeatable seeded configuration generation.
+- Retain the frozen v0.2.0 review helper as a historical baseline. Previous releases
+  are not overwritten. No new runtime dependency, private research or paid service.
+
+Migration: use `report --format markdown` for the previous report default. The
+`experiment` command still defaults to JSON. Public Python method APIs are unchanged.
+
 ## 0.2.1 - 2026-09-29 (experimental alpha)
 
 - Add `QuadraticProblem.from_reference(Q, x_star)` for the explicit case where the
