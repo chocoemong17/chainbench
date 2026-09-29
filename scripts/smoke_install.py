@@ -119,7 +119,7 @@ def exercise_experiments(cli: str, work: Path, env: dict[str, str], version: str
         rerun = json.loads(run([cli, "experiment", "--config", str(path)], work, env))
         if rerun != result:
             raise RuntimeError("Saved configuration rerun differs from the preset")
-        for format_name in ("json", "csv", "markdown"):
+        for format_name in ("json", "csv", "markdown", "html"):
             target = work / f"{name}-experiment.{format_name}"
             run([cli, "experiment", "--config", str(path), "--format", format_name,
                  "--output", str(target)], work, env)
@@ -141,11 +141,15 @@ def exercise_experiments(cli: str, work: Path, env: dict[str, str], version: str
                             or json.loads(row["config_json"]) != config
                             or row["config_sha256"] != result["config_sha256"]):
                         raise RuntimeError("Experiment CSV differs from the actual run")
+            elif format_name == "html":
+                if "<svg" not in text or result["fixture"]["kind"] not in text:
+                    raise RuntimeError("Experiment HTML lost its visual result")
             elif result["config_sha256"] not in text or result["fixture"]["input_sha256"] not in text:
                 raise RuntimeError("Experiment Markdown lost its provenance")
         records.append({"preset": name, "config_sha256": result["config_sha256"],
                         "methods": methods, "rows": sum(len(r["rows"]) for r in result["runs"]),
-                        "exports": ["json", "csv", "markdown"], "saved_config_rerun": "matched"})
+                        "exports": ["json", "csv", "markdown", "html"],
+                        "saved_config_rerun": "matched"})
     return records
 
 
@@ -185,7 +189,7 @@ def main() -> None:
             rows = json.loads(run([cli, "check", "all", "--json"], work, env))
             validate_rows(rows, listing)
             run([python, "-I", "-m", "chainbench", "--version"], work, env)
-            for format_name in ("markdown", "json", "csv"):
+            for format_name in ("html", "markdown", "json", "csv"):
                 target = work / f"report.{format_name}"
                 run([cli, "report", "--format", format_name, "--output", str(target)], work, env)
                 if not target.stat().st_size:
@@ -202,6 +206,12 @@ def main() -> None:
                         raise RuntimeError("CSV registry differs from installed checks")
                     if [r["status"] for r in exported] != [r["status"] for r in rows]:
                         raise RuntimeError("CSV statuses differ from installed checks")
+                elif "<svg" not in target.read_text(encoding="utf-8"):
+                    raise RuntimeError("HTML report did not contain visual plots")
+            plot = work / "nesterov.svg"
+            run([cli, "plot", "nesterov-1983", "--output", str(plot)], work, env)
+            if "<svg" not in plot.read_text(encoding="utf-8"):
+                raise RuntimeError("Standalone plot export is not SVG")
             experiments = exercise_experiments(cli, work, env, expected)
             records.append({
                 "artifact": artifact.name,
@@ -210,8 +220,8 @@ def main() -> None:
                 "checks": len(rows), "slugs": listing,
                 "statuses": [r["status"] for r in rows],
                 "installed_outside_checkout": True,
-                "pip_check": "passed", "exports": ["markdown", "csv", "json"],
-                "experiments": experiments,
+                "pip_check": "passed", "exports": ["html", "markdown", "csv", "json"],
+                "plot_svg": "passed", "experiments": experiments,
             })
             print(f"CLEAN INSTALL PASSED: {artifact.name}", flush=True)
     report = {"python": platform.python_version(), "artifacts": records,
