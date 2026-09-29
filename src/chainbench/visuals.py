@@ -191,7 +191,7 @@ def render_line_chart(spec: ChartSpec, width: int = 760, height: int = 400) -> s
         _series(series.label, series.x, series.y, series.role)
         if any(b <= a for a, b in zip(series.x, series.x[1:])):
             raise ValueError("chart x samples must be strictly increasing")
-        if series.role not in ("observed", "bound", "reference"):
+        if series.role not in ("observed", "bound", "reference", "samples"):
             raise ValueError("unknown chart series role")
     all_x = np.asarray([v for s in spec.series for v in s.x], dtype=float)
     all_y = np.asarray([v for s in spec.series for v in s.y], dtype=float)
@@ -273,6 +273,11 @@ def render_line_chart(spec: ChartSpec, width: int = 760, height: int = 400) -> s
                 parts.append(f'<path d="M{px-4:.2f},{py-7:.2f} L{px+4:.2f},{py-7:.2f} '
                              f'L{px:.2f},{py:.2f} Z" fill="{color}"><title>'
                              f'{escape(series.label)}: k={x:g}, value=0</title></path>')
+            elif series.role == "samples":
+                px, py = sx(x), sy(y)
+                parts.append(f'<circle cx="{px:.2f}" cy="{py:.2f}" r="4.1" fill="{color}" '
+                             f'fill-opacity=".83" stroke="white" stroke-width="1.2"><title>'
+                             f'{escape(series.label)}: sample={x:g}, value={y:.8g}</title></circle>')
             else:
                 segment.append((sx(x), sy(y)))
         if segment:
@@ -286,7 +291,10 @@ def render_line_chart(spec: ChartSpec, width: int = 760, height: int = 400) -> s
                 parts.append(f'<circle cx="{x:.2f}" cy="{y:.2f}" r="3" fill="{color}"/>')
         lx = left + (i % columns) * ((width - left - right) / columns)
         ly = 30 * len(title_lines) + 12 + (i // columns) * 24
-        parts.append(f'<path d="M{lx},{ly} h24" stroke="{color}" stroke-width="2.3"{dash}/>')
+        if series.role == "samples":
+            parts.append(f'<circle cx="{lx+10:.2f}" cy="{ly:.2f}" r="4" fill="{color}"/>')
+        else:
+            parts.append(f'<path d="M{lx},{ly} h24" stroke="{color}" stroke-width="2.3"{dash}/>')
         parts.append(text(lx + 30, ly + 4, series.label))
     for i, line in enumerate(textwrap.wrap(note, max(24, (width - 95) // 5))):
         parts.append(text(left, height - 20 + 11 * i, line, 10))
