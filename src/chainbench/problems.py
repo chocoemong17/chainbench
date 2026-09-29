@@ -44,11 +44,29 @@ class QuadraticProblem:
         left = np.divide(product, magnitude, out=np.zeros_like(b), where=magnitude != 0)
         right = np.divide(b, magnitude, out=np.zeros_like(b), where=magnitude != 0)
         if np.any(np.abs(left - right) > 64 * np.finfo(float).eps * q.shape[0]):
-            raise ValueError("x_star must satisfy Q @ x_star = b to relative floating precision")
+            raise ValueError(
+                "x_star must satisfy Q @ x_star = b to relative floating precision; "
+                "if b is derived from x_star, use QuadraticProblem.from_reference(Q, x_star) "
+                "so b is computed after float64 conversion"
+            )
         for name, value in (("Q", q), ("b", b), ("x_star", xs)):
             object.__setattr__(self, name, _freeze(value))
         object.__setattr__(self, "_L", float(eig[-1]))
         object.__setattr__(self, "_mu", float(eig[0]))
+
+    @classmethod
+    def from_reference(cls, Q: np.ndarray, x_star: np.ndarray) -> "QuadraticProblem":
+        """Build a quadratic whose declared reference is stationary after float64 promotion.
+
+        This is the explicit construction path when b is conceptually derived from
+        Q and x_star. It avoids asking a lower-precision matrix-vector product to
+        satisfy the strict three-argument constructor at float64 precision.
+        """
+        q = array(Q, "Q")
+        if q.ndim != 2 or q.shape[0] == 0 or q.shape[0] != q.shape[1]:
+            raise ValueError("Q must be a nonempty square matrix")
+        xs = vector(x_star, q.shape[0], "x_star")
+        return cls(q, q @ xs, xs)
 
     @property
     def dim(self) -> int:

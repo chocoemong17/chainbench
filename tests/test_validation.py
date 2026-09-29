@@ -62,6 +62,26 @@ def test_invalid_regularizer_and_proximal_parameter(value):
         proximal_point(strongly_convex_quadratic(4), 1, value)
 
 
+def test_float32_reference_factory_promotes_before_computing_rhs():
+    q = np.diag(np.geomspace(0.1, 1.0, 12).astype(np.float32))
+    x_star = np.linspace(-1, 1, 12, dtype=np.float32)
+    b_float32 = q @ x_star
+
+    with pytest.raises(ValueError, match="from_reference"):
+        QuadraticProblem(q, b_float32, x_star)
+
+    problem = QuadraticProblem.from_reference(q, x_star)
+    assert problem.Q.dtype == np.float64
+    assert problem.b.dtype == np.float64
+    np.testing.assert_array_equal(problem.b, problem.Q @ problem.x_star)
+    np.testing.assert_array_equal(problem.grad(problem.x_star), np.zeros(problem.dim))
+
+
+def test_reference_factory_does_not_weaken_strict_constructor():
+    with pytest.raises(ValueError, match="from_reference"):
+        QuadraticProblem(np.eye(2), np.array([1.0, 1.001]), np.ones(2))
+
+
 def test_problem_data_are_copied_and_readonly():
     q = np.eye(3)
     p = QuadraticProblem(q, np.ones(3), np.ones(3))
