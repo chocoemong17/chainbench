@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.3.0 - 2026-09-29 (experimental alpha)
+
+- Redesign the primary human-facing report around each paper/check's plain-language
+  claim, measured evidence, embedded SVG plot, takeaway, and explicit limitation.
+- Add a self-contained HTML overview dashboard and standalone `plot <check>` SVG export;
+  keep raw numerical values in an appendix plus existing JSON/CSV/Markdown formats.
+- Add visual HTML output for configurable experiments with objective-gap and named
+  stationarity trajectories, final-observation cards, and expandable provenance.
+- Add friendly no-command onboarding that points first-time users to visual outputs.
+- Add direct CLI controls for supported synthetic instances: dimension, update budget,
+  method subset, quadratic condition number/L/rotation, LASSO lambda, and iterate retention.
+- Add deterministic `--random-seed` sampling of supported preset parameters; the resolved
+  config remains the reproducibility record and sampled instances are not labeled worst case.
+- Document difficult/random instance terminology and the requirements for any future
+  mathematically certified worst-case feature based only on public literature.
+- Extend clean wheel/sdist installation and publication gates so HTML, SVG, direct
+  overrides, and seeded config generation must work before release publication.
+- Respond to relayed feedback from seven outside reproduction attempts, especially the
+  repeated request for graphs; the aggregate feedback is not represented as seven
+  individually auditable reports or endorsements.
+
+
 ## 0.2.1 - 2026-09-29 (experimental alpha)
 
 - Add `QuadraticProblem.from_reference(Q, x_star)` for the explicit case where the
