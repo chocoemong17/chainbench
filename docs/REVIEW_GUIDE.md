@@ -12,17 +12,17 @@ a new checkout and pin the implementation behind the previews:
 ```bash
 git clone https://github.com/chocoemong17/chainbench.git chainbench-review
 cd chainbench-review
-git checkout --detach 9b54b09465388604dbd2bcd5183c60650173489c
+git checkout --detach 031d4e5ab9b6da8dc6a82306234170629f7495d0
 python -m pip install .
 git rev-parse HEAD
 python -m chainbench tour --lang ko --output tour
 ```
 
 Open `tour/index.html`. This immutable computation snapshot includes every command
-on this page, including the heavy-ball counterexample and earlier stacked features.
-The [development issue](https://github.com/chocoemong17/chainbench/issues/67) links
+on this page, including the CG metric view, heavy-ball counterexample and earlier stacked features.
+The [development issue](https://github.com/chocoemong17/chainbench/issues/69) links
 its PR and CI evidence, where the exact tested PR-head commit is recorded. The
-implementation snapshot has 700 tests; documentation-only updates can follow it.
+implementation snapshot has 711 tests; documentation-only updates can follow it.
 Pipeline checks are maintainer validation, not independent review or a guarantee
 over arbitrary inputs.
 
@@ -57,7 +57,11 @@ It does not fit the inputs to the paper's approximate endpoint values.
 Open **Published setup** (`shewchuk.html`) and select the original start (-2,-2).
 SD and CG take the same first exact line-search step. CG reaches (2,-2) on its
 second update to floating-point tolerance; it is not padded with invented later
-iterations. Compare contours, objective heights and energy error, then inspect
+iterations. At k=2, open the metric view: the same steps become paths on circular
+level sets. Compare SD's Euclidean right angle to CG's A-metric right angle using
+their actual normalized directions and inner products. This changes the drawing,
+not the solver. Before two steps there is no pair to compare, including the
+one-update (3,0) case. Compare contours, objective heights and energy error, then inspect
 the nine added starts. They use the same matrix and are labelled separately from
 the original example. [Source and recurrence](SHEWCHUK_REPRODUCTION.md).
 
