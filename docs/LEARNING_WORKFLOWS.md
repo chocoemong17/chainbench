@@ -113,3 +113,8 @@ Development source adds `geometry frank-wolfe` to the Jaggi learning card: inspe
 the linear oracle, next feasible point and computable dual certificate across all
 twelve target/start combinations. The barycenter example also shows that the
 scheduled step need not decrease the objective. See [SIMPLEX_GEOMETRY.md](SIMPLEX_GEOMETRY.md).
+
+`stress` now links every sampled row to its actual curve and retained inputs, plus
+median-ranked/p90-ranked/maximum-observed cards. Recompute any one case with
+`stress-case TOPIC --seed SEED`. Sampler v2 broadens declared strata and preserves
+unresolved ratios; see [the version and metric contract](STRESS_SAMPLING.md).

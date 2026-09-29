@@ -6,8 +6,9 @@
 - Implemented on the development branch: Frank–Wolfe simplex/oracle movement,
   explicitly tied to Jaggi Algorithm 1, with all twelve target/start cases. See the
   [geometry and certificate contract](docs/SIMPLEX_GEOMETRY.md).
-- Next breadth candidate: inspectable individual and quantile cases
-  across the existing seeded stress dimensions and spectra.
+- Implemented on the development branch: inspectable individual and nearest-rank
+  cases, four dimensions, quadratic orientations/starts, actual input arrays, and
+  explicit unresolved ratios. See [sampler v2](docs/STRESS_SAMPLING.md).
 - FISTA image deblurring remains a candidate requiring an audit of the exact source
   image's reuse terms and boundary/wavelet/noise conventions. A substitute image must
   not be called the original paper's reproduced figure.

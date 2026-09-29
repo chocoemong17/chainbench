@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Expand stress to a versioned dimension/orientation/start design with full input
+  arrays and trajectories; add per-case curves, nearest-rank cards and `stress-case`.
+- Correct undefined ISTA/FISTA ratios previously replaced with zero and zero-radius
+  FISTA trials previously resampled. Retain unresolved rows without success counts.
+- Stress schema/sampler v2 changes the input associated with an old seed; historical
+  releases and ordinary schema-1 experiment/replay data remain unchanged.
+
 - Add `geometry frank-wolfe`: triangle, projected 3D surface, chosen oracle vertex,
   convex-combination update and gap/certificate curves for all 12 declared cases.
   Explain scheduled-step nonmonotonicity and separate objective bounds from dual gaps.

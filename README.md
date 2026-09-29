@@ -74,6 +74,13 @@ Every paper page now labels the evidence level explicitly:
 python -m chainbench stress nesterov-1983 --trials 24 --seed 0 --lang ko --output stress.html
 ```
 
+**Development source after v0.5.0:** stress reports now retain all actual inputs and
+trajectories, vary dimensions and starts, and link ranked/individual samples to their
+curves. `chainbench stress-case nesterov-1983 --seed 10 --output case.html` reruns one
+sample. Undefined ratios remain visible; they are never reported as zero successes.
+This uses sampler/schema **v2**, so old seed numbers alone do not identify the same
+inputs. See [sampling, metrics and migration](docs/STRESS_SAMPLING.md).
+
 For geometric intuition, compare the **same run** as a contour path, a 3D objective surface and a loss curve:
 
 ```bash

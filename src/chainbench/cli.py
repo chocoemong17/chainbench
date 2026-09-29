@@ -25,7 +25,7 @@ from .reproduction_views import reproduction_html
 from .reproductions import run_reproduction
 from .simplex_geometry import run_simplex_geometry, simplex_html
 from .stress import TOPICS as STRESS_TOPICS
-from .stress import run_stress, stress_html
+from .stress import run_stress, run_stress_case, stress_case_html, stress_html
 from .visuals import render_check_svg
 from .workflows import (
     MAX_REPORT_BYTES,
@@ -268,6 +268,14 @@ def main(argv: list[str] | None = None) -> int:
     stress.add_argument("--output", type=Path)
     stress.add_argument("--force", action="store_true")
 
+    stress_case = sub.add_parser("stress-case", help="inspect one versioned seeded stress instance")
+    stress_case.add_argument("topic", choices=STRESS_TOPICS)
+    stress_case.add_argument("--seed", type=int, default=0)
+    stress_case.add_argument("--lang", choices=["en", "ko"], default="en")
+    stress_case.add_argument("--format", choices=["html", "json"], default="html")
+    stress_case.add_argument("--output", type=Path)
+    stress_case.add_argument("--force", action="store_true")
+
     landscape = sub.add_parser(
         "landscape", help="compare quadratic methods on contour and 3D surface views"
     )
@@ -342,6 +350,12 @@ def main(argv: list[str] | None = None) -> int:
             text = replay_html(result, args.lang) if args.format == "html" else json.dumps(result, indent=2, allow_nan=False)
             _write(args.output, text, args.force)
             return 0 if result["status"] == "MATCH" else 1
+        if args.command == "stress-case":
+            result = run_stress_case(args.topic, args.seed)
+            text = (stress_case_html(result, args.lang) if args.format == "html"
+                    else json.dumps(result, indent=2, allow_nan=False))
+            _write(args.output, text, args.force)
+            return 0
         if args.command == "stress":
             result = run_stress(args.topic, args.trials, args.seed)
             text = (

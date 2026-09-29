@@ -16,6 +16,11 @@ A small deterministic problem makes the mechanism visible. These plots are gener
 
 Finite sampling still does not prove the theorem. Heavy-ball's 8% line remains an empirical project regression tolerance. ISTA/FISTA remains descriptive with no universal pass/fail threshold.
 
+Development sampler v2 retains every input and trajectory, exposes individual and
+nearest-rank cases, and varies dimensions and starts under a declared design.
+Unresolved ratios remain visible and are excluded from measured-only quantiles;
+they never count as successes. See [sampling and schema changes](STRESS_SAMPLING.md).
+
 ## 4. Published tight case
 
 Only when public literature supplies both an upper bound and a matching extremal construction can ChainBench label a case as tight. The current explicit example is the Drori--Teboulle constant-step GD construction documented in `GD_TIGHT_CASE.md`.

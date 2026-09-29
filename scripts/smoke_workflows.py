@@ -91,6 +91,18 @@ def exercise_workflows(cli, work, env, version, run):
     if (extract_record(stress_page) != stress or stress['summary'].get('within_threshold') != 3
             or len(stress['rows']) != 3):
         raise RuntimeError('seeded stress evidence differs from computed JSON')
+    if stress.get('schema_version') != 2 or stress.get('sampler') != 'stratified-pcg64-v2':
+        raise RuntimeError('stress sampler version is missing')
+    for row in stress['rows']:
+        validate_stress_sample('nesterov-1983', row)
+    for topic, seed in (('nesterov-1983', 10), ('ista-vs-fista', 24)):
+        args = [cli, 'stress-case', topic, '--seed', str(seed)]
+        sampled = json.loads(run(args+['--format', 'json'], work, env))
+        if extract_record(run(args, work, env)) != sampled:
+            raise RuntimeError('single stress case HTML differs from computed JSON')
+        validate_stress_sample(topic, sampled['case'])
+        if topic == 'nesterov-1983' and sampled['case'] != stress['rows'][1]:
+            raise RuntimeError('single stress rerun differs from the distribution case')
 
     landscape_args = [cli, 'landscape', '--condition-number', '20', '--steps', '6',
                       '--methods', 'gd', 'smooth-fista', 'cg']
@@ -116,7 +128,67 @@ def exercise_workflows(cli, work, env, version, run):
 
     return {'learning':'matched','sweep':'matched','replay':'matched','gd_tight':'matched',
             'stress':'matched','landscape':'matched','shewchuk_reproduction':'matched',
-            'simplex_geometry':'matched'}
+            'simplex_geometry':'matched', 'inspectable_stress':'matched'}
+
+
+def validate_stress_sample(topic, row):
+    """Independent installed checks for smooth-FISTA and paired diagonal LASSO cases."""
+    inputs = row['inputs']
+    digest = hashlib.sha256()
+    for name in sorted(inputs):
+        value = inputs[name]
+        shape = [len(value), len(value[0])] if isinstance(value[0], list) else [len(value)]
+        flat = [x for values in value for x in values] if len(shape) == 2 else value
+        if not all(math.isfinite(v) for v in flat):
+            raise RuntimeError('nonfinite stress input')
+        digest.update(name.encode('ascii')+b'\0')
+        digest.update(json.dumps(shape, separators=(',', ':')).encode('ascii')+b'\0')
+        digest.update(struct.pack('<'+str(len(flat))+'d', *flat))
+    if digest.hexdigest() != row['instance_sha256'] or inputs['update_budget'] != [row['steps']]:
+        raise RuntimeError('stress input fingerprint or budget differs')
+    if topic == 'nesterov-1983':
+        q, sol = inputs['Q'], inputs['x_star']
+        def gap(x):
+            e = [a-b for a, b in zip(x, sol)]
+            return sum(e[i]*sum(v*y for v, y in zip(q[i], e)) for i in range(len(e)))/2
+    elif topic == 'ista-vs-fista':
+        a, b, lam = inputs['a'], inputs['b'], inputs['lam'][0]
+        sol = [math.copysign(max(abs(v*w)-lam, 0), v*w)/(v*v) for v, w in zip(a, b)]
+        def gap(x):
+            return sum(.5*(v*(xi-si))**2 + lam*(abs(xi)-abs(si))
+                       + v*(v*si-w)*(xi-si) for v, w, xi, si in zip(a, b, x, sol))
+    else:
+        raise RuntimeError('unsupported independent installed stress validator')
+    for run in row['runs'].values():
+        if (run['iterates'][0] != inputs['x0'] or len(run['iterates']) != len(run['gaps'])
+                or run['updates'] != len(run['iterates'])-1):
+            raise RuntimeError('invalid stress trajectory')
+        for x, actual in zip(run['iterates'], run['gaps']):
+            if (len(x) != row['dim'] or not all(math.isfinite(v) for v in x)
+                    or not math.isfinite(actual) or actual < 0
+                    or not math.isclose(actual, gap(x), rel_tol=1e-9, abs_tol=1e-12)):
+                raise RuntimeError('stress gap differs from the actual inputs and iterates')
+    if topic == 'nesterov-1983':
+        radius2 = sum((x-y)**2 for x, y in zip(inputs['x0'], sol))
+        expected = [2*row['parameters']['L']*radius2/(k+1)**2 for k in range(1, row['steps']+1)]
+        series = row['curve']['series']
+        if series[0]['values'] != row['runs']['smooth-fista']['gaps']:
+            raise RuntimeError('stress curve differs from its run')
+        if any(not math.isclose(a, b, rel_tol=1e-12, abs_tol=1e-14)
+               for a, b in zip(expected, series[1]['values'])):
+            raise RuntimeError('stress bound uses the wrong initial radius')
+        metric = max(g/b for g, b in zip(series[0]['values'][1:], expected)) if radius2 else None
+    else:
+        gi, gf = row['runs']['ista']['gaps'][-1], row['runs']['fista']['gaps'][-1]
+        if row['threshold'] is not None:
+            raise RuntimeError('informational stress must not have a threshold')
+        metric = gf/gi if gi > 1e-28 else None
+    if metric is None:
+        if row['metric'] is not None or row['status'] != 'unresolved' or not row['reason']:
+            raise RuntimeError('undefined stress ratio was reported as measured')
+    elif (row['status'] != 'measured' or row['metric'] is None
+          or not math.isclose(metric, row['metric'], rel_tol=1e-12, abs_tol=1e-14)):
+        raise RuntimeError('stress metric differs from the recorded trajectory')
 
 
 def validate_simplex_geometry(result):

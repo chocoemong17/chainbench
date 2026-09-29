@@ -73,7 +73,7 @@ jobs:
           retention-days: 3
 
   reproduction-browser:
-    name: offline reproduction and simplex browser
+    name: offline interactive reports browser
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -90,6 +90,8 @@ jobs:
       - run: python scripts/check_reproduction_browser.py --html paper.html --output browser-check
       - run: python -m chainbench geometry frank-wolfe --lang ko --output simplex.html
       - run: python scripts/check_simplex_browser.py --html simplex.html --output browser-check/simplex
+      - run: python -m chainbench stress ista-vs-fista --trials 16 --seed 16 --lang ko --output stress.html
+      - run: python scripts/check_stress_browser.py --html stress.html --output browser-check/stress
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: always()
         with:

@@ -80,6 +80,14 @@ target/start fixtures are controlled illustrations, not original-paper figures.
 See [the exact recurrence, curvature, projection and scope](SIMPLEX_GEOMETRY.md).
 The `4/(k+2)` curve bounds objective gap for k>=1, not pointwise dual gap.
 
+## Inspectable stress (development source after v0.5.0)
+
+Sampler v2 reuses the above recurrences and measurements with four dimensions and
+declared initial-point/orientation strata. Radius-dependent bounds use each actual
+`||x0-x*||`, CG normalizes energy error by its actual initial error, and the simplex
+oracle always starts feasible. Missing denominators are recorded as unresolved,
+not zero metrics or replacement seeds. See [exact formulas, floors and migration](STRESS_SAMPLING.md).
+
 ## Post-release validation notes (v0.1.1)
 
 The quadratic constructor requires stationarity to relative floating precision, without an absolute tolerance floor; callers should build `b=Q@x_star` from their supplied symmetric matrix. `gap` is the energy error relative to that reference, and its interpretation as an optimality gap assumes a valid reference solution. This numeric reference check is not symbolic certification.
