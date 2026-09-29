@@ -42,4 +42,4 @@ __all__ = [
     "strongly_convex_quadratic",
 ]
 
-__version__ = "0.2.0"
+__version__ = "0.2.1"

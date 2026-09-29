@@ -1,5 +1,5 @@
 {
-  "version": "0.2.0",
+  "version": "0.2.1",
   "channel": "alpha",
-  "description": "Configurable installed experiments with portable provenance and reviewed release gates"
+  "description": "Float32-safe exact-reference construction guidance and concrete reproducibility workflows"
 }
