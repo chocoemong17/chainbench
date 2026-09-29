@@ -1,5 +1,5 @@
 {
-  "version": "0.4.0",
+  "version": "0.5.0",
   "channel": "alpha",
-  "description": "Visual paper-focused reports with auditable plots and configurable instances"
+  "description": "Evidence-layered paper explanations with seeded stress sampling and contour/3D trajectory geometry"
 }
