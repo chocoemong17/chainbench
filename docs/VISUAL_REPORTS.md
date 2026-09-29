@@ -81,3 +81,8 @@ The default log view is not an estimate of an asymptotic power-law exponent.
 Installation checks independently parse the actual generated HTML and compare the
 embedded records with CLI JSON results. These are maintainer-controlled validation,
 not independent external use, endorsements or support-program qualification.
+
+
+## v0.5.0: canonical plot, sampled breadth and geometry are separate
+
+The learning/report pages now identify a one-fixture plot as a **canonical illustration**. Use `chainbench stress <topic>` for many seeded instances and `chainbench landscape` for contour/3D path geometry. These outputs answer different questions and should not be substituted for each other. See [EVIDENCE_LAYERS.md](EVIDENCE_LAYERS.md).
