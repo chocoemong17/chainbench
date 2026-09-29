@@ -92,6 +92,8 @@ jobs:
       - run: python scripts/check_simplex_browser.py --html simplex.html --output browser-check/simplex
       - run: python -m chainbench stress ista-vs-fista --trials 16 --seed 16 --lang ko --output stress.html
       - run: python scripts/check_stress_browser.py --html stress.html --output browser-check/stress
+      - run: python -m chainbench geometry ista-fista --lang ko --output proximal.html
+      - run: python scripts/check_proximal_browser.py --html proximal.html --output browser-check/proximal
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: always()
         with:

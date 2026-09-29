@@ -80,6 +80,14 @@ target/start fixtures are controlled illustrations, not original-paper figures.
 See [the exact recurrence, curvature, projection and scope](SIMPLEX_GEOMETRY.md).
 The `4/(k+2)` curve bounds objective gap for k>=1, not pointwise dual gap.
 
+## Proximal geometry (development source after v0.5.0)
+
+`geometry ista-fista` adds nine controlled diagonal-LASSO illustrations using
+Beck–Teboulle Eqs. (1.5), (2.5)–(2.6), (3.1), (4.1)–(4.3) and Theorems 3.1/4.4.
+The exact source locations, half-squared-loss scaling, stage indexing, bisection
+contours and validation are documented in [PROXIMAL_GEOMETRY.md](PROXIMAL_GEOMETRY.md).
+These do not reproduce the paper's original image-deblurring experiment.
+
 ## Inspectable stress (development source after v0.5.0)
 
 Sampler v2 reuses the above recurrences and measurements with four dimensions and

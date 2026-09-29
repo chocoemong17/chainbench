@@ -9,6 +9,9 @@
 - Implemented on the development branch: inspectable individual and nearest-rank
   cases, four dimensions, quadratic orientations/starts, actual input arrays, and
   explicit unresolved ratios. See [sampler v2](docs/STRESS_SAMPLING.md).
+- Implemented on the development branch: ISTA/FISTA composite contours and 3D
+  heights, extrapolation/gradient/shrinkage inspection, and all nine lambda/start
+  cases. See [proximal geometry](docs/PROXIMAL_GEOMETRY.md).
 - FISTA image deblurring remains a candidate requiring an audit of the exact source
   image's reuse terms and boundary/wavelet/noise conventions. A substitute image must
   not be called the original paper's reproduced figure.

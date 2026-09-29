@@ -20,6 +20,8 @@ from .experiments import (
 from .landscape import METHODS as LANDSCAPE_METHODS
 from .landscape import landscape_html, run_landscape
 from .learning import learning_html
+from .proximal_geometry import run_proximal_geometry
+from .proximal_views import proximal_html
 from .reporting import render_json, render_report, result_status
 from .reproduction_views import reproduction_html
 from .reproductions import run_reproduction
@@ -298,8 +300,8 @@ def main(argv: list[str] | None = None) -> int:
     reproduce.add_argument("--output", type=Path)
     reproduce.add_argument("--force", action="store_true")
 
-    geometry = sub.add_parser("geometry", help="inspect constrained oracle choices and updates")
-    geometry.add_argument("name", choices=["frank-wolfe"])
+    geometry = sub.add_parser("geometry", help="inspect recorded oracle and proximal updates")
+    geometry.add_argument("name", choices=["frank-wolfe", "ista-fista"])
     geometry.add_argument("--steps", type=int, default=18)
     geometry.add_argument("--lang", choices=["en", "ko"], default="en")
     geometry.add_argument("--format", choices=["html", "json"], default="html")
@@ -377,8 +379,10 @@ def main(argv: list[str] | None = None) -> int:
             _write(args.output, text, args.force)
             return 0
         if args.command == "geometry":
-            result = run_simplex_geometry(args.steps)
-            text = (simplex_html(result, args.lang) if args.format == "html"
+            result = (run_simplex_geometry(args.steps) if args.name == "frank-wolfe"
+                      else run_proximal_geometry(args.steps))
+            renderer = simplex_html if args.name == "frank-wolfe" else proximal_html
+            text = (renderer(result, args.lang) if args.format == "html"
                     else json.dumps(result, indent=2, allow_nan=False))
             _write(args.output, text, args.force)
             return 0

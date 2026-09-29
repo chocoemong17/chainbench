@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Add `geometry ista-fista`: linked composite contours, 3D heights and actual
+  extrapolation/gradient/soft-threshold stages over nine lambda/start combinations.
+  Explain zero coordinates, the half-squared-loss convention and nonmonotone FISTA.
+- Independently verify proximal stages and geometry; require installed-distribution
+  evidence and exercise every case/method in offline browser CI.
+
 - Expand stress to a versioned dimension/orientation/start design with full input
   arrays and trajectories; add per-case curves, nearest-rank cards and `stress-case`.
 - Correct undefined ISTA/FISTA ratios previously replaced with zero and zero-radius

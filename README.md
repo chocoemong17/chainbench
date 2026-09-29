@@ -37,6 +37,17 @@ certificate and theorem curve have distinct meanings, and one example explains w
 a scheduled step can increase the objective. See the [source and geometry contract](docs/SIMPLEX_GEOMETRY.md).
 This command also requires the development source after v0.5.0.
 
+For the nonsmooth step in ISTA/FISTA, follow the actual extrapolated point, gradient
+step and soft-thresholded iterate across nine regularization/start combinations:
+
+```bash
+python -m chainbench geometry ista-fista --lang ko --output proximal.html
+```
+
+The [proximal geometry guide](docs/PROXIMAL_GEOMETRY.md) explains exact zero
+coordinates, composite contours/3D heights, theorem bounds and scaling conventions.
+This is also a development-source feature, labelled as controlled illustrations.
+
 For the full eight-topic learning atlas:
 
 ```bash

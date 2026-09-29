@@ -88,6 +88,7 @@ def verified_files(version: str, sha: str) -> list[Path]:
             "shewchuk_reproduction": "matched",
             "simplex_geometry": "matched",
             "inspectable_stress": "matched",
+            "proximal_geometry": "matched",
         }:
             raise RuntimeError("Missing installed learning-workflow evidence")
         summary = (slugs, statuses, experiments, controls, advanced)

@@ -126,9 +126,77 @@ def exercise_workflows(cli, work, env, version, run):
     if extract_record(html) != geometry or html.count('data-fw-case=') != 12:
         raise RuntimeError('simplex geometry HTML differs from installed calculations')
 
+    proximal_args = [cli, 'geometry', 'ista-fista', '--steps', '6']
+    proximal = json.loads(run(proximal_args + ['--format', 'json'], work, env))
+    html = run(proximal_args + ['--lang', 'ko'], work, env)
+    validate_proximal_geometry(proximal)
+    if extract_record(html) != proximal or html.count('data-prox-case=') != 9:
+        raise RuntimeError('proximal geometry HTML differs from installed calculations')
+
     return {'learning':'matched','sweep':'matched','replay':'matched','gd_tight':'matched',
             'stress':'matched','landscape':'matched','shewchuk_reproduction':'matched',
-            'simplex_geometry':'matched', 'inspectable_stress':'matched'}
+            'simplex_geometry':'matched', 'inspectable_stress':'matched', 'proximal_geometry':'matched'}
+
+
+def validate_proximal_geometry(result):
+    """Scalar reconstruction of complete proximal stages, gaps and envelopes."""
+    if (result['kind'] != 'chainbench.proximal-geometry'
+            or result['problem']['a'] != [1., 3.] or result['problem']['b'] != [1.4, -2.4]
+            or result['problem']['L'] != 9):
+        raise RuntimeError('proximal problem setup differs')
+    cases, steps = result['cases'], result['parameters']['steps']
+    expected = {(lam, start) for lam in (.1, .8, 1.8)
+                for start in ((-1.8, 1.2), (0., 0.), (2., -1.4))}
+    if len(cases) != 9 or {(c['lambda'], tuple(c['start'])) for c in cases} != expected:
+        raise RuntimeError('proximal case design differs')
+    def close(a, b):
+        return math.isclose(a, b, rel_tol=1e-12, abs_tol=1e-13)
+    for c in cases:
+        lam = c['lambda']
+        star = [max(1.4-lam, 0), -max(7.2-lam, 0)/9]
+        def objective(point):
+            x, y = point
+            return ((x-1.4)**2+(3*y+2.4)**2)/2+lam*(abs(x)+abs(y))
+        radius2 = sum((x-y)**2 for x, y in zip(c['start'], star))
+        digest = hashlib.sha256(struct.pack('<7d', 1, 3, 1.4, -2.4, lam, *c['start'])).hexdigest()
+        if (c['input_sha256'] != digest or not all(close(a, b) for a, b in zip(c['x_star'], star))
+                or not close(c['f_star'], objective(star)) or not close(c['radius_squared'], radius2)):
+            raise RuntimeError('proximal reference or fingerprint differs')
+        for method in ('ista', 'fista'):
+            run = c['runs'][method]
+            if (len(run['rows']) != steps+1 or len(run['stages']) != steps
+                    or run['rows'][0]['x'] != c['start'] or run['updates'] != steps):
+                raise RuntimeError('proximal trajectory budget differs')
+            t, beta, y = 1., 0., c['start'][:]
+            for k, row in enumerate(run['rows']):
+                if (row['iteration'] != k or not close(row['objective'], objective(row['x']))
+                        or not close(row['gap'], objective(row['x'])-objective(star))):
+                    raise RuntimeError('proximal objective is not tied to its iterate')
+                if k:
+                    bound = 9*radius2/(2*k) if method == 'ista' else 18*radius2/(k+1)**2
+                    if not close(c['bounds'][method][k-1], bound):
+                        raise RuntimeError('proximal envelope differs')
+                if k == steps:
+                    continue
+                stage, x = run['stages'][k], row['x']
+                if method == 'ista':
+                    y = x[:]
+                gradient = [y[0]-1.4, 9*y[1]+7.2]
+                z = [v-g/9 for v, g in zip(y, gradient)]
+                xn = [v-lam/9 if v > lam/9 else v+lam/9 if v < -lam/9 else 0. for v in z]
+                for field, values in (('x', x), ('y', y), ('gradient', gradient), ('z', z), ('next_x', xn)):
+                    if not all(close(a, b) for a, b in zip(stage[field], values)):
+                        raise RuntimeError('proximal stage differs from independent calculation')
+                if (not all(close(a, b) for a, b in zip(xn, run['rows'][k+1]['x']))
+                        or not close(stage['momentum'], beta) or not close(stage['t'], t)
+                        or not close(stage['threshold'], lam/9)
+                        or stage['zeroed'] != [abs(v) <= lam/9 for v in z]):
+                    raise RuntimeError('proximal update or threshold differs')
+                if method == 'fista':
+                    tn = (1+math.sqrt(1+4*t*t))/2
+                    beta = (t-1)/tn
+                    y = [a+beta*(a-b) for a, b in zip(run['rows'][k+1]['x'], x)]
+                    t = tn
 
 
 def validate_stress_sample(topic, row):

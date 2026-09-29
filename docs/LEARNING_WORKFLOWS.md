@@ -118,3 +118,7 @@ scheduled step need not decrease the objective. See [SIMPLEX_GEOMETRY.md](SIMPLE
 median-ranked/p90-ranked/maximum-observed cards. Recompute any one case with
 `stress-case TOPIC --seed SEED`. Sampler v2 broadens declared strata and preserves
 unresolved ratios; see [the version and metric contract](STRESS_SAMPLING.md).
+
+The FISTA and ISTA/FISTA comparison cards link to `geometry ista-fista`: inspect
+the extrapolated point, gradient step and exact shrinkage in nine declared cases.
+See [PROXIMAL_GEOMETRY.md](PROXIMAL_GEOMETRY.md) for the source, scaling and limitations.
