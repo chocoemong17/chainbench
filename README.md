@@ -67,8 +67,11 @@ updates ran, not convergence; CG separately reports `converged` or `max_steps`.
 Equal iteration budgets are **not** equal computational work.
 
 See [configurable experiments](docs/EXPERIMENTS.md) for valid fields, resource limits,
-output schemas and reproducibility caveats. Experiments are observations; the
-separate fixed suite below checks specific published inequalities.
+output schemas and reproducibility caveats. [Concrete use cases](docs/USE_CASES.md)
+show how to use the same small fixtures for regression checks, conditioning
+experiments, trajectory inspection and cross-machine reproduction. These are
+workflows, not claims of existing external adoption. Experiments are observations;
+the separate fixed suite below checks specific published inequalities.
 
 ## Bundled consistency checks
 
@@ -109,7 +112,7 @@ trace = gradient_descent(problem, steps=30)
 print(problem.gap(trace.iterates[-1]))
 ```
 
-`problem.gap` evaluates the gap directly to avoid subtracting nearly equal objective values. Inputs must be finite real arrays of the documented dimension. Problem data are copied and made read-only. Methods preserve the caller's starting array. CG additionally reports `trace.termination` and `trace.residual_norm`; exhaustion of the iteration budget is not reported as convergence. Method iteration budgets may be zero; quantitative check budgets must be positive.
+`problem.gap` evaluates the gap directly to avoid subtracting nearly equal objective values. Inputs must be finite real arrays of the documented dimension. Problem data are copied and made read-only. The strict `QuadraticProblem(Q, b, x_star)` constructor requires the declared reference to be stationary at float64-relative precision. If `b` is conceptually derived from `Q` and `x_star` (especially when the originals are float32), use `QuadraticProblem.from_reference(Q, x_star)`; it promotes first and computes a consistent stored `b` without weakening the strict constructor. Methods preserve the caller's starting array. CG additionally reports `trace.termination` and `trace.residual_norm`; exhaustion of the iteration budget is not reported as convergence. Method iteration budgets may be zero; quantitative check budgets must be positive.
 
 ## Development and validation
 

@@ -43,6 +43,28 @@ A returned `Trace` alone is not a promise that the requested tolerance was reach
 
 CG uses `max(atol, rtol * ||b-Q*x0||)` as its stopping tolerance. The relative reference is the **initial residual**, not necessarily `||b||` for a nonzero initial guess. A small residual is not by itself a small forward error on an ill-conditioned problem. See [SOURCE_MAP.md](SOURCE_MAP.md) for the bound and numerical assumptions.
 
+### Constructing a quadratic from a lower-precision reference
+
+The three-argument `QuadraticProblem(Q, b, x_star)` treats `x_star` as an exact
+reference for the stored float64 problem. It therefore checks `Q @ x_star == b`
+at strict float64-relative precision. If `b` was first computed in float32,
+rounding in that earlier matrix-vector product can make an otherwise sensible
+input fail this exact-reference contract after promotion.
+
+When `b` is *defined* by a reference point, use the explicit factory instead:
+
+```python
+Q32 = np.diag(np.geomspace(0.1, 1.0, 12).astype(np.float32))
+x32 = np.linspace(-1, 1, 12, dtype=np.float32)
+problem = QuadraticProblem.from_reference(Q32, x32)
+```
+
+The factory promotes `Q` and `x_star` to float64 first and then computes `b`,
+so the stored reference remains stationary for the stored problem. It does not
+silently relax the constructor's check. If an independently supplied `b` is part
+of the data you intend to preserve, keep using the three-argument constructor and
+treat a mismatch as input inconsistency rather than auto-correcting it.
+
 ## Inspect trajectories without cloning source
 
 The installed wheel now includes the configurable experiment commands:
