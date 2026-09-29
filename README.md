@@ -1,122 +1,94 @@
 # ChainBench
 
 [![tests](https://github.com/chocoemong17/chainbench/actions/workflows/tests.yml/badge.svg)](https://github.com/chocoemong17/chainbench/actions/workflows/tests.yml)
-[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
+![status](https://img.shields.io/badge/status-alpha-informational.svg)
 
-**ChainBench** is a small, transparent reproducibility project for classic results in optimization and iterative numerical methods.
+**Small, auditable numerical experiments for published optimization and iterative-method results.**
 
-Instead of introducing new theory, it implements well-known algorithms from the literature and runs deterministic numerical **consistency checks** on problems with exact solutions. The goal is to make it easy to answer questions such as:
+ChainBench implements established methods on deterministic problems with exact reference solutions. It is useful for learning, checking an implementation, and spotting numerical regressions without a solver framework. NumPy is the only runtime dependency. All computation is local: no API key, telemetry, or paid service is required.
 
-- Does a standard accelerated-gradient implementation respect the familiar `O(1/k^2)` bound on a concrete smooth convex problem?
-- Does Polyak's heavy-ball method exhibit the contraction predicted by its quadratic spectral analysis?
-- Does conjugate gradient respect its classical condition-number convergence envelope?
-- Does Frank-Wolfe exhibit its curvature-based `O(1/k)` behavior on a simplex problem?
-- Does the proximal point method exhibit the contraction predicted by strong convexity?
-- Does FISTA satisfy its standard objective-gap bound on a LASSO instance whose exact optimum is known?
+A numerical experiment can be **consistent with** a published result; it does not prove the theorem or reproduce every experiment in the original paper. This is an experimental alpha package, not a production solver or a worst-case certification tool.
 
-ChainBench deliberately uses the word **check**, not *proof*. A finite numerical experiment can catch implementation mistakes and reproduce a published phenomenon, but it cannot establish a theorem.
+## Install and run
 
-## Bundled literature checks
-
-| Command | Literature result | What is checked |
-|---|---|---|
-| `nesterov-1983` | Nesterov acceleration | Standard `O(1/k^2)` smooth-convex gap bound on a deterministic quadratic |
-| `polyak-1964` | Polyak heavy-ball | Tail contraction versus the quadratic spectral-radius prediction |
-| `hestenes-stiefel-1952` | Conjugate gradient | Classical A-norm error envelope on a deterministic SPD quadratic |
-| `jaggi-2013` | Frank-Wolfe | Curvature-based `O(1/k)` gap envelope on an exact-solvable simplex quadratic |
-| `rockafellar-1976` | Proximal point | Strongly-convex resolvent contraction on an exact-solvable quadratic |
-| `beck-teboulle-2009` | FISTA | Standard `O(1/k^2)` composite-objective gap bound on diagonal LASSO |
-| `ista-vs-fista` | ISTA/FISTA | Same-budget empirical comparison on the bundled LASSO instance |
-| `gd-baseline` | Gradient descent | Standard `O(1/k)` smooth-convex gap bound |
-
-See [REFERENCES.md](REFERENCES.md) for bibliographic details and links to the original sources.
-
-## Install
+Python 3.10 or newer is required. From a terminal with Git:
 
 ```bash
-python -m pip install -e .
+git clone https://github.com/chocoemong17/chainbench.git
+cd chainbench
+python -m venv .venv
 ```
 
-For development:
+Activate with `source .venv/bin/activate` on Linux/macOS, or `.venv\Scripts\Activate.ps1` in Windows PowerShell. Then:
 
 ```bash
-python -m pip install -e '.[dev]'
-pytest
-```
-
-## Quick start
-
-List the available checks:
-
-```bash
+python -m pip install .
+chainbench --version
 chainbench list
-```
-
-Run one literature check:
-
-```bash
-chainbench check nesterov-1983
-```
-
-Run everything:
-
-```bash
 chainbench check all
 ```
 
-Machine-readable output:
+A console-script-independent alternative is `python -m chainbench check all`.
+
+Release distributions, when published, are under [GitHub Releases](https://github.com/chocoemong17/chainbench/releases). Install the downloaded wheel with `python -m pip install ./chainbench-0.1.0-py3-none-any.whl`. Do not assume a package named `chainbench` on an unrelated registry is this project; no PyPI publication is configured.
+
+## Bundled experiments
+
+| CLI name | Algorithm / source | Interpretation |
+|---|---|---|
+| `gd-baseline` | Gradient descent, step 1/L | Smooth-convex objective-gap bound |
+| `nesterov-1983` | Nesterov-style acceleration, implemented as smooth fixed-L FISTA | Historical slug; **not** a literal 1983 algorithm reproduction |
+| `polyak-1964` | Polyak heavy-ball on an SPD quadratic | Empirical tail estimate; the 8% tolerance is not a theorem constant |
+| `hestenes-stiefel-1952` | Conjugate gradient; standard bound in Shewchuk (1994), eq. (52) | Positive-iteration A-norm error envelope |
+| `jaggi-2013` | Frank-Wolfe, Jaggi Algorithm 1 / Theorem 1 | Curvature-based bound for k >= 1 |
+| `rockafellar-1976` | Exact proximal point on a quadratic | Direct strongly-convex resolvent specialization |
+| `beck-teboulle-2009` | Fixed-L FISTA on diagonal LASSO | Composite objective-gap bound, exact soft-threshold optimum |
+| `ista-vs-fista` | Same-budget comparison on one LASSO fixture | **INFO**, not a universal algorithm ranking |
+
+The default suite contains **seven quantitative consistency conditions and one informational comparison**. Their assumptions, formulas, indexing, public sources, and numerical limitations are documented in [docs/SOURCE_MAP.md](docs/SOURCE_MAP.md) and [REFERENCES.md](REFERENCES.md).
+
+## Reports
 
 ```bash
+chainbench check beck-teboulle-2009
 chainbench check all --json
-```
-
-Export the complete suite as a reproducible report:
-
-```bash
 chainbench report --format markdown --output report.md
 chainbench report --format csv --output report.csv
+chainbench report --format json --output report.json
 ```
 
-See [benchmarks/latest.md](benchmarks/latest.md) for the checked-in deterministic snapshot and [docs/REPORTS.md](docs/REPORTS.md) for report formats.
+An existing output file is protected by default; add `--force` to replace it. Exit codes are `0` for satisfied conditions (INFO is allowed), `1` for an inconsistent quantitative condition, and `2` for invalid input or an output error.
 
-The command exits with a non-zero status if a bundled quantitative consistency condition fails, so it can also be used in CI.
+The [benchmark snapshot](benchmarks/latest.md) is generated from the package, not entered as external validation. Its numeric regression test has explicit floating-point tolerances rather than brittle byte-for-byte numeric equality.
 
-## Why exact-solvable instances?
+## Python API
 
-A numerical reproduction is much easier to interpret if the reference optimum is not itself estimated numerically. ChainBench therefore starts with:
+```python
+from chainbench import gradient_descent, strongly_convex_quadratic
 
-- diagonal smooth convex quadratics with a known optimizer, and
-- diagonal-design LASSO problems whose minimizer is available coordinatewise by soft thresholding, and
-- a simplex quadratic whose exact optimizer and curvature upper bound are known analytically.
-
-This keeps the checks deterministic, dependency-light, and auditable.
-
-## Example output
-
-```text
-[CONSISTENT] FISTA
-Reference : A. Beck and M. Teboulle (2009), A Fast Iterative Shrinkage-Thresholding Algorithm for Linear Inverse Problems
-Check     : On a diagonal LASSO instance with an exact optimizer, FISTA stays below the standard O(1/k^2) objective-gap bound.
-Metric    : max_k gap_k / bound_k
-Observed  : ...
-Threshold : 1
+problem = strongly_convex_quadratic(dim=20, mu=0.1, L=1.0)
+trace = gradient_descent(problem, steps=30)
+print(problem.gap(trace.iterates[-1]))
 ```
 
-## Scope
+`problem.gap` evaluates the gap directly to avoid subtracting nearly equal objective values. Inputs must be finite real arrays of the documented dimension. Problem data are copied and made read-only. Methods preserve the caller's starting array. Method iteration budgets may be zero; quantitative check budgets must be positive.
 
-ChainBench contains **implementations and reproducibility experiments for published methods only**. It does not contain unpublished optimization results, private derivations, or claims of new optimality/uniqueness results.
+## Development and validation
 
-Future contributions can add another paper when the check is:
+```bash
+python -m pip install -e '.[dev]'
+ruff check .
+python -m pytest
+python -m build
+python scripts/smoke_install.py
+```
 
-1. tied to a clear public reference,
-2. reproducible from a deterministic instance,
-3. tested against a concrete published formula or qualitative prediction, and
-4. careful not to turn a finite experiment into a theorem claim.
+CI covers Python 3.10-3.12 on Ubuntu, Python 3.12 on Windows/macOS, and a Python 3.10 environment with NumPy 1.24.0, pytest 8.0.0 and Ruff 0.6.0. Tests include invalid inputs, deterministic rotated SPD problems, several condition numbers and regularization parameters, near-optimal gaps, CLI errors and report formats. The package job installs **both wheel and sdist in separate clean virtual environments outside the checkout** before running their CLIs.
 
-## Contributing
+See [CONTRIBUTING.md](CONTRIBUTING.md), [methodology](docs/METHODOLOGY.md), [adding a check](docs/ADDING_A_CHECK.md) and [release procedure](RELEASING.md). Contributions should improve reproducibility, clarity, or correctness; adding more algorithms is not itself a quality measure.
 
-Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md), [docs/METHODOLOGY.md](docs/METHODOLOGY.md), and [docs/ADDING_A_CHECK.md](docs/ADDING_A_CHECK.md). A good contribution adds one public reference, one small implementation or experiment, and tests that make the reproduction auditable.
+## Scope and license
 
-## License
+Only public, published methods and independent implementation code belong here. No private research notes, unpublished derivations, personal identities or private datasets are needed for this project. References credit the original authors; paper PDFs and third-party code are not redistributed as part of this package.
 
-MIT. See [LICENSE](LICENSE).
+MIT; see [LICENSE](LICENSE). Maintained under the public handle **chocoemong17**.

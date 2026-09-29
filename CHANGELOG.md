@@ -1,19 +1,14 @@
 # Changelog
 
-## Unreleased
+## 0.1.0 - initial alpha
 
-- Add a Rockafellar proximal-point implementation and strongly-convex contraction check.
-
-- Add deterministic Markdown, CSV, and JSON report export with a checked-in benchmark snapshot.
-- Add a Frank-Wolfe implementation and deterministic curvature-based `O(1/k)` simplex check.
-- Add a conjugate-gradient implementation and deterministic check of its classical SPD A-norm convergence envelope.
-- Add public-maintenance metadata, issue/PR templates, Dependabot configuration, and release guidance.
-
-## 0.1.0
-
-- Initial public release.
-- Deterministic exact-solvable benchmark problems.
-- Gradient descent and Nesterov acceleration checks.
-- Polyak heavy-ball quadratic contraction check.
-- ISTA/FISTA and a Beck--Teboulle FISTA bound check.
-- CLI, tests, references, and CI.
+- Independent implementations of gradient descent, smooth FISTA/Nesterov-style acceleration, Polyak heavy-ball, conjugate gradient, Frank-Wolfe, exact quadratic proximal point, ISTA and FISTA.
+- Seven quantitative consistency conditions and one informational same-budget comparison on exact-solvable deterministic fixtures.
+- Correct source-to-recurrence mapping, including the historical Nesterov CLI name, Shewchuk's explicit CG bound, and the scope of quadratic PPA and empirical heavy-ball checks.
+- Finite-input, dimension, iteration-budget and parameter validation; read-only copied problem data; cached quadratic spectrum; scale-aware CG stopping.
+- Stable objective-gap formulas and explicit rejection of non-finite check results.
+- Markdown, CSV and strict JSON export, module execution, version output, protected output files and clean error exit codes.
+- Regression tests for invalid inputs, rotated SPD matrices, condition numbers, regularizers, proximal optimality equations and near-optimal gaps.
+- Ubuntu Python 3.10-3.12, Windows/macOS Python 3.12 and minimum NumPy/pytest/Ruff validation; separate clean wheel and sdist installation.
+- Main-only gated GitHub prerelease workflow with verified distribution uploads and SHA256SUMS. No external registry publication or paid API usage.
+- Public contribution, methodology, source mapping, issue/PR, security and release documentation; complete MIT license.

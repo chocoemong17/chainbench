@@ -4,6 +4,7 @@ from dataclasses import dataclass
 
 import numpy as np
 
+from ._validation import count, initial, scalar
 from .problems import DiagonalLassoProblem, QuadraticProblem, SimplexQuadraticProblem
 
 
@@ -13,167 +14,143 @@ class Trace:
     values: np.ndarray
 
 
-def _values(problem, xs: list[np.ndarray]) -> np.ndarray:
-    return np.asarray([problem.value(x) for x in xs], dtype=float)
+def _trace(problem, xs: list[np.ndarray]) -> Trace:
+    values = np.asarray([problem.value(x) for x in xs], dtype=float)
+    if not np.all(np.isfinite(values)):
+        raise FloatingPointError("non-finite objective; reduce problem scale")
+    return Trace(xs, values)
 
 
 def gradient_descent(problem: QuadraticProblem, steps: int, x0: np.ndarray | None = None) -> Trace:
-    if steps < 0:
-        raise ValueError("steps must be nonnegative")
-    x = np.zeros(problem.dim) if x0 is None else np.asarray(x0, dtype=float).copy()
+    steps = count(steps)
+    x = initial(problem.dim, x0)
+    L = scalar(problem.L, "L", positive=True)
     xs = [x.copy()]
-    alpha = 1.0 / problem.L
     for _ in range(steps):
-        x = x - alpha * problem.grad(x)
+        x = x - problem.grad(x) / L
         xs.append(x.copy())
-    return Trace(xs, _values(problem, xs))
+    return _trace(problem, xs)
 
 
 def accelerated_gradient(problem: QuadraticProblem, steps: int, x0: np.ndarray | None = None) -> Trace:
-    if steps < 0:
-        raise ValueError("steps must be nonnegative")
-    x = np.zeros(problem.dim) if x0 is None else np.asarray(x0, dtype=float).copy()
-    y = x.copy()
-    t = 1.0
-    xs = [x.copy()]
+    """Smooth specialization of Beck--Teboulle's fixed-L FISTA recurrence.
+
+    Nesterov-style acceleration; not a line-by-line implementation of the 1983 paper.
+    """
+    steps = count(steps)
+    x = initial(problem.dim, x0)
+    L = scalar(problem.L, "L", positive=True)
+    y, t, xs = x.copy(), 1.0, [x.copy()]
     for _ in range(steps):
-        x_next = y - problem.grad(y) / problem.L
-        t_next = 0.5 * (1.0 + np.sqrt(1.0 + 4.0 * t * t))
-        y = x_next + ((t - 1.0) / t_next) * (x_next - x)
-        x = x_next
-        t = t_next
+        xn = y - problem.grad(y) / L
+        tn = 0.5 * (1 + np.sqrt(1 + 4 * t * t))
+        y = xn + ((t - 1) / tn) * (xn - x)
+        x, t = xn, tn
         xs.append(x.copy())
-    return Trace(xs, _values(problem, xs))
+    return _trace(problem, xs)
 
 
 def heavy_ball(
     problem: QuadraticProblem, steps: int, x0: np.ndarray | None = None
 ) -> tuple[Trace, float, float]:
+    steps = count(steps)
     if problem.mu <= 0:
         raise ValueError("heavy-ball classical tuning requires mu > 0")
-    x = np.zeros(problem.dim) if x0 is None else np.asarray(x0, dtype=float).copy()
-    x_prev = x.copy()
-    sqrt_L = np.sqrt(problem.L)
-    sqrt_mu = np.sqrt(problem.mu)
-    alpha = 4.0 / (sqrt_L + sqrt_mu) ** 2
-    beta = ((sqrt_L - sqrt_mu) / (sqrt_L + sqrt_mu)) ** 2
-    xs = [x.copy()]
+    x = initial(problem.dim, x0)
+    previous, xs = x.copy(), [x.copy()]
+    root_L, root_mu = np.sqrt(problem.L), np.sqrt(problem.mu)
+    alpha = 4.0 / (root_L + root_mu) ** 2
+    beta = ((root_L - root_mu) / (root_L + root_mu)) ** 2
     for _ in range(steps):
-        x_next = x - alpha * problem.grad(x) + beta * (x - x_prev)
-        x_prev, x = x, x_next
+        xn = x - alpha * problem.grad(x) + beta * (x - previous)
+        previous, x = x, xn
         xs.append(x.copy())
-    return Trace(xs, _values(problem, xs)), alpha, beta
+    return _trace(problem, xs), float(alpha), float(beta)
 
 
 def conjugate_gradient(
-    problem: QuadraticProblem, steps: int | None = None, x0: np.ndarray | None = None
+    problem: QuadraticProblem, steps: int | None = None, x0: np.ndarray | None = None,
+    *, rtol: float = 1e-12, atol: float = 0.0,
 ) -> Trace:
-    """Run linear conjugate gradient on an SPD quadratic.
-
-    The quadratic stationarity equation is Q x = b. This implementation is
-    intentionally small and dependency-free so the literature check is easy to audit.
-    """
+    """Linear CG, with a scale-aware residual stopping rule."""
+    steps = count(problem.dim if steps is None else steps)
+    rtol, atol = scalar(rtol, "rtol"), scalar(atol, "atol")
     if problem.mu <= 0:
         raise ValueError("conjugate gradient requires a positive-definite quadratic")
-    max_steps = problem.dim if steps is None else steps
-    if max_steps < 0:
-        raise ValueError("steps must be nonnegative")
-
-    x = np.zeros(problem.dim) if x0 is None else np.asarray(x0, dtype=float).copy()
+    x = initial(problem.dim, x0)
     r = problem.b - problem.Q @ x
-    direction = r.copy()
-    residual_sq = float(r @ r)
-    xs = [x.copy()]
-
-    for _ in range(max_steps):
-        if residual_sq <= np.finfo(float).eps**2:
+    direction, rr, xs = r.copy(), float(r @ r), [x.copy()]
+    tolerance = max(atol, rtol * float(np.linalg.norm(r)))
+    for _ in range(steps):
+        if np.linalg.norm(r) <= tolerance:
             break
-        q_direction = problem.Q @ direction
-        denom = float(direction @ q_direction)
-        if denom <= 0.0:
-            raise ValueError("conjugate gradient encountered a non-positive curvature direction")
-        alpha = residual_sq / denom
-        x = x + alpha * direction
-        r = r - alpha * q_direction
-        next_residual_sq = float(r @ r)
+        qd = problem.Q @ direction
+        denominator = float(direction @ qd)
+        if not np.isfinite(denominator) or denominator <= 0:
+            raise FloatingPointError("CG encountered nonpositive or non-finite curvature")
+        alpha = rr / denominator
+        x, r = x + alpha * direction, r - alpha * qd
+        rr_next = float(r @ r)
         xs.append(x.copy())
-        if next_residual_sq <= np.finfo(float).eps**2:
+        if np.linalg.norm(r) <= tolerance:
             break
-        beta = next_residual_sq / residual_sq
-        direction = r + beta * direction
-        residual_sq = next_residual_sq
-
-    return Trace(xs, _values(problem, xs))
+        direction = r + (rr_next / rr) * direction
+        rr = rr_next
+    return _trace(problem, xs)
 
 
 def frank_wolfe(
     problem: SimplexQuadraticProblem, steps: int, x0: np.ndarray | None = None
 ) -> Trace:
-    """Run the classical Frank-Wolfe update on a simplex quadratic."""
-    if steps < 0:
-        raise ValueError("steps must be nonnegative")
+    steps = count(steps)
+    x = initial(problem.dim, x0)
     if x0 is None:
-        x = np.zeros(problem.dim)
-        x[0] = 1.0
-    else:
-        x = np.asarray(x0, dtype=float).copy()
-    if x.shape != (problem.dim,):
-        raise ValueError("x0 shape must match the simplex dimension")
-    if np.any(x < -1e-12) or not np.isclose(np.sum(x), 1.0, atol=1e-12):
+        x[0] = 1
+    if np.any(x < 0) or not np.isclose(x.sum(), 1, rtol=0, atol=1e-12):
         raise ValueError("x0 must lie on the probability simplex")
-
     xs = [x.copy()]
     for k in range(steps):
         vertex = problem.linear_minimizer(problem.grad(x))
         gamma = 2.0 / (k + 2.0)
-        x = (1.0 - gamma) * x + gamma * vertex
+        x = (1 - gamma) * x + gamma * vertex
         xs.append(x.copy())
-    return Trace(xs, _values(problem, xs))
+    return _trace(problem, xs)
 
 
 def proximal_point(
-    problem: QuadraticProblem,
-    steps: int,
-    proximal_parameter: float = 1.0,
+    problem: QuadraticProblem, steps: int, proximal_parameter: float = 1.0,
     x0: np.ndarray | None = None,
 ) -> Trace:
-    """Run exact proximal-point iterations on a convex quadratic."""
-    if steps < 0:
-        raise ValueError("steps must be nonnegative")
-    if proximal_parameter <= 0.0:
-        raise ValueError("proximal_parameter must be positive")
-
-    x = np.zeros(problem.dim) if x0 is None else np.asarray(x0, dtype=float).copy()
-    system = np.eye(problem.dim) + proximal_parameter * problem.Q
-    xs = [x.copy()]
+    steps = count(steps)
+    c = scalar(proximal_parameter, "proximal_parameter", positive=True)
+    x = initial(problem.dim, x0)
+    system, xs = np.eye(problem.dim) + c * problem.Q, [x.copy()]
     for _ in range(steps):
-        rhs = x + proximal_parameter * problem.b
-        x = np.linalg.solve(system, rhs)
+        x = np.linalg.solve(system, x + c * problem.b)
         xs.append(x.copy())
-    return Trace(xs, _values(problem, xs))
+    return _trace(problem, xs)
 
 
 def ista(problem: DiagonalLassoProblem, steps: int, x0: np.ndarray | None = None) -> Trace:
-    x = np.zeros(problem.dim) if x0 is None else np.asarray(x0, dtype=float).copy()
-    step = 1.0 / problem.L
+    steps = count(steps)
+    x = initial(problem.dim, x0)
+    step = 1.0 / scalar(problem.L, "L", positive=True)
     xs = [x.copy()]
     for _ in range(steps):
         x = problem.prox_l1(x - step * problem.smooth_grad(x), step)
         xs.append(x.copy())
-    return Trace(xs, _values(problem, xs))
+    return _trace(problem, xs)
 
 
 def fista(problem: DiagonalLassoProblem, steps: int, x0: np.ndarray | None = None) -> Trace:
-    x = np.zeros(problem.dim) if x0 is None else np.asarray(x0, dtype=float).copy()
-    y = x.copy()
-    t = 1.0
-    step = 1.0 / problem.L
-    xs = [x.copy()]
+    steps = count(steps)
+    x = initial(problem.dim, x0)
+    step = 1.0 / scalar(problem.L, "L", positive=True)
+    y, t, xs = x.copy(), 1.0, [x.copy()]
     for _ in range(steps):
-        x_next = problem.prox_l1(y - step * problem.smooth_grad(y), step)
-        t_next = 0.5 * (1.0 + np.sqrt(1.0 + 4.0 * t * t))
-        y = x_next + ((t - 1.0) / t_next) * (x_next - x)
-        x = x_next
-        t = t_next
+        xn = problem.prox_l1(y - step * problem.smooth_grad(y), step)
+        tn = 0.5 * (1 + np.sqrt(1 + 4 * t * t))
+        y = xn + ((t - 1) / tn) * (xn - x)
+        x, t = xn, tn
         xs.append(x.copy())
-    return Trace(xs, _values(problem, xs))
+    return _trace(problem, xs)
