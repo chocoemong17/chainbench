@@ -59,6 +59,11 @@ assumptions → recurrence → guarantee → observed curve → limitation**. Sw
 Korean and English, search a topic, expand bound-ratio plots, and save exact samples.
 The page is self-contained. Browser controls do not run a new optimizer or upload data.
 
+Development source also adds symbolic update flows, a two-method comparison of
+operations and memory, and links between related ideas. These diagrams explain
+the algorithms; the adjoining audited curves supply numerical observations.
+See [the learning guide](docs/LEARNING_WORKFLOWS.md) for focused exports and scope.
+
 Prefer a compact fixed-suite dashboard or one figure?
 
 ```bash

@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Add bilingual symbolic update flows and a two-method operation/state comparison
+  to the learning atlas. Related-method navigation clears filters; focused exports
+  provide runnable commands for omitted topics. Clarify Frank–Wolfe's 1956 origin
+  versus Jaggi's 2013 analysis. Symbolic maps remain separate from numeric evidence.
+- Exercise comparison, keyboard navigation, filtered links, focused pages, JSON,
+  narrow layouts and the no-JavaScript fallback in offline browser CI.
+
 - Add `geometry ista-fista`: linked composite contours, 3D heights and actual
   extrapolation/gradient/soft-threshold stages over nine lambda/start combinations.
   Explain zero coordinates, the half-squared-loss convention and nonmonotone FISTA.

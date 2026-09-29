@@ -30,6 +30,11 @@ where kappa=L/mu and ||e||_Q=sqrt(e^T Q e). Only positive iterations are summari
 
 ## Frank-Wolfe
 
+Frank and Wolfe (1956), *An algorithm for quadratic programming*, is the historical
+method source. The learning timeline distinguishes that origin from the specific
+2013 analysis used here; neither its relationship links nor symbolic process maps
+claim a direct historical derivation. See [REFERENCES.md](../REFERENCES.md).
+
 The implementation follows Jaggi (2013), Algorithm 1 with an exact linear minimization oracle and gamma[k]=2/(k+2). Theorem 1, with approximation parameter delta=0, gives f(x[k])-f* <= 2*C_f/(k+2) for k>=1.
 
 Here f(x)=0.5*||x-target||^2 on the probability simplex. The target is feasible, so x*=target and f*=0. The Hessian is I and the squared Euclidean diameter is 2, giving C_f=2. The oracle chooses a basis vector attaining the minimum gradient coordinate. The theorem is not extrapolated to arbitrary infeasible starts or to k=0.

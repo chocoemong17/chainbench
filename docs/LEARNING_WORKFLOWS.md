@@ -28,6 +28,33 @@ are checked with the same audit as `report`. A JSON export button saves the
 embedded evidence locally. No upload is performed. Without JavaScript the text,
 figures, native details sections and initial chosen language remain usable.
 
+### Development source: follow the computation and compare methods
+
+After v0.5.0, each topic also has a three- or four-stage **symbolic update flow**.
+These are explanatory diagrams, separate from the computed curves and their
+audited samples. Indexing starts at update k=0; accelerated methods start with t=1.
+CG's diagram shows the exact-arithmetic direction structure; its accompanying
+text retains the scaled correction and true-residual stopping used by the code.
+
+Select two methods to compare required information, carried state and operations.
+The cards explain why a PPA linear solve, a CG update with a true-residual check,
+a simplex linear oracle and a proximal-gradient step are different units of work.
+This is a reading aid, not a measured speed or convergence ranking. All eight
+cards remain visible without JavaScript and in print.
+
+Related-method links ask a specific question, such as what changes when g=0 or
+when gradients are evaluated at an extrapolated point. They clear any keyword
+filter before opening the target. A focused export includes commands to generate
+missing topics rather than links to absent sections. These conceptual connections
+do not assert a historical derivation. The timeline separately credits the 1956
+Frank–Wolfe method and Jaggi's 2013 analysis/oracle framework.
+
+The JSON evidence adds `mechanism_maps` with `kind: symbolic-process-maps` and
+the selected topic text. Existing results, plots, normalization and numerical
+audits are preserved. Both installed distribution formats must include the maps.
+The offline browser check covers 1440- and 390-pixel views, pair selection,
+keyboard input, filtered navigation, focused pages, JSON and static fallbacks.
+
 ## 2. Change one field, not everything
 
 ```bash

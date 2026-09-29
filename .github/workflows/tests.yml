@@ -94,6 +94,9 @@ jobs:
       - run: python scripts/check_stress_browser.py --html stress.html --output browser-check/stress
       - run: python -m chainbench geometry ista-fista --lang ko --output proximal.html
       - run: python scripts/check_proximal_browser.py --html proximal.html --output browser-check/proximal
+      - run: python -m chainbench learn --lang ko --output learning.html
+      - run: python -m chainbench learn --focus beck-teboulle-2009 --lang ko --output focused.html
+      - run: python scripts/check_learning_browser.py --html learning.html --focused focused.html --output browser-check/learning
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: always()
         with:

@@ -15,6 +15,9 @@
 - FISTA image deblurring remains a candidate requiring an audit of the exact source
   image's reuse terms and boundary/wavelet/noise conventions. A substitute image must
   not be called the original paper's reproduced figure.
+- Implemented on the development branch: symbolic update flows for all eight
+  topics, an operation/state comparison and linked method relationships. Historical
+  attribution is separated from mathematical specialization and measured evidence.
 - The new commands are not yet a release; previous tags/assets remain unchanged.
 
 ## v0.5.0: evidence breadth and geometry

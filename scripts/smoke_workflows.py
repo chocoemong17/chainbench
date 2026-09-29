@@ -47,6 +47,12 @@ def exercise_workflows(cli, work, env, version, run):
     if (learning['kind'] != 'chainbench.learning' or converted != actual
             or learning['environment']['chainbench'] != version or text.count('data-search=') != 16):
         raise RuntimeError('learning report disagrees with installed checks')
+    maps = learning.get('mechanism_maps', {})
+    if (maps.get('kind') != 'symbolic-process-maps'
+            or set(maps.get('topics', {})) != {r['slug'] for r in actual}
+            or text.count('class="method-flow"') != 8
+            or text.count('data-mechanism=') != 8):
+        raise RuntimeError('learning mechanism maps are missing from the installed report')
     # Selected default-normalized curves independently reproduce bound ratios.
     for slug in ('gd-baseline', 'nesterov-1983', 'beck-teboulle-2009', 'jaggi-2013'):
         figure = learning['charts'][slug]

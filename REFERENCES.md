@@ -25,6 +25,9 @@ https://www.cs.cmu.edu/~quake-papers/painless-conjugate-gradient.pdf
 
 ## Frank-Wolfe
 
+M. Frank and P. Wolfe (1956). An algorithm for quadratic programming. Naval Research Logistics Quarterly, 3(1–2), 95–110. Historical source of the method; the scheduled recurrence and bound implemented here follow Jaggi (2013).
+https://doi.org/10.1002/nav.3800030109
+
 M. Jaggi (2013). Revisiting Frank-Wolfe: Projection-Free Sparse Convex Optimization. Proceedings of ICML, PMLR 28(1), 427-435. Algorithm 1 and Theorem 1 with delta=0 and k>=1.
 https://proceedings.mlr.press/v28/jaggi13.html
 
