@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.1 - 2026-09-29
+
+- Fix false CG stopping at extreme global scales; expose true residual and termination reason.
+- Enforce scale-relative quadratic references and safe symmetrization.
+- Reject missing observations, invalid bound samples and empty evidence suites.
+- Bind published artifacts to their actual install hashes and source commit; guard pre-existing tags and failure responses.
+- Add independent recurrence, negative-path and four targeted mutation checks.
+- Add a tested, configurable trajectory example and end-to-end quickstart.
+
 ## 0.1.0 - initial alpha
 
 - Independent implementations of gradient descent, smooth FISTA/Nesterov-style acceleration, Polyak heavy-ball, conjugate gradient, Frank-Wolfe, exact quadratic proximal point, ISTA and FISTA.

@@ -26,7 +26,7 @@ The historical algorithm source is Hestenes and Stiefel (1952). The exact bound 
 
     ||e[k]||_Q <= 2 * ((sqrt(kappa)-1)/(sqrt(kappa)+1))^k * ||e[0]||_Q
 
-where kappa=L/mu and ||e||_Q=sqrt(e^T Q e). Only positive iterations are summarized: k=0 would always contribute an uninformative ratio of 0.5. The implementation uses a relative residual stopping tolerance, with an optional absolute tolerance. This floating-point test is not a claim of exact finite termination in dimension n.
+where kappa=L/mu and ||e||_Q=sqrt(e^T Q e). Only positive iterations are summarized: k=0 would always contribute an uninformative ratio of 0.5. As of v0.1.1, CG solves a normalized correction equation `(Q/L) z = (b-Q*x0)/(L*s)`, with `s` chosen from the scaled initial residual, and recovers `x=x0+s*z`. This positive scaling does not change the exact-arithmetic iterates. Stopping uses the recomputed true residual `||b-Q*x|| <= max(atol, rtol*||b-Q*x0||)` rather than just the recurrence residual. The returned trace distinguishes convergence from exhausted iteration budgets. This follows the residual-rechecking caution in Shewchuk Section 11.2; it costs an additional matrix-vector product per update. The initial-residual reference differs from libraries that use `||b||` for relative tolerance. This floating-point test is not a claim of exact finite termination in dimension n.
 
 ## Frank-Wolfe
 
@@ -61,3 +61,9 @@ The source code is independently implemented from public algorithms. Default exp
 Quantitative bound checks allow 1e-10 in the normalized ratio. The checked-in report uses seven significant digits, with regression tolerance rtol=1e-6 and atol=1e-12 for numeric cells and exact checks for labels/statuses. NaN and infinity are rejected. Very ill-scaled problems can still overflow or lose accuracy; this package is not an arbitrary-precision solver. Constructors reject matrices with numerically negative eigenvalues rather than silently treating them as positive semidefinite.
 
 Full bibliographic links are in [REFERENCES.md](../REFERENCES.md).
+
+## Post-release validation notes (v0.1.1)
+
+The quadratic constructor requires stationarity to relative floating precision, without an absolute tolerance floor; callers should build `b=Q@x_star` from their supplied symmetric matrix. `gap` is the energy error relative to that reference, and its interpretation as an optimality gap assumes a valid reference solution. This numeric reference check is not symbolic certification.
+
+Every bound sample must be finite and nonnegative before reduction; an empty vector or invalid sample is not discarded. Observations require real finite values, and an empty suite is an error rather than a vacuous pass. Tests include hand-computed recurrences and the explicit v0.1.0 counterexamples. `scripts/check_mutations.py` checks only four named fault injections in temporary copies, not all possible defects.

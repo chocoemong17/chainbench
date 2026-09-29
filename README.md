@@ -30,7 +30,9 @@ chainbench check all
 
 A console-script-independent alternative is `python -m chainbench check all`.
 
-Release distributions, when published, are under [GitHub Releases](https://github.com/chocoemong17/chainbench/releases). Install the downloaded wheel with `python -m pip install ./chainbench-0.1.0-py3-none-any.whl`. Do not assume a package named `chainbench` on an unrelated registry is this project; no PyPI publication is configured.
+Release distributions, when published, are under [GitHub Releases](https://github.com/chocoemong17/chainbench/releases). Install the downloaded wheel with `python -m pip install ./chainbench-0.1.1-py3-none-any.whl`. Do not assume a package named `chainbench` on an unrelated registry is this project; no PyPI publication is configured.
+
+For a complete first run, a hand-checkable CG example and trajectory export, see [the quickstart](docs/QUICKSTART.md).
 
 ## Bundled experiments
 
@@ -71,7 +73,7 @@ trace = gradient_descent(problem, steps=30)
 print(problem.gap(trace.iterates[-1]))
 ```
 
-`problem.gap` evaluates the gap directly to avoid subtracting nearly equal objective values. Inputs must be finite real arrays of the documented dimension. Problem data are copied and made read-only. Methods preserve the caller's starting array. Method iteration budgets may be zero; quantitative check budgets must be positive.
+`problem.gap` evaluates the gap directly to avoid subtracting nearly equal objective values. Inputs must be finite real arrays of the documented dimension. Problem data are copied and made read-only. Methods preserve the caller's starting array. CG additionally reports `trace.termination` and `trace.residual_norm`; exhaustion of the iteration budget is not reported as convergence. Method iteration budgets may be zero; quantitative check budgets must be positive.
 
 ## Development and validation
 
@@ -79,6 +81,7 @@ print(problem.gap(trace.iterates[-1]))
 python -m pip install -e '.[dev]'
 ruff check .
 python -m pytest
+python scripts/check_mutations.py
 python -m build
 python scripts/smoke_install.py
 ```

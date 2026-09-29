@@ -44,6 +44,9 @@ jobs:
       - run: python -m pip check
       - run: ruff check .
       - run: python -m pytest
+      - if: matrix.os == 'ubuntu-latest' && matrix.python == '3.12' && matrix.dependencies == 'current'
+        run: python scripts/check_mutations.py
+      - run: python examples/compare_quadratic.py --dim 6 --steps 8
       - run: chainbench check all --json
       - run: python -m chainbench --version
 

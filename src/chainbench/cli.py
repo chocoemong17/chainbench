@@ -18,6 +18,8 @@ def _render(r: CheckResult) -> str:
 
 
 def _exit_code(results: list[CheckResult]) -> int:
+    if not results:
+        raise ValueError("an empty suite has no evidence of success")
     return 1 if any(r.consistent is False for r in results) else 0
 
 
@@ -40,6 +42,7 @@ def main(argv: list[str] | None = None) -> int:
     try:
         if args.command == "report":
             results = run_all()
+            exit_code = _exit_code(results)
             text = render_report(results, args.format)
             if args.output is None:
                 print(text)
@@ -48,10 +51,11 @@ def main(argv: list[str] | None = None) -> int:
                     f.write(text)
         else:
             results = run_all() if args.name == "all" else [run_check(args.name)]
+            exit_code = _exit_code(results)
             print(render_json(results) if args.json else "\n\n".join(_render(r) for r in results))
     except (OSError, ValueError, FloatingPointError) as exc:
         parser.exit(2, f"chainbench: {exc}\n")
-    return _exit_code(results)
+    return exit_code
 
 
 if __name__ == "__main__":

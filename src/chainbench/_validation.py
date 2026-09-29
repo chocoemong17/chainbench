@@ -27,7 +27,10 @@ def scalar(value: float, name: str, *, positive: bool = False) -> float:
 def array(value: np.ndarray, name: str) -> np.ndarray:
     if np.iscomplexobj(value):
         raise ValueError(f"{name} must be real")
-    out = np.asarray(value, dtype=float)
+    try:
+        out = np.asarray(value, dtype=float)
+    except (TypeError, OverflowError) as exc:
+        raise ValueError(f"{name} cannot be represented as a real array") from exc
     if not np.all(np.isfinite(out)):
         raise ValueError(f"{name} must contain only finite values")
     return out

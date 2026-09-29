@@ -27,14 +27,24 @@ class QuadraticProblem:
             raise ValueError("Q must be a nonempty square matrix")
         b = vector(self.b, q.shape[0], "b")
         xs = vector(self.x_star, q.shape[0], "x_star")
-        if not np.allclose(q, q.T, rtol=0, atol=1e-12):
-            raise ValueError("Q must be symmetric")
-        q = 0.5 * (q + q.T)
-        eig = np.linalg.eigvalsh(q)
-        if eig[0] < 0:
-            raise ValueError("Q must be positive semidefinite")
-        if not np.allclose(q @ xs, b, rtol=1e-10, atol=1e-12):
-            raise ValueError("x_star must satisfy Q @ x_star = b")
+        scale = float(np.max(np.abs(q)))
+        normalized = q / scale if scale else q.copy()
+        if not np.allclose(normalized, normalized.T, rtol=0, atol=1e-12):
+            raise ValueError("Q must be symmetric relative to its scale")
+        # Preserve exactly symmetric/subnormal data; do not overflow Q+Q.T.
+        if not np.array_equal(q, q.T):
+            q = 0.5 * q + 0.5 * q.T
+        with np.errstate(over="raise", invalid="raise"):
+            eig = np.linalg.eigvalsh(q / scale) * scale if scale else np.zeros(q.shape[0])
+            product = q @ xs
+        if not np.all(np.isfinite(eig)) or eig[0] < 0:
+            raise ValueError("Q must have finite nonnegative eigenvalues")
+        # No absolute floor: otherwise tiny, nonstationary references pass as exact.
+        magnitude = np.maximum(np.abs(product), np.abs(b))
+        left = np.divide(product, magnitude, out=np.zeros_like(b), where=magnitude != 0)
+        right = np.divide(b, magnitude, out=np.zeros_like(b), where=magnitude != 0)
+        if np.any(np.abs(left - right) > 64 * np.finfo(float).eps * q.shape[0]):
+            raise ValueError("x_star must satisfy Q @ x_star = b to relative floating precision")
         for name, value in (("Q", q), ("b", b), ("x_star", xs)):
             object.__setattr__(self, name, _freeze(value))
         object.__setattr__(self, "_L", float(eig[-1]))

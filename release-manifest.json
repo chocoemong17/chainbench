@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.1.1",
   "channel": "alpha",
-  "description": "Initial public, published-literature numerical consistency toolkit"
+  "description": "Fix false convergence, missing evidence and artifact/commit binding"
 }
