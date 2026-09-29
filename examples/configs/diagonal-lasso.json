@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "problem": {
+    "kind": "diagonal-lasso",
+    "dimension": 12,
+    "lam": 0.12
+  },
+  "steps": 30,
+  "methods": [
+    "ista",
+    "fista"
+  ],
+  "method_options": {},
+  "include_iterates": false
+}

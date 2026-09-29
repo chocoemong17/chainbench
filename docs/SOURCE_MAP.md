@@ -67,3 +67,16 @@ Full bibliographic links are in [REFERENCES.md](../REFERENCES.md).
 The quadratic constructor requires stationarity to relative floating precision, without an absolute tolerance floor; callers should build `b=Q@x_star` from their supplied symmetric matrix. `gap` is the energy error relative to that reference, and its interpretation as an optimality gap assumes a valid reference solution. This numeric reference check is not symbolic certification.
 
 Every bound sample must be finite and nonnegative before reduction; an empty vector or invalid sample is not discarded. Observations require real finite values, and an empty suite is an error rather than a vacuous pass. Tests include hand-computed recurrences and the explicit v0.1.0 counterexamples. `scripts/check_mutations.py` checks only four named fault injections in temporary copies, not all possible defects.
+
+
+## Configurable observations (v0.2.0)
+
+The `experiment` command reuses the same public-method implementations, but does not
+apply a fixed literature-check threshold to every configuration. It reports objective
+gaps, distance to the fixture reference and one explicitly named stationarity quantity.
+For quadratics it is `||Qx-b||_2`. For diagonal LASSO it is the norm of
+`L * (x - prox_l1(x - smooth_grad(x)/L, 1/L))`. For simplex it is the Frank–Wolfe gap
+`grad(x)^T (x - linear_minimizer(grad(x)))`. The latter two are not smooth gradient
+norms. Fixture formulas and output semantics are specified in [EXPERIMENTS.md](EXPERIMENTS.md).
+No new mathematical theorem, original dataset reproduction or general performance
+ranking is introduced by this interface.

@@ -1,0 +1,36 @@
+name: Reproducibility feedback
+description: Share an actual installation, experiment or interpretation result
+title: "[reproduction] "
+body:
+  - type: markdown
+    attributes:
+      value: "Report only an attempt you actually made. No endorsement is expected. Use public synthetic inputs; remove credentials, private data and personal paths."
+  - type: input
+    id: version
+    attributes:
+      label: ChainBench release or commit
+      description: Include the output of python -m chainbench --version.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment and installation
+      description: OS, Python, NumPy, and whether you installed a wheel, sdist or checkout.
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: Command and public synthetic configuration
+      description: Include enough information to rerun the attempt. Do not include private input files.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: observation
+    attributes:
+      label: Expected and observed behavior
+      description: Successes, errors and unclear explanations are all useful; preserve actual results.
+    validations:
+      required: true

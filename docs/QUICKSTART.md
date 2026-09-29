@@ -4,7 +4,7 @@ ChainBench is a local NumPy tool for small experiments, not a production solver.
 
 ## Install the released version
 
-Download `chainbench-0.1.1-py3-none-any.whl` from the repository's `v0.1.1` GitHub prerelease into your working folder. With Python 3.10 or newer:
+Download `chainbench-0.2.0-py3-none-any.whl` from the repository's `v0.2.0` GitHub prerelease into your working folder. With Python 3.10 or newer:
 
 ```bash
 python -m venv .venv
@@ -13,7 +13,7 @@ python -m venv .venv
 Activate with `source .venv/bin/activate` on Linux/macOS. On Windows PowerShell use `.venv\Scripts\Activate.ps1`. Alternatively, run `.venv\Scripts\python.exe` directly without changing your PowerShell execution policy.
 
 ```bash
-python -m pip install ./chainbench-0.1.1-py3-none-any.whl
+python -m pip install ./chainbench-0.2.0-py3-none-any.whl
 python -m pip check
 python -m chainbench --version
 python -m chainbench check all
@@ -43,20 +43,39 @@ A returned `Trace` alone is not a promise that the requested tolerance was reach
 
 CG uses `max(atol, rtol * ||b-Q*x0||)` as its stopping tolerance. The relative reference is the **initial residual**, not necessarily `||b||` for a nonzero initial guess. A small residual is not by itself a small forward error on an ill-conditioned problem. See [SOURCE_MAP.md](SOURCE_MAP.md) for the bound and numerical assumptions.
 
-## Inspect trajectories, not just pass/fail
+## Inspect trajectories without cloning source
 
-For the example script, obtain a source checkout (examples are included in the sdist but not in the runtime wheel):
+The installed wheel now includes the configurable experiment commands:
 
 ```bash
-git clone --branch v0.1.1 --depth 1 https://github.com/chocoemong17/chainbench.git
-cd chainbench
-python -m pip install .
-python examples/compare_quadratic.py --dim 12 --condition 10 --steps 20
+python -m chainbench preset quadratic --output config.json
+python -m chainbench experiment --config config.json --output experiment.json
+python -m chainbench experiment --config config.json --format markdown --output experiment.md
 ```
 
-The example writes CSV to standard output, with method, iteration, analytical gap, true residual norm and CG termination. The termination label is populated only on the final row of that run; earlier iterates are not labeled as converged. Change `--condition` or `--steps` to inspect a different deterministic experiment. It uses a fixed Householder rotation, so it exercises non-diagonal matrix products without randomness.
+Open `config.json`, change `steps` or `problem.condition_number`, and rerun with a
+new output filename. To try a different objective family:
 
-This is not a timing benchmark or an equal-oracle-cost competition: CG may terminate early and its stopping check uses an additional matrix-vector product. Equal iteration budgets do not imply equal computation costs. Do not interpret one CSV as a universal algorithm ranking.
+```bash
+python -m chainbench experiment --preset diagonal-lasso --format csv --output lasso.csv
+python -m chainbench experiment --preset simplex --format markdown --output simplex.md
+```
+
+The JSON result embeds your resolved settings, Python/NumPy/ChainBench versions,
+configuration/input fingerprints and every iterate's metrics. Coordinate vectors
+can be included with `include_iterates: true` in the config. The CSV retains the
+metadata with every row; termination is recorded only on each method's final row.
+
+For quadratic experiments the stationarity metric is the true gradient norm; for
+LASSO it is the proximal-gradient mapping norm; for simplex it is the Frank–Wolfe
+gap. Do not compare these different quantities as if they were the same norm.
+`budget_complete` is not a convergence certificate. CG may stop early or report
+`max_steps`, both of which are valid observations rather than failures to run.
+
+This is not a timing or equal-oracle-cost benchmark. See [EXPERIMENTS.md](EXPERIMENTS.md)
+for a complete small config, allowed fields, limits and hash interpretation. The
+older `examples/compare_quadratic.py` remains available in the source distribution
+for readers who prefer a short standalone script.
 
 ## Troubleshooting
 

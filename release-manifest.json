@@ -1,5 +1,5 @@
 {
-  "version": "0.1.1",
+  "version": "0.2.0",
   "channel": "alpha",
-  "description": "Fix false convergence, missing evidence and artifact/commit binding"
+  "description": "Configurable installed experiments with portable provenance and reviewed release gates"
 }

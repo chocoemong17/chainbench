@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "problem": {
+    "kind": "simplex",
+    "dimension": 12
+  },
+  "steps": 30,
+  "methods": [
+    "frank-wolfe"
+  ],
+  "method_options": {},
+  "include_iterates": false
+}

@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.2.0 - 2026-09-29 (experimental alpha)
+
+- Add installed `preset` and `experiment` commands and the Python experiment API;
+  support deterministic quadratic, diagonal-LASSO and simplex fixtures using existing methods.
+- Validate versioned JSON configurations, reject ambiguous/unused fields and limit accidental work.
+- Export full trajectories, method/termination semantics, normalized configs, input/configuration
+  fingerprints and minimal environment metadata in JSON, CSV and Markdown.
+- Exercise all presets and saved-config reruns after clean wheel AND sdist installation;
+  bind that evidence to publication. Preserve the prior numerical regression/fault-injection suite.
+- Add no-checkout onboarding, configuration reference, external-review protocol and feedback form.
+- Keep old interfaces and prior releases; no new runtime dependency or external service is required.
+
 ## 0.1.1 - 2026-09-29
 
 - Fix false CG stopping at extreme global scales; expose true residual and termination reason.
