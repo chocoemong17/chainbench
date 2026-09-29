@@ -63,9 +63,13 @@ def _digest_problem(problem) -> str:
         h.update(json.dumps(arr.shape, separators=(",", ":")).encode("ascii") + b"\0")
         h.update(arr.tobytes(order="C"))
     if isinstance(problem, QuadraticProblem):
-        add("Q", problem.Q); add("b", problem.b); add("x_star", problem.x_star)
+        add("Q", problem.Q)
+        add("b", problem.b)
+        add("x_star", problem.x_star)
     elif isinstance(problem, DiagonalLassoProblem):
-        add("a", problem.a); add("b", problem.b); add("lam", [problem.lam])
+        add("a", problem.a)
+        add("b", problem.b)
+        add("lam", [problem.lam])
     elif isinstance(problem, SimplexQuadraticProblem):
         add("target", problem.target)
     else:
