@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Lead the README with actual image evidence, scoped geometry previews and a
+  question-to-workflow map. Add a pinned development review route; distinguish its
+  commands and commit from the frozen v0.5.0 release. Generate the image preview
+  from validated full-budget JSON, retaining source permission and input hashes.
+
 - Recompute the noiseless 64×64 ISTA/FISTA subset of Beck–Teboulle Figure 5,
   using a permission-preserving port of the public procedural image. Retain every
   scalar observation, declared full-precision snapshots, source differences and

@@ -3,239 +3,139 @@
 [![tests](https://github.com/chocoemong17/chainbench/actions/workflows/tests.yml/badge.svg)](https://github.com/chocoemong17/chainbench/actions/workflows/tests.yml)
 ![status](https://img.shields.io/badge/status-alpha-informational.svg)
 
-**Understand a selected optimization result, change one condition, and replay the evidence.**
+**Read the idea. Follow the iterates. Recompute the evidence.**
 
-ChainBench is a small local learning and numerical-reproduction toolkit. It connects
-published methods to assumptions, actual recurrences, reference formulas and plots
-on synthetic problems with independently known solutions. It is not a production
-solver, a theorem prover, or a reproduction of every experiment in the cited papers.
+ChainBench connects published optimization methods to their assumptions, update
+rules and actual calculations. Explore 2D contours, 3D objective surfaces, image
+reconstructions and reproducible instance families in local, bilingual reports.
+Python 3.10+ and NumPy generate the pages; a browser is enough to read or share them.
 
-## 1. Start with a question, not a table
+**New here? [Start with the review guide](docs/REVIEW_GUIDE.md)** — it gives a runnable,
+tested source checkout and specific questions to investigate. The development
+features shown below are in a PR stack; the frozen **v0.5.0 release does not contain
+the tour, paper reproductions or new geometry commands**.
 
-**One guided folder from the development source:**
+## From a paper's experiment to actual pixels
+
+![Clean input, blurred observation, and actual ISTA/FISTA reconstructions after 10,000 updates](docs/images/deblur-preview.svg)
+
+A rerun of the **ISTA/FISTA subset of Beck–Teboulle (2009), Section 5.2 / Figure 5**:
+64×64 public procedural image, 9×9 Gaussian blur with sigma=4 and edge-repeating
+symmetric boundaries, no noise, lambda=0, L=2 and step=1/2. Both methods start at
+the blurred observation and take 10,000 updates. All images share the [0,1] grayscale;
+only display pixels are clipped.
+
+| Actual observation at 10,000 updates | ISTA | FISTA |
+| --- | ---: | ---: |
+| Squared residual to the blurred observation, F | 1.247403e-4 | 1.109953e-8 |
+| Pixel RMSE against the clean input | 4.576756e-2 | 2.017030e-2 |
+
+A small residual does not imply exact image recovery. This is one published
+synthetic protocol, with explicit source-version and coordinate differences;
+it does not assert exact reproduction of the paper's reported endpoints.
+[Inspect the source, inputs, permission and differences](docs/FISTA_DEBLURRING.md).
+The [preview generator](scripts/render_readme_image.py) uses the same saved numerical
+record as the full report, including hashes and attribution.
+
+## Run the development tour
+
+In a checkout containing these changes, with Python in your preferred environment:
 
 ```bash
+python -m pip install .
 python -m chainbench tour --lang ko --output tour
 ```
 
-Open `tour/index.html`. Follow a published setup, inspect 2D/3D update geometry,
-read the method atlas, then open all 32 seeded cases for each of the eight topics.
-The whole folder works offline after generation; recipients only need a browser.
-Every page retains its evidence and links back to the guide. See the
-[tour contents, settings and file verification](docs/OFFLINE_TOUR.md).
-Choose a new destination directory; existing folders are never overwritten.
+For a fresh checkout, follow the [pinned installation steps](docs/REVIEW_GUIDE.md#run-the-tested-development-snapshot).
+Open `tour/index.html`. It connects **15 offline HTML pages**: the reading guide,
+eight-topic atlas, two published-example workflows, two geometry views, eight
+stress reports and one public tight case. Each report keeps its numerical evidence
+and links back to the guide. The recipient needs no server, account or Python.
 
-| Feasible simplex updates | Composite objective heights |
+Use a new destination directory. The whole folder is about 43 MB uncompressed;
+copy the folder to preserve its links. [Contents, settings and hashes](docs/OFFLINE_TOUR.md).
+
+## Choose the question you want to answer
+
+| Question | Open in the tour | What the evidence supports |
+| --- | --- | --- |
+| How do SD and CG move on a published example? | `shewchuk.html` | Exact stated 2D setup; nine additional starts labelled separately |
+| Does fitting blurred data recover the clean image? | `deblur.html` | One declared image protocol; all 10,001 objective/RMSE observations per method |
+| How does an oracle respect a constraint? | `simplex.html` | Twelve controlled Frank–Wolfe target/start cases |
+| What do momentum and soft thresholding do? | `proximal.html` | Nine controlled lambda/start cases with actual intermediate stages |
+| Does a claim survive more sampled inputs? | `stress-<topic>.html` | All 32 seeds per topic, including unresolved ratios |
+| Why can a bound be called tight? | `tight-gd.html` | A public upper bound and matching construction under stated assumptions |
+| How are the ideas related? | `atlas.html` | Symbolic flows, assumptions, results, trade-offs and linked methods |
+
+| A feasible Frank–Wolfe update | ISTA/FISTA at actual objective heights |
 | --- | --- |
-| ![Actual Frank–Wolfe simplex trajectory](docs/images/tour-simplex.svg) | ![Actual ISTA/FISTA trajectories at their composite objective heights](docs/images/tour-proximal.svg) |
+| ![Actual Frank–Wolfe simplex trajectory](docs/images/tour-simplex.svg) | ![Actual ISTA/FISTA trajectories on a composite objective](docs/images/tour-proximal.svg) |
 
-These are controlled illustrations from the tour: simplex target (0.2,0.3,0.5),
-start e1, C_f=2; diagonal LASSO a=(1,3), b=(1.4,-2.4), lambda=0.8,
-start (-1.8,1.2), L=9. Both use 18 updates. The 3D chords connect actual samples;
-they are not continuous paths on the surface. Open the reports for all cases and
-exact settings. These commands are not included in the frozen v0.5.0 wheel.
+These previews are controlled illustrations: simplex target (0.2,0.3,0.5), start e1,
+C_f=2; diagonal LASSO a=(1,3), b=(1.4,-2.4), lambda=0.8, start (-1.8,1.2), L=9.
+Both use 18 updates. The 3D chords join actual samples; they are not continuous
+paths on the surface. [Simplex contract](docs/SIMPLEX_GEOMETRY.md) ·
+[Proximal contract](docs/PROXIMAL_GEOMETRY.md).
 
-**New in the development source (after v0.5.0):** independently recompute the
-published setup behind Shewchuk's Figures 8 and 30, with linked contours, 3D heights,
-actual iterate inspection and all nine additional starting points:
+Every plot identifies its problem, start, parameters, budget, metric and source.
+Canonical illustrations, finite stress, published-example reruns and tight
+constructions answer different questions. [Read the evidence distinctions](docs/EVIDENCE_LAYERS.md).
+
+## Generate only the page you need
 
 ```bash
 python -m chainbench reproduce shewchuk-1994 --lang ko --output paper.html
-```
-
-This is a specific published numerical example, with explicit differences from the
-source figures; the nine variations are labelled separately. See the
-[source/setup/validation contract](docs/SHEWCHUK_REPRODUCTION.md).
-The command requires a source install; it is not in the frozen v0.5.0 wheel below.
-
-For constrained motion, inspect Frank–Wolfe's chosen vertex and feasible update
-segment on a triangle, alongside the same points on a 3D objective surface:
-
-```bash
-python -m chainbench geometry frank-wolfe --lang ko --output simplex.html
-```
-
-All 12 declared target/start combinations are inspectable. The objective gap, dual
-certificate and theorem curve have distinct meanings, and one example explains why
-a scheduled step can increase the objective. See the [source and geometry contract](docs/SIMPLEX_GEOMETRY.md).
-This command also requires the development source after v0.5.0.
-
-For the nonsmooth step in ISTA/FISTA, follow the actual extrapolated point, gradient
-step and soft-thresholded iterate across nine regularization/start combinations:
-
-```bash
-python -m chainbench geometry ista-fista --lang ko --output proximal.html
-```
-
-The [proximal geometry guide](docs/PROXIMAL_GEOMETRY.md) explains exact zero
-coordinates, composite contours/3D heights, theorem bounds and scaling conventions.
-This is also a development-source feature, labelled as controlled illustrations.
-
-For the full eight-topic learning atlas:
-
-```bash
-python -m chainbench learn --lang ko --output learn.html
-```
-
-Open `learn.html` in a browser. Eight topic cards explain **question → mechanism →
-assumptions → recurrence → guarantee → observed curve → limitation**. Switch between
-Korean and English, search a topic, expand bound-ratio plots, and save exact samples.
-The page is self-contained. Browser controls do not run a new optimizer or upload data.
-
-Development source also adds symbolic update flows, a two-method comparison of
-operations and memory, and links between related ideas. These diagrams explain
-the algorithms; the adjoining audited curves supply numerical observations.
-See [the learning guide](docs/LEARNING_WORKFLOWS.md) for focused exports and scope.
-Each canonical plot also identifies its actual problem, start and budget, with
-expandable input arrays and method settings. A standalone SVG keeps both a visible
-setup caption and exact input metadata; see [the data contract](docs/CANONICAL_CONTEXT.md).
-
-Prefer a compact fixed-suite dashboard or one figure?
-
-```bash
-python -m chainbench report --output report.html
-python -m chainbench plot beck-teboulle-2009 --output fista.svg
-```
-
-![A FISTA observation and its public upper envelope](docs/images/fista.svg)
-
-This example is generated from the plotting implementation, not a fabricated result
-or an external review. Source mapping and the scope of each result are explicit in
-[docs/SOURCE_MAP.md](docs/SOURCE_MAP.md).
-
-## Evidence before aesthetics: one plot is not enough
-
-Every paper page now labels the evidence level explicitly:
-
-1. **Literature claim** - assumptions and the selected public result.
-2. **Canonical illustration** - one transparent problem chosen for intuition, not representativeness.
-3. **Seeded stress** - many reproducible sampled instances of the same measurement.
-4. **Published tight case** - only when public literature supplies an extremal construction.
-
-```bash
-python -m chainbench stress nesterov-1983 --trials 24 --seed 0 --lang ko --output stress.html
-```
-
-**Development source after v0.5.0:** stress reports now retain all actual inputs and
-trajectories, vary dimensions and starts, and link ranked/individual samples to their
-curves. `chainbench stress-case nesterov-1983 --seed 10 --output case.html` reruns one
-sample. Undefined ratios remain visible; they are never reported as zero successes.
-This uses sampler/schema **v2**, so old seed numbers alone do not identify the same
-inputs. See [sampling, metrics and migration](docs/STRESS_SAMPLING.md).
-
-For geometric intuition, compare the **same run** as a contour path, a 3D objective surface and a loss curve:
-
-```bash
-python -m chainbench landscape --condition-number 20 --methods gd smooth-fista heavy-ball cg proximal-point --lang ko --output landscape.html
-```
-
-The 2D landscape is deliberately chosen for clarity and is labelled as an illustration. It is not used as evidence of universal superiority. See [evidence layers](docs/EVIDENCE_LAYERS.md).
-
-## Install v0.5.0
-
-Use Python 3.10+ in a new virtual environment. NumPy is the only runtime dependency;
-no API key, telemetry or paid service is required. Pip may need network access during
-installation; calculations and HTML viewing are local afterward.
-
-```bash
-python -m venv .venv
-# Linux/macOS: source .venv/bin/activate
-# Windows: use .venv\Scripts\python.exe in place of python below
-python -m pip install https://github.com/chocoemong17/chainbench/releases/download/v0.5.0/chainbench-0.5.0-py3-none-any.whl
-python -m chainbench --version
-python -m chainbench learn --lang ko --output learn.html
-```
-
-Alternatively install the local wheel from [GitHub Releases](https://github.com/chocoemong17/chainbench/releases).
-Do not assume a same-named registry package is this project; no PyPI publication is
-configured. From a source checkout, run `python -m pip install .` in its root.
-
-## 2. Change one condition
-
-```bash
-python -m chainbench sweep --preset quadratic --parameter condition_number --values 10 100 1000 --methods gd smooth-fista cg --lang ko --output conditioning.html
-```
-
-Compare actual trajectories at 2–8 values, with every resolved config and observation
-preserved. All inputs and the **combined** work budget are validated first. Different
-panels may have different y-axis ranges and objective scales; this is not a speed
-leaderboard or universal method ranking.
-
-Single runs still accept direct settings or reusable JSON:
-
-```bash
-python -m chainbench experiment --preset quadratic --dimension 20 --condition-number 100 --steps 50 --methods gd cg --format html --output custom.html
-python -m chainbench preset quadratic --random-seed 17 --output config.json
-python -m chainbench experiment --config config.json --output saved.json
-```
-
-The seed samples existing synthetic configuration knobs, not arbitrary data or
-certified worst cases. See [configuration reference](docs/EXPERIMENTS.md).
-
-## 3. Replay, rather than trusting a saved number
-
-```bash
-python -m chainbench replay saved.json --lang ko --output replay.html
-```
-
-This **recomputes** a complete schema-1 saved experiment and compares trajectories,
-parameters, inputs and environments. `MATCH` means observed agreement within the
-specified tolerances and identical input-byte fingerprints. `INPUT_DIFFERENCE` and
-`MISMATCH` remain visible. A match is not authentication of the author or proof that
-an independent person ran the original. Missing/non-finite evidence is an error.
-
-## Recompute the noiseless FISTA image experiment
-
-```bash
 python -m chainbench reproduce fista-deblurring --lang ko --output deblur.html
-```
-
-Recompute the ISTA/FISTA subset of Beck–Teboulle Figure 5: a public 64×64 synthetic
-image, explicit Gaussian blur, no noise, lambda=0 and all 10,000 updates. Compare
-actual reconstructed images, objective error and pixel error at shared snapshots.
-The page states source-version and coordinate differences; it does not claim exact
-original endpoint values. See [input provenance, permission and formulas](docs/FISTA_DEBLURRING.md).
-
-## 4. Inspect one public tight example
-
-```bash
+python -m chainbench geometry frank-wolfe --lang ko --output simplex.html
+python -m chainbench geometry ista-fista --lang ko --output proximal.html
+python -m chainbench learn --lang ko --output learn.html
+python -m chainbench stress nesterov-1983 --trials 32 --seed 0 --lang ko --output stress.html
 python -m chainbench case-study gd-tight --horizon 20 --lang ko --output tight.html
 ```
 
-Inspect the actual GD points and constant gradients beside a resolved view of the
-quadratic centre. The normalized inset stays readable at large horizons. The page
-shows why the final value attains the bound for this horizon-specific function.
+Reports support Korean and English, local controls, raw records and reading with
+JavaScript disabled. Controls inspect stored computations; they do not run an
+optimizer in the browser. Standalone SVGs retain setup captions and input metadata.
+[Visual formats](docs/VISUAL_REPORTS.md) · [Learning workflows](docs/LEARNING_WORKFLOWS.md).
 
-The separate Drori–Teboulle case constructs a one-dimensional Huber objective that
-attains a specific published bound for constant-step GD with `0<h<=1`. Changing the
-horizon changes the function. The mathematical worst-case assertion comes from the
-public upper bound and matching construction, not a numerical search or a graph.
-See [exact source, formula and limits](docs/GD_TIGHT_CASE.md).
+## Change a condition and replay a calculation
 
-## Read each paper as a research story
+```bash
+python -m chainbench sweep --preset quadratic --parameter condition_number --values 10 100 1000 --methods gd smooth-fista cg --lang ko --output conditioning.html
+python -m chainbench experiment --preset quadratic --dimension 20 --condition-number 100 --steps 50 --methods gd cg --output saved.json
+python -m chainbench replay saved.json --lang ko --output replay.html
+```
 
-The learning page is no longer just "formula + one graph". For every bundled topic it now adds **why the work mattered, strengths, trade-offs, the neighboring method to compare against, and the evidence type**. A small timeline connects CG, heavy-ball, proximal point, Nesterov acceleration, FISTA and Frank-Wolfe instead of presenting them as unrelated cards.
+A sweep changes one declared factor. A replay recomputes a schema-1 experiment and
+compares inputs, trajectories and environments with stated tolerances. A `MATCH`
+is numerical agreement, not author authentication or proof. Equal iteration counts
+need not mean equal work. [Configuration and limits](docs/EXPERIMENTS.md).
 
-The canonical figure is explicitly labelled as ChainBench-generated. It is not implied to be a figure from the original paper. The source link remains next to the selected theorem/specialization.
+## Use the frozen v0.5.0 release
 
-## Scope and evidence
+If you want the released baseline, use Python 3.10+ in your preferred environment:
 
-The original suite is unchanged: GD, Nesterov-style smooth FISTA, quadratic heavy-ball,
-CG, Frank–Wolfe, exact quadratic proximal point, FISTA and an INFO-only ISTA comparison.
-There are seven quantitative conditions plus one informational comparison. Historical
-Nesterov naming, empirical heavy-ball tolerance and the small synthetic fixtures are
-explicitly distinguished from entire-paper reproduction.
+```bash
+python -m pip install https://github.com/chocoemong17/chainbench/releases/download/v0.5.0/chainbench-0.5.0-py3-none-any.whl
+python -m chainbench learn --lang ko --output learn-v050.html
+```
 
-Existing Python method APIs and JSON/CSV/Markdown exports remain available. `report`
-defaults to HTML; `experiment` defaults to JSON. New workflow pages have optional local
-JavaScript controls; the old fixed reports remain script-free. Existing files require
-`--force` to overwrite; input files cannot be replaced by their own outputs.
+The release supports `learn`, `report`, `plot`, `experiment`, `sweep`, `replay`,
+`stress`, `landscape` and the original `case-study gd-tight`. New development
+workflows and sampler v2 require the source snapshot above. Both currently report
+package version 0.5.0: **record the commit as well as the version**.
+[Release assets](https://github.com/chocoemong17/chainbench/releases/tag/v0.5.0)
+remain unchanged. No PyPI publication is configured; do not assume a same-named
+registry package is this project.
 
-[Learning/sweep/replay guide](docs/LEARNING_WORKFLOWS.md) ·
-[Public references](REFERENCES.md) · [Roadmap](ROADMAP.md) ·
-[Contributing](CONTRIBUTING.md) · [Release process](RELEASING.md)
+## Scope and validation
 
-## Validation and feedback
+The fixed suite covers GD, smooth fixed-L FISTA under a historical Nesterov slug,
+quadratic heavy-ball, CG, Frank–Wolfe, exact quadratic proximal point, FISTA and an
+INFO-only ISTA comparison. Heavy-ball's tolerance is empirical. A finite sample
+cannot prove a theorem or a universal ranking. ChainBench is an experimental alpha,
+not a production solver or a reproduction of every experiment in each paper.
+[Exact source-to-implementation mapping](docs/SOURCE_MAP.md) · [Public references](REFERENCES.md).
 
 ```bash
 python -m pip install -e '.[dev]'
@@ -246,17 +146,20 @@ python -m build
 python scripts/smoke_install.py
 ```
 
-CI covers Ubuntu Python 3.10–3.12, Windows/macOS Python 3.12 and a minimum-dependency
-environment. Wheel and sdist are installed in separate clean environments outside the
-checkout; old and new CLI outputs are exercised before release. Tests are evidence
-about implemented cases, not an exhaustive correctness proof or independent adoption.
+CI checks Ubuntu Python 3.10–3.12, Windows/macOS Python 3.12, minimum dependencies,
+both clean distribution installs and offline Chromium at desktop/mobile widths.
+Numerical records are checked against rendered curves, points and image pixels.
+These are maintainer-controlled checks, not independent adoption evidence.
 
-[Report actual success, failure or confusion in issue #28](https://github.com/chocoemong17/chainbench/issues/28).
-The seven-person feedback there is maintainer-relayed and motivated the evidence-layer, stress-sampling and geometry redesign. No star or favorable review is
-requested. The [v0.2.0 review helper](review/README.md) remains a frozen historical
-baseline, not the latest package. Prior releases are preserved.
+[Report a concrete success, failure or confusing explanation](https://github.com/chocoemong17/chainbench/issues/28).
+The seven-person feedback there is maintainer-relayed. The [v0.2.0 reviewer kit](review/README.md)
+is a frozen historical baseline. No stars or favorable reviews are requested.
 
-Only public literature and independent code belong here. No private research,
-unpublished derivations, private datasets or real-name maintainer metadata are needed.
-MIT license for ChainBench; the attributed image-generator port retains its
-[ReguTools permission notice](docs/licenses/REGUTOOLS.txt). Public maintainer: **chocoemong17**.
+[Roadmap](ROADMAP.md) · [Contributing](CONTRIBUTING.md) · [Release process](RELEASING.md)
+
+NumPy is the only runtime dependency. No API key, telemetry or paid service is
+required. Installation may use the network; calculations and generated reports are
+local afterward. Only public literature and licensed inputs belong here.
+MIT license for ChainBench; the image-generator port retains its
+[ReguTools permission notice](docs/licenses/REGUTOOLS.txt).
+Public maintainer: **chocoemong17**.

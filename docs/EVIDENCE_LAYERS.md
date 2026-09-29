@@ -36,6 +36,13 @@ make a single example representative, worst-case or a proof. The extra nine star
 are labelled **controlled variations**, all on the same matrix. See the
 [full reproduction contract](SHEWCHUK_REPRODUCTION.md).
 
+`reproduce fista-deblurring` reruns the ISTA/FISTA subset of the published
+Beck–Teboulle Figure 5 protocol: a noiseless 64×64 image, lambda=0 and 10,000
+updates. Its exact image version, operator and coordinate choices are recorded;
+the source does not pin the original toolbox version. This is a **protocol rerun
+with declared differences**, not an exact match to the original endpoint numbers
+or evidence across representative images. [Source and scope](FISTA_DEBLURRING.md).
+
 ## Geometry is a fifth view, not a fifth proof
 
 `chainbench landscape` places the **same numerical run** on a contour map, a 3D objective surface and a convergence chart. It is designed to explain zig-zagging, momentum, conjugate directions and implicit steps. The 2D problem is deliberately chosen for visual clarity, so it belongs to the illustration layer rather than the stress layer.
@@ -45,6 +52,13 @@ geometric illustrations** of simplex constraints, linear oracle choices and feas
 updates. All cases are declared in advance and inspectable. A larger count of
 illustrations is still not representative random sampling. See [the case design](SIMPLEX_GEOMETRY.md).
 
+`geometry ista-fista` shows actual extrapolation, gradient and shrinkage stages in
+nine declared diagonal-LASSO cases. These controlled illustrations exercise positive
+regularization separately from the lambda=0 image experiment. The contours and
+projected 3D heights use the same composite objective and iterates. A chord between
+two sampled heights is not a continuous path on the surface.
+[Proximal geometry contract](PROXIMAL_GEOMETRY.md).
+
 ## Recommended reading order
 
 1. Read the question and assumptions in `chainbench learn`.
@@ -52,3 +66,8 @@ illustrations is still not representative random sampling. See [the case design]
 3. Run seeded stress if you want breadth beyond one example.
 4. Inspect a tight case only when literature justifies the word "tight".
 5. Use JSON/CSV/replay when you need auditable numerical evidence rather than presentation.
+
+The development [offline tour](OFFLINE_TOUR.md) connects these views and preserves
+their raw evidence. The [review guide](REVIEW_GUIDE.md) gives a pinned checkout and
+specific observations to investigate. Replay is for schema-1 experiment records;
+other workflows are recomputed through their own recorded commands.
