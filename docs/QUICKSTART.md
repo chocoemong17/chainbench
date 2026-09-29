@@ -4,7 +4,7 @@ ChainBench is a local NumPy tool for small experiments, not a production solver.
 
 ## Install the released version
 
-Download `chainbench-0.2.0-py3-none-any.whl` from the repository's `v0.2.0` GitHub prerelease into your working folder. With Python 3.10 or newer:
+Download `chainbench-0.2.1-py3-none-any.whl` from the repository's `v0.2.1` GitHub prerelease into your working folder. With Python 3.10 or newer:
 
 ```bash
 python -m venv .venv
@@ -13,7 +13,7 @@ python -m venv .venv
 Activate with `source .venv/bin/activate` on Linux/macOS. On Windows PowerShell use `.venv\Scripts\Activate.ps1`. Alternatively, run `.venv\Scripts\python.exe` directly without changing your PowerShell execution policy.
 
 ```bash
-python -m pip install ./chainbench-0.2.0-py3-none-any.whl
+python -m pip install ./chainbench-0.2.1-py3-none-any.whl
 python -m pip check
 python -m chainbench --version
 python -m chainbench check all
