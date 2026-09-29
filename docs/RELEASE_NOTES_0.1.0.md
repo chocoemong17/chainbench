@@ -1,30 +1,28 @@
-# ChainBench v0.1.0
+# ChainBench v0.1.0 — experimental alpha
 
-ChainBench v0.1.0 is the first public release of a small reproducibility toolkit
-for classic optimization and iterative-method results.
+A small, independently implemented toolkit for numerical consistency experiments from public optimization literature. This release is for reproducibility and education, not production optimization or theorem certification.
 
-## Included checks
+## What is included
 
-- Gradient descent: standard smooth-convex `O(1/k)` objective-gap envelope.
-- Nesterov acceleration (1983): smooth-convex `O(1/k^2)` objective-gap envelope.
-- Polyak heavy-ball (1964): quadratic tail contraction.
-- Hestenes--Stiefel conjugate gradient (1952): SPD A-norm convergence envelope.
-- Frank-Wolfe / conditional gradient (Jaggi 2013): curvature-based `O(1/k)` gap envelope.
-- Rockafellar proximal point (1976): strongly-convex resolvent contraction.
-- Beck--Teboulle FISTA (2009): composite `O(1/k^2)` objective-gap envelope.
-- ISTA/FISTA same-budget comparison on the bundled exact-solvable LASSO fixture.
+Seven quantitative conditions cover gradient descent, smooth fixed-L FISTA/Nesterov-style acceleration, heavy-ball's empirical quadratic tail, conjugate gradient, Frank-Wolfe, quadratic proximal point and composite FISTA. An eighth experiment reports ISTA versus FISTA as informational data, not a universal dominance claim.
 
-## Reproducibility
+Deterministic fixtures have exact reference solutions. Stable gap formulas, finite-input validation, read-only problem data and scale-aware CG stopping make failures easier to diagnose. The CLI supports Markdown, CSV and JSON reports, `python -m chainbench`, version output and overwrite protection.
 
-The package uses deterministic, dependency-light fixtures with exact or
-independently verifiable reference quantities. `chainbench check all` runs the
-entire suite, while `chainbench report` exports Markdown, CSV, or JSON reports.
+## Validation and artifacts
 
-The checked-in `benchmarks/latest.md` snapshot is intentionally timestamp-free
-so numerical changes are visible in normal source review.
+The release workflow gates publication on the cross-platform and minimum-runtime-dependency test matrix, then independently installs both distribution formats in clean environments outside the source checkout. See the attached `verification.json`, `build-environment.txt` and `SHA256SUMS` for the actual install/check results, environment and file digests. Uploaded assets are downloaded and hash-compared before publishing.
 
-## Scope
+Install the attached wheel with:
 
-These are finite numerical consistency checks of public, published results.
-They are not mathematical proofs, novelty claims, or validations of private or
-unpublished research.
+```bash
+python -m pip install ./chainbench-0.1.0-py3-none-any.whl
+chainbench check all
+```
+
+The sdist can be installed with pip too. No PyPI release or API key is required.
+
+## Important interpretation notes
+
+The `nesterov-1983` CLI name is historical; the implementation is smooth fixed-L FISTA. Heavy-ball's 8% finite-tail tolerance is empirical, not a theorem constant. CG's bound is explicitly sourced to Shewchuk equation (52). PPA is a direct quadratic specialization. FISTA is demonstrated on diagonal LASSO, not on an original paper's full dataset. See `docs/SOURCE_MAP.md` for assumptions and formulas.
+
+Only public published research and independent implementation code are included. Maintainer: `chocoemong17`. License: MIT.

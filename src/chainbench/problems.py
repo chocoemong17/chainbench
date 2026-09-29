@@ -1,8 +1,16 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 import numpy as np
+
+from ._validation import array, count, scalar, vector
+
+
+def _freeze(x: np.ndarray) -> np.ndarray:
+    result = x.copy()
+    result.flags.writeable = False
+    return result
 
 
 @dataclass(frozen=True)
@@ -10,25 +18,27 @@ class QuadraticProblem:
     Q: np.ndarray
     b: np.ndarray
     x_star: np.ndarray
+    _L: float = field(init=False, repr=False)
+    _mu: float = field(init=False, repr=False)
 
     def __post_init__(self) -> None:
-        q = np.asarray(self.Q, dtype=float)
-        b = np.asarray(self.b, dtype=float)
-        x_star = np.asarray(self.x_star, dtype=float)
-        if q.ndim != 2 or q.shape[0] != q.shape[1]:
-            raise ValueError("Q must be square")
-        if b.shape != (q.shape[0],) or x_star.shape != (q.shape[0],):
-            raise ValueError("b and x_star must match Q")
-        if not np.allclose(q, q.T, atol=1e-12):
+        q = array(self.Q, "Q")
+        if q.ndim != 2 or q.shape[0] == 0 or q.shape[0] != q.shape[1]:
+            raise ValueError("Q must be a nonempty square matrix")
+        b = vector(self.b, q.shape[0], "b")
+        xs = vector(self.x_star, q.shape[0], "x_star")
+        if not np.allclose(q, q.T, rtol=0, atol=1e-12):
             raise ValueError("Q must be symmetric")
-        eigvals = np.linalg.eigvalsh(q)
-        if eigvals[0] < -1e-12:
+        q = 0.5 * (q + q.T)
+        eig = np.linalg.eigvalsh(q)
+        if eig[0] < 0:
             raise ValueError("Q must be positive semidefinite")
-        if not np.allclose(q @ x_star, b, atol=1e-10):
+        if not np.allclose(q @ xs, b, rtol=1e-10, atol=1e-12):
             raise ValueError("x_star must satisfy Q @ x_star = b")
-        object.__setattr__(self, "Q", q)
-        object.__setattr__(self, "b", b)
-        object.__setattr__(self, "x_star", x_star)
+        for name, value in (("Q", q), ("b", b), ("x_star", xs)):
+            object.__setattr__(self, name, _freeze(value))
+        object.__setattr__(self, "_L", float(eig[-1]))
+        object.__setattr__(self, "_mu", float(eig[0]))
 
     @property
     def dim(self) -> int:
@@ -36,19 +46,23 @@ class QuadraticProblem:
 
     @property
     def L(self) -> float:
-        return float(np.linalg.eigvalsh(self.Q)[-1])
+        return self._L
 
     @property
     def mu(self) -> float:
-        return max(0.0, float(np.linalg.eigvalsh(self.Q)[0]))
+        return self._mu
 
     def value(self, x: np.ndarray) -> float:
-        x = np.asarray(x, dtype=float)
+        x = vector(x, self.dim)
         return float(0.5 * x @ self.Q @ x - self.b @ x)
 
     def grad(self, x: np.ndarray) -> np.ndarray:
-        x = np.asarray(x, dtype=float)
-        return self.Q @ x - self.b
+        return self.Q @ vector(x, self.dim) - self.b
+
+    def gap(self, x: np.ndarray) -> float:
+        """Avoid subtracting nearly equal objective values near the optimum."""
+        e = vector(x, self.dim) - self.x_star
+        return float(0.5 * e @ self.Q @ e)
 
     @property
     def f_star(self) -> float:
@@ -60,12 +74,12 @@ class SimplexQuadraticProblem:
     target: np.ndarray
 
     def __post_init__(self) -> None:
-        target = np.asarray(self.target, dtype=float)
+        target = array(self.target, "target")
         if target.ndim != 1 or target.size < 2:
-            raise ValueError("target must be a one-dimensional vector with at least two entries")
-        if np.any(target < 0.0) or not np.isclose(np.sum(target), 1.0, atol=1e-12):
+            raise ValueError("target must be a vector with at least two entries")
+        if np.any(target < 0) or not np.isclose(target.sum(), 1, rtol=0, atol=1e-12):
             raise ValueError("target must lie on the probability simplex")
-        object.__setattr__(self, "target", target)
+        object.__setattr__(self, "target", _freeze(target))
 
     @property
     def dim(self) -> int:
@@ -81,22 +95,22 @@ class SimplexQuadraticProblem:
 
     @property
     def curvature_upper_bound(self) -> float:
-        # For f(x)=0.5||x-target||^2 on the simplex, L=1 and diameter^2=2.
-        return 2.0
+        return 2.0  # Hessian=I, squared Euclidean simplex diameter=2.
 
     def value(self, x: np.ndarray) -> float:
-        delta = np.asarray(x, dtype=float) - self.target
-        return float(0.5 * delta @ delta)
+        e = vector(x, self.dim) - self.target
+        return float(0.5 * e @ e)
+
+    def gap(self, x: np.ndarray) -> float:
+        return self.value(x)
 
     def grad(self, x: np.ndarray) -> np.ndarray:
-        return np.asarray(x, dtype=float) - self.target
+        return vector(x, self.dim) - self.target
 
     def linear_minimizer(self, gradient: np.ndarray) -> np.ndarray:
-        gradient = np.asarray(gradient, dtype=float)
-        if gradient.shape != (self.dim,):
-            raise ValueError("gradient shape must match the simplex dimension")
+        g = vector(gradient, self.dim, "gradient")
         vertex = np.zeros(self.dim)
-        vertex[int(np.argmin(gradient))] = 1.0
+        vertex[int(np.argmin(g))] = 1
         return vertex
 
 
@@ -107,16 +121,15 @@ class DiagonalLassoProblem:
     lam: float
 
     def __post_init__(self) -> None:
-        a = np.asarray(self.a, dtype=float)
-        b = np.asarray(self.b, dtype=float)
-        if a.ndim != 1 or b.shape != a.shape:
-            raise ValueError("a and b must be one-dimensional arrays of equal length")
+        a = array(self.a, "a")
+        if a.ndim != 1 or not a.size:
+            raise ValueError("a must be a nonempty vector")
+        b = vector(self.b, a.size, "b")
         if np.any(np.abs(a) < 1e-12):
             raise ValueError("all diagonal entries must be nonzero")
-        if self.lam < 0:
-            raise ValueError("lam must be nonnegative")
-        object.__setattr__(self, "a", a)
-        object.__setattr__(self, "b", b)
+        object.__setattr__(self, "a", _freeze(a))
+        object.__setattr__(self, "b", _freeze(b))
+        object.__setattr__(self, "lam", scalar(self.lam, "lam"))
 
     @property
     def dim(self) -> int:
@@ -127,25 +140,34 @@ class DiagonalLassoProblem:
         return float(np.max(self.a**2))
 
     def smooth_value(self, x: np.ndarray) -> float:
-        residual = self.a * np.asarray(x, dtype=float) - self.b
+        residual = self.a * vector(x, self.dim) - self.b
         return float(0.5 * residual @ residual)
 
     def smooth_grad(self, x: np.ndarray) -> np.ndarray:
-        x = np.asarray(x, dtype=float)
-        return self.a * (self.a * x - self.b)
+        return self.a * (self.a * vector(x, self.dim) - self.b)
 
     def value(self, x: np.ndarray) -> float:
-        x = np.asarray(x, dtype=float)
-        return self.smooth_value(x) + self.lam * float(np.linalg.norm(x, ord=1))
+        x = vector(x, self.dim)
+        return self.smooth_value(x) + self.lam * float(np.abs(x).sum())
 
     def prox_l1(self, z: np.ndarray, step: float) -> np.ndarray:
-        threshold = step * self.lam
-        return np.sign(z) * np.maximum(np.abs(z) - threshold, 0.0)
+        z = vector(z, self.dim, "z")
+        threshold = scalar(step, "step") * self.lam
+        return np.sign(z) * np.maximum(np.abs(z) - threshold, 0)
 
     @property
     def x_star(self) -> np.ndarray:
-        numer = self.a * self.b
-        return np.sign(numer) * np.maximum(np.abs(numer) - self.lam, 0.0) / (self.a**2)
+        ab = self.a * self.b
+        return np.sign(ab) * np.maximum(np.abs(ab) - self.lam, 0) / self.a**2
+
+    def gap(self, x: np.ndarray) -> float:
+        """Quadratic error plus an l1 Bregman term, without F(x)-F(x*)."""
+        x = vector(x, self.dim)
+        error = self.a * (x - self.x_star)
+        if self.lam == 0:
+            return float(0.5 * error @ error)
+        subgradient = np.clip(self.a * self.b / self.lam, -1, 1)
+        return float(0.5 * error @ error + self.lam * np.sum(np.abs(x) - subgradient * x))
 
     @property
     def f_star(self) -> float:
@@ -153,40 +175,31 @@ class DiagonalLassoProblem:
 
 
 def smooth_convex_quadratic(dim: int = 80) -> QuadraticProblem:
-    if dim < 4:
-        raise ValueError("dim must be at least 4")
-    positive = np.geomspace(1e-5, 1.0, dim - 1)
-    eigvals = np.concatenate(([0.0], positive))
-    q = np.diag(eigvals)
-    x_star = np.cos(np.arange(dim, dtype=float) * 0.37)
-    x_star[0] = 0.0
-    b = q @ x_star
-    return QuadraticProblem(q, b, x_star)
+    dim = count(dim, "dim", 4)
+    q = np.diag(np.r_[0.0, np.geomspace(1e-5, 1, dim - 1)])
+    xs = np.cos(np.arange(dim, dtype=float) * 0.37)
+    xs[0] = 0
+    return QuadraticProblem(q, q @ xs, xs)
 
 
 def strongly_convex_quadratic(dim: int = 60, mu: float = 0.04, L: float = 1.0) -> QuadraticProblem:
-    if dim < 2:
-        raise ValueError("dim must be at least 2")
-    if not 0 < mu < L:
+    dim = count(dim, "dim", 2)
+    mu, L = scalar(mu, "mu", positive=True), scalar(L, "L", positive=True)
+    if mu >= L:
         raise ValueError("require 0 < mu < L")
-    eigvals = np.geomspace(mu, L, dim)
-    q = np.diag(eigvals)
-    x_star = np.sin(np.arange(dim, dtype=float) * 0.29) + 0.25
-    b = q @ x_star
-    return QuadraticProblem(q, b, x_star)
+    q = np.diag(np.geomspace(mu, L, dim))
+    xs = np.sin(np.arange(dim, dtype=float) * 0.29) + 0.25
+    return QuadraticProblem(q, q @ xs, xs)
 
 
 def simplex_quadratic(dim: int = 50) -> SimplexQuadraticProblem:
-    if dim < 2:
-        raise ValueError("dim must be at least 2")
-    return SimplexQuadraticProblem(target=np.full(dim, 1.0 / dim))
+    dim = count(dim, "dim", 2)
+    return SimplexQuadraticProblem(np.full(dim, 1.0 / dim))
 
 
 def diagonal_lasso(dim: int = 80, lam: float = 0.12) -> DiagonalLassoProblem:
-    if dim < 2:
-        raise ValueError("dim must be at least 2")
+    dim = count(dim, "dim", 2)
     a = np.linspace(0.35, 2.0, dim)
-    b = 0.8 * np.sin(np.arange(dim, dtype=float) * 0.41) + 0.35 * np.cos(
-        np.arange(dim, dtype=float) * 0.13
-    )
-    return DiagonalLassoProblem(a=a, b=b, lam=lam)
+    idx = np.arange(dim, dtype=float)
+    b = 0.8 * np.sin(idx * 0.41) + 0.35 * np.cos(idx * 0.13)
+    return DiagonalLassoProblem(a, b, lam)

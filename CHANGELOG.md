@@ -1,15 +1,14 @@
 # Changelog
 
-## 0.1.0 - 2026-09-28
+## 0.1.0 - initial alpha
 
-- Initial public release of ChainBench.
-- Add deterministic exact-solvable fixtures for smooth/strongly-convex quadratics, diagonal LASSO, and simplex quadratics.
-- Add gradient-descent and Nesterov accelerated-gradient convergence checks.
-- Add Polyak heavy-ball quadratic contraction check.
-- Add Hestenes--Stiefel conjugate-gradient A-norm convergence check.
-- Add Jaggi Frank-Wolfe curvature-based `O(1/k)` simplex check.
-- Add Rockafellar proximal-point strongly-convex contraction check.
-- Add Beck--Teboulle FISTA objective-gap check and an ISTA/FISTA same-budget comparison.
-- Add deterministic Markdown, CSV, and JSON report export with a checked-in benchmark snapshot.
-- Add public references, reproducibility methodology, contribution guidance, issue/PR templates, Dependabot, and release guidance.
-- Test Python 3.10--3.12 in CI and build both wheel and source distributions.
+- Independent implementations of gradient descent, smooth FISTA/Nesterov-style acceleration, Polyak heavy-ball, conjugate gradient, Frank-Wolfe, exact quadratic proximal point, ISTA and FISTA.
+- Seven quantitative consistency conditions and one informational same-budget comparison on exact-solvable deterministic fixtures.
+- Correct source-to-recurrence mapping, including the historical Nesterov CLI name, Shewchuk's explicit CG bound, and the scope of quadratic PPA and empirical heavy-ball checks.
+- Finite-input, dimension, iteration-budget and parameter validation; read-only copied problem data; cached quadratic spectrum; scale-aware CG stopping.
+- Stable objective-gap formulas and explicit rejection of non-finite check results.
+- Markdown, CSV and strict JSON export, module execution, version output, protected output files and clean error exit codes.
+- Regression tests for invalid inputs, rotated SPD matrices, condition numbers, regularizers, proximal optimality equations and near-optimal gaps.
+- Ubuntu Python 3.10-3.12, Windows/macOS Python 3.12 and minimum NumPy/pytest/Ruff validation; separate clean wheel and sdist installation.
+- Main-only gated GitHub prerelease workflow with verified distribution uploads and SHA256SUMS. No external registry publication or paid API usage.
+- Public contribution, methodology, source mapping, issue/PR, security and release documentation; complete MIT license.
