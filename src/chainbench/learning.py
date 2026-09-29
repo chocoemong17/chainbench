@@ -241,7 +241,14 @@ def learning_html(focus: str | None = None, lang: str = 'en') -> str:
                         + bi('어떤 조건에서?', 'Under which assumptions?') + '</h3><p>' + bi(*lesson['assumptions'])
                         + '</p></div><div><h3>' + bi('어떤 업데이트인가?', 'Which update?')
                         + '</h3><div class="formula">' + escape(lesson['recurrence']) + '</div></div></div>'
-                        + '<div class="formula">' + escape(lesson['formula']) + '</div><div class="plot">' + svg + '</div>'
+                        + '<div class="formula">' + escape(lesson['formula']) + '</div>'
+                        + '<div class="evidence-banner"><span class="evidence-tag">CANONICAL ILLUSTRATION</span>'
+                        + bi('아래 첫 그래프는 논문 그림을 복사한 것이 아니라, 정리 가정 안의 한 deterministic fixture에서 ChainBench가 만든 설명용 예시입니다. 대표성 주장은 stress에서 따로 봅니다.', 'The first plot below is ChainBench-generated on one deterministic fixture inside the assumptions; it is not a copied paper figure. Breadth is checked separately with seeded stress sampling.') + '</div>'
+                        + '<div class="deep-grid"><article><h3>' + bi('왜 이 논문/방법이 중요했나?', 'Why it mattered') + '</h3><p>' + bi(*deep['why']) + '</p></article>'
+                        + '<article><h3>' + bi('강점', 'Strength') + '</h3><p>' + bi(*deep['strength']) + '</p></article>'
+                        + '<article><h3>' + bi('대가·약점', 'Trade-off') + '</h3><p>' + bi(*deep['tradeoff']) + '</p></article>'
+                        + '<article><h3>' + bi('무엇과 비교해야 하나?', 'What to compare it with') + '</h3><p>' + bi(*deep['compare']) + '</p></article></div>'
+                        + '<div class="plot">' + svg + '</div>'
                         + '<p class="callout">' + bi(*lesson['reading']) + '</p>' + ratio_html
                         + '<p><span class="badge">' + result_status(result) + '</span> '
                         + bi('이 실행의 검사 통계', 'Statistic from this run') + f': {result.observed:.6g}</p>'
