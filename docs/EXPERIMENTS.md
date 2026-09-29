@@ -18,6 +18,35 @@ Preset definitions are part of the installed Python package, not files that requ
 cloning the repository. Running experiments makes no network requests. Pip may need
 the network to install the package and NumPy initially.
 
+## Choose parameters directly from the command line
+
+You do not need to edit JSON for common changes:
+
+```bash
+python -m chainbench experiment --preset quadratic \
+  --dimension 20 --condition-number 100 --L 2 --steps 50 \
+  --methods gd smooth-fista cg --format html --output custom.html
+```
+
+Problem-specific options fail explicitly when used with the wrong family. The
+quadratic preset accepts `--condition-number`, `--L`/ `--smoothness`, and
+`--rotation householder|none`; diagonal LASSO accepts `--lam`. All families
+accept `--dimension`, `--steps`, `--methods`, and `--include-iterates`.
+
+For exploratory sampling of the **supported preset parameters**:
+
+```bash
+python -m chainbench preset quadratic --random-seed 17 --output sampled.json
+python -m chainbench experiment --config sampled.json --format html --output sampled.html
+```
+
+The seed is a convenience for generating a config. The fully resolved JSON is the
+reproducibility record, so save it. Random sampling chooses among the existing
+synthetic parameterization; it does not load arbitrary data, generate a certified
+worst case, or establish that a sampled instance is hard. Explicit CLI overrides
+win over sampled values. To avoid ambiguous provenance, overrides cannot be mixed
+with `--config`.
+
 ## Change a configuration and run it again
 
 ```bash

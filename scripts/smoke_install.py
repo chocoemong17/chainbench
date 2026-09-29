@@ -153,6 +153,28 @@ def exercise_experiments(cli: str, work: Path, env: dict[str, str], version: str
     return records
 
 
+
+def exercise_instance_controls(cli: str, work: Path, env: dict[str, str]) -> dict:
+    first = run([cli, "preset", "quadratic", "--random-seed", "17"], work, env)
+    second = run([cli, "preset", "quadratic", "--random-seed", "17"], work, env)
+    if first != second:
+        raise RuntimeError("Seeded config generation is not deterministic in one environment")
+    config = json.loads(first)
+    canonical = json.dumps(config, sort_keys=True, separators=(",", ":"), allow_nan=False)
+    seed_hash = hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+    target = work / "direct-instance.html"
+    run([
+        cli, "experiment", "--preset", "quadratic", "--dimension", "6",
+        "--condition-number", "20", "--steps", "8", "--methods", "gd", "cg",
+        "--format", "html", "--output", str(target),
+    ], work, env)
+    text = target.read_text(encoding="utf-8")
+    if "<svg" not in text or "gd" not in text or "cg" not in text:
+        raise RuntimeError("Direct instance controls did not produce the expected visual experiment")
+    return {"direct_override": "passed", "seeded_config_sha256": seed_hash}
+
+
 def main() -> None:
     dist = ROOT / "dist"
     wheels, sdists = sorted(dist.glob("*.whl")), sorted(dist.glob("*.tar.gz"))
@@ -213,6 +235,7 @@ def main() -> None:
             if "<svg" not in plot.read_text(encoding="utf-8"):
                 raise RuntimeError("Standalone plot export is not SVG")
             experiments = exercise_experiments(cli, work, env, expected)
+            instance_controls = exercise_instance_controls(cli, work, env)
             records.append({
                 "artifact": artifact.name,
                 "sha256": hashlib.sha256(artifact.read_bytes()).hexdigest(),
@@ -222,6 +245,7 @@ def main() -> None:
                 "installed_outside_checkout": True,
                 "pip_check": "passed", "exports": ["html", "markdown", "csv", "json"],
                 "plot_svg": "passed", "experiments": experiments,
+                "instance_controls": instance_controls,
             })
             print(f"CLEAN INSTALL PASSED: {artifact.name}", flush=True)
     report = {"python": platform.python_version(), "artifacts": records,

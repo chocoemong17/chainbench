@@ -2,12 +2,20 @@ from __future__ import annotations
 
 import argparse
 import json
+import random
 from pathlib import Path
 
 from . import __version__
 from .checks import CHECKS, CheckResult, run_all, run_check
 from .experiment_reporting import render_experiment
-from .experiments import MAX_CONFIG_BYTES, PRESETS, load_config, preset_config, run_experiment
+from .experiments import (
+    MAX_CONFIG_BYTES,
+    PRESETS,
+    load_config,
+    normalize_config,
+    preset_config,
+    run_experiment,
+)
 from .reporting import render_json, render_report, result_status
 from .visuals import render_check_svg
 
@@ -54,8 +62,113 @@ Start here:
   chainbench experiment --preset quadratic --format html --output experiment.html
       Visual comparison on a configurable synthetic problem.
 
+Choose a supported instance directly:
+  chainbench experiment --preset quadratic --dimension 20 --condition-number 100 \
+      --steps 50 --methods gd smooth-fista cg --format html --output custom.html
+
 Use 'chainbench --help' for all commands. JSON/CSV remain available for auditing.
 """
+
+
+_OVERRIDE_NAMES = (
+    "dimension",
+    "steps",
+    "methods",
+    "condition_number",
+    "smoothness",
+    "rotation",
+    "lam",
+    "include_iterates",
+    "random_seed",
+)
+
+
+def _add_overrides(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument("--dimension", type=int, help="override the preset problem dimension")
+    parser.add_argument("--steps", type=int, help="override the update budget")
+    parser.add_argument(
+        "--methods",
+        nargs="+",
+        help="replace the preset method list; compatibility is validated by the problem family",
+    )
+    parser.add_argument("--condition-number", type=float, help="quadratic only")
+    parser.add_argument("--L", "--smoothness", dest="smoothness", type=float, help="quadratic only")
+    parser.add_argument("--rotation", choices=["householder", "none"], help="quadratic only")
+    parser.add_argument("--lam", type=float, help="diagonal-LASSO only")
+    parser.add_argument(
+        "--include-iterates",
+        action="store_true",
+        default=None,
+        help="retain coordinate vectors in the experiment result",
+    )
+    parser.add_argument(
+        "--random-seed",
+        type=int,
+        help=(
+            "sample supported preset parameters deterministically; the resolved config, not the "
+            "seed alone, is the reproducibility record"
+        ),
+    )
+
+
+def _has_overrides(args: argparse.Namespace) -> bool:
+    return any(getattr(args, name, None) is not None for name in _OVERRIDE_NAMES)
+
+
+def _randomized_preset(name: str, seed: int) -> dict:
+    rng = random.Random(seed)
+    config = preset_config(name)
+    config["problem"]["dimension"] = rng.choice([4, 6, 8, 12, 20, 32, 48])
+    config["steps"] = rng.choice([12, 20, 30, 50, 80, 120])
+    if name == "quadratic":
+        config["problem"]["condition_number"] = 10 ** rng.uniform(0.0, 4.0)
+        config["problem"]["L"] = 10 ** rng.uniform(-1.0, 1.0)
+        config["problem"]["rotation"] = rng.choice(["householder", "none"])
+    elif name == "diagonal-lasso":
+        config["problem"]["lam"] = 10 ** rng.uniform(-2.0, 0.5)
+    return normalize_config(config)
+
+
+def _configured_preset(name: str, args: argparse.Namespace) -> dict:
+    config = (
+        _randomized_preset(name, args.random_seed)
+        if getattr(args, "random_seed", None) is not None
+        else preset_config(name)
+    )
+    problem = config["problem"]
+
+    if getattr(args, "dimension", None) is not None:
+        problem["dimension"] = args.dimension
+    if getattr(args, "steps", None) is not None:
+        config["steps"] = args.steps
+    if getattr(args, "methods", None) is not None:
+        config["methods"] = list(args.methods)
+        config["method_options"] = {
+            method: options
+            for method, options in config.get("method_options", {}).items()
+            if method in config["methods"]
+        }
+    if getattr(args, "include_iterates", None) is True:
+        config["include_iterates"] = True
+
+    quadratic = {
+        "condition_number": getattr(args, "condition_number", None),
+        "L": getattr(args, "smoothness", None),
+        "rotation": getattr(args, "rotation", None),
+    }
+    if any(value is not None for value in quadratic.values()):
+        if name != "quadratic":
+            raise ValueError("condition-number, L and rotation options require the quadratic preset")
+        for key, value in quadratic.items():
+            if value is not None:
+                problem[key] = value
+
+    if getattr(args, "lam", None) is not None:
+        if name != "diagonal-lasso":
+            raise ValueError("--lam requires the diagonal-lasso preset")
+        problem["lam"] = args.lam
+
+    return normalize_config(config)
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -83,6 +196,7 @@ def main(argv: list[str] | None = None) -> int:
 
     preset = sub.add_parser("preset", help="print or save an installed experiment configuration")
     preset.add_argument("name", choices=PRESETS)
+    _add_overrides(preset)
     preset.add_argument("--output", type=Path)
     preset.add_argument("--force", action="store_true")
 
@@ -90,6 +204,7 @@ def main(argv: list[str] | None = None) -> int:
     source = experiment.add_mutually_exclusive_group(required=True)
     source.add_argument("--preset", choices=PRESETS)
     source.add_argument("--config", type=Path)
+    _add_overrides(experiment)
     experiment.add_argument("--format", choices=["html", "markdown", "csv", "json"], default="json")
     experiment.add_argument("--output", type=Path)
     experiment.add_argument("--force", action="store_true")
@@ -109,11 +224,17 @@ def main(argv: list[str] | None = None) -> int:
 
         if args.command in ("preset", "experiment"):
             if args.command == "preset":
-                text = json.dumps(preset_config(args.name), indent=2) + "\n"
+                config = _configured_preset(args.name, args)
+                text = json.dumps(config, indent=2) + "\n"
             else:
                 if args.config is None:
-                    config = preset_config(args.preset)
+                    config = _configured_preset(args.preset, args)
                 else:
+                    if _has_overrides(args):
+                        raise ValueError(
+                            "preset overrides and --random-seed cannot be combined with --config; "
+                            "edit or regenerate the config instead"
+                        )
                     with args.config.open("rb") as stream:
                         raw = stream.read(MAX_CONFIG_BYTES + 1)
                     if len(raw) > MAX_CONFIG_BYTES:

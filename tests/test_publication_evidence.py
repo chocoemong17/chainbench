@@ -38,6 +38,10 @@ def evidence(tmp_path, monkeypatch):
             "checks": 2, "slugs": ["condition", "observation"], "statuses": ["CONSISTENT", "INFO"],
             "installed_outside_checkout": True, "pip_check": "passed",
             "exports": ["html", "markdown", "csv", "json"], "plot_svg": "passed",
+            "instance_controls": {
+                "direct_override": "passed",
+                "seeded_config_sha256": "c" * 64,
+            },
             "experiments": [
                 {"preset": name, "methods": methods, "config_sha256": "a"*64, "rows": 100,
                  "exports": ["json", "csv", "markdown", "html"],
@@ -76,6 +80,7 @@ def test_reject_distribution_changed_after_smoke_test(evidence):
     ("statuses", ["CONSISTENT", "UNKNOWN"]), ("slugs", ["same", "same"]),
     ("experiments", None), ("experiments", []),
     ("installed_outside_checkout", False), ("pip_check", "failed"), ("exports", []),
+    ("instance_controls", None),
 ])
 def test_reject_malformed_or_failed_verification(evidence, field, value):
     module, dist, report = evidence

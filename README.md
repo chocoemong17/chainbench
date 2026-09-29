@@ -89,9 +89,20 @@ python -m chainbench preset quadratic --output config.json
 python -m chainbench experiment --config config.json --format csv --output trajectory.csv
 ```
 
-Edit `config.json` to change dimensions, condition numbers, iteration budgets or
-compatible methods. JSON, CSV and Markdown retain the resolved settings, input and
-configuration hashes, software versions and trajectories. Each problem family uses
+You can edit `config.json`, or choose common settings directly:
+
+```bash
+python -m chainbench experiment --preset quadratic \
+  --dimension 20 --condition-number 100 --steps 50 \
+  --methods gd smooth-fista cg --format html --output custom.html
+
+python -m chainbench preset quadratic --random-seed 17 --output sampled.json
+```
+
+The seeded command samples only supported synthetic parameters; the saved resolved
+config is the reproducibility record and is **not** a certified worst-case instance.
+JSON, CSV, Markdown and HTML retain the resolved settings, input and configuration
+hashes, software versions and trajectories. Each problem family uses
 an explicitly named stationarity metric. `budget_complete` means the requested
 updates ran, not convergence; CG separately reports `converged` or `max_steps`.
 Equal iteration budgets are **not** equal computational work.
