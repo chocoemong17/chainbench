@@ -14,6 +14,15 @@ green tests are not substitutes for useful and independently reviewable behavior
   fixtures, with portable trajectories, settings/input fingerprints and environment records.
 - A no-checkout quickstart and a concrete protocol/form for external reproduction feedback.
 
+## Visual communication priority
+
+External reproduction feedback showed that the main bottleneck is interpretation,
+not another algorithm count. Five of seven relayed outside users asked for graphs,
+and some users could not tell what the project was trying to show. The v0.3.0
+direction therefore makes claim-centered visual reports the primary human output:
+paper idea, observed trajectory, theoretical/reference curve, takeaway and caveat.
+Raw tables remain audit material.
+
 ## Next priorities after the configurable release
 
 1. Collect and triage **actual** external installation and interpretation feedback.

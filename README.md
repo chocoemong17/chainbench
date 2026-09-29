@@ -21,6 +21,35 @@ during evaluation without loosening the strict constructor. Internal reports and
 are maintainer-assisted evidence, not outside users or endorsements. No star or
 favorable review is requested.
 
+## Start with the visual report
+
+The recommended first human-facing output is a self-contained HTML report:
+
+```bash
+chainbench report --format html --output report.html
+```
+
+Open `report.html` in a browser. Each paper/check is presented as:
+
+**claim → what ChainBench measures → plot → takeaway → limitation**.
+
+Raw numerical values remain available in a collapsible appendix, JSON and CSV.
+To export one figure directly:
+
+```bash
+chainbench plot nesterov-1983 --output nesterov.svg
+```
+
+Configurable experiments can also be viewed visually:
+
+```bash
+chainbench experiment --preset quadratic --format html --output experiment.html
+```
+
+See [visual reports](docs/VISUAL_REPORTS.md) for the reading guide and
+[worst-case terminology](docs/WORST_CASES.md) for why a difficult sampled fixture
+is not automatically a certified worst case.
+
 ## Install and run
 
 Python 3.10 or newer is required. Use a fresh virtual environment:
@@ -94,6 +123,8 @@ The default suite contains **seven quantitative consistency conditions and one i
 ```bash
 chainbench check beck-teboulle-2009
 chainbench check all --json
+chainbench report --format html --output report.html
+chainbench plot beck-teboulle-2009 --output fista.svg
 chainbench report --format markdown --output report.md
 chainbench report --format csv --output report.csv
 chainbench report --format json --output report.json

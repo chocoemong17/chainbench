@@ -54,7 +54,8 @@ def verified_files(version: str, sha: str) -> list[Path]:
             or type(record.get("checks")) is not int or record["checks"] != len(slugs)
             or record.get("installed_outside_checkout") is not True
             or record.get("pip_check") != "passed"
-            or record.get("exports") != ["markdown", "csv", "json"]
+            or record.get("exports") != ["html", "markdown", "csv", "json"]
+            or record.get("plot_svg") != "passed"
         ):
             raise RuntimeError("Invalid or unsuccessful installed-package evidence")
         experiments = record.get("experiments")
@@ -68,7 +69,7 @@ def verified_files(version: str, sha: str) -> list[Path]:
             if (not isinstance(experiment, dict) or experiment.get("preset") != preset
                     or experiment.get("methods") != methods
                     or type(experiment.get("rows")) is not int or experiment["rows"] < len(methods)
-                    or experiment.get("exports") != ["json", "csv", "markdown"]
+                    or experiment.get("exports") != ["json", "csv", "markdown", "html"]
                     or experiment.get("saved_config_rerun") != "matched"
                     or not re.fullmatch(r"[0-9a-f]{64}", str(experiment.get("config_sha256", "")))):
                 raise RuntimeError("Invalid installed experiment evidence")

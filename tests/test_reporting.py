@@ -27,7 +27,7 @@ def test_csv_and_json_round_trip():
 
 def test_cli_report_writes_and_protects_existing_file(tmp_path):
     dest = tmp_path / "report.md"
-    args = ["report", "--output", str(dest)]
+    args = ["report", "--format", "markdown", "--output", str(dest)]
     assert main(args) == 0
     with pytest.raises(SystemExit) as exc:
         main(args)
