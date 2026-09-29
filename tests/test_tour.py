@@ -12,7 +12,11 @@ def validator():
     spec = importlib.util.spec_from_file_location('tour_smoke',
         Path(__file__).resolve().parents[1]/'scripts/smoke_workflows.py')
     module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
+    import sys
+    from unittest.mock import patch
+    with patch.object(sys, 'path', [str(Path(__file__).resolve().parents[1]/'scripts'), *sys.path]):
+        spec.loader.exec_module(module)
+        importlib.import_module('smoke_deblurring')
     return module.validate_tour
 
 
@@ -25,8 +29,10 @@ def tour_folder(tmp_path_factory):
 
 def test_generated_tour_hashes_links_coverage_and_independent_numerics(tour_folder):
     records = validator()(tour_folder)
-    assert len(records) == 13
+    assert len(records) == 14
     assert len(records['atlas.html']['results']) == 8
+    assert records['deblur.html']['parameters']['full_paper_budget']
+    assert len(records['deblur.html']['runs']['fista']['rows']) == 10001
     assert records['tight-gd.html']['matches_target']
     assert records['tight-gd.html']['observed_ratio'] == pytest.approx(1.)
     assert '<html lang="ko">' in (tour_folder/'index.html').read_text(encoding='utf8')

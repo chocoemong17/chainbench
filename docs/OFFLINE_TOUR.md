@@ -13,7 +13,7 @@ links are optional; embedded images, scripts and numerical records load locally.
 
 ## What is included
 
-The command generates fourteen HTML files and one manifest, currently about 35 MB
+The command generates fifteen HTML files and one manifest, currently about 43 MB
 uncompressed. It reuses existing computations with fixed, declared settings:
 
 | Page | Settings | Evidence level |
@@ -21,15 +21,18 @@ uncompressed. It reuses existing computations with fixed, declared settings:
 | `index.html` | Generated navigation and previews from the actual reports | Reading guide |
 | `atlas.html` | All eight fixed topics and their existing canonical fixtures | Symbolic explanations + canonical observations |
 | `shewchuk.html` | 12-update budget; published start and all nine added starts | Exact published setup + separate controlled variations |
+| `deblur.html` | 64×64 noiseless image; both methods at 10,000 updates | Published experiment protocol rerun with declared differences |
 | `simplex.html` | 18 updates; all 12 target/start combinations | Controlled geometry |
 | `proximal.html` | 18 updates; both methods for all nine lambda/start combinations | Controlled geometry |
 | `stress-<topic>.html` | Every topic; every seed 0–31; sampler v2 | Finite synthetic breadth |
 | `tight-gd.html` | Horizon 20; h=L=R=1 | Public tight construction within its stated scope |
 
 The index asks what to read next and distinguishes these evidence levels. The
-previews are extracted from the actual generated SVGs. They are static: full
+previews are extracted from the actual generated SVGs and the final FISTA reconstruction PNG. They are static: full
 interactive controls, raw samples and limitations remain in the linked reports.
-Every report has a return-to-tour link. Both Korean and English and native
+Every report has a return-to-tour link. The image experiment and proximal geometry
+have reciprocal links, labelled with their distinct lambda=0 versus positive-lambda
+settings; the atlas also links to the image experiment. Both Korean and English and native
 no-JavaScript reading are supported.
 
 The stress interval is fixed in advance, not selected by performance. Across
@@ -61,12 +64,13 @@ files created by that attempt are removed. The manifest is written last.
 
 Tests and installed wheel/sdist smoke inspect every file hash, local path/anchor,
 return link, all eight topics and all 32 seeds. Numerical validators check the
-published example and both geometries; installed standalone commands must reproduce
+published example, both geometries, tight case and image experiment; installed standalone commands must reproduce
 selected tour records exactly, including the unresolved case. Missing or changed
 artifacts and injected calculation/write failures are exercised.
 
-Browser CI opens all thirteen reports from the index and returns from each at
-1440px and 390px, verifies loaded previews and the preserved unresolved row, and
+Browser CI opens all fourteen reports from the index and returns from each at
+1440px and 390px, verifies loaded previews, the full image budget, reciprocal geometry links and the
+preserved unresolved row, and
 checks language, overflow, offline operation and a no-JavaScript reading path.
 The release gate requires `offline_tour: matched` for both distribution formats.
 

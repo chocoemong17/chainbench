@@ -162,6 +162,8 @@ def exercise_workflows(cli, work, env, version, run):
     deblur_args = [cli, 'reproduce', 'fista-deblurring']
     deblur = json.loads(run(deblur_args + ['--format', 'json'], work, env))
     validate_deblurring(deblur)
+    if deblur != tour_records['deblur.html']:
+        raise RuntimeError('tour deblurring differs from the installed standalone command')
     deblur_html = run(deblur_args + ['--lang', 'ko'], work, env)
     if extract_record(deblur_html) != deblur or deblur['parameters']['steps'] != 10000:
         raise RuntimeError('installed deblurring HTML differs from the full published budget')
@@ -177,7 +179,7 @@ def validate_tour(folder):
     manifest = json.loads((folder/'manifest.json').read_text(encoding='utf8'))
     topics = {'gd-baseline', 'nesterov-1983', 'polyak-1964', 'hestenes-stiefel-1952',
               'jaggi-2013', 'rockafellar-1976', 'beck-teboulle-2009', 'ista-vs-fista'}
-    expected = {'index.html', 'atlas.html', 'shewchuk.html', 'simplex.html', 'proximal.html', 'tight-gd.html'}
+    expected = {'index.html', 'atlas.html', 'shewchuk.html', 'simplex.html', 'proximal.html', 'tight-gd.html', 'deblur.html'}
     expected.update('stress-'+topic+'.html' for topic in topics)
     if (manifest.get('kind') != 'chainbench.offline-tour' or manifest.get('start') != 'index.html'
             or len(manifest['artifacts']) != len(expected)
@@ -231,6 +233,10 @@ def validate_tour(folder):
     validate_simplex_geometry(records['simplex.html'])
     validate_proximal_geometry(records['proximal.html'])
     validate_tight_geometry(records['tight-gd.html'])
+    from smoke_deblurring import validate_deblurring
+    validate_deblurring(records['deblur.html'])
+    if records['deblur.html']['parameters']['steps'] != 10000:
+        raise RuntimeError('tour omitted the full published image budget')
     info = records['stress-ista-vs-fista.html']
     if info['rows'][24]['metric'] is not None or info['rows'][24]['status'] != 'unresolved':
         raise RuntimeError('tour must retain the unresolved case')

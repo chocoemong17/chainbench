@@ -6,6 +6,8 @@
   using a permission-preserving port of the public procedural image. Retain every
   scalar observation, declared full-precision snapshots, source differences and
   both objective/image error; do not treat source magnitudes as exact targets.
+- Link the full image experiment into the offline tour with an actual reconstruction
+  preview and reciprocal, scope-labelled proximal geometry links.
 - Stream the existing proximal recurrence for the 10,000-step experiment while
   preserving public Trace outputs. Independently check operators, coordinates,
   installs and displayed pixels; keep long final-axis labels inside SVG bounds.

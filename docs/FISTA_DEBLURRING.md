@@ -24,6 +24,8 @@ python -m chainbench reproduce fista-deblurring --format json --output deblur.js
 python -m chainbench reproduce fista-deblurring --steps 200 --output preview.html
 ```
 
+The generated `tour` includes this full 10,000-step report and links it to the
+positive-lambda proximal geometry. The atlas supplies the standalone command too.
 The old `reproduce shewchuk-1994` default remains 12 updates. This new default is
 10,000, with a hard 1–10,000 limit and fixed 64×64 inputs. No noise seed, resampling,
 parameter search or visual selection is involved. One source experiment is not

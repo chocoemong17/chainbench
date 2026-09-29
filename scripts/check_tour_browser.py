@@ -27,10 +27,11 @@ def main():
             page.on('request', lambda r: evidence['network_requests'].append(r.url)
                     if r.url.startswith(('http:', 'https:')) else None)
             page.goto(url)
-            assert page.locator('img').count() == 5
+            assert page.locator('img').count() == 6
             assert page.locator('img').evaluate_all('(els)=>els.every(e=>e.complete&&e.naturalWidth>0)')
             assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
             page.screenshot(path=str(args.output/f'index-{width}.png'), full_page=True)
+            page.locator('#image-experiment').screenshot(path=str(args.output/f'image-experiment-{width}.png'))
             page.locator('#geometry').screenshot(path=str(args.output/f'geometry-{width}.png'))
             page.locator('#breadth').screenshot(path=str(args.output/f'breadth-{width}.png'))
             for artifact in manifest['artifacts']:
@@ -40,6 +41,7 @@ def main():
                 link = page.locator('a[href="'+filename+'"]')
                 expect(link).to_have_count(1)
                 link.click()
+                page.wait_for_url('**/'+filename, wait_until='load')
                 expect(page.locator('#chainbench-evidence')).to_have_count(1)
                 assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
                 assert page.url.endswith('/'+filename)
@@ -48,12 +50,21 @@ def main():
                     assert [r['seed'] for r in record['rows']] == list(range(32))
                     assert record['rows'][24]['status'] == 'unresolved'
                     assert record['rows'][24]['metric'] is None
+                if filename == 'deblur.html':
+                    record = json.loads(page.locator('#chainbench-evidence').text_content())
+                    assert record['parameters']['steps'] == 10000
+                    page.locator('[data-tour-related]').click()
+                    page.wait_for_url('**/proximal.html', wait_until='load')
+                    assert page.url.endswith('/proximal.html')
+                    page.locator('[data-tour-related]').click()
+                    page.wait_for_url('**/deblur.html', wait_until='load')
+                    assert page.url.endswith('/deblur.html')
                 page.locator('[data-tour-home]').click()
                 assert page.url == url
             page.locator('[data-action="language"]').click()
             assert page.locator('html').get_attribute('lang') == 'en'
             assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
-            evidence['viewports'].append({'width': width, 'reports_opened': 13,
+            evidence['viewports'].append({'width': width, 'reports_opened': 14,
                 'return_links': 'passed', 'preview_images': 'loaded', 'all_seeds': 'retained',
                 'unresolved_seed24': 'retained', 'language': 'passed', 'overflow': False})
             context.close()
