@@ -143,6 +143,6 @@ def test_new_cli_workflows_write_html_and_json(tmp_path):
         "landscape", "--condition-number", "60", "--steps", "8", "--lang", "ko",
         "--methods", "gd", "smooth-fista", "cg", "--output", str(landscape),
     ]) == 0
-    assert stress.read_text().startswith("<!doctype html>")
-    assert json.loads(raw.read_text())["kind"] == "chainbench.stress"
-    assert landscape.read_text().count("<svg") >= 3
+    assert stress.read_text(encoding="utf-8").startswith("<!doctype html>")
+    assert json.loads(raw.read_text(encoding="utf-8"))["kind"] == "chainbench.stress"
+    assert landscape.read_text(encoding="utf-8").count("<svg") >= 3
