@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.4.0 - 2026-09-29 (experimental alpha)
+
+- Add bilingual offline learning pages and normalized bound interpretations.
+- Add one-factor parameter sweeps with a shared validated work budget.
+- Add strict saved-experiment replay with numeric/input/environment comparisons.
+- Add the public Drori--Teboulle tight GD Huber case, with explicit scope and source.
+- Extend installed wheel/sdist evidence and release gates to all four workflows.
+- Preserve old releases, the eight-item suite and the historical v0.2.0 review kit.
+
 ## 0.3.0 - 2026-09-29 (experimental alpha)
 
 - Make HTML the default fixed-suite report: overview previews, selected paper messages,

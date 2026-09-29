@@ -38,3 +38,7 @@ A future worst-case demonstration should name, from public literature:
 Private or unpublished derivations are outside this repository. A literature-motivated
 hard example may be added without being called worst-case if it is useful and honestly
 labeled.
+
+## Implemented in v0.4.0: one explicit tight GD construction
+
+The new `case-study gd-tight` command illustrates Drori--Teboulle's public construction for constant-step GD with 0<h<=1. It is not a general search facility. The matching theorem, function, horizon and limitations are specified in [GD_TIGHT_CASE.md](GD_TIGHT_CASE.md).

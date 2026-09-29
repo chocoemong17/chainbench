@@ -80,3 +80,7 @@ For quadratics it is `||Qx-b||_2`. For diagonal LASSO it is the norm of
 norms. Fixture formulas and output semantics are specified in [EXPERIMENTS.md](EXPERIMENTS.md).
 No new mathematical theorem, original dataset reproduction or general performance
 ranking is introduced by this interface.
+
+## Learning and the separate tight-GD case (v0.4.0)
+
+The `learn` pages explain selected existing results rather than expanding the eight fixed checks. The new `case-study gd-tight` is separately sourced to Drori--Teboulle preprint Theorems 3.1 and 3.2. See [GD_TIGHT_CASE.md](GD_TIGHT_CASE.md): a horizon-dependent Huber function attains LR²/(4Nh+2) for GD step h/L, restricted to 0<h<=1. The theorem supplies extremality; a floating-point match does not prove it.

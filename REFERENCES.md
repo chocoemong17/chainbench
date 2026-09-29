@@ -32,3 +32,9 @@ https://proceedings.mlr.press/v28/jaggi13.html
 
 R. T. Rockafellar (1976). Monotone Operators and the Proximal Point Algorithm. SIAM Journal on Control and Optimization, 14(5), 877-898. Foundational PPA source; the experiment uses the directly derived quadratic resolvent specialization documented in SOURCE_MAP.
 https://doi.org/10.1137/0314056
+
+## Tight GD case study
+
+Drori, Y. and Teboulle, M. (2014), *Performance of first-order methods for smooth convex minimization: a novel approach*, Mathematical Programming 145, 451–482. DOI: https://doi.org/10.1007/s10107-013-0653-0
+
+Implemented source: public preprint https://arxiv.org/pdf/1206.3209, Theorems 3.1/3.2, restricted to 0<h<=1. See docs/GD_TIGHT_CASE.md for the horizon-dependent 1D specialization.

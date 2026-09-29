@@ -81,7 +81,10 @@ def verified_files(version: str, sha: str) -> list[Path]:
             or not re.fullmatch(r"[0-9a-f]{64}", str(controls.get("seeded_config_sha256", "")))
         ):
             raise RuntimeError("Missing installed instance-control evidence")
-        summary = (slugs, statuses, experiments, controls)
+        advanced = record.get("advanced_workflows")
+        if advanced != {"learning": "matched", "sweep": "matched", "replay": "matched", "gd_tight": "matched"}:
+            raise RuntimeError("Missing installed learning-workflow evidence")
+        summary = (slugs, statuses, experiments, controls, advanced)
         if baseline is not None and summary != baseline:
             raise RuntimeError("Wheel and sdist results disagree")
         baseline = summary
