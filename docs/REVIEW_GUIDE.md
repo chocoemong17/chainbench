@@ -12,17 +12,18 @@ a new checkout and pin the implementation behind the previews:
 ```bash
 git clone https://github.com/chocoemong17/chainbench.git chainbench-review
 cd chainbench-review
-git checkout --detach 031d4e5ab9b6da8dc6a82306234170629f7495d0
+git checkout --detach ae20f1d869a39a3d3e3d30a51d9f31b0343c1b18
 python -m pip install .
 git rev-parse HEAD
 python -m chainbench tour --lang ko --output tour
 ```
 
 Open `tour/index.html`. This immutable computation snapshot includes every command
-on this page, including the CG metric view, heavy-ball counterexample and earlier stacked features.
-The [development issue](https://github.com/chocoemong17/chainbench/issues/69) links
+on this page, including the five-method landscape comparison, CG metric view,
+heavy-ball counterexample and earlier stacked features.
+The [development issue](https://github.com/chocoemong17/chainbench/issues/71) links
 its PR and CI evidence, where the exact tested PR-head commit is recorded. The
-implementation snapshot has 711 tests; documentation-only updates can follow it.
+implementation snapshot has 731 tests; documentation-only updates can follow it.
 Pipeline checks are maintainer validation, not independent review or a guarantee
 over arbitrary inputs.
 
@@ -30,7 +31,7 @@ The checkout is intentionally detached for an identifiable review. The commands
 do not merge PRs or publish a release. The package version still says 0.5.0, so
 record the commit too. New README edits may postdate this implementation snapshot.
 
-The tour generates sixteen HTML files and a manifest, about 45 MB uncompressed.
+The tour generates seventeen HTML files and a manifest, about 45 MB uncompressed.
 Use a new output directory; existing directories are refused. After generation,
 share the whole folder. It needs no server, account or network to read. The original
 papers' links require a connection; all report content and controls are local.
@@ -69,6 +70,12 @@ Next, open **Simplex geometry** or **Proximal geometry**. Inspect one oracle ver
 or one extrapolate → gradient → shrinkage sequence. Try another declared case.
 The 3D chords join computed samples; their interiors are not trajectories on the
 objective surface. These cases explain movement but are not representative samples.
+
+Open **Five methods on the same quadratic** (`landscape.html`) to compare fixed
+steps, momentum, CG and exact quadratic PPA. Read the method settings and actual
+iteration indices above the linked plots. Early-stopped CG holds its last computed
+point; PPA solves a linear system at each update. Equal iteration counts do not
+mean equal work or time. [Input and projection contract](LANDSCAPE_CONTEXT.md).
 
 ### 3. Look at a published failure of quadratic tuning
 
