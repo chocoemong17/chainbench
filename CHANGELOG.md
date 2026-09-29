@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased
+
+- Recompute the published 2D setup in Shewchuk (1994), Figures 8 and 30, using exact
+  line-search steepest descent and existing CG. New `reproduce shewchuk-1994` exports
+  bilingual offline HTML or full JSON with inputs, metrics, termination and hashes.
+- Connect equal-aspect contours, projected 3D heights, energy errors and iteration
+  inspection; expose all nine declared extra starts as separate controlled variations.
+- Add rational/geometry/CLI regression checks and optional offline browser inspection.
+  Require installed reproduction evidence for both wheel and sdist before publication.
+
 ## 0.5.0 - 2026-09-29 (experimental alpha)
 
 - Separate four evidence layers: public literature claim, one canonical illustration,

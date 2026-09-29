@@ -1,3 +1,16 @@
+## After v0.5.0: published examples before algorithm counts
+
+- Implemented on the development branch: exact-setup numerical reproduction of
+  Shewchuk Figures 8 and 30, linked geometry/energy views, and every start in a declared
+  nine-point grid. See [the source and scope](docs/SHEWCHUK_REPRODUCTION.md).
+- Next geometry candidate: Frank–Wolfe simplex/oracle movement, explicitly tied to
+  Jaggi Algorithm 1. Next breadth candidate: inspectable individual and quantile cases
+  across the existing seeded stress dimensions and spectra.
+- FISTA image deblurring remains a candidate requiring an audit of the exact source
+  image's reuse terms and boundary/wavelet/noise conventions. A substitute image must
+  not be called the original paper's reproduced figure.
+- The new command is not yet a release; previous tags/assets remain unchanged.
+
 ## v0.5.0: evidence breadth and geometry
 
 - Label the first paper plot as a canonical illustration rather than representative evidence.

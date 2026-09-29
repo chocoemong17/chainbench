@@ -5,8 +5,10 @@ No package imports from the checkout are used here.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import math
+import struct
 from html.parser import HTMLParser
 
 
@@ -98,5 +100,53 @@ def exercise_workflows(cli, work, env, version, run):
             or set(landscape['methods']) != {'gd', 'smooth-fista', 'cg'}):
         raise RuntimeError('landscape evidence differs from computed JSON')
 
+    reproduce_args = [cli, 'reproduce', 'shewchuk-1994', '--steps', '6']
+    reproduction = json.loads(run(reproduce_args + ['--format', 'json'], work, env))
+    html = run(reproduce_args + ['--lang', 'ko'], work, env)
+    validate_reproduction(reproduction)
+    if extract_record(html) != reproduction or html.count('data-repro-case=') != 10:
+        raise RuntimeError('published-example HTML differs from installed calculations')
+
     return {'learning':'matched','sweep':'matched','replay':'matched','gd_tight':'matched',
-            'stress':'matched','landscape':'matched'}
+            'stress':'matched','landscape':'matched','shewchuk_reproduction':'matched'}
+
+
+def validate_reproduction(result):
+    """Independent scalar checks; no imports from the package being tested."""
+    p = result['problem']
+    if (result['kind'] != 'chainbench.reproduction' or p['A'] != [[3, 2], [2, 6]]
+            or p['b'] != [2, -8] or p['x_star'] != [2, -2] or p['f_star'] != -10):
+        raise RuntimeError('published problem setup differs')
+    cases = result['cases']
+    if (len(cases) != 10 or cases[0]['start'] != [-2, -2]
+            or {tuple(c['start']) for c in cases[1:]} != {
+                (x, y) for x in [-3, 0, 3] for y in [-4, 0, 3]}):
+        raise RuntimeError('published example or complete start grid missing')
+    cg = cases[0]['runs']['cg']
+    if (cg['updates'] != 2 or cg['termination'] != 'converged'
+            or len(cg['rows']) != 3
+            or not math.isclose(cg['rows'][1]['x'][0], 2/25, abs_tol=1e-13)
+            or not math.isclose(cg['rows'][1]['x'][1], -46/75, abs_tol=1e-13)):
+        raise RuntimeError('CG differs from independent first-step calculation')
+    for case in cases:
+        digest = hashlib.sha256(struct.pack('<9d', 3, 2, 2, 6, 2, -8, 0, *case['start'])).hexdigest()
+        if case['input_sha256'] != digest:
+            raise RuntimeError('input fingerprint differs from actual inputs')
+        for method in ('sd', 'cg'):
+            trace = case['runs'][method]
+            rows = trace['rows']
+            if (trace['updates'] != len(rows)-1 or rows[0]['x'] != case['start']
+                    or trace['termination'] not in ('converged', 'max_steps')):
+                raise RuntimeError('invalid reproduction trajectory')
+            for k, row in enumerate(rows):
+                x, y = row['x']
+                gap = (3*(x-2)**2 + 4*(x-2)*(y+2) + 6*(y+2)**2)/2
+                norm = math.hypot(2-3*x-2*y, -8-2*x-6*y)
+                if (row['iteration'] != k
+                        or not math.isclose(row['gap'], gap, rel_tol=1e-12, abs_tol=1e-25)
+                        or not math.isclose(row['energy_error'], math.sqrt(2*gap), abs_tol=1e-13)
+                        or not math.isclose(row['residual_norm'], norm, abs_tol=1e-13)):
+                    raise RuntimeError('reproduction metric is not tied to the iterates')
+            converged = rows[-1]['residual_norm'] <= 1e-12*rows[0]['residual_norm']
+            if (trace['termination'] == 'converged') != converged:
+                raise RuntimeError('reproduction termination differs from true residual')

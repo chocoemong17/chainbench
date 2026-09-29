@@ -21,6 +21,8 @@ from .landscape import METHODS as LANDSCAPE_METHODS
 from .landscape import landscape_html, run_landscape
 from .learning import learning_html
 from .reporting import render_json, render_report, result_status
+from .reproduction_views import reproduction_html
+from .reproductions import run_reproduction
 from .stress import TOPICS as STRESS_TOPICS
 from .stress import run_stress, stress_html
 from .visuals import render_check_svg
@@ -279,6 +281,14 @@ def main(argv: list[str] | None = None) -> int:
     landscape.add_argument("--output", type=Path)
     landscape.add_argument("--force", action="store_true")
 
+    reproduce = sub.add_parser("reproduce", help="recompute an exact published numerical example")
+    reproduce.add_argument("name", choices=["shewchuk-1994"])
+    reproduce.add_argument("--steps", type=int, default=12)
+    reproduce.add_argument("--lang", choices=["en", "ko"], default="en")
+    reproduce.add_argument("--format", choices=["html", "json"], default="html")
+    reproduce.add_argument("--output", type=Path)
+    reproduce.add_argument("--force", action="store_true")
+
     case = sub.add_parser("case-study", help="reproduce a specific public tight GD example")
     case.add_argument("name", choices=["gd-tight"])
     case.add_argument("--horizon", type=int, default=20)
@@ -341,6 +351,12 @@ def main(argv: list[str] | None = None) -> int:
                 if args.format == "html"
                 else json.dumps(result, indent=2, allow_nan=False)
             )
+            _write(args.output, text, args.force)
+            return 0
+        if args.command == "reproduce":
+            result = run_reproduction(args.steps)
+            text = (reproduction_html(result, args.lang) if args.format == "html"
+                    else json.dumps(result, indent=2, allow_nan=False))
             _write(args.output, text, args.force)
             return 0
         if args.command == "case-study":

@@ -12,6 +12,21 @@ solver, a theorem prover, or a reproduction of every experiment in the cited pap
 
 ## 1. Start with a question, not a table
 
+**New in the development source (after v0.5.0):** independently recompute the
+published setup behind Shewchuk's Figures 8 and 30, with linked contours, 3D heights,
+actual iterate inspection and all nine additional starting points:
+
+```bash
+python -m chainbench reproduce shewchuk-1994 --lang ko --output paper.html
+```
+
+This is a specific published numerical example, with explicit differences from the
+source figures; the nine variations are labelled separately. See the
+[source/setup/validation contract](docs/SHEWCHUK_REPRODUCTION.md).
+The command requires a source install; it is not in the frozen v0.5.0 wheel below.
+
+For the full eight-topic learning atlas:
+
 ```bash
 python -m chainbench learn --lang ko --output learn.html
 ```

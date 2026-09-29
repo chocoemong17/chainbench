@@ -1,5 +1,8 @@
 # Learn, sample many cases, inspect geometry, vary one thing, and replay (v0.5.0)
 
+For the new development-source `reproduce shewchuk-1994` workflow (not bundled in the
+v0.5.0 release), see [the published-example guide](SHEWCHUK_REPRODUCTION.md).
+
 This release adds four bounded workflows to the existing engine. None requires a
 server, API key, telemetry, a new solver or a new runtime dependency. HTML outputs
 contain calculated observations; browser controls change their presentation, not

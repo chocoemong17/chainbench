@@ -62,6 +62,16 @@ Quantitative bound checks allow 1e-10 in the normalized ratio. The checked-in re
 
 Full bibliographic links are in [REFERENCES.md](../REFERENCES.md).
 
+## Separate published-example reproduction (after v0.5.0)
+
+`reproduce shewchuk-1994` independently recomputes the particular numerical setup in
+Shewchuk Eq. (4), with steepest descent Eqs. (10)–(12)/Figure 8 and CG
+Eqs. (45)–(49)/Figure 30. This is distinct from the fixed-suite synthetic CG fixture
+above. Exact line-search steepest descent is not fixed-step `gradient_descent`.
+The envelope is Eq. (52). See [source locations, mathematical inputs, differences,
+license scope and validation](SHEWCHUK_REPRODUCTION.md). The nine additional starts,
+3D view and energy chart are ChainBench additions, not original-paper figures.
+
 ## Post-release validation notes (v0.1.1)
 
 The quadratic constructor requires stationarity to relative floating precision, without an absolute tolerance floor; callers should build `b=Q@x_star` from their supplied symmetric matrix. `gap` is the energy error relative to that reference, and its interpretation as an optimality gap assumes a valid reference solution. This numeric reference check is not symbolic certification.

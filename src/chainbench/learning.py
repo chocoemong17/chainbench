@@ -258,6 +258,7 @@ def learning_html(focus: str | None = None, lang: str = 'en') -> str:
                         + bi('다음에 직접 바꿔볼 실험', 'A controlled experiment to try next') + '</summary><pre>'
                         + escape(lesson['command']) + '\n\n# many seeded cases\nchainbench stress ' + escape(slug) + ' --trials 24 --seed 0 --lang ko --output stress.html'
                         + ('\n\n# contour + 3D geometry\nchainbench landscape --condition-number 80 --methods gd smooth-fista heavy-ball cg proximal-point --lang ko --output landscape.html' if lesson['category'] in ('smooth','quadratic') else '')
+                        + ('\n\n# published example: Shewchuk Figures 8 and 30\nchainbench reproduce shewchuk-1994 --lang ko --output paper.html' if slug == 'hestenes-stiefel-1952' else '')
                         + '</pre></details><p class="small"><a href="'
                         + SOURCE_LINKS[slug] + '">' + escape(result.reference) + '</a></p></section>')
     record = evidence_record(results, charts)

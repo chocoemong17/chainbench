@@ -1,5 +1,9 @@
 # Visual reports
 
+The development-source [Shewchuk reproduction](SHEWCHUK_REPRODUCTION.md) connects
+equal-scale coordinates, projected 3D objective gaps, energy errors and full numerical
+records. Original-paper setup and added controlled variations have separate labels.
+
 The HTML report is the primary human-readable ChainBench output (tracked in issue #34). It is designed to
 answer the question that raw tables do not: **what should I notice about this paper?**
 

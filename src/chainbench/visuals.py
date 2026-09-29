@@ -176,9 +176,11 @@ def _fmt(value: float) -> str:
     return f"{value:.4g}"
 
 
-def render_line_chart(spec: ChartSpec, width: int = 760, height: int = 400) -> str:
+def render_line_chart(spec: ChartSpec, width: int = 760, height: int = 400,
+                      *, colors: tuple[str, ...] | None = None) -> str:
     """Render finite samples without inventing positive values for logarithmic zeros."""
     import json
+    import re
     import textwrap
     from dataclasses import asdict
 
@@ -187,6 +189,9 @@ def render_line_chart(spec: ChartSpec, width: int = 760, height: int = 400) -> s
         raise ValueError("chart dimensions must be bounded integers")
     if spec.y_scale not in ("linear", "log") or not spec.series:
         raise ValueError("chart needs series and a linear or log y_scale")
+    if colors is not None and (len(colors) != len(spec.series)
+                              or any(not re.fullmatch(r"#[0-9a-fA-F]{6}", c) for c in colors)):
+        raise ValueError("colors must supply one six-digit hex color per series")
     for series in spec.series:
         _series(series.label, series.x, series.y, series.role)
         if any(b <= a for a, b in zip(series.x, series.x[1:])):
@@ -257,7 +262,7 @@ def render_line_chart(spec: ChartSpec, width: int = 760, height: int = 400) -> s
     parts.append(text(left + plot_w / 2, height - 31, spec.x_label, 13, "middle"))
     parts.append(f'<text transform="translate(18 {top + plot_h / 2}) rotate(-90)" '
                  f'text-anchor="middle" fill="#334155" font-size="12">{escape(spec.y_label)}</text>')
-    palette = ("#2563eb", "#dc2626", "#059669", "#7c3aed", "#d97706", "#0891b2")
+    palette = colors or ("#2563eb", "#dc2626", "#059669", "#7c3aed", "#d97706", "#0891b2")
     patterns = ("", "7 4", "2 3", "9 3 2 3", "12 4", "4 2")
     for i, series in enumerate(spec.series):
         color = palette[i % len(palette)]

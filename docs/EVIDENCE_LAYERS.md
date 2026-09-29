@@ -22,6 +22,15 @@ Only when public literature supplies both an upper bound and a matching extremal
 
 A difficult random sample is not a certified worst case.
 
+## Published-example reproduction (development source after v0.5.0)
+
+`reproduce shewchuk-1994` adds a precisely scoped **published-example reproduction**:
+the stated numerical setup behind Figures 8 and 30, independently recomputed.
+That provenance is stronger than an arbitrary teaching fixture, but still does not
+make a single example representative, worst-case or a proof. The extra nine starts
+are labelled **controlled variations**, all on the same matrix. See the
+[full reproduction contract](SHEWCHUK_REPRODUCTION.md).
+
 ## Geometry is a fifth view, not a fifth proof
 
 `chainbench landscape` places the **same numerical run** on a contour map, a 3D objective surface and a convergence chart. It is designed to explain zig-zagging, momentum, conjugate directions and implicit steps. The 2D problem is deliberately chosen for visual clarity, so it belongs to the illustration layer rather than the stress layer.
