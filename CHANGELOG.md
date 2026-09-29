@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.2.1 - 2026-09-29 (experimental alpha)
+
+- Add `QuadraticProblem.from_reference(Q, x_star)` for the explicit case where the
+  right-hand side is derived from a declared reference point. Inputs are promoted to
+  float64 before `b` is computed, preserving strict stationary-reference semantics.
+- Keep the three-argument `QuadraticProblem(Q, b, x_star)` constructor strict for
+  independently supplied systems and make its precision-mismatch error actionable.
+- Add a regression reproducing float32 matrix-vector rounding that previously caused
+  a surprising constructor rejection, without weakening the exact-reference check.
+- Add concrete workflows for implementation regression checks, condition-number
+  sensitivity, trajectory inspection, cross-machine reproduction, and float32 input
+  construction. These are documented workflows, not claims of external adoption.
+
+
 ## 0.2.0 - 2026-09-29 (experimental alpha)
 
 - Add installed `preset` and `experiment` commands and the Python experiment API;
