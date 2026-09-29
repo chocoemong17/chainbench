@@ -92,9 +92,12 @@ def exercise_workflows(cli, work, env, version, run):
             or not math.isclose(case['rows'][-1]['x'], 2/3, abs_tol=1e-14)
             or not math.isclose(case['observed_ratio'],1,abs_tol=1e-12)):
         raise RuntimeError('public Huber case failed independent N=1 calculation')
+    validate_tight_geometry(case)
     html = run([cli,'case-study','gd-tight','--horizon','1'],work,env)
     if extract_record(html) != case:
         raise RuntimeError('case-study HTML differs from computed JSON')
+    large = json.loads(run([cli, 'case-study', 'gd-tight', '--horizon', '500', '--format', 'json'], work, env))
+    validate_tight_geometry(large)
     stress_args = [cli, 'stress', 'nesterov-1983', '--trials', '3', '--seed', '9']
     stress = json.loads(run(stress_args + ['--format', 'json'], work, env))
     stress_page = run(stress_args, work, env)
@@ -219,10 +222,56 @@ def validate_tour(folder):
     validate_reproduction(records['shewchuk.html'])
     validate_simplex_geometry(records['simplex.html'])
     validate_proximal_geometry(records['proximal.html'])
+    validate_tight_geometry(records['tight-gd.html'])
     info = records['stress-ista-vs-fista.html']
     if info['rows'][24]['metric'] is not None or info['rows'][24]['status'] != 'unresolved':
         raise RuntimeError('tour must retain the unresolved case')
     return records
+
+
+def validate_tight_geometry(result):
+    c, geometry = result['config'], result.get('geometry')
+    if not geometry or geometry.get('kind') != 'huber-function-geometry':
+        raise RuntimeError('tight-GD geometry is missing')
+    n, L, R, h = c['horizon'], c['L'], c['R'], c['h']
+    a = R/(2*n*h+1)
+    def close(x,y):
+        if not math.isfinite(x) or not math.isfinite(y) or not math.isclose(x,y,rel_tol=2e-10,abs_tol=0.):
+            raise RuntimeError('tight-GD geometry disagrees with the public construction')
+    def value(x):
+        return L*(x*x/2 if abs(x)<=a else a*abs(x)-a*a/2)
+    close(result['transition'], a)
+    close(geometry['x_scale'], a)
+    close(geometry['value_scale'], L*a*a)
+    points = result['charts']['function']['series'][0]
+    if (len(points['x']) != len(points['y']) or -a not in points['x'] or a not in points['x']
+            or sum(-a<=x<=a for x in points['x']) < 81):
+        raise RuntimeError('tight-GD curve does not resolve its quadratic centre')
+    for x,y in zip(points['x'],points['y']):
+        close(y,value(x))
+    u, values = geometry['normalized_x'], geometry['normalized_value']
+    if (len(u) != len(values) or len(u) < 81 or not {-2.,-1.,0.,1.,2.}.issubset(u)
+            or any(y<=x for x,y in zip(u,u[1:]))):
+        raise RuntimeError('tight-GD normalized coordinates are missing')
+    for x,y in zip(u,values):
+        close(y, x*x/2 if abs(x)<=1 else abs(x)-.5)
+    joins = geometry.get('transition_points', [])
+    if len(joins) != 2:
+        raise RuntimeError('tight-GD transition evidence is missing')
+    for sign, join in zip((-1,1), joins):
+        close(join['x'], sign*a)
+        close(join['value'], L*a*a/2)
+        close(join['gradient'], sign*L*a)
+    rows = result['rows']
+    if len(rows) != n+1 or [r['iteration'] for r in rows] != list(range(n+1)):
+        raise RuntimeError('tight-GD recorded steps are incomplete')
+    for r in rows:
+        close(r['x'], R-r['iteration']*h*a)
+        close(r['gradient'], L*a)
+        close(r['gap'], value(r['x']))
+        if r['x'] <= a:
+            raise RuntimeError('tight-GD point left the affine construction')
+    close(result['rows'][-1]['gap'], L*R*R/(4*n*h+2))
 
 
 def validate_proximal_geometry(result):

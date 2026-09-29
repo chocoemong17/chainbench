@@ -1,5 +1,9 @@
 ## After v0.5.0: published examples before algorithm counts
 
+- Tight-GD now resolves its shrinking quadratic centre, exposes every actual
+  step and constant gradient, and explains the algebraic attainment separately
+  from the class-wide bound. See [source and scope](docs/GD_TIGHT_CASE.md).
+
 - The development-source `tour` command connects these reports through one offline
   reading path, with explicit evidence levels, all seeded cases and file hashes.
   See [the bounded bundle](docs/OFFLINE_TOUR.md).

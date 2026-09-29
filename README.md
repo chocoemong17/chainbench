@@ -190,6 +190,10 @@ an independent person ran the original. Missing/non-finite evidence is an error.
 python -m chainbench case-study gd-tight --horizon 20 --lang ko --output tight.html
 ```
 
+Inspect the actual GD points and constant gradients beside a resolved view of the
+quadratic centre. The normalized inset stays readable at large horizons. The page
+shows why the final value attains the bound for this horizon-specific function.
+
 The separate Drori–Teboulle case constructs a one-dimensional Huber objective that
 attains a specific published bound for constant-step GD with `0<h<=1`. Changing the
 horizon changes the function. The mathematical worst-case assertion comes from the

@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Resolve the narrow quadratic centre of the tight-GD construction with samples
+  at its exact joins and a normalized inset. Inspect every actual GD point and
+  its constant gradient; explain algebraic attainment separately from the bound.
+- Verify the geometry at maximum horizon and extreme allowed scales, in installed
+  distributions and offline browsers. Existing recurrence and bound values stay fixed.
+
 - Add `tour --output NEW_DIRECTORY`: a guided offline index with actual SVG previews,
   the learning atlas, published example, both geometry views, all eight stress topics
   at seeds 0–31 and the public tight-GD case. Keep all raw records and return links.
