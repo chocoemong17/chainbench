@@ -1,14 +1,19 @@
 """Geometry-first two-dimensional visualizations for supported optimization methods."""
 from __future__ import annotations
 
-import json
 import math
 from html import escape
 
 import numpy as np
 
 from ._pages import bi, evidence, page
-from .methods import accelerated_gradient, conjugate_gradient, gradient_descent, heavy_ball, proximal_point
+from .methods import (
+    accelerated_gradient,
+    conjugate_gradient,
+    gradient_descent,
+    heavy_ball,
+    proximal_point,
+)
 from .problems import QuadraticProblem
 from .visuals import ChartSpec, LineSeries, render_line_chart
 
@@ -115,8 +120,11 @@ def contour_svg(result: dict, width: int = 720, height: int = 500, methods: tupl
     levels = np.geomspace(max(corner * 0.01, 1e-4), corner * .9, 8)
     left, right, top, bottom = 58., 24., 42., 52.
     pw, ph = width - left - right, height - top - bottom
-    sx = lambda x: left + (x - xmin) / (xmax - xmin) * pw
-    sy = lambda y: top + (ymax - y) / (ymax - ymin) * ph
+    def sx(x):
+        return left + (x - xmin) / (xmax - xmin) * pw
+
+    def sy(y):
+        return top + (ymax - y) / (ymax - ymin) * ph
     parts = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-label="Contour trajectories">',
              '<rect width="100%" height="100%" rx="18" fill="#fbfaf7"/>',
              '<text x="58" y="27" font-size="17" font-weight="700" fill="#172238">Contour map: where each method moves</text>']
@@ -165,7 +173,8 @@ def surface_svg(result: dict, width: int = 720, height: int = 500) -> str:
         return xn - yn, .48 * (xn + yn) - 1.55 * zn
 
     raw_grid = [raw(float(x), float(y), _gap(result, float(x), float(y))) for x in xs for y in ys]
-    rx = [p[0] for p in raw_grid]; ry = [p[1] for p in raw_grid]
+    rx = [p[0] for p in raw_grid]
+    ry = [p[1] for p in raw_grid]
     margin_x, margin_y = 55., 58.
     scale_x = (width - 2 * margin_x) / (max(rx) - min(rx))
     scale_y = (height - 2 * margin_y) / (max(ry) - min(ry))
