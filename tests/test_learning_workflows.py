@@ -220,7 +220,8 @@ def test_config_digest_cannot_hide_normalization(saved):
         validate_saved_experiment(saved)
 
 
-@pytest.mark.parametrize('text', ['{"x":1,"x":2}', '{"x":NaN}', '[1,2]', '{}', 'a'*8_000_001])
+@pytest.mark.parametrize('text', ['{"x":1,"x":2}', '{"x":NaN}', '[1,2]', '{}', 'a'*8_000_001],
+                         ids=['duplicate-keys', 'nonfinite', 'nonobject', 'empty', 'oversize'])
 def test_strict_saved_json(text):
     with pytest.raises(ValueError):
         load_report(text)
