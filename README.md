@@ -9,6 +9,17 @@ ChainBench implements established methods on deterministic problems with exact r
 
 A numerical experiment can be **consistent with** a published result; it does not prove the theorem or reproduce every experiment in the original paper. This is an experimental alpha package, not a production solver or a worst-case certification tool.
 
+## Help review the released version
+
+Start with the [fixed v0.2.0 review kit](review/README.md): verify the wheel, collect
+local reproduction evidence, inspect a hand-computed GD case and compare reports.
+The helper never uploads data. [Report an actual success, failure or confusing step
+in issue #28](https://github.com/chocoemong17/chainbench/issues/28).
+
+We are keeping v0.2.0 fixed while seeking first outside feedback. Internal reports
+and CI are maintainer-assisted evidence, not outside users or endorsements.
+No star or favorable review is requested.
+
 ## Install and run
 
 Python 3.10 or newer is required. Use a fresh virtual environment:
