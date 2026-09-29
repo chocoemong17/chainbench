@@ -37,10 +37,11 @@ def evidence(tmp_path, monkeypatch):
             "sha256": hashlib.sha256((dist / name).read_bytes()).hexdigest(),
             "checks": 2, "slugs": ["condition", "observation"], "statuses": ["CONSISTENT", "INFO"],
             "installed_outside_checkout": True, "pip_check": "passed",
-            "exports": ["markdown", "csv", "json"],
+            "exports": ["html", "markdown", "csv", "json"], "plot_svg": "passed",
             "experiments": [
                 {"preset": name, "methods": methods, "config_sha256": "a"*64, "rows": 100,
-                 "exports": ["json", "csv", "markdown"], "saved_config_rerun": "matched"}
+                 "exports": ["json", "csv", "markdown", "html"],
+                 "saved_config_rerun": "matched"}
                 for name, methods in {
                     "quadratic": ["gd", "smooth-fista", "heavy-ball", "cg", "proximal-point"],
                     "diagonal-lasso": ["ista", "fista"], "simplex": ["frank-wolfe"],
