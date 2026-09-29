@@ -17,10 +17,12 @@ from .experiments import (
     preset_config,
     run_experiment,
 )
+from .landscape import METHODS as LANDSCAPE_METHODS
+from .landscape import landscape_html, run_landscape
 from .learning import learning_html
-from .landscape import METHODS as LANDSCAPE_METHODS, landscape_html, run_landscape
 from .reporting import render_json, render_report, result_status
-from .stress import TOPICS as STRESS_TOPICS, run_stress, stress_html
+from .stress import TOPICS as STRESS_TOPICS
+from .stress import run_stress, stress_html
 from .visuals import render_check_svg
 from .workflows import (
     MAX_REPORT_BYTES,
