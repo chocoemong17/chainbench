@@ -6,6 +6,7 @@ from html import escape
 
 import numpy as np
 
+from ._conjugacy_views import metric_section
 from ._pages import bi, evidence, page
 from .reproductions import SOURCE_URL
 from .visuals import ChartSpec, LineSeries, render_line_chart
@@ -26,6 +27,7 @@ font-variant-numeric:tabular-nums;overflow-wrap:anywhere}.repro .readout p{margi
 .repro .source-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .repro details.case{border-top:1px solid #ded9cf;padding:12px 0}
 .repro .formula{line-height:1.8}.repro .plot{margin-top:24px}
+.repro .metric-details td{white-space:nowrap}
 @media(max-width:900px){.repro .geometry,.repro .source-grid{grid-template-columns:1fr}}
 @media print{.repro .player{display:none}.repro details.case{break-inside:avoid}}
 """
@@ -54,6 +56,22 @@ SCRIPT = """
     panel.querySelector(`[data-readout="${method}"]`).textContent =
      `${method.toUpperCase()} · k=${row.iteration}${held} · x=(${row.x.map(v=>v.toPrecision(5)).join(', ')})`
      + ` · f−f*=${row.gap.toExponential(3)} · ||r||₂=${row.residual_norm.toExponential(3)}`;
+    const pair=row.step_pair;
+    for(const metric of ['euclidean','a']) {
+     const value=pair ? pair['cos_'+metric] : null;
+     panel.querySelector(`[data-cosine="${method}-${metric}"]`).textContent =
+      value===null ? 'pair unavailable' : `cos = ${value.toExponential(3)}`;
+     for(const name of ['previous','current']) {
+      const vector=pair ? pair[(metric==='a'?'transformed_':'')+name] : [0,0];
+      const norm=Math.hypot(...vector);
+      panel.querySelectorAll(`[data-direction="${method}-${metric}-${name}"]`).forEach(el=>{
+       const [cx,cy]=el.dataset.origin.split(',').map(Number);
+       const x=norm ? cx+68*vector[0]/norm : cx, y=norm ? cy-68*vector[1]/norm : cy;
+       if(el.tagName.toLowerCase()==='line'){el.setAttribute('x2',x);el.setAttribute('y2',y);}
+       else{el.setAttribute('cx',x);el.setAttribute('cy',y);el.setAttribute('visibility',norm?'visible':'hidden');}
+      });
+     }
+    }
    }
   };
   const stop=()=>{clearInterval(timer);timer=null;play.textContent='▶';play.setAttribute('aria-pressed','false');};
@@ -217,6 +235,7 @@ def _case_view(problem: dict, case: dict, surface: bool = False) -> str:
         '종료된 방법은 마지막 계산점에 머뭅니다. 반복 수는 실행 시간 비교가 아닙니다.',
         'A stopped method stays at its last computed point. Iterations are not timing measurements.')
     body += '</p>'
+    body += metric_section(case)
     if surface:
         body += '<div class="plot">' + _energy_chart(case) + '</div>'
     body += '<details><summary>' + bi('반복별 수치·종료 조건', 'Every computed iterate and termination')
@@ -282,6 +301,12 @@ def reproduction_html(result: dict, lang: str = "en") -> str:
         body += '<article><h3>' + title + '</h3><p>' + bi(ko, en) + '</p></article>'
     body += '</div><div class="formula">||eₖ||A ≤ 2ρᵏ||e₀||A · ρ = (√κ−1)/(√κ+1)<br>'
     body += '||e||A = √(eᵀAe) · f(x)−f* = ½||e||A² · Shewchuk Eq. (52)</div>'
+    body += '<p>'+bi(
+        '타원을 원으로 바꾸는 이유: T=(A+√14 I)/√(9+2√14)이면 TᵀT=A입니다. 따라서 z=T(x−x*)에서는 f−f*=½||z||²이고 (Tu)ᵀ(Tv)=uᵀAv입니다. 같은 실제 걸음을 변환했으므로 알고리즘이나 반복 수는 바뀌지 않습니다.',
+        'Why circles: T=(A+√14 I)/√(9+2√14) satisfies TᵀT=A. With z=T(x−x*), f−f*=½||z||² and (Tu)ᵀ(Tv)=uᵀAv. Transforming these actual steps changes neither the algorithm nor its iteration count.')+'</p>'
+    body += f'<p><a href="{SOURCE_URL}#page=29">Shewchuk §7.1 · Figure 22</a> · '+bi(
+        '원문의 기하 설명을 위 재현 경로에 적용한 추가 화면입니다. 원 Figure 22의 벡터 재현이나 전처리 성능 실험이 아닙니다. 변환 행렬과 모든 벡터는 JSON에 있습니다.',
+        'An added view applying the source explanation to the reproduced paths; it does not reproduce Figure 22’s original vectors or benchmark a preconditioner. JSON retains T and every vector.')+'</p>'
     body += '<p>' + bi(
         '점선은 CG의 정확한 산술 상계입니다. 곡선이 점선 아래에 있다고 정리가 증명되는 것은 아닙니다. k=0은 비교에서 빼고, 수치적으로 종료한 뒤의 반복은 생성하지 않습니다.',
         'The dashed envelope is for CG in exact arithmetic. Agreement does not prove the theorem. The envelope starts at k=1; no extra iterates are invented after numerical termination.') + '</p>'

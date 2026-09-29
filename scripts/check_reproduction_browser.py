@@ -30,6 +30,7 @@ def main():
             page.on('request', lambda request: evidence['network_requests'].append(request.url)
                     if request.url.startswith(('https:', 'http:')) else None)
             page.goto(url)
+            numeric = json.loads(page.locator('#chainbench-evidence').text_content())
             page.wait_for_selector('[data-repro-case="paper"]')
             assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'), 'page overflows'
             panel = page.locator('[data-repro-case="paper"]')
@@ -56,15 +57,72 @@ def main():
             assert page.locator('html').get_attribute('lang') != old_lang
             page.locator('[data-action="language"]').click()
             # Open every declared variation; controls must remain independently scoped.
-            for i in range(1, 10):
-                details = page.locator(f'#start-{i}')
-                details.locator('summary').first.click()
+            inspected = 0
+            for i, case in enumerate(numeric['cases']):
+                if i:
+                    page.locator(f'#{case["id"]} > summary').click()
+                details = page.locator(f'[data-repro-case="{case["id"]}"]')
                 control = details.locator('input[type=range]')
                 control.focus()
                 control.press('Home')
                 assert details.locator('[data-step]').inner_text() == 'k = 0'
                 control.press('End')
-                details.locator('summary').first.click()
+                inspected += details.evaluate('''(panel,c)=>{
+                  const slider=panel.querySelector('input[type=range]');
+                  const close=(a,b)=>{if(Math.abs(Number(a)-b)>.00051)throw Error('metric coordinate mismatch');};
+                  const s=Math.sqrt(14),den=Math.sqrt(9+2*s);
+                  const transform=v=>[((3+s)*v[0]+2*v[1])/den,(2*v[0]+(6+s)*v[1])/den];
+                  for(let k=0;k<=Number(slider.max);k++){
+                    slider.value=String(k);slider.dispatchEvent(new Event('input',{bubbles:true}));
+                    for(const method of ['sd','cg']){
+                      const run=c.runs[method],index=Math.min(k,run.updates),row=run.rows[index];
+                      const points=run.rows.slice(0,index+1).map(r=>{
+                        const z=transform([r.x[0]-2,r.x[1]+2]);return [280+15*z[0],256-15*z[1]];});
+                      const svg=panel.querySelector('[data-metric-view="path"]');
+                      const line=svg.querySelector('polyline[data-method="'+method+'"]');
+                      const actual=line.getAttribute('points').split(' ').map(p=>p.split(',').map(Number));
+                      if(actual.length!==points.length)throw Error('invented metric iterate');
+                      actual.forEach((xy,j)=>{close(xy[0],points[j][0]);close(xy[1],points[j][1]);});
+                      const marker=svg.querySelector('circle[data-method="'+method+'"]');
+                      close(marker.getAttribute('cx'),points[index][0]);close(marker.getAttribute('cy'),points[index][1]);
+                      const pair=row.step_pair;
+                      for(const metric of ['euclidean','a']){
+                        const value=pair?pair['cos_'+metric]:null;
+                        const label=panel.querySelector('[data-cosine="'+method+'-'+metric+'"]');
+                        if(label.textContent!==(value===null?'pair unavailable':'cos = '+value.toExponential(3)))throw Error('cosine readout mismatch');
+                        for(const name of ['previous','current']){
+                          let vector=[0,0];
+                          if(index>=2){const end=index-(name==='previous'?1:0);
+                            vector=run.rows[end].x.map((v,j)=>v-run.rows[end-1].x[j]);
+                            if(metric==='a')vector=transform(vector);}
+                          const norm=Math.hypot(...vector);
+                          panel.querySelectorAll('[data-direction="'+method+'-'+metric+'-'+name+'"]').forEach(el=>{
+                            const [cx,cy]=el.dataset.origin.split(',').map(Number);
+                            const x=norm?cx+68*vector[0]/norm:cx,y=norm?cy-68*vector[1]/norm:cy;
+                            const line=el.tagName.toLowerCase()==='line';
+                            close(el.getAttribute(line?'x2':'cx'),x);close(el.getAttribute(line?'y2':'cy'),y);
+                            if(!line && el.getAttribute('visibility')!==(norm?'visible':'hidden'))throw Error('undefined vector visible');
+                          });
+                        }
+                      }
+                      const held=panel.querySelector('[data-readout="'+method+'"]').textContent;
+                      if(held.includes('last computed')!==(k>run.updates))throw Error('termination label mismatch');
+                    }
+                  }
+                  for(const svg of panel.querySelectorAll('[data-metric-view]')){
+                    for(const label of svg.querySelectorAll('text')){
+                      const b=label.getBBox(),v=svg.viewBox.baseVal;
+                      if(b.x<0||b.y<0||b.x+b.width>v.width||b.y+b.height>v.height)throw Error('metric text clipped');
+                    }
+                  }
+                  return Number(slider.max)+1;
+                }''', case)
+                if i:
+                    page.locator(f'#{case["id"]} > summary').click()
+            slider.fill('2')
+            slider.dispatch_event('input')
+            panel.locator('.metric-details').screenshot(path=str(args.output / f'metric-{width}.png'))
+            slider.press('End')
             record = page.locator('#chainbench-evidence').text_content()
             page.locator('#chainbench-evidence').locator('..').locator('summary').click()
             with page.expect_download() as download_info:
@@ -78,13 +136,14 @@ def main():
             page.locator('#paths').screenshot(path=str(args.output / f'paths-{width}.png'))
             evidence['viewports'].append({'width': width, 'overflow': False, 'keyboard': 'passed',
                                           'playback': 'passed', 'download': 'matched',
-                                          'all_variations': 9})
+                                          'all_variations': 9, 'metric_states': inspected})
             context.close()
         context = browser.new_context(java_script_enabled=False, offline=True,
                                       viewport={'width': 390, 'height': 1000})
         page = context.new_page()
         page.goto(url)
-        assert page.locator('[data-repro-case="paper"] svg').count() == 3
+        assert page.locator('[data-repro-case="paper"] svg').count() == 5
+        assert page.locator('[data-repro-case="paper"] [data-metric-view]').count() == 2
         page.locator('#start-1 > summary').click()
         assert page.locator('#start-1 svg').first.is_visible()
         assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')

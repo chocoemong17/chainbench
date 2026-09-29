@@ -485,6 +485,7 @@ def validate_simplex_geometry(result):
 
 def validate_reproduction(result):
     """Independent scalar checks; no imports from the package being tested."""
+    validate_metric_geometry(result)
     p = result['problem']
     if (result['kind'] != 'chainbench.reproduction' or p['A'] != [[3, 2], [2, 6]]
             or p['b'] != [2, -8] or p['x_star'] != [2, -2] or p['f_star'] != -10):
@@ -522,3 +523,49 @@ def validate_reproduction(result):
             converged = rows[-1]['residual_norm'] <= 1e-12*rows[0]['residual_norm']
             if (trace['termination'] == 'converged') != converged:
                 raise RuntimeError('reproduction termination differs from true residual')
+
+
+def validate_metric_geometry(result):
+    """Recompute the fixed 2x2 transform and all displacement measurements."""
+    def close(actual, expected):
+        if expected is None:
+            if actual is not None:
+                raise RuntimeError('undefined metric pair became evidence')
+        elif not isinstance(actual, (int, float)) or not math.isfinite(actual) or not math.isclose(
+                actual, expected, rel_tol=2e-10, abs_tol=2e-13):
+            raise RuntimeError('metric geometry differs from actual coordinates')
+    root = math.sqrt(14)
+    scale = math.sqrt(9+2*root)
+    t = [[(3+root)/scale, 2/scale], [2/scale, (6+root)/scale]]
+    for actual, expected in zip(result['metric_geometry']['transform'], t, strict=True):
+        for a, b in zip(actual, expected, strict=True):
+            close(a, b)
+    def transform(v):
+        return [sum(a*b for a, b in zip(row, v)) for row in t]
+    def dot(u, v):
+        return sum(a*b for a, b in zip(u, v))
+    for case in result['cases']:
+        for run in case['runs'].values():
+            rows = run['rows']
+            for k, row in enumerate(rows):
+                expected = transform([row['x'][0]-2, row['x'][1]+2])
+                for a, b in zip(row['metric_coordinates'], expected, strict=True):
+                    close(a, b)
+                close(dot(expected, expected)/2, row['gap'])
+                pair = row['step_pair']
+                if k < 2:
+                    close(pair, None)
+                    continue
+                u = [a-b for a, b in zip(rows[k-1]['x'], rows[k-2]['x'])]
+                v = [a-b for a, b in zip(row['x'], rows[k-1]['x'])]
+                tu, tv = transform(u), transform(v)
+                for key, vec in [('previous', u), ('current', v),
+                                 ('transformed_previous', tu), ('transformed_current', tv)]:
+                    for a, b in zip(pair[key], vec, strict=True):
+                        close(a, b)
+                dot2, dota = dot(u, v), dot(u, [3*v[0]+2*v[1], 2*v[0]+6*v[1]])
+                close(pair['euclidean_dot'], dot2)
+                close(pair['a_dot'], dota)
+                den2, dena = math.hypot(*u)*math.hypot(*v), math.hypot(*tu)*math.hypot(*tv)
+                close(pair['cos_euclidean'], dot2/den2 if den2 else None)
+                close(pair['cos_a'], dota/dena if dena else None)

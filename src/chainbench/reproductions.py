@@ -12,6 +12,7 @@ import platform
 import numpy as np
 
 from . import __version__
+from ._conjugacy import add_metric_coordinates
 from .methods import Trace, conjugate_gradient
 from .problems import QuadraticProblem
 
@@ -26,6 +27,7 @@ SOURCE = {
     "sd": "Section 4, Eqs. (10)-(12), Figure 8, printed p. 8 / PDF page 14",
     "cg": "Section 8, Eqs. (45)-(49), Figure 30, printed p. 32 / PDF page 38",
     "envelope": "Section 9.2, Eq. (52), printed p. 37 / PDF page 43",
+    "conjugacy": "Section 7.1, Figure 22, printed pp. 22-23 / PDF pages 28-29",
 }
 METHOD_LABELS = {"sd": "Steepest descent (exact line search)", "cg": "Conjugate gradient"}
 RTOL = 1e-12
@@ -109,6 +111,7 @@ def run_reproduction(steps: int = 12) -> dict:
                              "scope": "nine additional starts on ONE unchanged 2D matrix"},
         "input_hash_encoding": "SHA-256 of little-endian float64 A(row-major), b, c, x0",
         "cases": cases,
+        "metric_geometry": add_metric_coordinates(problem, cases),
         "environment": {"chainbench": __version__, "numpy": np.__version__,
                         "python": platform.python_version()},
         "differences": [
@@ -116,6 +119,7 @@ def run_reproduction(steps: int = 12) -> dict:
             "Iteration budget and residual tolerance are ChainBench choices.",
             "CG uses a scaled correction equation and true-residual stopping.",
             "Contours use our stated levels; 3D, energy plots and nine extra starts are additions.",
+            "Figure 22's metric explanation is applied to our computed paths, not its original vectors.",
         ],
         "limits": [
             "A pedagogical 2D example, not a dataset benchmark or whole-paper reproduction.",

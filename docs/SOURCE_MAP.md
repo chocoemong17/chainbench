@@ -76,6 +76,11 @@ above. Exact line-search steepest descent is not fixed-step `gradient_descent`.
 The envelope is Eq. (52). See [source locations, mathematical inputs, differences,
 license scope and validation](SHEWCHUK_REPRODUCTION.md). The nine additional starts,
 3D view and energy chart are ChainBench additions, not original-paper figures.
+The metric view applies Section 7.1 / Figure 22's explanation to the existing
+trajectories with the explicit symmetric square root of A. Raw displacements,
+their transformed counterparts and observed normalized inner products distinguish
+Euclidean orthogonality from A-conjugacy. It is a display transformation, not a
+preconditioner experiment or a reproduction of Figure 22's original vectors.
 
 ## Separate simplex geometry (development source after v0.5.0)
 

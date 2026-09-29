@@ -124,8 +124,8 @@ def _index(artifacts, previews, lang):
         body += '<a href="#'+target+'">'+bi(ko,en)+'</a>'
     body += '</div><section id="published"><h2>'+bi('먼저, 논문이 실제로 사용한 한 문제', 'Start with a problem the source actually used')+'</h2><div class="tour-grid">'
     body += card('shewchuk.html', ('왜 CG의 경로는 다른가?', 'Why does CG take a different path?'),
-        ('Shewchuk의 2×2 문제를 다시 계산합니다. 원 시작점과 추가한 9개 시작점을 구분하고, 등고선·3D 높이·에너지 오차를 함께 봅니다.',
-         'Recompute Shewchuk’s 2×2 example. Separate the published start from nine added starts; connect contours, 3D heights and energy error.'), 'PUBLISHED SETUP + VARIATIONS')
+        ('Shewchuk의 2×2 문제를 다시 계산합니다. 원 시작점과 추가한 9개 시작점을 구분하고, 등고선·3D 높이·에너지 오차를 함께 봅니다. 같은 걸음을 원형 등고선으로 옮겨 SD의 직각과 CG의 켤레 방향을 비교하세요.',
+         'Recompute Shewchuk’s 2×2 example, keeping nine added starts separate. Connect contours, 3D heights and energy error; transform the same steps to circular levels to distinguish SD orthogonality from CG conjugacy.'), 'PUBLISHED SETUP + VARIATIONS')
     body += '<div><p>'+bi('읽을 질문: 두 방법의 첫 이동이 같아도, 왜 그다음 방향은 달라질까요?',
         'Reading question: if both methods take the same first step, why do their next directions differ?')+'</p>'
     body += '<img style="width:100%;height:auto" alt="Same published-example iterates at their actual objective heights" src="'+previews['shewchuk-surface']+'"><p class="callout">'+bi(

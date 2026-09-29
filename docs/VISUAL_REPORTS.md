@@ -1,5 +1,11 @@
 # Visual reports
 
+The development Shewchuk reproduction also connects its actual trajectories to
+the source's ellipse-to-circle explanation. A common player updates the circular
+metric paths and normalized adjacent-step directions for all ten starts, with
+raw inner products, undefined pairs and finite-precision limits retained. See
+[the coordinate and source contract](SHEWCHUK_REPRODUCTION.md#which-right-angle).
+
 The development-source [Shewchuk reproduction](SHEWCHUK_REPRODUCTION.md) connects
 equal-scale coordinates, projected 3D objective gaps, energy errors and full numerical
 records. Original-paper setup and added controlled variations have separate labels.

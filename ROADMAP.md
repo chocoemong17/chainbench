@@ -45,6 +45,10 @@
 
 # Roadmap and priorities
 
+The development Shewchuk view now explains A-conjugacy with the same computed
+steps in x and square-root-metric coordinates. This extends understanding of the
+existing reproduction; it does not add a method or claim preconditioner speedups.
+
 ChainBench remains a small experimental alpha project. Useful and reviewable
 behavior matters more than algorithm counts, commit counts or green test counts.
 

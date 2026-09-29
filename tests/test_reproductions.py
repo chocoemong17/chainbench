@@ -126,7 +126,7 @@ def test_html_preserves_evidence_and_every_energy_sample(lang):
     assert '<html lang="' + lang + '">' in text
     # Chart metadata must carry the same observations, not just a matching appendix.
     import re
-    charts = re.findall(r'<svg[^>]*>.*?</svg>', text)[2::2]
+    charts = [s for s in re.findall(r'<svg[^>]*>.*?</svg>', text) if '<metadata>' in s]
     assert len(charts) == len(result['cases'])
     for case, svg in zip(result['cases'], charts):
         root = ET.fromstring(svg)

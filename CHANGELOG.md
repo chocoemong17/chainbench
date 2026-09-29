@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Connect Shewchuk's ellipse-to-circle explanation to the existing SD/CG paths.
+  Show their actual transformed coordinates and adjacent displacement directions,
+  with Euclidean/A inner products, undefined pairs and finite-precision limits.
+  Validate all observations in installed distributions and every browser state.
+
 - Recompute Lessard–Recht–Packard's public heavy-ball counterexample with the
   existing recurrence. Connect signed iterates, objective heights and two-state
   geometry; retain every added grid start, the exact source cycle and separate

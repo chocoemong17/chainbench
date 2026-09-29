@@ -59,7 +59,7 @@ copy the folder to preserve its links. [Contents, settings and hashes](docs/OFFL
 
 | Question | Open in the tour | What the evidence supports |
 | --- | --- | --- |
-| How do SD and CG move on a published example? | `shewchuk.html` | Exact stated 2D setup; nine additional starts labelled separately |
+| Why do SD and CG use different notions of a right angle? | `shewchuk.html` | Exact published setup; the same steps in x and A-metric coordinates; nine labelled added starts |
 | Does fitting blurred data recover the clean image? | `deblur.html` | One declared image protocol; all 10,001 objective/RMSE observations per method |
 | Can quadratic tuning fail on a smooth strongly convex function? | `heavy-ball.html` | Lessard–Recht–Packard's published counterexample; eight separately labelled added starts |
 | How does an oracle respect a constraint? | `simplex.html` | Twelve controlled Frank–Wolfe target/start cases |

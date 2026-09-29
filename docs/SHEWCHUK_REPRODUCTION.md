@@ -23,6 +23,7 @@ computed paths; it neither copies pixels nor digitizes the source curves.
 | Steepest descent | Section 4, Eqs. (10)–(12), Figure 8 (8; 14) | Recomputed residual, exact quadratic line search |
 | Conjugate gradient | Section 8, Eqs. (45)–(49), Figure 30 (32; 38) | Existing ChainBench scaled-correction CG |
 | Energy-norm envelope | Section 9.2, Eq. (52) (37; 43) | `2 rho^k ||e0||_A`, `rho=(sqrt(kappa)-1)/(sqrt(kappa)+1)` |
+| Meaning of conjugacy | Section 7.1, Figure 22 (22–23; 28–29) | Same computed paths in `z=T(x-x*)`; not the original figure's vectors |
 
 For both paths, `x0=[-2,-2]`, `x*=[2,-2]`, `f*=−10`, eigenvalues are 2 and 7,
 and condition number is 3.5. The objective is `f(x)=0.5*x^T*A*x-b^T*x`.
@@ -45,6 +46,48 @@ recomputed residual satisfies `||b-Ax||₂ <= 1e-12 ||b-Ax0||₂`. `max_steps` m
 budget was exhausted, not that convergence was established. CG stops after one or
 two updates on these cases; the report never extends its trajectory with invented
 iterations. The player holds the last computed point and explicitly labels it.
+
+## Which right angle?
+
+The expandable metric view applies the source's ellipse-to-circle explanation to
+the **same already computed** trajectories. For this 2×2 matrix, the unique
+symmetric positive square root is
+`T=(A+sqrt(14)*I)/sqrt(9+2*sqrt(14))`. It satisfies `T^T*T=A`, so
+`z=T*(x-x*)` has circular levels with `f(x)-f*=0.5*||z||_2^2`.
+The original x contour and the z contour each use equal coordinate scales. The z
+view uses [-14,14] on both axes, shared across every start and both methods.
+Changing the display coordinates does not run a preconditioned algorithm, change
+the saved iterates, or measure a preconditioner's cost or performance.
+
+At saved row k>=2, let `u=x[k-1]-x[k-2]` and `v=x[k]-x[k-1]`. The direction view
+draws both from the same origin and normalizes each vector to unit length in its
+own coordinate system. Dashed means the previous displacement, solid the current
+one. These lengths convey direction, not step size. The two displayed quantities
+are signed normalized inner products:
+
+- `cos_2=(u^T*v)/(||u||_2*||v||_2)`;
+- `cos_A=(u^T*A*v)/(||T*u||_2*||T*v||_2)`.
+
+Zero means 90 degrees. Exact line-search SD makes successive steps Euclidean
+orthogonal; CG makes its search directions A-conjugate. Positive step lengths
+preserve this property for their displacements, since `(T*u)^T*(T*v)=u^T*A*v`.
+On the original first two updates, SD has `cos_2` near zero and CG has `cos_A`
+near zero, while their other inner products are nonzero.
+
+Every row keeps z, both raw displacements, their transformed versions, both dot
+products and cosines. Before two completed steps the pair is null, including
+every row of the one-update `(3,0)` variation. Zero-length vectors also have null
+cosines. A stopped method keeps its last actual pair, with the existing termination
+label. No angles are rounded to zero or forced to satisfy a theorem. Subtracting
+tiny late iterates can lose relative precision; these diagnostics are observations,
+not new pass/fail criteria. The full table and static final paths remain available
+without JavaScript, and the normal player updates both added views.
+
+Independent checks verify `T^T*T=A`, positive eigenvalues, energy equality and
+every displacement product (also using a nonsymmetric Cholesky square root).
+Rational first steps distinguish the two orthogonality relations. The installed
+validator recomputes the complete added record; the browser check compares every
+saved state, normalized direction, held endpoint and cosine readout at both widths.
 
 The envelope is an exact-arithmetic result. Finite agreement is not a proof, a
 worst-case certificate or a general floating-point convergence guarantee. The
