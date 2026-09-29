@@ -6,6 +6,7 @@ import random
 from pathlib import Path
 
 from . import __version__
+from .case_studies import case_html, gd_tight_case
 from .checks import CHECKS, CheckResult, run_all, run_check
 from .experiment_reporting import render_experiment
 from .experiments import (
@@ -16,8 +17,18 @@ from .experiments import (
     preset_config,
     run_experiment,
 )
+from .learning import learning_html
 from .reporting import render_json, render_report, result_status
 from .visuals import render_check_svg
+from .workflows import (
+    MAX_REPORT_BYTES,
+    PARAMETERS,
+    load_report,
+    replay_experiment,
+    replay_html,
+    run_sweep,
+    sweep_html,
+)
 
 
 def _render(result: CheckResult) -> str:
@@ -53,6 +64,9 @@ def _welcome() -> str:
 See what classic optimization results are saying, not just their raw numbers.
 
 Start here:
+  chainbench learn --lang ko --output learn.html
+      Read each method's question, assumptions, recurrence and plot.
+
   chainbench report --format html --output report.html
       Visual paper-by-paper dashboard: claim -> plot -> limitation.
 
@@ -66,7 +80,7 @@ Choose a supported instance directly:
   chainbench experiment --preset quadratic --dimension 20 --condition-number 100 \
       --steps 50 --methods gd smooth-fista cg --format html --output custom.html
 
-Use 'chainbench --help' for all commands. JSON/CSV remain available for auditing.
+Also try 'sweep', 'replay' and 'case-study gd-tight'.\nUse 'chainbench --help' for all commands. JSON/CSV remain available for auditing.
 """
 
 
@@ -209,6 +223,44 @@ def main(argv: list[str] | None = None) -> int:
     experiment.add_argument("--output", type=Path)
     experiment.add_argument("--force", action="store_true")
 
+    learn = sub.add_parser("learn", help="open a bilingual paper-to-plot reading guide")
+    learn.add_argument("--focus", choices=CHECKS)
+    learn.add_argument("--lang", choices=["en", "ko"], default="en")
+    learn.add_argument("--output", type=Path)
+    learn.add_argument("--force", action="store_true")
+
+    sweep = sub.add_parser("sweep", help="vary one supported setting with a shared work budget")
+    sweep.add_argument("--preset", choices=PRESETS, required=True)
+    sweep.add_argument("--parameter", choices=PARAMETERS, required=True)
+    sweep.add_argument("--values", type=float, nargs="+", required=True)
+    sweep.add_argument("--dimension", type=int)
+    sweep.add_argument("--steps", type=int)
+    sweep.add_argument("--methods", nargs="+")
+    sweep.add_argument("--lang", choices=["en", "ko"], default="en")
+    sweep.add_argument("--format", choices=["html", "json"], default="html")
+    sweep.add_argument("--output", type=Path)
+    sweep.add_argument("--force", action="store_true")
+
+    replay = sub.add_parser("replay", help="rerun and compare a saved experiment JSON")
+    replay.add_argument("input", type=Path)
+    replay.add_argument("--rtol", type=float, default=1e-7)
+    replay.add_argument("--atol", type=float, default=1e-12)
+    replay.add_argument("--lang", choices=["en", "ko"], default="en")
+    replay.add_argument("--format", choices=["html", "json"], default="html")
+    replay.add_argument("--output", type=Path)
+    replay.add_argument("--force", action="store_true")
+
+    case = sub.add_parser("case-study", help="reproduce a specific public tight GD example")
+    case.add_argument("name", choices=["gd-tight"])
+    case.add_argument("--horizon", type=int, default=20)
+    case.add_argument("--L", type=float, default=1.)
+    case.add_argument("--R", type=float, default=1.)
+    case.add_argument("--h", type=float, default=1.)
+    case.add_argument("--lang", choices=["en", "ko"], default="en")
+    case.add_argument("--format", choices=["html", "json"], default="html")
+    case.add_argument("--output", type=Path)
+    case.add_argument("--force", action="store_true")
+
     args = parser.parse_args(argv)
     if args.command is None:
         print(_welcome())
@@ -218,6 +270,36 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     try:
+        if args.command == "learn":
+            _write(args.output, learning_html(args.focus, args.lang), args.force)
+            return 0
+        if args.command == "sweep":
+            config = _configured_preset(args.preset, args)
+            if (args.parameter == "dimension" and args.dimension is not None
+                    or args.parameter == "steps" and args.steps is not None):
+                raise ValueError("the swept field cannot also have a fixed override")
+            result = run_sweep(config, args.parameter, args.values)
+            text = sweep_html(result, args.lang) if args.format == "html" else json.dumps(result, indent=2, allow_nan=False)
+            _write(args.output, text, args.force)
+            return 0
+        if args.command == "replay":
+            if args.output is not None and (args.input.resolve() == args.output.resolve()
+                    or (args.output.exists() and args.output.samefile(args.input))):
+                raise ValueError("replay output must not replace its input")
+            with args.input.open("rb") as stream:
+                raw = stream.read(MAX_REPORT_BYTES + 1)
+            if len(raw) > MAX_REPORT_BYTES:
+                raise ValueError("saved report exceeds the byte limit")
+            result = replay_experiment(load_report(raw.decode("utf-8")), rtol=args.rtol, atol=args.atol)
+            text = replay_html(result, args.lang) if args.format == "html" else json.dumps(result, indent=2, allow_nan=False)
+            _write(args.output, text, args.force)
+            return 0 if result["status"] == "MATCH" else 1
+        if args.command == "case-study":
+            result = gd_tight_case(args.horizon, args.L, args.R, args.h)
+            text = case_html(result, args.lang) if args.format == "html" else json.dumps(result, indent=2, allow_nan=False)
+            _write(args.output, text, args.force)
+            return 0 if result["matches_target"] else 1
+
         if args.command == "plot":
             _write(args.output, render_check_svg(args.name), args.force)
             return 0
@@ -261,7 +343,7 @@ def main(argv: list[str] | None = None) -> int:
                 if args.json
                 else "\n\n".join(_render(result) for result in results)
             )
-    except (OSError, UnicodeError, ValueError, FloatingPointError) as exc:
+    except (OSError, UnicodeError, ValueError, FloatingPointError, OverflowError) as exc:
         parser.exit(2, f"chainbench: {exc}\n")
     return exit_code
 

@@ -38,6 +38,7 @@ def evidence(tmp_path, monkeypatch):
             "checks": 2, "slugs": ["condition", "observation"], "statuses": ["CONSISTENT", "INFO"],
             "installed_outside_checkout": True, "pip_check": "passed",
             "exports": ["html", "markdown", "csv", "json"], "plot_svg": "passed", "visual_evidence": "matched",
+            "advanced_workflows": {"learning": "matched", "sweep": "matched", "replay": "matched", "gd_tight": "matched"},
             "instance_controls": {
                 "direct_override": "passed",
                 "seeded_config_sha256": "c" * 64,
@@ -80,7 +81,7 @@ def test_reject_distribution_changed_after_smoke_test(evidence):
     ("statuses", ["CONSISTENT", "UNKNOWN"]), ("slugs", ["same", "same"]),
     ("experiments", None), ("experiments", []),
     ("installed_outside_checkout", False), ("pip_check", "failed"), ("exports", []),
-    ("instance_controls", None), ("visual_evidence", None),
+    ("instance_controls", None), ("advanced_workflows", None), ("visual_evidence", None),
 ])
 def test_reject_malformed_or_failed_verification(evidence, field, value):
     module, dist, report = evidence

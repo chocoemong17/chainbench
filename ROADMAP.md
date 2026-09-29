@@ -1,50 +1,42 @@
 # Roadmap and priorities
 
-This is a small experimental alpha project. More algorithms, more commits or more
-green tests are not substitutes for useful and independently reviewable behavior.
+ChainBench remains a small experimental alpha project. Useful and reviewable
+behavior matters more than algorithm counts, commit counts or green test counts.
 
-## Completed foundation
+## v0.4.0: implemented in priority order
 
-- Public-source mappings for the implemented recurrences and finite numerical checks.
-- Versioned alpha distributions, cross-platform/minimum-dependency tests, clean
-  installation of wheel and sdist, and artifact/commit verification before publication.
-- Regressions for known false-convergence and missing-evidence counterexamples;
-  four narrowly scoped fault injections, not exhaustive mutation coverage.
-- Configurable installed experiments for quadratic, diagonal-LASSO and simplex
-  fixtures, with portable trajectories, settings/input fingerprints and environment records.
-- A no-checkout quickstart and a concrete protocol/form for external reproduction feedback.
+1. **Understand the selected result.** Bilingual question-led learning pages connect
+   assumptions, the actual recurrence, public formulas, observed curves and limits.
+   Six bound-based topics have normalized ratio plots; empirical/INFO topics do not
+   masquerade as pointwise theorems.
+2. **Change one condition.** Bounded one-factor sweeps retain all resolved configs,
+   inputs and observations. A shared preflight work cap limits accidental large jobs.
+3. **Recompute the evidence.** Saved schema-1 experiments can be replayed, with
+   numerical mismatches, input fingerprints and environment changes distinguished.
+4. **Show one public extremal construction.** The separate Drori--Teboulle GD case
+   illustrates a matching bound and horizon-dependent Huber function under explicit
+   h<=1 assumptions. It is not arbitrary-method worst-case search.
 
-## Visual communication priority
+All four workflows must pass independent installed-wheel AND installed-sdist smoke
+checks before publication. The existing eight checks, cross-platform/minimum-version
+CI, targeted fault injections and distribution/commit integrity gates are preserved.
 
-External reproduction feedback showed that the main bottleneck is interpretation,
-not another algorithm count. Five of seven relayed outside users asked for graphs,
-and some users could not tell what the project was trying to show. The v0.3.0
-direction therefore makes claim-centered visual reports the primary human output:
-paper idea, observed trajectory, theoretical/reference curve, takeaway and caveat.
-Raw tables remain audit material.
+## Feedback that motivated this scope
 
-## Next priorities after the configurable release
+The maintainer relayed seven outside reproduction/use attempts in issue #28, with
+five graph requests and additional requests for clearer purpose and instance choice.
+This is relayed feedback, not seven independently archived environment/run reports.
+The next useful review is whether the new pages and controlled experiments address
+those specific comprehension problems. Do not substitute CI or bot activity for it.
 
-1. Collect and triage **actual** external installation and interpretation feedback.
-   Do not substitute bot traffic or the maintainer's own tests for adoption.
-2. Reduce and fix any reproducible defects before widening the supported scope.
-3. Consider general dense/sparse user problems only when there is a clear use case,
-   an independent reference quantity and a maintainable input/validation contract.
-4. Evaluate optional trajectory plotting or general experiment comparison after users
-   identify a concrete need. The separate frozen-release reviewer comparator is
-   intentionally narrower. Keep the runtime dependency footprint small.
+## Next decisions, not implemented claims
 
-No production-solver guarantee, original-paper dataset reproduction, independent
-review, external adoption or support-program acceptance is implied by this roadmap.
+- Resolve concrete reproducible defects and accessibility/interpretation feedback first.
+- Consider arbitrary matrix imports, sparse datasets or a local server only after a
+  clear use case and safe, independently verifiable input contract are specified.
+- Add another worst-case class only with an exact public theorem-to-code mapping.
+- Keep honest limitations: no production guarantee, original-paper dataset benchmark,
+  exhaustive testing, theorem-prover status or support-program acceptance claim.
 
-## Current priority: external reproduction of the fixed v0.2.0 release
-
-Before adding more algorithms or changing the review target, collect actual outside
-feedback through issue #28. The source-verified offline review helper, hand-computed
-GD oracle and finite recorded-result comparator are review infrastructure, not a
-new package release. The published v0.2.0 artifacts remain unchanged.
-
-Completed documentation/tests/CI are not independent review. A report is triaged
-as a reproducible defect, portability difference, usability issue or unanswered
-question; only an actual verified report is counted as such. Correct confirmed
-issues with focused regression tests. Do not produce fictional review records.
+The v0.2.0 reviewer kit remains a frozen historical comparison baseline, not the
+recommended new package. All prior tags and release assets are left unchanged.
