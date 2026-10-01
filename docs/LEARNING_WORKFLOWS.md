@@ -155,6 +155,15 @@ A matching rerun is not authentication of a report's author or proof of a theore
 Someone can fabricate a matching saved record. Preserve the actual origin of any
 external feedback rather than turning a matching JSON into an independent user.
 
+### Compare several saved runs without recomputing
+
+Development source also provides `chainbench compare a.json b.json --lang ko
+--output comparison.html` for two to four saved schema-1 experiments. Pairwise
+config/input/environment diagnostics precede the actual stored curves. Shared
+overlays require matching recorded problems; different objectives retain separate
+axes and scale warnings. This comparison does not rerun a method or authenticate
+a record. [Input contract, examples and validation](SAVED_COMPARISON.md).
+
 ## 4. A public tight GD example
 
 ```bash

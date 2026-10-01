@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Add `compare` for two to four saved experiment records, with exact provenance
+  retention, pairwise setup/input/environment diagnostics, bounded strict imports
+  and separate panels when objectives differ. Shared-method overlays use actual
+  saved samples only. Include bilingual offline reading, installed wheel/sdist
+  audits, browser checks and a cloud-generated PDF review packet.
+  [Contract and examples](docs/SAVED_COMPARISON.md).
+
 The development toolkit is now integrated into `main` through [PR #73](https://github.com/chocoemong17/chainbench/pull/73).
 Its [final candidate CI](https://github.com/chocoemong17/chainbench/actions/runs/36880865578)
 passed all eight jobs, including 1,288 tests in each of six compatibility configurations,

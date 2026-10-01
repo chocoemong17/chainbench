@@ -428,6 +428,8 @@ def main() -> None:
             instance_controls = exercise_instance_controls(cli, work, env)
             from smoke_workflows import exercise_workflows
             advanced = exercise_workflows(cli, work, env, expected, run)
+            from smoke_comparison import exercise_comparison
+            comparison = exercise_comparison(cli, work, env, run)
             records.append({
                 "artifact": artifact.name,
                 "sha256": hashlib.sha256(artifact.read_bytes()).hexdigest(),
@@ -438,6 +440,7 @@ def main() -> None:
                 "pip_check": "passed", "exports": ["html", "markdown", "csv", "json"],
                 "plot_svg": "passed", "visual_evidence": "matched", "experiments": experiments,
                 "instance_controls": instance_controls, "advanced_workflows": advanced,
+                "saved_comparison": comparison,
             })
             print(f"CLEAN INSTALL PASSED: {artifact.name}", flush=True)
     report = {"python": platform.python_version(), "artifacts": records,
