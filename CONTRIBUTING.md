@@ -30,6 +30,10 @@ independent validators and file-integrity checks retain their own unchanged cont
 NumPy `float64` and its decoded JSON float share the floating-number contract;
 neither can substitute for an integer count or boolean flag.
 
+Do not raise this tolerance to hide larger trajectory drift. The Intel CG failure
+required a scalar-accumulation repair, with the comparison gate retained.
+[Controlled diagnosis and arithmetic contract](docs/CG_ARITHMETIC.md).
+
 Interactive reports also have optional offline Playwright checks in `scripts/check_*_browser.py`.
 For example, with Playwright and Chromium available:
 

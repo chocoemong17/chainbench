@@ -23,6 +23,13 @@ The frozen v0.5.0 release remains unchanged. Later commits retain their own CI.
   tolerance after Intel macOS exposed exact-equality assumptions. Keep provenance,
   types, counts and inputs exact; preserve same-record serialization/preview checks
   and every independent scientific validator. Add corrupt-record rejection cases.
+- Stabilize CG's three scalar inner-product sites with compensated accumulation.
+  A complete Intel audit found late trajectory drift up to 4.32e-4; single-thread
+  execution did not fix it. The controlled scalar-reduction replacement removed
+  discrepancies beyond the existing comparison tolerance. Preserve matrix-vector
+  products, true-residual stopping, exact-start behavior and mathematical bounds.
+  Add cancellation, nonfinite-arithmetic and repeated-seed regressions.
+  [Diagnosis, numerical changes and limits](docs/CG_ARITHMETIC.md).
 
 - Explain randomized Kaczmarz's conditional expectation through actual orthogonal
   error triangles and all possible row choices from each recorded input point.
