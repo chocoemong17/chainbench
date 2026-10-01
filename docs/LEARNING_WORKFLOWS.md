@@ -96,9 +96,9 @@ The independent validator checks topic coverage, commands displayed in HTML,
 actual link destinations and equality with each linked artifact's manifest
 command. Unknown report filenames are rejected before calculation.
 
-This work follows the local CG spectral explanation and is newer than the pinned
-review-guide snapshot. New remote PR/CI and clean-install evidence remain pending
-GitHub authentication.
+These reading links are included in the [review guide's pinned snapshot](REVIEW_GUIDE.md).
+[PR #73](https://github.com/chocoemong17/chainbench/pull/73) links current remote CI
+and independent clean-install evidence for the consolidated source.
 
 ## 2. Change one field, not everything
 

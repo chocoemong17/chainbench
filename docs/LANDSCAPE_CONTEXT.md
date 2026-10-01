@@ -125,7 +125,8 @@ dot-product ordering differences do not fabricate a different relative residual.
 Tests also cover rational unrotated data, contour energies, endpoints, absent PPA,
 stationary/undefined-ratio cases and corrupt explanations. Browser checks inspect
 each frame, k=0, stationary scaling, all controls and no-script tables. Existing
-mathematical runs and metrics are preserved. New remote validation is pending.
+mathematical runs and metrics are preserved. See
+[PR #73](https://github.com/chocoemong17/chainbench/pull/73) for actual remote validation.
 Contour tests bound the energy error induced by rounding SVG positions to 0.001
 pixels using the frame's coordinate scale and H eigenvalues; raw records are not
 rounded to display precision.

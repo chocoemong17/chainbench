@@ -56,7 +56,7 @@ rejected or accepted. Explore all 12 objective/start inputs with three initial
 curvature guesses, then follow the accepted 2D/3D path, every rejected proposal,
 and the actual objective/model slice. Accepted L carries to the next update;
 the page exposes later changes and objective increases. This additional report
-requires the new checkout and is being verified by remote PR/CI. The extended
+requires the development checkout; PR #73 links its current remote CI. The extended
 tour connects it to fixed-L FISTA with symbolic update flows, an actual rejected
 candidate preview and a comparison of thresholds, carried curvature and bounds. [Source, recurrence and numerical scope](docs/FISTA_BACKTRACKING.md).
 
@@ -80,7 +80,7 @@ pass and original-objective gap. Choose any cell to inspect its actual final
 [Source, equations and scope](docs/ADMM_GEOMETRY.md). The extended tour connects
 it to ISTA/FISTA with symbolic flows and a notation table: their y/z variables,
 thresholds, input grids and per-iteration work differ. The development changes
-are being verified by remote PR/CI. Open the report separately with:
+are included in PR #73 with current remote CI. Open the report separately with:
 
 ```bash
 python -m chainbench geometry admm-lasso --lang ko --output admm.html
@@ -96,7 +96,7 @@ shared position axis. Its signed ledger explains how changing denominator
 memory affects the two return steps, and distinguishes complete-block regret
 from an unfinished block. All nine cases retain a native first-block view.
 [Source, regret definition and scope](docs/ADAM_COUNTEREXAMPLE.md).
-The command is newer than the pinned review snapshot and awaits remote PR/CI:
+The command is included in the pinned review snapshot; PR #73 links remote CI:
 
 ```bash
 python -m chainbench reproduce reddi-2018 --lang ko --output adam.html
@@ -145,7 +145,7 @@ development path is subject to remote PR/CI validation:
 python -m chainbench tour --extended --lang ko --output tour-extended
 ```
 
-Open `tour-extended/index.html`. This option is newer than the review guide's
+Open `tour-extended/index.html`. This option is included in the review guide's
 pinned snapshot; the default 17-page tour keeps its existing calculations.
 
 ## Choose the question you want to answer
@@ -212,7 +212,7 @@ two coordinate bases and three initial-error profiles. Inspect actual signed
 mode ratios and energy bars alongside explicitly separate comparison polynomials.
 All 18 inputs and every computed step remain available offline, separately or in
 the extended tour, with links to the published 2×2 example. This development
-addition is newer than the pinned snapshot and awaits remote validation.
+addition is included in the pinned snapshot; PR #73 links actual remote CI.
 
 The separate [nonuniform signal experiment](docs/NONUNIFORM_SAMPLING.md) follows
 Strohmer–Vershynin's 700-sample / 101-coefficient protocol with three declared
@@ -221,14 +221,14 @@ probability and all 15,000 projections of cyclic, uniform and weighted Kaczmarz.
 The projection explanation connects a single chosen observation to the actual
 before/after waveforms and global Fourier response, retaining rounding differences.
 The first input deliberately remains visible when a sufficient gap condition
-does not apply. This standalone development addition is newer than the pinned
-review snapshot and awaits remote validation.
+does not apply. This standalone development addition is included in the pinned
+review snapshot; PR #73 links actual remote CI.
 
 The separate [noisy Haar experiment](docs/FISTA_WAVELET.md) adds 256×256 restoration
 with positive λ, actual wavelet shrinkage and a declared noise draw. Its default
 200 updates follow Figure 4's protocol; the unknown optimum is never labelled
-zero. This command is newer than the pinned snapshot in the review guide and
-requires the `feat/noisy-wavelet-protocol` development work. Its full-array export
+zero. This command is included in the review guide's pinned development snapshot.
+Its full-array export
 is about 30 MB; the optional extended tour includes it at seed 0 and 200 updates.
 
 The subsequent [Frank–Wolfe sparsity construction](docs/FW_SPARSITY.md) connects
@@ -245,7 +245,7 @@ gradient. The same method's successful quadratic fixture remains a separate stor
 The newer [CG spectral explanation](docs/CG_SPECTRAL_EXPLANATION.md) connects
 Shewchuk's exact comparison polynomials to the same saved errors in all ten starts.
 Actual mode ratios and weighted norm error are distinguished from minimax bounds;
-absent initial modes remain undefined. This local addition awaits remote validation.
+absent initial modes remain undefined. PR #73 links this explanation's remote CI.
 
 ## Change a condition and replay a calculation
 

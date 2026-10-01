@@ -18,9 +18,9 @@ budgets, UI and comparisons are added examples, not original-paper experiments.
 The existing `case-study gd-tight` defaults stay 20/1/1/1 for horizon/L/R/h.
 GD-specific options are rejected for this case; `--steps` is rejected for GD.
 
-This development addition follows the noisy-wavelet work and is newer than the
-review guide's pinned snapshot. Remote PR/CI evidence is pending authentication;
-the earlier published snapshot and v0.5.0 release are separate.
+This development addition is included in the [review guide's pinned snapshot](REVIEW_GUIDE.md).
+[PR #73](https://github.com/chocoemong17/chainbench/pull/73) links actual remote CI
+for the consolidated source. The frozen v0.5.0 release remains separate.
 The subsequent [optional extended tour](OFFLINE_TOUR.md#optional-extended-path)
 connects the default 40-update record to oracle geometry and the GD tight case.
 

@@ -159,10 +159,11 @@ including unresolved runs and draws after zero. Its finite sample mean is never
 required to lie below the exact expectation curve. Seeds are reused across cases;
 cases must not be pooled as independent trials.
 
-This optional path and its eight extensions are newer than the review guide's pinned
-snapshot. Local tests and browser checks are available; their new remote PR/CI and
-clean installation evidence await GitHub authentication. The default command
-continues to generate the base seventeen pages.
+This optional path and all eight extensions are included in the
+[review guide's pinned snapshot](REVIEW_GUIDE.md). GitHub Actions generates and
+audits the full bundle; [PR #73](https://github.com/chocoemong17/chainbench/pull/73)
+links current tests, browser checks and independent clean installations.
+The default command continues to generate the base seventeen pages.
 
 ## Reading across evidence levels
 

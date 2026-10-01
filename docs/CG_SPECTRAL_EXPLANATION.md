@@ -3,8 +3,9 @@
 The development `reproduce shewchuk-1994` page now links its existing paths to
 the polynomial argument in Shewchuk (1994), Sections 9.1–9.2. The published
 2×2 matrix, both algorithms, all ten starts, budgets and stopping rules are
-unchanged. This addition follows `feat/extended-tour`; remote PR/CI evidence is
-pending authentication. It is newer than the review guide's pinned snapshot.
+unchanged. This explanation is included in the [review guide's pinned snapshot](REVIEW_GUIDE.md).
+[PR #73](https://github.com/chocoemong17/chainbench/pull/73) links the consolidated
+source and actual remote CI, including clean installation and browser checks.
 
 ```sh
 python -m chainbench reproduce shewchuk-1994 --lang ko --output paper.html

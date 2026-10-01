@@ -7,7 +7,8 @@ python -m chainbench case-study cg-spectrum --format json --output cg-spectrum.j
 
 This standalone development study extends the two-dimensional published-example
 [spectral explanation](CG_SPECTRAL_EXPLANATION.md) to 18 declared inputs. It is
-newer than the pinned review snapshot; remote PR/CI validation is pending. It is
+included in the [pinned review snapshot](REVIEW_GUIDE.md);
+[PR #73](https://github.com/chocoemong17/chainbench/pull/73) links actual remote CI. It is
 also available through `tour --extended`, which links it to the published 2×2
 example and the CG lesson. The base 17-page tour keeps its existing scope.
 

@@ -12,9 +12,10 @@ python -m chainbench geometry fista-backtracking --lang ko --output backtracking
 python -m chainbench geometry fista-backtracking --steps 60 --format json --output backtracking.json
 ```
 
-This is a development addition after the frozen v0.5.0 and pinned review snapshot;
-it requires a checkout containing the command. Authenticated remote PR/CI remains
-pending. Existing fixed-L ISTA/FISTA and image workflows are unchanged. This
+This is a development addition after the frozen v0.5.0, included in the
+[review guide's pinned snapshot](REVIEW_GUIDE.md). See
+[PR #73](https://github.com/chocoemong17/chainbench/pull/73) for actual remote CI.
+Existing fixed-L ISTA/FISTA and image workflows are unchanged. This
 report is also available as the eighth extension of the offline tour.
 
 ## Inputs and recurrence

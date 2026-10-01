@@ -111,9 +111,10 @@ floating exponentiation, not deviations of the finite sample mean.
 
 The browser check exercises all cases/seeds/iterations at desktop and mobile
 widths, camera rotation, native tables, language, playback, offline download and
-JavaScript-disabled access. New CI steps and both installation checks are wired;
-remote results are pending authenticated PR publication. Executing built wheel
-and sdist code in an existing runtime is not a clean-install claim.
+JavaScript-disabled access. Both independent clean-install checks and browser
+coverage run on GitHub; [PR #73](https://github.com/chocoemong17/chainbench/pull/73)
+links the actual results. Earlier execution of wheel/sdist code in an existing
+local runtime was not clean-install evidence.
 
 ## Development: the conditional step in the proof
 

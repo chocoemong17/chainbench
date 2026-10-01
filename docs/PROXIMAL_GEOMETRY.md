@@ -122,8 +122,9 @@ model excess. Independent checks expand Q directly instead of using the producti
 PSD-excess formula. Rational first-step arithmetic, all supported budget endpoints,
 corrupt explanations, coordinate projection, and every browser frame are checked.
 Floating comparisons use relative 2e-12 and absolute 5e-13 for the expanded model;
-the direct excess comparison uses absolute 1e-28. New PR/remote CI and clean-install
-evidence remain pending GitHub authentication.
+the direct excess comparison uses absolute 1e-28. See
+[PR #73](https://github.com/chocoemong17/chainbench/pull/73) for the consolidated
+source's actual remote tests, browser checks and independent clean installations.
 
 ## Development addition: the same iterates in dual coordinates
 
