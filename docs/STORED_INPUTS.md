@@ -32,6 +32,9 @@ update to inspect that exact stored row. A method that stops early has only its
 computed rows; there is no fabricated continuation. Native input details, static
 SVG plots, initial row and all evidence remain readable without JavaScript.
 The browser never executes a numerical solver or requests a remote service.
+Gap and stationarity use log axes with explicit zero markers; reference distance
+uses a linear axis from zero. Small screens retain horizontally scrollable plots
+with keyboard access rather than shrinking every label into illegible text.
 
 JSON `run` and HTML `run` in this example are separate numerical executions.
 Their input bytes are identical; floating outputs can differ within the documented

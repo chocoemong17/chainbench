@@ -119,6 +119,7 @@ def audit_instance_result(record, manifest, html=None):
         charts = [json.loads(unescape(s)) for s in re.findall(r'<metadata>(.*?)</metadata>', html, re.S)]
         require(len(charts) == 3)
         for chart, field in zip(charts, ('gap', 'stationarity', 'distance_to_reference')):
+            require(chart['y_scale'] == ('linear' if field == 'distance_to_reference' else 'log'))
             require(len(chart['series']) == len(record['runs']))
             for curve, run in zip(chart['series'], record['runs']):
                 require(curve['x'] == [r['iteration'] for r in run['rows']])

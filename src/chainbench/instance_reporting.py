@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+from dataclasses import replace
 from html import escape
 
 from ._pages import bi, evidence, page
@@ -58,6 +59,8 @@ def instance_html(result: dict, lang: str = "en", *, replay: dict | None = None)
     body += '<section id="instance-curves"><h2>' + bi('계산된 궤적 읽기', 'Read the computed trajectories') + '</h2>'
     body += '<p>' + bi('k=0은 저장된 시작점이고 k는 완료한 업데이트 수입니다. CG는 잔차 조건에서 먼저 멈출 수 있습니다. 로그 축에서 0은 양의 작은 수로 바꾸지 않습니다.',
                       'k=0 is the stored start; k counts completed updates. CG may stop early at its true-residual criterion. Log scale does not replace zeros with small positive numbers.') + '</p>'
+    body += '<p class="small">' + bi('기준점 거리는 0부터 시작하는 선형 축입니다. 작은 화면에서는 그래프를 가로로 스크롤하거나 그래프에 초점을 두고 방향키를 누르세요.',
+        'Reference distance uses a linear axis starting at zero. On small screens, scroll each plot horizontally or focus it and use the arrow keys.') + '</p>'
     body += ('<div class="panel" id="instance-inspector"><h3>' + bi('한 업데이트의 실제 숫자', 'Inspect one computed update')
              + '</h3><div id="instance-inspector-controls" class="controls" hidden><label>'
              + bi('방법', 'Method') + ' <select id="instance-method">'
@@ -77,10 +80,13 @@ def instance_html(result: dict, lang: str = "en", *, replay: dict | None = None)
          '준정부호 문제에서는 최적해가 여러 개일 수 있어 이 거리가 0이 되지 않아도 gap은 0일 수 있습니다.',
          'For PSD quadratics, the solution may be nonunique: zero gap does not require zero distance to this particular reference.'),
     ]:
+        chart = experiment_chart(result, field, title, label)
+        if field == 'distance_to_reference':
+            chart = replace(chart, y_scale='linear')
         body += ('<h3>' + escape(title) + '</h3><p>' + bi(note_ko, note_en) + '</p>'
                  + (f'<p class="formula">{escape(metric)}</p>' if field == 'stationarity' else '')
                  + f'<div class="plot" data-instance-chart="{field}" tabindex="0" role="region" aria-label="{escape(title)}">'
-                 + render_line_chart(experiment_chart(result, field, title, label)) + '</div>')
+                 + render_line_chart(chart) + '</div>')
     body += '</section><section id="instance-methods"><h2>' + bi('방법의 실제 설정', 'Actual method settings') + '</h2>'
     descriptions = {
         'gd': ('기울기 반대 방향으로 1/L만큼 이동합니다.', 'Move against the gradient with step 1/L.'),

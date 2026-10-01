@@ -5,6 +5,7 @@ import copy
 import hashlib
 import json
 import math
+import re
 from html import unescape
 
 import numpy as np
@@ -282,6 +283,8 @@ def test_html_retains_inputs_every_sample_and_no_script_fallback():
     html = instance_html(saved, 'ko')
     assert unescape(html.split('<pre id="chainbench-evidence">')[1].split('</pre>')[0]) == json.dumps(saved, indent=2, ensure_ascii=False)
     assert html.count('data-instance-chart=') == 3 and html.count('<metadata>') == 3
+    charts = [json.loads(unescape(s)) for s in re.findall(r'<metadata>(.*?)</metadata>', html, re.S)]
+    assert [c['y_scale'] for c in charts] == ['log', 'log', 'linear']
     assert 'x_star' in html and 'stored_vector' in html and 'lang="ko"' in html and 'lang="en"' in html
     assert 'connect-src' in html
     replay = replay_instance(saved)
