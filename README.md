@@ -17,6 +17,10 @@ For a quick preview without installation or sign-in, open the
 or [five actual geometry views with Korean reading notes](https://github.com/chocoemong17/chainbench/tree/archive/local-reviews-20261001/cloud/33b6243/browser-gallery).
 These archived previews include their source and verification records.
 
+Already have several saved runs? [Compare two to four experiment records](docs/SAVED_COMPARISON.md)
+with `chainbench compare a.json b.json --lang ko --output comparison.html`.
+Inspect changed inputs, settings and environments before reading the actual curves.
+
 The development features are available on `main` through merged
 [PR #73](https://github.com/chocoemong17/chainbench/pull/73),
 with actual cloud CI linked there; the frozen **v0.5.0 release does not contain

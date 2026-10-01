@@ -14,6 +14,8 @@ from .case_studies import case_html, gd_tight_case
 from .cg_spectrum import run_cg_spectrum
 from .cg_spectrum_views import cg_spectrum_html
 from .checks import CHECKS, CheckResult, run_all, run_check
+from .comparison import METRICS, compare_experiments, read_comparison_inputs
+from .comparison_views import comparison_html
 from .deblur_views import deblur_html
 from .deblurring import run_deblurring
 from .experiment_reporting import render_experiment
@@ -288,6 +290,14 @@ def main(argv: list[str] | None = None) -> int:
     replay.add_argument("--output", type=Path)
     replay.add_argument("--force", action="store_true")
 
+    compare = sub.add_parser("compare", help="inspect two to four saved experiment reports without rerunning")
+    compare.add_argument("inputs", type=Path, nargs="+")
+    compare.add_argument("--metric", choices=METRICS, default="gap")
+    compare.add_argument("--lang", choices=["en", "ko"], default="en")
+    compare.add_argument("--format", choices=["html", "json"], default="html")
+    compare.add_argument("--output", type=Path)
+    compare.add_argument("--force", action="store_true")
+
     stress = sub.add_parser(
         "stress", help="run the same paper-linked measurement on many seeded instances"
     )
@@ -374,6 +384,16 @@ def main(argv: list[str] | None = None) -> int:
                 raise ValueError("the swept field cannot also have a fixed override")
             result = run_sweep(config, args.parameter, args.values)
             text = sweep_html(result, args.lang) if args.format == "html" else json.dumps(result, indent=2, allow_nan=False)
+            _write(args.output, text, args.force)
+            return 0
+        if args.command == "compare":
+            if args.output is not None and any(
+                    args.output.resolve() == path.resolve()
+                    or (args.output.exists() and path.exists() and args.output.samefile(path))
+                    for path in args.inputs):
+                raise ValueError("comparison output must not replace any input")
+            result = compare_experiments(read_comparison_inputs(args.inputs), metric=args.metric)
+            text = comparison_html(result, args.lang) if args.format == "html" else json.dumps(result, indent=2, allow_nan=False)
             _write(args.output, text, args.force)
             return 0
         if args.command == "replay":
