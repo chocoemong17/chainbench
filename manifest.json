@@ -1,0 +1,260 @@
+[
+  {
+    "path": "reports/ChainBench_ADMM_36개결과_검토보고서.pdf",
+    "bytes": 273089,
+    "sha256": "6b715c3f05dd28b416539a5ddfd6dd697d012f340fe559da51c6c138760ed64a",
+    "git_blob": "616b25147488a75d3fc1d53051f059cd4b0db9ae"
+  },
+  {
+    "path": "reports/ChainBench_ADMM_두변수의합의_검토보고서.pdf",
+    "bytes": 372484,
+    "sha256": "aaa08ae1bcdd0d18a650f04c1ebce7f4a95ce267fa654f8c3a64c8ec34393c58",
+    "git_blob": "95a3a4019c126bf2ac271e038e247b4e32d032f9"
+  },
+  {
+    "path": "reports/ChainBench_ADMM_한걸음의두문제_검토보고서.pdf",
+    "bytes": 335199,
+    "sha256": "6e088dbbeff48e56bd4198b70d2d4cb09f993cf2e7d5a8892213f686c3fb4998",
+    "git_blob": "ef5336076496290a34fc4525c72b469be4852c5d"
+  },
+  {
+    "path": "reports/ChainBench_Adam_기억과regret_검토보고서.pdf",
+    "bytes": 385145,
+    "sha256": "38752c3e1c74926ca69c431c333911552c13d390ab472899dbebf7d946ba236d",
+    "git_blob": "637235a9ad3648b67285221f188baa91ceeb00d2"
+  },
+  {
+    "path": "reports/ChainBench_Adam_세걸음_검토보고서.pdf",
+    "bytes": 342246,
+    "sha256": "064938bd7c83ae1c76b61f52f895ec013e20515bb2ef169380a46b7a794ca81f",
+    "git_blob": "28dc5caa22c0395dedfef817f1cd60a3bb9021f4"
+  },
+  {
+    "path": "reports/ChainBench_Adam_통합탐색_검토보고서.pdf",
+    "bytes": 311078,
+    "sha256": "93c403134f42570c1b9af4e69256cb57aaffcd2d49612439b92e5c6281ef44a3",
+    "git_blob": "e5e2284c78d0849cbe1bab774efc2f52152a0fb1"
+  },
+  {
+    "path": "reports/ChainBench_CG내적_검토보고서.pdf",
+    "bytes": 264256,
+    "sha256": "bd57e035984b0c0a057874a15c3da90cd6470f587ad31d42c5b24968b67a8344",
+    "git_blob": "60be0e580ff17bb9ae4abde60d03f6a458897fde"
+  },
+  {
+    "path": "reports/ChainBench_CG스펙트럼_검토보고서.pdf",
+    "bytes": 281167,
+    "sha256": "b378f07296c2a0f3cf7db3c32f29b700d75923774a7ab8de0a0ab7cef1b6b887",
+    "git_blob": "99b802edb38e4c54d54a389d3f92e74486355609"
+  },
+  {
+    "path": "reports/ChainBench_FISTA_거부와채택_검토보고서.pdf",
+    "bytes": 304374,
+    "sha256": "87ffb8d06a8229f0640980e11109e6e9ec1ce3d160cfb0bb8900a39f4cc90ef3",
+    "git_blob": "c853ff31a77db626e5df584d140d98fc9fdff8ef"
+  },
+  {
+    "path": "reports/ChainBench_FISTA영상_검토보고서.pdf",
+    "bytes": 368317,
+    "sha256": "167d16734fe7833f6a4d2f42ab784ae50b4d5c5d606842c331d62ba30f2e078b",
+    "git_blob": "07f017c634944632008844a9d8d0ab58a23c5b55"
+  },
+  {
+    "path": "reports/ChainBench_FW보증_검토보고서.pdf",
+    "bytes": 225030,
+    "sha256": "7f631aa696363fd25c89f3fec15f2b6fafdfc316abc10ede0ea93024ec3a9f3d",
+    "git_blob": "15881520f13b948c5a2dc1d3ce7668cff82c4373"
+  },
+  {
+    "path": "reports/ChainBench_FrankWolfe_검토보고서.pdf",
+    "bytes": 319225,
+    "sha256": "4e7bd33782472212b8ee4d80a3c70e994ac34bb9ad2c1dd60dd21cd77b28e9b8",
+    "git_blob": "d89163ab7414b7d62905a6968c52ede6c209fdc3"
+  },
+  {
+    "path": "reports/ChainBench_Haar영상_검토보고서.pdf",
+    "bytes": 342294,
+    "sha256": "c786627abd7528d24e1f1a2dd0440e559ec367d83ee2c6996af12285c6df13c8",
+    "git_blob": "dcdf77d9fe8d210045ff7a67df54965d12faa6b7"
+  },
+  {
+    "path": "reports/ChainBench_HeavyBall_검토보고서.pdf",
+    "bytes": 330885,
+    "sha256": "06ea9ccfc7d40be815e6886e0fab6f16ae8ca8ef23197ed5b1e33586b12fce62",
+    "git_blob": "db9d634ac84020754003c7f6435c35fd183c747d"
+  },
+  {
+    "path": "reports/ChainBench_PPA_검토보고서.pdf",
+    "bytes": 262889,
+    "sha256": "74ab1de6ff69e460309c132b83772ec37810b7d6cc443e005da8ba4bf1ec8910",
+    "git_blob": "f77fc9476dcdb72455e13c7fa611f42327cdaf80"
+  },
+  {
+    "path": "reports/ChainBench_Proximal_검토보고서.pdf",
+    "bytes": 404495,
+    "sha256": "ad2c05af16699242ad9ecc972e148c47752309090d44ce538e86d11dbc102672",
+    "git_blob": "d1daca3f0db8671d5b707e004ad2ae7f219a2626"
+  },
+  {
+    "path": "reports/ChainBench_Stress_검토보고서.pdf",
+    "bytes": 410755,
+    "sha256": "421ef58bd8aad9b1ae6b56f3b17f2a7d6f9b7665da0a3a0181684e9ab51b1d1a",
+    "git_blob": "72e2f4119061558a3c7a1c39f6ff08b1a6eefd0f"
+  },
+  {
+    "path": "reports/ChainBench_TightGD_검토보고서.pdf",
+    "bytes": 281821,
+    "sha256": "1533ac8b0a1fdd75c352d6613fda9cef41d231a6c5c4b50fecd4e3e743e0648a",
+    "git_blob": "b310893e09a4e64041d63363b45a4173efb7cd38"
+  },
+  {
+    "path": "reports/ChainBench_계산조건_검토보고서.pdf",
+    "bytes": 393812,
+    "sha256": "e634f0d90279ef0edcd2cbdeec3ac1cc0c61f69e4027ab2492b2c90d980dae31",
+    "git_blob": "68e49decad1a4afa7479b4aa9540d9156105e4de"
+  },
+  {
+    "path": "reports/ChainBench_고유값분포_검토보고서.pdf",
+    "bytes": 466597,
+    "sha256": "b211d7a04a5756300f5a5bd73a14500c35f4335ab8bca831ff32521e731c6a57",
+    "git_blob": "1e1c727c0ffb75a965ad215459678e8698808ca5"
+  },
+  {
+    "path": "reports/ChainBench_고유모드_통합탐색_검토보고서.pdf",
+    "bytes": 283953,
+    "sha256": "644088d6315ffad08e8e365a35a6b24c755359758b4cc3e8f22e694827752a93",
+    "git_blob": "0631fc2e65dd007c42c7c6763d25d709e10609c1"
+  },
+  {
+    "path": "reports/ChainBench_근사함수_검토보고서.pdf",
+    "bytes": 235287,
+    "sha256": "7f3ef537ee8c0a4f14e2022282658fced600dc08aada643dba6f4c50c3670873",
+    "git_blob": "db395f0328429a5b12bcbd607609fb102d7d1295"
+  },
+  {
+    "path": "reports/ChainBench_논문연결_검토보고서.pdf",
+    "bytes": 258785,
+    "sha256": "787c806971e2de5921355dee1190f37a2746d7780549a00e50fdb05be48682b5",
+    "git_blob": "48e4625dad8928e80b94d55fa17440a310264310"
+  },
+  {
+    "path": "reports/ChainBench_논문재현_검토보고서.pdf",
+    "bytes": 451140,
+    "sha256": "fae09de3e6fa97ae077e763c0cb0e993e74c50a72fd15dd7f260fce83ce2e36c",
+    "git_blob": "81cd6e0db0676e37b7da0e253c7ccfc398aa7fa1"
+  },
+  {
+    "path": "reports/ChainBench_무작위투영_검토보고서.pdf",
+    "bytes": 246121,
+    "sha256": "7b2c4fffa467dc6cda01afa8093b8003d878f9405c7d7ee9555c9d06d5db58d3",
+    "git_blob": "576af84d8394fb3c0f0ecd18f0f55bfa6318f406"
+  },
+  {
+    "path": "reports/ChainBench_비교화면_검토보고서.pdf",
+    "bytes": 310100,
+    "sha256": "1b7a0cb641ccbbb297f42b346b23fc03ee0b58d32e5ed02af85def84fdce1322",
+    "git_blob": "5ff9fe672be43bc8c7b74ee3ef7a93ef91f28940"
+  },
+  {
+    "path": "reports/ChainBench_비균일샘플링_검토보고서.pdf",
+    "bytes": 400009,
+    "sha256": "1cddadfecf9d97f454144e33a0038586c3222d3edcb399d7163a92652bd1bdc4",
+    "git_blob": "8f1807e21ca3a950f74b8451b4058014276589c2"
+  },
+  {
+    "path": "reports/ChainBench_선분과보폭_검토보고서.pdf",
+    "bytes": 354264,
+    "sha256": "64276a65c024b42bcc955c70b6ffd8e6544f6bf5d25452f8ca10ad0c33c7bec6",
+    "git_blob": "f5bcec3c5ef615e3ae9c6ea53cbbb33f3f980ed6"
+  },
+  {
+    "path": "reports/ChainBench_수치기록_검증개선_검토보고서.pdf",
+    "bytes": 290137,
+    "sha256": "45d2059cb68d3a9d2bcb7c7bed1dcb547e3c0ef0074c69f69f755fce272fab74",
+    "git_blob": "95c242d062b579e2682a6b8f64e4ff3036289bec"
+  },
+  {
+    "path": "reports/ChainBench_신호복원_통합탐색_검토보고서.pdf",
+    "bytes": 298692,
+    "sha256": "f7f8f3e3b39685a42c282a18ef198a1b30ef422a34ea903fa6f4983189f26d9e",
+    "git_blob": "38d933278e6753ff39492c9e741d45c022c44d4f"
+  },
+  {
+    "path": "reports/ChainBench_쌍대기하_검토보고서.pdf",
+    "bytes": 258218,
+    "sha256": "2aacf801b4c5e1d5fd57a26f3f8a3796bd6c7df93a7d7fe2c141e0ad93cf26ab",
+    "git_blob": "e9ce6676aaccb81cf9feeb5914e8e9a936e1a711"
+  },
+  {
+    "path": "reports/ChainBench_쌍대상한_검토보고서.pdf",
+    "bytes": 250287,
+    "sha256": "0278422059b1741417efaa4d819ad233a8e09339a3e33ccdec045f104d219109",
+    "git_blob": "72eb1bf52ccb6c776a4a3e3c453178c4236aec75"
+  },
+  {
+    "path": "reports/ChainBench_조건부기대값_검토보고서.pdf",
+    "bytes": 232990,
+    "sha256": "5f5e5df5ee5d61da6981016788db0ec0991d50833b7593d6b65782f8120e3c72",
+    "git_blob": "2c84dfbc78be5cf5b684617d9ff35eb8875770d9"
+  },
+  {
+    "path": "reports/ChainBench_첫화면_검토보고서.pdf",
+    "bytes": 313659,
+    "sha256": "7a276487bc471cb0a0b47c1fda02ff2566f876ec88ca0b1dc2f5a8cf2f5d7938",
+    "git_blob": "66f35041a9d67f1d73526af456114e4da8fdae61"
+  },
+  {
+    "path": "reports/ChainBench_축소에서합의로_통합탐색_검토보고서.pdf",
+    "bytes": 353323,
+    "sha256": "dfcd7363cfd44066f33e4439eb779c51d726679d863cbc223744b110f2284c64",
+    "git_blob": "b0ce6afaa883337f98c3a8a3fad798b9739970ac"
+  },
+  {
+    "path": "reports/ChainBench_탐색묶음_검토보고서.pdf",
+    "bytes": 410712,
+    "sha256": "b5283553062ccfa4ea64c9b93a81435370b9fde5eeb092f39b049b882ad9acf7",
+    "git_blob": "daff115856553e45e9a58bc403180709e91c395e"
+  },
+  {
+    "path": "reports/ChainBench_투영파형_검토보고서.pdf",
+    "bytes": 384001,
+    "sha256": "3b2bc949d485bc1475c67aa544224ca9095ae9c828de3fb04f5abe78b5142cb3",
+    "git_blob": "e4d21d8c1ea6f04d0123209566e6e08d4f07ebea"
+  },
+  {
+    "path": "reports/ChainBench_학습흐름_검토보고서.pdf",
+    "bytes": 367532,
+    "sha256": "af1d8f51b523468e54e7aff192977f80f77fa5f6aab60949057085be95028deb",
+    "git_blob": "71e16467aa99955c5ed8e6d325c6732ab345a4fc"
+  },
+  {
+    "path": "reports/ChainBench_확률통합탐색_검토보고서.pdf",
+    "bytes": 224853,
+    "sha256": "5dabbe3774fb586f36892fda934a9b7817cd82dd7207e13a746bf790ef09751a",
+    "git_blob": "488eb2463bf0e7a3fba8960e602eb54c55f492c7"
+  },
+  {
+    "path": "reports/ChainBench_확장탐색_검토보고서.pdf",
+    "bytes": 315724,
+    "sha256": "1a16212c226f0cb3b548e36ffa36f6a7881bbf8acad1067830d46bc86c18f6e1",
+    "git_blob": "9945cdec9023b4fb365d124dff37a258856b3202"
+  },
+  {
+    "path": "reports/ChainBench_희소성하한_검토보고서.pdf",
+    "bytes": 292967,
+    "sha256": "8cde9ef75780683616b4cb85abf62b1d0d63538ceae2b688f05cc862bbda87d1",
+    "git_blob": "249685e6d700698de6bfd2228699e5c9a5b3bf65"
+  },
+  {
+    "path": "source/all-local-refs.bundle",
+    "bytes": 992452,
+    "sha256": "57d513ff53885ddeec0d5c238712854bf300a6c8d0d0adbc860475b12d51c03f",
+    "git_blob": "a1bec7b7042a7a15a1f49113657d157e26e4390f"
+  },
+  {
+    "path": "source/pre-migration-source.tar.gz",
+    "bytes": 678247,
+    "sha256": "3327d11e96d1cf5c6d2c6a901194b4aadd09387a8e25f9786a1f02c6d9eda250",
+    "git_blob": "fd9a6004d52fcb66f5c907ec943d4d0402f3b76b"
+  }
+]
