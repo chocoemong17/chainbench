@@ -1,0 +1,32 @@
+name: Intel rerun diagnosis
+on:
+  push:
+    branches: [diagnose/intel-reruns]
+permissions:
+  contents: read
+jobs:
+  measurements:
+    name: Measure reruns (${{ matrix.mode }})
+    runs-on: macos-26-intel
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        mode: [native, single-thread]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.12'
+      - run: python -m pip install .
+      - name: Measure complete arrays and provenance without changing tests
+        shell: bash
+        env:
+          DIAGNOSTIC_MODE: ${{ matrix.mode }}
+        run: |
+          if [ "$DIAGNOSTIC_MODE" = "single-thread" ]; then
+            export OPENBLAS_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 BLIS_NUM_THREADS=1
+          fi
+          python scripts/diagnose_reruns.py
