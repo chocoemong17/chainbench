@@ -73,10 +73,12 @@ def test_valid_publication_evidence(evidence):
     assert len(module.verified_files(VERSION, SHA)) == 5
 
 
-@pytest.mark.parametrize("artifact_index", [0, 1])
-def test_missing_saved_comparison_is_rejected(evidence, artifact_index):
+@pytest.mark.parametrize("artifact_indexes", [(0,), (1,), (0, 1)])
+def test_missing_saved_comparison_is_rejected(evidence, artifact_indexes):
     module, dist, report = evidence
-    del report["artifacts"][artifact_index]["saved_comparison"]
+    # Both missing is essential: wheel/sdist agreement alone would accept it.
+    for index in artifact_indexes:
+        del report["artifacts"][index]["saved_comparison"]
     (dist / "verification.json").write_text(json.dumps(report), encoding="utf-8")
     write_sums(dist)
     with pytest.raises(RuntimeError, match="saved-comparison"):
@@ -134,7 +136,8 @@ def test_missing_comparison_prevents_any_release_api_call(evidence, monkeypatch)
     (root / "docs").mkdir()
     (root / "docs" / f"RELEASE_NOTES_{VERSION}.md").write_text("fixture", encoding="utf-8")
     (root / "release-manifest.json").write_text(json.dumps({"version": VERSION, "channel": "alpha"}))
-    del report["artifacts"][1]["saved_comparison"]
+    for record in report["artifacts"]:
+        del record["saved_comparison"]
     (dist / "verification.json").write_text(json.dumps(report), encoding="utf-8")
     write_sums(dist)
     monkeypatch.setenv("GITHUB_REPOSITORY", "chocoemong17/chainbench")
