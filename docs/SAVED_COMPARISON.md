@@ -39,6 +39,8 @@ the saved indices and values, end at each method's actual recorded update, and
 never extrapolate or pad early termination. Zero values are marked at the log
 baseline, not converted to small positive numbers. Iterations are not equal work.
 `budget_complete` says the requested updates ran; it does not certify convergence.
+On narrow screens, explicit scroll hints accompany the full-width table and plots.
+Their focusable regions support arrow keys; the page itself stays within the screen.
 
 ## Provenance and limits
 

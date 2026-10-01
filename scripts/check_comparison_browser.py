@@ -66,6 +66,15 @@ def main():
                 assert json.loads(page.locator('#chainbench-evidence').text_content()) == records[name]
                 assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
                 page.locator('#comparison-context').screenshot(path=str(args.output/f'{name}-context-{width}.png'))
+                if width == 390:
+                    region = page.locator('[aria-label="Record diagnostics"]')
+                    assert region.evaluate('(el)=>el.scrollWidth>el.clientWidth')
+                    region.focus()
+                    region.press('ArrowRight')
+                    page.wait_for_function("document.querySelector('[aria-label=\"Record diagnostics\"]').scrollLeft>0")
+                    region.evaluate('(el)=>el.scrollLeft=el.scrollWidth')
+                    page.locator('#comparison-context').screenshot(path=str(args.output/f'{name}-context-right-{width}.png'))
+                    region.evaluate('(el)=>el.scrollLeft=0')
                 # Native anchors/details/language/downloads must remain keyboard operable.
                 link = page.locator('nav a[href="#record-A"]')
                 link.focus()
@@ -90,9 +99,18 @@ def main():
                 assert json.loads(destination.read_text(encoding='utf8')) == records[name]
                 assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
                 if name == 'matched':
+                    if width == 390:
+                        chart = page.locator('[data-comparison-chart="shared-gd"]')
+                        chart.focus()
+                        chart.press('ArrowRight')
+                        page.wait_for_function("document.querySelector('[data-comparison-chart=\"shared-gd\"]').scrollLeft>0")
+                        chart.evaluate('(el)=>el.scrollLeft=el.scrollWidth')
+                        chart.screenshot(path=str(args.output/'shared-gd-right-390.png'))
+                        chart.evaluate('(el)=>el.scrollLeft=0')
                     page.locator('[data-comparison-chart="shared-gd"]').screenshot(path=str(args.output/f'shared-gd-{width}.png'))
                 evidence['viewports'].append({'width': width, 'case': name, 'records': count,
-                    'keyboard': 'passed', 'download': 'exact', 'horizontal_page_overflow': False})
+                    'keyboard': 'passed', 'horizontal_regions': 'keyboard checked' if width == 390 else 'full width',
+                    'download': 'exact', 'horizontal_page_overflow': False})
             context.close()
         context = browser.new_context(java_script_enabled=False, offline=True,
                                       viewport={'width': 390, 'height': 1000})
@@ -107,6 +125,16 @@ def main():
         context.close()
         assert not evidence['network_requests'] and not evidence['javascript_errors']
 
+        # Larger text in the print packet than scaling a wide desktop screenshot.
+        context = browser.new_context(viewport={'width': 900, 'height': 1100}, offline=True)
+        page = context.new_page()
+        for name in ('matched', 'mixed'):
+            page.goto((args.output/f'{name}.html').resolve().as_uri())
+            page.locator('#comparison-context').screenshot(path=str(args.output/f'{name}-context-print.png'))
+            if name == 'matched':
+                page.locator('[data-comparison-chart="shared-gd"]').screenshot(path=str(args.output/'shared-gd-print.png'))
+        context.close()
+
         # A static, two-page judgment packet uses the actual inspected screenshots.
         def picture(name):
             raw = (args.output/name).read_bytes()
@@ -120,14 +148,14 @@ def main():
                   '<p>Two actual records, one declared quadratic: dimension 4, condition number 10, '
                   'L=1, Householder rotation, zero start. Record A requests 8 updates; B requests 12. '
                   'GD and CG retain their own actual endpoints and stopping states.</p>'
-                  + picture('matched-context-1440.png') + picture('shared-gd-1440.png')
+                  + picture('matched-context-print.png') + picture('shared-gd-print.png')
                   + '<p class="note">The plot contains saved objective-gap samples. Comparison runs no solver. '
                   'Matching input fingerprints do not authenticate the arrays or the author.</p>'
                   '<p>Source: <code>' + escape(source) + '</code></p></section><section>'
                   '<h2>Different problems stay visibly different</h2>'
                   '<p>Add record C with condition number 100 and record D with diagonal LASSO, '
                   'dimension 4, lambda=0.12 and 8 updates. All six record pairs remain inspectable.</p>'
-                  + picture('mixed-context-1440.png')
+                  + picture('mixed-context-print.png')
                   + '<p>No common overlay is offered for these four records. Individual panels retain '
                   'their own axes, parameters and environments. A smaller final value on a different '
                   'objective is not a method ranking.</p>'

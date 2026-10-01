@@ -22,10 +22,16 @@ def comparison_html(result: dict, lang: str = "en") -> str:
         raw = item["chart"]
         chart = ChartSpec(raw["title"], raw["x_label"], raw["y_label"],
                           tuple(LineSeries(**s) for s in raw["series"]), raw["y_scale"])
-        return '<div class="plot" data-comparison-chart="' + item["id"] + '">' + render_line_chart(chart) + '</div>'
+        return ('<p class="comparison-scroll-hint small">' + bi('그래프를 가로로 스크롤하면 끝까지 볼 수 있습니다. 키보드로 영역을 선택한 뒤 방향키도 사용할 수 있습니다.', 'Scroll the chart horizontally to inspect its full width, or focus it and use the arrow keys.')
+                + '</p><div class="plot" tabindex="0" role="region" aria-label="'
+                + escape(raw['title'], quote=True) + '" data-comparison-chart="' + item["id"] + '">'
+                + render_line_chart(chart) + '</div>')
     intro = bi('실제로 저장한 실험 2–4개를 나란히 읽습니다. 먼저 문제·입력·예산의 차이를 확인한 뒤 곡선을 비교하세요.',
                'Read two to four saved experiments together. Inspect problem, input and budget differences before comparing curves.')
-    body = '<nav class="panel"><a href="#comparison-context">' + bi('무엇이 달라졌나', 'What changed?') + '</a>'
+    body = ('<style>.comparison-table{min-width:640px}.comparison-table th,.comparison-table td{white-space:nowrap}'
+            '.comparison-scroll-hint{display:none}@media(max-width:760px){.comparison-scroll-hint{display:block}}'
+            '@media print{.comparison-scroll-hint{display:none}}</style>'
+            '<nav class="panel"><a href="#comparison-context">' + bi('무엇이 달라졌나', 'What changed?') + '</a>')
     for record in result["records"]:
         body += f'<a href="#record-{record["id"]}">' + bi('기록 ', 'Record ') + record["id"] + '</a>'
     body += '</nav><section id="comparison-context"><h2>' + bi('같은 문제를 비교하고 있나요?', 'Are these the same recorded problem?') + '</h2>'
@@ -34,7 +40,8 @@ def comparison_html(result: dict, lang: str = "en") -> str:
         'These are supplied observations. No solver is rerun and no input arrays or authors are authenticated. Matching hashes do not establish independent reproduction; duplicate records add no evidence.') + '</p>'
     headings = [bi('기록 쌍', 'Pair'), bi('전체 설정', 'Full config'), bi('입력 해시', 'Input digest'),
                 bi('문제·시작점', 'Problem and start'), bi('환경', 'Environment'), bi('원본 기록', 'Whole record')]
-    body += '<div class="scroll" tabindex="0" role="region" aria-label="Record diagnostics"><table><thead><tr>'
+    body += '<p class="comparison-scroll-hint small">' + bi('표를 가로로 스크롤해 환경과 원본 기록의 차이까지 확인하세요. 영역을 선택한 뒤 방향키로도 이동할 수 있습니다.', 'Scroll the table horizontally to reach environment and whole-record differences. Focus the region to use the arrow keys.') + '</p>'
+    body += '<div class="scroll" tabindex="0" role="region" aria-label="Record diagnostics"><table class="comparison-table"><thead><tr>'
     body += ''.join('<th scope="col">'+h+'</th>' for h in headings) + '</tr></thead><tbody>'
     for pair in result["pairs"]:
         body += f'<tr data-pair="{pair["left"]}-{pair["right"]}"><th scope="row">{pair["left"]} / {pair["right"]}</th>'
