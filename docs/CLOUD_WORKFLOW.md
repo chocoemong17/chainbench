@@ -25,9 +25,10 @@ The PDF makes no claim about other CI jobs or independent review.
 
 The job packages the exact audited tour and review packet into
 `chainbench-<version>-reading.zip`, alongside a standalone copy of the same PDF and
-`reading-verification.json`. A strict member manifest covers all 35 ZIP entries
+`reading-verification.json`. A strict inventory accounts for all 35 ZIP entries
 (25 HTML pages, original tour manifest, seven review files, README and bundle
-manifest). Source/version bindings, hashes, sizes, member types and PDF identity
+manifest). The member manifest hashes the 34 payload files; the asset proof binds
+that manifest. Source/version bindings, hashes, sizes, member types and PDF identity
 are checked before extraction. The extracted ZIP then goes through the existing
 offline Chromium tour checks at 1440px and 390px, including no-script reading.
 The `chainbench-reading-release-<commit>` artifact contains these three assets;

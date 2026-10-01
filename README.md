@@ -95,8 +95,7 @@ pass and original-objective gap. Choose any cell to inspect its actual final
 2D/3D state; the same link opens its native numerical row without scripts.
 [Source, equations and scope](docs/ADMM_GEOMETRY.md). The extended tour connects
 it to ISTA/FISTA with symbolic flows and a notation table: their y/z variables,
-thresholds, input grids and per-iteration work differ. The development changes
-are included in PR #73 with current remote CI. Open the report separately with:
+thresholds, input grids and per-iteration work differ. Open the report separately with:
 
 ```bash
 python -m chainbench geometry admm-lasso --lang ko --output admm.html
@@ -112,7 +111,7 @@ shared position axis. Its signed ledger explains how changing denominator
 memory affects the two return steps, and distinguishes complete-block regret
 from an unfinished block. All nine cases retain a native first-block view.
 [Source, regret definition and scope](docs/ADAM_COUNTEREXAMPLE.md).
-The command is included in the pinned review snapshot; PR #73 links remote CI:
+Open the report with:
 
 ```bash
 python -m chainbench reproduce reddi-2018 --lang ko --output adam.html
@@ -122,20 +121,20 @@ The randomized Kaczmarz case study adds Strohmer–Vershynin's
 construction: rotate actual 3D coordinate projections, compare six inputs and
 keep every seed while distinguishing exact expectation from a finite sample mean.
 [Source and scope](docs/KACZMARZ_EXPECTATION.md). It can be opened separately or
-in the extended tour; see PR #73 for the consolidated source and current CI:
+in the extended tour:
 
 ```bash
 python -m chainbench case-study kaczmarz-expectation --lang ko --output kaczmarz.html
 ```
 
-In a checkout containing these changes, with Python in your preferred environment:
+To generate the smaller default tour from a source checkout:
 
 ```bash
 python -m pip install .
 python -m chainbench tour --lang ko --output tour
 ```
 
-For a fresh checkout, follow the [pinned installation steps](docs/REVIEW_GUIDE.md#run-the-tested-development-snapshot).
+For the versioned wheel, follow the [installation steps](#install-v060).
 Open `tour/index.html`. It connects **17 offline HTML pages**: the reading guide,
 eight-topic atlas, three published-example workflows, three geometry views, eight
 stress reports and one public tight case. Each report keeps its numerical evidence
@@ -144,25 +143,24 @@ and links back to the guide. The recipient needs no server, account or Python.
 The latest local atlas also connects each topic directly to its included
 experiments through question-led cards. Standalone pages provide reproducible
 commands; tour cards open local files and reports link to their related lesson.
-[How the reading paths work](docs/LEARNING_WORKFLOWS.md#development-source-follow-a-topic-into-its-actual-reports).
+[How the reading paths work](docs/LEARNING_WORKFLOWS.md#follow-a-topic-into-its-actual-reports).
 
 Use a new destination directory. The whole folder is about 45 MB uncompressed;
 copy the folder to preserve its links. [Contents, settings and hashes](docs/OFFLINE_TOUR.md).
 
-The newer optional **25-page** path connects noisy Haar restoration, the sharp
+The complete **25-page** path connects noisy Haar restoration, the sharp
 Frank–Wolfe sparsity construction, randomized Kaczmarz expectation attainment
 and nonuniform signal recovery with CG spectral breadth, the Adam counterexample
 ADMM variable splitting and FISTA candidate tests.
 Its comparison of fixed-objective gaps and changing-loss regret keeps their scopes separate.
-The index reports the actual file size; this
-development path is subject to remote PR/CI validation:
+The index reports the actual file size. Generate the complete tour with:
 
 ```bash
 python -m chainbench tour --extended --lang ko --output tour-extended
 ```
 
-Open `tour-extended/index.html`. This option is included in the review guide's
-pinned snapshot; the default 17-page tour keeps its existing calculations.
+Open `tour-extended/index.html`. The release reading ZIP uses this complete
+25-page path; the default 17-page tour remains available for a smaller download.
 
 ## Choose the question you want to answer
 
@@ -227,8 +225,7 @@ eigenvalue interval and condition number fixed while varying all three spectra,
 two coordinate bases and three initial-error profiles. Inspect actual signed
 mode ratios and energy bars alongside explicitly separate comparison polynomials.
 All 18 inputs and every computed step remain available offline, separately or in
-the extended tour, with links to the published 2×2 example. This development
-addition is included in the pinned snapshot; PR #73 links actual remote CI.
+the extended tour, with links to the published 2×2 example.
 
 The separate [nonuniform signal experiment](docs/NONUNIFORM_SAMPLING.md) follows
 Strohmer–Vershynin's 700-sample / 101-coefficient protocol with three declared
@@ -237,21 +234,18 @@ probability and all 15,000 projections of cyclic, uniform and weighted Kaczmarz.
 The projection explanation connects a single chosen observation to the actual
 before/after waveforms and global Fourier response, retaining rounding differences.
 The first input deliberately remains visible when a sufficient gap condition
-does not apply. This standalone development addition is included in the pinned
-review snapshot; PR #73 links actual remote CI.
+does not apply.
 
 The separate [noisy Haar experiment](docs/FISTA_WAVELET.md) adds 256×256 restoration
 with positive λ, actual wavelet shrinkage and a declared noise draw. Its default
 200 updates follow Figure 4's protocol; the unknown optimum is never labelled
-zero. This command is included in the review guide's pinned development snapshot.
-Its full-array export
+zero. Its full-array export
 is about 30 MB; the optional extended tour includes it at seed 0 and 200 updates.
 
 The subsequent [Frank–Wolfe sparsity construction](docs/FW_SPARSITY.md) connects
 Jaggi's sharp support floor to actual atom weights across four dimensions and a
 three-coordinate objective surface. It distinguishes support size from iteration,
-and ends the dual lower bound at full support. This addition is prepared on the
-consolidated development branch; PR #73 links the source and current remote CI.
+and ends the dual lower bound at full support.
 
 The [heavy-ball counterexample](docs/HEAVY_BALL_COUNTEREXAMPLE.md) connects the
 actual function, signed iterates and `(previous, current)` state plane. Its published
@@ -261,7 +255,7 @@ gradient. The same method's successful quadratic fixture remains a separate stor
 The newer [CG spectral explanation](docs/CG_SPECTRAL_EXPLANATION.md) connects
 Shewchuk's exact comparison polynomials to the same saved errors in all ten starts.
 Actual mode ratios and weighted norm error are distinguished from minimax bounds;
-absent initial modes remain undefined. PR #73 links this explanation's remote CI.
+absent initial modes remain undefined.
 
 ## Change a condition and replay a calculation
 

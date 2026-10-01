@@ -42,7 +42,7 @@ bundle: 22 links in the base tour and 25 in the extended tour. Report pages also
 link to the relevant lesson or method-comparison panel. Cards for reports absent
 from the base bundle offer commands without broken local links. Their commands
 are checked against the linked artifacts' manifest settings. See the
-[reading-path contract](LEARNING_WORKFLOWS.md#development-source-follow-a-topic-into-its-actual-reports).
+[reading-path contract](LEARNING_WORKFLOWS.md#follow-a-topic-into-its-actual-reports).
 
 ## Optional extended path
 
