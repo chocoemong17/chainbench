@@ -183,8 +183,8 @@ def test_cli_embedded_record_native_coverage_and_exclusive_output(tmp_path, monk
     args = ["geometry", "fista-backtracking", "--steps", "1"]
     assert main(args + ["--lang", "ko", "--output", str(html)]) == 0
     assert main(args + ["--format", "json", "--output", str(raw)]) == 0
-    contents = html.read_text()
-    data = json.loads(raw.read_text())
+    contents = html.read_text(encoding='utf8')
+    data = json.loads(raw.read_text(encoding='utf8'))
     assert extract_record(contents) == data
     assert contents.count("data-bt-case=") == 36
     assert contents.count("data-bt-native-row=") == sum(

@@ -79,15 +79,15 @@ def test_validator_rejects_missing_or_changed_artifact(tour_folder):
 def test_existing_destination_is_preserved_before_computation(tmp_path, monkeypatch):
     import chainbench.tour as tour
     marker = tmp_path/'keep.txt'
-    marker.write_text('keep')
+    marker.write_text('keep', encoding='utf8')
     monkeypatch.setattr(tour, '_reports', lambda _: pytest.fail('must check destination first'))
     with pytest.raises(FileExistsError):
         build_tour(tmp_path)
-    assert marker.read_text() == 'keep'
+    assert marker.read_text(encoding='utf8') == 'keep'
     with pytest.raises(SystemExit) as error:
         main(['tour', '--output', str(tmp_path)])
     assert error.value.code == 2
-    assert marker.read_text() == 'keep'
+    assert marker.read_text(encoding='utf8') == 'keep'
 
 
 def test_failed_calculation_leaves_no_destination_or_staging_folder(tmp_path, monkeypatch):
@@ -142,16 +142,16 @@ def test_extended_tour_preserves_base_records_and_reproduction_metadata(tour_fol
     assert records['fw-sparsity.html']['parameters']['steps'] == 40
     assert all(records[name] == record for name, record in validator()(tour_folder).items())
     assert records['kaczmarz.html']['parameters']['trials'] == 64
-    assert json.loads((extended_folder/'manifest.json').read_text())['extensions'] == ['fista-wavelet','fw-sparsity','kaczmarz-expectation','kaczmarz-sampling','cg-spectrum','reddi-2018','admm-lasso','fista-backtracking']
-    assert json.loads((tour_folder/'manifest.json').read_text())['extensions'] == []
-    assert 'wavelet.html' not in (tour_folder/'index.html').read_text()
-    assert 'fw-sparsity.html' not in (tour_folder/'index.html').read_text()
-    assert 'kaczmarz.html' not in (tour_folder/'index.html').read_text()
-    assert 'sampling.html' not in (tour_folder/'index.html').read_text()
-    assert 'cg-spectrum.html' not in (tour_folder/'index.html').read_text()
-    assert 'adam.html' not in (tour_folder/'index.html').read_text()
-    assert 'admm.html' not in (tour_folder/'index.html').read_text()
-    assert 'backtracking.html' not in (tour_folder/'index.html').read_text()
+    assert json.loads((extended_folder/'manifest.json').read_text(encoding='utf8'))['extensions'] == ['fista-wavelet','fw-sparsity','kaczmarz-expectation','kaczmarz-sampling','cg-spectrum','reddi-2018','admm-lasso','fista-backtracking']
+    assert json.loads((tour_folder/'manifest.json').read_text(encoding='utf8'))['extensions'] == []
+    assert 'wavelet.html' not in (tour_folder/'index.html').read_text(encoding='utf8')
+    assert 'fw-sparsity.html' not in (tour_folder/'index.html').read_text(encoding='utf8')
+    assert 'kaczmarz.html' not in (tour_folder/'index.html').read_text(encoding='utf8')
+    assert 'sampling.html' not in (tour_folder/'index.html').read_text(encoding='utf8')
+    assert 'cg-spectrum.html' not in (tour_folder/'index.html').read_text(encoding='utf8')
+    assert 'adam.html' not in (tour_folder/'index.html').read_text(encoding='utf8')
+    assert 'admm.html' not in (tour_folder/'index.html').read_text(encoding='utf8')
+    assert 'backtracking.html' not in (tour_folder/'index.html').read_text(encoding='utf8')
     from chainbench.kaczmarz import run_kaczmarz
     assert records['kaczmarz.html'] == run_kaczmarz(40,64)
     from chainbench.nonuniform_sampling import run_nonuniform_sampling
@@ -170,10 +170,10 @@ def test_adam_preview_retains_the_slow_case_and_actual_regret_quantity(extended_
     import base64
     import re
 
-    report = (extended_folder/'adam.html').read_text()
+    report = (extended_folder/'adam.html').read_text(encoding='utf8')
     case = report.split('<details data-adam-case="c3-a0.1">',1)[1].split('<details data-adam-case=',1)[0]
     expected = re.search(r'<svg\b[^>]*data-adam-chart="average_regret".*?</svg>',case,flags=re.S)[0]
-    index = (extended_folder/'index.html').read_text()
+    index = (extended_folder/'index.html').read_text(encoding='utf8')
     card = re.search(r'<a class="tour-card" href="adam.html">.*?</a>',index,flags=re.S)[0]
     encoded = re.search(r'src="data:image/svg\+xml;base64,([^"]+)"',card)[1]
     assert base64.b64decode(encoded).decode()==expected
@@ -184,7 +184,7 @@ def test_adam_preview_retains_the_slow_case_and_actual_regret_quantity(extended_
     assert 'href="heavy-ball.html" data-tour-regret' in report
     assert 'data-tour-lesson' not in report  # No false ninth fixed-suite topic.
     for filename in ('heavy-ball.html','atlas.html'):
-        assert 'href="adam.html" data-tour-regret' in (extended_folder/filename).read_text()
+        assert 'href="adam.html" data-tour-regret' in (extended_folder/filename).read_text(encoding='utf8')
 
 
 def test_admm_preview_is_the_actual_surface_and_notation_bridge_is_scoped(extended_folder):
@@ -192,10 +192,10 @@ def test_admm_preview_is_the_actual_surface_and_notation_bridge_is_scoped(extend
     import re
     import xml.etree.ElementTree as ET
 
-    report = (extended_folder/'admm.html').read_text()
+    report = (extended_folder/'admm.html').read_text(encoding='utf8')
     case = report.split('data-admm-case="coupled-lambda0.1-zero-rho1"',1)[1].split('data-admm-case=',1)[0]
     expected = re.search(r'<svg\b[^>]*data-admm-primal="surface".*?</svg>',case,flags=re.S)[0]
-    index = (extended_folder/'index.html').read_text()
+    index = (extended_folder/'index.html').read_text(encoding='utf8')
     card = re.search(r'<a class="tour-card" href="admm.html">.*?</a>',index,flags=re.S)[0]
     raw = base64.b64decode(re.search(r'src="data:image/svg\+xml;base64,([^"]+)"',card)[1]).decode()
     assert raw==expected
@@ -208,7 +208,7 @@ def test_admm_preview_is_the_actual_surface_and_notation_bridge_is_scoped(extend
     assert 'href="proximal.html" data-tour-splitting' in report
     assert 'data-tour-lesson' not in report
     for filename in ('proximal.html','atlas.html'):
-        assert 'href="admm.html" data-tour-splitting' in (extended_folder/filename).read_text()
+        assert 'href="admm.html" data-tour-splitting' in (extended_folder/filename).read_text(encoding='utf8')
 
 
 @pytest.mark.parametrize('missing',['case','surface'])
@@ -241,7 +241,7 @@ def test_admm_tour_binds_original_metric_full_inputs_and_split_variant(extended_
             artifact['command'][3] = '1'
         else:
             artifact[fault] = {'steps':1,'dimension':3,'layer':'published-figure-reproduction','metric':'split objective gap'}[fault]
-        path.write_text(json.dumps(manifest))
+        path.write_text(json.dumps(manifest), encoding='utf8')
         with pytest.raises(RuntimeError,match='ADMM tour metadata'):
             validator()(extended_folder)
     finally:
@@ -274,7 +274,7 @@ def test_admm_tour_rejects_rehashed_wrong_preview_or_missing_comparison(extended
         manifest = json.loads(manifest_before)
         artifact = next(a for a in manifest['artifacts'] if a['path']==path.name)
         artifact.update(bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest())
-        manifest_path.write_text(json.dumps(manifest))
+        manifest_path.write_text(json.dumps(manifest), encoding='utf8')
         with pytest.raises(RuntimeError,match='ADMM tour'):
             validator()(extended_folder)
     finally:
@@ -313,7 +313,7 @@ def test_adam_extension_binds_variant_loss_metric_and_complete_case_selection(ex
             artifact['preview']['case'] = 'c3-a0.9'
         else:
             artifact['command'][3] = '30'
-        path.write_text(json.dumps(manifest))
+        path.write_text(json.dumps(manifest), encoding='utf8')
         with pytest.raises(RuntimeError,match='Adam tour metadata'):
             validator()(extended_folder)
     finally:
@@ -324,9 +324,9 @@ def test_cg_spectrum_preview_uses_the_actual_three_spectrum_overview(extended_fo
     import base64
     import re
 
-    report = (extended_folder/'cg-spectrum.html').read_text()
+    report = (extended_folder/'cg-spectrum.html').read_text(encoding='utf8')
     expected = re.search(r'<details data-cg-overview><summary>hadamard · equal-energy</summary>.*?(<svg\b.*?</svg>)',report,flags=re.S)[1]
-    index = (extended_folder/'index.html').read_text()
+    index = (extended_folder/'index.html').read_text(encoding='utf8')
     card = re.search(r'<a class="tour-card" href="cg-spectrum.html">.*?</a>',index,flags=re.S)[0]
     encoded = re.search(r'src="data:image/svg\+xml;base64,([^"]+)"',card)[1]
     assert base64.b64decode(encoded).decode()==expected
@@ -335,7 +335,7 @@ def test_cg_spectrum_preview_uses_the_actual_three_spectrum_overview(extended_fo
     assert 'href="shewchuk.html" data-tour-spectrum' in report
     assert 'href="atlas.html#hestenes-stiefel-1952" data-tour-lesson' in report
     for filename in ('shewchuk.html','atlas.html','stress-hestenes-stiefel-1952.html'):
-        assert 'href="cg-spectrum.html" data-tour-spectrum' in (extended_folder/filename).read_text()
+        assert 'href="cg-spectrum.html" data-tour-spectrum' in (extended_folder/filename).read_text(encoding='utf8')
 
 
 @pytest.mark.parametrize('fault',['steps','dimension','rtol','source','cases','metric','preview','command'])
@@ -361,7 +361,7 @@ def test_spectral_extension_binds_inputs_stop_metric_and_preview(extended_folder
             artifact['preview']['start_profile'] = 'single-mode'
         else:
             artifact['command'][3] = '1'
-        path.write_text(json.dumps(manifest))
+        path.write_text(json.dumps(manifest), encoding='utf8')
         with pytest.raises(RuntimeError,match='CG spectrum tour metadata'):
             validator()(extended_folder)
     finally:
@@ -372,16 +372,16 @@ def test_sampling_preview_is_the_actual_first_case_weighted_snapshot(extended_fo
     import base64
     import re
 
-    report = (extended_folder/'sampling.html').read_text()
+    report = (extended_folder/'sampling.html').read_text(encoding='utf8')
     expected = re.search(r'<details data-sampling-gallery="weighted-100">.*?(<svg\b.*?</svg>)', report, flags=re.S)[1]
-    index = (extended_folder/'index.html').read_text()
+    index = (extended_folder/'index.html').read_text(encoding='utf8')
     card = re.search(r'<a class="tour-card" href="sampling.html">.*?</a>', index, flags=re.S)[0]
     encoded = re.search(r'src="data:image/svg\+xml;base64,([^"]+)"',card)[1]
     assert base64.b64decode(encoded).decode() == expected
     assert 'k=100' in index
     assert 'not an expectation' in index
     assert 'data-tour-sampling' in report
-    assert 'href="sampling.html" data-tour-sampling' in (extended_folder/'kaczmarz.html').read_text()
+    assert 'href="sampling.html" data-tour-sampling' in (extended_folder/'kaczmarz.html').read_text(encoding='utf8')
 
 
 @pytest.mark.parametrize('fault',['steps','seeds','dimension','source','metric','preview','command'])
@@ -405,7 +405,7 @@ def test_sampling_extension_binds_inputs_budget_metric_and_preview(extended_fold
             artifact['preview']['iteration'] = 15000
         else:
             artifact['command'][3] = '100'
-        path.write_text(json.dumps(manifest))
+        path.write_text(json.dumps(manifest), encoding='utf8')
         with pytest.raises(RuntimeError,match='nonuniform sampling tour metadata'):
             validator()(extended_folder)
     finally:
@@ -431,7 +431,7 @@ def test_randomized_extension_binds_all_metadata(extended_folder,fault):
             artifact['cases'].pop()
         else:
             artifact['command'][5] = '1'
-        path.write_text(json.dumps(manifest))
+        path.write_text(json.dumps(manifest), encoding='utf8')
         with pytest.raises(RuntimeError,match='randomized tour extension'):
             validator()(extended_folder)
     finally:
@@ -453,12 +453,12 @@ def test_previous_two_to_seven_extension_manifests_remain_readable(extended_fold
     removed = ['backtracking.html'] + ([] if include_admm else ['admm.html']) + ([] if include_adam else ['adam.html']) + ([] if include_spectrum else ['cg-spectrum.html']) + ([] if include_sampling else ['sampling.html']) + ([] if include_randomized else ['kaczmarz.html'])
     for filename in removed:
         (folder/filename).unlink()
-    manifest = json.loads((folder/'manifest.json').read_text())
+    manifest = json.loads((folder/'manifest.json').read_text(encoding='utf8'))
     manifest['extensions'] = ['fista-wavelet','fw-sparsity'] + (['kaczmarz-expectation'] if include_randomized else []) + (['kaczmarz-sampling'] if include_sampling else []) + (['cg-spectrum'] if include_spectrum else []) + (['reddi-2018'] if include_adam else []) + (['admm-lasso'] if include_admm else [])
     manifest['artifacts'] = [a for a in manifest['artifacts'] if a['path'] not in removed]
     for a in manifest['artifacts']:
         p = folder/a['path']
-        text = p.read_text()
+        text = p.read_text(encoding='utf8')
         text = re.sub(r'<section id="step-selection">.*?</section>','',text,flags=re.S)
         text = re.sub(r'<a href="#step-selection">.*?</a>','',text,flags=re.S)
         text = re.sub(r'<nav aria-label="FISTA step selection">.*?</nav>','',text,flags=re.S)
@@ -485,7 +485,7 @@ def test_previous_two_to_seven_extension_manifests_remain_readable(extended_fold
         raw = text.encode()
         p.write_bytes(raw)
         a.update(bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest())
-    (folder/'manifest.json').write_text(json.dumps(manifest))
+    (folder/'manifest.json').write_text(json.dumps(manifest), encoding='utf8')
     assert len(validator()(folder)) == 16+extension_count
 
 
@@ -523,7 +523,7 @@ def test_extended_manifest_must_describe_actual_computations(extended_folder, fa
             wavelet['command'][5] = '1'
         else:
             wavelet['f_star'] = 0
-        path.write_text(json.dumps(manifest))
+        path.write_text(json.dumps(manifest), encoding='utf8')
         with pytest.raises(RuntimeError, match='extension|coverage|workflow'):
             validator()(extended_folder)
     finally:
@@ -551,7 +551,7 @@ def changed_evidence(folder, filename, change):
         manifest = json.loads(manifest_before)
         artifact = next(a for a in manifest['artifacts'] if a['path']==filename)
         artifact.update(bytes=len(raw), sha256=hashlib.sha256(raw).hexdigest())
-        manifest_path.write_text(json.dumps(manifest))
+        manifest_path.write_text(json.dumps(manifest), encoding='utf8')
         yield
     finally:
         path.write_bytes(before)
@@ -574,7 +574,7 @@ def test_late_extension_metadata_fails_before_presentation_or_numerical_audits(
         manifest = json.loads(before)
         artifact = next(a for a in manifest['artifacts'] if a['path']==filename)
         artifact['steps'] = 1
-        path.write_text(json.dumps(manifest))
+        path.write_text(json.dumps(manifest), encoding='utf8')
         with pytest.raises(RuntimeError, match='tour metadata|tour extension settings'):
             check(extended_folder)
     finally:
@@ -637,7 +637,7 @@ def test_backtracking_metadata_cannot_relabel_or_reduce_the_experiment(extended_
             artifact['command'][3] = '1'
         else:
             artifact[fault] = 'changed'
-        path.write_text(json.dumps(manifest))
+        path.write_text(json.dumps(manifest), encoding='utf8')
         with pytest.raises(RuntimeError,match='Backtracking tour: metadata'):
             validator()(extended_folder)
     finally:
@@ -673,7 +673,7 @@ def test_backtracking_presentation_rejects_rehashed_missing_or_misleading_conten
         manifest = json.loads(manifest_before)
         artifact = next(a for a in manifest['artifacts'] if a['path']==path.name)
         artifact.update(bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest())
-        manifest_path.write_text(json.dumps(manifest))
+        manifest_path.write_text(json.dumps(manifest), encoding='utf8')
         with pytest.raises(RuntimeError,match='Backtracking tour:'):
             validate_backtracking_tour_presentation(extended_folder)
     finally:
