@@ -1,12 +1,13 @@
 # Roadmap: published examples before algorithm counts
 
-## Current development main
+## Current v0.6.0 source
 
-[PR #73](https://github.com/chocoemong17/chainbench/pull/73) integrated the
-implementation into `main` and links its actual cloud checks. The package version remains
-0.5.0, but these development features are not in the frozen v0.5.0 release.
-[Start with the reading guide](docs/REVIEW_GUIDE.md) for a pinned computation
-snapshot, artifact downloads and specific questions to inspect.
+The v0.6.0 release candidate packages the integrated toolkit, portability repairs
+and saved-record comparison into a complete versioned offline tour. Publication
+requires the tested main-branch release gate; source version metadata alone does
+not indicate a published release. [Download guide](docs/OFFLINE_DOWNLOAD.md) and
+[release notes](docs/RELEASE_NOTES_0.6.0.md) explain availability and numerical migration.
+The frozen v0.5.0 baseline stays unchanged.
 
 The complete extended tour has 25 HTML pages and 24 numerical records. GitHub
 Actions generates the bundle, audits its hashes and numerical evidence, and
@@ -14,7 +15,7 @@ renders a separate two-page FISTA review packet. Source stays in GitHub; full
 tests, builds and browser checks run there too. The local task folder stays below
 1 GB. [Cloud workflow and artifact lifetime](docs/CLOUD_WORKFLOW.md).
 
-Implemented in the development source:
+Implemented in this source:
 
 - **Published examples and their limits.** Shewchuk's original 2D CG/SD setup and
   declared added starts; Beck–Teboulle's noiseless image protocol and a separate
@@ -38,6 +39,13 @@ Implemented in the development source:
   GD construction, sharp FW support floors and Kaczmarz expectation attainment.
   Finite paths, expectations and theorem statements remain separate.
   [Evidence levels](docs/OFFLINE_TOUR.md).
+- **Saved experiment comparisons.** Compare two to four schema-1 records without
+  running a solver. Retain exact samples and provenance, expose input/setup
+  differences and overlay only matching recorded problems.
+  [Comparison contract](docs/SAVED_COMPARISON.md).
+- **Versioned reading downloads.** Ship all 25 HTML pages and the two-page PDF with
+  source/member hashes. Read the extracted ZIP in offline desktop/mobile Chromium,
+  then publish the same bytes alongside both verified Python distributions.
 - **Connected paper explanations.** Eight bilingual atlas topics, symbolic
   process flows, operation/state comparisons and topic-specific report links.
   Return links and native tables preserve offline and no-script reading.

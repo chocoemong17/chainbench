@@ -14,7 +14,9 @@ No outside review has been inferred from this invitation or from CI activity.
 
 ## Start with the released package
 
-For a new manual review, prefer the latest v0.5.0 GitHub prerelease. The standalone
+For a new manual review, use the v0.6.0 GitHub prerelease after its gate completes;
+[check download availability and version](OFFLINE_DOWNLOAD.md). Reading its HTML
+ZIP needs no Python installation. The standalone
 `review/` helper is intentionally pinned to v0.2.0 so its historical cross-platform
 baseline does not move underneath existing reports. Install the version you intend
 to review in a new virtual environment, not over an editable source install, then run:
@@ -31,8 +33,9 @@ can compare the output from `--preset quadratic` with that saved-config run.
 Review the seven quantitative conditions and the INFO observation separately;
 `CONSISTENT` is a finite experiment result, not a theorem certification.
 
-The v0.5.0 `learn`, `stress`, `landscape`, `sweep`, `replay` and `case-study gd-tight` workflows are
-additional useful review targets. See [LEARNING_WORKFLOWS.md](LEARNING_WORKFLOWS.md).
+The `learn`, `stress`, `landscape`, `sweep`, `replay`, `compare`, `tour`, `geometry`
+and `reproduce` workflows provide additional review targets.
+See [LEARNING_WORKFLOWS.md](LEARNING_WORKFLOWS.md).
 A replay MATCH does not authenticate who ran the original saved record.
 
 ## Examine one mathematical connection

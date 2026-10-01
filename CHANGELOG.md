@@ -1,6 +1,13 @@
 # Changelog
 
-## Unreleased
+## 0.6.0
+
+- Publish the complete 25-page offline reading ZIP and two-page PDF alongside the
+  verified wheel and sdist. Preserve source/member hashes and rendering evidence;
+  extract and read the actual ZIP in offline desktop/mobile Chromium before
+  publication. Reuse the exact eight tested assets in the main-only release job.
+  Add a sixth fault injection for corrupted ZIP contents with rehashed outer
+  evidence. [Release notes](docs/RELEASE_NOTES_0.6.0.md).
 
 - Require complete saved-comparison installation evidence before publication,
   including all three metrics for two, three and four records. Bind requested

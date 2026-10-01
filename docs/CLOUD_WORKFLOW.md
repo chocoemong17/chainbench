@@ -4,12 +4,15 @@ The repository and pull requests are the source of truth. Full tests, clean
 package installation, browser checks and report generation run on GitHub Actions.
 The local task folder has a strict 1 GB ceiling; generated copies are disposable.
 
-The **cloud reading bundle** workflow generates the complete 25-page Korean/English
+The **tests** workflow calls the reusable **cloud reading bundle** workflow, which
+generates the complete 25-page Korean/English
 tour and independently audits every file, link and all 24 numerical records.
 Open the workflow run's **Artifacts** section, download `chainbench-reading-bundle-<commit>`,
 extract it and open `index.html`. The recipient needs no Python or server.
 Artifacts expire after seven days; rerun the workflow to regenerate them.
-The artifact is a development reading bundle, separate from gated releases.
+Manual cloud generation is also available. For the versioned ZIP and PDF, use the
+[release download guide](OFFLINE_DOWNLOAD.md); those assets are separate from
+temporary Actions retention and appear only after the publication gate completes.
 
 The same run also uploads `chainbench-review-packet-<commit>`, a small artifact
 containing the Korean two-page FISTA comparison PDF, two previews rendered from
@@ -20,15 +23,27 @@ checks layout boundaries, figure loading, PDF page count and embedded CJK fonts.
 The evidence binds the source commit, tour manifest fingerprint and output hashes.
 The PDF makes no claim about other CI jobs or independent review.
 
+The job packages the exact audited tour and review packet into
+`chainbench-<version>-reading.zip`, alongside a standalone copy of the same PDF and
+`reading-verification.json`. A strict member manifest covers all 35 ZIP entries
+(25 HTML pages, original tour manifest, seven review files, README and bundle
+manifest). Source/version bindings, hashes, sizes, member types and PDF identity
+are checked before extraction. The extracted ZIP then goes through the existing
+offline Chromium tour checks at 1440px and 390px, including no-script reading.
+The `chainbench-reading-release-<commit>` artifact contains these three assets;
+`chainbench-extracted-browser-<commit>` retains the browser evidence.
+
 GitHub requires sign-in to download Actions artifacts. Select a completed run
 whose source revision matches the candidate you want to inspect. Pull-request
 runs use GitHub's merge commit, so their artifact suffix may differ from the PR's
 head SHA; the review packet's `source-commit.txt` and evidence identify the actual checkout.
 The commit and its tree remain available after the artifact expires.
 
-The reading bundle retains exactly the generated tour files so it can be audited
-again with `validate_tour`. Source/environment notes stay with the review packet,
-outside the tour's strict manifest coverage.
+The original `chainbench-reading-bundle-<commit>` artifact retains exactly the
+generated tour files so it can be audited again with `validate_tour`. The release
+ZIP adds `README.txt`, `bundle-manifest.json` and `review/`; its verifier checks
+those additions separately. To use the original strict tour validator after
+extraction, supply only the files listed by the original `manifest.json`.
 
 The rendering tools (pinned Playwright and PyMuPDF, Chromium, Noto CJK fonts) are
 installed only on the ephemeral runner. They are not package runtime dependencies.
@@ -45,9 +60,18 @@ incomplete tours and missing evidence are rejected. A failed render leaves no
 finished packet directory. The workflow stores outputs on GitHub; do not create
 local copies of the full test/build/report matrix.
 
-The tests workflow retains the full cross-platform suite, wheel/sdist clean
-installation and offline browser checks. A successful reading-bundle job does
-not substitute for the remaining CI jobs. Existing releases stay unchanged.
+The tests workflow has nine jobs: six compatibility configurations, the complete
+offline report browser suite, cloud reading generation, and clean wheel/sdist
+installation. The installation job downloads the reading assets from the same
+workflow run, binds them to the same commit and validates all eight release files.
+A successful reading job does not substitute for the remaining CI jobs.
+
+The main-only release workflow calls this full suite. Its publishing job downloads
+the exact already-tested `distributions-<run-id>` artifact; it does not rebuild
+packages or regenerate reports. The publisher rechecks all eight files, source
+and internal ZIP bindings before a release write, then downloads uploaded assets
+again and verifies their bytes before publication. Prior releases stay unchanged.
+[Release protocol](../RELEASING.md).
 
 The macOS Python 3.12 gate uses GitHub's standard `macos-26-intel` runner.
 The earlier `macos-latest` ARM64 job was cancelled without acquiring a runner;

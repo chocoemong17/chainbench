@@ -1,9 +1,11 @@
-# Learn, sample many cases, inspect geometry, vary one thing, and replay (v0.5.0)
+# Learn, sample many cases, inspect geometry, vary one thing, and replay
 
-For the new development-source `reproduce shewchuk-1994` workflow (not bundled in the
-v0.5.0 release), see [the published-example guide](SHEWCHUK_REPRODUCTION.md).
+These workflows are included in the v0.6.0 source. Start with the
+[versioned offline download](OFFLINE_DOWNLOAD.md) or recompute a report with the
+installed package. For `reproduce shewchuk-1994`, see
+[the published-example guide](SHEWCHUK_REPRODUCTION.md).
 
-This release adds four bounded workflows to the existing engine. None requires a
+The original v0.5.0 introduced four bounded workflows to the engine. None requires a
 server, API key, telemetry, a new solver or a new runtime dependency. HTML outputs
 contain calculated observations; browser controls change their presentation, not
 run optimization in JavaScript. Exact numbers remain in the expandable record.
@@ -21,7 +23,7 @@ A topic explains motivation, assumptions, the implemented recurrence, a selected
 published guarantee, the actual observation and what it does not establish.
 Source links are optional links; no remote resource is loaded by the report.
 
-Development source also shows the actual deterministic instance beside each curve:
+The current version also shows the actual deterministic instance beside each curve:
 dimension, objective, constants, start, budget, completed updates and termination.
 Expand the panel for full input arrays and method settings. These records come
 from the objects used to calculate the plot; see [the contract](CANONICAL_CONTEXT.md).
@@ -33,7 +35,7 @@ are checked with the same audit as `report`. A JSON export button saves the
 embedded evidence locally. No upload is performed. Without JavaScript the text,
 figures, native details sections and initial chosen language remain usable.
 
-### Development source: follow the computation and compare methods
+### follow the computation and compare methods
 
 After v0.5.0, each topic also has a three- or four-stage **symbolic update flow**.
 These are explanatory diagrams, separate from the computed curves and their
@@ -60,7 +62,7 @@ audits are preserved. Both installed distribution formats must include the maps.
 The offline browser check covers 1440- and 390-pixel views, pair selection,
 keyboard input, filtered navigation, focused pages, JSON and static fallbacks.
 
-### Development source: follow a topic into its actual reports
+### follow a topic into its actual reports
 
 Each of the eight topics now has question-led report cards alongside its symbolic
 flow and canonical calculation. The complete atlas has 25 cards; a focused export
@@ -157,7 +159,7 @@ external feedback rather than turning a matching JSON into an independent user.
 
 ### Compare several saved runs without recomputing
 
-Development source also provides `chainbench compare a.json b.json --lang ko
+The current version also provides `chainbench compare a.json b.json --lang ko
 --output comparison.html` for two to four saved schema-1 experiments. Pairwise
 config/input/environment diagnostics precede the actual stored curves. Shared
 overlays require matching recorded problems; different objectives retain separate
@@ -191,7 +193,7 @@ image reproductions also embed their computed PNG previews and numeric arrays.
 
 A learning page now labels its first plot as a canonical illustration. To reduce cherry-picking concerns, run the same paper-linked measurement over seeded instances with `chainbench stress <topic>`. To understand *why* trajectories differ on an ill-conditioned quadratic, use `chainbench landscape`, which renders the same run as contour, 3D surface and loss views. See [EVIDENCE_LAYERS.md](EVIDENCE_LAYERS.md).
 
-Development source adds `geometry frank-wolfe` to the Jaggi learning card: inspect
+The current version adds `geometry frank-wolfe` to the Jaggi learning card: inspect
 the linear oracle, next feasible point and computable dual certificate across all
 twelve target/start combinations. The barycenter example also shows that the
 scheduled step need not decrease the objective. See [SIMPLEX_GEOMETRY.md](SIMPLEX_GEOMETRY.md).

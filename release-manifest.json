@@ -1,5 +1,5 @@
 {
-  "version": "0.5.0",
+  "version": "0.6.0",
   "channel": "alpha",
-  "description": "Evidence-layered paper explanations with seeded stress sampling and contour/3D trajectory geometry"
+  "description": "Versioned offline paper-reading bundle with audited reproductions, linked geometry and saved-run comparison"
 }

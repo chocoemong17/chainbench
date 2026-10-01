@@ -10,8 +10,9 @@ rules and actual calculations. Explore 2D contours, 3D objective surfaces, image
 reconstructions and reproducible instance families in local, bilingual reports.
 Python 3.10+ and NumPy generate the pages; a browser is enough to read or share them.
 
-**New here? [Start with the review guide](docs/REVIEW_GUIDE.md)** — download the reading
-bundle from GitHub, or use a pinned source checkout and specific questions to investigate.
+**New here? [Download the offline tour and PDF](docs/OFFLINE_DOWNLOAD.md)**, then
+follow the [short reading route](docs/REVIEW_GUIDE.md#a-short-reading-route).
+The v0.6.0 assets become available after the main-branch release gate completes.
 For a quick preview without installation or sign-in, open the
 [two-page FISTA PDF](https://github.com/chocoemong17/chainbench/blob/archive/local-reviews-20261001/cloud/33b6243/ChainBench_FISTA_review.pdf)
 or [five actual geometry views with Korean reading notes](https://github.com/chocoemong17/chainbench/tree/archive/local-reviews-20261001/cloud/33b6243/browser-gallery).
@@ -21,10 +22,10 @@ Already have several saved runs? [Compare two to four experiment records](docs/S
 with `chainbench compare a.json b.json --lang ko --output comparison.html`.
 Inspect changed inputs, settings and environments before reading the actual curves.
 
-The development features are available on `main` through merged
-[PR #73](https://github.com/chocoemong17/chainbench/pull/73),
-with actual cloud CI linked there; the frozen **v0.5.0 release does not contain
-the tour, paper reproductions or new geometry commands**.
+The v0.6.0 source includes the integrated tour, paper examples, geometry inspectors,
+portability repairs and saved-record comparison. [Release notes](docs/RELEASE_NOTES_0.6.0.md)
+state the numerical migration and validation scope. The frozen v0.5.0 tag and assets
+remain unchanged and do not contain these later workflows.
 
 ## From a paper's experiment to actual pixels
 
@@ -50,23 +51,28 @@ record as the full report, including hashes and attribution.
 
 ## Download a reading bundle from GitHub
 
-Open [cloud reading bundle runs](https://github.com/chocoemong17/chainbench/actions/workflows/cloud-tour.yml),
-choose a successful run and download its `chainbench-reading-bundle-<commit>` artifact.
-Extract it and open `index.html` to explore all 25 pages offline. Generation and
-validation run on GitHub; artifact retention is seven days.
-The separate `chainbench-review-packet-<commit>` artifact contains a two-page
-Korean FISTA comparison PDF, page previews and generation evidence. GitHub
-requires sign-in for artifact downloads; the extracted reports work offline.
-[Cloud workflow and evidence scope](docs/CLOUD_WORKFLOW.md).
+Download the [v0.6.0 reading ZIP](https://github.com/chocoemong17/chainbench/releases/download/v0.6.0/chainbench-0.6.0-reading.zip)
+and [two-page PDF](https://github.com/chocoemong17/chainbench/releases/download/v0.6.0/chainbench-0.6.0-review.pdf)
+from the gated prerelease. Extract the whole ZIP and open `index.html`: all 25
+pages, their figures and recorded examples work offline. The named reading ZIP
+contains generated reports; GitHub's automatic source archive contains source code.
+[Download, availability and verification guide](docs/OFFLINE_DOWNLOAD.md).
 
-## Run the development tour
+For an unreleased candidate, a successful
+[tests run](https://github.com/chocoemong17/chainbench/actions/workflows/tests.yml)
+provides `chainbench-reading-release-<commit>`. Actions artifacts require sign-in
+and expire after seven days; release assets are separate from that retention.
+The reading assets are generated, independently audited, extracted and checked in
+offline desktop/mobile Chromium on GitHub. [Workflow and evidence scope](docs/CLOUD_WORKFLOW.md).
+
+## Run the tour
 
 The **FISTA backtracking** inspector shows how a proposed step is
 rejected or accepted. Explore all 12 objective/start inputs with three initial
 curvature guesses, then follow the accepted 2D/3D path, every rejected proposal,
 and the actual objective/model slice. Accepted L carries to the next update;
 the page exposes later changes and objective increases. This additional report
-requires the development checkout; PR #73 links its current remote CI. The extended
+is included in v0.6.0 and the current source checkout. The extended
 tour connects it to fixed-L FISTA with symbolic update flows, an actual rejected
 candidate preview and a comparison of thresholds, carried curvature and bounds. [Source, recurrence and numerical scope](docs/FISTA_BACKTRACKING.md).
 
@@ -270,22 +276,25 @@ compares inputs, trajectories and environments with stated tolerances. A `MATCH`
 is numerical agreement, not author authentication or proof. Equal iteration counts
 need not mean equal work. [Configuration and limits](docs/EXPERIMENTS.md).
 
-## Use the frozen v0.5.0 release
+## Install v0.6.0
 
-If you want the released baseline, use Python 3.10+ in your preferred environment:
+Use Python 3.10+ in your preferred environment once the
+[gated prerelease](https://github.com/chocoemong17/chainbench/releases/tag/v0.6.0) is published:
 
 ```bash
-python -m pip install https://github.com/chocoemong17/chainbench/releases/download/v0.5.0/chainbench-0.5.0-py3-none-any.whl
-python -m chainbench learn --lang ko --output learn-v050.html
+python -m pip install https://github.com/chocoemong17/chainbench/releases/download/v0.6.0/chainbench-0.6.0-py3-none-any.whl
+python -m chainbench --version
+python -m chainbench tour --extended --lang ko --output tour
 ```
 
-The release supports `learn`, `report`, `plot`, `experiment`, `sweep`, `replay`,
-`stress`, `landscape` and the original `case-study gd-tight`. New development
-workflows and sampler v2 require the source snapshot above. Both currently report
-package version 0.5.0: **record the commit as well as the version**.
-[Release assets](https://github.com/chocoemong17/chainbench/releases/tag/v0.5.0)
-remain unchanged. No PyPI publication is configured; do not assume a same-named
-registry package is this project.
+The reading ZIP needs no installation. To recompute reports, use the wheel above
+or install a pinned source checkout. Record both the package version and commit
+when comparing results. [Release notes and migration](docs/RELEASE_NOTES_0.6.0.md).
+
+The [frozen v0.5.0 baseline](https://github.com/chocoemong17/chainbench/releases/tag/v0.5.0)
+remains available with its original assets. Earlier development builds also reported
+0.5.0; their commit distinguishes them from that release. No PyPI publication is
+configured; do not assume a same-named registry package is this project.
 
 ## Scope and validation
 
@@ -306,8 +315,9 @@ python scripts/smoke_install.py
 ```
 
 CI checks Ubuntu Python 3.10–3.12, Windows/macOS Python 3.12, minimum dependencies,
-both clean distribution installs and offline Chromium at desktop/mobile widths.
-Numerical records are checked against rendered curves, points and image pixels.
+both clean distribution installs, an audited reading ZIP/PDF, and offline Chromium
+at desktop/mobile widths. The nine validation jobs include extraction and reading
+of the exact ZIP prepared for release. Numerical records are checked against rendered curves, points and image pixels.
 These are maintainer-controlled checks, not independent adoption evidence.
 
 [Report a concrete success, failure or confusing explanation](https://github.com/chocoemong17/chainbench/issues/28).

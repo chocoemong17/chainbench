@@ -19,6 +19,7 @@ jobs:
     uses: ./.github/workflows/tests.yml
     permissions:
       contents: read
+      actions: read
 
   publish:
     name: publish verified alpha release
@@ -28,6 +29,7 @@ jobs:
     timeout-minutes: 20
     permissions:
       contents: write
+      actions: read
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
@@ -36,10 +38,10 @@ jobs:
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
         with:
           python-version: '3.12'
-      - run: python -m pip install -e '.[dev]'
-      - run: python -m build
-      - run: python -m pip freeze > dist/build-environment.txt
-      - run: python scripts/smoke_install.py
+      - name: Download exactly the distributions and reading assets tested in this run
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run download "$GITHUB_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "distributions-$GITHUB_RUN_ID" --dir dist
       - name: Upload, verify and publish GitHub prerelease
         env:
           GH_TOKEN: ${{ github.token }}
