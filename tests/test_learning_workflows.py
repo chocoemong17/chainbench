@@ -193,7 +193,7 @@ def test_replay_matches_every_observation(saved):
     assert result['status'] == 'MATCH'
     assert result['numeric_samples_compared'] > 100
     assert result['mismatch_count'] == 0
-    assert result['replayed'] == saved
+    assert_recomputed_record(result['replayed'], saved)
     assert original == saved
 
 

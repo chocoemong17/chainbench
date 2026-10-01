@@ -185,7 +185,7 @@ def test_single_case_cli_reruns_selected_case_and_protects_output(tmp_path, caps
     args = ['stress-case', 'nesterov-1983', '--seed', '10']
     assert main(args+['--format', 'json']) == 0
     actual = json.loads(capsys.readouterr().out)
-    assert actual['case'] == selected
+    assert_recomputed_record(actual['case'], selected)
     path = tmp_path/'case.html'
     assert main(args+['--lang', 'ko', '--output', str(path)]) == 0
     before = path.read_bytes()

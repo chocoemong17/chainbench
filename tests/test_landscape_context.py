@@ -5,6 +5,7 @@ import xml.etree.ElementTree as ET
 
 import numpy as np
 import pytest
+from _numeric_records import assert_recomputed_record
 from test_reproductions import smoke_module
 
 from chainbench.landscape import (
@@ -23,7 +24,7 @@ def test_actual_context_metrics_and_independent_scalar_recurrences(condition, an
     result = run_landscape(condition, angle, steps, methods)
     smoke_module().validate_landscape(result)
     assert result['methods'] == list(methods)
-    assert result == run_landscape(condition, angle, steps, methods)
+    assert_recomputed_record(result, run_landscape(condition, angle, steps, methods))
     p = result['problem']
     assert p['b'] == pytest.approx(np.array(p['Q']) @ p['x_star'])
     assert p['actual_condition_number'] == pytest.approx(condition)

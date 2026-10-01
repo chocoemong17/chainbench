@@ -2,7 +2,7 @@
 import copy
 import json
 import xml.etree.ElementTree as ET
-from dataclasses import replace
+from dataclasses import asdict, replace
 from html.parser import HTMLParser
 from pathlib import Path
 
@@ -46,14 +46,22 @@ def test_plotted_samples_reproduce_every_checked_metric():
         assert chart_metric(result.slug, chart) == pytest.approx(result.observed, rel=1e-10)
 
 
-def test_fixed_html_retains_exact_chart_samples_and_environment():
+def test_fixed_html_retains_exact_chart_samples_and_environment(monkeypatch):
+    captured = {}
+
+    def capture_chart(slug):
+        chart = build_check_chart(slug)
+        captured[slug] = asdict(chart)
+        return chart
+
+    monkeypatch.setattr('chainbench.reporting.build_check_chart', capture_chart)
     results = run_all()
     record = evidence(render_html(results))
     assert len(record['charts']) == len(results)
     assert record['environment']['numpy'] == np.__version__
     assert record['results'][0]['observed'] == results[0].observed
-    actual = build_check_chart(results[0].slug)
-    assert record['charts'][results[0].slug]['series'][0]['y'] == list(actual.series[0].y)
+    # Compare every serialized chart with its actual input, not another rerun.
+    assert record['charts'] == json.loads(json.dumps(captured))
 
 
 @pytest.mark.parametrize('change', [{'observed': 42.}, {'consistent': False}, {'threshold': 7.}])

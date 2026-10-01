@@ -2,7 +2,7 @@
 
 The development CG implementation retains its scaled correction recurrence,
 initial-residual stopping rule and NumPy matrix-vector products. Its three scalar
-inner-product sites (initial residual square, search-direction curvature and
+inner-product quantities (initial residual square, search-direction curvature and
 updated residual square) accumulate the float64 products with
 [`math.fsum`](https://docs.python.org/3/library/math.html#math.fsum).
 This improves summation accuracy and removes the observed dependence of these

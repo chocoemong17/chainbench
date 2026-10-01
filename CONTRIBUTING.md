@@ -27,6 +27,8 @@ counts, booleans and missing values exact, and rejects nonfinite values. It is
 only for independent recomputation: serialization, embedded previews and views
 of the same computed record still require exact equality. The scientific bounds,
 independent validators and file-integrity checks retain their own unchanged contracts.
+HTML retention tests capture the actual chart passed to the renderer and compare
+the entire embedded chart record exactly, without recomputing a reference chart.
 NumPy `float64` and its decoded JSON float share the floating-number contract;
 neither can substitute for an integer count or boolean flag.
 

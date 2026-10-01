@@ -23,7 +23,7 @@ The frozen v0.5.0 release remains unchanged. Later commits retain their own CI.
   tolerance after Intel macOS exposed exact-equality assumptions. Keep provenance,
   types, counts and inputs exact; preserve same-record serialization/preview checks
   and every independent scientific validator. Add corrupt-record rejection cases.
-- Stabilize CG's three scalar inner-product sites with compensated accumulation.
+- Stabilize CG's three scalar inner-product quantities with compensated accumulation.
   A complete Intel audit found late trajectory drift up to 4.32e-4; single-thread
   execution did not fix it. The controlled scalar-reduction replacement removed
   discrepancies beyond the existing comparison tolerance. Preserve matrix-vector

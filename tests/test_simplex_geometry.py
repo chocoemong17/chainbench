@@ -7,6 +7,7 @@ from pathlib import Path
 
 import numpy as np
 import pytest
+from _numeric_records import assert_recomputed_record
 
 from chainbench._fw_certificate import certificate_svg
 from chainbench.cli import main
@@ -25,7 +26,7 @@ def smoke_module():
 def test_all_cases_feasibility_certificates_and_recurrences(steps):
     result = run_simplex_geometry(steps)
     smoke_module().validate_simplex_geometry(result)
-    assert result == run_simplex_geometry(steps)
+    assert_recomputed_record(result, run_simplex_geometry(steps))
     assert len({c['input_sha256'] for c in result['cases']}) == 12
     for case in result['cases']:
         if case['start_name'] != 'center':
