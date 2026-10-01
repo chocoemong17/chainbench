@@ -85,6 +85,22 @@ def verified_files(version: str, sha: str) -> list[Path]:
         if advanced != {
             "learning": "matched", "sweep": "matched", "replay": "matched",
             "gd_tight": "matched", "stress": "matched", "landscape": "matched",
+            "shewchuk_reproduction": "matched",
+            "simplex_geometry": "matched",
+            "inspectable_stress": "matched",
+            "proximal_geometry": "matched",
+            "offline_tour": "matched",
+            "fista_deblurring": "matched",
+            "heavy_ball_counterexample": "matched",
+            "noisy_wavelet": "matched",
+            "fw_sparsity": "matched",
+            "extended_tour": "matched",
+            "kaczmarz_expectation": "matched",
+            "nonuniform_sampling": "matched",
+            "cg_spectrum": "matched",
+            "adam_counterexample": "matched",
+            "admm_geometry": "matched",
+            "fista_backtracking": "matched",
         }:
             raise RuntimeError("Missing installed learning-workflow evidence")
         summary = (slugs, statuses, experiments, controls, advanced)

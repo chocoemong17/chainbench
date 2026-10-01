@@ -7,9 +7,16 @@ from html import escape
 
 import numpy as np
 
+from ._canonical import CSS as INSTANCE_CSS
+from ._canonical import context_html
+from ._learning_paths import CSS as WORKFLOW_CSS
+from ._learning_paths import known_reports, workflow_html, workflow_record
 from ._pages import bi, evidence, page
 from ._plot_audit import evidence_record, validate_chart_result
 from .checks import CHECKS, run_check
+from .mechanisms import CSS as MECHANISM_CSS
+from .mechanisms import SCRIPT as MECHANISM_SCRIPT
+from .mechanisms import comparison_html, flow_html, mechanism_record, related_html
 from .reporting import SOURCE_LINKS, result_status
 from .stories import STORIES
 from .visuals import ChartSpec, LineSeries, build_check_chart, render_line_chart
@@ -150,7 +157,7 @@ DEEP_CONTEXT = {
         "evidence": "CANONICAL + STRESS + GEOMETRY",
     },
     "jaggi-2013": {
-        "year": "2013",
+        "year": "1956 method / 2013 analysis",
         "why": ("projection이 비싼 제약문제에서 linear minimization oracle만으로 feasible iterate를 유지하는 관점을 정리합니다.", "It reframes constrained optimization when projection is expensive but a linear minimization oracle is cheap."),
         "strength": ("simplex·nuclear-norm 구조에서 sparse/low-rank iterate를 자연스럽게 만들 수 있습니다.", "It naturally produces sparse or low-rank iterates on simplex/nuclear-norm domains."),
         "tradeoff": ("O(1/k) rate와 zig-zagging, active-set identification 문제는 실제 성능 병목이 될 수 있습니다.", "Its O(1/k) rate, zig-zagging and active-set identification can become practical bottlenecks."),
@@ -185,11 +192,12 @@ DEEP_CONTEXT = {
 
 TIMELINE = (
     ("1952", "CG", "SPD geometry"),
+    ("1956", "Frank–Wolfe", "original quadratic-programming method"),
     ("1964", "Heavy-ball", "momentum"),
     ("1976", "PPA", "implicit/proximal"),
     ("1983", "Nesterov", "acceleration"),
     ("2009", "FISTA", "composite acceleration"),
-    ("2013", "Frank-Wolfe", "projection-free"),
+    ("2013", "Jaggi", "Frank–Wolfe analysis / oracle framework"),
 )
 
 
@@ -210,10 +218,14 @@ def ratio_chart(slug: str, chart: ChartSpec) -> ChartSpec | None:
                       LineSeries('threshold 1', tuple(x), tuple(np.ones(len(x))), 'bound')), 'linear')
 
 
-def learning_html(focus: str | None = None, lang: str = 'en') -> str:
+def learning_html(focus: str | None = None, lang: str = 'en', *, report_links=()) -> str:
     if focus is not None and focus not in LESSONS:
         raise ValueError('unknown learning topic')
+    report_links = frozenset(report_links)
+    if not report_links <= known_reports():
+        raise ValueError('unknown linked learning report')
     slugs = [focus] if focus else list(CHECKS)
+    names = {slug: lesson['name'] for slug, lesson in LESSONS.items()}
     results = [run_check(slug) for slug in slugs]
     charts = {slug: build_check_chart(slug) for slug in slugs}
     ratios = {}
@@ -223,7 +235,7 @@ def learning_html(focus: str | None = None, lang: str = 'en') -> str:
         lesson, chart = LESSONS[slug], charts[slug]
         deep = DEEP_CONTEXT[slug]
         validate_chart_result(result, chart)
-        svg = render_line_chart(chart)
+        svg = render_line_chart(chart, show_instance=False)
         thumbnail = base64.b64encode(svg.encode()).decode()
         search = escape(' '.join((slug, lesson['name'], lesson['category'], *lesson['question'])), quote=True)
         cards.append(f'<a class="card" href="#{slug}" data-search="{search}"><div><span class="badge">'
@@ -237,7 +249,8 @@ def learning_html(focus: str | None = None, lang: str = 'en') -> str:
             ratio_html = '<details><summary>' + bi('상계와의 비율 보기: 1을 넘는가?', 'Inspect normalized ratio: does it exceed 1?') + '</summary><div class="plot">' + render_line_chart(normalized) + '</div></details>'
         sections.append(f'<section id="{slug}" data-search="{search}"><div class="eyebrow">'
                         + escape(STORIES[slug].source) + '</div><h2>' + bi(*lesson['question']) + '</h2>'
-                        + '<p>' + bi(*lesson['mechanism']) + '</p><div class="pairs"><div><h3>'
+                        + '<p>' + bi(*lesson['mechanism']) + '</p>' + flow_html(slug)
+                        + '<div class="pairs"><div><h3>'
                         + bi('어떤 조건에서?', 'Under which assumptions?') + '</h3><p>' + bi(*lesson['assumptions'])
                         + '</p></div><div><h3>' + bi('어떤 업데이트인가?', 'Which update?')
                         + '</h3><div class="formula">' + escape(lesson['recurrence']) + '</div></div></div>'
@@ -248,13 +261,14 @@ def learning_html(focus: str | None = None, lang: str = 'en') -> str:
                         + '<article><h3>' + bi('강점', 'Strength') + '</h3><p>' + bi(*deep['strength']) + '</p></article>'
                         + '<article><h3>' + bi('대가·약점', 'Trade-off') + '</h3><p>' + bi(*deep['tradeoff']) + '</p></article>'
                         + '<article><h3>' + bi('무엇과 비교해야 하나?', 'What to compare it with') + '</h3><p>' + bi(*deep['compare']) + '</p></article></div>'
-                        + '<div class="plot">' + svg + '</div>'
+                        + context_html(chart.instance) + '<div class="plot">' + svg + '</div>'
                         + '<p class="callout">' + bi(*lesson['reading']) + '</p>' + ratio_html
                         + '<p><span class="badge">' + result_status(result) + '</span> '
                         + bi('이 실행의 검사 통계', 'Statistic from this run') + f': {result.observed:.6g}</p>'
                         + '<details><summary>' + bi('왜 이런 결과가 나오는가?', 'Why does this result make sense?')
                         + '</summary><p>' + bi(*lesson['reason']) + '</p></details>'
-                        + '<p class="callout caution">' + bi(*lesson['limit']) + '</p><details><summary>'
+                        + '<p class="callout caution">' + bi(*lesson['limit']) + '</p>'
+                        + related_html(slug, slugs, names) + workflow_html(slug, report_links, lang) + '<details><summary>'
                         + bi('다음에 직접 바꿔볼 실험', 'A controlled experiment to try next') + '</summary><pre>'
                         + escape(lesson['command']) + '\n\n# many seeded cases\nchainbench stress ' + escape(slug) + ' --trials 24 --seed 0 --lang ko --output stress.html'
                         + ('\n\n# contour + 3D geometry\nchainbench landscape --condition-number 80 --methods gd smooth-fista heavy-ball cg proximal-point --lang ko --output landscape.html' if lesson['category'] in ('smooth','quadratic') else '')
@@ -264,6 +278,8 @@ def learning_html(focus: str | None = None, lang: str = 'en') -> str:
     record['kind'] = 'chainbench.learning'
     record['normalized_charts'] = ratios
     record['source_map'] = {s: SOURCE_LINKS[s] for s in slugs}
+    record['mechanism_maps'] = mechanism_record(slugs)
+    record['workflow_guides'] = workflow_record(slugs)
     intro = bi('논문 이름이나 숫자보다 먼저 질문을 고르세요. 무엇이 달라지는지, 어떤 조건에서 보장되는지, 실제 곡선에서 무엇을 읽어야 하는지 연결합니다.', 'Start with a question, not a paper title or number. Connect the mechanism, its assumptions and the observation on the plot.')
     timeline = '<div class="timeline">' + ''.join('<div><strong>' + escape(year) + ' · ' + escape(name) + '</strong><span>' + escape(theme) + '</span></div>' for year, name, theme in TIMELINE) + '</div>'
     ladder = ('<div class="evidence-ladder"><div class="evidence-step"><strong>1 · Literature claim</strong><span>assumptions + theorem / selected specialization</span></div>'
@@ -271,8 +287,16 @@ def learning_html(focus: str | None = None, lang: str = 'en') -> str:
               '<div class="evidence-step"><strong>3 · Seeded stress</strong><span>many reproducible sampled instances</span></div>'
               '<div class="evidence-step"><strong>4 · Tight case</strong><span>only when public literature supplies extremality</span></div></div>')
     guide = ('<div class="callout">' + bi('읽는 순서: 논문의 질문 → 가정 → 업데이트 → 정리 → 한 예시 → 여러 표본 → 한계. 한 개의 예시는 직관을 위한 것이고, 대표성이나 worst-case 주장은 별도 증거에서 다룹니다.', 'Read: question → assumptions → update → theorem → one illustration → many sampled cases → limitation. One example is for intuition; breadth and worst-case claims require separate evidence.') + '</div>'
-             + ladder + timeline
+             + ladder + timeline + '<p class="small">'
+             + bi('연도는 출처의 역사입니다. 아래 연결은 방법의 수학적 관계이며, 직접적인 역사적 파생 관계를 뜻하지 않습니다. ',
+                  'Dates identify historical sources. The links below explain mathematical relationships, not a direct historical derivation. ')
+             + '<a href="https://doi.org/10.1002/nav.3800030109">Frank &amp; Wolfe (1956)</a> · '
+             + '<a href="https://proceedings.mlr.press/v28/jaggi13.html">Jaggi (2013)</a></p>'
+             + comparison_html(slugs, names)
              + '<div class="controls"><label for="lesson-filter">' + bi('방법·키워드 찾기', 'Find a method or keyword')
              + '</label><input id="lesson-filter" type="search" placeholder="FISTA / CG / 기울기"></div>')
     glossary = '<details class="panel"><summary>' + bi('처음 보는 용어', 'A small glossary') + '</summary><p>' + bi('gap: 현재 목적함수 값과 최적값의 차이. bound: 조건을 만족하는 문제들에 대한 보장 상계. κ: 이차함수의 최대/최소 곡률 비. residual: 방정식을 얼마나 만족하는지. INFO: 관측일 뿐, 통과 판정이 아님.', 'Gap: objective error relative to an optimum. Bound: guaranteed upper envelope under stated assumptions. Kappa: largest/smallest curvature ratio. Residual: equation error. INFO: observation without a pass/fail guarantee.') + '</p></details>'
-    return page('From paper to understanding', intro, guide + '<div class="cards">' + ''.join(cards) + '</div>' + glossary + ''.join(sections) + evidence(record, 'learning-evidence.json'), lang=lang)
+    return page('From paper to understanding', intro, '<style>' + MECHANISM_CSS + INSTANCE_CSS + WORKFLOW_CSS + '</style>'
+                + guide + '<div class="cards">' + ''.join(cards) + '</div>' + glossary
+                + ''.join(sections) + evidence(record, 'learning-evidence.json')
+                + '<script>' + MECHANISM_SCRIPT + '</script>', lang=lang)

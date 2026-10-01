@@ -41,8 +41,37 @@ independently evaluated target formula. The fixed function is used throughout
 one run; changing N constructs a different function. Its gap need not equal the
 upper bound at earlier k. This distinction is visible on the plot.
 
-The second plot shows the function itself, including its quadratic centre and
-affine tails. No PDF, third-party code, confidential derivation or private research
+The function view marks the actual stored GD points in original units. A slider
+selects a recorded point, shows its position/value/gradient, and reveals the
+corresponding path prefix; playback does not run an optimizer in JavaScript.
+The full path and every row remain accessible without JavaScript.
+
+The sampling grid includes the exact joins ±a and at least 81 points inside the
+quadratic centre. A uniform grid over the full R-scale can miss this narrow
+centre when N is large. An adjacent view instead uses u=x/a and
+φ(u)=f(a*u)/(L*a²). It is the same function with both axes rescaled:
+
+    φ(u) = u²/2      for |u| <= 1
+         = |u|-1/2  otherwise.
+
+Its slopes agree at ±1. Affine tails have zero curvature, not zero gradient.
+All stored iterates lie strictly beyond +a because
+
+    x_N = (Nh+1)*a > a.
+
+Thus their gradients are La, each step moves ha, and direct substitution gives
+f(x_N)=La²(Nh+1/2)=LR²/(4Nh+2). This algebra explains attainment; Theorem 3.1
+supplies the separate upper bound for the full class of admissible functions.
+
+The JSON adds a `geometry` object with normalization scales, centre samples and
+transition values/gradients. The existing function chart uses a transition-aware
+grid; algorithm rows and bound/gap series are unchanged. The installed-package
+validator independently evaluates the piecewise function, normalized samples and
+stored recurrence at N=1 and N=500. Unit tests also cover extreme allowed L/R/h
+scales. Browser CI checks every point, keyboard/playback, JSON, no-JavaScript
+access and wide/narrow layouts for N=20 and N=500.
+
+ No PDF, third-party code, confidential derivation or private research
 is distributed. Only the public construction and independently written code are used.
 
 ## Meaning of the result

@@ -38,7 +38,7 @@ def evidence(tmp_path, monkeypatch):
             "checks": 2, "slugs": ["condition", "observation"], "statuses": ["CONSISTENT", "INFO"],
             "installed_outside_checkout": True, "pip_check": "passed",
             "exports": ["html", "markdown", "csv", "json"], "plot_svg": "passed", "visual_evidence": "matched",
-            "advanced_workflows": {"learning": "matched", "sweep": "matched", "replay": "matched", "gd_tight": "matched", "stress": "matched", "landscape": "matched"},
+            "advanced_workflows": {"learning": "matched", "sweep": "matched", "replay": "matched", "gd_tight": "matched", "stress": "matched", "landscape": "matched", "shewchuk_reproduction": "matched", "simplex_geometry": "matched", "inspectable_stress": "matched", "proximal_geometry": "matched", "offline_tour": "matched", "fista_deblurring": "matched", "heavy_ball_counterexample": "matched", "noisy_wavelet": "matched", "fw_sparsity": "matched", "extended_tour": "matched", "kaczmarz_expectation": "matched", "nonuniform_sampling": "matched", "cg_spectrum": "matched", "adam_counterexample": "matched", "admm_geometry": "matched", "fista_backtracking": "matched"},
             "instance_controls": {
                 "direct_override": "passed",
                 "seeded_config_sha256": "c" * 64,
@@ -65,6 +65,33 @@ def evidence(tmp_path, monkeypatch):
 def test_valid_publication_evidence(evidence):
     module, _, _ = evidence
     assert len(module.verified_files(VERSION, SHA)) == 5
+
+
+@pytest.mark.parametrize('workflow', ['shewchuk_reproduction', 'simplex_geometry', 'inspectable_stress', 'proximal_geometry', 'offline_tour', 'fista_deblurring', 'heavy_ball_counterexample', 'noisy_wavelet', 'fw_sparsity', 'extended_tour', 'kaczmarz_expectation', 'nonuniform_sampling', 'cg_spectrum', 'adam_counterexample', 'admm_geometry', 'fista_backtracking'])
+def test_reproduction_install_evidence_is_required(evidence, workflow):
+    module, dist, report = evidence
+    del report['artifacts'][0]['advanced_workflows'][workflow]
+    (dist/'verification.json').write_text(json.dumps(report), encoding='utf8')
+    write_sums(dist)
+    with pytest.raises(RuntimeError, match='learning-workflow'):
+        module.verified_files(VERSION, SHA)
+
+
+def test_actual_workflow_summary_is_accepted_by_release_contract(evidence):
+    # The producer and consumer previously drifted when a new workflow key was
+    # added. Read its literal summary without pretending to have run installs.
+    import ast
+
+    source = Path(__file__).resolve().parents[1]/'scripts/smoke_workflows.py'
+    tree = ast.parse(source.read_text())
+    function = next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=='exercise_workflows')
+    summary = ast.literal_eval(function.body[-1].value)
+    module,dist,report = evidence
+    for record in report['artifacts']:
+        record['advanced_workflows'] = summary
+    (dist/'verification.json').write_text(json.dumps(report))
+    write_sums(dist)
+    assert len(module.verified_files(VERSION,SHA)) == 5
 
 
 def test_reject_distribution_changed_after_smoke_test(evidence):

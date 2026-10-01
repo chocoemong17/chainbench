@@ -44,12 +44,35 @@ def test_learning_preserves_actual_check_and_chart(slug):
     assert data['results'] == [asdict(run_check(slug))]
     assert data['charts'][slug] == json.loads(json.dumps(asdict(build_check_chart(slug))))
     assert data['kind'] == 'chainbench.learning'
+    assert data['mechanism_maps']['kind'] == 'symbolic-process-maps'
+    assert list(data['mechanism_maps']['topics']) == [slug]
+    assert 'class="method-flow"' in html
+    assert '<select data-compare=' not in html  # No empty comparison controls in focused reports.
     assert '<html lang="ko">' in html
     for field in ('question', 'mechanism', 'assumptions', 'reason', 'reading', 'limit'):
         assert len(LESSONS[slug][field]) == 2
         assert all(LESSONS[slug][field])
     assert 'data-action="language"' in html
     assert 'https://' in html  # optional source links, not resource loads
+
+
+@pytest.mark.parametrize('focus', [None, *CHECKS])
+def test_learning_navigation_has_no_missing_local_target(focus):
+    class Links(HTMLParser):
+        def __init__(self, text):
+            super().__init__()
+            self.ids, self.targets = [], []
+            self.feed(text)
+        def handle_starttag(self, tag, attrs):
+            data = dict(attrs)
+            if 'id' in data:
+                self.ids.append(data['id'])
+            if tag == 'a' and data.get('href', '').startswith('#'):
+                self.targets.append(data['href'][1:])
+    links = Links(learning_html(focus))
+    assert links.targets
+    assert len(links.ids) == len(set(links.ids))
+    assert set(links.targets) <= set(links.ids)
 
 
 @pytest.mark.parametrize('slug', list(CHECKS))

@@ -15,7 +15,7 @@ CASES = [
     ("unsafe-cg-norm", "src/chainbench/methods.py", "return float(np.hypot.reduce(x))",
      "return float(np.linalg.norm(x))", "", "tests/test_audit_regressions.py::test_cg_is_invariant_to_global_system_scale"),
     ("missing-fista-momentum", "src/chainbench/methods.py",
-     "y = xn + ((t - 1) / tn) * (xn - x)", "y = xn.copy()", "def fista(",
+     "y = xn + ((t - 1) / tn) * (xn - x)", "y = xn.copy()", "def _proximal_iterates(",
      "tests/test_recurrences.py::test_fista_third_iterate_contains_acceleration_and_l1_threshold"),
     ("missing-observation-guard", "src/chainbench/checks.py", "if self.observed is None:",
      "if False:", "", "tests/test_audit_regressions.py::test_missing_or_invalid_observation_is_not_a_result"),

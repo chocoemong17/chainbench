@@ -9,3 +9,13 @@ Run ruff check ., python -m pytest, chainbench check all, python -m build and py
 Use substantive PRs and one coherent commit per tested change where possible; do not generate artificial contributor activity. Preserve real review and CI outcomes, including failures. Do not fabricate users, stars, downloads or endorsements.
 
 Publishing is restricted to the tested main-branch commit through the gated release workflow. Do not overwrite releases, enable paid services, publish to registries, alter account security, or disable protective checks to force a release.
+
+## Cloud execution and local storage
+
+Use GitHub branches and pull requests as the authoritative work location. Run
+full tests, package installation, browser rendering and report generation on
+GitHub Actions. Keep the user's entire task folder below 1,000,000,000 bytes;
+do not accumulate local worktrees, generated tours, screenshots or test copies.
+Only small source edits and migration metadata may be staged locally for upload.
+Do not download Actions artifacts locally unless explicitly needed and budgeted.
+Record failed checks honestly; regenerate disposable outputs in CI when needed.

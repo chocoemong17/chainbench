@@ -37,7 +37,7 @@ padding:14px;border-radius:14px;background:#fff;border:1px solid #d9e1ea}.eviden
 font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#aec1df}.metric strong{font-family:Georgia,serif;font-size:28px}.small{font-size:13px;color:#56657b}.formula{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:15px;padding:18px;background:#f0f3f7;border-radius:12px;overflow-wrap:anywhere;white-space:pre-wrap;border:1px solid #e1e6ed}
 .plot{overflow-x:auto;margin:14px 0}.plot svg{width:100%;min-width:580px;height:auto;display:block;border-radius:14px}summary{font-weight:700;cursor:pointer;padding:10px 0}
 pre{font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere;background:#f1f4f8;border-radius:12px;padding:16px}code{overflow-wrap:anywhere}table{border-collapse:collapse;width:100%;font-size:13px}
-th,td{padding:10px;border-bottom:1px solid #e1e7ef;text-align:left;vertical-align:top}th{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:#637087}.scroll{overflow:auto}
+th,td{padding:10px;border-bottom:1px solid #e1e7ef;text-align:left;vertical-align:top}th{font-size:11px;text-transform:none;letter-spacing:normal;color:#637087}.scroll{overflow:auto}
 nav a{display:inline-block;padding:6px 10px}footer{font-size:12px;color:#66768f;margin-top:34px}.pill{padding:5px 10px;border-radius:20px;background:#e6edfa;display:inline-block}.timeline{display:grid;
 grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:18px 0}.timeline div{padding:12px 14px;border-radius:13px;background:#fff;border-top:3px solid #2864d7}.timeline strong{display:block;font-size:13px}.timeline span{font-size:12px;color:#667085}.trajectory-player{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:14px 16px;border-radius:16px;background:#101f39;color:white;margin:18px 0}.trajectory-player button{width:44px;height:40px;padding:0;border:0;background:#fff;color:#13233f;border-radius:999px}.trajectory-player input[type=range]{flex:1;min-width:220px;padding:0;border:0;background:transparent}.trajectory-player strong{min-width:56px;font-variant-numeric:tabular-nums}
 html[lang='ko'] [lang='en'],html[lang='en'] [lang='ko']{display:none}[hidden]{display:none!important}@media(max-width:760px){main{padding:15px 12px 44px}header{padding:26px 22px}.pairs,.visual-grid{grid-template-columns:1fr}
@@ -72,6 +72,9 @@ document.querySelectorAll('[data-trajectory-player]').forEach(player => {
  const label = player.querySelector('[data-trajectory-label]');
  const play = player.querySelector('[data-trajectory-play]');
  if(!slider || !label || !play) return;
+ document.documentElement.classList.add('trajectory-enabled');
+ const readouts=Array.from(document.querySelectorAll('[data-landscape-readout]'));
+ const record=readouts.length ? JSON.parse(document.getElementById('chainbench-evidence').textContent) : null;
  const lines = Array.from(document.querySelectorAll('[data-trajectory-line]'));
  const markers = Array.from(document.querySelectorAll('[data-trajectory-marker]'));
  const parse = el => el.dataset.trajectoryPoints.split('|').map(pair => pair.split(',').map(Number));
@@ -89,19 +92,27 @@ document.querySelectorAll('[data-trajectory-player]').forEach(player => {
    const index = Math.min(step, points.length - 1);
    el.setAttribute('cx', points[index][0]); el.setAttribute('cy', points[index][1]);
   });
+  readouts.forEach(el=>{
+   const method=el.dataset.landscapeReadout,run=record.runs[method],k=Math.min(step,run.updates);
+   const held=step>run.updates?' (last computed / 마지막 계산점)':'';
+   el.textContent=method+' · k='+k+held+' · x=('+record.traces[method][k].map(v=>v.toPrecision(6)).join(', ')+')'
+    +' · f−f*='+record.gaps[method][k].toExponential(5)+' · ||r||₂='+run.residual_norms[k].toExponential(5);
+  });
+  document.dispatchEvent(new CustomEvent('chainbench:trajectory',{detail:{step}}));
  };
- const stop = () => { if(timer) clearInterval(timer); timer = null; play.textContent = '▶'; };
+ const stop = () => { if(timer) clearInterval(timer); timer = null; play.textContent = '▶'; play.setAttribute('aria-pressed','false'); };
  slider.addEventListener('input', () => { stop(); update(); });
  play.addEventListener('click', () => {
   if(timer){ stop(); return; }
   if(Number(slider.value) >= Number(slider.max)) slider.value = '0';
-  play.textContent = '❚❚'; update();
+  play.textContent = '❚❚'; play.setAttribute('aria-pressed','true'); update();
   timer = setInterval(() => {
    const next = Number(slider.value) + 1;
    if(next > Number(slider.max)){ stop(); return; }
    slider.value = String(next); update();
   }, 520);
  });
+ document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();});
  update();
 });
 """

@@ -1,5 +1,8 @@
 # Learn, sample many cases, inspect geometry, vary one thing, and replay (v0.5.0)
 
+For the new development-source `reproduce shewchuk-1994` workflow (not bundled in the
+v0.5.0 release), see [the published-example guide](SHEWCHUK_REPRODUCTION.md).
+
 This release adds four bounded workflows to the existing engine. None requires a
 server, API key, telemetry, a new solver or a new runtime dependency. HTML outputs
 contain calculated observations; browser controls change their presentation, not
@@ -18,12 +21,84 @@ A topic explains motivation, assumptions, the implemented recurrence, a selected
 published guarantee, the actual observation and what it does not establish.
 Source links are optional links; no remote resource is loaded by the report.
 
+Development source also shows the actual deterministic instance beside each curve:
+dimension, objective, constants, start, budget, completed updates and termination.
+Expand the panel for full input arrays and method settings. These records come
+from the objects used to calculate the plot; see [the contract](CANONICAL_CONTEXT.md).
+
 The six inequality topics include a normalized ratio plot with threshold 1.
 Heavy-ball is instead an empirical tail comparison, and ISTA/FISTA is INFO only;
 neither gets a misleading pointwise bound plot. Underlying samples and verdicts
 are checked with the same audit as `report`. A JSON export button saves the
 embedded evidence locally. No upload is performed. Without JavaScript the text,
 figures, native details sections and initial chosen language remain usable.
+
+### Development source: follow the computation and compare methods
+
+After v0.5.0, each topic also has a three- or four-stage **symbolic update flow**.
+These are explanatory diagrams, separate from the computed curves and their
+audited samples. Indexing starts at update k=0; accelerated methods start with t=1.
+CG's diagram shows the exact-arithmetic direction structure; its accompanying
+text retains the scaled correction and true-residual stopping used by the code.
+
+Select two methods to compare required information, carried state and operations.
+The cards explain why a PPA linear solve, a CG update with a true-residual check,
+a simplex linear oracle and a proximal-gradient step are different units of work.
+This is a reading aid, not a measured speed or convergence ranking. All eight
+cards remain visible without JavaScript and in print.
+
+Related-method links ask a specific question, such as what changes when g=0 or
+when gradients are evaluated at an extrapolated point. They clear any keyword
+filter before opening the target. A focused export includes commands to generate
+missing topics rather than links to absent sections. These conceptual connections
+do not assert a historical derivation. The timeline separately credits the 1956
+Frank–Wolfe method and Jaggi's 2013 analysis/oracle framework.
+
+The JSON evidence adds `mechanism_maps` with `kind: symbolic-process-maps` and
+the selected topic text. Existing results, plots, normalization and numerical
+audits are preserved. Both installed distribution formats must include the maps.
+The offline browser check covers 1440- and 390-pixel views, pair selection,
+keyboard input, filtered navigation, focused pages, JSON and static fallbacks.
+
+### Development source: follow a topic into its actual reports
+
+Each of the eight topics now has question-led report cards alongside its symbolic
+flow and canonical calculation. The complete atlas has 25 cards; a focused export
+keeps only its topic's cards. They connect published setups/protocols, controlled
+geometry, explicit sharp constructions and all 32 fixed stress seeds. Each card
+states the relevant settings and evidence scope before offering a command.
+
+The FISTA cards distinguish the noiseless 64×64, λ=0, 10,000-update experiment
+from noisy 256×256 Haar restoration with λ=10⁻⁴, declared seed 0, 200 updates and
+unknown optimum. Frank–Wolfe's cards distinguish 12 controlled oracle cases
+from the support-bound study across four declared dimensions. PPA links to its actual quadratic
+specialization in the shared landscape; no general monotone-operator experiment
+is implied.
+
+Standalone and focused HTML pages expose native expandable commands, with no
+assumption that other files exist nearby. In a [tour](OFFLINE_TOUR.md), cards gain
+direct local links only to reports included in that bundle. The base tour has
+22 such links; the extended tour has 25. The three omitted links in the base
+atlas remain usable as commands (two Haar cards and one sparsity card).
+
+Every linked report also offers a related-lesson link into the atlas. Shared
+reports use a stated related topic: both FISTA topics lead back to the FISTA
+lesson, while the five-method landscape leads to the operation-comparison panel.
+This is a conceptual link, not browser history. Native links/details work without
+JavaScript and filtering does not remove the underlying reading paths.
+Atlas anchors jump immediately, so navigation from a deep lesson to the document
+header does not compete with a long smooth-scroll animation in native reading.
+
+The `workflow_guides` JSON field contains the same bilingual questions, scope,
+fixed filenames and CLI arguments in standalone/base/extended output. Link
+availability is presentation context; numerical records do not change with it.
+The independent validator checks topic coverage, commands displayed in HTML,
+actual link destinations and equality with each linked artifact's manifest
+command. Unknown report filenames are rejected before calculation.
+
+These reading links are included in the [review guide's pinned snapshot](REVIEW_GUIDE.md).
+[PR #73](https://github.com/chocoemong17/chainbench/pull/73) links current remote CI
+and independent clean-install evidence for the consolidated source.
 
 ## 2. Change one field, not everything
 
@@ -99,9 +174,24 @@ All embedded data are HTML-escaped; no user expressions, URLs or data-loading ho
 are evaluated. Existing APIs, fixed checks, report exports and the frozen v0.2.0
 review kit remain intact. `report` defaults to HTML as in v0.3.0; `experiment` still
 defaults to JSON. New `sweep`, `replay` and `case-study` commands default to HTML and
-also support JSON. Generated pages use only system fonts and embedded SVGs.
+also support JSON. Generated pages use system fonts and embedded SVGs; the separate
+image reproductions also embed their computed PNG previews and numeric arrays.
 
 
 ## Many cases and geometry (v0.5.0)
 
 A learning page now labels its first plot as a canonical illustration. To reduce cherry-picking concerns, run the same paper-linked measurement over seeded instances with `chainbench stress <topic>`. To understand *why* trajectories differ on an ill-conditioned quadratic, use `chainbench landscape`, which renders the same run as contour, 3D surface and loss views. See [EVIDENCE_LAYERS.md](EVIDENCE_LAYERS.md).
+
+Development source adds `geometry frank-wolfe` to the Jaggi learning card: inspect
+the linear oracle, next feasible point and computable dual certificate across all
+twelve target/start combinations. The barycenter example also shows that the
+scheduled step need not decrease the objective. See [SIMPLEX_GEOMETRY.md](SIMPLEX_GEOMETRY.md).
+
+`stress` now links every sampled row to its actual curve and retained inputs, plus
+median-ranked/p90-ranked/maximum-observed cards. Recompute any one case with
+`stress-case TOPIC --seed SEED`. Sampler v2 broadens declared strata and preserves
+unresolved ratios; see [the version and metric contract](STRESS_SAMPLING.md).
+
+The FISTA and ISTA/FISTA comparison cards link to `geometry ista-fista`: inspect
+the extrapolated point, gradient step and exact shrinkage in nine declared cases.
+See [PROXIMAL_GEOMETRY.md](PROXIMAL_GEOMETRY.md) for the source, scaling and limitations.

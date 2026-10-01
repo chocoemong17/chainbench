@@ -177,26 +177,27 @@ def proximal_point(
     return _trace(problem, xs)
 
 
-def ista(problem: DiagonalLassoProblem, steps: int, x0: np.ndarray | None = None) -> Trace:
+def _proximal_iterates(problem, steps: int, x0: np.ndarray | None = None, *, accelerated: bool):
+    """Stream the fixed-L recurrence; yielded copies cannot mutate future steps."""
     steps = count(steps)
     x = initial(problem.dim, x0)
     step = 1.0 / scalar(problem.L, "L", positive=True)
-    xs = [x.copy()]
+    y, t = x.copy(), 1.0
+    yield x.copy()
     for _ in range(steps):
-        x = problem.prox_l1(x - step * problem.smooth_grad(x), step)
-        xs.append(x.copy())
-    return _trace(problem, xs)
+        base = y if accelerated else x
+        xn = problem.prox_l1(base - step * problem.smooth_grad(base), step)
+        if accelerated:
+            tn = 0.5 * (1 + np.sqrt(1 + 4 * t * t))
+            y = xn + ((t - 1) / tn) * (xn - x)
+            t = tn
+        x = xn
+        yield x.copy()
+
+
+def ista(problem: DiagonalLassoProblem, steps: int, x0: np.ndarray | None = None) -> Trace:
+    return _trace(problem, list(_proximal_iterates(problem, steps, x0, accelerated=False)))
 
 
 def fista(problem: DiagonalLassoProblem, steps: int, x0: np.ndarray | None = None) -> Trace:
-    steps = count(steps)
-    x = initial(problem.dim, x0)
-    step = 1.0 / scalar(problem.L, "L", positive=True)
-    y, t, xs = x.copy(), 1.0, [x.copy()]
-    for _ in range(steps):
-        xn = problem.prox_l1(y - step * problem.smooth_grad(y), step)
-        tn = 0.5 * (1 + np.sqrt(1 + 4 * t * t))
-        y = xn + ((t - 1) / tn) * (xn - x)
-        x, t = xn, tn
-        xs.append(x.copy())
-    return _trace(problem, xs)
+    return _trace(problem, list(_proximal_iterates(problem, steps, x0, accelerated=True)))

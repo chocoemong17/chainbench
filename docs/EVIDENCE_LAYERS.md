@@ -16,15 +16,55 @@ A small deterministic problem makes the mechanism visible. These plots are gener
 
 Finite sampling still does not prove the theorem. Heavy-ball's 8% line remains an empirical project regression tolerance. ISTA/FISTA remains descriptive with no universal pass/fail threshold.
 
+Development sampler v2 retains every input and trajectory, exposes individual and
+nearest-rank cases, and varies dimensions and starts under a declared design.
+Unresolved ratios remain visible and are excluded from measured-only quantiles;
+they never count as successes. See [sampling and schema changes](STRESS_SAMPLING.md).
+
 ## 4. Published tight case
 
 Only when public literature supplies both an upper bound and a matching extremal construction can ChainBench label a case as tight. The current explicit example is the Drori--Teboulle constant-step GD construction documented in `GD_TIGHT_CASE.md`.
 
 A difficult random sample is not a certified worst case.
 
+## Published-example reproduction (development source after v0.5.0)
+
+`reproduce shewchuk-1994` adds a precisely scoped **published-example reproduction**:
+the stated numerical setup behind Figures 8 and 30, independently recomputed.
+That provenance is stronger than an arbitrary teaching fixture, but still does not
+make a single example representative, worst-case or a proof. The extra nine starts
+are labelled **controlled variations**, all on the same matrix. See the
+[full reproduction contract](SHEWCHUK_REPRODUCTION.md).
+
+`reproduce fista-deblurring` reruns the ISTA/FISTA subset of the published
+Beck–Teboulle Figure 5 protocol: a noiseless 64×64 image, lambda=0 and 10,000
+updates. Its exact image version, operator and coordinate choices are recorded;
+the source does not pin the original toolbox version. This is a **protocol rerun
+with declared differences**, not an exact match to the original endpoint numbers
+or evidence across representative images. [Source and scope](FISTA_DEBLURRING.md).
+
+`reproduce lessard-2016` recomputes the exact published heavy-ball counterexample
+from Eq. (4.11), Figures 6–7 and Appendix B. The piecewise objective is smooth and
+strongly convex, but not quadratic; the classical quadratic tuning approaches a
+nonstationary cycle from the published start. Eight added starts and GD are labelled
+as controlled additions. The source's analytical cycle/attraction argument is
+separate from the finite observations. [Source and scope](HEAVY_BALL_COUNTEREXAMPLE.md).
+
 ## Geometry is a fifth view, not a fifth proof
 
 `chainbench landscape` places the **same numerical run** on a contour map, a 3D objective surface and a convergence chart. It is designed to explain zig-zagging, momentum, conjugate directions and implicit steps. The 2D problem is deliberately chosen for visual clarity, so it belongs to the illustration layer rather than the stress layer.
+
+The development command `geometry frank-wolfe` provides twelve **controlled
+geometric illustrations** of simplex constraints, linear oracle choices and feasible
+updates. All cases are declared in advance and inspectable. A larger count of
+illustrations is still not representative random sampling. See [the case design](SIMPLEX_GEOMETRY.md).
+
+`geometry ista-fista` shows actual extrapolation, gradient and shrinkage stages in
+nine declared diagonal-LASSO cases. These controlled illustrations exercise positive
+regularization separately from the lambda=0 image experiment. The contours and
+projected 3D heights use the same composite objective and iterates. A chord between
+two sampled heights is not a continuous path on the surface.
+[Proximal geometry contract](PROXIMAL_GEOMETRY.md).
 
 ## Recommended reading order
 
@@ -33,3 +73,8 @@ A difficult random sample is not a certified worst case.
 3. Run seeded stress if you want breadth beyond one example.
 4. Inspect a tight case only when literature justifies the word "tight".
 5. Use JSON/CSV/replay when you need auditable numerical evidence rather than presentation.
+
+The development [offline tour](OFFLINE_TOUR.md) connects these views and preserves
+their raw evidence. The [review guide](REVIEW_GUIDE.md) gives a pinned checkout and
+specific observations to investigate. Replay is for schema-1 experiment records;
+other workflows are recomputed through their own recorded commands.
