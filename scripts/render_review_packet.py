@@ -48,6 +48,31 @@ def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def font_evidence(document, font):
+    """Require a font file or Type 3 glyph streams stored inside this PDF.
+
+    PyMuPDF extract_font intentionally returns no font file for Type 3 fonts:
+    https://pymupdf.readthedocs.io/en/latest/document.html#Document.extract_font
+    """
+    xref, _, kind, name, resource, *_ = font
+    result = dict(name=name, type=kind, resource=resource)
+    if kind != 'Type3':
+        data = document.extract_font(xref)[3]
+        if not data:
+            raise RuntimeError(f'PDF font file is missing: {font}')
+        return dict(result, embedded_bytes=len(data))
+    key_type, value = document.xref_get_key(xref, 'CharProcs')
+    if key_type == 'xref':
+        value = document.xref_object(int(value.split()[0]))
+    elif key_type != 'dict':
+        raise RuntimeError(f'Type 3 glyph dictionary is missing: {font}')
+    refs = re.findall(r'\b(\d+)\s+0\s+R\b', value)
+    streams = [document.xref_stream(int(ref)) for ref in refs]
+    if not streams or any(not stream for stream in streams):
+        raise RuntimeError(f'Type 3 glyph stream is missing: {font}')
+    return dict(result, glyph_programs=len(streams), embedded_bytes=sum(map(len, streams)))
+
+
 def render_html(src, flows, table, counts, commit, run_url):
     pages, runs, trials, updates = counts
     return f'''<!doctype html><html lang="ko"><meta charset="utf-8">
@@ -154,12 +179,9 @@ def render(tour, output, run_url):
                 if len(text) < 400 or '\ufffd' in text or titles[index] not in re.sub(r'\s+', '', text):
                     raise RuntimeError('Missing or broken PDF text')
                 fonts = sheet.get_fonts()
-                # Chromium may rename CJK subsets; check the delivered text and
-                # font bytes rather than depending on a particular basefont name.
-                if not fonts or any(not document.extract_font(f[0])[3] for f in fonts):
-                    raise RuntimeError('PDF font is not embedded')
-                evidence['pdf_fonts'].append([dict(name=f[3], type=f[2],
-                    embedded_bytes=len(document.extract_font(f[0])[3])) for f in fonts])
+                if not fonts:
+                    raise RuntimeError('PDF fonts are missing')
+                evidence['pdf_fonts'].append([font_evidence(document, f) for f in fonts])
                 sheet.get_pixmap(matrix=pymupdf.Matrix(1.2, 1.2)).save(stage/f'page-{index+1}.png')
         evidence['pdf_pages'] = 2
         evidence['files'] = {p.name: dict(bytes=p.stat().st_size, sha256=digest(p)) for p in sorted(stage.iterdir())}
