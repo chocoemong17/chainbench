@@ -9,6 +9,11 @@ import subprocess
 import tempfile
 from pathlib import Path
 
+try:
+    from .reading_release import asset_names, verify_assets
+except ImportError:  # Direct script invocation; the script directory is on sys.path.
+    from reading_release import asset_names, verify_assets
+
 ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -44,7 +49,7 @@ def verified_files(version: str, sha: str) -> list[Path]:
     """Fail before any network write if evidence or distribution bytes changed."""
     dist = ROOT / "dist"
     expected = {f"chainbench-{version}-py3-none-any.whl", f"chainbench-{version}.tar.gz"}
-    names = expected | {"verification.json", "SHA256SUMS", "build-environment.txt"}
+    names = expected | {"verification.json", "SHA256SUMS", "build-environment.txt"} | set(asset_names(version))
     files = sorted(dist.iterdir())
     if {p.name for p in files} != names or any(p.is_symlink() or not p.is_file() for p in files):
         raise RuntimeError("Expected only the verified distribution/evidence files, without symlinks")
@@ -138,6 +143,7 @@ def verified_files(version: str, sha: str) -> list[Path]:
     actual = {p.name: digest(p) for p in files if p.name != "SHA256SUMS"}
     if checksums != actual:
         raise RuntimeError("Checksums do not match the verified local assets")
+    verify_assets(dist, version, sha)
     return files
 
 

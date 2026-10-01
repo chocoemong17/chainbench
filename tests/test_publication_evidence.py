@@ -3,6 +3,7 @@ import copy
 import hashlib
 import importlib.util
 import json
+import zipfile
 from pathlib import Path
 
 import pytest
@@ -12,7 +13,7 @@ VERSION, SHA = "0.2.0", "a" * 40
 
 def load_script(name):
     path = Path(__file__).resolve().parents[1] / "scripts" / f"{name}.py"
-    spec = importlib.util.spec_from_file_location(name, path)
+    spec = importlib.util.spec_from_file_location(f"scripts.{name}", path)
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
@@ -26,7 +27,7 @@ def write_sums(dist):
 
 
 @pytest.fixture
-def evidence(tmp_path, monkeypatch):
+def evidence(tmp_path, monkeypatch, reading_factory):
     dist = tmp_path / "dist"
     dist.mkdir()
     artifacts = []
@@ -63,6 +64,8 @@ def evidence(tmp_path, monkeypatch):
     (dist / "verification.json").write_text(json.dumps(report), encoding="utf-8")
     (dist / "build-environment.txt").write_text("test fixture\n", encoding="utf-8")
     write_sums(dist)
+    reading, _, _, reading_assets, _, _ = reading_factory(VERSION, SHA)
+    reading.attach(reading_assets, dist, VERSION, SHA)
     module = load_script("publish_release")
     monkeypatch.setattr(module, "ROOT", tmp_path)
     return module, dist, report
@@ -70,7 +73,34 @@ def evidence(tmp_path, monkeypatch):
 
 def test_valid_publication_evidence(evidence):
     module, _, _ = evidence
-    assert len(module.verified_files(VERSION, SHA)) == 5
+    assert len(module.verified_files(VERSION, SHA)) == 8
+
+
+@pytest.mark.parametrize('kind', ['reading.zip', 'review.pdf', 'reading-verification.json'])
+def test_reading_assets_are_required_before_publication(evidence, kind):
+    module, dist, _ = evidence
+    name = kind if kind.endswith('.json') else f'chainbench-{VERSION}-{kind}'
+    (dist/name).unlink()
+    write_sums(dist)
+    with pytest.raises(RuntimeError, match='only the verified'):
+        module.verified_files(VERSION, SHA)
+
+
+def test_rehashed_reading_bytes_cannot_bypass_publication_audit(evidence):
+    module, dist, _ = evidence
+    path = dist/f'chainbench-{VERSION}-reading.zip'
+    with zipfile.ZipFile(path) as archive:
+        entries = [(info, archive.read(info)) for info in archive.infolist()]
+    with zipfile.ZipFile(path, 'w') as archive:
+        for info, data in entries:
+            archive.writestr(info, data+b'changed' if info.filename == 'index.html' else data)
+    proof_path = dist/'reading-verification.json'
+    proof = json.loads(proof_path.read_bytes())
+    proof['assets'][path.name] = {'bytes': path.stat().st_size, 'sha256': hashlib.sha256(path.read_bytes()).hexdigest()}
+    proof_path.write_text(json.dumps(proof), encoding='utf8')
+    write_sums(dist)
+    with pytest.raises(RuntimeError, match='ZIP member'):
+        module.verified_files(VERSION, SHA)
 
 
 @pytest.mark.parametrize("artifact_indexes", [(0,), (1,), (0, 1)])
@@ -177,7 +207,7 @@ def test_actual_workflow_summary_is_accepted_by_release_contract(evidence):
         record['advanced_workflows'] = summary
     (dist/'verification.json').write_text(json.dumps(report))
     write_sums(dist)
-    assert len(module.verified_files(VERSION,SHA)) == 5
+    assert len(module.verified_files(VERSION,SHA)) == 8
 
 
 def test_reject_distribution_changed_after_smoke_test(evidence):

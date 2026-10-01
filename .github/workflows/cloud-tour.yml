@@ -1,17 +1,11 @@
 name: cloud reading bundle
 
 on:
-  pull_request:
-  push:
-    branches: [main]
+  workflow_call:
   workflow_dispatch:
 
 permissions:
   contents: read
-
-concurrency:
-  group: cloud-tour-${{ github.ref }}
-  cancel-in-progress: true
 
 jobs:
   reading-bundle:
@@ -36,6 +30,18 @@ jobs:
         run: |
           git rev-parse HEAD > review-packet/source-commit.txt
           python -m pip freeze > review-packet/environment.txt
+      - name: Package and verify the versioned reading assets
+        run: |
+          python scripts/reading_release.py prepare --tour reading-bundle --review review-packet --output reading-release --source "$GITHUB_SHA"
+          python scripts/reading_release.py extract --directory reading-release --output extracted-reading --source "$GITHUB_SHA"
+      - name: Read the extracted ZIP offline on desktop and mobile
+        run: python scripts/check_tour_browser.py --tour extracted-reading --output extracted-browser
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: chainbench-reading-release-${{ github.sha }}
+          path: reading-release/
+          if-no-files-found: error
+          retention-days: 7
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: chainbench-reading-bundle-${{ github.sha }}
@@ -46,5 +52,11 @@ jobs:
         with:
           name: chainbench-review-packet-${{ github.sha }}
           path: review-packet/
+          if-no-files-found: error
+          retention-days: 7
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: chainbench-extracted-browser-${{ github.sha }}
+          path: extracted-browser/
           if-no-files-found: error
           retention-days: 7

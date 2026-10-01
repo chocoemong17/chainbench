@@ -2,9 +2,19 @@
 
 Start with a question you can inspect in the output. The tour connects published
 examples, controlled geometry, finite breadth and a tight construction, while
-keeping their claims separate. It is a development snapshot, not a new release.
+keeping their claims separate. The v0.6.0 reading ZIP packages the complete tour.
 
-## Download first, or recompute a pinned development snapshot
+## Download the versioned tour
+
+Follow the [download guide](OFFLINE_DOWNLOAD.md) for the 25-page HTML ZIP, standalone
+PDF, source records and publication status. Extract the whole archive and open
+`index.html`, then follow the reading route below. Python is needed only to
+recompute reports. The release assets become available after the main gate passes.
+
+The following archived previews and computation snapshot retain earlier review
+history. Their recorded source and CI outcomes are separate from v0.6.0.
+
+## Historical previews and pinned development snapshot
 
 For a preview without installation or GitHub sign-in, open the archived
 [two-page Korean FISTA PDF](https://github.com/chocoemong17/chainbench/blob/archive/local-reviews-20261001/cloud/33b6243/ChainBench_FISTA_review.pdf)
@@ -15,7 +25,7 @@ contains selected display examples; the full reports retain every declared case.
 
 The [consolidated development PR](https://github.com/chocoemong17/chainbench/pull/73)
 is merged into `main` and links its actual checks. Open a successful
-[cloud reading bundle run](https://github.com/chocoemong17/chainbench/actions/workflows/cloud-tour.yml)
+[tests run](https://github.com/chocoemong17/chainbench/actions/workflows/tests.yml)
 and download `chainbench-reading-bundle-<commit>` from **Artifacts**. Extract the
 whole archive and open `index.html`; generation takes place on GitHub.
 GitHub requires sign-in to download Actions artifacts. After download, the tour
@@ -28,8 +38,9 @@ The evidence records the source revision, manifest hash and PDF checks. This sho
 guide covers step selection; the full bundle contains all the other reports.
 Packet generation is not a claim that the remaining CI jobs passed.
 
-Use Git and Python 3.10+ in your preferred Python environment. These commands use
-a new checkout and pin the implementation behind the complete extended tour:
+To inspect the earlier 9f797d5 computation snapshot, use Git and Python 3.10+.
+These commands intentionally select that historical implementation; use the
+[versioned download](OFFLINE_DOWNLOAD.md) for the current reading bundle:
 
 ```bash
 git clone https://github.com/chocoemong17/chainbench.git chainbench-review
@@ -207,7 +218,9 @@ speed ranking; iteration counts do not normalize per-step computational cost.
 The heavy-ball workflow reproduces the selected counterexample, not the paper's
 IQC programs or a claim that all momentum choices fail.
 
-For the released baseline instead, follow [the v0.5.0 installation](../README.md#use-the-frozen-v050-release).
+For the versioned toolkit, follow [the v0.6.0 installation](../README.md#install-v060).
+The [v0.5.0 baseline](https://github.com/chocoemong17/chainbench/releases/tag/v0.5.0)
+remains unchanged for historical comparisons.
 It has the earlier workflows and sampler, without the new reproduction, geometry
 or tour commands. Prior releases and the v0.2.0 kit are preserved.
 

@@ -14,6 +14,12 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  reading:
+    name: audited offline reading assets
+    uses: ./.github/workflows/cloud-tour.yml
+    permissions:
+      contents: read
+
   test:
     name: test (${{ matrix.os }}, Python ${{ matrix.python }}, ${{ matrix.dependencies }})
     runs-on: ${{ matrix.os }}
@@ -56,8 +62,12 @@ jobs:
 
   package:
     name: wheel and sdist clean installation
+    needs: reading
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    permissions:
+      contents: read
+      actions: read
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
@@ -69,6 +79,12 @@ jobs:
       - run: python -m build
       - run: python -m pip freeze > dist/build-environment.txt
       - run: python scripts/smoke_install.py
+      - name: Fetch the reading assets from this tested workflow run
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run download "$GITHUB_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "chainbench-reading-release-$GITHUB_SHA" --dir reading-release
+      - name: Bind reading assets to the installed distributions
+        run: python scripts/reading_release.py attach --directory reading-release --dist dist --source "$GITHUB_SHA"
       - name: Validate real install evidence at the publication boundary
         run: |
           python - <<'PY'

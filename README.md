@@ -10,8 +10,9 @@ rules and actual calculations. Explore 2D contours, 3D objective surfaces, image
 reconstructions and reproducible instance families in local, bilingual reports.
 Python 3.10+ and NumPy generate the pages; a browser is enough to read or share them.
 
-**New here? [Start with the review guide](docs/REVIEW_GUIDE.md)** — download the reading
-bundle from GitHub, or use a pinned source checkout and specific questions to investigate.
+**New here? [Download the offline tour and PDF](docs/OFFLINE_DOWNLOAD.md)**, then
+follow the [short reading route](docs/REVIEW_GUIDE.md#a-short-reading-route).
+The v0.6.0 assets become available after the main-branch release gate completes.
 For a quick preview without installation or sign-in, open the
 [two-page FISTA PDF](https://github.com/chocoemong17/chainbench/blob/archive/local-reviews-20261001/cloud/33b6243/ChainBench_FISTA_review.pdf)
 or [five actual geometry views with Korean reading notes](https://github.com/chocoemong17/chainbench/tree/archive/local-reviews-20261001/cloud/33b6243/browser-gallery).
@@ -21,10 +22,10 @@ Already have several saved runs? [Compare two to four experiment records](docs/S
 with `chainbench compare a.json b.json --lang ko --output comparison.html`.
 Inspect changed inputs, settings and environments before reading the actual curves.
 
-The development features are available on `main` through merged
-[PR #73](https://github.com/chocoemong17/chainbench/pull/73),
-with actual cloud CI linked there; the frozen **v0.5.0 release does not contain
-the tour, paper reproductions or new geometry commands**.
+The v0.6.0 source includes the integrated tour, paper examples, geometry inspectors,
+portability repairs and saved-record comparison. [Release notes](docs/RELEASE_NOTES_0.6.0.md)
+state the numerical migration and validation scope. The frozen v0.5.0 tag and assets
+remain unchanged and do not contain these later workflows.
 
 ## From a paper's experiment to actual pixels
 
@@ -50,23 +51,28 @@ record as the full report, including hashes and attribution.
 
 ## Download a reading bundle from GitHub
 
-Open [cloud reading bundle runs](https://github.com/chocoemong17/chainbench/actions/workflows/cloud-tour.yml),
-choose a successful run and download its `chainbench-reading-bundle-<commit>` artifact.
-Extract it and open `index.html` to explore all 25 pages offline. Generation and
-validation run on GitHub; artifact retention is seven days.
-The separate `chainbench-review-packet-<commit>` artifact contains a two-page
-Korean FISTA comparison PDF, page previews and generation evidence. GitHub
-requires sign-in for artifact downloads; the extracted reports work offline.
-[Cloud workflow and evidence scope](docs/CLOUD_WORKFLOW.md).
+Download the [v0.6.0 reading ZIP](https://github.com/chocoemong17/chainbench/releases/download/v0.6.0/chainbench-0.6.0-reading.zip)
+and [two-page PDF](https://github.com/chocoemong17/chainbench/releases/download/v0.6.0/chainbench-0.6.0-review.pdf)
+from the gated prerelease. Extract the whole ZIP and open `index.html`: all 25
+pages, their figures and recorded examples work offline. The named reading ZIP
+contains generated reports; GitHub's automatic source archive contains source code.
+[Download, availability and verification guide](docs/OFFLINE_DOWNLOAD.md).
 
-## Run the development tour
+For an unreleased candidate, a successful
+[tests run](https://github.com/chocoemong17/chainbench/actions/workflows/tests.yml)
+provides `chainbench-reading-release-<commit>`. Actions artifacts require sign-in
+and expire after seven days; release assets are separate from that retention.
+The reading assets are generated, independently audited, extracted and checked in
+offline desktop/mobile Chromium on GitHub. [Workflow and evidence scope](docs/CLOUD_WORKFLOW.md).
+
+## Run the tour
 
 The **FISTA backtracking** inspector shows how a proposed step is
 rejected or accepted. Explore all 12 objective/start inputs with three initial
 curvature guesses, then follow the accepted 2D/3D path, every rejected proposal,
 and the actual objective/model slice. Accepted L carries to the next update;
 the page exposes later changes and objective increases. This additional report
-requires the development checkout; PR #73 links its current remote CI. The extended
+is included in v0.6.0 and the current source checkout. The extended
 tour connects it to fixed-L FISTA with symbolic update flows, an actual rejected
 candidate preview and a comparison of thresholds, carried curvature and bounds. [Source, recurrence and numerical scope](docs/FISTA_BACKTRACKING.md).
 
@@ -89,8 +95,7 @@ pass and original-objective gap. Choose any cell to inspect its actual final
 2D/3D state; the same link opens its native numerical row without scripts.
 [Source, equations and scope](docs/ADMM_GEOMETRY.md). The extended tour connects
 it to ISTA/FISTA with symbolic flows and a notation table: their y/z variables,
-thresholds, input grids and per-iteration work differ. The development changes
-are included in PR #73 with current remote CI. Open the report separately with:
+thresholds, input grids and per-iteration work differ. Open the report separately with:
 
 ```bash
 python -m chainbench geometry admm-lasso --lang ko --output admm.html
@@ -106,7 +111,7 @@ shared position axis. Its signed ledger explains how changing denominator
 memory affects the two return steps, and distinguishes complete-block regret
 from an unfinished block. All nine cases retain a native first-block view.
 [Source, regret definition and scope](docs/ADAM_COUNTEREXAMPLE.md).
-The command is included in the pinned review snapshot; PR #73 links remote CI:
+Open the report with:
 
 ```bash
 python -m chainbench reproduce reddi-2018 --lang ko --output adam.html
@@ -116,20 +121,20 @@ The randomized Kaczmarz case study adds Strohmer–Vershynin's
 construction: rotate actual 3D coordinate projections, compare six inputs and
 keep every seed while distinguishing exact expectation from a finite sample mean.
 [Source and scope](docs/KACZMARZ_EXPECTATION.md). It can be opened separately or
-in the extended tour; see PR #73 for the consolidated source and current CI:
+in the extended tour:
 
 ```bash
 python -m chainbench case-study kaczmarz-expectation --lang ko --output kaczmarz.html
 ```
 
-In a checkout containing these changes, with Python in your preferred environment:
+To generate the smaller default tour from a source checkout:
 
 ```bash
 python -m pip install .
 python -m chainbench tour --lang ko --output tour
 ```
 
-For a fresh checkout, follow the [pinned installation steps](docs/REVIEW_GUIDE.md#run-the-tested-development-snapshot).
+For the versioned wheel, follow the [installation steps](#install-v060).
 Open `tour/index.html`. It connects **17 offline HTML pages**: the reading guide,
 eight-topic atlas, three published-example workflows, three geometry views, eight
 stress reports and one public tight case. Each report keeps its numerical evidence
@@ -138,25 +143,24 @@ and links back to the guide. The recipient needs no server, account or Python.
 The latest local atlas also connects each topic directly to its included
 experiments through question-led cards. Standalone pages provide reproducible
 commands; tour cards open local files and reports link to their related lesson.
-[How the reading paths work](docs/LEARNING_WORKFLOWS.md#development-source-follow-a-topic-into-its-actual-reports).
+[How the reading paths work](docs/LEARNING_WORKFLOWS.md#follow-a-topic-into-its-actual-reports).
 
 Use a new destination directory. The whole folder is about 45 MB uncompressed;
 copy the folder to preserve its links. [Contents, settings and hashes](docs/OFFLINE_TOUR.md).
 
-The newer optional **25-page** path connects noisy Haar restoration, the sharp
+The complete **25-page** path connects noisy Haar restoration, the sharp
 Frank–Wolfe sparsity construction, randomized Kaczmarz expectation attainment
 and nonuniform signal recovery with CG spectral breadth, the Adam counterexample
 ADMM variable splitting and FISTA candidate tests.
 Its comparison of fixed-objective gaps and changing-loss regret keeps their scopes separate.
-The index reports the actual file size; this
-development path is subject to remote PR/CI validation:
+The index reports the actual file size. Generate the complete tour with:
 
 ```bash
 python -m chainbench tour --extended --lang ko --output tour-extended
 ```
 
-Open `tour-extended/index.html`. This option is included in the review guide's
-pinned snapshot; the default 17-page tour keeps its existing calculations.
+Open `tour-extended/index.html`. The release reading ZIP uses this complete
+25-page path; the default 17-page tour remains available for a smaller download.
 
 ## Choose the question you want to answer
 
@@ -221,8 +225,7 @@ eigenvalue interval and condition number fixed while varying all three spectra,
 two coordinate bases and three initial-error profiles. Inspect actual signed
 mode ratios and energy bars alongside explicitly separate comparison polynomials.
 All 18 inputs and every computed step remain available offline, separately or in
-the extended tour, with links to the published 2×2 example. This development
-addition is included in the pinned snapshot; PR #73 links actual remote CI.
+the extended tour, with links to the published 2×2 example.
 
 The separate [nonuniform signal experiment](docs/NONUNIFORM_SAMPLING.md) follows
 Strohmer–Vershynin's 700-sample / 101-coefficient protocol with three declared
@@ -231,21 +234,18 @@ probability and all 15,000 projections of cyclic, uniform and weighted Kaczmarz.
 The projection explanation connects a single chosen observation to the actual
 before/after waveforms and global Fourier response, retaining rounding differences.
 The first input deliberately remains visible when a sufficient gap condition
-does not apply. This standalone development addition is included in the pinned
-review snapshot; PR #73 links actual remote CI.
+does not apply.
 
 The separate [noisy Haar experiment](docs/FISTA_WAVELET.md) adds 256×256 restoration
 with positive λ, actual wavelet shrinkage and a declared noise draw. Its default
 200 updates follow Figure 4's protocol; the unknown optimum is never labelled
-zero. This command is included in the review guide's pinned development snapshot.
-Its full-array export
+zero. Its full-array export
 is about 30 MB; the optional extended tour includes it at seed 0 and 200 updates.
 
 The subsequent [Frank–Wolfe sparsity construction](docs/FW_SPARSITY.md) connects
 Jaggi's sharp support floor to actual atom weights across four dimensions and a
 three-coordinate objective surface. It distinguishes support size from iteration,
-and ends the dual lower bound at full support. This addition is prepared on the
-consolidated development branch; PR #73 links the source and current remote CI.
+and ends the dual lower bound at full support.
 
 The [heavy-ball counterexample](docs/HEAVY_BALL_COUNTEREXAMPLE.md) connects the
 actual function, signed iterates and `(previous, current)` state plane. Its published
@@ -255,7 +255,7 @@ gradient. The same method's successful quadratic fixture remains a separate stor
 The newer [CG spectral explanation](docs/CG_SPECTRAL_EXPLANATION.md) connects
 Shewchuk's exact comparison polynomials to the same saved errors in all ten starts.
 Actual mode ratios and weighted norm error are distinguished from minimax bounds;
-absent initial modes remain undefined. PR #73 links this explanation's remote CI.
+absent initial modes remain undefined.
 
 ## Change a condition and replay a calculation
 
@@ -270,22 +270,25 @@ compares inputs, trajectories and environments with stated tolerances. A `MATCH`
 is numerical agreement, not author authentication or proof. Equal iteration counts
 need not mean equal work. [Configuration and limits](docs/EXPERIMENTS.md).
 
-## Use the frozen v0.5.0 release
+## Install v0.6.0
 
-If you want the released baseline, use Python 3.10+ in your preferred environment:
+Use Python 3.10+ in your preferred environment once the
+[gated prerelease](https://github.com/chocoemong17/chainbench/releases/tag/v0.6.0) is published:
 
 ```bash
-python -m pip install https://github.com/chocoemong17/chainbench/releases/download/v0.5.0/chainbench-0.5.0-py3-none-any.whl
-python -m chainbench learn --lang ko --output learn-v050.html
+python -m pip install https://github.com/chocoemong17/chainbench/releases/download/v0.6.0/chainbench-0.6.0-py3-none-any.whl
+python -m chainbench --version
+python -m chainbench tour --extended --lang ko --output tour
 ```
 
-The release supports `learn`, `report`, `plot`, `experiment`, `sweep`, `replay`,
-`stress`, `landscape` and the original `case-study gd-tight`. New development
-workflows and sampler v2 require the source snapshot above. Both currently report
-package version 0.5.0: **record the commit as well as the version**.
-[Release assets](https://github.com/chocoemong17/chainbench/releases/tag/v0.5.0)
-remain unchanged. No PyPI publication is configured; do not assume a same-named
-registry package is this project.
+The reading ZIP needs no installation. To recompute reports, use the wheel above
+or install a pinned source checkout. Record both the package version and commit
+when comparing results. [Release notes and migration](docs/RELEASE_NOTES_0.6.0.md).
+
+The [frozen v0.5.0 baseline](https://github.com/chocoemong17/chainbench/releases/tag/v0.5.0)
+remains available with its original assets. Earlier development builds also reported
+0.5.0; their commit distinguishes them from that release. No PyPI publication is
+configured; do not assume a same-named registry package is this project.
 
 ## Scope and validation
 
@@ -306,8 +309,9 @@ python scripts/smoke_install.py
 ```
 
 CI checks Ubuntu Python 3.10–3.12, Windows/macOS Python 3.12, minimum dependencies,
-both clean distribution installs and offline Chromium at desktop/mobile widths.
-Numerical records are checked against rendered curves, points and image pixels.
+both clean distribution installs, an audited reading ZIP/PDF, and offline Chromium
+at desktop/mobile widths. The nine validation jobs include extraction and reading
+of the exact ZIP prepared for release. Numerical records are checked against rendered curves, points and image pixels.
 These are maintainer-controlled checks, not independent adoption evidence.
 
 [Report a concrete success, failure or confusing explanation](https://github.com/chocoemong17/chainbench/issues/28).
