@@ -11,7 +11,7 @@ import sys
 from html import escape
 from pathlib import Path
 
-import fitz
+import pymupdf
 from playwright.sync_api import expect, sync_playwright
 from smoke_comparison import validate_comparison
 
@@ -71,7 +71,9 @@ def main():
                     assert region.evaluate('(el)=>el.scrollWidth>el.clientWidth')
                     region.focus()
                     region.press('ArrowRight')
-                    page.wait_for_function("document.querySelector('[aria-label=\"Record diagnostics\"]').scrollLeft>0")
+                    # Pass a function, as in the existing simplex browser gate:
+                    # evaluating a raw expression would violate the page's CSP.
+                    page.wait_for_function('el=>el.scrollLeft>0', arg=region.element_handle())
                     region.evaluate('(el)=>el.scrollLeft=el.scrollWidth')
                     page.locator('#comparison-context').screenshot(path=str(args.output/f'{name}-context-right-{width}.png'))
                     region.evaluate('(el)=>el.scrollLeft=0')
@@ -103,7 +105,7 @@ def main():
                         chart = page.locator('[data-comparison-chart="shared-gd"]')
                         chart.focus()
                         chart.press('ArrowRight')
-                        page.wait_for_function("document.querySelector('[data-comparison-chart=\"shared-gd\"]').scrollLeft>0")
+                        page.wait_for_function('el=>el.scrollLeft>0', arg=chart.element_handle())
                         chart.evaluate('(el)=>el.scrollLeft=el.scrollWidth')
                         chart.screenshot(path=str(args.output/'shared-gd-right-390.png'))
                         chart.evaluate('(el)=>el.scrollLeft=0')
@@ -175,11 +177,11 @@ def main():
                  prefer_css_page_size=True)
         context.close()
         browser.close()
-    with fitz.open(args.output/'ChainBench_saved_comparison_review.pdf') as document:
+    with pymupdf.open(args.output/'ChainBench_saved_comparison_review.pdf') as document:
         assert len(document) == 2, 'Review packet must retain exactly two complete pages'
         assert 'Read the complete evidence' in document[1].get_text()
         for index, pdf_page in enumerate(document):
-            pdf_page.get_pixmap(matrix=fitz.Matrix(1.25, 1.25)).save(args.output/f'review-page-{index+1}.png')
+            pdf_page.get_pixmap(matrix=pymupdf.Matrix(1.25, 1.25)).save(args.output/f'review-page-{index+1}.png')
         evidence['pdf'] = {'pages': len(document), 'final_section_present': True}
     outputs = {}
     for path in sorted(args.output.iterdir()):
