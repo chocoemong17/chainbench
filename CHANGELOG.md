@@ -1,5 +1,146 @@
 # Changelog
 
+## Unreleased
+
+- Explain randomized Kaczmarz's conditional expectation through actual orthogonal
+  error triangles and all possible row choices from each recorded input point.
+  Keep candidate projections separate from sampled history, synchronize the
+  completed update and retain zero-error/degenerate states. Add independent
+  rational checks and full browser-state coverage. Remote validation is pending.
+
+- Extend the optional tour to twenty HTML pages with the randomized Kaczmarz
+  construction, actual coordinate preview and links comparing deterministic,
+  support-constrained and expected-error attainment. Retain the seventeen-page
+  base and all existing numeric records. Validate new metadata/standalone parity
+  while accepting prior two-extension manifests. Remote validation is pending.
+- Require the randomized workflow's installation result at the release gate and
+  check the actual smoke-summary contract against that gate, preventing key drift.
+
+- Add six explicit members of Strohmer–Vershynin's expected-error bound attainment
+  through `case-study kaczmarz-expectation`. Show actual 3D projections, row and
+  direction probabilities, all seeds and the finite batch mean. Retain every
+  update after zero and unresolved trials; never test single paths against an
+  expectation bound. Add rational/state validators and offline browser checks.
+  Source-version notation caveat is explicit. Remote validation is pending.
+
+- Explain the same quadratic PPA updates through their shifted subproblem and
+  gradient balance. Synchronize completed solves with the existing landscape
+  player, retain floating residuals and native tables, and omit the panel without
+  PPA. Independent numerical and browser checks cover the added explanation.
+  Remote validation is pending.
+
+- Connect the same nine ISTA/FISTA trajectories to the minimized upper model,
+  actual update slices and the distinction between current and extrapolated
+  descent references. Include every stage, L1 corner and numerical value.
+- Add independent model expansion, rational reference and corrupt-record checks,
+  synchronized browser validation, and native tables. Remote validation is pending.
+
+- Connect every atlas topic to its experiment/geometry/stress workflows through
+  question-led cards. Bind direct tour links to included artifacts and declared
+  commands, provide related-lesson links, and retain standalone command fallbacks.
+  Preserve calculations and 17/19-page counts. Remote validation is pending.
+
+- Connect source finite-spectrum/interval comparison polynomials to actual CG
+  eigenmode errors and weighted energy in the existing Shewchuk reproduction.
+  Retain absent-mode ratios as null and measured roundoff. Correct the Eq. (52)
+  page locator; preserve algorithms, starts and stopping. Remote validation pending.
+
+- Add optional `tour --extended` with the 200-update noisy Haar protocol and
+  40-update Frank–Wolfe sparsity construction. Connect their actual previews and
+  related reports, retain base records, validate extension metadata and require
+  both tour variants in distribution evidence. The base tour remains seventeen
+  HTML pages; the extended tour has nineteen. New remote validation is pending.
+
+- Repair the existing landscape comparison: consistent method colors, equal
+  contour coordinate scales, numeric 3D axes, visible actual inputs/settings and
+  per-method iterate/termination readouts. Retain the original numerical paths,
+  validate all five methods independently, and include the comparison in the tour.
+
+- Connect Shewchuk's ellipse-to-circle explanation to the existing SD/CG paths.
+  Show their actual transformed coordinates and adjacent displacement directions,
+  with Euclidean/A inner products, undefined pairs and finite-precision limits.
+  Validate all observations in installed distributions and every browser state.
+
+- Recompute Lessard–Recht–Packard's public heavy-ball counterexample with the
+  existing recurrence. Connect signed iterates, objective heights and two-state
+  geometry; retain every added grid start, the exact source cycle and separate
+  stationarity/repetition diagnostics. Add it to the tour, atlas and installed
+  evidence gate without changing the eight fixed checks.
+
+- Connect Frank–Wolfe's exact oracle to its affine lower model and optimal-value
+  bracket. Show actual vertex values, both endpoints and the dual-gap width for
+  all twelve controlled cases; retain final-row evidence and verify the displays
+  independently from the existing recurrence.
+
+- Lead the README with actual image evidence, scoped geometry previews and a
+  question-to-workflow map. Add a pinned development review route; distinguish its
+  commands and commit from the frozen v0.5.0 release. Generate the image preview
+  from validated full-budget JSON, retaining source permission and input hashes.
+
+- Recompute the noiseless 64×64 ISTA/FISTA subset of Beck–Teboulle Figure 5,
+  using a permission-preserving port of the public procedural image. Retain every
+  scalar observation, declared full-precision snapshots, source differences and
+  both objective/image error; do not treat source magnitudes as exact targets.
+- Link the full image experiment into the offline tour with an actual reconstruction
+  preview and reciprocal, scope-labelled proximal geometry links.
+- Stream the existing proximal recurrence for the 10,000-step experiment while
+  preserving public Trace outputs. Independently check operators, coordinates,
+  installs and displayed pixels; keep long final-axis labels inside SVG bounds.
+
+- Resolve the narrow quadratic centre of the tight-GD construction with samples
+  at its exact joins and a normalized inset. Inspect every actual GD point and
+  its constant gradient; explain algebraic attainment separately from the bound.
+- Verify the geometry at maximum horizon and extreme allowed scales, in installed
+  distributions and offline browsers. Existing recurrence and bound values stay fixed.
+
+- Add `tour --output NEW_DIRECTORY`: a guided offline index with actual SVG previews,
+  the learning atlas, published example, both geometry views, all eight stress topics
+  at seeds 0–31 and the public tight-GD case. Keep all raw records and return links.
+- Stage the reports, refuse existing destinations, retain file/settings hashes in
+  a manifest, and clean failed writes. Require installed tour evidence and offline
+  navigation checks before publication; no browser-side solver or server is added.
+
+- Attach computation-derived instance context to every canonical learning/report
+  chart and standalone SVG: exact inputs/hash, dimension, constants, actual start,
+  method parameters, budget, completed updates and stopping. Keep singular
+  quadratic conditioning explicitly undefined instead of inventing a finite value.
+- Recompute all canonical observations from retained inputs in tests; independently
+  verify input fingerprints, first updates and reference curves in wheel/sdist smoke.
+
+- Add bilingual symbolic update flows and a two-method operation/state comparison
+  to the learning atlas. Related-method navigation clears filters; focused exports
+  provide runnable commands for omitted topics. Clarify Frank–Wolfe's 1956 origin
+  versus Jaggi's 2013 analysis. Symbolic maps remain separate from numeric evidence.
+- Exercise comparison, keyboard navigation, filtered links, focused pages, JSON,
+  narrow layouts and the no-JavaScript fallback in offline browser CI.
+
+- Add `geometry ista-fista`: linked composite contours, 3D heights and actual
+  extrapolation/gradient/soft-threshold stages over nine lambda/start combinations.
+  Explain zero coordinates, the half-squared-loss convention and nonmonotone FISTA.
+- Independently verify proximal stages and geometry; require installed-distribution
+  evidence and exercise every case/method in offline browser CI.
+
+- Expand stress to a versioned dimension/orientation/start design with full input
+  arrays and trajectories; add per-case curves, nearest-rank cards and `stress-case`.
+- Correct undefined ISTA/FISTA ratios previously replaced with zero and zero-radius
+  FISTA trials previously resampled. Retain unresolved rows without success counts.
+- Stress schema/sampler v2 changes the input associated with an old seed; historical
+  releases and ordinary schema-1 experiment/replay data remain unchanged.
+
+- Add `geometry frank-wolfe`: triangle, projected 3D surface, chosen oracle vertex,
+  convex-combination update and gap/certificate curves for all 12 declared cases.
+  Explain scheduled-step nonmonotonicity and separate objective bounds from dual gaps.
+- Validate geometry samples independently in tests and installed distributions;
+  exercise all case controls and JSON downloads in the offline browser CI job.
+
+- Recompute the published 2D setup in Shewchuk (1994), Figures 8 and 30, using exact
+  line-search steepest descent and existing CG. New `reproduce shewchuk-1994` exports
+  bilingual offline HTML or full JSON with inputs, metrics, termination and hashes.
+- Connect equal-aspect contours, projected 3D heights, energy errors and iteration
+  inspection; expose all nine declared extra starts as separate controlled variations.
+- Add rational/geometry/CLI regression checks and optional offline browser inspection.
+  Require installed reproduction evidence for both wheel and sdist before publication.
+
 ## 0.5.0 - 2026-09-29 (experimental alpha)
 
 - Separate four evidence layers: public literature claim, one canonical illustration,

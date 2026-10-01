@@ -1,333 +1,225 @@
-"""Seeded multi-instance evidence: sampled stress tests are not theorem proofs."""
+"""Inspectable finite stress samples; unresolved measurements stay in the record."""
 from __future__ import annotations
 
-import hashlib
 import json
 import math
+import platform
 from html import escape
 
 import numpy as np
 
+from . import __version__
 from ._pages import bi, evidence, page
-from .methods import (
-    accelerated_gradient,
-    conjugate_gradient,
-    fista,
-    frank_wolfe,
-    gradient_descent,
-    heavy_ball,
-    ista,
-    proximal_point,
-)
-from .problems import DiagonalLassoProblem, QuadraticProblem, SimplexQuadraticProblem
+from .learning import LESSONS
+from .reporting import SOURCE_LINKS
+from .stress_cases import DIMENSIONS, SAMPLER, TOPICS, trial, validate_seed
 from .visuals import ChartSpec, LineSeries, render_line_chart
 
 MAX_TRIALS = 64
-TOPICS = (
-    "gd-baseline",
-    "nesterov-1983",
-    "polyak-1964",
-    "hestenes-stiefel-1952",
-    "jaggi-2013",
-    "rockafellar-1976",
-    "beck-teboulle-2009",
-    "ista-vs-fista",
-)
 
 
-def _rng(seed: int) -> np.random.Generator:
-    if isinstance(seed, bool) or not isinstance(seed, int):
-        raise ValueError("seed must be an integer")
-    return np.random.Generator(np.random.PCG64(seed))
+def _environment():
+    return {'chainbench': __version__, 'numpy': np.__version__, 'python': platform.python_version()}
 
 
-def _orthogonal_mix(rng: np.random.Generator, dim: int) -> np.ndarray:
-    """Compose a few deterministic Householder reflections from the seeded RNG."""
-    mix = np.eye(dim)
-    for _ in range(3):
-        v = rng.normal(size=dim)
-        norm = float(np.hypot.reduce(v))
-        if not math.isfinite(norm) or norm == 0:
-            raise FloatingPointError("invalid sampled rotation vector")
-        v = v / norm
-        h = np.eye(dim) - 2.0 * np.outer(v, v)
-        mix = h @ mix
-    return mix
+def _source(topic):
+    return {'selected_reference': SOURCE_LINKS[topic],
+            'implemented_recurrence': LESSONS[topic]['recurrence'],
+            'assumptions': LESSONS[topic]['assumptions'][1],
+            'scope': LESSONS[topic]['limit'][1],
+            'implementation_source': SOURCE_LINKS['beck-teboulle-2009']
+            if topic in ('gd-baseline', 'nesterov-1983', 'ista-vs-fista') else SOURCE_LINKS[topic]}
 
 
-def _digest_problem(problem) -> str:
-    h = hashlib.sha256()
-    def add(name: str, value) -> None:
-        arr = np.ascontiguousarray(np.asarray(value, dtype="<f8"))
-        h.update(name.encode("ascii") + b"\0")
-        h.update(json.dumps(arr.shape, separators=(",", ":")).encode("ascii") + b"\0")
-        h.update(arr.tobytes(order="C"))
-    if isinstance(problem, QuadraticProblem):
-        add("Q", problem.Q)
-        add("b", problem.b)
-        add("x_star", problem.x_star)
-    elif isinstance(problem, DiagonalLassoProblem):
-        add("a", problem.a)
-        add("b", problem.b)
-        add("lam", [problem.lam])
-    elif isinstance(problem, SimplexQuadraticProblem):
-        add("target", problem.target)
-    else:
-        raise TypeError("unsupported stress problem")
-    return h.hexdigest()
+def _context_html(topic):
+    lesson = LESSONS[topic]
+    source = _source(topic)
+    return ('<section><h2>'+escape(lesson['name'])+'</h2><p>'+bi(*lesson['mechanism'])
+            +'</p><p>'+bi(*lesson['assumptions'])+'</p><pre>'+escape(lesson['recurrence'])
+            +'</pre><p class="small">'+bi(*lesson['limit'])+'</p><a href="'
+            +source['implementation_source']+'">'+bi('실제 갱신식의 문헌 출처', 'Source of the implemented recurrence')+'</a></section>')
 
 
-def _gaps(problem, trace) -> np.ndarray:
-    values = np.asarray([problem.gap(x) for x in trace.iterates], dtype=float)
-    if not np.all(np.isfinite(values)) or np.any(values < 0):
-        raise FloatingPointError("invalid sampled objective gaps")
-    return values
-
-
-def _smooth_problem(rng: np.random.Generator, dim: int = 24) -> QuadraticProblem:
-    L = float(10 ** rng.uniform(-0.35, 0.35))
-    floor = L * 1e-5
-    interior = np.sort(10 ** rng.uniform(math.log10(floor), math.log10(L), dim - 2))
-    eig = np.r_[floor, interior, L]
-    x_star = rng.uniform(-1.0, 1.0, dim)
-    mix = _orthogonal_mix(rng, dim)
-    q = mix.T @ np.diag(eig) @ mix
-    q = 0.5 * q + 0.5 * q.T
-    return QuadraticProblem.from_reference(q, x_star)
-
-
-def _strong_problem(rng: np.random.Generator, dim: int = 24) -> QuadraticProblem:
-    L = float(10 ** rng.uniform(-0.2, 0.3))
-    kappa = float(10 ** rng.uniform(0.5, 3.0))
-    mu = L / kappa
-    interior = np.sort(10 ** rng.uniform(math.log10(mu), math.log10(L), dim - 2))
-    eig = np.r_[mu, interior, L]
-    x_star = rng.uniform(-1.0, 1.0, dim)
-    mix = _orthogonal_mix(rng, dim)
-    q = mix.T @ np.diag(eig) @ mix
-    q = 0.5 * q + 0.5 * q.T
-    return QuadraticProblem.from_reference(q, x_star)
-
-
-def _lasso_problem(rng: np.random.Generator, dim: int = 28) -> DiagonalLassoProblem:
-    a = rng.uniform(0.4, 2.0, dim)
-    b = rng.uniform(-1.6, 1.6, dim)
-    lam = float(10 ** rng.uniform(-2.0, -0.25))
-    return DiagonalLassoProblem(a, b, lam)
-
-
-def _simplex_problem(rng: np.random.Generator, dim: int = 28) -> SimplexQuadraticProblem:
-    raw = rng.uniform(0.05, 1.0, dim)
-    return SimplexQuadraticProblem(raw / raw.sum())
-
-
-def _trial(topic: str, seed: int) -> dict:
-    rng = _rng(seed)
-    if topic in ("gd-baseline", "nesterov-1983"):
-        p = _smooth_problem(rng)
-        steps = 40
-        trace = gradient_descent(p, steps) if topic == "gd-baseline" else accelerated_gradient(p, steps)
-        k = np.arange(1, steps + 1, dtype=float)
-        radius2 = float(p.x_star @ p.x_star)
-        if topic == "gd-baseline":
-            bound = p.L * radius2 / (2 * k)
-        else:
-            bound = 2 * p.L * radius2 / (k + 1) ** 2
-        metric = float(np.max(_gaps(p, trace)[1:] / bound))
-        return {"seed": seed, "metric": metric, "threshold": 1.0, "dim": p.dim,
-                "L": p.L, "mu": p.mu, "steps": steps,
-                "instance_sha256": _digest_problem(p), "orientation": "seeded-householder"}
-
-    if topic == "polyak-1964":
-        p = _strong_problem(rng)
-        steps = 180
-        trace, alpha, beta = heavy_ball(p, steps)
-        errors = np.asarray([np.linalg.norm(x - p.x_star) for x in trace.iterates])
-        valid = errors[:-1] > 1e-10
-        ratios = errors[1:][valid] / errors[:-1][valid]
-        if ratios.size == 0:
-            raise FloatingPointError("sampled heavy-ball trial reached numerical floor too early")
-        observed = float(np.median(ratios[-20:]))
-        rho = float((np.sqrt(p.L) - np.sqrt(p.mu)) / (np.sqrt(p.L) + np.sqrt(p.mu)))
-        metric = abs(observed - rho) / rho
-        return {"seed": seed, "metric": metric, "threshold": 0.08, "dim": p.dim,
-                "condition_number": p.L / p.mu, "steps": steps, "alpha": alpha,
-                "beta": beta, "rho": rho, "evidence_kind": "empirical",
-                "instance_sha256": _digest_problem(p), "orientation": "seeded-householder"}
-
-    if topic == "hestenes-stiefel-1952":
-        p = _strong_problem(rng)
-        steps = min(20, p.dim)
-        trace = conjugate_gradient(p, steps, rtol=0.0, atol=0.0)
-        errors = np.sqrt(2 * _gaps(p, trace))
-        rho = (np.sqrt(p.L / p.mu) - 1) / (np.sqrt(p.L / p.mu) + 1)
-        k = np.arange(1, len(errors), dtype=float)
-        metric = float(np.max(errors[1:] / (2 * rho ** k * errors[0]))) if k.size else 0.0
-        return {"seed": seed, "metric": metric, "threshold": 1.0, "dim": p.dim,
-                "condition_number": p.L / p.mu, "steps": steps,
-                "instance_sha256": _digest_problem(p), "orientation": "seeded-householder"}
-
-    if topic == "jaggi-2013":
-        p = _simplex_problem(rng)
-        steps = 40
-        trace = frank_wolfe(p, steps)
-        k = np.arange(1, steps + 1, dtype=float)
-        bound = 2 * p.curvature_upper_bound / (k + 2)
-        metric = float(np.max(_gaps(p, trace)[1:] / bound))
-        return {"seed": seed, "metric": metric, "threshold": 1.0, "dim": p.dim,
-                "steps": steps, "instance_sha256": _digest_problem(p)}
-
-    if topic == "rockafellar-1976":
-        p = _strong_problem(rng)
-        c = float(10 ** rng.uniform(-0.6, 0.6))
-        steps = 24
-        trace = proximal_point(p, steps, c)
-        errors = np.asarray([np.linalg.norm(x - p.x_star) for x in trace.iterates])
-        q = 1 / (1 + c * p.mu)
-        valid = errors[:-1] > 1e-12
-        metric = float(np.max(errors[1:][valid] / (q * errors[:-1][valid])))
-        return {"seed": seed, "metric": metric, "threshold": 1.0, "dim": p.dim,
-                "condition_number": p.L / p.mu, "proximal_parameter": c, "steps": steps,
-                "instance_sha256": _digest_problem(p), "orientation": "seeded-householder"}
-
-    if topic in ("beck-teboulle-2009", "ista-vs-fista"):
-        p = _lasso_problem(rng)
-        steps = 50
-        if topic == "beck-teboulle-2009":
-            trace = fista(p, steps)
-            radius2 = float(p.x_star @ p.x_star)
-            if radius2 == 0:
-                return _trial(topic, seed + 1000003)
-            k = np.arange(1, steps + 1, dtype=float)
-            bound = 2 * p.L * radius2 / (k + 1) ** 2
-            metric = float(np.max(_gaps(p, trace)[1:] / bound))
-            return {"seed": seed, "metric": metric, "threshold": 1.0, "dim": p.dim,
-                    "lambda": p.lam, "steps": steps, "instance_sha256": _digest_problem(p)}
-        gi = p.gap(ista(p, steps).iterates[-1])
-        gf = p.gap(fista(p, steps).iterates[-1])
-        metric = float(gf / gi) if gi > 1e-28 else 0.0
-        return {"seed": seed, "metric": metric, "threshold": None, "dim": p.dim,
-                "lambda": p.lam, "steps": steps, "evidence_kind": "informational",
-                "instance_sha256": _digest_problem(p)}
-
-    raise ValueError(f"unknown stress topic: {topic}")
+def run_stress_case(topic: str, seed: int = 0) -> dict:
+    return {'kind': 'chainbench.stress-case', 'schema_version': 2, 'sampler': SAMPLER,
+            'topic': topic, 'case': trial(topic, seed), 'source': _source(topic), 'environment': _environment()}
 
 
 def run_stress(topic: str, trials: int = 24, seed: int = 0) -> dict:
     if topic not in TOPICS:
-        raise ValueError("unknown stress topic")
-    if isinstance(seed, bool) or not isinstance(seed, int):
-        raise ValueError("seed must be an integer")
-    if isinstance(trials, bool) or not isinstance(trials, int) or not 2 <= trials <= MAX_TRIALS:
-        raise ValueError(f"trials must be an integer between 2 and {MAX_TRIALS}")
-    rows = [_trial(topic, seed + i) for i in range(trials)]
-    metrics = np.asarray([row["metric"] for row in rows], dtype=float)
+        raise ValueError('unknown stress topic')
+    validate_seed(seed)
+    if type(trials) is not int or not 2 <= trials <= MAX_TRIALS:
+        raise ValueError(f'trials must be an integer between 2 and {MAX_TRIALS}')
+    validate_seed(seed+trials-1)
+    rows = [trial(topic, seed+i) for i in range(trials)]
+    threshold = rows[0]['threshold']
+    if any(r['threshold'] != threshold for r in rows):
+        raise ValueError('stress trials disagree on threshold semantics')
+    measured = [(i, r) for i, r in enumerate(rows) if r['metric'] is not None]
+    for r in rows:
+        if (r['status'] == 'unresolved') != (r['metric'] is None):
+            raise ValueError('stress measurement status disagrees')
+    metrics = np.asarray([r['metric'] for _, r in measured], dtype=float)
     if not np.all(np.isfinite(metrics)) or np.any(metrics < 0):
-        raise FloatingPointError("invalid stress metric")
-    threshold = rows[0]["threshold"]
-    if any(row["threshold"] != threshold for row in rows):
-        raise ValueError("stress trials disagree on threshold semantics")
-    hashes = [row["instance_sha256"] for row in rows]
+        raise FloatingPointError('invalid stress metric')
     summary = {
-        "min": float(np.min(metrics)),
-        "median": float(np.median(metrics)),
-        "p90": float(np.quantile(metrics, .9)),
-        "max": float(np.max(metrics)),
-        "unique_instances": len(set(hashes)),
+        'min': float(np.min(metrics)) if metrics.size else None,
+        'median': float(np.median(metrics)) if metrics.size else None,
+        'p90': float(np.quantile(metrics, .9)) if metrics.size else None,
+        'max': float(np.max(metrics)) if metrics.size else None,
+        'unique_instances': len({r['instance_sha256'] for r in rows}),
+        'measured': len(measured), 'unresolved': trials-len(measured), 'trials': trials,
     }
     if threshold is not None:
-        summary["within_threshold"] = int(np.count_nonzero(metrics <= threshold + 1e-10))
-        summary["trials"] = trials
-    return {
-        "kind": "chainbench.stress",
-        "schema_version": 1,
-        "topic": topic,
-        "seed": seed,
-        "trials": trials,
-        "threshold": threshold,
-        "summary": summary,
-        "rows": rows,
-        "notice": (
-            "Seeded sampled instances broaden finite evidence beyond one canonical fixture. "
-            "They do not prove a class-wide theorem, certify worst-case behavior, or measure adoption."
-        ),
+        summary['within_threshold'] = int(np.count_nonzero(metrics <= threshold+1e-10))
+        summary['above_threshold'] = len(measured)-summary['within_threshold']
+    ranked = sorted(measured, key=lambda pair: (pair[1]['metric'], pair[1]['seed']))
+    selected = {}
+    if ranked:
+        for name, quantile in (('median-ranked', .5), ('p90-ranked', .9), ('maximum-observed', 1.)):
+            rank = max(1, math.ceil(quantile*len(ranked)))
+            i, row = ranked[rank-1]
+            selected[name] = {'trial': i+1, 'seed': row['seed'], 'metric': row['metric'], 'rank': rank}
+    result = {
+        'kind': 'chainbench.stress', 'schema_version': 2, 'sampler': SAMPLER,
+        'topic': topic, 'seed': seed, 'trials': trials, 'threshold': threshold,
+        'summary': summary, 'rows': rows, 'selected': selected,
+        'selection_rule': 'nearest rank ceil(q*n) among measured cases, ties by seed; no omissions',
+        'sampling': {'dimensions': list(DIMENSIONS),
+                     'design': 'seed%4 selects dimension; (seed//4)%2 rotation; (seed//8)%2 start',
+                     'coverage': '16 consecutive seeds cover all dimension/rotation/start strata for quadratics',
+                     'within_strata': 'PCG64 draws spectra, reference points and L; LASSO draws a,b,lambda; simplex draws target',
+                     'limits': 'diagonal LASSO and simplex have no rotation stratum; smooth tests keep kappa=1e5'},
+        'input_hash_encoding': 'sorted named arrays, ASCII name+NUL, JSON shape+NUL, little-endian float64 bytes',
+        'environment': _environment(), 'source': _source(topic),
+        'notice': 'Finite synthetic sampling is not representative real data, a theorem proof or a worst-case certificate. Unresolved ratios remain visible and excluded from measured-only quantiles.',
     }
+    json.dumps(result, allow_nan=False)
+    return result
 
 
-def _stress_chart(result: dict) -> ChartSpec:
-    x = tuple(range(1, result["trials"] + 1))
-    metrics = tuple(row["metric"] for row in result["rows"])
-    series = [LineSeries("sampled metric", x, metrics, "samples")]
-    if result["threshold"] is not None:
-        series.append(LineSeries(
-            "threshold", x, tuple(float(result["threshold"]) for _ in x), "bound"
-        ))
-    title = "Sampled evidence across reproducible instances"
-    return ChartSpec(title, "trial", "normalized check metric", tuple(series), "linear")
+def _number(value):
+    return '—' if value is None else f'{value:.5g}'
 
 
-def stress_html(result: dict, lang: str = "en") -> str:
-    if result.get("kind") != "chainbench.stress":
-        raise ValueError("not a stress report")
-    topic = result["topic"]
-    s = result["summary"]
-    threshold = result["threshold"]
-    if threshold is None:
-        verdict = bi(
-            "이 항목은 통과/실패 정리가 아니라 분포 자체를 보여줍니다.",
-            "This topic is descriptive; the distribution has no theorem pass/fail threshold.",
-        )
+def _stress_chart(result):
+    rows = [(i, r['metric']) for i, r in enumerate(result['rows'], 1) if r['metric'] is not None]
+    if not rows:
+        return '<p class="callout caution">' + bi('측정 가능한 비율이 없어 분포 곡선을 그리지 않습니다.',
+            'No resolved ratios: there is no measured distribution to plot.') + '</p>'
+    x, y = zip(*rows)
+    series = [LineSeries('resolved metric (unresolved omitted)', x, y, 'samples')]
+    if result['threshold'] is not None:
+        series.append(LineSeries('threshold', (1, result['trials']),
+                                 (result['threshold'], result['threshold']), 'bound'))
+    label = {'polyak-1964': 'relative tail deviation from rho',
+             'hestenes-stiefel-1952': 'max energy error / bound',
+             'rockafellar-1976': 'max error ratio / bound',
+             'ista-vs-fista': 'final FISTA gap / ISTA gap'}.get(result['topic'], 'max objective gap / bound')
+    return render_line_chart(ChartSpec('Measured ratios across declared instances', 'trial index',
+                                       label, tuple(series), 'linear'))
+
+
+def _case_html(topic, row):
+    body = '<div class="case-data"><p class="formula">seed=' + escape(str(row['seed']))
+    body += ' · n=' + escape(str(row['dim'])) + ' · ' + escape(row['orientation'])
+    body += ' · start=' + escape(row['start_kind']) + ' · budget=' + str(row['steps']) + '\n'
+    body += escape(', '.join(f'{key}={_number(value)}' for key, value in row['parameters'].items()))+'</p>'
+    body += '<p><strong>' + escape(row['measurement']['definition']) + '</strong>: ' + _number(row['metric'])+'</p>'
+    if row['reason']:
+        body += '<p class="callout caution">UNRESOLVED · ' + escape(row['reason']) + '</p>'
+    series = tuple(LineSeries(s['label'], tuple(s['iterations']), tuple(s['values']), s['role'])
+                   for s in row['curve']['series'] if s['iterations'])
+    if series:
+        body += '<div class="plot">'+render_line_chart(ChartSpec(
+            f'{topic} · seed {row["seed"]}', 'completed updates k', row['curve']['units'],
+            series, row['curve']['scale']))+'</div>'
     else:
-        label = "경험적 회귀 기준" if topic == "polyak-1964" else "선택한 이론 상계"
-        label_en = "empirical regression threshold" if topic == "polyak-1964" else "selected theoretical envelope"
-        verdict = bi(
-            f'{result["trials"]}개 중 {s["within_threshold"]}개가 {label} 안에 있었습니다.',
-            f'{s["within_threshold"]} of {result["trials"]} samples were within the {label_en}.',
-        )
-    cards = (
-        '<div class="metric-grid">'
-        f'<div class="metric"><span>median</span><strong>{s["median"]:.4g}</strong></div>'
-        f'<div class="metric"><span>90%</span><strong>{s["p90"]:.4g}</strong></div>'
-        f'<div class="metric"><span>max</span><strong>{s["max"]:.4g}</strong></div>'
-        f'<div class="metric"><span>unique instances</span><strong>{s["unique_instances"]}</strong></div>'
-        '</div>'
-    )
-    rows = []
-    for index, row in enumerate(result["rows"], 1):
-        details = ", ".join(
-            f"{escape(str(k))}={escape(f'{v:.4g}' if isinstance(v, float) else str(v))}"
-            for k, v in row.items()
-            if k not in {"seed", "metric", "threshold", "evidence_kind", "instance_sha256"}
-        )
-        rows.append(
-            f'<tr><td>{index}</td><td>{row["seed"]}</td><td>{row["metric"]:.6g}</td>'
-            f'<td><code>{row["instance_sha256"][:12]}…</code></td><td>{details}</td></tr>'
-        )
-    protocol = bi(
-        "한 개의 예시를 잘 골라 보여주는 대신, 연속된 seed로 여러 합성 문제를 생성해 같은 검사를 반복합니다. "
-        "모든 seed와 파라미터를 아래 JSON에 보존합니다. 그래도 이것은 유한 표본이며 정리의 증명은 아닙니다.",
-        "Instead of selecting one flattering example, ChainBench generates multiple synthetic instances from consecutive seeds and reruns the same measurement. Every seed and parameter is preserved below. This remains finite sampling, not proof.",
-    )
-    body = (
-        '<div class="evidence-banner"><span class="evidence-tag">MULTI-INSTANCE STRESS</span>'
-        + protocol + '</div>' + cards
-        + '<section><h2>' + bi('표본 전체 보기', 'See the whole sample') + '</h2><p>' + verdict + '</p>'
-        + '<div class="plot">' + render_line_chart(_stress_chart(result)) + '</div></section>'
-        + '<section><h2>' + bi('어떤 상황들을 시험했나?', 'What situations were sampled?')
-        + '</h2><p>' + bi(
-            '각 행은 별도의 seed로 만든 문제입니다. 차원, 조건수, 정규화 계수처럼 결과 해석에 필요한 값도 함께 저장됩니다.',
-            'Each row is a separate seeded problem. Dimensions, conditioning and regularization parameters needed for interpretation are stored with it.',
-        ) + '</p><div class="scroll"><table><thead><tr><th>#</th><th>seed</th><th>metric</th><th>instance</th><th>parameters</th></tr></thead><tbody>'
-        + ''.join(rows) + '</tbody></table></div></section>'
-        + '<p class="callout caution">' + bi(
-            '표본을 많이 통과했다고 해서 모든 허용 함수에서 성립함을 새로 증명한 것은 아닙니다. 반대로 정리 가정 밖의 문제를 섞어 실패를 만들지도 않습니다.',
-            'Passing many samples does not newly prove a universal statement. The sampler also stays inside the assumptions instead of manufacturing failures outside the theorem class.',
-        ) + '</p>' + evidence(result, f'stress-{topic}.json')
-    )
-    return page(
-        'Many cases, not one cherry-picked curve',
-        bi('한 개의 예시는 직관용, 여러 seed의 표본은 견고성 확인용, tight case는 별도의 수학적 주장입니다.',
-           'One example is for intuition, seeded sampling probes robustness, and a tight case is a separate mathematical claim.'),
-        body,
-        lang=lang,
-    )
+        body += '<p>'+bi('바닥값 기준을 넘는 비율 표본이 없습니다.', 'No ratio samples exceed the denominator floor.')+'</p>'
+    if row['evidence_kind'] == 'empirical':
+        body += '<p class="small">'+bi('마지막 유효 비율 최대 20개의 중앙값과 ρ를 비교한 경험적 회귀 통계입니다. 8%는 정리의 보장이 아닙니다.',
+            'This empirical regression statistic compares the median of up to the last 20 valid ratios with rho. The 8% threshold is not a theorem guarantee.')+'</p>'
+    elif row['evidence_kind'] == 'informational':
+        body += '<p class="small">'+bi('같은 반복 예산의 최종 gap 비율입니다. 통과/실패 기준과 보편적 우열 주장은 없습니다.',
+            'The ratio compares final gaps at equal iteration budgets. It has no pass/fail threshold or universal ranking claim.')+'</p>'
+    body += '<details><summary>'+bi('모든 반복점·실제 입력·측정 규칙', 'Every iterate, actual input and measurement rule')+'</summary>'
+    body += '<div class="scroll"><table><tr><th>method</th><th>k</th><th>gap</th><th>x</th></tr>'
+    for name, run in row['runs'].items():
+        for k, (x, gap) in enumerate(zip(run['iterates'], run['gaps'])):
+            body += f'<tr><td>{escape(name)}</td><td>{k}</td><td>{gap:.6g}</td>'
+            body += '<td><details><summary>'+bi('좌표', 'Coordinates')+'</summary><code>'
+            body += escape(json.dumps(x))+'</code></details></td></tr>'
+    body += '</table></div><pre>'+escape(json.dumps({'inputs': row['inputs'],
+             'measurement': row['measurement'], 'instance_sha256': row['instance_sha256']},
+             indent=2, allow_nan=False))+'</pre></details>'
+    body += '<p class="small">input SHA-256: <code>'+escape(row['instance_sha256'])+'</code></p>'
+    body += '<pre>python -m chainbench stress-case '+escape(topic)+' --seed '+escape(str(row['seed']))
+    body += ' --lang ko --output case.html</pre></div>'
+    return body
+
+
+def stress_case_html(result, lang='en'):
+    if result.get('kind') != 'chainbench.stress-case' or result.get('schema_version') != 2:
+        raise ValueError('not a schema-2 stress case')
+    body = '<div class="evidence-banner">'+bi('버전 2 생성기의 개별 합성 표본입니다. 대표 사례나 최악 사례로 인증된 것이 아닙니다.',
+        'One synthetic sample from sampler v2, not a certified representative or worst case.')+'</div>'
+    body += _context_html(result['topic'])+'<section>'+_case_html(result['topic'], result['case'])+'</section>'+evidence(result, 'stress-case.json')
+    return page('One sampled instance, fully inspectable',
+                bi('요약 통계를 실제 입력과 수렴 곡선으로 되짚습니다.',
+                   'Trace a summary measurement back to its actual input and convergence curve.'), body, lang=lang)
+
+
+SCRIPT = '''document.querySelectorAll('[data-case-link]').forEach(a=>a.addEventListener('click',()=>{
+ const panel=document.getElementById(a.dataset.caseLink);if(panel)panel.open=true;
+}));'''
+
+
+def stress_html(result: dict, lang: str = 'en') -> str:
+    if result.get('kind') != 'chainbench.stress' or result.get('schema_version') != 2:
+        raise ValueError('not a schema-2 stress report')
+    topic, s, threshold = result['topic'], result['summary'], result['threshold']
+    if threshold is None:
+        verdict = bi('이 항목은 통과/실패 정리가 아닌 설명용 분포입니다.',
+                     'This topic is descriptive; there is no theorem pass/fail threshold.')
+    else:
+        label = 'empirical regression threshold' if topic == 'polyak-1964' else 'selected theoretical envelope'
+        verdict = bi(f'전체 {s["trials"]}개: 기준 안 {s["within_threshold"]}개 · 기준 밖 {s["above_threshold"]}개 · 측정 불가 {s["unresolved"]}개.',
+                     f'{s["trials"]} total: {s["within_threshold"]} within the {label}, {s["above_threshold"]} above, {s["unresolved"]} unresolved.')
+    cards = '<div class="metric-grid">'
+    for title, value in (('median · measured only', s['median']), ('p90 · measured only', s['p90']),
+                         ('maximum observed', s['max']), ('unresolved / total', None)):
+        text = f'{s["unresolved"]} / {s["trials"]}' if value is None and title.startswith('unresolved') else _number(value)
+        cards += '<div class="metric"><span>'+title+'</span><strong>'+text+'</strong></div>'
+    cards += '</div>'
+    body = '<div class="evidence-banner"><span class="evidence-tag">MULTI-INSTANCE STRESS</span>'
+    body += bi('모든 연속 seed의 실제 입력·경로를 보존합니다. 측정 불가 표본도 빠뜨리지 않습니다. 유한 합성 표본이며 정리의 증명은 아닙니다.',
+               'Every consecutive seed retains its actual inputs and paths, including unresolved cases. Finite synthetic sampling is not proof.')+'</div>'+cards+_context_html(topic)
+    body += '<section><h2>'+bi('분포에서 개별 곡선으로', 'From the distribution to an individual curve')+'</h2><p>'+verdict+'</p>'
+    body += '<div class="plot">'+_stress_chart(result)+'</div><div class="cards">'
+    for label, selected in result['selected'].items():
+        case_id = 'sample-'+str(selected['trial'])
+        body += f'<a class="card" href="#{case_id}" data-case-link="{case_id}"><strong>{label}</strong>'
+        body += f'<span>seed {selected["seed"]} · trial {selected["trial"]} · metric {selected["metric"]:.5g}</span></a>'
+    body += '</div><p class="small">'+bi('카드는 측정 가능 표본의 nearest rank ceil(q·n)를 선택합니다(동률은 seed 순). 표시된 median·p90 요약값은 보간 분위수이므로 카드의 실제 관측값과 다를 수 있습니다. 최댓값은 관측 최댓값이며 인증된 최악 사례가 아닙니다.',
+        'Cards use nearest rank ceil(q·n) among measured samples, ties by seed. The summary median/p90 are interpolated quantiles and may differ from the selected actual observation. Maximum observed is not a certified worst case.')+'</p></section>'
+    body += '<section><h2>'+bi('생성 규칙과 실제 범위', 'Sampling design and actual coverage')+'</h2><p>'
+    body += bi('차원은 seed % 4로 6·12·24·40을 순환합니다. 이차함수는 다음 비트로 대각/회전과 영점/임의 시작을 선택합니다. 16개 연속 seed는 전체 조합을 포함합니다. LASSO는 대각 구조를 유지하며 심플렉스 시작점은 실행 가능합니다.',
+        'Dimensions cycle through 6, 12, 24, 40 by seed % 4. Quadratic orientation and start use the next bits; 16 consecutive seeds cover all strata. LASSO stays diagonal and simplex starts remain feasible.')+'</p>'
+    body += '<p class="small">'+bi('버전 2 생성기입니다. v0.5.0의 동일 seed와 입력이 다를 수 있습니다. 실제 배열·시작점·갱신 예산을 해시하며, JSON에 환경과 생성기 버전을 남깁니다. 부드러운 볼록 검사에서는 조건수 10⁵를 고정합니다.',
+        'Sampler v2 changes the input associated with a v0.5.0 seed. Actual arrays, start and update budget are hashed; JSON records environment and sampler version. Smooth convex checks retain condition number 10^5.')+'</p>'
+    body += '<div class="scroll"><table><tr><th>trial</th><th>seed</th><th>n</th><th>orientation / start</th><th>metric</th><th>status</th></tr>'
+    for i, row in enumerate(result['rows'], 1):
+        body += f'<tr><td><a href="#sample-{i}" data-case-link="sample-{i}">{i}</a></td>'
+        body += f'<td>{row["seed"]}</td><td>{row["dim"]}</td><td>{escape(row["orientation"])} / {escape(row["start_kind"])}</td>'
+        body += f'<td>{_number(row["metric"])}</td><td>{escape(row["status"])}</td></tr>'
+    body += '</table></div></section><section><h2>'+bi('전체 표본 열어보기', 'Open every sampled instance')+'</h2>'
+    for i, row in enumerate(result['rows'], 1):
+        body += f'<details class="stress-case" id="sample-{i}"><summary>#{i} · seed {row["seed"]} · n={row["dim"]} · '
+        body += f'{escape(row["status"])} · {_number(row["metric"])}</summary>'+_case_html(topic, row)+'</details>'
+    body += '</section><p class="callout caution">'+bi('합성 표본의 범위를 넓혔지만 실제 데이터의 대표성이나 보편적 성능 순위를 주장하지 않습니다. 기준 밖 또는 측정 불가인 표본을 성공으로 세지 않습니다.',
+        'This broadens declared synthetic coverage, not real-data representativeness or universal performance rankings. Above-threshold and unresolved cases are not counted as successes.')+'</p>'
+    body += evidence(result, f'stress-{topic}.json')+'<script>'+SCRIPT+'</script>'
+    return page('Every sample has a story',
+        bi('분포 · 분위수 사례 · 개별 수렴 곡선 · 보존된 입력',
+           'Distribution · ranked cases · individual convergence curves · retained inputs'), body, lang=lang)

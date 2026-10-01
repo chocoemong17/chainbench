@@ -6,7 +6,10 @@ import io
 import json
 from html import escape
 
+from ._canonical import CSS as INSTANCE_CSS
+from ._canonical import context_html
 from ._plot_audit import evidence_record, validate_chart_result
+from ._sources import SOURCE_LINKS
 from .checks import CheckResult
 from .stories import STORIES
 from .visuals import build_check_chart, render_line_chart
@@ -86,16 +89,7 @@ def _status_class(result: CheckResult) -> str:
     }[result_status(result)]
 
 
-SOURCE_LINKS = {
-    "gd-baseline": "https://doi.org/10.1137/080716542",
-    "nesterov-1983": "https://doi.org/10.1137/080716542",
-    "polyak-1964": "https://doi.org/10.1016/0041-5553(64)90137-5",
-    "hestenes-stiefel-1952": "https://www.cs.cmu.edu/~quake-papers/painless-conjugate-gradient.pdf",
-    "jaggi-2013": "https://proceedings.mlr.press/v28/jaggi13.html",
-    "rockafellar-1976": "https://doi.org/10.1137/0314056",
-    "beck-teboulle-2009": "https://doi.org/10.1137/080716542",
-    "ista-vs-fista": "https://doi.org/10.1137/080716542",
-}
+
 
 
 def render_html(results: list[CheckResult]) -> str:
@@ -117,7 +111,7 @@ def render_html(results: list[CheckResult]) -> str:
         story = STORIES[result.slug]
         status = result_status(result)
         threshold = "n/a" if result.threshold is None else f"{result.threshold:.7g}"
-        chart = render_line_chart(charts[result.slug])
+        chart = render_line_chart(charts[result.slug], show_instance=False)
         thumbnail = base64.b64encode(chart.encode("utf-8")).decode("ascii")
         cards.append(
             f'<a class="summary-card" href="#{escape(result.slug)}">'
@@ -137,7 +131,8 @@ def render_html(results: list[CheckResult]) -> str:
             f'<article><h3>What the result says</h3><p>{escape(story.claim)}</p></article>'
             f'<article><h3>What ChainBench shows</h3><p>{escape(story.evidence)}</p></article>'
             f'<article><h3>What to notice</h3><p>{escape(story.takeaway)}</p></article>'
-            f'</div><div class="chart">{chart}</div>'
+            '</div>' + context_html(charts[result.slug].instance, bilingual=False)
+            + f'<div class="chart">{chart}</div>'
             f'<p class="caveat"><strong>Limit:</strong> {escape(story.caveat)}</p>'
             f'<p class="note">Measured metric: {result.observed:.5g}. '
             f'{"Observation only; no pass/fail threshold." if result.consistent is None else "Threshold: " + threshold + ". Verdict: " + status + "."}</p>'
@@ -192,7 +187,7 @@ margin-top:26px}.paper,.summary-card{scroll-margin-top:20px}pre{white-space:pre-
     return (
         '<!doctype html><html lang="en"><head><meta charset="utf-8">'
         '<meta name="viewport" content="width=device-width,initial-scale=1">'
-        '<title>ChainBench visual report</title><style>' + css + '</style></head><body><main>'
+        '<title>ChainBench visual report</title><style>' + css + INSTANCE_CSS + '</style></head><body><main>'
         '<header class="hero"><h1>ChainBench visual report</h1>'
         '<p>Start with an optimization idea. Run it on a small problem with a known solution. '
         'See how its error changes, and how the observed curve compares with the selected '

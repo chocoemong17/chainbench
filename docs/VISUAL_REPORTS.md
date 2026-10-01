@@ -1,5 +1,24 @@
 # Visual reports
 
+The development `landscape` view uses consistent colors across reordered method
+subsets, equal contour scales, numeric surface axes and visible computation-derived
+settings/early-stop readouts. The original trajectories remain unchanged. See
+[the projection, input and validation contract](LANDSCAPE_CONTEXT.md).
+
+The development Shewchuk reproduction also connects its actual trajectories to
+the source's ellipse-to-circle explanation. A common player updates the circular
+metric paths and normalized adjacent-step directions for all ten starts, with
+raw inner products, undefined pairs and finite-precision limits retained. See
+[the coordinate and source contract](SHEWCHUK_REPRODUCTION.md#which-right-angle).
+
+The development-source [Shewchuk reproduction](SHEWCHUK_REPRODUCTION.md) connects
+equal-scale coordinates, projected 3D objective gaps, energy errors and full numerical
+records. Original-paper setup and added controlled variations have separate labels.
+
+For a guided entry point, use the [review guide](REVIEW_GUIDE.md) and
+[offline tour](OFFLINE_TOUR.md). The tour connects sixteen local HTML pages,
+including the full image protocol, both new geometries and all sampled cases.
+
 The HTML report is the primary human-readable ChainBench output (tracked in issue #34). It is designed to
 answer the question that raw tables do not: **what should I notice about this paper?**
 
@@ -36,6 +55,11 @@ chainbench plot hestenes-stiefel-1952 --output cg.svg
 
 SVG is used so plots stay sharp, inspectable and dependency-free.
 
+Development source after v0.5.0 adds a visible setup caption and full instance
+metadata to standalone SVGs. Learning/report pages show the same setup in an
+adjacent panel, with expandable inputs, method settings and input hash. See
+[CANONICAL_CONTEXT.md](CANONICAL_CONTEXT.md) for fields and validation.
+
 ## Configurable experiments
 
 ```bash
@@ -65,7 +89,9 @@ not be the limit of every consecutive heavy-ball norm ratio.
 
 Overview previews use the same samples as the detailed plots. `report` now defaults
 to HTML; use `--format markdown` in scripts needing the old behavior. `experiment`
-still defaults to JSON. HTML and SVG use no JavaScript, CDNs, web fonts or telemetry.
+still defaults to JSON. Fixed reports and SVG use no JavaScript. New workflow
+pages use optional local scripts for inspection, with a no-JavaScript reading path.
+No generated report needs CDNs, remote fonts or telemetry.
 
 The SVG metadata and HTML `chainbench-evidence` block retain the original floating
 values. Fixed HTML checks that its supplied summaries agree with its plotted default
@@ -86,3 +112,36 @@ not independent external use, endorsements or support-program qualification.
 ## v0.5.0: canonical plot, sampled breadth and geometry are separate
 
 The learning/report pages now identify a one-fixture plot as a **canonical illustration**. Use `chainbench stress <topic>` for many seeded instances and `chainbench landscape` for contour/3D path geometry. These outputs answer different questions and should not be substituted for each other. See [EVIDENCE_LAYERS.md](EVIDENCE_LAYERS.md).
+
+The development `geometry frank-wolfe` page places each recorded iterate and oracle
+on a feasible triangle and projected objective surface. The selected step controls
+both projections; the complete gap/certificate chart remains available below them.
+All twelve cases, static paths and numeric tables work offline. See the [source and
+visual contract](SIMPLEX_GEOMETRY.md), including why the 3D chord is not a surface curve.
+Two linked certificate diagrams also show the affine model at each vertex and the
+resulting optimal-value bracket. They use actual stored values and a fixed scale
+within each case; the full table includes the final certificate. Affine vertex
+values are distinguished from the objective surface heights.
+
+The [proximal view](PROXIMAL_GEOMETRY.md) follows the same computed extrapolation,
+gradient and shrinkage stages in two coordinate views, with every case available.
+The [tight-GD view](GD_TIGHT_CASE.md) resolves the shrinking quadratic centre and
+shows every constant-gradient update without changing the underlying construction.
+
+The [FISTA image protocol](FISTA_DEBLURRING.md) embeds actual 64×64 grayscale PNGs,
+all scalar observations and full-precision selected images. A shared selector changes
+both methods to the same saved iteration. Fixed [0,1] display clipping never changes
+the raw iterates, objective or image RMSE. These two error metrics remain separate.
+Desktop/mobile browser checks compare every displayed pixel to the stored arrays.
+
+The README preview is generated from the full JSON record by
+`scripts/render_readme_image.py`; its metadata retains settings, hashes, endpoint
+values and source permission. It is a static preview of the same computation, not
+an image copied from the paper. Use the full HTML to inspect intermediate snapshots,
+curves, source differences and numerical evidence.
+
+The [heavy-ball counterexample](HEAVY_BALL_COUNTEREXAMPLE.md) keeps signed iterates,
+the actual objective graph and the two-state `(x[k-1],x[k])` plane together. The
+published rational cycle is a source reference; objective gap, gradient norm and
+three-step difference remain distinct quantities. Its nine cases include every
+declared added start, and the last selected point explicitly has no next update.

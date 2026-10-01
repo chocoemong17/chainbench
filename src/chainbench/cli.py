@@ -6,8 +6,16 @@ import random
 from pathlib import Path
 
 from . import __version__
+from .adam_counterexample import run_adam_counterexample
+from .adam_counterexample_views import adam_counterexample_html
+from .admm_geometry import run_admm_geometry
+from .admm_views import admm_html
 from .case_studies import case_html, gd_tight_case
+from .cg_spectrum import run_cg_spectrum
+from .cg_spectrum_views import cg_spectrum_html
 from .checks import CHECKS, CheckResult, run_all, run_check
+from .deblur_views import deblur_html
+from .deblurring import run_deblurring
 from .experiment_reporting import render_experiment
 from .experiments import (
     MAX_CONFIG_BYTES,
@@ -17,13 +25,31 @@ from .experiments import (
     preset_config,
     run_experiment,
 )
+from .fista_backtracking import run_fista_backtracking
+from .fista_backtracking_views import fista_backtracking_html
+from .fw_sparsity import run_fw_sparsity
+from .fw_sparsity_views import fw_sparsity_html
+from .heavy_ball_cycle import run_heavy_ball_cycle
+from .heavy_ball_views import heavy_ball_cycle_html
+from .kaczmarz import run_kaczmarz
+from .kaczmarz_views import kaczmarz_html
 from .landscape import METHODS as LANDSCAPE_METHODS
 from .landscape import landscape_html, run_landscape
 from .learning import learning_html
+from .nonuniform_sampling import run_nonuniform_sampling
+from .nonuniform_views import nonuniform_html
+from .proximal_geometry import run_proximal_geometry
+from .proximal_views import proximal_html
 from .reporting import render_json, render_report, result_status
+from .reproduction_views import reproduction_html
+from .reproductions import run_reproduction
+from .simplex_geometry import run_simplex_geometry, simplex_html
 from .stress import TOPICS as STRESS_TOPICS
-from .stress import run_stress, stress_html
+from .stress import run_stress, run_stress_case, stress_case_html, stress_html
+from .tour import build_tour
 from .visuals import render_check_svg
+from .wavelet_deblurring import run_wavelet_deblurring
+from .wavelet_views import wavelet_html
 from .workflows import (
     MAX_REPORT_BYTES,
     PARAMETERS,
@@ -68,6 +94,9 @@ def _welcome() -> str:
 See what classic optimization results are saying, not just their raw numbers.
 
 Start here:
+  chainbench tour --lang ko --output tour
+      Generate a guided offline folder; open tour/index.html in a browser.
+
   chainbench learn --lang ko --output learn.html
       Read each method's question, assumptions, recurrence and plot.
 
@@ -233,6 +262,11 @@ def main(argv: list[str] | None = None) -> int:
     learn.add_argument("--output", type=Path)
     learn.add_argument("--force", action="store_true")
 
+    tour = sub.add_parser('tour', help='export a guided offline folder using all existing evidence layers')
+    tour.add_argument('--output', type=Path, required=True)
+    tour.add_argument('--lang', choices=['en', 'ko'], default='en')
+    tour.add_argument('--extended', action='store_true', help='include noisy images, sparsity, randomized sampling, CG spectra and the Adam counterexample; index reports generated size')
+
     sweep = sub.add_parser("sweep", help="vary one supported setting with a shared work budget")
     sweep.add_argument("--preset", choices=PRESETS, required=True)
     sweep.add_argument("--parameter", choices=PARAMETERS, required=True)
@@ -265,6 +299,14 @@ def main(argv: list[str] | None = None) -> int:
     stress.add_argument("--output", type=Path)
     stress.add_argument("--force", action="store_true")
 
+    stress_case = sub.add_parser("stress-case", help="inspect one versioned seeded stress instance")
+    stress_case.add_argument("topic", choices=STRESS_TOPICS)
+    stress_case.add_argument("--seed", type=int, default=0)
+    stress_case.add_argument("--lang", choices=["en", "ko"], default="en")
+    stress_case.add_argument("--format", choices=["html", "json"], default="html")
+    stress_case.add_argument("--output", type=Path)
+    stress_case.add_argument("--force", action="store_true")
+
     landscape = sub.add_parser(
         "landscape", help="compare quadratic methods on contour and 3D surface views"
     )
@@ -279,12 +321,31 @@ def main(argv: list[str] | None = None) -> int:
     landscape.add_argument("--output", type=Path)
     landscape.add_argument("--force", action="store_true")
 
-    case = sub.add_parser("case-study", help="reproduce a specific public tight GD example")
-    case.add_argument("name", choices=["gd-tight"])
-    case.add_argument("--horizon", type=int, default=20)
-    case.add_argument("--L", type=float, default=1.)
-    case.add_argument("--R", type=float, default=1.)
-    case.add_argument("--h", type=float, default=1.)
+    reproduce = sub.add_parser("reproduce", help="recompute a published example or declared experiment protocol")
+    reproduce.add_argument("name", choices=["shewchuk-1994", "fista-deblurring", "fista-wavelet", "lessard-2016", "kaczmarz-sampling", "reddi-2018"])
+    reproduce.add_argument("--steps", type=int, help="default: Shewchuk 12, noiseless FISTA 10000, noisy wavelet 200, Lessard 50, Kaczmarz sampling 15000, Reddi 3000")
+    reproduce.add_argument("--seed", type=int, help="fista-wavelet only: declared PCG64 noise seed (default 0)")
+    reproduce.add_argument("--lang", choices=["en", "ko"], default="en")
+    reproduce.add_argument("--format", choices=["html", "json"], default="html")
+    reproduce.add_argument("--output", type=Path)
+    reproduce.add_argument("--force", action="store_true")
+
+    geometry = sub.add_parser("geometry", help="inspect recorded oracle, proximal and splitting updates")
+    geometry.add_argument("name", choices=["frank-wolfe", "ista-fista", "admm-lasso", "fista-backtracking"])
+    geometry.add_argument("--steps", type=int, help="default: Frank–Wolfe and FISTA variants 18, ADMM 60")
+    geometry.add_argument("--lang", choices=["en", "ko"], default="en")
+    geometry.add_argument("--format", choices=["html", "json"], default="html")
+    geometry.add_argument("--output", type=Path)
+    geometry.add_argument("--force", action="store_true")
+
+    case = sub.add_parser("case-study", help="compute a public construction or controlled illustration")
+    case.add_argument("name", choices=["gd-tight", "fw-sparsity", "kaczmarz-expectation", "cg-spectrum"])
+    case.add_argument("--horizon", type=int, help="gd-tight only (default 20)")
+    case.add_argument("--L", type=float, help="gd-tight only (default 1)")
+    case.add_argument("--R", type=float, help="gd-tight only (default 1)")
+    case.add_argument("--h", type=float, help="gd-tight only (default 1)")
+    case.add_argument("--steps", type=int, help="cg-spectrum (default 32), fw-sparsity or kaczmarz-expectation (default 40)")
+    case.add_argument("--trials", type=int, help="kaczmarz-expectation only (default 64)")
     case.add_argument("--lang", choices=["en", "ko"], default="en")
     case.add_argument("--format", choices=["html", "json"], default="html")
     case.add_argument("--output", type=Path)
@@ -299,6 +360,10 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     try:
+        if args.command == 'tour':
+            manifest = build_tour(args.output, args.lang, extended=args.extended)
+            print(f'Created {len(manifest["artifacts"])} HTML files. Open {args.output / "index.html"}')
+            return 0
         if args.command == "learn":
             _write(args.output, learning_html(args.focus, args.lang), args.force)
             return 0
@@ -323,6 +388,12 @@ def main(argv: list[str] | None = None) -> int:
             text = replay_html(result, args.lang) if args.format == "html" else json.dumps(result, indent=2, allow_nan=False)
             _write(args.output, text, args.force)
             return 0 if result["status"] == "MATCH" else 1
+        if args.command == "stress-case":
+            result = run_stress_case(args.topic, args.seed)
+            text = (stress_case_html(result, args.lang) if args.format == "html"
+                    else json.dumps(result, indent=2, allow_nan=False))
+            _write(args.output, text, args.force)
+            return 0
         if args.command == "stress":
             result = run_stress(args.topic, args.trials, args.seed)
             text = (
@@ -343,11 +414,61 @@ def main(argv: list[str] | None = None) -> int:
             )
             _write(args.output, text, args.force)
             return 0
-        if args.command == "case-study":
-            result = gd_tight_case(args.horizon, args.L, args.R, args.h)
-            text = case_html(result, args.lang) if args.format == "html" else json.dumps(result, indent=2, allow_nan=False)
+        if args.command == "geometry":
+            compute, renderer, default_steps = {
+                'frank-wolfe': (run_simplex_geometry, simplex_html, 18),
+                'ista-fista': (run_proximal_geometry, proximal_html, 18),
+                'admm-lasso': (run_admm_geometry, admm_html, 60),
+                'fista-backtracking': (run_fista_backtracking, fista_backtracking_html, 18),
+            }[args.name]
+            result = compute(args.steps if args.steps is not None else default_steps)
+            text = (renderer(result, args.lang) if args.format == "html"
+                    else json.dumps(result, indent=2, allow_nan=False))
             _write(args.output, text, args.force)
-            return 0 if result["matches_target"] else 1
+            return 0
+        if args.command == "reproduce":
+            if args.seed is not None and args.name != 'fista-wavelet':
+                raise ValueError('--seed is only supported for fista-wavelet')
+            compute, renderer, default_steps = {
+                'shewchuk-1994': (run_reproduction, reproduction_html, 12),
+                'fista-deblurring': (run_deblurring, deblur_html, 10000),
+                'lessard-2016': (run_heavy_ball_cycle, heavy_ball_cycle_html, 50),
+                'fista-wavelet': (run_wavelet_deblurring, wavelet_html, 200),
+                'kaczmarz-sampling': (run_nonuniform_sampling, nonuniform_html, 15000),
+                'reddi-2018': (run_adam_counterexample, adam_counterexample_html, 3000),
+            }[args.name]
+            steps = args.steps if args.steps is not None else default_steps
+            result = (compute(steps, seed=args.seed if args.seed is not None else 0)
+                      if args.name == 'fista-wavelet' else compute(steps))
+            text = (renderer(result, args.lang) if args.format == "html"
+                    else json.dumps(result, indent=2, allow_nan=False))
+            _write(args.output, text, args.force)
+            return 0
+        if args.command == "case-study":
+            if args.trials is not None and args.name != 'kaczmarz-expectation':
+                raise ValueError('--trials is only supported for kaczmarz-expectation')
+            if args.name in ('fw-sparsity', 'kaczmarz-expectation', 'cg-spectrum'):
+                if any(v is not None for v in (args.horizon, args.L, args.R, args.h)):
+                    raise ValueError('--horizon, --L, --R and --h are only supported for gd-tight')
+                steps = args.steps if args.steps is not None else (32 if args.name == 'cg-spectrum' else 40)
+                if args.name == 'fw-sparsity':
+                    result, renderer = run_fw_sparsity(steps), fw_sparsity_html
+                elif args.name == 'cg-spectrum':
+                    result, renderer = run_cg_spectrum(steps), cg_spectrum_html
+                else:
+                    result = run_kaczmarz(steps, args.trials if args.trials is not None else 64)
+                    renderer = kaczmarz_html
+            else:
+                if args.steps is not None:
+                    raise ValueError('--steps is only supported for fw-sparsity, kaczmarz-expectation or cg-spectrum')
+                result = gd_tight_case(args.horizon if args.horizon is not None else 20,
+                                       args.L if args.L is not None else 1.,
+                                       args.R if args.R is not None else 1.,
+                                       args.h if args.h is not None else 1.)
+                renderer = case_html
+            text = renderer(result, args.lang) if args.format == "html" else json.dumps(result, indent=2, allow_nan=False)
+            _write(args.output, text, args.force)
+            return 0 if args.name != 'gd-tight' or result["matches_target"] else 1
 
         if args.command == "plot":
             _write(args.output, render_check_svg(args.name), args.force)

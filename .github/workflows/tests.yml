@@ -17,7 +17,9 @@ jobs:
   test:
     name: test (${{ matrix.os }}, Python ${{ matrix.python }}, ${{ matrix.dependencies }})
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 15
+    # The 25-page tour audits every record and earlier extension manifests.
+    # Allow the full compatibility suite to finish without dropping checks.
+    timeout-minutes: 45
     strategy:
       fail-fast: false
       matrix:
@@ -70,4 +72,74 @@ jobs:
           name: distributions-${{ github.run_id }}
           path: dist/
           if-no-files-found: error
+          retention-days: 3
+
+  reproduction-browser:
+    name: offline interactive reports browser
+    runs-on: ubuntu-latest
+    # Keep every report/round and subproblem audit, with room for browser setup.
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: '3.12'
+      - run: python -m pip install . 'playwright==1.63.0'
+      - run: python -m playwright install --with-deps chromium
+      - run: sudo apt-get install -y fonts-noto-cjk
+      - run: python -m chainbench reproduce shewchuk-1994 --lang ko --output paper.html
+      - run: python scripts/check_reproduction_browser.py --html paper.html --output browser-check
+      - run: python -m chainbench geometry frank-wolfe --lang ko --output simplex.html
+      - run: python scripts/check_simplex_browser.py --html simplex.html --output browser-check/simplex
+      - run: python -m chainbench stress ista-vs-fista --trials 16 --seed 16 --lang ko --output stress.html
+      - run: python scripts/check_stress_browser.py --html stress.html --output browser-check/stress
+      - run: python -m chainbench geometry ista-fista --lang ko --output proximal.html
+      - run: python scripts/check_proximal_browser.py --html proximal.html --output browser-check/proximal
+      - run: python -m chainbench learn --lang ko --output learning.html
+      - run: python -m chainbench learn --focus beck-teboulle-2009 --lang ko --output focused.html
+      - run: python scripts/check_learning_browser.py --html learning.html --focused focused.html --output browser-check/learning
+      - run: python -m chainbench report --output canonical-report.html
+      - run: python -m chainbench plot nesterov-1983 --output canonical.svg
+      - run: python scripts/check_canonical_browser.py --report canonical-report.html --learning focused.html --svg canonical.svg --output browser-check/canonical
+      - run: python -m chainbench case-study gd-tight --horizon 20 --lang ko --output tight.html
+      - run: python -m chainbench case-study gd-tight --horizon 500 --lang ko --output tight-large.html
+      - run: python scripts/check_tight_browser.py --html tight.html tight-large.html --output browser-check/tight
+      - run: python -m chainbench case-study fw-sparsity --lang ko --output sparsity.html
+      - run: python scripts/check_fw_sparsity_browser.py --html sparsity.html --output browser-check/sparsity
+      - run: python -m chainbench case-study kaczmarz-expectation --lang ko --output kaczmarz.html
+      - run: python scripts/check_kaczmarz_browser.py --html kaczmarz.html --output browser-check/kaczmarz
+      - run: python -m chainbench reproduce kaczmarz-sampling --lang ko --output sampling.html
+      - run: python scripts/check_nonuniform_browser.py --html sampling.html --output browser-check/sampling
+      - run: python -m chainbench case-study cg-spectrum --lang ko --output cg-spectrum.html
+      - run: python scripts/check_cg_spectrum_browser.py --html cg-spectrum.html --output browser-check/cg-spectrum
+      - run: python -m chainbench reproduce reddi-2018 --lang ko --output adam.html
+      - run: python scripts/check_adam_counterexample_browser.py --html adam.html --output browser-check/adam
+      - run: python -m chainbench geometry admm-lasso --lang ko --output admm.html
+      - run: python scripts/check_admm_browser.py --html admm.html --output browser-check/admm
+      - run: python scripts/check_admm_browser_mutations.py --html admm.html --output browser-check/admm/mutations.json
+      - run: python -m chainbench geometry fista-backtracking --lang ko --output backtracking.html
+      - run: python scripts/check_fista_backtracking_browser.py --html backtracking.html --output browser-check/backtracking
+      - run: python scripts/check_fista_backtracking_mutations.py --html backtracking.html --output browser-check/backtracking/mutations.json
+      - run: python -m chainbench reproduce fista-deblurring --lang ko --output deblur.html
+      - run: python scripts/check_deblur_browser.py --html deblur.html --output browser-check/deblur
+      - run: python -m chainbench reproduce fista-wavelet --lang ko --output wavelet.html
+      - run: python scripts/check_wavelet_browser.py --html wavelet.html --output browser-check/wavelet
+      - run: python scripts/render_readme_image.py browser-check/deblur/download-1440.json --output browser-check/deblur/readme-preview.svg
+      - run: python -m chainbench reproduce lessard-2016 --lang ko --output heavy-ball.html
+      - run: python scripts/check_heavy_ball_browser.py --html heavy-ball.html --output browser-check/heavy-ball
+      - run: python -m chainbench landscape --lang ko --output landscape.html
+      - run: python -m chainbench landscape --condition-number 10000 --angle 85 --steps 80 --methods proximal-point cg smooth-fista --lang ko --output landscape-extreme.html
+      - run: python scripts/check_landscape_browser.py --html landscape.html landscape-extreme.html --output browser-check/landscape
+      - run: python -m chainbench tour --lang ko --output tour
+      - run: python scripts/check_tour_browser.py --tour tour --output browser-check/tour
+      - run: python -m chainbench tour --extended --lang ko --output tour-extended
+      - run: python scripts/check_tour_browser.py --tour tour-extended --output browser-check/tour-extended
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        if: always()
+        with:
+          name: reproduction-browser-${{ github.run_id }}
+          path: browser-check/
+          if-no-files-found: warn
           retention-days: 3
