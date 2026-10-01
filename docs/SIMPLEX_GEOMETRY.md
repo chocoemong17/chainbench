@@ -146,7 +146,11 @@ floating-point certificate.
 Each transition stores 65 uniformly spaced gamma values together with the
 scheduled gamma and analytic minimizer. The points use the same convex-combination
 arithmetic as the original recurrence; the scheduled point and its objective equal
-the actual next recorded iterate. The final row has `segment: null`, since no next
+the actual next recorded iterate. The scheduled objective reuses that row's stored
+value after checking a direct evaluation at the existing absolute 3e-15 audit
+tolerance. Repeated BLAS evaluations can differ in their final bits, so a second
+evaluation does not replace the recorded observation. The Decimal audit and exact
+identity checks remain unchanged. The final row has `segment: null`, since no next
 update was performed. The raw maximum difference between direct evaluation and
 the quadratic expansion is retained. The value scale stays fixed across a case;
 on a narrow screen the scalar diagram scrolls horizontally to keep labels readable.

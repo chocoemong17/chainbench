@@ -1,15 +1,19 @@
 """Remote-only audit of every exact Frank-Wolfe segment identity."""
 import json
 import platform
+import sys
 
 import numpy as np
 
 from chainbench.simplex_geometry import run_simplex_geometry
+from smoke_workflows import validate_fw_segments
 
 summary = {"python": platform.python_version(), "numpy": np.__version__, "runs": []}
 for steps in (1, 18, 60):
     for repeat in range(3):
         record = run_simplex_geometry(steps)
+        if '--require-clean' in sys.argv:
+            validate_fw_segments(record, required=True)
         faults = []
         maximum_gap_difference = 0.0
         counts = {}
@@ -37,3 +41,5 @@ for steps in (1, 18, 60):
                                 "first_faults": faults})
 np.show_config()
 print("FW_DIAGNOSTIC_JSON=" + json.dumps(summary, allow_nan=False))
+if '--require-clean' in sys.argv:
+    assert all(not run['counts'] for run in summary['runs'])

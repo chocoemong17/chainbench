@@ -30,6 +30,11 @@ The frozen v0.5.0 release remains unchanged. Later commits retain their own CI.
   products, true-residual stopping, exact-start behavior and mathematical bounds.
   Add cancellation, nonfinite-arithmetic and repeated-seed regressions.
   [Diagnosis, numerical changes and limits](docs/CG_ARITHMETIC.md).
+- Preserve the actual recorded next objective in Frank–Wolfe segment views after
+  validating its direct evaluation. A minimum-version BLAS path exposed a
+  last-bit difference from reevaluation. Keep the trajectory, independent Decimal
+  audit and exact stored-record identity checks unchanged; add retention and
+  invalid-value regressions.
 
 - Explain randomized Kaczmarz's conditional expectation through actual orthogonal
   error triangles and all possible row choices from each recorded input point.

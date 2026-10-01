@@ -9,6 +9,7 @@ import pytest
 
 from chainbench._fw_segment import segment_profile
 from chainbench._fw_segment_views import profile_svg
+from chainbench.problems import SimplexQuadraticProblem
 from chainbench.simplex_geometry import run_simplex_geometry, simplex_html, simplex_svg
 
 
@@ -68,6 +69,39 @@ def test_all_stages_include_actual_step_and_final_row_has_no_invented_update(rec
             assert p["parameter"][p["scheduled_index"]] == row["gamma"]
             assert p["points"][p["scheduled_index"]] == nxt["x"]
             assert p["objective"][p["scheduled_index"]] == nxt["gap"]
+
+
+@pytest.mark.parametrize("current,vertex,gamma", [
+    ([0, 0, 1], [1, 0, 0], 1),
+    ([1, 0, 0], [1, 0, 0], 0),  # scheduled point is also the segment minimum
+])
+def test_segment_retains_the_actual_next_value_including_roundoff(current, vertex, gamma):
+    stored = math.nextafter(.39, math.inf)
+    p = segment_profile([.2, .3, .5], current, vertex, gamma, [1, 0, 0],
+                        following_value=stored)
+    assert p['objective'][p['scheduled_index']] == stored
+    assert p['minimum_value'] == p['objective'][p['minimum_index']]
+    assert p['quadratic_roundoff_inf'] == max(
+        abs(a-b) for a, b in zip(p['objective'], p['quadratic']))
+
+
+def test_geometry_passes_stored_objectives_to_every_segment(monkeypatch, checker):
+    original = SimplexQuadraticProblem.gap
+    monkeypatch.setattr(SimplexQuadraticProblem, 'gap',
+                        lambda self, x: math.nextafter(original(self, x), math.inf))
+    result = run_simplex_geometry(3)
+    checker(result, required=True)
+    for case in result['cases']:
+        for row, nxt in zip(case['rows'], case['rows'][1:]):
+            p = row['segment']
+            assert p['objective'][p['scheduled_index']] == nxt['gap']
+
+
+@pytest.mark.parametrize("value", [.4, -.01, float('nan'), float('inf')])
+def test_segment_rejects_incorrect_or_nonfinite_recorded_objective(value):
+    with pytest.raises(ValueError, match='objective'):
+        segment_profile([.2, .3, .5], [0, 0, 1], [1, 0, 0], 1, [1, 0, 0],
+                        following_value=value)
 
 
 @pytest.mark.parametrize("path,value", [
