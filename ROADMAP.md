@@ -1,9 +1,9 @@
 # Roadmap: published examples before algorithm counts
 
-## Current development candidate
+## Current development main
 
-[PR #73](https://github.com/chocoemong17/chainbench/pull/73) consolidates the
-implementation and links its actual cloud checks. The package version remains
+[PR #73](https://github.com/chocoemong17/chainbench/pull/73) integrated the
+implementation into `main` and links its actual cloud checks. The package version remains
 0.5.0, but these development features are not in the frozen v0.5.0 release.
 [Start with the reading guide](docs/REVIEW_GUIDE.md) for a pinned computation
 snapshot, artifact downloads and specific questions to inspect.
@@ -46,16 +46,23 @@ Implemented in the development source:
 The first consolidated remote run found 12 Windows UTF-8 fixture-read failures;
 Linux/macOS, clean wheel/sdist installation and browser checks passed. The repair
 and its follow-up run are recorded in [issue #74](https://github.com/chocoemong17/chainbench/issues/74).
-The failure remains part of the record. Read the candidate's current CI status;
-local checks and a successful PDF job do not substitute for full remote validation.
+The failure remains part of the record. The
+[final consolidated candidate passed all eight CI jobs](https://github.com/chocoemong17/chainbench/actions/runs/36880865578),
+including 1,288 tests in each of six compatibility configurations, clean wheel/sdist
+installs and offline browser checks. Later commits have their own CI status.
+
+The cloud PDF packet and updated reading route from
+[issue #75](https://github.com/chocoemong17/chainbench/issues/75) are implemented.
+Archived [PDF](https://github.com/chocoemong17/chainbench/blob/archive/local-reviews-20261001/cloud/33b6243/ChainBench_FISTA_review.pdf)
+and [geometry previews](https://github.com/chocoemong17/chainbench/tree/archive/local-reviews-20261001/cloud/33b6243/browser-gallery)
+are directly readable without installation or Actions sign-in.
 
 ## Next work, in priority order
 
 1. Repair concrete correctness, portability or usability defects found in the
-   current candidate; preserve all declared examples and existing validation.
-2. Make the available explanations easier to inspect and share. The cloud PDF
-   packet and updated reading route are tracked in
-   [issue #75](https://github.com/chocoemong17/chainbench/issues/75).
+   current source; preserve all declared examples and existing validation.
+2. Improve the reading route where actual use reveals a confusing step, missing
+   input explanation or inaccessible comparison.
 3. Use actual reader feedback to choose the next explanation or public experiment.
    Add a paper only with a precise source-to-recurrence mapping, explicit input
    differences, multiple meaningful examples and independent numerical checks.
