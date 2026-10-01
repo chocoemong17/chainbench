@@ -1,0 +1,31 @@
+{
+  "source_head": "b857694bbdd4f314bbe2bf2d05629af02d829023",
+  "source_merge": "affc55a2de5ea97be4fa8a7b9d4c1165fd38af2a",
+  "source_tree": "a9bf92a49d9a7af52e51a2f04717efd6fdf9ba2b",
+  "run": 36897340879,
+  "job": 110487530371,
+  "artifact": 11180916799,
+  "archive_bytes": 117205832,
+  "archive_sha256": "32974dd6dbfd5a2b8f59cf200e78f2e85cda1388cab14019bc2fe11bf1aa2cb3",
+  "archive_storage": "memory only; never written to local disk",
+  "files": [
+    {
+      "archive_path": "paths-1440.png",
+      "file": "paths-1440.png",
+      "bytes": 545435,
+      "sha256": "511604add2472408689491d337cd76781b6520d66e0060a82ece9181c8e11b27"
+    },
+    {
+      "archive_path": "cg-spectrum/modes-390.png",
+      "file": "cg-spectrum__modes-390.png",
+      "bytes": 69085,
+      "sha256": "c5a8315ed555a20fb6937dd877994cbfb5f129d1aee544c44c0e26cddd090816"
+    }
+  ],
+  "visually_inspected": true,
+  "inspection_notes": [
+    "Desktop: actual SD/CG coordinate and objective-height paths, metric views, spectral explanation and error plot are legible.",
+    "Mobile: control/readout fits narrow viewport; spectral figures intentionally scroll horizontally; browser job verifies keyboard scrolling and all 18 cases."
+  ],
+  "full_run_outcome": "Seven jobs passed; Intel macOS 1 failed / 1332 passed. All CG regressions passed; the remaining failure compared HTML chart samples with an independent GD rerun using exact equality."
+}

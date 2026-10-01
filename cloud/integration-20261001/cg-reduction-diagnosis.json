@@ -1,0 +1,3575 @@
+{
+  "baseline": {
+    "head": "a776984cf923746d48e301822ee66dc1375fd682",
+    "run": 36896154426,
+    "native_job": 110483545515,
+    "single_thread_job": 110483545161,
+    "native": [
+      {
+        "purpose": "Measure all differences; thresholds are diagnostics, not altered tests",
+        "python": "3.12.10",
+        "numpy": "2.5.3",
+        "system": "Darwin",
+        "machine": "x86_64",
+        "thread_environment": {
+          "OPENBLAS_NUM_THREADS": null,
+          "VECLIB_MAXIMUM_THREADS": null,
+          "OMP_NUM_THREADS": null,
+          "MKL_NUM_THREADS": null,
+          "BLIS_NUM_THREADS": null
+        }
+      },
+      {
+        "comparison": "gd-baseline; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 207384,
+        "changed_floats": 676,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "gd-baseline.repeat1.rows[11].parameters.radius_squared",
+          "a": 28.15142110014726,
+          "b": 28.151421100147264,
+          "absolute": 3.552713678800501e-15,
+          "scaled": 1.2620015402284313e-16,
+          "relative": 1.2620015402284313e-16
+        },
+        "max_scaled": {
+          "path": "gd-baseline.repeat0.rows[23].curve.series[0].values[0]",
+          "a": 1.1247652518030282,
+          "b": 1.1247652518030287,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 3.9482835119432767e-16,
+          "relative": 3.9482835119432767e-16
+        },
+        "max_relative": {
+          "path": "gd-baseline.repeat0.rows[23].curve.series[0].values[0]",
+          "a": 1.1247652518030282,
+          "b": 1.1247652518030287,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 3.9482835119432767e-16,
+          "relative": 3.9482835119432767e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "nesterov-1983; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 207384,
+        "changed_floats": 300,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "nesterov-1983.single_seed11.parameters.radius_squared",
+          "a": 28.15142110014726,
+          "b": 28.151421100147264,
+          "absolute": 3.552713678800501e-15,
+          "scaled": 1.2620015402284313e-16,
+          "relative": 1.2620015402284313e-16
+        },
+        "max_scaled": {
+          "path": "nesterov-1983.repeat2.rows[23].curve.series[0].values[0]",
+          "a": 1.1247652518030287,
+          "b": 1.1247652518030282,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 3.9482835119432767e-16,
+          "relative": 3.9482835119432767e-16
+        },
+        "max_relative": {
+          "path": "nesterov-1983.repeat2.rows[23].curve.series[0].values[0]",
+          "a": 1.1247652518030287,
+          "b": 1.1247652518030282,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 3.9482835119432767e-16,
+          "relative": 3.9482835119432767e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "polyak-1964; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 609480,
+        "changed_floats": 1647,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "polyak-1964.repeat1.rows[7].runs.heavy-ball.gaps[3]",
+          "a": 10.421294348385853,
+          "b": 10.42129434838585,
+          "absolute": 3.552713678800501e-15,
+          "scaled": 3.4090906177607184e-16,
+          "relative": 3.4090906177607184e-16
+        },
+        "max_scaled": {
+          "path": "polyak-1964.single_seed19.runs.heavy-ball.gaps[18]",
+          "a": 1.1082791521026543,
+          "b": 1.108279152102655,
+          "absolute": 6.661338147750939e-16,
+          "scaled": 6.010523734126806e-16,
+          "relative": 6.010523734126806e-16
+        },
+        "max_relative": {
+          "path": "polyak-1964.single_seed19.runs.heavy-ball.gaps[18]",
+          "a": 1.1082791521026543,
+          "b": 1.108279152102655,
+          "absolute": 6.661338147750939e-16,
+          "scaled": 6.010523734126806e-16,
+          "relative": 6.010523734126806e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "hestenes-stiefel-1952; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 139480,
+        "changed_floats": 15633,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "hestenes-stiefel-1952.single_seed7.runs.cg.iterates[20][39]",
+          "a": 0.6510036613279347,
+          "b": 0.6506820906923498,
+          "absolute": 0.0003215706355849113,
+          "scaled": 0.0003215706355849113,
+          "relative": 0.0004939613318440681
+        },
+        "max_scaled": {
+          "path": "hestenes-stiefel-1952.single_seed7.runs.cg.iterates[20][39]",
+          "a": 0.6510036613279347,
+          "b": 0.6506820906923498,
+          "absolute": 0.0003215706355849113,
+          "scaled": 0.0003215706355849113,
+          "relative": 0.0004939613318440681
+        },
+        "max_relative": {
+          "path": "hestenes-stiefel-1952.repeat2.rows[7].runs.cg.iterates[20][9]",
+          "a": 0.00032857532859560716,
+          "b": 0.0002774888315045924,
+          "absolute": 0.00005108649709101477,
+          "scaled": 0.00005108649709101477,
+          "relative": 0.1554787978433076
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 2857,
+          "1e-12/1e-12": 2552,
+          "1e-10/1e-12": 1773,
+          "1e-7/1e-12": 586
+        }
+      },
+      {
+        "comparison": "jaggi-2013; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 129240,
+        "changed_floats": 206,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "jaggi-2013.repeat0.rows[31].curve.series[0].values[2]",
+          "a": 0.2479625560914825,
+          "b": 0.24796255609148243,
+          "absolute": 5.551115123125783e-17,
+          "scaled": 5.551115123125783e-17,
+          "relative": 2.2386908776169306e-16
+        },
+        "max_scaled": {
+          "path": "jaggi-2013.repeat0.rows[31].curve.series[0].values[2]",
+          "a": 0.2479625560914825,
+          "b": 0.24796255609148243,
+          "absolute": 5.551115123125783e-17,
+          "scaled": 5.551115123125783e-17,
+          "relative": 2.2386908776169306e-16
+        },
+        "max_relative": {
+          "path": "jaggi-2013.repeat1.rows[15].curve.series[0].values[37]",
+          "a": 0.0050016671761417605,
+          "b": 0.005001667176141762,
+          "absolute": 1.734723475976807e-18,
+          "scaled": 1.734723475976807e-18,
+          "relative": 3.4682905017181813e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "rockafellar-1976; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 159384,
+        "changed_floats": 174,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "rockafellar-1976.single_seed31.runs.proximal-point.gaps[0]",
+          "a": 13.435960211374715,
+          "b": 13.435960211374717,
+          "absolute": 1.7763568394002505e-15,
+          "scaled": 1.3220914705421716e-16,
+          "relative": 1.3220914705421716e-16
+        },
+        "max_scaled": {
+          "path": "rockafellar-1976.repeat0.rows[3].curve.series[0].values[4]",
+          "a": 0.945399047319671,
+          "b": 0.9453990473196712,
+          "absolute": 2.220446049250313e-16,
+          "scaled": 2.220446049250313e-16,
+          "relative": 2.348686573723091e-16
+        },
+        "max_relative": {
+          "path": "rockafellar-1976.single_seed31.runs.proximal-point.gaps[11]",
+          "a": 0.0011355989375198819,
+          "b": 0.0011355989375198814,
+          "absolute": 4.336808689942018e-19,
+          "scaled": 4.336808689942018e-19,
+          "relative": 3.818961559979524e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "beck-teboulle-2009; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 162072,
+        "changed_floats": 891,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "beck-teboulle-2009.repeat0.rows[11].curve.series[1].values[0]",
+          "a": 127.52457215304598,
+          "b": 127.52457215304601,
+          "absolute": 2.842170943040401e-14,
+          "scaled": 2.228724154925552e-16,
+          "relative": 2.228724154925552e-16
+        },
+        "max_scaled": {
+          "path": "beck-teboulle-2009.repeat0.rows[11].curve.series[1].values[13]",
+          "a": 2.2671035049430395,
+          "b": 2.2671035049430404,
+          "absolute": 8.881784197001252e-16,
+          "scaled": 3.917679178580072e-16,
+          "relative": 3.917679178580072e-16
+        },
+        "max_relative": {
+          "path": "beck-teboulle-2009.repeat0.rows[11].curve.series[1].values[41]",
+          "a": 0.2758779278594829,
+          "b": 0.275877927859483,
+          "absolute": 1.1102230246251565e-16,
+          "scaled": 1.1102230246251565e-16,
+          "relative": 4.0243271117747515e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "ista-vs-fista; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 302545,
+        "changed_floats": 1002,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "ista-vs-fista.repeat0.rows[27].curve.series[1].values[0]",
+          "a": 27.56269685082992,
+          "b": 27.562696850829916,
+          "absolute": 3.552713678800501e-15,
+          "scaled": 1.2889572083703878e-16,
+          "relative": 1.2889572083703878e-16
+        },
+        "max_scaled": {
+          "path": "ista-vs-fista.single_seed3.curve.series[1].values[6]",
+          "a": 1.1866434178517364,
+          "b": 1.1866434178517369,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 3.7423981220409766e-16,
+          "relative": 3.7423981220409766e-16
+        },
+        "max_relative": {
+          "path": "ista-vs-fista.single_seed3.curve.series[1].values[6]",
+          "a": 1.1866434178517364,
+          "b": 1.1866434178517369,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 3.7423981220409766e-16,
+          "relative": 3.7423981220409766e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "gd-baseline; canonical and normalized charts; 10 reruns",
+        "floats": 73690,
+        "changed_floats": 0,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": null,
+        "max_scaled": null,
+        "max_relative": null,
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "nesterov-1983; canonical and normalized charts; 10 reruns",
+        "floats": 73700,
+        "changed_floats": 78,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "nesterov-1983.chart5.series[0].y[1]",
+          "a": 0.3333235125526121,
+          "b": 0.33332351255261217,
+          "absolute": 5.551115123125783e-17,
+          "scaled": 5.551115123125783e-17,
+          "relative": 1.665383603039281e-16
+        },
+        "max_scaled": {
+          "path": "nesterov-1983.chart5.series[0].y[1]",
+          "a": 0.3333235125526121,
+          "b": 0.33332351255261217,
+          "absolute": 5.551115123125783e-17,
+          "scaled": 5.551115123125783e-17,
+          "relative": 1.665383603039281e-16
+        },
+        "max_relative": {
+          "path": "nesterov-1983.normalized5.series[0].y[5]",
+          "a": 0.052467853956253536,
+          "b": 0.05246785395625355,
+          "absolute": 1.3877787807814457e-17,
+          "scaled": 1.3877787807814457e-17,
+          "relative": 2.6450077068876167e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "polyak-1964; canonical and normalized charts; 10 reruns",
+        "floats": 41230,
+        "changed_floats": 0,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": null,
+        "max_scaled": null,
+        "max_relative": null,
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "hestenes-stiefel-1952; canonical and normalized charts; 10 reruns",
+        "floats": 11960,
+        "changed_floats": 507,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "hestenes-stiefel-1952.normalized6.series[0].y[19]",
+          "a": 0.04807909875600201,
+          "b": 0.04807909875111048,
+          "absolute": 4.891531624195977e-12,
+          "scaled": 4.891531624195977e-12,
+          "relative": 1.0173925366238977e-10
+        },
+        "max_scaled": {
+          "path": "hestenes-stiefel-1952.normalized6.series[0].y[19]",
+          "a": 0.04807909875600201,
+          "b": 0.04807909875111048,
+          "absolute": 4.891531624195977e-12,
+          "scaled": 4.891531624195977e-12,
+          "relative": 1.0173925366238977e-10
+        },
+        "max_relative": {
+          "path": "hestenes-stiefel-1952.chart8.instance.runs.cg.true_residual_norm",
+          "a": 2.8339967409955093e-7,
+          "b": 2.833996740567777e-7,
+          "absolute": 4.277320507265164e-17,
+          "scaled": 4.277320507265164e-17,
+          "relative": 1.5092891411592282e-10
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 44,
+          "1e-12/1e-12": 13,
+          "1e-10/1e-12": 1,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "jaggi-2013; canonical and normalized charts; 10 reruns",
+        "floats": 7980,
+        "changed_floats": 141,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "jaggi-2013.normalized0.series[0].y[5]",
+          "a": 0.18634920634920635,
+          "b": 0.18634920634920632,
+          "absolute": 2.7755575615628914e-17,
+          "scaled": 2.7755575615628914e-17,
+          "relative": 1.4894388958983148e-16
+        },
+        "max_scaled": {
+          "path": "jaggi-2013.normalized0.series[0].y[5]",
+          "a": 0.18634920634920635,
+          "b": 0.18634920634920632,
+          "absolute": 2.7755575615628914e-17,
+          "scaled": 2.7755575615628914e-17,
+          "relative": 1.4894388958983148e-16
+        },
+        "max_relative": {
+          "path": "jaggi-2013.normalized0.series[0].y[36]",
+          "a": 0.07586415362731151,
+          "b": 0.07586415362731154,
+          "absolute": 2.7755575615628914e-17,
+          "scaled": 2.7755575615628914e-17,
+          "relative": 3.65858897628784e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "rockafellar-1976; canonical and normalized charts; 10 reruns",
+        "floats": 20140,
+        "changed_floats": 100,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "rockafellar-1976.chart0.instance.constants.radius_squared",
+          "a": 23.88977489671759,
+          "b": 23.889774896717586,
+          "absolute": 3.552713678800501e-15,
+          "scaled": 1.4871273145770149e-16,
+          "relative": 1.4871273145770149e-16
+        },
+        "max_scaled": {
+          "path": "rockafellar-1976.normalized0.series[0].y[17]",
+          "a": 0.9731566824417466,
+          "b": 0.9731566824417468,
+          "absolute": 2.220446049250313e-16,
+          "scaled": 2.220446049250313e-16,
+          "relative": 2.2816942937482514e-16
+        },
+        "max_relative": {
+          "path": "rockafellar-1976.normalized0.series[0].y[17]",
+          "a": 0.9731566824417466,
+          "b": 0.9731566824417468,
+          "absolute": 2.220446049250313e-16,
+          "scaled": 2.220446049250313e-16,
+          "relative": 2.2816942937482514e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "beck-teboulle-2009; canonical and normalized charts; 10 reruns",
+        "floats": 9720,
+        "changed_floats": 204,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "beck-teboulle-2009.chart2.series[0].y[1]",
+          "a": 2.78771700483169,
+          "b": 2.7877170048316904,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 1.593021131916777e-16,
+          "relative": 1.593021131916777e-16
+        },
+        "max_scaled": {
+          "path": "beck-teboulle-2009.chart2.series[0].y[2]",
+          "a": 1.870879638961005,
+          "b": 1.8708796389610054,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 2.373692035564019e-16,
+          "relative": 2.373692035564019e-16
+        },
+        "max_relative": {
+          "path": "beck-teboulle-2009.normalized2.series[0].y[2]",
+          "a": 0.1266615060650291,
+          "b": 0.12666150606502916,
+          "absolute": 5.551115123125783e-17,
+          "scaled": 5.551115123125783e-17,
+          "relative": 4.382637863374047e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "ista-vs-fista; canonical and normalized charts; 10 reruns",
+        "floats": 6570,
+        "changed_floats": 275,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "ista-vs-fista.chart1.series[0].y[2]",
+          "a": 2.7877170048316904,
+          "b": 2.78771700483169,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 1.593021131916777e-16,
+          "relative": 1.593021131916777e-16
+        },
+        "max_scaled": {
+          "path": "ista-vs-fista.chart1.series[1].y[3]",
+          "a": 1.8708796389610054,
+          "b": 1.870879638961005,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 2.373692035564019e-16,
+          "relative": 2.373692035564019e-16
+        },
+        "max_relative": {
+          "path": "ista-vs-fista.chart1.series[1].y[53]",
+          "a": 0.0001312840757894967,
+          "b": 0.00013128407578949676,
+          "absolute": 5.421010862427522e-20,
+          "scaled": 5.421010862427522e-20,
+          "relative": 4.12922194091511e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      }
+    ],
+    "single_thread": [
+      {
+        "purpose": "Measure all differences; thresholds are diagnostics, not altered tests",
+        "python": "3.12.10",
+        "numpy": "2.5.3",
+        "system": "Darwin",
+        "machine": "x86_64",
+        "thread_environment": {
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "BLIS_NUM_THREADS": "1"
+        }
+      },
+      {
+        "comparison": "gd-baseline; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 207384,
+        "changed_floats": 621,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "gd-baseline.repeat1.rows[15].parameters.radius_squared",
+          "a": 25.230866927519475,
+          "b": 25.23086692751947,
+          "absolute": 3.552713678800501e-15,
+          "scaled": 1.408082286275123e-16,
+          "relative": 1.408082286275123e-16
+        },
+        "max_scaled": {
+          "path": "gd-baseline.repeat2.rows[23].runs.gd.gaps[0]",
+          "a": 1.1247652518030282,
+          "b": 1.1247652518030287,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 3.9482835119432767e-16,
+          "relative": 3.9482835119432767e-16
+        },
+        "max_relative": {
+          "path": "gd-baseline.repeat2.rows[23].runs.gd.gaps[0]",
+          "a": 1.1247652518030282,
+          "b": 1.1247652518030287,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 3.9482835119432767e-16,
+          "relative": 3.9482835119432767e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "nesterov-1983; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 207384,
+        "changed_floats": 521,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "nesterov-1983.repeat0.rows[11].parameters.radius_squared",
+          "a": 28.151421100147264,
+          "b": 28.15142110014726,
+          "absolute": 3.552713678800501e-15,
+          "scaled": 1.2620015402284313e-16,
+          "relative": 1.2620015402284313e-16
+        },
+        "max_scaled": {
+          "path": "nesterov-1983.repeat0.rows[23].runs.smooth-fista.gaps[0]",
+          "a": 1.1247652518030282,
+          "b": 1.1247652518030287,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 3.9482835119432767e-16,
+          "relative": 3.9482835119432767e-16
+        },
+        "max_relative": {
+          "path": "nesterov-1983.repeat0.rows[23].runs.smooth-fista.gaps[0]",
+          "a": 1.1247652518030282,
+          "b": 1.1247652518030287,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 3.9482835119432767e-16,
+          "relative": 3.9482835119432767e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "polyak-1964; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 609480,
+        "changed_floats": 1910,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "polyak-1964.single_seed7.runs.heavy-ball.gaps[3]",
+          "a": 10.42129434838585,
+          "b": 10.421294348385853,
+          "absolute": 3.552713678800501e-15,
+          "scaled": 3.4090906177607184e-16,
+          "relative": 3.4090906177607184e-16
+        },
+        "max_scaled": {
+          "path": "polyak-1964.repeat2.rows[19].runs.heavy-ball.gaps[18]",
+          "a": 1.108279152102655,
+          "b": 1.1082791521026543,
+          "absolute": 6.661338147750939e-16,
+          "scaled": 6.010523734126806e-16,
+          "relative": 6.010523734126806e-16
+        },
+        "max_relative": {
+          "path": "polyak-1964.repeat2.rows[19].runs.heavy-ball.gaps[18]",
+          "a": 1.108279152102655,
+          "b": 1.1082791521026543,
+          "absolute": 6.661338147750939e-16,
+          "scaled": 6.010523734126806e-16,
+          "relative": 6.010523734126806e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "hestenes-stiefel-1952; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 139480,
+        "changed_floats": 14627,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "hestenes-stiefel-1952.repeat0.rows[19].runs.cg.iterates[20][39]",
+          "a": 0.17733683983481544,
+          "b": 0.17690506083731936,
+          "absolute": 0.0004317789974960795,
+          "scaled": 0.0004317789974960795,
+          "relative": 0.0024347958263960844
+        },
+        "max_scaled": {
+          "path": "hestenes-stiefel-1952.repeat0.rows[19].runs.cg.iterates[20][39]",
+          "a": 0.17733683983481544,
+          "b": 0.17690506083731936,
+          "absolute": 0.0004317789974960795,
+          "scaled": 0.0004317789974960795,
+          "relative": 0.0024347958263960844
+        },
+        "max_relative": {
+          "path": "hestenes-stiefel-1952.repeat1.rows[7].runs.cg.iterates[20][9]",
+          "a": 0.00030560564016452287,
+          "b": 0.00027748883150458827,
+          "absolute": 0.0000281168086599346,
+          "scaled": 0.0000281168086599346,
+          "relative": 0.09200356591847555
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 2796,
+          "1e-12/1e-12": 2499,
+          "1e-10/1e-12": 1731,
+          "1e-7/1e-12": 436
+        }
+      },
+      {
+        "comparison": "jaggi-2013; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 129240,
+        "changed_floats": 374,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "jaggi-2013.repeat0.rows[23].runs.frank-wolfe.gaps[0]",
+          "a": 0.4824056332710666,
+          "b": 0.4824056332710667,
+          "absolute": 1.1102230246251565e-16,
+          "scaled": 1.1102230246251565e-16,
+          "relative": 2.3014304727269123e-16
+        },
+        "max_scaled": {
+          "path": "jaggi-2013.repeat0.rows[23].runs.frank-wolfe.gaps[0]",
+          "a": 0.4824056332710666,
+          "b": 0.4824056332710667,
+          "absolute": 1.1102230246251565e-16,
+          "scaled": 1.1102230246251565e-16,
+          "relative": 2.3014304727269123e-16
+        },
+        "max_relative": {
+          "path": "jaggi-2013.repeat0.rows[15].runs.frank-wolfe.gaps[37]",
+          "a": 0.005001667176141762,
+          "b": 0.0050016671761417605,
+          "absolute": 1.734723475976807e-18,
+          "scaled": 1.734723475976807e-18,
+          "relative": 3.4682905017181813e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "rockafellar-1976; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 159384,
+        "changed_floats": 177,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "rockafellar-1976.single_seed31.runs.proximal-point.gaps[0]",
+          "a": 13.435960211374717,
+          "b": 13.435960211374715,
+          "absolute": 1.7763568394002505e-15,
+          "scaled": 1.3220914705421716e-16,
+          "relative": 1.3220914705421716e-16
+        },
+        "max_scaled": {
+          "path": "rockafellar-1976.repeat0.rows[3].curve.series[0].values[4]",
+          "a": 0.9453990473196712,
+          "b": 0.945399047319671,
+          "absolute": 2.220446049250313e-16,
+          "scaled": 2.220446049250313e-16,
+          "relative": 2.348686573723091e-16
+        },
+        "max_relative": {
+          "path": "rockafellar-1976.single_seed31.runs.proximal-point.gaps[11]",
+          "a": 0.0011355989375198814,
+          "b": 0.0011355989375198819,
+          "absolute": 4.336808689942018e-19,
+          "scaled": 4.336808689942018e-19,
+          "relative": 3.818961559979524e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "beck-teboulle-2009; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 162072,
+        "changed_floats": 903,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "beck-teboulle-2009.repeat1.rows[11].curve.series[1].values[0]",
+          "a": 127.52457215304598,
+          "b": 127.52457215304601,
+          "absolute": 2.842170943040401e-14,
+          "scaled": 2.228724154925552e-16,
+          "relative": 2.228724154925552e-16
+        },
+        "max_scaled": {
+          "path": "beck-teboulle-2009.repeat1.rows[11].curve.series[1].values[13]",
+          "a": 2.2671035049430395,
+          "b": 2.2671035049430404,
+          "absolute": 8.881784197001252e-16,
+          "scaled": 3.917679178580072e-16,
+          "relative": 3.917679178580072e-16
+        },
+        "max_relative": {
+          "path": "beck-teboulle-2009.repeat1.rows[11].curve.series[1].values[41]",
+          "a": 0.2758779278594829,
+          "b": 0.275877927859483,
+          "absolute": 1.1102230246251565e-16,
+          "scaled": 1.1102230246251565e-16,
+          "relative": 4.0243271117747515e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "ista-vs-fista; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 302545,
+        "changed_floats": 1077,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "ista-vs-fista.repeat0.rows[15].runs.fista.gaps[0]",
+          "a": 21.7390109656844,
+          "b": 21.739010965684404,
+          "absolute": 3.552713678800501e-15,
+          "scaled": 1.6342572734373943e-16,
+          "relative": 1.6342572734373943e-16
+        },
+        "max_scaled": {
+          "path": "ista-vs-fista.repeat0.rows[3].runs.fista.gaps[6]",
+          "a": 1.1866434178517364,
+          "b": 1.1866434178517369,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 3.7423981220409766e-16,
+          "relative": 3.7423981220409766e-16
+        },
+        "max_relative": {
+          "path": "ista-vs-fista.repeat0.rows[3].runs.fista.gaps[6]",
+          "a": 1.1866434178517364,
+          "b": 1.1866434178517369,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 3.7423981220409766e-16,
+          "relative": 3.7423981220409766e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "gd-baseline; canonical and normalized charts; 10 reruns",
+        "floats": 73690,
+        "changed_floats": 230,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "gd-baseline.chart2.series[0].y[1]",
+          "a": 0.33332351255261217,
+          "b": 0.3333235125526121,
+          "absolute": 5.551115123125783e-17,
+          "scaled": 5.551115123125783e-17,
+          "relative": 1.665383603039281e-16
+        },
+        "max_scaled": {
+          "path": "gd-baseline.chart2.series[0].y[1]",
+          "a": 0.33332351255261217,
+          "b": 0.3333235125526121,
+          "absolute": 5.551115123125783e-17,
+          "scaled": 5.551115123125783e-17,
+          "relative": 1.665383603039281e-16
+        },
+        "max_relative": {
+          "path": "gd-baseline.normalized2.series[0].y[13]",
+          "a": 0.04113639672199571,
+          "b": 0.041136396721995726,
+          "absolute": 1.3877787807814457e-17,
+          "scaled": 1.3877787807814457e-17,
+          "relative": 3.373603162572081e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "nesterov-1983; canonical and normalized charts; 10 reruns",
+        "floats": 73700,
+        "changed_floats": 312,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "nesterov-1983.chart1.series[0].y[1]",
+          "a": 0.3333235125526121,
+          "b": 0.33332351255261217,
+          "absolute": 5.551115123125783e-17,
+          "scaled": 5.551115123125783e-17,
+          "relative": 1.665383603039281e-16
+        },
+        "max_scaled": {
+          "path": "nesterov-1983.chart1.series[0].y[1]",
+          "a": 0.3333235125526121,
+          "b": 0.33332351255261217,
+          "absolute": 5.551115123125783e-17,
+          "scaled": 5.551115123125783e-17,
+          "relative": 1.665383603039281e-16
+        },
+        "max_relative": {
+          "path": "nesterov-1983.normalized1.series[0].y[5]",
+          "a": 0.052467853956253536,
+          "b": 0.05246785395625355,
+          "absolute": 1.3877787807814457e-17,
+          "scaled": 1.3877787807814457e-17,
+          "relative": 2.6450077068876167e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "polyak-1964; canonical and normalized charts; 10 reruns",
+        "floats": 41230,
+        "changed_floats": 130,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "polyak-1964.chart0.series[0].y[12]",
+          "a": 0.7137089554327751,
+          "b": 0.7137089554327755,
+          "absolute": 3.3306690738754696e-16,
+          "scaled": 3.3306690738754696e-16,
+          "relative": 4.666704892130482e-16
+        },
+        "max_scaled": {
+          "path": "polyak-1964.chart0.series[0].y[12]",
+          "a": 0.7137089554327751,
+          "b": 0.7137089554327755,
+          "absolute": 3.3306690738754696e-16,
+          "scaled": 3.3306690738754696e-16,
+          "relative": 4.666704892130482e-16
+        },
+        "max_relative": {
+          "path": "polyak-1964.chart0.series[0].y[12]",
+          "a": 0.7137089554327751,
+          "b": 0.7137089554327755,
+          "absolute": 3.3306690738754696e-16,
+          "scaled": 3.3306690738754696e-16,
+          "relative": 4.666704892130482e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "hestenes-stiefel-1952; canonical and normalized charts; 10 reruns",
+        "floats": 11960,
+        "changed_floats": 447,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "hestenes-stiefel-1952.normalized9.series[0].y[18]",
+          "a": 0.06343716407421103,
+          "b": 0.06343716407736275,
+          "absolute": 3.151715000093702e-12,
+          "scaled": 3.151715000093702e-12,
+          "relative": 4.968246998321252e-11
+        },
+        "max_scaled": {
+          "path": "hestenes-stiefel-1952.normalized9.series[0].y[18]",
+          "a": 0.06343716407421103,
+          "b": 0.06343716407736275,
+          "absolute": 3.151715000093702e-12,
+          "scaled": 3.151715000093702e-12,
+          "relative": 4.968246998321252e-11
+        },
+        "max_relative": {
+          "path": "hestenes-stiefel-1952.chart7.instance.runs.cg.true_residual_norm",
+          "a": 2.8339967409955093e-7,
+          "b": 2.833996740812042e-7,
+          "absolute": 1.8346733637528145e-17,
+          "scaled": 1.8346733637528145e-17,
+          "relative": 6.473801953309027e-11
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 41,
+          "1e-12/1e-12": 11,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "jaggi-2013; canonical and normalized charts; 10 reruns",
+        "floats": 7980,
+        "changed_floats": 235,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "jaggi-2013.normalized0.series[0].y[5]",
+          "a": 0.18634920634920632,
+          "b": 0.18634920634920635,
+          "absolute": 2.7755575615628914e-17,
+          "scaled": 2.7755575615628914e-17,
+          "relative": 1.4894388958983148e-16
+        },
+        "max_scaled": {
+          "path": "jaggi-2013.normalized0.series[0].y[5]",
+          "a": 0.18634920634920632,
+          "b": 0.18634920634920635,
+          "absolute": 2.7755575615628914e-17,
+          "scaled": 2.7755575615628914e-17,
+          "relative": 1.4894388958983148e-16
+        },
+        "max_relative": {
+          "path": "jaggi-2013.normalized0.series[0].y[36]",
+          "a": 0.07586415362731154,
+          "b": 0.07586415362731151,
+          "absolute": 2.7755575615628914e-17,
+          "scaled": 2.7755575615628914e-17,
+          "relative": 3.65858897628784e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "rockafellar-1976; canonical and normalized charts; 10 reruns",
+        "floats": 20140,
+        "changed_floats": 70,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "rockafellar-1976.chart0.instance.constants.radius_squared",
+          "a": 23.889774896717586,
+          "b": 23.88977489671759,
+          "absolute": 3.552713678800501e-15,
+          "scaled": 1.4871273145770149e-16,
+          "relative": 1.4871273145770149e-16
+        },
+        "max_scaled": {
+          "path": "rockafellar-1976.normalized0.series[0].y[17]",
+          "a": 0.9731566824417468,
+          "b": 0.9731566824417466,
+          "absolute": 2.220446049250313e-16,
+          "scaled": 2.220446049250313e-16,
+          "relative": 2.2816942937482514e-16
+        },
+        "max_relative": {
+          "path": "rockafellar-1976.normalized0.series[0].y[17]",
+          "a": 0.9731566824417468,
+          "b": 0.9731566824417466,
+          "absolute": 2.220446049250313e-16,
+          "scaled": 2.220446049250313e-16,
+          "relative": 2.2816942937482514e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "beck-teboulle-2009; canonical and normalized charts; 10 reruns",
+        "floats": 9720,
+        "changed_floats": 51,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "beck-teboulle-2009.chart2.series[0].y[1]",
+          "a": 2.7877170048316904,
+          "b": 2.78771700483169,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 1.593021131916777e-16,
+          "relative": 1.593021131916777e-16
+        },
+        "max_scaled": {
+          "path": "beck-teboulle-2009.chart2.series[0].y[2]",
+          "a": 1.8708796389610054,
+          "b": 1.870879638961005,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 2.373692035564019e-16,
+          "relative": 2.373692035564019e-16
+        },
+        "max_relative": {
+          "path": "beck-teboulle-2009.normalized2.series[0].y[2]",
+          "a": 0.12666150606502916,
+          "b": 0.1266615060650291,
+          "absolute": 5.551115123125783e-17,
+          "scaled": 5.551115123125783e-17,
+          "relative": 4.382637863374047e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "ista-vs-fista; canonical and normalized charts; 10 reruns",
+        "floats": 6570,
+        "changed_floats": 165,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "ista-vs-fista.chart0.series[0].y[2]",
+          "a": 2.78771700483169,
+          "b": 2.7877170048316904,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 1.593021131916777e-16,
+          "relative": 1.593021131916777e-16
+        },
+        "max_scaled": {
+          "path": "ista-vs-fista.chart0.series[1].y[3]",
+          "a": 1.870879638961005,
+          "b": 1.8708796389610054,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 2.373692035564019e-16,
+          "relative": 2.373692035564019e-16
+        },
+        "max_relative": {
+          "path": "ista-vs-fista.chart0.series[1].y[53]",
+          "a": 0.00013128407578949676,
+          "b": 0.0001312840757894967,
+          "absolute": 5.421010862427522e-20,
+          "scaled": 5.421010862427522e-20,
+          "relative": 4.12922194091511e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      }
+    ]
+  },
+  "full_compensated_probe": {
+    "head": "55f7dff6098456bb16eea99cd32abf53f552d95b",
+    "run": 36896610957,
+    "native": [
+      {
+        "purpose": "Measure all differences; thresholds are diagnostics, not altered tests",
+        "python": "3.12.10",
+        "numpy": "2.5.3",
+        "system": "Darwin",
+        "machine": "x86_64",
+        "thread_environment": {
+          "OPENBLAS_NUM_THREADS": null,
+          "VECLIB_MAXIMUM_THREADS": null,
+          "OMP_NUM_THREADS": null,
+          "MKL_NUM_THREADS": null,
+          "BLIS_NUM_THREADS": null
+        }
+      },
+      {
+        "comparison": "gd-baseline; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 207384,
+        "changed_floats": 549,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "gd-baseline.repeat0.rows[15].parameters.radius_squared",
+          "a": 25.230866927519475,
+          "b": 25.23086692751947,
+          "absolute": 3.552713678800501e-15,
+          "scaled": 1.408082286275123e-16,
+          "relative": 1.408082286275123e-16
+        },
+        "max_scaled": {
+          "path": "gd-baseline.repeat0.rows[23].runs.gd.gaps[0]",
+          "a": 1.1247652518030282,
+          "b": 1.1247652518030287,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 3.9482835119432767e-16,
+          "relative": 3.9482835119432767e-16
+        },
+        "max_relative": {
+          "path": "gd-baseline.repeat0.rows[23].runs.gd.gaps[0]",
+          "a": 1.1247652518030282,
+          "b": 1.1247652518030287,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 3.9482835119432767e-16,
+          "relative": 3.9482835119432767e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "nesterov-1983; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 207384,
+        "changed_floats": 547,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "nesterov-1983.repeat0.rows[15].parameters.radius_squared",
+          "a": 25.23086692751947,
+          "b": 25.230866927519475,
+          "absolute": 3.552713678800501e-15,
+          "scaled": 1.408082286275123e-16,
+          "relative": 1.408082286275123e-16
+        },
+        "max_scaled": {
+          "path": "nesterov-1983.repeat0.rows[23].runs.smooth-fista.gaps[0]",
+          "a": 1.1247652518030287,
+          "b": 1.1247652518030282,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 3.9482835119432767e-16,
+          "relative": 3.9482835119432767e-16
+        },
+        "max_relative": {
+          "path": "nesterov-1983.repeat0.rows[11].runs.smooth-fista.gaps[39]",
+          "a": 0.001089067415104295,
+          "b": 0.0010890674151042955,
+          "absolute": 4.336808689942018e-19,
+          "scaled": 4.336808689942018e-19,
+          "relative": 3.9821306099096713e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "polyak-1964; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 609480,
+        "changed_floats": 2384,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "polyak-1964.repeat0.rows[7].runs.heavy-ball.gaps[3]",
+          "a": 10.42129434838585,
+          "b": 10.421294348385853,
+          "absolute": 3.552713678800501e-15,
+          "scaled": 3.4090906177607184e-16,
+          "relative": 3.4090906177607184e-16
+        },
+        "max_scaled": {
+          "path": "polyak-1964.repeat0.rows[19].runs.heavy-ball.gaps[18]",
+          "a": 1.1082791521026543,
+          "b": 1.108279152102655,
+          "absolute": 6.661338147750939e-16,
+          "scaled": 6.010523734126806e-16,
+          "relative": 6.010523734126806e-16
+        },
+        "max_relative": {
+          "path": "polyak-1964.repeat0.rows[19].runs.heavy-ball.gaps[18]",
+          "a": 1.1082791521026543,
+          "b": 1.108279152102655,
+          "absolute": 6.661338147750939e-16,
+          "scaled": 6.010523734126806e-16,
+          "relative": 6.010523734126806e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "hestenes-stiefel-1952; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 139480,
+        "changed_floats": 253,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "hestenes-stiefel-1952.repeat0.rows[31].runs.cg.gaps[0]",
+          "a": 13.435960211374715,
+          "b": 13.435960211374717,
+          "absolute": 1.7763568394002505e-15,
+          "scaled": 1.3220914705421716e-16,
+          "relative": 1.3220914705421716e-16
+        },
+        "max_scaled": {
+          "path": "hestenes-stiefel-1952.repeat1.rows[11].curve.series[1].values[2]",
+          "a": 1.8234910732615826,
+          "b": 1.823491073261583,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 2.4353791272240424e-16,
+          "relative": 2.4353791272240424e-16
+        },
+        "max_relative": {
+          "path": "hestenes-stiefel-1952.repeat1.rows[11].curve.series[1].values[11]",
+          "a": 0.16217932634703225,
+          "b": 0.1621793263470323,
+          "absolute": 5.551115123125783e-17,
+          "scaled": 5.551115123125783e-17,
+          "relative": 3.4228253675486807e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "jaggi-2013; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 129240,
+        "changed_floats": 342,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "jaggi-2013.repeat1.rows[23].runs.frank-wolfe.gaps[0]",
+          "a": 0.4824056332710666,
+          "b": 0.4824056332710667,
+          "absolute": 1.1102230246251565e-16,
+          "scaled": 1.1102230246251565e-16,
+          "relative": 2.3014304727269123e-16
+        },
+        "max_scaled": {
+          "path": "jaggi-2013.repeat1.rows[23].runs.frank-wolfe.gaps[0]",
+          "a": 0.4824056332710666,
+          "b": 0.4824056332710667,
+          "absolute": 1.1102230246251565e-16,
+          "scaled": 1.1102230246251565e-16,
+          "relative": 2.3014304727269123e-16
+        },
+        "max_relative": {
+          "path": "jaggi-2013.repeat0.rows[15].runs.frank-wolfe.gaps[37]",
+          "a": 0.0050016671761417605,
+          "b": 0.005001667176141762,
+          "absolute": 1.734723475976807e-18,
+          "scaled": 1.734723475976807e-18,
+          "relative": 3.4682905017181813e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "rockafellar-1976; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 159384,
+        "changed_floats": 272,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "rockafellar-1976.repeat0.rows[31].runs.proximal-point.gaps[0]",
+          "a": 13.435960211374715,
+          "b": 13.435960211374717,
+          "absolute": 1.7763568394002505e-15,
+          "scaled": 1.3220914705421716e-16,
+          "relative": 1.3220914705421716e-16
+        },
+        "max_scaled": {
+          "path": "rockafellar-1976.repeat0.rows[11].runs.proximal-point.gaps[6]",
+          "a": 0.845578664214135,
+          "b": 0.8455786642141347,
+          "absolute": 2.220446049250313e-16,
+          "scaled": 2.220446049250313e-16,
+          "relative": 2.625948528767521e-16
+        },
+        "max_relative": {
+          "path": "rockafellar-1976.repeat0.rows[31].runs.proximal-point.gaps[11]",
+          "a": 0.0011355989375198819,
+          "b": 0.0011355989375198814,
+          "absolute": 4.336808689942018e-19,
+          "scaled": 4.336808689942018e-19,
+          "relative": 3.818961559979524e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "beck-teboulle-2009; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 162072,
+        "changed_floats": 186,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "beck-teboulle-2009.single_seed11.curve.series[1].values[0]",
+          "a": 127.52457215304601,
+          "b": 127.52457215304598,
+          "absolute": 2.842170943040401e-14,
+          "scaled": 2.228724154925552e-16,
+          "relative": 2.228724154925552e-16
+        },
+        "max_scaled": {
+          "path": "beck-teboulle-2009.single_seed11.curve.series[1].values[13]",
+          "a": 2.2671035049430404,
+          "b": 2.2671035049430395,
+          "absolute": 8.881784197001252e-16,
+          "scaled": 3.917679178580072e-16,
+          "relative": 3.917679178580072e-16
+        },
+        "max_relative": {
+          "path": "beck-teboulle-2009.single_seed11.curve.series[1].values[41]",
+          "a": 0.275877927859483,
+          "b": 0.2758779278594829,
+          "absolute": 1.1102230246251565e-16,
+          "scaled": 1.1102230246251565e-16,
+          "relative": 4.0243271117747515e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "ista-vs-fista; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 302545,
+        "changed_floats": 691,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "ista-vs-fista.repeat0.rows[15].runs.ista.gaps[0]",
+          "a": 21.7390109656844,
+          "b": 21.739010965684404,
+          "absolute": 3.552713678800501e-15,
+          "scaled": 1.6342572734373943e-16,
+          "relative": 1.6342572734373943e-16
+        },
+        "max_scaled": {
+          "path": "ista-vs-fista.repeat1.rows[31].runs.fista.gaps[5]",
+          "a": 1.738719367853016,
+          "b": 1.7387193678530164,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 2.5541166565506614e-16,
+          "relative": 2.5541166565506614e-16
+        },
+        "max_relative": {
+          "path": "ista-vs-fista.repeat0.rows[31].runs.ista.gaps[39]",
+          "a": 0.04124884257025058,
+          "b": 0.04124884257025056,
+          "absolute": 1.3877787807814457e-17,
+          "scaled": 1.3877787807814457e-17,
+          "relative": 3.364406597392231e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "gd-baseline; canonical and normalized charts; 10 reruns",
+        "floats": 73690,
+        "changed_floats": 184,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "gd-baseline.chart2.series[0].y[1]",
+          "a": 0.33332351255261217,
+          "b": 0.3333235125526121,
+          "absolute": 5.551115123125783e-17,
+          "scaled": 5.551115123125783e-17,
+          "relative": 1.665383603039281e-16
+        },
+        "max_scaled": {
+          "path": "gd-baseline.chart2.series[0].y[1]",
+          "a": 0.33332351255261217,
+          "b": 0.3333235125526121,
+          "absolute": 5.551115123125783e-17,
+          "scaled": 5.551115123125783e-17,
+          "relative": 1.665383603039281e-16
+        },
+        "max_relative": {
+          "path": "gd-baseline.normalized2.series[0].y[13]",
+          "a": 0.04113639672199571,
+          "b": 0.041136396721995726,
+          "absolute": 1.3877787807814457e-17,
+          "scaled": 1.3877787807814457e-17,
+          "relative": 3.373603162572081e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "nesterov-1983; canonical and normalized charts; 10 reruns",
+        "floats": 73700,
+        "changed_floats": 39,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "nesterov-1983.chart4.series[0].y[1]",
+          "a": 0.33332351255261217,
+          "b": 0.3333235125526121,
+          "absolute": 5.551115123125783e-17,
+          "scaled": 5.551115123125783e-17,
+          "relative": 1.665383603039281e-16
+        },
+        "max_scaled": {
+          "path": "nesterov-1983.chart4.series[0].y[1]",
+          "a": 0.33332351255261217,
+          "b": 0.3333235125526121,
+          "absolute": 5.551115123125783e-17,
+          "scaled": 5.551115123125783e-17,
+          "relative": 1.665383603039281e-16
+        },
+        "max_relative": {
+          "path": "nesterov-1983.normalized4.series[0].y[5]",
+          "a": 0.05246785395625355,
+          "b": 0.052467853956253536,
+          "absolute": 1.3877787807814457e-17,
+          "scaled": 1.3877787807814457e-17,
+          "relative": 2.6450077068876167e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "polyak-1964; canonical and normalized charts; 10 reruns",
+        "floats": 41230,
+        "changed_floats": 0,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": null,
+        "max_scaled": null,
+        "max_relative": null,
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "hestenes-stiefel-1952; canonical and normalized charts; 10 reruns",
+        "floats": 11960,
+        "changed_floats": 179,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "hestenes-stiefel-1952.chart0.instance.f_star",
+          "a": -4.581780124564214,
+          "b": -4.581780124564213,
+          "absolute": 8.881784197001252e-16,
+          "scaled": 1.9385007476424948e-16,
+          "relative": 1.9385007476424948e-16
+        },
+        "max_scaled": {
+          "path": "hestenes-stiefel-1952.chart0.instance.f_star",
+          "a": -4.581780124564214,
+          "b": -4.581780124564213,
+          "absolute": 8.881784197001252e-16,
+          "scaled": 1.9385007476424948e-16,
+          "relative": 1.9385007476424948e-16
+        },
+        "max_relative": {
+          "path": "hestenes-stiefel-1952.normalized4.series[0].y[10]",
+          "a": 0.2526947055794903,
+          "b": 0.2526947055794904,
+          "absolute": 1.1102230246251565e-16,
+          "scaled": 1.1102230246251565e-16,
+          "relative": 4.39353496575698e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "jaggi-2013; canonical and normalized charts; 10 reruns",
+        "floats": 7980,
+        "changed_floats": 282,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "jaggi-2013.normalized0.series[0].y[5]",
+          "a": 0.18634920634920635,
+          "b": 0.18634920634920632,
+          "absolute": 2.7755575615628914e-17,
+          "scaled": 2.7755575615628914e-17,
+          "relative": 1.4894388958983148e-16
+        },
+        "max_scaled": {
+          "path": "jaggi-2013.normalized0.series[0].y[5]",
+          "a": 0.18634920634920635,
+          "b": 0.18634920634920632,
+          "absolute": 2.7755575615628914e-17,
+          "scaled": 2.7755575615628914e-17,
+          "relative": 1.4894388958983148e-16
+        },
+        "max_relative": {
+          "path": "jaggi-2013.normalized0.series[0].y[36]",
+          "a": 0.07586415362731151,
+          "b": 0.07586415362731154,
+          "absolute": 2.7755575615628914e-17,
+          "scaled": 2.7755575615628914e-17,
+          "relative": 3.65858897628784e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "rockafellar-1976; canonical and normalized charts; 10 reruns",
+        "floats": 20140,
+        "changed_floats": 10,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "rockafellar-1976.chart2.instance.constants.radius_squared",
+          "a": 23.88977489671759,
+          "b": 23.889774896717586,
+          "absolute": 3.552713678800501e-15,
+          "scaled": 1.4871273145770149e-16,
+          "relative": 1.4871273145770149e-16
+        },
+        "max_scaled": {
+          "path": "rockafellar-1976.normalized2.series[0].y[17]",
+          "a": 0.9731566824417466,
+          "b": 0.9731566824417468,
+          "absolute": 2.220446049250313e-16,
+          "scaled": 2.220446049250313e-16,
+          "relative": 2.2816942937482514e-16
+        },
+        "max_relative": {
+          "path": "rockafellar-1976.normalized2.series[0].y[17]",
+          "a": 0.9731566824417466,
+          "b": 0.9731566824417468,
+          "absolute": 2.220446049250313e-16,
+          "scaled": 2.220446049250313e-16,
+          "relative": 2.2816942937482514e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "beck-teboulle-2009; canonical and normalized charts; 10 reruns",
+        "floats": 9720,
+        "changed_floats": 51,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "beck-teboulle-2009.chart9.series[0].y[1]",
+          "a": 2.78771700483169,
+          "b": 2.7877170048316904,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 1.593021131916777e-16,
+          "relative": 1.593021131916777e-16
+        },
+        "max_scaled": {
+          "path": "beck-teboulle-2009.chart9.series[0].y[2]",
+          "a": 1.870879638961005,
+          "b": 1.8708796389610054,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 2.373692035564019e-16,
+          "relative": 2.373692035564019e-16
+        },
+        "max_relative": {
+          "path": "beck-teboulle-2009.normalized9.series[0].y[2]",
+          "a": 0.1266615060650291,
+          "b": 0.12666150606502916,
+          "absolute": 5.551115123125783e-17,
+          "scaled": 5.551115123125783e-17,
+          "relative": 4.382637863374047e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "ista-vs-fista; canonical and normalized charts; 10 reruns",
+        "floats": 6570,
+        "changed_floats": 495,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "ista-vs-fista.chart0.series[0].y[2]",
+          "a": 2.7877170048316904,
+          "b": 2.78771700483169,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 1.593021131916777e-16,
+          "relative": 1.593021131916777e-16
+        },
+        "max_scaled": {
+          "path": "ista-vs-fista.chart0.series[1].y[3]",
+          "a": 1.8708796389610054,
+          "b": 1.870879638961005,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 2.373692035564019e-16,
+          "relative": 2.373692035564019e-16
+        },
+        "max_relative": {
+          "path": "ista-vs-fista.chart0.series[1].y[53]",
+          "a": 0.0001312840757894967,
+          "b": 0.00013128407578949676,
+          "absolute": 5.421010862427522e-20,
+          "scaled": 5.421010862427522e-20,
+          "relative": 4.12922194091511e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      }
+    ],
+    "single_thread": [
+      {
+        "purpose": "Measure all differences; thresholds are diagnostics, not altered tests",
+        "python": "3.12.10",
+        "numpy": "2.5.3",
+        "system": "Darwin",
+        "machine": "x86_64",
+        "thread_environment": {
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "BLIS_NUM_THREADS": "1"
+        }
+      },
+      {
+        "comparison": "gd-baseline; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 207384,
+        "changed_floats": 802,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "gd-baseline.repeat0.rows[11].parameters.radius_squared",
+          "a": 28.15142110014726,
+          "b": 28.151421100147264,
+          "absolute": 3.552713678800501e-15,
+          "scaled": 1.2620015402284313e-16,
+          "relative": 1.2620015402284313e-16
+        },
+        "max_scaled": {
+          "path": "gd-baseline.repeat0.rows[23].runs.gd.gaps[0]",
+          "a": 1.1247652518030287,
+          "b": 1.1247652518030282,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 3.9482835119432767e-16,
+          "relative": 3.9482835119432767e-16
+        },
+        "max_relative": {
+          "path": "gd-baseline.repeat0.rows[23].runs.gd.gaps[0]",
+          "a": 1.1247652518030287,
+          "b": 1.1247652518030282,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 3.9482835119432767e-16,
+          "relative": 3.9482835119432767e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "nesterov-1983; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 207384,
+        "changed_floats": 0,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": null,
+        "max_scaled": null,
+        "max_relative": null,
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "polyak-1964; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 609480,
+        "changed_floats": 2308,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "polyak-1964.repeat1.rows[7].runs.heavy-ball.gaps[3]",
+          "a": 10.421294348385853,
+          "b": 10.42129434838585,
+          "absolute": 3.552713678800501e-15,
+          "scaled": 3.4090906177607184e-16,
+          "relative": 3.4090906177607184e-16
+        },
+        "max_scaled": {
+          "path": "polyak-1964.repeat1.rows[19].runs.heavy-ball.gaps[18]",
+          "a": 1.1082791521026543,
+          "b": 1.108279152102655,
+          "absolute": 6.661338147750939e-16,
+          "scaled": 6.010523734126806e-16,
+          "relative": 6.010523734126806e-16
+        },
+        "max_relative": {
+          "path": "polyak-1964.repeat1.rows[19].runs.heavy-ball.gaps[18]",
+          "a": 1.1082791521026543,
+          "b": 1.108279152102655,
+          "absolute": 6.661338147750939e-16,
+          "scaled": 6.010523734126806e-16,
+          "relative": 6.010523734126806e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "hestenes-stiefel-1952; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 139480,
+        "changed_floats": 0,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": null,
+        "max_scaled": null,
+        "max_relative": null,
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "jaggi-2013; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 129240,
+        "changed_floats": 256,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "jaggi-2013.repeat0.rows[23].runs.frank-wolfe.gaps[0]",
+          "a": 0.4824056332710666,
+          "b": 0.4824056332710667,
+          "absolute": 1.1102230246251565e-16,
+          "scaled": 1.1102230246251565e-16,
+          "relative": 2.3014304727269123e-16
+        },
+        "max_scaled": {
+          "path": "jaggi-2013.repeat0.rows[23].runs.frank-wolfe.gaps[0]",
+          "a": 0.4824056332710666,
+          "b": 0.4824056332710667,
+          "absolute": 1.1102230246251565e-16,
+          "scaled": 1.1102230246251565e-16,
+          "relative": 2.3014304727269123e-16
+        },
+        "max_relative": {
+          "path": "jaggi-2013.repeat2.rows[19].runs.frank-wolfe.gaps[8]",
+          "a": 0.054958552623322596,
+          "b": 0.05495855262332258,
+          "absolute": 1.3877787807814457e-17,
+          "scaled": 1.3877787807814457e-17,
+          "relative": 2.525137061547211e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "rockafellar-1976; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 159384,
+        "changed_floats": 221,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "rockafellar-1976.repeat0.rows[31].runs.proximal-point.gaps[0]",
+          "a": 13.435960211374715,
+          "b": 13.435960211374717,
+          "absolute": 1.7763568394002505e-15,
+          "scaled": 1.3220914705421716e-16,
+          "relative": 1.3220914705421716e-16
+        },
+        "max_scaled": {
+          "path": "rockafellar-1976.repeat0.rows[3].curve.series[0].values[4]",
+          "a": 0.9453990473196712,
+          "b": 0.945399047319671,
+          "absolute": 2.220446049250313e-16,
+          "scaled": 2.220446049250313e-16,
+          "relative": 2.348686573723091e-16
+        },
+        "max_relative": {
+          "path": "rockafellar-1976.repeat0.rows[31].runs.proximal-point.gaps[11]",
+          "a": 0.0011355989375198819,
+          "b": 0.0011355989375198814,
+          "absolute": 4.336808689942018e-19,
+          "scaled": 4.336808689942018e-19,
+          "relative": 3.818961559979524e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "beck-teboulle-2009; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 162072,
+        "changed_floats": 433,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "beck-teboulle-2009.repeat0.rows[11].curve.series[1].values[0]",
+          "a": 127.52457215304598,
+          "b": 127.52457215304601,
+          "absolute": 2.842170943040401e-14,
+          "scaled": 2.228724154925552e-16,
+          "relative": 2.228724154925552e-16
+        },
+        "max_scaled": {
+          "path": "beck-teboulle-2009.repeat0.rows[11].curve.series[1].values[13]",
+          "a": 2.2671035049430395,
+          "b": 2.2671035049430404,
+          "absolute": 8.881784197001252e-16,
+          "scaled": 3.917679178580072e-16,
+          "relative": 3.917679178580072e-16
+        },
+        "max_relative": {
+          "path": "beck-teboulle-2009.repeat0.rows[11].curve.series[1].values[41]",
+          "a": 0.2758779278594829,
+          "b": 0.275877927859483,
+          "absolute": 1.1102230246251565e-16,
+          "scaled": 1.1102230246251565e-16,
+          "relative": 4.0243271117747515e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "ista-vs-fista; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 302545,
+        "changed_floats": 996,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "ista-vs-fista.repeat2.rows[15].runs.ista.gaps[0]",
+          "a": 21.7390109656844,
+          "b": 21.739010965684404,
+          "absolute": 3.552713678800501e-15,
+          "scaled": 1.6342572734373943e-16,
+          "relative": 1.6342572734373943e-16
+        },
+        "max_scaled": {
+          "path": "ista-vs-fista.repeat2.rows[3].runs.fista.gaps[6]",
+          "a": 1.1866434178517364,
+          "b": 1.1866434178517369,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 3.7423981220409766e-16,
+          "relative": 3.7423981220409766e-16
+        },
+        "max_relative": {
+          "path": "ista-vs-fista.repeat2.rows[3].runs.fista.gaps[6]",
+          "a": 1.1866434178517364,
+          "b": 1.1866434178517369,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 3.7423981220409766e-16,
+          "relative": 3.7423981220409766e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "gd-baseline; canonical and normalized charts; 10 reruns",
+        "floats": 73690,
+        "changed_floats": 322,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "gd-baseline.chart0.series[0].y[1]",
+          "a": 0.33332351255261217,
+          "b": 0.3333235125526121,
+          "absolute": 5.551115123125783e-17,
+          "scaled": 5.551115123125783e-17,
+          "relative": 1.665383603039281e-16
+        },
+        "max_scaled": {
+          "path": "gd-baseline.chart0.series[0].y[1]",
+          "a": 0.33332351255261217,
+          "b": 0.3333235125526121,
+          "absolute": 5.551115123125783e-17,
+          "scaled": 5.551115123125783e-17,
+          "relative": 1.665383603039281e-16
+        },
+        "max_relative": {
+          "path": "gd-baseline.normalized0.series[0].y[13]",
+          "a": 0.04113639672199571,
+          "b": 0.041136396721995726,
+          "absolute": 1.3877787807814457e-17,
+          "scaled": 1.3877787807814457e-17,
+          "relative": 3.373603162572081e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "nesterov-1983; canonical and normalized charts; 10 reruns",
+        "floats": 73700,
+        "changed_floats": 156,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "nesterov-1983.chart0.series[0].y[1]",
+          "a": 0.3333235125526121,
+          "b": 0.33332351255261217,
+          "absolute": 5.551115123125783e-17,
+          "scaled": 5.551115123125783e-17,
+          "relative": 1.665383603039281e-16
+        },
+        "max_scaled": {
+          "path": "nesterov-1983.chart0.series[0].y[1]",
+          "a": 0.3333235125526121,
+          "b": 0.33332351255261217,
+          "absolute": 5.551115123125783e-17,
+          "scaled": 5.551115123125783e-17,
+          "relative": 1.665383603039281e-16
+        },
+        "max_relative": {
+          "path": "nesterov-1983.normalized0.series[0].y[5]",
+          "a": 0.052467853956253536,
+          "b": 0.05246785395625355,
+          "absolute": 1.3877787807814457e-17,
+          "scaled": 1.3877787807814457e-17,
+          "relative": 2.6450077068876167e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "polyak-1964; canonical and normalized charts; 10 reruns",
+        "floats": 41230,
+        "changed_floats": 104,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "polyak-1964.chart0.series[0].y[12]",
+          "a": 0.7137089554327751,
+          "b": 0.7137089554327755,
+          "absolute": 3.3306690738754696e-16,
+          "scaled": 3.3306690738754696e-16,
+          "relative": 4.666704892130482e-16
+        },
+        "max_scaled": {
+          "path": "polyak-1964.chart0.series[0].y[12]",
+          "a": 0.7137089554327751,
+          "b": 0.7137089554327755,
+          "absolute": 3.3306690738754696e-16,
+          "scaled": 3.3306690738754696e-16,
+          "relative": 4.666704892130482e-16
+        },
+        "max_relative": {
+          "path": "polyak-1964.chart0.series[0].y[12]",
+          "a": 0.7137089554327751,
+          "b": 0.7137089554327755,
+          "absolute": 3.3306690738754696e-16,
+          "scaled": 3.3306690738754696e-16,
+          "relative": 4.666704892130482e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "hestenes-stiefel-1952; canonical and normalized charts; 10 reruns",
+        "floats": 11960,
+        "changed_floats": 308,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "hestenes-stiefel-1952.chart1.series[1].y[0]",
+          "a": 6.0542746053110035,
+          "b": 6.054274605311004,
+          "absolute": 8.881784197001252e-16,
+          "scaled": 1.4670269811035438e-16,
+          "relative": 1.4670269811035438e-16
+        },
+        "max_scaled": {
+          "path": "hestenes-stiefel-1952.chart1.series[0].y[0]",
+          "a": 3.0271373026555017,
+          "b": 3.027137302655502,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 1.4670269811035438e-16,
+          "relative": 1.4670269811035438e-16
+        },
+        "max_relative": {
+          "path": "hestenes-stiefel-1952.normalized1.series[0].y[10]",
+          "a": 0.2526947055794904,
+          "b": 0.2526947055794903,
+          "absolute": 1.1102230246251565e-16,
+          "scaled": 1.1102230246251565e-16,
+          "relative": 4.39353496575698e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "jaggi-2013; canonical and normalized charts; 10 reruns",
+        "floats": 7980,
+        "changed_floats": 141,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "jaggi-2013.normalized1.series[0].y[5]",
+          "a": 0.18634920634920635,
+          "b": 0.18634920634920632,
+          "absolute": 2.7755575615628914e-17,
+          "scaled": 2.7755575615628914e-17,
+          "relative": 1.4894388958983148e-16
+        },
+        "max_scaled": {
+          "path": "jaggi-2013.normalized1.series[0].y[5]",
+          "a": 0.18634920634920635,
+          "b": 0.18634920634920632,
+          "absolute": 2.7755575615628914e-17,
+          "scaled": 2.7755575615628914e-17,
+          "relative": 1.4894388958983148e-16
+        },
+        "max_relative": {
+          "path": "jaggi-2013.normalized1.series[0].y[36]",
+          "a": 0.07586415362731151,
+          "b": 0.07586415362731154,
+          "absolute": 2.7755575615628914e-17,
+          "scaled": 2.7755575615628914e-17,
+          "relative": 3.65858897628784e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "rockafellar-1976; canonical and normalized charts; 10 reruns",
+        "floats": 20140,
+        "changed_floats": 50,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "rockafellar-1976.chart0.instance.constants.radius_squared",
+          "a": 23.88977489671759,
+          "b": 23.889774896717586,
+          "absolute": 3.552713678800501e-15,
+          "scaled": 1.4871273145770149e-16,
+          "relative": 1.4871273145770149e-16
+        },
+        "max_scaled": {
+          "path": "rockafellar-1976.normalized0.series[0].y[17]",
+          "a": 0.9731566824417466,
+          "b": 0.9731566824417468,
+          "absolute": 2.220446049250313e-16,
+          "scaled": 2.220446049250313e-16,
+          "relative": 2.2816942937482514e-16
+        },
+        "max_relative": {
+          "path": "rockafellar-1976.normalized0.series[0].y[17]",
+          "a": 0.9731566824417466,
+          "b": 0.9731566824417468,
+          "absolute": 2.220446049250313e-16,
+          "scaled": 2.220446049250313e-16,
+          "relative": 2.2816942937482514e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "beck-teboulle-2009; canonical and normalized charts; 10 reruns",
+        "floats": 9720,
+        "changed_floats": 306,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "beck-teboulle-2009.chart0.series[0].y[1]",
+          "a": 2.7877170048316904,
+          "b": 2.78771700483169,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 1.593021131916777e-16,
+          "relative": 1.593021131916777e-16
+        },
+        "max_scaled": {
+          "path": "beck-teboulle-2009.chart0.series[0].y[2]",
+          "a": 1.8708796389610054,
+          "b": 1.870879638961005,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 2.373692035564019e-16,
+          "relative": 2.373692035564019e-16
+        },
+        "max_relative": {
+          "path": "beck-teboulle-2009.normalized0.series[0].y[2]",
+          "a": 0.12666150606502916,
+          "b": 0.1266615060650291,
+          "absolute": 5.551115123125783e-17,
+          "scaled": 5.551115123125783e-17,
+          "relative": 4.382637863374047e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "ista-vs-fista; canonical and normalized charts; 10 reruns",
+        "floats": 6570,
+        "changed_floats": 275,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "ista-vs-fista.chart1.series[0].y[2]",
+          "a": 2.78771700483169,
+          "b": 2.7877170048316904,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 1.593021131916777e-16,
+          "relative": 1.593021131916777e-16
+        },
+        "max_scaled": {
+          "path": "ista-vs-fista.chart1.series[1].y[3]",
+          "a": 1.870879638961005,
+          "b": 1.8708796389610054,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 2.373692035564019e-16,
+          "relative": 2.373692035564019e-16
+        },
+        "max_relative": {
+          "path": "ista-vs-fista.chart1.series[1].y[53]",
+          "a": 0.00013128407578949676,
+          "b": 0.0001312840757894967,
+          "absolute": 5.421010862427522e-20,
+          "scaled": 5.421010862427522e-20,
+          "relative": 4.12922194091511e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      }
+    ]
+  },
+  "controlled": {
+    "head": "332a9c8b8f1b8be26e7adb02e5dcb4932a87f8df",
+    "run": 36896839745,
+    "dot_matvec": [
+      {
+        "purpose": "Measure all differences; thresholds are diagnostics, not altered tests",
+        "mode": "compensated-dot-matvec",
+        "python": "3.12.10",
+        "numpy": "2.5.3",
+        "system": "Darwin",
+        "machine": "x86_64",
+        "thread_environment": {
+          "OPENBLAS_NUM_THREADS": null,
+          "VECLIB_MAXIMUM_THREADS": null,
+          "OMP_NUM_THREADS": null,
+          "MKL_NUM_THREADS": null,
+          "BLIS_NUM_THREADS": null
+        }
+      },
+      {
+        "comparison": "gd-baseline; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 207384,
+        "changed_floats": 677,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "gd-baseline.repeat0.rows[11].parameters.radius_squared",
+          "a": 28.151421100147264,
+          "b": 28.15142110014726,
+          "absolute": 3.552713678800501e-15,
+          "scaled": 1.2620015402284313e-16,
+          "relative": 1.2620015402284313e-16
+        },
+        "max_scaled": {
+          "path": "gd-baseline.repeat2.rows[23].runs.gd.gaps[0]",
+          "a": 1.1247652518030287,
+          "b": 1.1247652518030282,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 3.9482835119432767e-16,
+          "relative": 3.9482835119432767e-16
+        },
+        "max_relative": {
+          "path": "gd-baseline.repeat2.rows[23].runs.gd.gaps[0]",
+          "a": 1.1247652518030287,
+          "b": 1.1247652518030282,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 3.9482835119432767e-16,
+          "relative": 3.9482835119432767e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "nesterov-1983; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 207384,
+        "changed_floats": 388,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "nesterov-1983.repeat0.rows[7].parameters.radius_squared",
+          "a": 15.230135302354412,
+          "b": 15.230135302354414,
+          "absolute": 1.7763568394002505e-15,
+          "scaled": 1.1663434395921912e-16,
+          "relative": 1.1663434395921912e-16
+        },
+        "max_scaled": {
+          "path": "nesterov-1983.repeat0.rows[23].curve.series[1].values[1]",
+          "a": 3.975650920333495,
+          "b": 3.975650920333496,
+          "absolute": 8.881784197001252e-16,
+          "scaled": 2.2340452859116233e-16,
+          "relative": 2.2340452859116233e-16
+        },
+        "max_relative": {
+          "path": "nesterov-1983.repeat0.rows[23].curve.series[1].values[25]",
+          "a": 0.04908211012757401,
+          "b": 0.049082110127574026,
+          "absolute": 1.3877787807814457e-17,
+          "scaled": 1.3877787807814457e-17,
+          "relative": 2.8274635649818977e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "polyak-1964; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 609480,
+        "changed_floats": 1980,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "polyak-1964.repeat0.rows[7].runs.heavy-ball.gaps[3]",
+          "a": 10.42129434838585,
+          "b": 10.421294348385853,
+          "absolute": 3.552713678800501e-15,
+          "scaled": 3.4090906177607184e-16,
+          "relative": 3.4090906177607184e-16
+        },
+        "max_scaled": {
+          "path": "polyak-1964.repeat0.rows[19].runs.heavy-ball.gaps[18]",
+          "a": 1.108279152102655,
+          "b": 1.1082791521026543,
+          "absolute": 6.661338147750939e-16,
+          "scaled": 6.010523734126806e-16,
+          "relative": 6.010523734126806e-16
+        },
+        "max_relative": {
+          "path": "polyak-1964.repeat0.rows[19].runs.heavy-ball.gaps[18]",
+          "a": 1.108279152102655,
+          "b": 1.1082791521026543,
+          "absolute": 6.661338147750939e-16,
+          "scaled": 6.010523734126806e-16,
+          "relative": 6.010523734126806e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "hestenes-stiefel-1952; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 139480,
+        "changed_floats": 273,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "hestenes-stiefel-1952.repeat1.rows[31].runs.cg.gaps[0]",
+          "a": 13.435960211374715,
+          "b": 13.435960211374717,
+          "absolute": 1.7763568394002505e-15,
+          "scaled": 1.3220914705421716e-16,
+          "relative": 1.3220914705421716e-16
+        },
+        "max_scaled": {
+          "path": "hestenes-stiefel-1952.repeat0.rows[11].curve.series[1].values[2]",
+          "a": 1.823491073261583,
+          "b": 1.8234910732615826,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 2.4353791272240424e-16,
+          "relative": 2.4353791272240424e-16
+        },
+        "max_relative": {
+          "path": "hestenes-stiefel-1952.repeat1.rows[15].runs.cg.gaps[7]",
+          "a": 0.039291999718934975,
+          "b": 0.03929199971893496,
+          "absolute": 1.3877787807814457e-17,
+          "scaled": 1.3877787807814457e-17,
+          "relative": 3.5319627168598127e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "jaggi-2013; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 129240,
+        "changed_floats": 112,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "jaggi-2013.repeat0.rows[11].runs.frank-wolfe.gaps[5]",
+          "a": 0.09229106747048171,
+          "b": 0.0922910674704817,
+          "absolute": 1.3877787807814457e-17,
+          "scaled": 1.3877787807814457e-17,
+          "relative": 1.5036978321063537e-16
+        },
+        "max_scaled": {
+          "path": "jaggi-2013.repeat0.rows[11].runs.frank-wolfe.gaps[5]",
+          "a": 0.09229106747048171,
+          "b": 0.0922910674704817,
+          "absolute": 1.3877787807814457e-17,
+          "scaled": 1.3877787807814457e-17,
+          "relative": 1.5036978321063537e-16
+        },
+        "max_relative": {
+          "path": "jaggi-2013.repeat0.rows[11].runs.frank-wolfe.gaps[13]",
+          "a": 0.02653687572099525,
+          "b": 0.026536875720995258,
+          "absolute": 6.938893903907228e-18,
+          "scaled": 6.938893903907228e-18,
+          "relative": 2.614811923175027e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "rockafellar-1976; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 159384,
+        "changed_floats": 287,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "rockafellar-1976.repeat0.rows[31].runs.proximal-point.gaps[0]",
+          "a": 13.435960211374717,
+          "b": 13.435960211374715,
+          "absolute": 1.7763568394002505e-15,
+          "scaled": 1.3220914705421716e-16,
+          "relative": 1.3220914705421716e-16
+        },
+        "max_scaled": {
+          "path": "rockafellar-1976.repeat0.selected.median-ranked.metric",
+          "a": 0.990234697819064,
+          "b": 0.9902346978190643,
+          "absolute": 2.220446049250313e-16,
+          "scaled": 2.220446049250313e-16,
+          "relative": 2.2423432082724624e-16
+        },
+        "max_relative": {
+          "path": "rockafellar-1976.repeat0.rows[31].runs.proximal-point.gaps[11]",
+          "a": 0.0011355989375198814,
+          "b": 0.0011355989375198819,
+          "absolute": 4.336808689942018e-19,
+          "scaled": 4.336808689942018e-19,
+          "relative": 3.818961559979524e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "beck-teboulle-2009; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 162072,
+        "changed_floats": 1031,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "beck-teboulle-2009.repeat0.rows[11].curve.series[1].values[0]",
+          "a": 127.52457215304598,
+          "b": 127.52457215304601,
+          "absolute": 2.842170943040401e-14,
+          "scaled": 2.228724154925552e-16,
+          "relative": 2.228724154925552e-16
+        },
+        "max_scaled": {
+          "path": "beck-teboulle-2009.repeat0.rows[11].curve.series[1].values[13]",
+          "a": 2.2671035049430395,
+          "b": 2.2671035049430404,
+          "absolute": 8.881784197001252e-16,
+          "scaled": 3.917679178580072e-16,
+          "relative": 3.917679178580072e-16
+        },
+        "max_relative": {
+          "path": "beck-teboulle-2009.repeat0.rows[11].curve.series[1].values[41]",
+          "a": 0.2758779278594829,
+          "b": 0.275877927859483,
+          "absolute": 1.1102230246251565e-16,
+          "scaled": 1.1102230246251565e-16,
+          "relative": 4.0243271117747515e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "ista-vs-fista; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 302545,
+        "changed_floats": 1221,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "ista-vs-fista.repeat0.rows[15].runs.fista.gaps[0]",
+          "a": 21.7390109656844,
+          "b": 21.739010965684404,
+          "absolute": 3.552713678800501e-15,
+          "scaled": 1.6342572734373943e-16,
+          "relative": 1.6342572734373943e-16
+        },
+        "max_scaled": {
+          "path": "ista-vs-fista.single_seed3.runs.fista.gaps[6]",
+          "a": 1.1866434178517369,
+          "b": 1.1866434178517364,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 3.7423981220409766e-16,
+          "relative": 3.7423981220409766e-16
+        },
+        "max_relative": {
+          "path": "ista-vs-fista.single_seed3.runs.fista.gaps[6]",
+          "a": 1.1866434178517369,
+          "b": 1.1866434178517364,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 3.7423981220409766e-16,
+          "relative": 3.7423981220409766e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "gd-baseline; canonical and normalized charts; 10 reruns",
+        "floats": 73690,
+        "changed_floats": 0,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": null,
+        "max_scaled": null,
+        "max_relative": null,
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "nesterov-1983; canonical and normalized charts; 10 reruns",
+        "floats": 73700,
+        "changed_floats": 39,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "nesterov-1983.chart1.series[0].y[1]",
+          "a": 0.3333235125526121,
+          "b": 0.33332351255261217,
+          "absolute": 5.551115123125783e-17,
+          "scaled": 5.551115123125783e-17,
+          "relative": 1.665383603039281e-16
+        },
+        "max_scaled": {
+          "path": "nesterov-1983.chart1.series[0].y[1]",
+          "a": 0.3333235125526121,
+          "b": 0.33332351255261217,
+          "absolute": 5.551115123125783e-17,
+          "scaled": 5.551115123125783e-17,
+          "relative": 1.665383603039281e-16
+        },
+        "max_relative": {
+          "path": "nesterov-1983.normalized1.series[0].y[5]",
+          "a": 0.052467853956253536,
+          "b": 0.05246785395625355,
+          "absolute": 1.3877787807814457e-17,
+          "scaled": 1.3877787807814457e-17,
+          "relative": 2.6450077068876167e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "polyak-1964; canonical and normalized charts; 10 reruns",
+        "floats": 41230,
+        "changed_floats": 0,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": null,
+        "max_scaled": null,
+        "max_relative": null,
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "hestenes-stiefel-1952; canonical and normalized charts; 10 reruns",
+        "floats": 11960,
+        "changed_floats": 308,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "hestenes-stiefel-1952.chart1.series[1].y[0]",
+          "a": 6.0542746053110035,
+          "b": 6.054274605311004,
+          "absolute": 8.881784197001252e-16,
+          "scaled": 1.4670269811035438e-16,
+          "relative": 1.4670269811035438e-16
+        },
+        "max_scaled": {
+          "path": "hestenes-stiefel-1952.chart1.series[0].y[0]",
+          "a": 3.0271373026555017,
+          "b": 3.027137302655502,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 1.4670269811035438e-16,
+          "relative": 1.4670269811035438e-16
+        },
+        "max_relative": {
+          "path": "hestenes-stiefel-1952.normalized1.series[0].y[10]",
+          "a": 0.2526947055794904,
+          "b": 0.2526947055794903,
+          "absolute": 1.1102230246251565e-16,
+          "scaled": 1.1102230246251565e-16,
+          "relative": 4.39353496575698e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "jaggi-2013; canonical and normalized charts; 10 reruns",
+        "floats": 7980,
+        "changed_floats": 329,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "jaggi-2013.normalized0.series[0].y[5]",
+          "a": 0.18634920634920635,
+          "b": 0.18634920634920632,
+          "absolute": 2.7755575615628914e-17,
+          "scaled": 2.7755575615628914e-17,
+          "relative": 1.4894388958983148e-16
+        },
+        "max_scaled": {
+          "path": "jaggi-2013.normalized0.series[0].y[5]",
+          "a": 0.18634920634920635,
+          "b": 0.18634920634920632,
+          "absolute": 2.7755575615628914e-17,
+          "scaled": 2.7755575615628914e-17,
+          "relative": 1.4894388958983148e-16
+        },
+        "max_relative": {
+          "path": "jaggi-2013.normalized0.series[0].y[36]",
+          "a": 0.07586415362731151,
+          "b": 0.07586415362731154,
+          "absolute": 2.7755575615628914e-17,
+          "scaled": 2.7755575615628914e-17,
+          "relative": 3.65858897628784e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "rockafellar-1976; canonical and normalized charts; 10 reruns",
+        "floats": 20140,
+        "changed_floats": 50,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "rockafellar-1976.chart0.instance.constants.radius_squared",
+          "a": 23.88977489671759,
+          "b": 23.889774896717586,
+          "absolute": 3.552713678800501e-15,
+          "scaled": 1.4871273145770149e-16,
+          "relative": 1.4871273145770149e-16
+        },
+        "max_scaled": {
+          "path": "rockafellar-1976.normalized0.series[0].y[17]",
+          "a": 0.9731566824417466,
+          "b": 0.9731566824417468,
+          "absolute": 2.220446049250313e-16,
+          "scaled": 2.220446049250313e-16,
+          "relative": 2.2816942937482514e-16
+        },
+        "max_relative": {
+          "path": "rockafellar-1976.normalized0.series[0].y[17]",
+          "a": 0.9731566824417466,
+          "b": 0.9731566824417468,
+          "absolute": 2.220446049250313e-16,
+          "scaled": 2.220446049250313e-16,
+          "relative": 2.2816942937482514e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "beck-teboulle-2009; canonical and normalized charts; 10 reruns",
+        "floats": 9720,
+        "changed_floats": 0,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": null,
+        "max_scaled": null,
+        "max_relative": null,
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "ista-vs-fista; canonical and normalized charts; 10 reruns",
+        "floats": 6570,
+        "changed_floats": 440,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "ista-vs-fista.chart0.series[0].y[2]",
+          "a": 2.78771700483169,
+          "b": 2.7877170048316904,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 1.593021131916777e-16,
+          "relative": 1.593021131916777e-16
+        },
+        "max_scaled": {
+          "path": "ista-vs-fista.chart0.series[1].y[3]",
+          "a": 1.870879638961005,
+          "b": 1.8708796389610054,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 2.373692035564019e-16,
+          "relative": 2.373692035564019e-16
+        },
+        "max_relative": {
+          "path": "ista-vs-fista.chart0.series[1].y[53]",
+          "a": 0.00013128407578949676,
+          "b": 0.0001312840757894967,
+          "absolute": 5.421010862427522e-20,
+          "scaled": 5.421010862427522e-20,
+          "relative": 4.12922194091511e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      }
+    ],
+    "dot_only": [
+      {
+        "purpose": "Measure all differences; thresholds are diagnostics, not altered tests",
+        "mode": "compensated-dot",
+        "python": "3.12.10",
+        "numpy": "2.5.3",
+        "system": "Darwin",
+        "machine": "x86_64",
+        "thread_environment": {
+          "OPENBLAS_NUM_THREADS": null,
+          "VECLIB_MAXIMUM_THREADS": null,
+          "OMP_NUM_THREADS": null,
+          "MKL_NUM_THREADS": null,
+          "BLIS_NUM_THREADS": null
+        }
+      },
+      {
+        "comparison": "gd-baseline; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 207384,
+        "changed_floats": 612,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "gd-baseline.repeat0.rows[11].parameters.radius_squared",
+          "a": 28.15142110014726,
+          "b": 28.151421100147264,
+          "absolute": 3.552713678800501e-15,
+          "scaled": 1.2620015402284313e-16,
+          "relative": 1.2620015402284313e-16
+        },
+        "max_scaled": {
+          "path": "gd-baseline.repeat0.rows[23].curve.series[0].values[0]",
+          "a": 1.1247652518030287,
+          "b": 1.1247652518030282,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 3.9482835119432767e-16,
+          "relative": 3.9482835119432767e-16
+        },
+        "max_relative": {
+          "path": "gd-baseline.repeat0.rows[23].curve.series[0].values[0]",
+          "a": 1.1247652518030287,
+          "b": 1.1247652518030282,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 3.9482835119432767e-16,
+          "relative": 3.9482835119432767e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "nesterov-1983; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 207384,
+        "changed_floats": 771,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "nesterov-1983.repeat1.rows[15].curve.series[1].values[0]",
+          "a": 17.21165114385398,
+          "b": 17.211651143853977,
+          "absolute": 3.552713678800501e-15,
+          "scaled": 2.0641329812620105e-16,
+          "relative": 2.0641329812620105e-16
+        },
+        "max_scaled": {
+          "path": "nesterov-1983.repeat0.rows[23].curve.series[0].values[0]",
+          "a": 1.1247652518030287,
+          "b": 1.1247652518030282,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 3.9482835119432767e-16,
+          "relative": 3.9482835119432767e-16
+        },
+        "max_relative": {
+          "path": "nesterov-1983.repeat0.rows[11].curve.series[0].values[39]",
+          "a": 0.0010890674151042955,
+          "b": 0.001089067415104295,
+          "absolute": 4.336808689942018e-19,
+          "scaled": 4.336808689942018e-19,
+          "relative": 3.9821306099096713e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "polyak-1964; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 609480,
+        "changed_floats": 2453,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "polyak-1964.repeat0.rows[7].runs.heavy-ball.gaps[3]",
+          "a": 10.42129434838585,
+          "b": 10.421294348385853,
+          "absolute": 3.552713678800501e-15,
+          "scaled": 3.4090906177607184e-16,
+          "relative": 3.4090906177607184e-16
+        },
+        "max_scaled": {
+          "path": "polyak-1964.single_seed19.runs.heavy-ball.gaps[18]",
+          "a": 1.1082791521026543,
+          "b": 1.108279152102655,
+          "absolute": 6.661338147750939e-16,
+          "scaled": 6.010523734126806e-16,
+          "relative": 6.010523734126806e-16
+        },
+        "max_relative": {
+          "path": "polyak-1964.single_seed19.runs.heavy-ball.gaps[18]",
+          "a": 1.1082791521026543,
+          "b": 1.108279152102655,
+          "absolute": 6.661338147750939e-16,
+          "scaled": 6.010523734126806e-16,
+          "relative": 6.010523734126806e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "hestenes-stiefel-1952; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 139480,
+        "changed_floats": 300,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "hestenes-stiefel-1952.repeat1.rows[31].runs.cg.gaps[0]",
+          "a": 13.435960211374717,
+          "b": 13.435960211374715,
+          "absolute": 1.7763568394002505e-15,
+          "scaled": 1.3220914705421716e-16,
+          "relative": 1.3220914705421716e-16
+        },
+        "max_scaled": {
+          "path": "hestenes-stiefel-1952.repeat1.rows[11].curve.series[1].values[2]",
+          "a": 1.8234910732615826,
+          "b": 1.823491073261583,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 2.4353791272240424e-16,
+          "relative": 2.4353791272240424e-16
+        },
+        "max_relative": {
+          "path": "hestenes-stiefel-1952.repeat0.rows[23].runs.cg.gaps[7]",
+          "a": 0.008314237508429644,
+          "b": 0.00831423750842964,
+          "absolute": 3.469446951953614e-18,
+          "scaled": 3.469446951953614e-18,
+          "relative": 4.17289853511643e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "jaggi-2013; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 129240,
+        "changed_floats": 376,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "jaggi-2013.repeat0.rows[23].curve.series[0].values[0]",
+          "a": 0.4824056332710667,
+          "b": 0.4824056332710666,
+          "absolute": 1.1102230246251565e-16,
+          "scaled": 1.1102230246251565e-16,
+          "relative": 2.3014304727269123e-16
+        },
+        "max_scaled": {
+          "path": "jaggi-2013.repeat0.rows[23].curve.series[0].values[0]",
+          "a": 0.4824056332710667,
+          "b": 0.4824056332710666,
+          "absolute": 1.1102230246251565e-16,
+          "scaled": 1.1102230246251565e-16,
+          "relative": 2.3014304727269123e-16
+        },
+        "max_relative": {
+          "path": "jaggi-2013.repeat0.rows[11].curve.series[0].values[13]",
+          "a": 0.026536875720995258,
+          "b": 0.02653687572099525,
+          "absolute": 6.938893903907228e-18,
+          "scaled": 6.938893903907228e-18,
+          "relative": 2.614811923175027e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "rockafellar-1976; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 159384,
+        "changed_floats": 182,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "rockafellar-1976.single_seed31.runs.proximal-point.gaps[0]",
+          "a": 13.435960211374717,
+          "b": 13.435960211374715,
+          "absolute": 1.7763568394002505e-15,
+          "scaled": 1.3220914705421716e-16,
+          "relative": 1.3220914705421716e-16
+        },
+        "max_scaled": {
+          "path": "rockafellar-1976.repeat0.rows[3].curve.series[0].values[4]",
+          "a": 0.945399047319671,
+          "b": 0.9453990473196712,
+          "absolute": 2.220446049250313e-16,
+          "scaled": 2.220446049250313e-16,
+          "relative": 2.348686573723091e-16
+        },
+        "max_relative": {
+          "path": "rockafellar-1976.single_seed31.runs.proximal-point.gaps[11]",
+          "a": 0.0011355989375198814,
+          "b": 0.0011355989375198819,
+          "absolute": 4.336808689942018e-19,
+          "scaled": 4.336808689942018e-19,
+          "relative": 3.818961559979524e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "beck-teboulle-2009; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 162072,
+        "changed_floats": 559,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "beck-teboulle-2009.single_seed11.curve.series[1].values[0]",
+          "a": 127.52457215304601,
+          "b": 127.52457215304598,
+          "absolute": 2.842170943040401e-14,
+          "scaled": 2.228724154925552e-16,
+          "relative": 2.228724154925552e-16
+        },
+        "max_scaled": {
+          "path": "beck-teboulle-2009.single_seed11.curve.series[1].values[13]",
+          "a": 2.2671035049430404,
+          "b": 2.2671035049430395,
+          "absolute": 8.881784197001252e-16,
+          "scaled": 3.917679178580072e-16,
+          "relative": 3.917679178580072e-16
+        },
+        "max_relative": {
+          "path": "beck-teboulle-2009.single_seed11.curve.series[1].values[41]",
+          "a": 0.275877927859483,
+          "b": 0.2758779278594829,
+          "absolute": 1.1102230246251565e-16,
+          "scaled": 1.1102230246251565e-16,
+          "relative": 4.0243271117747515e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "ista-vs-fista; seeds 0..31; 3 full reruns plus individual cases",
+        "floats": 302545,
+        "changed_floats": 943,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "ista-vs-fista.repeat0.rows[15].curve.series[1].values[0]",
+          "a": 21.7390109656844,
+          "b": 21.739010965684404,
+          "absolute": 3.552713678800501e-15,
+          "scaled": 1.6342572734373943e-16,
+          "relative": 1.6342572734373943e-16
+        },
+        "max_scaled": {
+          "path": "ista-vs-fista.repeat1.rows[3].curve.series[1].values[6]",
+          "a": 1.1866434178517364,
+          "b": 1.1866434178517369,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 3.7423981220409766e-16,
+          "relative": 3.7423981220409766e-16
+        },
+        "max_relative": {
+          "path": "ista-vs-fista.repeat1.rows[3].curve.series[1].values[6]",
+          "a": 1.1866434178517364,
+          "b": 1.1866434178517369,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 3.7423981220409766e-16,
+          "relative": 3.7423981220409766e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "gd-baseline; canonical and normalized charts; 10 reruns",
+        "floats": 73690,
+        "changed_floats": 460,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "gd-baseline.chart0.series[0].y[1]",
+          "a": 0.33332351255261217,
+          "b": 0.3333235125526121,
+          "absolute": 5.551115123125783e-17,
+          "scaled": 5.551115123125783e-17,
+          "relative": 1.665383603039281e-16
+        },
+        "max_scaled": {
+          "path": "gd-baseline.chart0.series[0].y[1]",
+          "a": 0.33332351255261217,
+          "b": 0.3333235125526121,
+          "absolute": 5.551115123125783e-17,
+          "scaled": 5.551115123125783e-17,
+          "relative": 1.665383603039281e-16
+        },
+        "max_relative": {
+          "path": "gd-baseline.normalized0.series[0].y[13]",
+          "a": 0.04113639672199571,
+          "b": 0.041136396721995726,
+          "absolute": 1.3877787807814457e-17,
+          "scaled": 1.3877787807814457e-17,
+          "relative": 3.373603162572081e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "nesterov-1983; canonical and normalized charts; 10 reruns",
+        "floats": 73700,
+        "changed_floats": 273,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "nesterov-1983.chart0.series[0].y[1]",
+          "a": 0.3333235125526121,
+          "b": 0.33332351255261217,
+          "absolute": 5.551115123125783e-17,
+          "scaled": 5.551115123125783e-17,
+          "relative": 1.665383603039281e-16
+        },
+        "max_scaled": {
+          "path": "nesterov-1983.chart0.series[0].y[1]",
+          "a": 0.3333235125526121,
+          "b": 0.33332351255261217,
+          "absolute": 5.551115123125783e-17,
+          "scaled": 5.551115123125783e-17,
+          "relative": 1.665383603039281e-16
+        },
+        "max_relative": {
+          "path": "nesterov-1983.normalized0.series[0].y[5]",
+          "a": 0.052467853956253536,
+          "b": 0.05246785395625355,
+          "absolute": 1.3877787807814457e-17,
+          "scaled": 1.3877787807814457e-17,
+          "relative": 2.6450077068876167e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "polyak-1964; canonical and normalized charts; 10 reruns",
+        "floats": 41230,
+        "changed_floats": 130,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "polyak-1964.chart2.series[0].y[12]",
+          "a": 0.7137089554327751,
+          "b": 0.7137089554327755,
+          "absolute": 3.3306690738754696e-16,
+          "scaled": 3.3306690738754696e-16,
+          "relative": 4.666704892130482e-16
+        },
+        "max_scaled": {
+          "path": "polyak-1964.chart2.series[0].y[12]",
+          "a": 0.7137089554327751,
+          "b": 0.7137089554327755,
+          "absolute": 3.3306690738754696e-16,
+          "scaled": 3.3306690738754696e-16,
+          "relative": 4.666704892130482e-16
+        },
+        "max_relative": {
+          "path": "polyak-1964.chart2.series[0].y[12]",
+          "a": 0.7137089554327751,
+          "b": 0.7137089554327755,
+          "absolute": 3.3306690738754696e-16,
+          "scaled": 3.3306690738754696e-16,
+          "relative": 4.666704892130482e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "hestenes-stiefel-1952; canonical and normalized charts; 10 reruns",
+        "floats": 11960,
+        "changed_floats": 265,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "hestenes-stiefel-1952.chart1.series[1].y[0]",
+          "a": 6.0542746053110035,
+          "b": 6.054274605311004,
+          "absolute": 8.881784197001252e-16,
+          "scaled": 1.4670269811035438e-16,
+          "relative": 1.4670269811035438e-16
+        },
+        "max_scaled": {
+          "path": "hestenes-stiefel-1952.chart8.instance.f_star",
+          "a": -4.581780124564214,
+          "b": -4.581780124564213,
+          "absolute": 8.881784197001252e-16,
+          "scaled": 1.9385007476424948e-16,
+          "relative": 1.9385007476424948e-16
+        },
+        "max_relative": {
+          "path": "hestenes-stiefel-1952.normalized1.series[0].y[10]",
+          "a": 0.2526947055794904,
+          "b": 0.2526947055794903,
+          "absolute": 1.1102230246251565e-16,
+          "scaled": 1.1102230246251565e-16,
+          "relative": 4.39353496575698e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "jaggi-2013; canonical and normalized charts; 10 reruns",
+        "floats": 7980,
+        "changed_floats": 235,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "jaggi-2013.normalized1.series[0].y[5]",
+          "a": 0.18634920634920632,
+          "b": 0.18634920634920635,
+          "absolute": 2.7755575615628914e-17,
+          "scaled": 2.7755575615628914e-17,
+          "relative": 1.4894388958983148e-16
+        },
+        "max_scaled": {
+          "path": "jaggi-2013.normalized1.series[0].y[5]",
+          "a": 0.18634920634920632,
+          "b": 0.18634920634920635,
+          "absolute": 2.7755575615628914e-17,
+          "scaled": 2.7755575615628914e-17,
+          "relative": 1.4894388958983148e-16
+        },
+        "max_relative": {
+          "path": "jaggi-2013.normalized1.series[0].y[36]",
+          "a": 0.07586415362731154,
+          "b": 0.07586415362731151,
+          "absolute": 2.7755575615628914e-17,
+          "scaled": 2.7755575615628914e-17,
+          "relative": 3.65858897628784e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "rockafellar-1976; canonical and normalized charts; 10 reruns",
+        "floats": 20140,
+        "changed_floats": 0,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": null,
+        "max_scaled": null,
+        "max_relative": null,
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "beck-teboulle-2009; canonical and normalized charts; 10 reruns",
+        "floats": 9720,
+        "changed_floats": 255,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "beck-teboulle-2009.chart1.series[0].y[1]",
+          "a": 2.78771700483169,
+          "b": 2.7877170048316904,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 1.593021131916777e-16,
+          "relative": 1.593021131916777e-16
+        },
+        "max_scaled": {
+          "path": "beck-teboulle-2009.chart1.series[0].y[2]",
+          "a": 1.870879638961005,
+          "b": 1.8708796389610054,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 2.373692035564019e-16,
+          "relative": 2.373692035564019e-16
+        },
+        "max_relative": {
+          "path": "beck-teboulle-2009.normalized1.series[0].y[2]",
+          "a": 0.1266615060650291,
+          "b": 0.12666150606502916,
+          "absolute": 5.551115123125783e-17,
+          "scaled": 5.551115123125783e-17,
+          "relative": 4.382637863374047e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      },
+      {
+        "comparison": "ista-vs-fista; canonical and normalized charts; 10 reruns",
+        "floats": 6570,
+        "changed_floats": 220,
+        "exact_fault_count": 0,
+        "exact_faults": [],
+        "nonfinite": 0,
+        "max_absolute": {
+          "path": "ista-vs-fista.chart0.series[0].y[2]",
+          "a": 2.7877170048316904,
+          "b": 2.78771700483169,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 1.593021131916777e-16,
+          "relative": 1.593021131916777e-16
+        },
+        "max_scaled": {
+          "path": "ista-vs-fista.chart0.series[1].y[3]",
+          "a": 1.8708796389610054,
+          "b": 1.870879638961005,
+          "absolute": 4.440892098500626e-16,
+          "scaled": 2.373692035564019e-16,
+          "relative": 2.373692035564019e-16
+        },
+        "max_relative": {
+          "path": "ista-vs-fista.chart0.series[1].y[53]",
+          "a": 0.0001312840757894967,
+          "b": 0.00013128407578949676,
+          "absolute": 5.421010862427522e-20,
+          "scaled": 5.421010862427522e-20,
+          "relative": 4.12922194091511e-16
+        },
+        "threshold_exceedances": {
+          "1e-12/1e-14": 0,
+          "1e-12/1e-12": 0,
+          "1e-10/1e-12": 0,
+          "1e-7/1e-12": 0
+        }
+      }
+    ]
+  },
+  "chosen": "scalar CG inner products only; preserve BLAS matvec and true residual; keep rtol 1e-12 and atol 1e-14",
+  "repair_head": "b857694bbdd4f314bbe2bf2d05629af02d829023"
+}

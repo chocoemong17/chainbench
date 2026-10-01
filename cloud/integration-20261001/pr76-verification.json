@@ -1,0 +1,111 @@
+{
+  "head": "5189791eb2ca9ca4c6c60efff3d4bcb12746e112",
+  "tree": "460819089c9a642a895b4472bd878ddfbbf90c9c",
+  "pull_request": 76,
+  "tests_run": 36891895555,
+  "tests_status": "failure: seven jobs passed, Intel macOS 3 failed / 1315 passed",
+  "cloud_status": "success",
+  "cloud": {
+    "source_commit": "667659774821cd82772bfd26024b8828e80f9eb8",
+    "run_url": "https://github.com/chocoemong17/chainbench/actions/runs/36891895442",
+    "manifest_sha256": "728a787a2ab1846d6fbf5fbea92047f27480f0550ac4262e333dd801d65c6240",
+    "numerical_records": 24,
+    "html_pages": 25,
+    "backtracking_runs": 36,
+    "candidate_trials": 790,
+    "accepted_updates_per_run": 18,
+    "renderer_sha256": "f4b458d131d95b77572ad26d0644061faa68da5035925146af6af7667ceb9769",
+    "environment": {
+      "python": "3.12.14",
+      "playwright": "1.63.0",
+      "pymupdf": "1.28.2"
+    },
+    "scope": "Tour record audit and PDF layout only; not full CI or independent review",
+    "pdf_pages": 2
+  },
+  "jobs": [
+    {
+      "id": 110469886655,
+      "name": "wheel and sdist clean installation",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 110469886995,
+      "name": "test (ubuntu-latest, Python 3.11, current)",
+      "status": "completed",
+      "conclusion": "success",
+      "passed_tests": 1318,
+      "failed_tests": 0
+    },
+    {
+      "id": 110469887035,
+      "name": "test (ubuntu-latest, Python 3.10, minimum)",
+      "status": "completed",
+      "conclusion": "success",
+      "passed_tests": 1318,
+      "failed_tests": 0
+    },
+    {
+      "id": 110469887057,
+      "name": "offline interactive reports browser",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 110469887161,
+      "name": "test (ubuntu-latest, Python 3.10, current)",
+      "status": "completed",
+      "conclusion": "success",
+      "passed_tests": 1318,
+      "failed_tests": 0
+    },
+    {
+      "id": 110469887306,
+      "name": "test (windows-latest, Python 3.12, current)",
+      "status": "completed",
+      "conclusion": "success",
+      "passed_tests": 1318,
+      "failed_tests": 0
+    },
+    {
+      "id": 110469887384,
+      "name": "test (ubuntu-latest, Python 3.12, current)",
+      "status": "completed",
+      "conclusion": "success",
+      "passed_tests": 1318,
+      "failed_tests": 0
+    },
+    {
+      "id": 110469887536,
+      "name": "test (macos-26-intel, Python 3.12, current)",
+      "status": "completed",
+      "conclusion": "failure",
+      "passed_tests": 1315,
+      "failed_tests": 3
+    }
+  ],
+  "package_install_results": [
+    "CLEAN INSTALL PASSED: chainbench-0.5.0-py3-none-any.whl",
+    "CLEAN INSTALL PASSED: chainbench-0.5.0.tar.gz"
+  ],
+  "diagnostic_branch": "diagnose/intel-reruns",
+  "diagnostic_head": "a776984cf923746d48e301822ee66dc1375fd682",
+  "intel_failures": [
+    {
+      "path": "$.runs.cg.iterates[13][9]",
+      "actual": 0.026620138706543547,
+      "expected": 0.02662013870650739
+    },
+    {
+      "path": "$.rows[0].runs.cg.iterates[18][39]",
+      "actual": -0.369634505766484,
+      "expected": -0.3696345057669117
+    },
+    {
+      "path": "atlas.html.normalized_charts.hestenes-stiefel-1952.series[0].y[14]",
+      "actual": 0.16289290871832326,
+      "expected": 0.16289290871870538
+    }
+  ]
+}

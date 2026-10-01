@@ -1,0 +1,152 @@
+{
+  "main": "e3858108ea492df04121c14d5306ac2bab1454fa",
+  "main_tree": "260bcb2433eb518b039130353c922494fe424126",
+  "archive_parent": "655230218698cd09001c5011820f2a76d0737b66",
+  "scope": "New final-main review set; paths are relative to archive root. This manifest excludes itself. Historical files remain unchanged except the root README.",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 2141,
+      "sha256": "91a65d783046f60d4caf78479fce038668dc12f738ab694a6e82fbeff487d950",
+      "git_sha": "6e8cec1f977f3d8ea4df9ab5e417e27073f9480c"
+    },
+    {
+      "path": "cloud/e385810/ChainBench_FISTA_review.pdf",
+      "bytes": 286392,
+      "sha256": "4392e623e630620b371784f0ca801b6379733d4f6190d0c1efe75a216ee3b120",
+      "git_sha": "0358e996555df757d36ff65872d251ce0163d749"
+    },
+    {
+      "path": "cloud/e385810/README.md",
+      "bytes": 2064,
+      "sha256": "c8ccadc3e2dc4d8bced06a5e44d9e175b7abcdb2dbab48b6ec995965a5c29406",
+      "git_sha": "e5ae85b09aefaffe01725cd504c34d465600cbbe"
+    },
+    {
+      "path": "cloud/e385810/environment.txt",
+      "bytes": 163,
+      "sha256": "1398245ebf976e43e480759c590471b0f47a5cbc15945f0ef01d986a402442e9",
+      "git_sha": "b0517fc3b8dd51ae8f3a2556efadb89d3fb6f127"
+    },
+    {
+      "path": "cloud/e385810/evidence.json",
+      "bytes": 21363,
+      "sha256": "92e6dfb581a6a81089e8b4ca2c565e037adf89cd921f313a12e0681e52ac982c",
+      "git_sha": "7bb0036c33ccabd7575446035c97edc5ae186b54"
+    },
+    {
+      "path": "cloud/e385810/page-1.png",
+      "bytes": 83880,
+      "sha256": "8a127bdc291ce58885f58442d6d2f5b0a16613729f972d9b028e5817351aa422",
+      "git_sha": "818e4e702e028babb229399f8bac145e6bc36800"
+    },
+    {
+      "path": "cloud/e385810/page-2.png",
+      "bytes": 76869,
+      "sha256": "ed0817f97a3470558530633d6e28375c8621c1df5183b012cff3e781f4e23084",
+      "git_sha": "f26081338c4734649e0a7b9e76f829b4219bd64e"
+    },
+    {
+      "path": "cloud/e385810/review.html",
+      "bytes": 66840,
+      "sha256": "057d1d8de13a6b5409eeeb989b30fae1f7fbc55b5ede839712ea53351ef741c9",
+      "git_sha": "3e8381b9096bc8c0936714809129d4cc79b64752"
+    },
+    {
+      "path": "cloud/e385810/source-commit.txt",
+      "bytes": 41,
+      "sha256": "27fc0fd1927a16603e99258aeb4411307933ca9379caa5f8b56bde9e3d646ac5",
+      "git_sha": "25c79c025d185901c2d687e356dd1af0a82558a2"
+    },
+    {
+      "path": "cloud/b857694/cg-repair/README.md",
+      "bytes": 2343,
+      "sha256": "7ba2dcd7abfc8408cc312d77ada77f42fcf5ca6a048427769dd8cef45322ce2d",
+      "git_sha": "39759dfb49b9206c1059c8c5215151a7658d67e6"
+    },
+    {
+      "path": "cloud/b857694/cg-repair/cg-spectrum__modes-390.png",
+      "bytes": 69085,
+      "sha256": "c5a8315ed555a20fb6937dd877994cbfb5f129d1aee544c44c0e26cddd090816",
+      "git_sha": "acb9455864654e7ab82e59c0c1283d97bca05df0"
+    },
+    {
+      "path": "cloud/b857694/cg-repair/evidence.json",
+      "bytes": 1423,
+      "sha256": "e75b3b005e6c3d405d8d0d7f965ba22e5e6bf81a9a85432e68f49d7a951f22be",
+      "git_sha": "62ded6fb0a1f3a31af381a5092d20c8316d0ac4a"
+    },
+    {
+      "path": "cloud/b857694/cg-repair/paths-1440.png",
+      "bytes": 545435,
+      "sha256": "511604add2472408689491d337cd76781b6520d66e0060a82ece9181c8e11b27",
+      "git_sha": "39dd8ea6d1a3e551d856eb7c75a5f642d1cadaf8"
+    },
+    {
+      "path": "cloud/integration-20261001/README.md",
+      "bytes": 14141,
+      "sha256": "c38c7f693cb87510d4ae1f4f7d6302bf1163847078cfb369e4610a3705f3f62a",
+      "git_sha": "262d6081b852eb1b102b4bda3253505fe31606ad"
+    },
+    {
+      "path": "cloud/integration-20261001/reconciliation.json",
+      "bytes": 2870,
+      "sha256": "4058b97de48bcfe26d337f7efb5a107e214c6259b1fe5dc468a530a0bf6366c6",
+      "git_sha": "34dddd0849120957345d9661c10f7daf2368f569"
+    },
+    {
+      "path": "cloud/integration-20261001/storage-usage.json",
+      "bytes": 436,
+      "sha256": "71d5e18eac569736da1bde43ac9b30f0547c82b9e50e087989056ccdd8dc618e",
+      "git_sha": "3719918ebe2c351c92be81ceb12cf8d58718de60"
+    },
+    {
+      "path": "cloud/integration-20261001/main-e385810-verification.json",
+      "bytes": 6974,
+      "sha256": "64e7b86afc48f8d48f7d4141aca39892637f136e5a51a0ced38415252db4fcd5",
+      "git_sha": "b054180f98dec4b67d8a0cd5c891554f798dc4fb"
+    },
+    {
+      "path": "cloud/integration-20261001/pr76-fw-repair-verification.json",
+      "bytes": 5389,
+      "sha256": "8e699dd6930117c8733371299a884e10bfcf363eedf65fc373b397538558a2c6",
+      "git_sha": "0f7272b3cc6b63448311a7b211119560275e6e4c"
+    },
+    {
+      "path": "cloud/integration-20261001/pr76-cg-repair-verification.json",
+      "bytes": 4614,
+      "sha256": "c6df14f9b6b79205eee27b7d716baf5c16228b7c948cdbb2c41666e4769a59f7",
+      "git_sha": "826ac33e92a2c29cd9f652a1ef2261498a15de85"
+    },
+    {
+      "path": "cloud/integration-20261001/pr76-serialization-verification.json",
+      "bytes": 2858,
+      "sha256": "4065f181ca5c89788c3d6799b0e2bc429f48679f3fa4688d17208e9a658b5b3b",
+      "git_sha": "a08a190015d0c05dfb135797b2cefad37331c035"
+    },
+    {
+      "path": "cloud/integration-20261001/pr76-verification.json",
+      "bytes": 3307,
+      "sha256": "14dffa4103d83206653d4c615c2eb9c835914a245c0b6d75e008e17325f8daa0",
+      "git_sha": "389f29d9a5ef0121cef0dfa73ac247ddb085247c"
+    },
+    {
+      "path": "cloud/integration-20261001/cg-reduction-diagnosis.json",
+      "bytes": 123537,
+      "sha256": "ce9179e82adb47951e5405405bfdda55006a520f7b01dc9a45c0f4e2c23b7e3c",
+      "git_sha": "17911d613d04f541f3d5f42c91178ee993e9847b"
+    },
+    {
+      "path": "cloud/integration-20261001/fw-segment-diagnosis.json",
+      "bytes": 30609,
+      "sha256": "7b52c3586d11901769ed9fb7a4d34e0ca6499dfb55be1bae4e2c23a0dde379ef",
+      "git_sha": "d7e66795e1cabcc270427205315ddcb37b16dbae"
+    },
+    {
+      "path": "cloud/integration-20261001/integration-history.json",
+      "bytes": 16060,
+      "sha256": "2c5b1f0e4a58a9da01d5aae9c063a1b3c4cc5cc0a8e2c9c3187f3435f34b62b0",
+      "git_sha": "6cf04060dfbb2ceb54f05876089257b97c60c80d"
+    }
+  ]
+}

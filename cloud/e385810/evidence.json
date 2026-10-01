@@ -1,0 +1,985 @@
+{
+  "source_commit": "e3858108ea492df04121c14d5306ac2bab1454fa",
+  "run_url": "https://github.com/chocoemong17/chainbench/actions/runs/36907555063",
+  "manifest_sha256": "4336dc564fcc5e8e751c6db90a2cb885935d09b3efa21637653b800945662564",
+  "numerical_records": 24,
+  "html_pages": 25,
+  "backtracking_runs": 36,
+  "candidate_trials": 790,
+  "accepted_updates_per_run": 18,
+  "renderer_sha256": "f4b458d131d95b77572ad26d0644061faa68da5035925146af6af7667ceb9769",
+  "environment": {
+    "python": "3.12.14",
+    "playwright": "1.63.0",
+    "pymupdf": "1.28.2"
+  },
+  "scope": "Tour record audit and PDF layout only; not full CI or independent review",
+  "browser": "153.0.8010.12",
+  "geometry": [
+    {
+      "bottom": 732.09375,
+      "footer": 743.953125,
+      "left": 45.34375,
+      "right": 1077.171875,
+      "width": 1123
+    },
+    {
+      "bottom": 1403.71875,
+      "footer": 1537.640625,
+      "left": 45.34375,
+      "right": 1077.171875,
+      "width": 1123
+    }
+  ],
+  "pdf_fonts": [
+    [
+      {
+        "name": "AAAAAA+LiberationSans",
+        "type": "Type0",
+        "resource": "F4",
+        "embedded_bytes": 21164
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F5",
+        "glyph_programs": 4,
+        "embedded_bytes": 1147
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F6",
+        "glyph_programs": 10,
+        "embedded_bytes": 4367
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F7",
+        "glyph_programs": 4,
+        "embedded_bytes": 804
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F8",
+        "glyph_programs": 2,
+        "embedded_bytes": 691
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F9",
+        "glyph_programs": 2,
+        "embedded_bytes": 564
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F10",
+        "glyph_programs": 8,
+        "embedded_bytes": 2416
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F11",
+        "glyph_programs": 5,
+        "embedded_bytes": 1633
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F12",
+        "glyph_programs": 6,
+        "embedded_bytes": 2490
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F13",
+        "glyph_programs": 3,
+        "embedded_bytes": 1024
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F14",
+        "glyph_programs": 3,
+        "embedded_bytes": 959
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F15",
+        "glyph_programs": 3,
+        "embedded_bytes": 662
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F16",
+        "glyph_programs": 3,
+        "embedded_bytes": 865
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F17",
+        "glyph_programs": 10,
+        "embedded_bytes": 3403
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F18",
+        "glyph_programs": 19,
+        "embedded_bytes": 8391
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F19",
+        "glyph_programs": 13,
+        "embedded_bytes": 2746
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F20",
+        "glyph_programs": 57,
+        "embedded_bytes": 15424
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F21",
+        "glyph_programs": 7,
+        "embedded_bytes": 1380
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F22",
+        "glyph_programs": 6,
+        "embedded_bytes": 3043
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F23",
+        "glyph_programs": 6,
+        "embedded_bytes": 2023
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F24",
+        "glyph_programs": 12,
+        "embedded_bytes": 4994
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F25",
+        "glyph_programs": 5,
+        "embedded_bytes": 1895
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F26",
+        "glyph_programs": 4,
+        "embedded_bytes": 1392
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F27",
+        "glyph_programs": 6,
+        "embedded_bytes": 2093
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F28",
+        "glyph_programs": 5,
+        "embedded_bytes": 1611
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F29",
+        "glyph_programs": 9,
+        "embedded_bytes": 4410
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F30",
+        "glyph_programs": 2,
+        "embedded_bytes": 627
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F31",
+        "glyph_programs": 2,
+        "embedded_bytes": 669
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F32",
+        "glyph_programs": 2,
+        "embedded_bytes": 819
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F33",
+        "glyph_programs": 2,
+        "embedded_bytes": 734
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F34",
+        "glyph_programs": 4,
+        "embedded_bytes": 1210
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F35",
+        "glyph_programs": 2,
+        "embedded_bytes": 535
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F36",
+        "glyph_programs": 3,
+        "embedded_bytes": 757
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F37",
+        "glyph_programs": 4,
+        "embedded_bytes": 1147
+      },
+      {
+        "name": "DAAAAA+LiberationSerif",
+        "type": "Type0",
+        "resource": "F38",
+        "embedded_bytes": 28832
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F42",
+        "glyph_programs": 4,
+        "embedded_bytes": 1232
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F43",
+        "glyph_programs": 11,
+        "embedded_bytes": 5703
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F44",
+        "glyph_programs": 7,
+        "embedded_bytes": 2195
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F45",
+        "glyph_programs": 5,
+        "embedded_bytes": 1311
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F46",
+        "glyph_programs": 10,
+        "embedded_bytes": 3323
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F47",
+        "glyph_programs": 6,
+        "embedded_bytes": 1935
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F48",
+        "glyph_programs": 3,
+        "embedded_bytes": 894
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F49",
+        "glyph_programs": 9,
+        "embedded_bytes": 3213
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F50",
+        "glyph_programs": 2,
+        "embedded_bytes": 814
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F51",
+        "glyph_programs": 8,
+        "embedded_bytes": 2609
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F52",
+        "glyph_programs": 5,
+        "embedded_bytes": 1605
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F53",
+        "glyph_programs": 12,
+        "embedded_bytes": 7264
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F54",
+        "glyph_programs": 4,
+        "embedded_bytes": 1250
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F55",
+        "glyph_programs": 5,
+        "embedded_bytes": 1918
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F56",
+        "glyph_programs": 3,
+        "embedded_bytes": 896
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F57",
+        "glyph_programs": 6,
+        "embedded_bytes": 1761
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F58",
+        "glyph_programs": 2,
+        "embedded_bytes": 611
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F59",
+        "glyph_programs": 3,
+        "embedded_bytes": 939
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F60",
+        "glyph_programs": 4,
+        "embedded_bytes": 1337
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F61",
+        "glyph_programs": 5,
+        "embedded_bytes": 2922
+      },
+      {
+        "name": "EAAAAA+DejaVuSansMono",
+        "type": "Type0",
+        "resource": "F62",
+        "embedded_bytes": 22568
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F63",
+        "glyph_programs": 2,
+        "embedded_bytes": 819
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F64",
+        "glyph_programs": 4,
+        "embedded_bytes": 1051
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F65",
+        "glyph_programs": 2,
+        "embedded_bytes": 750
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F66",
+        "glyph_programs": 2,
+        "embedded_bytes": 712
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F67",
+        "glyph_programs": 2,
+        "embedded_bytes": 605
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F68",
+        "glyph_programs": 3,
+        "embedded_bytes": 1173
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F69",
+        "glyph_programs": 3,
+        "embedded_bytes": 890
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F70",
+        "glyph_programs": 2,
+        "embedded_bytes": 604
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F71",
+        "glyph_programs": 4,
+        "embedded_bytes": 1397
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F72",
+        "glyph_programs": 2,
+        "embedded_bytes": 693
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F73",
+        "glyph_programs": 8,
+        "embedded_bytes": 3336
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F74",
+        "glyph_programs": 3,
+        "embedded_bytes": 1011
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F75",
+        "glyph_programs": 3,
+        "embedded_bytes": 1097
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F76",
+        "glyph_programs": 2,
+        "embedded_bytes": 396
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F77",
+        "glyph_programs": 3,
+        "embedded_bytes": 1000
+      }
+    ],
+    [
+      {
+        "name": "AAAAAA+LiberationSans",
+        "type": "Type0",
+        "resource": "F4",
+        "embedded_bytes": 21164
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F5",
+        "glyph_programs": 4,
+        "embedded_bytes": 1147
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F6",
+        "glyph_programs": 10,
+        "embedded_bytes": 4367
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F7",
+        "glyph_programs": 4,
+        "embedded_bytes": 804
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F10",
+        "glyph_programs": 8,
+        "embedded_bytes": 2416
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F11",
+        "glyph_programs": 5,
+        "embedded_bytes": 1633
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F12",
+        "glyph_programs": 6,
+        "embedded_bytes": 2490
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F15",
+        "glyph_programs": 3,
+        "embedded_bytes": 662
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F16",
+        "glyph_programs": 3,
+        "embedded_bytes": 865
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F17",
+        "glyph_programs": 10,
+        "embedded_bytes": 3403
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F18",
+        "glyph_programs": 19,
+        "embedded_bytes": 8391
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F19",
+        "glyph_programs": 13,
+        "embedded_bytes": 2746
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F20",
+        "glyph_programs": 57,
+        "embedded_bytes": 15424
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F21",
+        "glyph_programs": 7,
+        "embedded_bytes": 1380
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F22",
+        "glyph_programs": 6,
+        "embedded_bytes": 3043
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F23",
+        "glyph_programs": 6,
+        "embedded_bytes": 2023
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F24",
+        "glyph_programs": 12,
+        "embedded_bytes": 4994
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F25",
+        "glyph_programs": 5,
+        "embedded_bytes": 1895
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F26",
+        "glyph_programs": 4,
+        "embedded_bytes": 1392
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F27",
+        "glyph_programs": 6,
+        "embedded_bytes": 2093
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F28",
+        "glyph_programs": 5,
+        "embedded_bytes": 1611
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F29",
+        "glyph_programs": 9,
+        "embedded_bytes": 4410
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F30",
+        "glyph_programs": 2,
+        "embedded_bytes": 627
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F31",
+        "glyph_programs": 2,
+        "embedded_bytes": 669
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F33",
+        "glyph_programs": 2,
+        "embedded_bytes": 734
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F34",
+        "glyph_programs": 4,
+        "embedded_bytes": 1210
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F36",
+        "glyph_programs": 3,
+        "embedded_bytes": 757
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F37",
+        "glyph_programs": 4,
+        "embedded_bytes": 1147
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F42",
+        "glyph_programs": 4,
+        "embedded_bytes": 1232
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F43",
+        "glyph_programs": 11,
+        "embedded_bytes": 5703
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F44",
+        "glyph_programs": 7,
+        "embedded_bytes": 2195
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F45",
+        "glyph_programs": 5,
+        "embedded_bytes": 1311
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F46",
+        "glyph_programs": 10,
+        "embedded_bytes": 3323
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F47",
+        "glyph_programs": 6,
+        "embedded_bytes": 1935
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F48",
+        "glyph_programs": 3,
+        "embedded_bytes": 894
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F49",
+        "glyph_programs": 9,
+        "embedded_bytes": 3213
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F51",
+        "glyph_programs": 8,
+        "embedded_bytes": 2609
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F52",
+        "glyph_programs": 5,
+        "embedded_bytes": 1605
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F53",
+        "glyph_programs": 12,
+        "embedded_bytes": 7264
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F54",
+        "glyph_programs": 4,
+        "embedded_bytes": 1250
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F55",
+        "glyph_programs": 5,
+        "embedded_bytes": 1918
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F56",
+        "glyph_programs": 3,
+        "embedded_bytes": 896
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F57",
+        "glyph_programs": 6,
+        "embedded_bytes": 1761
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F59",
+        "glyph_programs": 3,
+        "embedded_bytes": 939
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F60",
+        "glyph_programs": 4,
+        "embedded_bytes": 1337
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F61",
+        "glyph_programs": 5,
+        "embedded_bytes": 2922
+      },
+      {
+        "name": "EAAAAA+DejaVuSansMono",
+        "type": "Type0",
+        "resource": "F62",
+        "embedded_bytes": 22568
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F64",
+        "glyph_programs": 4,
+        "embedded_bytes": 1051
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F67",
+        "glyph_programs": 2,
+        "embedded_bytes": 605
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F68",
+        "glyph_programs": 3,
+        "embedded_bytes": 1173
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F69",
+        "glyph_programs": 3,
+        "embedded_bytes": 890
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F71",
+        "glyph_programs": 4,
+        "embedded_bytes": 1397
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F73",
+        "glyph_programs": 8,
+        "embedded_bytes": 3336
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F74",
+        "glyph_programs": 3,
+        "embedded_bytes": 1011
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F75",
+        "glyph_programs": 3,
+        "embedded_bytes": 1097
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F77",
+        "glyph_programs": 3,
+        "embedded_bytes": 1000
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F80",
+        "glyph_programs": 27,
+        "embedded_bytes": 7090
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F81",
+        "glyph_programs": 2,
+        "embedded_bytes": 763
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F82",
+        "glyph_programs": 2,
+        "embedded_bytes": 648
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F83",
+        "glyph_programs": 2,
+        "embedded_bytes": 854
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F84",
+        "glyph_programs": 4,
+        "embedded_bytes": 1270
+      },
+      {
+        "name": "",
+        "type": "Type3",
+        "resource": "F85",
+        "glyph_programs": 2,
+        "embedded_bytes": 711
+      }
+    ]
+  ],
+  "pdf_pages": 2,
+  "files": {
+    "ChainBench_FISTA_review.pdf": {
+      "bytes": 286392,
+      "sha256": "4392e623e630620b371784f0ca801b6379733d4f6190d0c1efe75a216ee3b120"
+    },
+    "page-1.png": {
+      "bytes": 83880,
+      "sha256": "8a127bdc291ce58885f58442d6d2f5b0a16613729f972d9b028e5817351aa422"
+    },
+    "page-2.png": {
+      "bytes": 76869,
+      "sha256": "ed0817f97a3470558530633d6e28375c8621c1df5183b012cff3e781f4e23084"
+    },
+    "review.html": {
+      "bytes": 66840,
+      "sha256": "057d1d8de13a6b5409eeeb989b30fae1f7fbc55b5ede839712ea53351ef741c9"
+    }
+  }
+}

@@ -1,0 +1,1022 @@
+{
+  "baseline_head": "05331b8f506d659391ddaad2c118e1ea16853fa7",
+  "baseline_run": 36903344825,
+  "baseline_jobs": [
+    {
+      "id": 110507630839,
+      "name": "audit (3.10, 1.24.0)",
+      "status": "completed",
+      "conclusion": "success",
+      "observations": {
+        "python": "3.10.21",
+        "numpy": "1.24.0",
+        "runs": [
+          {
+            "steps": 1,
+            "repeat": 0,
+            "counts": {},
+            "max_scheduled_objective_difference": 0,
+            "first_faults": []
+          },
+          {
+            "steps": 1,
+            "repeat": 1,
+            "counts": {},
+            "max_scheduled_objective_difference": 0,
+            "first_faults": []
+          },
+          {
+            "steps": 1,
+            "repeat": 2,
+            "counts": {},
+            "max_scheduled_objective_difference": 0,
+            "first_faults": []
+          },
+          {
+            "steps": 18,
+            "repeat": 0,
+            "counts": {},
+            "max_scheduled_objective_difference": 0,
+            "first_faults": []
+          },
+          {
+            "steps": 18,
+            "repeat": 1,
+            "counts": {},
+            "max_scheduled_objective_difference": 0,
+            "first_faults": []
+          },
+          {
+            "steps": 18,
+            "repeat": 2,
+            "counts": {},
+            "max_scheduled_objective_difference": 0,
+            "first_faults": []
+          },
+          {
+            "steps": 60,
+            "repeat": 0,
+            "counts": {},
+            "max_scheduled_objective_difference": 0,
+            "first_faults": []
+          },
+          {
+            "steps": 60,
+            "repeat": 1,
+            "counts": {},
+            "max_scheduled_objective_difference": 0,
+            "first_faults": []
+          },
+          {
+            "steps": 60,
+            "repeat": 2,
+            "counts": {},
+            "max_scheduled_objective_difference": 0,
+            "first_faults": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 110507631213,
+      "name": "audit (3.12, 2.5.3)",
+      "status": "completed",
+      "conclusion": "success",
+      "observations": {
+        "python": "3.12.14",
+        "numpy": "2.5.3",
+        "runs": [
+          {
+            "steps": 1,
+            "repeat": 0,
+            "counts": {},
+            "max_scheduled_objective_difference": 0,
+            "first_faults": []
+          },
+          {
+            "steps": 1,
+            "repeat": 1,
+            "counts": {},
+            "max_scheduled_objective_difference": 0,
+            "first_faults": []
+          },
+          {
+            "steps": 1,
+            "repeat": 2,
+            "counts": {},
+            "max_scheduled_objective_difference": 0,
+            "first_faults": []
+          },
+          {
+            "steps": 18,
+            "repeat": 0,
+            "counts": {},
+            "max_scheduled_objective_difference": 0,
+            "first_faults": []
+          },
+          {
+            "steps": 18,
+            "repeat": 1,
+            "counts": {},
+            "max_scheduled_objective_difference": 0,
+            "first_faults": []
+          },
+          {
+            "steps": 18,
+            "repeat": 2,
+            "counts": {},
+            "max_scheduled_objective_difference": 0,
+            "first_faults": []
+          },
+          {
+            "steps": 60,
+            "repeat": 0,
+            "counts": {},
+            "max_scheduled_objective_difference": 0,
+            "first_faults": []
+          },
+          {
+            "steps": 60,
+            "repeat": 1,
+            "counts": {},
+            "max_scheduled_objective_difference": 0,
+            "first_faults": []
+          },
+          {
+            "steps": 60,
+            "repeat": 2,
+            "counts": {},
+            "max_scheduled_objective_difference": 0,
+            "first_faults": []
+          }
+        ]
+      }
+    }
+  ],
+  "full_suite_failure": {
+    "head": "24099d987102c36438e5e527b04d5291f31ed0d8",
+    "run": 36901800433,
+    "job": 110502506552,
+    "failed": 17,
+    "passed": 1316
+  },
+  "cpu_probe_head": "9633e415c7da2d6e940f333fa777c6172429906d",
+  "status": "controlled repair passed; full PR CI still required",
+  "cpu_probe_run": 36903611759,
+  "cpu_probe_jobs": [
+    {
+      "id": 110508546200,
+      "name": "audit (Sandybridge)",
+      "status": "completed",
+      "conclusion": "success",
+      "observations": {
+        "python": "3.10.21",
+        "numpy": "1.24.0",
+        "runs": [
+          {
+            "steps": 1,
+            "repeat": 0,
+            "counts": {},
+            "max_scheduled_objective_difference": 0,
+            "first_faults": []
+          },
+          {
+            "steps": 1,
+            "repeat": 1,
+            "counts": {},
+            "max_scheduled_objective_difference": 0,
+            "first_faults": []
+          },
+          {
+            "steps": 1,
+            "repeat": 2,
+            "counts": {},
+            "max_scheduled_objective_difference": 0,
+            "first_faults": []
+          },
+          {
+            "steps": 18,
+            "repeat": 0,
+            "counts": {},
+            "max_scheduled_objective_difference": 0,
+            "first_faults": []
+          },
+          {
+            "steps": 18,
+            "repeat": 1,
+            "counts": {},
+            "max_scheduled_objective_difference": 0,
+            "first_faults": []
+          },
+          {
+            "steps": 18,
+            "repeat": 2,
+            "counts": {},
+            "max_scheduled_objective_difference": 0,
+            "first_faults": []
+          },
+          {
+            "steps": 60,
+            "repeat": 0,
+            "counts": {},
+            "max_scheduled_objective_difference": 0,
+            "first_faults": []
+          },
+          {
+            "steps": 60,
+            "repeat": 1,
+            "counts": {},
+            "max_scheduled_objective_difference": 0,
+            "first_faults": []
+          },
+          {
+            "steps": 60,
+            "repeat": 2,
+            "counts": {},
+            "max_scheduled_objective_difference": 0,
+            "first_faults": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 110508546481,
+      "name": "audit (Haswell)",
+      "status": "completed",
+      "conclusion": "success",
+      "observations": {
+        "python": "3.10.21",
+        "numpy": "1.24.0",
+        "runs": [
+          {
+            "steps": 1,
+            "repeat": 0,
+            "counts": {},
+            "max_scheduled_objective_difference": 0,
+            "first_faults": []
+          },
+          {
+            "steps": 1,
+            "repeat": 1,
+            "counts": {},
+            "max_scheduled_objective_difference": 0,
+            "first_faults": []
+          },
+          {
+            "steps": 1,
+            "repeat": 2,
+            "counts": {},
+            "max_scheduled_objective_difference": 0,
+            "first_faults": []
+          },
+          {
+            "steps": 18,
+            "repeat": 0,
+            "counts": {},
+            "max_scheduled_objective_difference": 0,
+            "first_faults": []
+          },
+          {
+            "steps": 18,
+            "repeat": 1,
+            "counts": {},
+            "max_scheduled_objective_difference": 0,
+            "first_faults": []
+          },
+          {
+            "steps": 18,
+            "repeat": 2,
+            "counts": {},
+            "max_scheduled_objective_difference": 0,
+            "first_faults": []
+          },
+          {
+            "steps": 60,
+            "repeat": 0,
+            "counts": {},
+            "max_scheduled_objective_difference": 0,
+            "first_faults": []
+          },
+          {
+            "steps": 60,
+            "repeat": 1,
+            "counts": {},
+            "max_scheduled_objective_difference": 0,
+            "first_faults": []
+          },
+          {
+            "steps": 60,
+            "repeat": 2,
+            "counts": {},
+            "max_scheduled_objective_difference": 0,
+            "first_faults": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 110508546649,
+      "name": "audit (Prescott)",
+      "status": "completed",
+      "conclusion": "success",
+      "observations": {
+        "python": "3.10.21",
+        "numpy": "1.24.0",
+        "runs": [
+          {
+            "steps": 1,
+            "repeat": 0,
+            "counts": {
+              "scheduled_objective": 1
+            },
+            "max_scheduled_objective_difference": 5.551115123125783e-17,
+            "first_faults": [
+              {
+                "case": "interior-e3",
+                "iteration": 0,
+                "field": "scheduled_objective",
+                "actual": 0.38999999999999996,
+                "expected": 0.39
+              }
+            ]
+          },
+          {
+            "steps": 1,
+            "repeat": 1,
+            "counts": {
+              "scheduled_objective": 1
+            },
+            "max_scheduled_objective_difference": 5.551115123125783e-17,
+            "first_faults": [
+              {
+                "case": "interior-e3",
+                "iteration": 0,
+                "field": "scheduled_objective",
+                "actual": 0.38999999999999996,
+                "expected": 0.39
+              }
+            ]
+          },
+          {
+            "steps": 1,
+            "repeat": 2,
+            "counts": {
+              "scheduled_objective": 1
+            },
+            "max_scheduled_objective_difference": 5.551115123125783e-17,
+            "first_faults": [
+              {
+                "case": "interior-e3",
+                "iteration": 0,
+                "field": "scheduled_objective",
+                "actual": 0.38999999999999996,
+                "expected": 0.39
+              }
+            ]
+          },
+          {
+            "steps": 18,
+            "repeat": 0,
+            "counts": {
+              "scheduled_objective": 28
+            },
+            "max_scheduled_objective_difference": 5.551115123125783e-17,
+            "first_faults": [
+              {
+                "case": "interior-e1",
+                "iteration": 2,
+                "field": "scheduled_objective",
+                "actual": 0.1011111111111111,
+                "expected": 0.10111111111111111
+              },
+              {
+                "case": "interior-e1",
+                "iteration": 6,
+                "field": "scheduled_objective",
+                "actual": 0.019336734693877543,
+                "expected": 0.019336734693877547
+              },
+              {
+                "case": "interior-e1",
+                "iteration": 11,
+                "field": "scheduled_objective",
+                "actual": 0.007225509533201843,
+                "expected": 0.007225509533201842
+              },
+              {
+                "case": "interior-e1",
+                "iteration": 12,
+                "field": "scheduled_objective",
+                "actual": 0.0018705470353821943,
+                "expected": 0.001870547035382194
+              },
+              {
+                "case": "interior-e1",
+                "iteration": 15,
+                "field": "scheduled_objective",
+                "actual": 0.0015592560553633259,
+                "expected": 0.0015592560553633257
+              },
+              {
+                "case": "interior-e1",
+                "iteration": 16,
+                "field": "scheduled_objective",
+                "actual": 0.0018928617198513344,
+                "expected": 0.0018928617198513346
+              },
+              {
+                "case": "interior-e2",
+                "iteration": 2,
+                "field": "scheduled_objective",
+                "actual": 0.1011111111111111,
+                "expected": 0.10111111111111111
+              },
+              {
+                "case": "interior-e2",
+                "iteration": 6,
+                "field": "scheduled_objective",
+                "actual": 0.019336734693877543,
+                "expected": 0.019336734693877547
+              }
+            ]
+          },
+          {
+            "steps": 18,
+            "repeat": 1,
+            "counts": {
+              "scheduled_objective": 28
+            },
+            "max_scheduled_objective_difference": 5.551115123125783e-17,
+            "first_faults": [
+              {
+                "case": "interior-e1",
+                "iteration": 2,
+                "field": "scheduled_objective",
+                "actual": 0.1011111111111111,
+                "expected": 0.10111111111111111
+              },
+              {
+                "case": "interior-e1",
+                "iteration": 6,
+                "field": "scheduled_objective",
+                "actual": 0.019336734693877543,
+                "expected": 0.019336734693877547
+              },
+              {
+                "case": "interior-e1",
+                "iteration": 11,
+                "field": "scheduled_objective",
+                "actual": 0.007225509533201843,
+                "expected": 0.007225509533201842
+              },
+              {
+                "case": "interior-e1",
+                "iteration": 12,
+                "field": "scheduled_objective",
+                "actual": 0.0018705470353821943,
+                "expected": 0.001870547035382194
+              },
+              {
+                "case": "interior-e1",
+                "iteration": 15,
+                "field": "scheduled_objective",
+                "actual": 0.0015592560553633259,
+                "expected": 0.0015592560553633257
+              },
+              {
+                "case": "interior-e1",
+                "iteration": 16,
+                "field": "scheduled_objective",
+                "actual": 0.0018928617198513344,
+                "expected": 0.0018928617198513346
+              },
+              {
+                "case": "interior-e2",
+                "iteration": 2,
+                "field": "scheduled_objective",
+                "actual": 0.1011111111111111,
+                "expected": 0.10111111111111111
+              },
+              {
+                "case": "interior-e2",
+                "iteration": 6,
+                "field": "scheduled_objective",
+                "actual": 0.019336734693877543,
+                "expected": 0.019336734693877547
+              }
+            ]
+          },
+          {
+            "steps": 18,
+            "repeat": 2,
+            "counts": {
+              "scheduled_objective": 28
+            },
+            "max_scheduled_objective_difference": 5.551115123125783e-17,
+            "first_faults": [
+              {
+                "case": "interior-e1",
+                "iteration": 2,
+                "field": "scheduled_objective",
+                "actual": 0.1011111111111111,
+                "expected": 0.10111111111111111
+              },
+              {
+                "case": "interior-e1",
+                "iteration": 6,
+                "field": "scheduled_objective",
+                "actual": 0.019336734693877543,
+                "expected": 0.019336734693877547
+              },
+              {
+                "case": "interior-e1",
+                "iteration": 11,
+                "field": "scheduled_objective",
+                "actual": 0.007225509533201843,
+                "expected": 0.007225509533201842
+              },
+              {
+                "case": "interior-e1",
+                "iteration": 12,
+                "field": "scheduled_objective",
+                "actual": 0.0018705470353821943,
+                "expected": 0.001870547035382194
+              },
+              {
+                "case": "interior-e1",
+                "iteration": 15,
+                "field": "scheduled_objective",
+                "actual": 0.0015592560553633259,
+                "expected": 0.0015592560553633257
+              },
+              {
+                "case": "interior-e1",
+                "iteration": 16,
+                "field": "scheduled_objective",
+                "actual": 0.0018928617198513344,
+                "expected": 0.0018928617198513346
+              },
+              {
+                "case": "interior-e2",
+                "iteration": 2,
+                "field": "scheduled_objective",
+                "actual": 0.1011111111111111,
+                "expected": 0.10111111111111111
+              },
+              {
+                "case": "interior-e2",
+                "iteration": 6,
+                "field": "scheduled_objective",
+                "actual": 0.019336734693877543,
+                "expected": 0.019336734693877547
+              }
+            ]
+          },
+          {
+            "steps": 60,
+            "repeat": 0,
+            "counts": {
+              "scheduled_objective": 68
+            },
+            "max_scheduled_objective_difference": 5.551115123125783e-17,
+            "first_faults": [
+              {
+                "case": "interior-e1",
+                "iteration": 2,
+                "field": "scheduled_objective",
+                "actual": 0.1011111111111111,
+                "expected": 0.10111111111111111
+              },
+              {
+                "case": "interior-e1",
+                "iteration": 6,
+                "field": "scheduled_objective",
+                "actual": 0.019336734693877543,
+                "expected": 0.019336734693877547
+              },
+              {
+                "case": "interior-e1",
+                "iteration": 11,
+                "field": "scheduled_objective",
+                "actual": 0.007225509533201843,
+                "expected": 0.007225509533201842
+              },
+              {
+                "case": "interior-e1",
+                "iteration": 12,
+                "field": "scheduled_objective",
+                "actual": 0.0018705470353821943,
+                "expected": 0.001870547035382194
+              },
+              {
+                "case": "interior-e1",
+                "iteration": 15,
+                "field": "scheduled_objective",
+                "actual": 0.0015592560553633259,
+                "expected": 0.0015592560553633257
+              },
+              {
+                "case": "interior-e1",
+                "iteration": 16,
+                "field": "scheduled_objective",
+                "actual": 0.0018928617198513344,
+                "expected": 0.0018928617198513346
+              },
+              {
+                "case": "interior-e1",
+                "iteration": 20,
+                "field": "scheduled_objective",
+                "actual": 0.0023029928224733375,
+                "expected": 0.002302992822473337
+              },
+              {
+                "case": "interior-e1",
+                "iteration": 21,
+                "field": "scheduled_objective",
+                "actual": 0.0020092486994016455,
+                "expected": 0.002009248699401645
+              }
+            ]
+          },
+          {
+            "steps": 60,
+            "repeat": 1,
+            "counts": {
+              "scheduled_objective": 68
+            },
+            "max_scheduled_objective_difference": 5.551115123125783e-17,
+            "first_faults": [
+              {
+                "case": "interior-e1",
+                "iteration": 2,
+                "field": "scheduled_objective",
+                "actual": 0.1011111111111111,
+                "expected": 0.10111111111111111
+              },
+              {
+                "case": "interior-e1",
+                "iteration": 6,
+                "field": "scheduled_objective",
+                "actual": 0.019336734693877543,
+                "expected": 0.019336734693877547
+              },
+              {
+                "case": "interior-e1",
+                "iteration": 11,
+                "field": "scheduled_objective",
+                "actual": 0.007225509533201843,
+                "expected": 0.007225509533201842
+              },
+              {
+                "case": "interior-e1",
+                "iteration": 12,
+                "field": "scheduled_objective",
+                "actual": 0.0018705470353821943,
+                "expected": 0.001870547035382194
+              },
+              {
+                "case": "interior-e1",
+                "iteration": 15,
+                "field": "scheduled_objective",
+                "actual": 0.0015592560553633259,
+                "expected": 0.0015592560553633257
+              },
+              {
+                "case": "interior-e1",
+                "iteration": 16,
+                "field": "scheduled_objective",
+                "actual": 0.0018928617198513344,
+                "expected": 0.0018928617198513346
+              },
+              {
+                "case": "interior-e1",
+                "iteration": 20,
+                "field": "scheduled_objective",
+                "actual": 0.0023029928224733375,
+                "expected": 0.002302992822473337
+              },
+              {
+                "case": "interior-e1",
+                "iteration": 21,
+                "field": "scheduled_objective",
+                "actual": 0.0020092486994016455,
+                "expected": 0.002009248699401645
+              }
+            ]
+          },
+          {
+            "steps": 60,
+            "repeat": 2,
+            "counts": {
+              "scheduled_objective": 68
+            },
+            "max_scheduled_objective_difference": 5.551115123125783e-17,
+            "first_faults": [
+              {
+                "case": "interior-e1",
+                "iteration": 2,
+                "field": "scheduled_objective",
+                "actual": 0.1011111111111111,
+                "expected": 0.10111111111111111
+              },
+              {
+                "case": "interior-e1",
+                "iteration": 6,
+                "field": "scheduled_objective",
+                "actual": 0.019336734693877543,
+                "expected": 0.019336734693877547
+              },
+              {
+                "case": "interior-e1",
+                "iteration": 11,
+                "field": "scheduled_objective",
+                "actual": 0.007225509533201843,
+                "expected": 0.007225509533201842
+              },
+              {
+                "case": "interior-e1",
+                "iteration": 12,
+                "field": "scheduled_objective",
+                "actual": 0.0018705470353821943,
+                "expected": 0.001870547035382194
+              },
+              {
+                "case": "interior-e1",
+                "iteration": 15,
+                "field": "scheduled_objective",
+                "actual": 0.0015592560553633259,
+                "expected": 0.0015592560553633257
+              },
+              {
+                "case": "interior-e1",
+                "iteration": 16,
+                "field": "scheduled_objective",
+                "actual": 0.0018928617198513344,
+                "expected": 0.0018928617198513346
+              },
+              {
+                "case": "interior-e1",
+                "iteration": 20,
+                "field": "scheduled_objective",
+                "actual": 0.0023029928224733375,
+                "expected": 0.002302992822473337
+              },
+              {
+                "case": "interior-e1",
+                "iteration": 21,
+                "field": "scheduled_objective",
+                "actual": 0.0020092486994016455,
+                "expected": 0.002009248699401645
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "finding": "Prescott reproduces scheduled_objective differences only: max5.551115123125783e-17, 1/28/68 mismatches at budgets1/18/60, repeated three times. Other five exact identities remain intact. Sandybridge/Haswell had zero differences.",
+  "repair_probe_head": "40183ab9f4046520a07c8f091bb555e61ac367b1",
+  "repair_probe_initial": {
+    "head": "40183ab9f4046520a07c8f091bb555e61ac367b1",
+    "run": 36904048808,
+    "identity_and_decimal_audits": "all clean in three kernels",
+    "focused_tests": "2 new retention fixture failures in each kernel: expected e2 objective at e1; fixed fixture to e2"
+  },
+  "repair_verified": {
+    "head": "1486de4546b24b118911c339985f09dbfe484306",
+    "run": 36904276640,
+    "jobs": [
+      {
+        "id": 110510778763,
+        "name": "audit (Prescott)",
+        "conclusion": "success",
+        "observations": {
+          "python": "3.10.21",
+          "numpy": "1.24.0",
+          "runs": [
+            {
+              "steps": 1,
+              "repeat": 0,
+              "counts": {},
+              "max_scheduled_objective_difference": 0,
+              "first_faults": []
+            },
+            {
+              "steps": 1,
+              "repeat": 1,
+              "counts": {},
+              "max_scheduled_objective_difference": 0,
+              "first_faults": []
+            },
+            {
+              "steps": 1,
+              "repeat": 2,
+              "counts": {},
+              "max_scheduled_objective_difference": 0,
+              "first_faults": []
+            },
+            {
+              "steps": 18,
+              "repeat": 0,
+              "counts": {},
+              "max_scheduled_objective_difference": 0,
+              "first_faults": []
+            },
+            {
+              "steps": 18,
+              "repeat": 1,
+              "counts": {},
+              "max_scheduled_objective_difference": 0,
+              "first_faults": []
+            },
+            {
+              "steps": 18,
+              "repeat": 2,
+              "counts": {},
+              "max_scheduled_objective_difference": 0,
+              "first_faults": []
+            },
+            {
+              "steps": 60,
+              "repeat": 0,
+              "counts": {},
+              "max_scheduled_objective_difference": 0,
+              "first_faults": []
+            },
+            {
+              "steps": 60,
+              "repeat": 1,
+              "counts": {},
+              "max_scheduled_objective_difference": 0,
+              "first_faults": []
+            },
+            {
+              "steps": 60,
+              "repeat": 2,
+              "counts": {},
+              "max_scheduled_objective_difference": 0,
+              "first_faults": []
+            }
+          ]
+        },
+        "test_summary": [
+          "2026-10-01T18:06:20.6304006Z 60 passed in 6.14s"
+        ]
+      },
+      {
+        "id": 110510779158,
+        "name": "audit (Sandybridge)",
+        "conclusion": "success",
+        "observations": {
+          "python": "3.10.21",
+          "numpy": "1.24.0",
+          "runs": [
+            {
+              "steps": 1,
+              "repeat": 0,
+              "counts": {},
+              "max_scheduled_objective_difference": 0,
+              "first_faults": []
+            },
+            {
+              "steps": 1,
+              "repeat": 1,
+              "counts": {},
+              "max_scheduled_objective_difference": 0,
+              "first_faults": []
+            },
+            {
+              "steps": 1,
+              "repeat": 2,
+              "counts": {},
+              "max_scheduled_objective_difference": 0,
+              "first_faults": []
+            },
+            {
+              "steps": 18,
+              "repeat": 0,
+              "counts": {},
+              "max_scheduled_objective_difference": 0,
+              "first_faults": []
+            },
+            {
+              "steps": 18,
+              "repeat": 1,
+              "counts": {},
+              "max_scheduled_objective_difference": 0,
+              "first_faults": []
+            },
+            {
+              "steps": 18,
+              "repeat": 2,
+              "counts": {},
+              "max_scheduled_objective_difference": 0,
+              "first_faults": []
+            },
+            {
+              "steps": 60,
+              "repeat": 0,
+              "counts": {},
+              "max_scheduled_objective_difference": 0,
+              "first_faults": []
+            },
+            {
+              "steps": 60,
+              "repeat": 1,
+              "counts": {},
+              "max_scheduled_objective_difference": 0,
+              "first_faults": []
+            },
+            {
+              "steps": 60,
+              "repeat": 2,
+              "counts": {},
+              "max_scheduled_objective_difference": 0,
+              "first_faults": []
+            }
+          ]
+        },
+        "test_summary": [
+          "2026-10-01T18:06:25.9852402Z 60 passed in 4.71s"
+        ]
+      },
+      {
+        "id": 110510779249,
+        "name": "audit (Haswell)",
+        "conclusion": "success",
+        "observations": {
+          "python": "3.10.21",
+          "numpy": "1.24.0",
+          "runs": [
+            {
+              "steps": 1,
+              "repeat": 0,
+              "counts": {},
+              "max_scheduled_objective_difference": 0,
+              "first_faults": []
+            },
+            {
+              "steps": 1,
+              "repeat": 1,
+              "counts": {},
+              "max_scheduled_objective_difference": 0,
+              "first_faults": []
+            },
+            {
+              "steps": 1,
+              "repeat": 2,
+              "counts": {},
+              "max_scheduled_objective_difference": 0,
+              "first_faults": []
+            },
+            {
+              "steps": 18,
+              "repeat": 0,
+              "counts": {},
+              "max_scheduled_objective_difference": 0,
+              "first_faults": []
+            },
+            {
+              "steps": 18,
+              "repeat": 1,
+              "counts": {},
+              "max_scheduled_objective_difference": 0,
+              "first_faults": []
+            },
+            {
+              "steps": 18,
+              "repeat": 2,
+              "counts": {},
+              "max_scheduled_objective_difference": 0,
+              "first_faults": []
+            },
+            {
+              "steps": 60,
+              "repeat": 0,
+              "counts": {},
+              "max_scheduled_objective_difference": 0,
+              "first_faults": []
+            },
+            {
+              "steps": 60,
+              "repeat": 1,
+              "counts": {},
+              "max_scheduled_objective_difference": 0,
+              "first_faults": []
+            },
+            {
+              "steps": 60,
+              "repeat": 2,
+              "counts": {},
+              "max_scheduled_objective_difference": 0,
+              "first_faults": []
+            }
+          ]
+        },
+        "test_summary": [
+          "2026-10-01T18:06:15.7071010Z 60 passed in 5.97s"
+        ]
+      }
+    ]
+  }
+}

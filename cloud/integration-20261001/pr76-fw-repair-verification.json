@@ -1,0 +1,167 @@
+{
+  "head": "77d29114c2f0281e7387c1c7bf52308f7bd164ce",
+  "tree": "260bcb2433eb518b039130353c922494fe424126",
+  "pr": 76,
+  "pr_merge": "4d2772f21df9063ef61f57b18fc9303f6310a7fd",
+  "merge_tree_verified": true,
+  "tests_run": 36904513888,
+  "tests_status": "success: all eight jobs passed; six configurations each 1340 tests",
+  "expected_test_count": 1340,
+  "cloud_run": 36904513793,
+  "cloud_job": 110511573051,
+  "cloud_status": "success",
+  "cloud_html_pages": 25,
+  "cloud_numerical_records": 24,
+  "cloud_pdf_pages": 2,
+  "cloud_manifest_sha256": "4336dc564fcc5e8e751c6db90a2cb885935d09b3efa21637653b800945662564",
+  "cloud_artifacts": [
+    {
+      "id": 11183351346,
+      "name": "chainbench-review-packet-4d2772f21df9063ef61f57b18fc9303f6310a7fd",
+      "size_in_bytes": 313439,
+      "url": "https://api.github.com/repos/chocoemong17/chainbench/actions/artifacts/11183351346",
+      "archive_download_url": "https://api.github.com/repos/chocoemong17/chainbench/actions/artifacts/11183351346/zip",
+      "expired": false,
+      "created_at": "2026-10-01T18:09:32Z",
+      "expires_at": "2026-10-08T18:09:31Z",
+      "updated_at": "2026-10-01T18:09:32Z",
+      "digest": "sha256:56b28d2f8bf228d42489b5b47d7a4a113800f16b98c69cc8815c202f0ceca63e",
+      "workflow_run": {
+        "id": 36904513793,
+        "repository_id": 1392555473,
+        "head_repository_id": 1392555473,
+        "head_branch": "docs/main-review-entry",
+        "head_sha": "77d29114c2f0281e7387c1c7bf52308f7bd164ce"
+      }
+    },
+    {
+      "id": 11183321372,
+      "name": "chainbench-reading-bundle-4d2772f21df9063ef61f57b18fc9303f6310a7fd",
+      "size_in_bytes": 44002388,
+      "url": "https://api.github.com/repos/chocoemong17/chainbench/actions/artifacts/11183321372",
+      "archive_download_url": "https://api.github.com/repos/chocoemong17/chainbench/actions/artifacts/11183321372/zip",
+      "expired": false,
+      "created_at": "2026-10-01T18:09:31Z",
+      "expires_at": "2026-10-08T18:09:25Z",
+      "updated_at": "2026-10-01T18:09:31Z",
+      "digest": "sha256:0d055b19dadc920a78562fd1cb893b0a97a9f38554319bf6014dc4c955dee9b7",
+      "workflow_run": {
+        "id": 36904513793,
+        "repository_id": 1392555473,
+        "head_repository_id": 1392555473,
+        "head_branch": "docs/main-review-entry",
+        "head_sha": "77d29114c2f0281e7387c1c7bf52308f7bd164ce"
+      }
+    }
+  ],
+  "jobs": [
+    {
+      "id": 110512105988,
+      "name": "wheel and sdist clean installation",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 110512106117,
+      "name": "offline interactive reports browser",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 110512106212,
+      "name": "test (windows-latest, Python 3.12, current)",
+      "status": "completed",
+      "conclusion": "success",
+      "passed_tests": 1340
+    },
+    {
+      "id": 110512106225,
+      "name": "test (ubuntu-latest, Python 3.10, current)",
+      "status": "completed",
+      "conclusion": "success",
+      "passed_tests": 1340
+    },
+    {
+      "id": 110512106253,
+      "name": "test (ubuntu-latest, Python 3.12, current)",
+      "status": "completed",
+      "conclusion": "success",
+      "passed_tests": 1340
+    },
+    {
+      "id": 110512106256,
+      "name": "test (ubuntu-latest, Python 3.11, current)",
+      "status": "completed",
+      "conclusion": "success",
+      "passed_tests": 1340
+    },
+    {
+      "id": 110512106269,
+      "name": "test (macos-26-intel, Python 3.12, current)",
+      "status": "completed",
+      "conclusion": "success",
+      "passed_tests": 1340
+    },
+    {
+      "id": 110512106329,
+      "name": "test (ubuntu-latest, Python 3.10, minimum)",
+      "status": "completed",
+      "conclusion": "success",
+      "passed_tests": 1340
+    }
+  ],
+  "fw_controlled_run": 36904276640,
+  "local_checks": [
+    "Ruff --no-cache",
+    "AST syntax",
+    "git diff --check"
+  ],
+  "full_tests_location": "GitHub Actions",
+  "test_summaries": [
+    {
+      "job": 110512106212,
+      "summaries": [
+        "2026-10-01T18:19:29.3075048Z 1340 passed in 588.21s (0:09:48)\r"
+      ]
+    },
+    {
+      "job": 110512106256,
+      "summaries": [
+        "2026-10-01T18:20:25.6326478Z 1340 passed in 669.43s (0:11:09)"
+      ]
+    },
+    {
+      "job": 110512106225,
+      "summaries": [
+        "2026-10-01T18:21:57.7727631Z 1340 passed in 760.49s (0:12:40)"
+      ]
+    },
+    {
+      "job": 110512106253,
+      "summaries": [
+        "2026-10-01T18:21:32.1910777Z 1340 passed in 736.04s (0:12:16)",
+        "2026-10-01T18:21:34.2124236Z     \"detected_by\": [",
+        "2026-10-01T18:21:34.2126558Z     \"detected_by\": [",
+        "2026-10-01T18:21:34.2128762Z     \"detected_by\": [",
+        "2026-10-01T18:21:34.2130659Z     \"detected_by\": ["
+      ]
+    },
+    {
+      "job": 110512106329,
+      "summaries": [
+        "2026-10-01T18:23:31.0829037Z 1340 passed in 842.55s (0:14:02)"
+      ]
+    },
+    {
+      "job": 110512106269,
+      "summaries": [
+        "2026-10-01T18:29:37.0083510Z 1340 passed in 1208.27s (0:20:08)"
+      ]
+    }
+  ],
+  "package_install_results": [
+    "2026-10-01T18:12:52.9766714Z CLEAN INSTALL PASSED: chainbench-0.5.0-py3-none-any.whl",
+    "2026-10-01T18:16:26.5377591Z CLEAN INSTALL PASSED: chainbench-0.5.0.tar.gz"
+  ],
+  "merged_main": "e3858108ea492df04121c14d5306ac2bab1454fa"
+}

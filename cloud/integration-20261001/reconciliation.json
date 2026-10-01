@@ -1,0 +1,97 @@
+{
+  "release": {
+    "id": 399273838,
+    "tag": "v0.5.0",
+    "target": "43ba91a8e7fe8d4baf287e3faa154ab5a5819c31",
+    "assets": [
+      {
+        "id": 598522878,
+        "name": "build-environment.txt",
+        "size": 246,
+        "digest": "sha256:33ed3de43a3470f430dae00065dfe4d4a615790bf304e3e1985297005394e803"
+      },
+      {
+        "id": 598522870,
+        "name": "chainbench-0.5.0-py3-none-any.whl",
+        "size": 77204,
+        "digest": "sha256:c462b483c921cf47bf9dc8cbd1d4066d0924426cb9299883981e477576a619ce"
+      },
+      {
+        "id": 598522871,
+        "name": "chainbench-0.5.0.tar.gz",
+        "size": 151062,
+        "digest": "sha256:cf1dade42c67d7722efa8b6190f3f0f7666db81f7e7eba63a550928e14659cb6"
+      },
+      {
+        "id": 598522873,
+        "name": "SHA256SUMS",
+        "size": 362,
+        "digest": "sha256:8039c2841dae5e57320aaf2cd2d63fab05d961868c53673e40bbfb054b6bbb3f"
+      },
+      {
+        "id": 598522874,
+        "name": "verification.json",
+        "size": 5240,
+        "digest": "sha256:83172d5fa514b2bde2c95aa39249a9d2ff77b4a4e38d37c111ff8a9737754a4b"
+      }
+    ]
+  },
+  "release_ref": {
+    "sha": "43ba91a8e7fe8d4baf287e3faa154ab5a5819c31",
+    "type": "commit",
+    "url": "https://api.github.com/repos/chocoemong17/chainbench/git/commits/43ba91a8e7fe8d4baf287e3faa154ab5a5819c31"
+  },
+  "open_work": [
+    {
+      "number": 78,
+      "title": "Preserve actual Frank-Wolfe objective samples across segment views",
+      "is_pr": false
+    },
+    {
+      "number": 77,
+      "title": "Stabilize CG scalar reductions and preserve strict rerun comparisons",
+      "is_pr": false
+    },
+    {
+      "number": 76,
+      "title": "Preserve numerical report consistency across supported environments",
+      "is_pr": true
+    },
+    {
+      "number": 40,
+      "title": "Make the visual alpha usable for guided learning, local interaction and saved comparisons",
+      "is_pr": false
+    },
+    {
+      "number": 39,
+      "title": "Turn static reports into an explorable, reproducible learning workflow (v0.4.0)",
+      "is_pr": false
+    },
+    {
+      "number": 28,
+      "title": "Call for independent v0.2.0 reproduction reports \u2014 successes and failures welcome",
+      "is_pr": false
+    }
+  ],
+  "main_before_merge": "69a16c5dd00241011250ea560501de451514e0d3",
+  "merged_main": "e3858108ea492df04121c14d5306ac2bab1454fa",
+  "merged_tree": "260bcb2433eb518b039130353c922494fe424126",
+  "final_pr_tests": 36904513888,
+  "final_pr_cloud": 36904513793,
+  "new_main_tests": 36907555600,
+  "new_main_cloud": 36907555063,
+  "release_checked_at_utc": "2026-10-01T18:25:32Z",
+  "closed_by_pr76": [
+    77,
+    78
+  ],
+  "open_issues_after_merge": [
+    28,
+    39,
+    40
+  ],
+  "new_main_tests_status": "success",
+  "new_main_cloud_status": "success",
+  "tests_per_configuration": 1340,
+  "configurations": 6
+}

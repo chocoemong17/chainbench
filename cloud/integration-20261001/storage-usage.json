@@ -1,0 +1,12 @@
+{
+  "checked_at_utc": "2026-10-01T18:59:45.593236+00:00",
+  "scope": "Entire local task folder",
+  "cap_bytes": 1000000000,
+  "allocated_bytes": 88588288,
+  "apparent_bytes": 78265688,
+  "measurement": "GNU du -s -B 1 and du -sb; symlink targets not followed",
+  "full_tests_builds_rendering": "GitHub Actions only",
+  "main_pdf_packet_bytes": 535548,
+  "new_cg_png_bytes": 614520,
+  "new_review_zip_downloads_written_to_disk": false
+}
