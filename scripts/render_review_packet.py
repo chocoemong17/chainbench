@@ -147,15 +147,19 @@ def render(tour, output, run_url):
         with pymupdf.open(pdf) as document:
             if len(document) != 2:
                 raise RuntimeError('Expected exactly two PDF pages')
+            titles = ('같은축소계산에서,이동크기선택으로', '무엇이같고,무엇을다르게읽어야할까?')
+            evidence['pdf_fonts'] = []
             for index, sheet in enumerate(document):
                 text = sheet.get_text()
-                if len(text) < 400 or '\ufffd' in text:
+                if len(text) < 400 or '\ufffd' in text or titles[index] not in re.sub(r'\s+', '', text):
                     raise RuntimeError('Missing or broken PDF text')
                 fonts = sheet.get_fonts()
-                if not any('NotoSansCJK' in f[3] for f in fonts):
-                    raise RuntimeError('Korean PDF font is missing')
-                if any(not document.extract_font(f[0])[3] for f in fonts):
+                # Chromium may rename CJK subsets; check the delivered text and
+                # font bytes rather than depending on a particular basefont name.
+                if not fonts or any(not document.extract_font(f[0])[3] for f in fonts):
                     raise RuntimeError('PDF font is not embedded')
+                evidence['pdf_fonts'].append([dict(name=f[3], type=f[2],
+                    embedded_bytes=len(document.extract_font(f[0])[3])) for f in fonts])
                 sheet.get_pixmap(matrix=pymupdf.Matrix(1.2, 1.2)).save(stage/f'page-{index+1}.png')
         evidence['pdf_pages'] = 2
         evidence['files'] = {p.name: dict(bytes=p.stat().st_size, sha256=digest(p)) for p in sorted(stage.iterdir())}
