@@ -72,12 +72,13 @@ def test_all_stages_include_actual_step_and_final_row_has_no_invented_update(rec
 
 
 @pytest.mark.parametrize("current,vertex,gamma", [
-    ([0, 0, 1], [1, 0, 0], 1),
-    ([1, 0, 0], [1, 0, 0], 0),  # scheduled point is also the segment minimum
+    ([0, 0, 1], [0, 1, 0], 1),
+    ([0, 1, 0], [0, 1, 0], 0),  # scheduled point is also the segment minimum
 ])
 def test_segment_retains_the_actual_next_value_including_roundoff(current, vertex, gamma):
+    # At e2, half(.2**2 + .7**2 + .5**2) = .39.
     stored = math.nextafter(.39, math.inf)
-    p = segment_profile([.2, .3, .5], current, vertex, gamma, [1, 0, 0],
+    p = segment_profile([.2, .3, .5], current, vertex, gamma, [0, 1, 0],
                         following_value=stored)
     assert p['objective'][p['scheduled_index']] == stored
     assert p['minimum_value'] == p['objective'][p['minimum_index']]
