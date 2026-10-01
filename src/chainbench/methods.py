@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass
 
 import numpy as np
@@ -78,6 +79,24 @@ def _norm(x: np.ndarray) -> float:
         return float(np.hypot.reduce(x))
 
 
+def _cg_dot(left: np.ndarray, right: np.ndarray) -> float:
+    """Accumulate rounded products independently of BLAS reduction dispatch."""
+    with np.errstate(over="raise", invalid="raise"):
+        products = np.multiply(left, right)
+    try:
+        result = math.fsum(products)
+    except (OverflowError, ValueError) as exc:
+        raise FloatingPointError("non-finite CG inner product") from exc
+    if not math.isfinite(result):
+        raise FloatingPointError("non-finite CG inner product")
+    return result
+
+
+def _cg_matvec(matrix: np.ndarray, vector: np.ndarray) -> np.ndarray:
+    """Use the same explicit accumulation for every small dense CG row."""
+    return np.asarray([_cg_dot(row, vector) for row in matrix], dtype=float)
+
+
 def conjugate_gradient(
     problem: QuadraticProblem, steps: int | None = None, x0: np.ndarray | None = None,
     *, rtol: float = 1e-12, atol: float = 0.0,
@@ -95,7 +114,7 @@ def conjugate_gradient(
     x = initial(problem.dim, x0)
     start, xs = x.copy(), [x.copy()]
     with np.errstate(over="raise", invalid="raise", divide="raise"):
-        raw = problem.b - problem.Q @ x
+        raw = problem.b - _cg_matvec(problem.Q, x)
         initial_norm = _norm(raw)
         tolerance = max(atol, rtol * initial_norm)
         if initial_norm <= tolerance or steps == 0:
@@ -111,13 +130,13 @@ def conjugate_gradient(
             raise FloatingPointError("CG correction cannot be represented at this scale")
         residual = residual / scale
         direction = residual.copy()
-        rr = float(residual @ residual)
+        rr = _cg_dot(residual, residual)
         correction = np.zeros(problem.dim)
         residual_norm = initial_norm
         termination = "max_steps"
         for _ in range(steps):
-            qd = operator @ direction
-            denominator = float(direction @ qd)
+            qd = _cg_matvec(operator, direction)
+            denominator = _cg_dot(direction, qd)
             if not np.isfinite(denominator) or denominator <= 0 or rr <= 0:
                 raise FloatingPointError("CG encountered nonpositive or non-finite curvature")
             alpha = rr / denominator
@@ -125,17 +144,17 @@ def conjugate_gradient(
             x = start + scale * correction
             xs.append(x.copy())
             # Never declare convergence from the recursively updated residual alone.
-            raw = problem.b - problem.Q @ x
+            raw = problem.b - _cg_matvec(problem.Q, x)
             residual_norm = _norm(raw)
             if residual_norm <= tolerance:
                 termination = "converged"
                 break
             residual = residual - alpha * qd
-            rr_next = float(residual @ residual)
+            rr_next = _cg_dot(residual, residual)
             if rr_next == 0:
                 # A recurrence can round to zero while the true residual remains nonzero.
                 residual = (raw / problem.L) / scale
-                rr_next = float(residual @ residual)
+                rr_next = _cg_dot(residual, residual)
                 direction = residual.copy()
             else:
                 direction = residual + (rr_next / rr) * direction
