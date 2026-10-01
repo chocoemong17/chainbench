@@ -7,7 +7,9 @@ Its full PR gate passed all eight jobs, including 1,394 tests per configuration.
 The packet is pinned to the tested PR; its tree is identical to the merged source.
 Current source: [main f8fdc61](https://github.com/chocoemong17/chainbench/tree/f8fdc61502426a0f60c99274e4960bf568812b45).
 [Separate main push CI](https://github.com/chocoemong17/chainbench/actions/runs/36919253999)
-records post-merge verification.
+passed all eight jobs: 1,394 tests in each of six environments, both clean
+installations and the complete browser checks. [The completed main verification](cloud/main-f8fdc61/verification.json)
+retains all job IDs, actual-log checks and separate cloud output hashes.
 
 For the broader optimization toolkit, start with the [two-page Korean FISTA PDF](cloud/e385810/ChainBench_FISTA_review.pdf),
 [five geometry previews](cloud/33b6243/browser-gallery), or
