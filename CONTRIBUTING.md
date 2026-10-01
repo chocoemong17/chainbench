@@ -22,11 +22,13 @@ chainbench check all
 
 Independent reruns compare computed floating values with the canonical trajectory
 tolerance (`rtol=1e-12`, `atol=1e-14`), not bitwise equality. The test helper in
-`tests/_numeric_records.py` keeps types, shape, inputs/config, hashes, strings,
+`tests/_numeric_records.py` keeps JSON numeric types, shape, inputs/config, hashes, strings,
 counts, booleans and missing values exact, and rejects nonfinite values. It is
 only for independent recomputation: serialization, embedded previews and views
 of the same computed record still require exact equality. The scientific bounds,
 independent validators and file-integrity checks retain their own unchanged contracts.
+NumPy `float64` and its decoded JSON float share the floating-number contract;
+neither can substitute for an integer count or boolean flag.
 
 Interactive reports also have optional offline Playwright checks in `scripts/check_*_browser.py`.
 For example, with Playwright and Chromium available:

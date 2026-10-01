@@ -2,6 +2,7 @@
 import copy
 import math
 
+import numpy as np
 import pytest
 from _numeric_records import assert_recomputed_record
 
@@ -29,6 +30,19 @@ def test_independent_roundoff_is_allowed_without_modifying_either_record():
     assert rerun == snapshot and original == record()
     # Actual failing Intel canonical residual, within the existing absolute tolerance.
     assert_recomputed_record(2.833996741079226e-7, 2.833996740567777e-7)
+
+
+def test_json_float_and_numpy_float64_share_the_floating_number_contract():
+    raw = {'active_declared_eigenvalues': [np.float64(1.25)]}
+    decoded = {'active_declared_eigenvalues': [1.25]}
+    assert_recomputed_record(raw, decoded)
+    assert_recomputed_record(decoded, raw)
+    with pytest.raises(AssertionError):
+        assert_recomputed_record(np.float64(1.251), 1.25)
+    with pytest.raises(AssertionError, match='types differ'):
+        assert_recomputed_record(np.float64(1.0), 1)
+    with pytest.raises(AssertionError, match='types differ'):
+        assert_recomputed_record(np.float64(0.0), False)
 
 
 @pytest.mark.parametrize('fault', [
@@ -77,6 +91,8 @@ def test_rerun_comparison_rejects_corrupted_evidence(fault):
 
 @pytest.mark.parametrize('value', [float('nan'), float('inf'), -float('inf')])
 @pytest.mark.parametrize('key', ['inputs', 'result'])
-def test_even_matching_nonfinite_values_are_rejected(value, key):
+@pytest.mark.parametrize('scalar_type', [float, np.float64])
+def test_even_matching_nonfinite_values_are_rejected(value, key, scalar_type):
+    value = scalar_type(value)
     with pytest.raises(AssertionError, match='nonfinite'):
         assert_recomputed_record({key: [value]}, {key: [value]})
