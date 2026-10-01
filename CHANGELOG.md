@@ -16,6 +16,10 @@ The entries below describe successive implementation stages; earlier 19- and
 20-page counts describe those stages, not the complete current extended tour.
 The frozen v0.5.0 release remains unchanged. Later commits retain their own CI.
 
+- Keep the complete macOS Python 3.12 gate on the standard macOS 26 Intel runner
+  after the ARM64 pool failed to allocate a runner. Preserve the cancelled attempt
+  and distinguish Intel validation from earlier Apple Silicon results.
+
 - Explain randomized Kaczmarz's conditional expectation through actual orthogonal
   error triangles and all possible row choices from each recorded input point.
   Keep candidate projections separate from sampled history, synchronize the

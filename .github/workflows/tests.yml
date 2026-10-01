@@ -28,7 +28,9 @@ jobs:
           - {os: ubuntu-latest, python: '3.11', dependencies: current}
           - {os: ubuntu-latest, python: '3.12', dependencies: current}
           - {os: windows-latest, python: '3.12', dependencies: current}
-          - {os: macos-latest, python: '3.12', dependencies: current}
+          # Standard Intel runner: the ARM64 pool failed to acquire a runner.
+          # Keep the full macOS suite; this is not an Apple Silicon validation.
+          - {os: macos-26-intel, python: '3.12', dependencies: current}
           - {os: ubuntu-latest, python: '3.10', dependencies: minimum}
     defaults:
       run:

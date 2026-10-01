@@ -49,6 +49,15 @@ The tests workflow retains the full cross-platform suite, wheel/sdist clean
 installation and offline browser checks. A successful reading-bundle job does
 not substitute for the remaining CI jobs. Existing releases stay unchanged.
 
+The macOS Python 3.12 gate uses GitHub's standard `macos-26-intel` runner.
+The earlier `macos-latest` ARM64 job was cancelled without acquiring a runner;
+[GitHub recorded its capacity constraint](https://github.com/chocoemong17/chainbench/actions/runs/36882942713/job/110439029108).
+The Intel runner keeps the complete test suite and the same macOS generation.
+It is a free standard runner for this public repository, as listed in
+[GitHub's runner reference](https://docs.github.com/en/actions/reference/runners/github-hosted-runners).
+Current Intel passes establish that environment's result; earlier Apple Silicon
+passes and the cancelled attempt remain separate evidence.
+
 The 2026-10-01 migration uploads the accumulated implementation, including the
 latest FISTA backtracking reading path. Previous local browser checks covered
 25 pages and 1,580 backtracking trial states across desktop/mobile. The final
