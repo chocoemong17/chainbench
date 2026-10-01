@@ -1,0 +1,35 @@
+{
+  "run": 36878546485,
+  "artifact": 11170642611,
+  "artifact_bytes": 117206344,
+  "artifact_sha256": "23ea5f2cab0496a60bf570a6459d4e9042ea633a1d777490fb97d7c56142b9db",
+  "source_head": "33b62430c98c94aa822fcf7101c03d458a7fb308",
+  "zip_saved_locally": false,
+  "files": {
+    "simplex__geometry-1440.png": {
+      "source_entry": "simplex/geometry-1440.png",
+      "bytes": 94342,
+      "sha256": "de936d30a710a4971b1c197c14f2c452fb9809d1c00bfe4940f967b7446df749"
+    },
+    "proximal__geometry-1440.png": {
+      "source_entry": "proximal/geometry-1440.png",
+      "bytes": 102107,
+      "sha256": "9e4c1d9f04ff98bfa0bb0ea9e0bce12f388a274aab4a07bf933f56327a51bc7c"
+    },
+    "paths-1440.png": {
+      "source_entry": "paths-1440.png",
+      "bytes": 545435,
+      "sha256": "511604add2472408689491d337cd76781b6520d66e0060a82ece9181c8e11b27"
+    },
+    "kaczmarz__cube-1440.png": {
+      "source_entry": "kaczmarz/cube-1440.png",
+      "bytes": 44742,
+      "sha256": "d085442c68bcabaabe304bd04fc96f120fd10363a204b832b3e4a4c4585e22cb"
+    },
+    "admm__admm-1440.png": {
+      "source_entry": "admm/admm-1440.png",
+      "bytes": 158059,
+      "sha256": "5c4444207aa662c750adac61524b5e31fada9f24a3e0b6bca670f62627e7f055"
+    }
+  }
+}
