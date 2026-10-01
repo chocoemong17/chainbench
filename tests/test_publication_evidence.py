@@ -38,6 +38,12 @@ def evidence(tmp_path, monkeypatch):
             "checks": 2, "slugs": ["condition", "observation"], "statuses": ["CONSISTENT", "INFO"],
             "installed_outside_checkout": True, "pip_check": "passed",
             "exports": ["html", "markdown", "csv", "json"], "plot_svg": "passed", "visual_evidence": "matched",
+            "saved_comparison": [
+                {"metric": metric, "records": count, "pairs": pairs, "plots": plots,
+                 "retained_samples": "exact", "shared_recorded_problem": shared}
+                for count, pairs, plots, shared in [(2, 1, 4, True), (3, 3, 3, False), (4, 6, 4, False)]
+                for metric in ["gap", "stationarity", "distance_to_reference"]
+            ],
             "advanced_workflows": {"learning": "matched", "sweep": "matched", "replay": "matched", "gd_tight": "matched", "stress": "matched", "landscape": "matched", "shewchuk_reproduction": "matched", "simplex_geometry": "matched", "inspectable_stress": "matched", "proximal_geometry": "matched", "offline_tour": "matched", "fista_deblurring": "matched", "heavy_ball_counterexample": "matched", "noisy_wavelet": "matched", "fw_sparsity": "matched", "extended_tour": "matched", "kaczmarz_expectation": "matched", "nonuniform_sampling": "matched", "cg_spectrum": "matched", "adam_counterexample": "matched", "admm_geometry": "matched", "fista_backtracking": "matched"},
             "instance_controls": {
                 "direct_override": "passed",
@@ -65,6 +71,83 @@ def evidence(tmp_path, monkeypatch):
 def test_valid_publication_evidence(evidence):
     module, _, _ = evidence
     assert len(module.verified_files(VERSION, SHA)) == 5
+
+
+@pytest.mark.parametrize("artifact_index", [0, 1])
+def test_missing_saved_comparison_is_rejected(evidence, artifact_index):
+    module, dist, report = evidence
+    del report["artifacts"][artifact_index]["saved_comparison"]
+    (dist / "verification.json").write_text(json.dumps(report), encoding="utf-8")
+    write_sums(dist)
+    with pytest.raises(RuntimeError, match="saved-comparison"):
+        module.verified_files(VERSION, SHA)
+
+
+@pytest.mark.parametrize("artifact_index", [0, 1])
+@pytest.mark.parametrize("corruption", [
+    "empty", "nonlist", "missing", "duplicate", "reordered", "extra",
+    "metric", "records", "pairs", "plots", "samples", "shared",
+    "bool-count", "float-count", "integer-bool", "unknown-field", "missing-metric", "nonobject",
+])
+def test_invalid_saved_comparison_is_rejected(evidence, artifact_index, corruption):
+    module, dist, report = evidence
+    record = report["artifacts"][artifact_index]
+    cases = record["saved_comparison"]
+    if corruption == "empty":
+        record["saved_comparison"] = []
+    elif corruption == "nonlist":
+        record["saved_comparison"] = {"passed": True}
+    elif corruption == "missing":
+        cases.pop()
+    elif corruption == "duplicate":
+        cases[1] = copy.deepcopy(cases[0])
+    elif corruption == "reordered":
+        cases.reverse()
+    elif corruption == "extra":
+        cases.append(copy.deepcopy(cases[-1]))
+    elif corruption == "missing-metric":
+        del cases[0]["metric"]
+    elif corruption == "nonobject":
+        cases[0] = None
+    else:
+        key, value = {
+            "metric": ("metric", "gap"), "records": ("records", 2),
+            "pairs": ("pairs", 0), "plots": ("plots", 4),
+            "samples": ("retained_samples", "approximately"),
+            "shared": ("shared_recorded_problem", True),
+            "bool-count": ("pairs", True), "float-count": ("pairs", 1.0),
+            "integer-bool": ("shared_recorded_problem", 1),
+            "unknown-field": ("unverified", "passed"),
+        }[corruption]
+        # Exercise both matching and mixed cases; type substitutions target a 1/True case.
+        case = cases[0] if corruption in ("bool-count", "float-count", "integer-bool") else cases[4]
+        case[key] = value
+    (dist / "verification.json").write_text(json.dumps(report), encoding="utf-8")
+    write_sums(dist)
+    with pytest.raises(RuntimeError, match="saved-comparison"):
+        module.verified_files(VERSION, SHA)
+
+
+def test_missing_comparison_prevents_any_release_api_call(evidence, monkeypatch):
+    module, dist, report = evidence
+    root = dist.parent
+    (root / "docs").mkdir()
+    (root / "docs" / f"RELEASE_NOTES_{VERSION}.md").write_text("fixture", encoding="utf-8")
+    (root / "release-manifest.json").write_text(json.dumps({"version": VERSION, "channel": "alpha"}))
+    del report["artifacts"][1]["saved_comparison"]
+    (dist / "verification.json").write_text(json.dumps(report), encoding="utf-8")
+    write_sums(dist)
+    monkeypatch.setenv("GITHUB_REPOSITORY", "chocoemong17/chainbench")
+    monkeypatch.setenv("GITHUB_REF", "refs/heads/main")
+    monkeypatch.setenv("GITHUB_SHA", SHA)
+
+    def local_checkout_only(*args):
+        assert args == ("git", "rev-parse", "HEAD"), "Release API called before evidence validation"
+        return SHA
+
+    monkeypatch.setattr(module, "command", local_checkout_only)
+    with pytest.raises(RuntimeError, match="saved-comparison"):
+        module.main()
 
 
 @pytest.mark.parametrize('workflow', ['shewchuk_reproduction', 'simplex_geometry', 'inspectable_stress', 'proximal_geometry', 'offline_tour', 'fista_deblurring', 'heavy_ball_counterexample', 'noisy_wavelet', 'fw_sparsity', 'extended_tour', 'kaczmarz_expectation', 'nonuniform_sampling', 'cg_spectrum', 'adam_counterexample', 'admm_geometry', 'fista_backtracking'])

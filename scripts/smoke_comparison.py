@@ -75,7 +75,8 @@ def validate_comparison(result, originals, html=None):
         ordered = ([c['chart'] for c in result['charts'] if c['id'].startswith('shared-')]
                    + [c['chart'] for c in result['charts'] if c['id'].startswith('record-')])
         require(canonical(plots) == canonical(ordered))
-    return {'records': len(originals), 'pairs': len(pairs), 'plots': len(expected),
+    return {'metric': result['metric'], 'records': len(originals),
+            'pairs': len(pairs), 'plots': len(expected),
             'retained_samples': 'exact', 'shared_recorded_problem': expected_shared}
 
 
@@ -97,6 +98,8 @@ def exercise_comparison(cli, work, env, run):
         for metric in ('gap', 'stationarity', 'distance_to_reference'):
             args = [cli, 'compare', *paths[:count], '--metric', metric]
             record = json.loads(run(args+['--format', 'json'], work, env))
+            if record.get('metric') != metric:
+                raise RuntimeError('Comparison did not preserve the requested metric')
             html = run(args+['--lang', 'ko'], work, env)
             outcomes.append(validate_comparison(record, originals[:count], html))
     if not outcomes[0]['shared_recorded_problem'] or outcomes[-1]['shared_recorded_problem']:

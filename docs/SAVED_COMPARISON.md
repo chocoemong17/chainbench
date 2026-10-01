@@ -76,8 +76,12 @@ NumPy remains the only runtime dependency.
 
 Installed wheel and sdist smoke checks independently audit two-, three- and
 four-record examples with all three metrics. They compare every retained report,
-canonical hash, pair diagnostic, plotted sample and SVG metadata. Regression
-cases corrupt hashes, diagnostics and curves and require rejection. Browser
+canonical hash, pair diagnostic, plotted sample and SVG metadata. Checks also
+bind each requested metric to the actual returned record. The release
+gate requires the complete nine-case summary from both distributions; missing,
+duplicate or malformed cases fail before publication. Ordinary PR package CI
+applies this gate to its real installation output without publishing a release.
+Regression cases corrupt hashes, diagnostics and curves and require rejection. Browser
 checks inspect both matching and mixed problems at 1440px and 390px, keyboard
 navigation, native details, language switching, exact JSON download, no-script
 reading and absence of network requests. The browser job produces the actual

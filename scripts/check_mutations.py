@@ -1,4 +1,4 @@
-"""Four targeted fault injections; detection is not a general mutation-coverage claim."""
+"""Five targeted fault injections; detection is not a general mutation-coverage claim."""
 from __future__ import annotations
 
 import json
@@ -22,6 +22,9 @@ CASES = [
     ("missing-install-hash-binding", "scripts/publish_release.py",
      'if record.get("sha256") != digest(dist / name):', "if False:", "",
      "tests/test_publication_evidence.py::test_reject_distribution_changed_after_smoke_test"),
+    ("missing-comparison-publication-gate", "scripts/publish_release.py",
+     "require_saved_comparison(comparison)", "pass", "",
+     "tests/test_publication_evidence.py::test_missing_saved_comparison_is_rejected"),
 ]
 
 

@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Require complete saved-comparison installation evidence before publication,
+  including all three metrics for two, three and four records. Bind requested
+  metrics to actual outputs, reject missing or malformed cases, and apply the
+  publication validator to real wheel/sdist evidence in ordinary PR package CI.
+
 - Add `compare` for two to four saved experiment records, with exact provenance
   retention, pairwise setup/input/environment diagnostics, bounded strict imports
   and separate panels when objectives differ. Shared-method overlays use actual
