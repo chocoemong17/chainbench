@@ -1,3 +1,4 @@
+import copy
 import importlib.util
 import json
 from pathlib import Path
@@ -26,8 +27,17 @@ def test_focused_pages_have_executable_workflows_and_no_missing_local_links(topi
     assert 'data-workflow-link=' not in html
 
 
-def test_link_context_does_not_change_computed_learning_evidence():
+def test_link_context_does_not_change_computed_learning_evidence(monkeypatch):
     from test_learning_workflows import Evidence
+
+    import chainbench.learning as module
+
+    # A presentation-only change must preserve one computed record exactly.
+    # Independent recomputation has a separate numerical comparison contract.
+    result = module.run_check('jaggi-2013')
+    chart = module.build_check_chart('jaggi-2013')
+    monkeypatch.setattr(module, 'run_check', lambda _: copy.deepcopy(result))
+    monkeypatch.setattr(module, 'build_check_chart', lambda _: copy.deepcopy(chart))
     raw = learning_html('jaggi-2013', 'ko')
     linked = learning_html('jaggi-2013', 'ko', report_links=['simplex.html', 'fw-sparsity.html'])
     assert json.loads(Evidence(raw).text) == json.loads(Evidence(linked).text)

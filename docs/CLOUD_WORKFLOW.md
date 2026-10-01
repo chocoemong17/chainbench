@@ -58,6 +58,12 @@ It is a free standard runner for this public repository, as listed in
 Current Intel passes establish that environment's result; earlier Apple Silicon
 passes and the cancelled attempt remain separate evidence.
 
+The first Intel run then exposed 12 tests that required exact equality across
+independent floating-point computations (1,276 passed). [Issue #77](https://github.com/chocoemong17/chainbench/issues/77)
+records the failure and the stricter distinction between numerical rerun comparison
+and exact serialization/provenance. This result is separate from the earlier
+ARM64 allocation failure; it is not counted as a passing validation.
+
 The 2026-10-01 migration uploads the accumulated implementation, including the
 latest FISTA backtracking reading path. Previous local browser checks covered
 25 pages and 1,580 backtracking trial states across desktop/mobile. The final

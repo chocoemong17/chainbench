@@ -4,6 +4,7 @@ from dataclasses import asdict
 from html.parser import HTMLParser
 
 import pytest
+from _numeric_records import assert_recomputed_record
 
 from chainbench._pages import bi
 from chainbench.case_studies import case_html, gd_tight_case
@@ -41,8 +42,10 @@ class Evidence(HTMLParser):
 def test_learning_preserves_actual_check_and_chart(slug):
     html = learning_html(slug, 'ko')
     data = json.loads(Evidence(html).text)
-    assert data['results'] == [asdict(run_check(slug))]
-    assert data['charts'][slug] == json.loads(json.dumps(asdict(build_check_chart(slug))))
+    assert_recomputed_record(data['results'], [asdict(run_check(slug))])
+    assert_recomputed_record(
+        data['charts'][slug], json.loads(json.dumps(asdict(build_check_chart(slug)))),
+    )
     assert data['kind'] == 'chainbench.learning'
     assert data['mechanism_maps']['kind'] == 'symbolic-process-maps'
     assert list(data['mechanism_maps']['topics']) == [slug]
@@ -113,7 +116,7 @@ def test_sweep_is_actual_one_field_experiment(preset, parameter, values):
         assert target[parameter] == v
         target[parameter] = base[parameter] if parameter == 'steps' else base['problem'][parameter]
         assert restored == base
-        assert exp == run_experiment(exp['config'])
+        assert_recomputed_record(exp, run_experiment(exp['config']))
 
 
 @pytest.mark.parametrize('parameter,values', [

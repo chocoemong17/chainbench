@@ -4,6 +4,7 @@ from contextlib import contextmanager
 from pathlib import Path
 
 import pytest
+from _numeric_records import assert_recomputed_record
 
 from chainbench.cli import main
 from chainbench.tour import build_tour
@@ -140,7 +141,8 @@ def test_extended_tour_preserves_base_records_and_reproduction_metadata(tour_fol
     assert records['wavelet.html']['parameters']['full_paper_budget']
     assert records['wavelet.html']['problem']['f_star'] is None
     assert records['fw-sparsity.html']['parameters']['steps'] == 40
-    assert all(records[name] == record for name, record in validator()(tour_folder).items())
+    for name, record in validator()(tour_folder).items():
+        assert_recomputed_record(records[name], record, path=name)
     assert records['kaczmarz.html']['parameters']['trials'] == 64
     assert json.loads((extended_folder/'manifest.json').read_text(encoding='utf8'))['extensions'] == ['fista-wavelet','fw-sparsity','kaczmarz-expectation','kaczmarz-sampling','cg-spectrum','reddi-2018','admm-lasso','fista-backtracking']
     assert json.loads((tour_folder/'manifest.json').read_text(encoding='utf8'))['extensions'] == []
@@ -153,17 +155,17 @@ def test_extended_tour_preserves_base_records_and_reproduction_metadata(tour_fol
     assert 'admm.html' not in (tour_folder/'index.html').read_text(encoding='utf8')
     assert 'backtracking.html' not in (tour_folder/'index.html').read_text(encoding='utf8')
     from chainbench.kaczmarz import run_kaczmarz
-    assert records['kaczmarz.html'] == run_kaczmarz(40,64)
+    assert_recomputed_record(records['kaczmarz.html'], run_kaczmarz(40,64))
     from chainbench.nonuniform_sampling import run_nonuniform_sampling
-    assert records['sampling.html'] == run_nonuniform_sampling()
+    assert_recomputed_record(records['sampling.html'], run_nonuniform_sampling())
     from chainbench.cg_spectrum import run_cg_spectrum
-    assert records['cg-spectrum.html'] == run_cg_spectrum()
+    assert_recomputed_record(records['cg-spectrum.html'], run_cg_spectrum())
     from chainbench.adam_counterexample import run_adam_counterexample
-    assert records['adam.html'] == run_adam_counterexample()
+    assert_recomputed_record(records['adam.html'], run_adam_counterexample())
     from chainbench.admm_geometry import run_admm_geometry
-    assert records['admm.html'] == run_admm_geometry()
+    assert_recomputed_record(records['admm.html'], run_admm_geometry())
     from chainbench.fista_backtracking import run_fista_backtracking
-    assert records['backtracking.html'] == run_fista_backtracking()
+    assert_recomputed_record(records['backtracking.html'], run_fista_backtracking())
 
 
 def test_adam_preview_retains_the_slow_case_and_actual_regret_quantity(extended_folder):

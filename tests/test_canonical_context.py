@@ -6,6 +6,7 @@ from pathlib import Path
 
 import numpy as np
 import pytest
+from _numeric_records import assert_recomputed_record
 
 from chainbench.checks import CHECKS
 from chainbench.methods import (
@@ -59,7 +60,7 @@ def test_retained_inputs_rerun_every_plotted_observation(slug):
             trace = methods[name](problem, c['budget'], **kwargs)
         assert run['updates'] == len(trace.iterates)-1
         assert run['termination'] == (trace.termination or 'fixed_budget')
-        assert run['true_residual_norm'] == trace.residual_norm
+        assert_recomputed_record(run['true_residual_norm'], trace.residual_norm)
         series = chart.series[1 if slug == 'ista-vs-fista' and name == 'fista' else 0]
         gaps = np.array([problem.gap(x) for x in trace.iterates])
         observed = gaps
