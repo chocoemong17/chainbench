@@ -20,6 +20,26 @@ def digest(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def require_saved_comparison(value: object) -> None:
+    """Require all nine installed CLI scenarios, including their requested metric."""
+    expected = [
+        {"metric": metric, "records": count, "pairs": pairs, "plots": plots,
+         "retained_samples": "exact", "shared_recorded_problem": shared}
+        for count, pairs, plots, shared in ((2, 1, 4, True), (3, 3, 3, False), (4, 6, 4, False))
+        for metric in ("gap", "stationarity", "distance_to_reference")
+    ]
+    if (
+        not isinstance(value, list) or len(value) != len(expected)
+        or any(
+            not isinstance(actual, dict) or actual.keys() != required.keys()
+            or any(type(actual[key]) is not type(want) or actual[key] != want
+                   for key, want in required.items())
+            for actual, required in zip(value, expected)
+        )
+    ):
+        raise RuntimeError("Missing or invalid installed saved-comparison evidence")
+
+
 def verified_files(version: str, sha: str) -> list[Path]:
     """Fail before any network write if evidence or distribution bytes changed."""
     dist = ROOT / "dist"
@@ -103,7 +123,9 @@ def verified_files(version: str, sha: str) -> list[Path]:
             "fista_backtracking": "matched",
         }:
             raise RuntimeError("Missing installed learning-workflow evidence")
-        summary = (slugs, statuses, experiments, controls, advanced)
+        comparison = record.get("saved_comparison")
+        require_saved_comparison(comparison)
+        summary = (slugs, statuses, experiments, controls, advanced, comparison)
         if baseline is not None and summary != baseline:
             raise RuntimeError("Wheel and sdist results disagree")
         baseline = summary

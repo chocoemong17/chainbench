@@ -12,7 +12,7 @@ from chainbench.comparison_views import comparison_html
 from chainbench.experiments import config_digest, preset_config, run_experiment
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
-from smoke_comparison import validate_comparison  # noqa: E402
+from smoke_comparison import exercise_comparison, validate_comparison  # noqa: E402
 
 
 def make_record(kind='quadratic', steps=4):
@@ -37,11 +37,32 @@ def test_exact_samples_and_no_solver_execution(kind, metric, monkeypatch):
     monkeypatch.setattr('chainbench.experiments.run_experiment', forbidden)
     monkeypatch.setattr('chainbench.workflows.run_experiment', forbidden)
     result = compare_experiments([left, right], metric=metric)
-    validate_comparison(result, [left, right], comparison_html(result, 'ko'))
+    audit = validate_comparison(result, [left, right], comparison_html(result, 'ko'))
+    assert audit['metric'] == metric
     assert result['shared_recorded_problem']
     assert not result['pairs'][0]['same_config']
     assert [d['field'] for d in result['pairs'][0]['config_differences']] == ['steps']
     assert result['records'][0]['experiment']['runs'][0]['rows'] == left['runs'][0]['rows']
+
+
+@pytest.mark.parametrize('wrong_metric', ['stationarity', 'distance_to_reference', None])
+def test_installed_smoke_rejects_ignored_metric_flag(tmp_path, wrong_metric):
+    # Intercept CLI output before scientific validation: the requested first
+    # metric is gap, even if the returned report claims another valid metric.
+    calls = []
+
+    def fake_run(args, work, env):
+        calls.append(args)
+        if args[1] == 'experiment':
+            Path(args[args.index('--output')+1]).write_text('{}', encoding='utf8')
+            return ''
+        assert args[args.index('--metric')+1] == 'gap'
+        assert args[-2:] == ['--format', 'json']
+        return json.dumps({'metric': wrong_metric})
+
+    with pytest.raises(RuntimeError, match='requested metric'):
+        exercise_comparison('chainbench', tmp_path, {}, fake_run)
+    assert len(calls) == 5
 
 
 def test_four_records_are_detached_and_duplicates_explicit(record):

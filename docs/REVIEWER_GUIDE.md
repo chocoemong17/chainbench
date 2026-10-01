@@ -46,7 +46,7 @@ or the hand-computed recurrence tests. A missing FISTA momentum term should not 
 
 A valid review can focus on malformed input, an exhausted CG budget, a mislabeled
 metric, a missing measurement or unsafe publication evidence. The test suite and
-four targeted fault injections demonstrate specific cases; they are not exhaustive.
+targeted fault injections demonstrate specific cases; they are not exhaustive.
 To run them in a source checkout:
 
 ```bash

@@ -69,6 +69,17 @@ jobs:
       - run: python -m build
       - run: python -m pip freeze > dist/build-environment.txt
       - run: python scripts/smoke_install.py
+      - name: Validate real install evidence at the publication boundary
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          from scripts.publish_release import verified_files
+          version = json.loads(Path('release-manifest.json').read_text(encoding='utf-8'))['version']
+          files = verified_files(version, os.environ['GITHUB_SHA'])
+          print(f'PUBLICATION EVIDENCE PASSED: {len(files)} verified files')
+          PY
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: distributions-${{ github.run_id }}

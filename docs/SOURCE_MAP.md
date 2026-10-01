@@ -229,7 +229,7 @@ not zero metrics or replacement seeds. See [exact formulas, floors and migration
 
 The quadratic constructor requires stationarity to relative floating precision, without an absolute tolerance floor; callers should build `b=Q@x_star` from their supplied symmetric matrix. `gap` is the energy error relative to that reference, and its interpretation as an optimality gap assumes a valid reference solution. This numeric reference check is not symbolic certification.
 
-Every bound sample must be finite and nonnegative before reduction; an empty vector or invalid sample is not discarded. Observations require real finite values, and an empty suite is an error rather than a vacuous pass. Tests include hand-computed recurrences and the explicit v0.1.0 counterexamples. `scripts/check_mutations.py` checks only four named fault injections in temporary copies, not all possible defects.
+Every bound sample must be finite and nonnegative before reduction; an empty vector or invalid sample is not discarded. Observations require real finite values, and an empty suite is an error rather than a vacuous pass. Tests include hand-computed recurrences and the explicit v0.1.0 counterexamples. `scripts/check_mutations.py` checks a fixed set of named fault injections in temporary copies, not all possible defects. Development source adds a saved-comparison publication-gate injection to the four earlier cases.
 
 
 ## Configurable observations (v0.2.0)
