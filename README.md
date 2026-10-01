@@ -12,7 +12,7 @@ Python 3.10+ and NumPy generate the pages; a browser is enough to read or share 
 
 **New here? [Download the offline tour and PDF](docs/OFFLINE_DOWNLOAD.md)**, then
 follow the [short reading route](docs/REVIEW_GUIDE.md#a-short-reading-route).
-The v0.6.0 assets become available after the main-branch release gate completes.
+The v0.6.0 assets are published with their completed validation records.
 For a quick preview without installation or sign-in, open the
 [two-page FISTA PDF](https://github.com/chocoemong17/chainbench/blob/archive/local-reviews-20261001/cloud/33b6243/ChainBench_FISTA_review.pdf)
 or [five actual geometry views with Korean reading notes](https://github.com/chocoemong17/chainbench/tree/archive/local-reviews-20261001/cloud/33b6243/browser-gallery).
@@ -21,6 +21,11 @@ These archived previews include their source and verification records.
 Already have several saved runs? [Compare two to four experiment records](docs/SAVED_COMPARISON.md)
 with `chainbench compare a.json b.json --lang ko --output comparison.html`.
 Inspect changed inputs, settings and environments before reading the actual curves.
+
+Development source also supports [stored numeric inputs and exact replay](docs/STORED_INPUTS.md):
+`instance generate`, `instance import`, `instance run` and `instance replay`.
+Save the actual arrays and starting point, inspect their trajectories, and rerun
+those same numbers. This addition is not in the frozen v0.6.0 downloads.
 
 The v0.6.0 source includes the integrated tour, paper examples, geometry inspectors,
 portability repairs and saved-record comparison. [Release notes](docs/RELEASE_NOTES_0.6.0.md)

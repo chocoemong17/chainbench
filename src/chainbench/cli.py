@@ -33,6 +33,7 @@ from .fw_sparsity import run_fw_sparsity
 from .fw_sparsity_views import fw_sparsity_html
 from .heavy_ball_cycle import run_heavy_ball_cycle
 from .heavy_ball_views import heavy_ball_cycle_html
+from .instance_cli import add_instance_parser, execute_instance
 from .kaczmarz import run_kaczmarz
 from .kaczmarz_views import kaczmarz_html
 from .landscape import METHODS as LANDSCAPE_METHODS
@@ -243,6 +244,8 @@ def main(argv: list[str] | None = None) -> int:
     plot.add_argument("--output", type=Path)
     plot.add_argument("--force", action="store_true")
 
+    add_instance_parser(sub)
+
     preset = sub.add_parser("preset", help="print or save an installed experiment configuration")
     preset.add_argument("name", choices=PRESETS)
     _add_overrides(preset)
@@ -370,6 +373,8 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     try:
+        if args.command == 'instance':
+            return execute_instance(args, _write)
         if args.command == 'tour':
             manifest = build_tour(args.output, args.lang, extended=args.extended)
             print(f'Created {len(manifest["artifacts"])} HTML files. Open {args.output / "index.html"}')

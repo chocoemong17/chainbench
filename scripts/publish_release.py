@@ -10,8 +10,10 @@ import tempfile
 from pathlib import Path
 
 try:
+    from .instance_evidence import require_stored_instances
     from .reading_release import asset_names, verify_assets
 except ImportError:  # Direct script invocation; the script directory is on sys.path.
+    from instance_evidence import require_stored_instances
     from reading_release import asset_names, verify_assets
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -130,7 +132,9 @@ def verified_files(version: str, sha: str) -> list[Path]:
             raise RuntimeError("Missing installed learning-workflow evidence")
         comparison = record.get("saved_comparison")
         require_saved_comparison(comparison)
-        summary = (slugs, statuses, experiments, controls, advanced, comparison)
+        stored = record.get("stored_instances")
+        stored_scope = require_stored_instances(stored)
+        summary = (slugs, statuses, experiments, controls, advanced, comparison, stored_scope)
         if baseline is not None and summary != baseline:
             raise RuntimeError("Wheel and sdist results disagree")
         baseline = summary

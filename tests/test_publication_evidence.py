@@ -45,6 +45,13 @@ def evidence(tmp_path, monkeypatch, reading_factory):
                 for count, pairs, plots, shared in [(2, 1, 4, True), (3, 3, 3, False), (4, 6, 4, False)]
                 for metric in ["gap", "stationarity", "distance_to_reference"]
             ],
+            # Synthetic transport fixtures; actual scalar/input audits run on installed CLI outputs.
+            "stored_instances": [
+                {"case": name, "family": family, "methods": methods, "rows": rows,
+                 "numeric_audit": True, "exact_inputs": True, "html_samples": True, "replay": "MATCH",
+                 "input_sha256": "1"*64, "manifest_sha256": "2"*64}
+                for name, family, methods, rows in load_script("instance_evidence").CASES
+            ],
             "advanced_workflows": {"learning": "matched", "sweep": "matched", "replay": "matched", "gd_tight": "matched", "stress": "matched", "landscape": "matched", "shewchuk_reproduction": "matched", "simplex_geometry": "matched", "inspectable_stress": "matched", "proximal_geometry": "matched", "offline_tour": "matched", "fista_deblurring": "matched", "heavy_ball_counterexample": "matched", "noisy_wavelet": "matched", "fw_sparsity": "matched", "extended_tour": "matched", "kaczmarz_expectation": "matched", "nonuniform_sampling": "matched", "cg_spectrum": "matched", "adam_counterexample": "matched", "admm_geometry": "matched", "fista_backtracking": "matched"},
             "instance_controls": {
                 "direct_override": "passed",
@@ -387,4 +394,25 @@ def test_wheel_and_sdist_experiment_records_must_agree(evidence):
     (dist / "verification.json").write_text(json.dumps(report), encoding="utf-8")
     write_sums(dist)
     with pytest.raises(RuntimeError, match="results disagree"):
+        module.verified_files(VERSION, SHA)
+
+
+def test_missing_stored_instances_is_rejected(evidence):
+    module, dist, report = evidence
+    del report['artifacts'][0]['stored_instances']
+    (dist/'verification.json').write_text(json.dumps(report), encoding='utf8')
+    write_sums(dist)
+    with pytest.raises(RuntimeError, match='stored-instance'):
+        module.verified_files(VERSION, SHA)
+
+
+@pytest.mark.parametrize('field,value', [('numeric_audit', 1), ('exact_inputs', 'passed'),
+    ('html_samples', False), ('rows', 33.0), ('replay', 'MISMATCH'), ('input_sha256', 'bad'),
+    ('manifest_sha256', None), ('case', 'unknown'), ('methods', ['gd']), ('family', 'simplex')])
+def test_corrupt_stored_instance_publication_evidence(evidence, field, value):
+    module, dist, report = evidence
+    report['artifacts'][0]['stored_instances'][0][field] = value
+    (dist/'verification.json').write_text(json.dumps(report), encoding='utf8')
+    write_sums(dist)
+    with pytest.raises(RuntimeError, match='[Ss]tored-instance'):
         module.verified_files(VERSION, SHA)
