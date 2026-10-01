@@ -114,7 +114,7 @@ def conjugate_gradient(
     x = initial(problem.dim, x0)
     start, xs = x.copy(), [x.copy()]
     with np.errstate(over="raise", invalid="raise", divide="raise"):
-        raw = problem.b - _cg_matvec(problem.Q, x)
+        raw = problem.b - problem.Q @ x
         initial_norm = _norm(raw)
         tolerance = max(atol, rtol * initial_norm)
         if initial_norm <= tolerance or steps == 0:
@@ -144,7 +144,7 @@ def conjugate_gradient(
             x = start + scale * correction
             xs.append(x.copy())
             # Never declare convergence from the recursively updated residual alone.
-            raw = problem.b - _cg_matvec(problem.Q, x)
+            raw = problem.b - problem.Q @ x
             residual_norm = _norm(raw)
             if residual_norm <= tolerance:
                 termination = "converged"

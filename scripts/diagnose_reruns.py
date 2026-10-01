@@ -6,11 +6,17 @@ import os
 import platform
 
 import numpy as np
+import pytest
+
+import chainbench.methods as cg_methods
 
 from chainbench.checks import CHECKS
 from chainbench.learning import ratio_chart
 from chainbench.stress import run_stress, run_stress_case
 from chainbench.visuals import build_check_chart
+
+if os.environ.get('DIAGNOSTIC_MODE') == 'compensated-dot':
+    cg_methods._cg_matvec = lambda matrix, vector: matrix @ vector
 
 class Differences:
     def __init__(self):
@@ -72,7 +78,7 @@ class Differences:
         print(json.dumps({"comparison": name, **self.__dict__}, allow_nan=False), flush=True)
 
 print(json.dumps({"purpose": "Measure all differences; thresholds are diagnostics, not altered tests",
-                  "python": platform.python_version(), "numpy": np.__version__,
+                  "mode": os.environ.get("DIAGNOSTIC_MODE"), "python": platform.python_version(), "numpy": np.__version__,
                   "system": platform.system(), "machine": platform.machine(),
                   "thread_environment": {k: os.environ.get(k) for k in
                       ("OPENBLAS_NUM_THREADS","VECLIB_MAXIMUM_THREADS","OMP_NUM_THREADS",
@@ -100,3 +106,5 @@ for topic in CHECKS:
         stats.compare(first_ratio,asdict(ratio) if ratio is not None else None,
                       f"{topic}.normalized{repeat}")
     stats.emit(topic+"; canonical and normalized charts; 10 reruns")
+
+raise SystemExit(pytest.main(["-q", "tests/test_conjugate_gradient.py", "tests/test_recurrences.py", "tests/test_numerical_regressions.py", "tests/test_audit_regressions.py"]))
