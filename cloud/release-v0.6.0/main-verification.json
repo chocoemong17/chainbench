@@ -1,0 +1,983 @@
+{
+  "main": "b22aeb16313c5ab5f2d605c25da576c5137841d6",
+  "tree": "f63246d907de5566d27d968af54cbbb3a0363dcb",
+  "pr": 84,
+  "previous_main": "afa81a6cf33c56d955ef60a5840d2a2cb94722e4",
+  "tests": 36934601939,
+  "release": 36934602943,
+  "status": "success",
+  "tree_matches_fully_tested_pr": true,
+  "recorded_at": "2026-10-01T22:24:20.624018+00:00",
+  "release_published": true,
+  "last_observed_runs": [
+    {
+      "run": 36934601939,
+      "jobs": [
+        {
+          "id": 110611797560,
+          "name": "offline interactive reports browser",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 110611797812,
+          "name": "test (ubuntu-latest, Python 3.12, current)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 110611797876,
+          "name": "test (windows-latest, Python 3.12, current)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 110611797911,
+          "name": "test (macos-26-intel, Python 3.12, current)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 110611797934,
+          "name": "test (ubuntu-latest, Python 3.10, current)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 110611798005,
+          "name": "test (ubuntu-latest, Python 3.11, current)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 110611798038,
+          "name": "test (ubuntu-latest, Python 3.10, minimum)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 110611798103,
+          "name": "audited offline reading assets / reading-bundle",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 110612681615,
+          "name": "wheel and sdist clean installation",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "run": 36934602943,
+      "jobs": [
+        {
+          "id": 110611800438,
+          "name": "verify / offline interactive reports browser",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 110611800637,
+          "name": "verify / test (ubuntu-latest, Python 3.10, current)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 110611800712,
+          "name": "verify / test (ubuntu-latest, Python 3.11, current)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 110611800749,
+          "name": "verify / audited offline reading assets / reading-bundle",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 110611800800,
+          "name": "verify / test (windows-latest, Python 3.12, current)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 110611800927,
+          "name": "verify / test (ubuntu-latest, Python 3.12, current)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 110611800955,
+          "name": "verify / test (macos-26-intel, Python 3.12, current)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 110611800964,
+          "name": "verify / test (ubuntu-latest, Python 3.10, minimum)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 110613055142,
+          "name": "verify / wheel and sdist clean installation",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 110618229967,
+          "name": "publish verified alpha release",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "main_reading_result": {
+    "job": 110611798103,
+    "status": "success",
+    "actual_completed_log_read": true,
+    "reading": {
+      "kind": "chainbench.reading-assets",
+      "schema_version": 1,
+      "version": "0.6.0",
+      "source_commit": "b22aeb16313c5ab5f2d605c25da576c5137841d6",
+      "bundle_manifest_sha256": "14426caa61db15e4040801afe76351794d22a1adb81aa7a97bb9e5feb82c4e07",
+      "assets": {
+        "chainbench-0.6.0-reading.zip": {
+          "bytes": 44961342,
+          "sha256": "7cd83dffbf0199c16cdfd39e922f20de3803ee76b68d21846bc0464b15e905b6"
+        },
+        "chainbench-0.6.0-review.pdf": {
+          "bytes": 286445,
+          "sha256": "9e2a3f0b0de99ebfd5061e327710def62fbc6d958b975590d34b213c620d05ff"
+        }
+      }
+    },
+    "pdf": {
+      "source_commit": "b22aeb16313c5ab5f2d605c25da576c5137841d6",
+      "run_url": "https://github.com/chocoemong17/chainbench/actions/runs/36934601939",
+      "manifest_sha256": "95b5483300cb01d2a18f0046e2108a5d3b8493e242be4786b528d8243c18cb36",
+      "renderer_sha256": "f4b458d131d95b77572ad26d0644061faa68da5035925146af6af7667ceb9769",
+      "html_pages": 25,
+      "numerical_records": 24,
+      "pdf_pages": 2,
+      "geometry": [
+        {
+          "bottom": 732.09375,
+          "footer": 743.953125,
+          "left": 45.34375,
+          "right": 1077.171875,
+          "width": 1123
+        },
+        {
+          "bottom": 1403.71875,
+          "footer": 1537.640625,
+          "left": 45.34375,
+          "right": 1077.171875,
+          "width": 1123
+        }
+      ],
+      "all_fonts_embedded": true,
+      "files": {
+        "ChainBench_FISTA_review.pdf": {
+          "bytes": 286445,
+          "sha256": "9e2a3f0b0de99ebfd5061e327710def62fbc6d958b975590d34b213c620d05ff"
+        },
+        "page-1.png": {
+          "bytes": 83880,
+          "sha256": "8a127bdc291ce58885f58442d6d2f5b0a16613729f972d9b028e5817351aa422"
+        },
+        "page-2.png": {
+          "bytes": 76855,
+          "sha256": "7e34ad3bc70ec577f8fa9d0a3326aa16a85ddcc7046707c583cf615252418ec3"
+        },
+        "review.html": {
+          "bytes": 66840,
+          "sha256": "a76abfd380f956efb1353e66ac852425716b193b31648222eb0d07879c4ce652"
+        }
+      }
+    },
+    "extracted_browser": {
+      "viewports": [
+        {
+          "width": 1440,
+          "reports_opened": 24,
+          "return_links": "passed",
+          "preview_images": "loaded",
+          "all_seeds": "retained",
+          "unresolved_seed24": "retained",
+          "language": "passed",
+          "overflow": false,
+          "atlas_workflow_links": 25,
+          "case_preserved_table_nodes": {
+            "index.html": 49,
+            "atlas.html": 0,
+            "shewchuk.html": 255,
+            "deblur.html": 0,
+            "heavy-ball.html": 95,
+            "simplex.html": 197,
+            "proximal.html": 193,
+            "landscape.html": 38,
+            "stress-gd-baseline.html": 134,
+            "stress-nesterov-1983.html": 134,
+            "stress-polyak-1964.html": 134,
+            "stress-hestenes-stiefel-1952.html": 134,
+            "stress-jaggi-2013.html": 134,
+            "stress-rockafellar-1976.html": 134,
+            "stress-beck-teboulle-2009.html": 134,
+            "stress-ista-vs-fista.html": 134,
+            "tight-gd.html": 4,
+            "wavelet.html": 13,
+            "fw-sparsity.html": 28,
+            "kaczmarz.html": 1674,
+            "sampling.html": 18,
+            "cg-spectrum.html": 864,
+            "adam.html": 281,
+            "admm.html": 1576,
+            "backtracking.html": 612
+          }
+        },
+        {
+          "width": 390,
+          "reports_opened": 24,
+          "return_links": "passed",
+          "preview_images": "loaded",
+          "all_seeds": "retained",
+          "unresolved_seed24": "retained",
+          "language": "passed",
+          "overflow": false,
+          "atlas_workflow_links": 25,
+          "case_preserved_table_nodes": {
+            "index.html": 49,
+            "atlas.html": 0,
+            "shewchuk.html": 255,
+            "deblur.html": 0,
+            "heavy-ball.html": 95,
+            "simplex.html": 197,
+            "proximal.html": 193,
+            "landscape.html": 38,
+            "stress-gd-baseline.html": 134,
+            "stress-nesterov-1983.html": 134,
+            "stress-polyak-1964.html": 134,
+            "stress-hestenes-stiefel-1952.html": 134,
+            "stress-jaggi-2013.html": 134,
+            "stress-rockafellar-1976.html": 134,
+            "stress-beck-teboulle-2009.html": 134,
+            "stress-ista-vs-fista.html": 134,
+            "tight-gd.html": 4,
+            "wavelet.html": 13,
+            "fw-sparsity.html": 28,
+            "kaczmarz.html": 1674,
+            "sampling.html": 18,
+            "cg-spectrum.html": 864,
+            "adam.html": 281,
+            "admm.html": 1576,
+            "backtracking.html": 612
+          }
+        }
+      ],
+      "network_requests": [],
+      "javascript_errors": [],
+      "browser": "153.0.8010.12",
+      "backtracking_trials": [
+        {
+          "width": 1440,
+          "cases": 36,
+          "states": 790
+        },
+        {
+          "width": 390,
+          "cases": 36,
+          "states": 790
+        }
+      ],
+      "no_script": "index, static figures and local navigation work"
+    }
+  },
+  "last_checked": "2026-10-01T23:09:23.565633+00:00",
+  "release_reading_result": {
+    "job": 110611800749,
+    "status": "success",
+    "actual_completed_log_read": true,
+    "reading": {
+      "kind": "chainbench.reading-assets",
+      "schema_version": 1,
+      "version": "0.6.0",
+      "source_commit": "b22aeb16313c5ab5f2d605c25da576c5137841d6",
+      "bundle_manifest_sha256": "42e0a436edba1bf3ac9ae84fbebfe0266922ca44c9a0c88065a353c18e9334c9",
+      "assets": {
+        "chainbench-0.6.0-reading.zip": {
+          "bytes": 44911739,
+          "sha256": "f654f06af572b98cfade39ee80933cbe70121d99443c5b7c4bd906f98c6337c2"
+        },
+        "chainbench-0.6.0-review.pdf": {
+          "bytes": 286445,
+          "sha256": "3d3dd41a281d90d2862dd9046fcfddbd69f61235d258887af44b5f836697fddb"
+        }
+      }
+    },
+    "pdf": {
+      "source_commit": "b22aeb16313c5ab5f2d605c25da576c5137841d6",
+      "run_url": "https://github.com/chocoemong17/chainbench/actions/runs/36934602943",
+      "manifest_sha256": "0758a9056a3fbce46f95407dd2d75e8844297a3125867d76fd415fdfe1ace07b",
+      "renderer_sha256": "f4b458d131d95b77572ad26d0644061faa68da5035925146af6af7667ceb9769",
+      "html_pages": 25,
+      "numerical_records": 24,
+      "pdf_pages": 2,
+      "geometry": [
+        {
+          "bottom": 732.09375,
+          "footer": 743.953125,
+          "left": 45.34375,
+          "right": 1077.171875,
+          "width": 1123
+        },
+        {
+          "bottom": 1403.71875,
+          "footer": 1537.640625,
+          "left": 45.34375,
+          "right": 1077.171875,
+          "width": 1123
+        }
+      ],
+      "all_fonts_embedded": true,
+      "files": {
+        "ChainBench_FISTA_review.pdf": {
+          "bytes": 286445,
+          "sha256": "3d3dd41a281d90d2862dd9046fcfddbd69f61235d258887af44b5f836697fddb"
+        },
+        "page-1.png": {
+          "bytes": 83880,
+          "sha256": "8a127bdc291ce58885f58442d6d2f5b0a16613729f972d9b028e5817351aa422"
+        },
+        "page-2.png": {
+          "bytes": 76855,
+          "sha256": "7e34ad3bc70ec577f8fa9d0a3326aa16a85ddcc7046707c583cf615252418ec3"
+        },
+        "review.html": {
+          "bytes": 66840,
+          "sha256": "f5ad4ab7cc94dd4574f672058dd55b98939edb020cdbdbae78a4679aea2f95c6"
+        }
+      }
+    },
+    "extracted_browser": {
+      "viewports": [
+        {
+          "width": 1440,
+          "reports_opened": 24,
+          "return_links": "passed",
+          "preview_images": "loaded",
+          "all_seeds": "retained",
+          "unresolved_seed24": "retained",
+          "language": "passed",
+          "overflow": false,
+          "atlas_workflow_links": 25,
+          "case_preserved_table_nodes": {
+            "index.html": 49,
+            "atlas.html": 0,
+            "shewchuk.html": 255,
+            "deblur.html": 0,
+            "heavy-ball.html": 95,
+            "simplex.html": 197,
+            "proximal.html": 193,
+            "landscape.html": 38,
+            "stress-gd-baseline.html": 134,
+            "stress-nesterov-1983.html": 134,
+            "stress-polyak-1964.html": 134,
+            "stress-hestenes-stiefel-1952.html": 134,
+            "stress-jaggi-2013.html": 134,
+            "stress-rockafellar-1976.html": 134,
+            "stress-beck-teboulle-2009.html": 134,
+            "stress-ista-vs-fista.html": 134,
+            "tight-gd.html": 4,
+            "wavelet.html": 13,
+            "fw-sparsity.html": 28,
+            "kaczmarz.html": 1674,
+            "sampling.html": 18,
+            "cg-spectrum.html": 864,
+            "adam.html": 281,
+            "admm.html": 1576,
+            "backtracking.html": 612
+          }
+        },
+        {
+          "width": 390,
+          "reports_opened": 24,
+          "return_links": "passed",
+          "preview_images": "loaded",
+          "all_seeds": "retained",
+          "unresolved_seed24": "retained",
+          "language": "passed",
+          "overflow": false,
+          "atlas_workflow_links": 25,
+          "case_preserved_table_nodes": {
+            "index.html": 49,
+            "atlas.html": 0,
+            "shewchuk.html": 255,
+            "deblur.html": 0,
+            "heavy-ball.html": 95,
+            "simplex.html": 197,
+            "proximal.html": 193,
+            "landscape.html": 38,
+            "stress-gd-baseline.html": 134,
+            "stress-nesterov-1983.html": 134,
+            "stress-polyak-1964.html": 134,
+            "stress-hestenes-stiefel-1952.html": 134,
+            "stress-jaggi-2013.html": 134,
+            "stress-rockafellar-1976.html": 134,
+            "stress-beck-teboulle-2009.html": 134,
+            "stress-ista-vs-fista.html": 134,
+            "tight-gd.html": 4,
+            "wavelet.html": 13,
+            "fw-sparsity.html": 28,
+            "kaczmarz.html": 1674,
+            "sampling.html": 18,
+            "cg-spectrum.html": 864,
+            "adam.html": 281,
+            "admm.html": 1576,
+            "backtracking.html": 612
+          }
+        }
+      ],
+      "network_requests": [],
+      "javascript_errors": [],
+      "browser": "153.0.8010.12",
+      "backtracking_trials": [
+        {
+          "width": 1440,
+          "cases": 36,
+          "states": 790
+        },
+        {
+          "width": 390,
+          "cases": 36,
+          "states": 790
+        }
+      ],
+      "no_script": "index, static figures and local navigation work"
+    }
+  },
+  "verified_runs": [
+    {
+      "run": 36934601939,
+      "jobs": [
+        {
+          "id": 110611797560,
+          "name": "offline interactive reports browser",
+          "status": "success",
+          "actual_completed_log_read": true,
+          "checkout_verified": true
+        },
+        {
+          "id": 110611797812,
+          "name": "test (ubuntu-latest, Python 3.12, current)",
+          "status": "success",
+          "actual_completed_log_read": true,
+          "checkout_verified": true,
+          "passed": 1474,
+          "seconds": 750.18,
+          "fault_injections": 6
+        },
+        {
+          "id": 110611797934,
+          "name": "test (ubuntu-latest, Python 3.10, current)",
+          "status": "success",
+          "actual_completed_log_read": true,
+          "checkout_verified": true,
+          "passed": 1474,
+          "seconds": 666.95
+        },
+        {
+          "id": 110611798005,
+          "name": "test (ubuntu-latest, Python 3.11, current)",
+          "status": "success",
+          "actual_completed_log_read": true,
+          "checkout_verified": true,
+          "passed": 1474,
+          "seconds": 622.32
+        },
+        {
+          "id": 110611798038,
+          "name": "test (ubuntu-latest, Python 3.10, minimum)",
+          "status": "success",
+          "actual_completed_log_read": true,
+          "checkout_verified": true,
+          "passed": 1474,
+          "seconds": 490.66
+        },
+        {
+          "id": 110611798103,
+          "name": "audited offline reading assets / reading-bundle",
+          "status": "success",
+          "actual_completed_log_read": true,
+          "checkout_verified": true
+        },
+        {
+          "id": 110612681615,
+          "name": "wheel and sdist clean installation",
+          "status": "success",
+          "actual_completed_log_read": true,
+          "checkout_verified": true,
+          "both_clean_installs": true,
+          "publication_evidence_files": 8
+        },
+        {
+          "id": 110611797876,
+          "name": "test (windows-latest, Python 3.12, current)",
+          "status": "success",
+          "actual_completed_log_read": true,
+          "checkout_verified": true,
+          "passed": 1474,
+          "seconds": 841.05
+        },
+        {
+          "id": 110611797911,
+          "name": "test (macos-26-intel, Python 3.12, current)",
+          "status": "success",
+          "actual_completed_log_read": true,
+          "checkout_verified": true,
+          "passed": 1474,
+          "seconds": 2579.94,
+          "check_all": "7 CONSISTENT, 1 INFO"
+        }
+      ]
+    },
+    {
+      "run": 36934602943,
+      "jobs": [
+        {
+          "id": 110611800438,
+          "name": "verify / offline interactive reports browser",
+          "status": "success",
+          "actual_completed_log_read": true,
+          "checkout_verified": true
+        },
+        {
+          "id": 110611800637,
+          "name": "verify / test (ubuntu-latest, Python 3.10, current)",
+          "status": "success",
+          "actual_completed_log_read": true,
+          "checkout_verified": true,
+          "passed": 1474,
+          "seconds": 603.8
+        },
+        {
+          "id": 110611800712,
+          "name": "verify / test (ubuntu-latest, Python 3.11, current)",
+          "status": "success",
+          "actual_completed_log_read": true,
+          "checkout_verified": true,
+          "passed": 1474,
+          "seconds": 390.13
+        },
+        {
+          "id": 110611800749,
+          "name": "verify / audited offline reading assets / reading-bundle",
+          "status": "success",
+          "actual_completed_log_read": true,
+          "checkout_verified": true
+        },
+        {
+          "id": 110611800800,
+          "name": "verify / test (windows-latest, Python 3.12, current)",
+          "status": "success",
+          "actual_completed_log_read": true,
+          "checkout_verified": true,
+          "passed": 1474,
+          "seconds": 807.74
+        },
+        {
+          "id": 110611800927,
+          "name": "verify / test (ubuntu-latest, Python 3.12, current)",
+          "status": "success",
+          "actual_completed_log_read": true,
+          "checkout_verified": true,
+          "passed": 1474,
+          "seconds": 573.12,
+          "fault_injections": 6
+        },
+        {
+          "id": 110611800955,
+          "name": "verify / test (macos-26-intel, Python 3.12, current)",
+          "status": "success",
+          "actual_completed_log_read": true,
+          "checkout_verified": true,
+          "passed": 1474,
+          "seconds": 1170.21
+        },
+        {
+          "id": 110611800964,
+          "name": "verify / test (ubuntu-latest, Python 3.10, minimum)",
+          "status": "success",
+          "actual_completed_log_read": true,
+          "checkout_verified": true,
+          "passed": 1474,
+          "seconds": 625.27
+        },
+        {
+          "id": 110613055142,
+          "name": "verify / wheel and sdist clean installation",
+          "status": "success",
+          "actual_completed_log_read": true,
+          "checkout_verified": true,
+          "both_clean_installs": true,
+          "publication_evidence_files": 8
+        },
+        {
+          "id": 110618229967,
+          "name": "publish verified alpha release",
+          "status": "success",
+          "actual_completed_log_read": true,
+          "checkout_verified": true,
+          "downloaded_same_run_artifact": true,
+          "public_release_url": "https://github.com/chocoemong17/chainbench/releases/tag/v0.6.0",
+          "publisher_upload_download_hash_gates_completed": true
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "run": 36934601939,
+      "files": [
+        {
+          "id": 11198166542,
+          "name": "reproduction-browser-36934601939",
+          "bytes": 117288456,
+          "sha256": "0f3e5194d787cbd0bf606da4ce194d1ca59d080389e1067c7cf5b2461c7c619d",
+          "local_download": false
+        },
+        {
+          "id": 11197731641,
+          "name": "distributions-36934601939",
+          "bytes": 45408758,
+          "sha256": "1e7250ba7a78f0f33afaf670c34d0431d7844b36afe8531036a7e80816c165a8",
+          "local_download": false
+        },
+        {
+          "id": 11197522801,
+          "name": "chainbench-review-packet-b22aeb16313c5ab5f2d605c25da576c5137841d6",
+          "bytes": 313458,
+          "sha256": "e937ee96e67466e29dcc5acc62d6675b45db1a61a7ea26adae4bc4a27d27d7b6",
+          "local_download": false
+        },
+        {
+          "id": 11197448362,
+          "name": "chainbench-reading-release-b22aeb16313c5ab5f2d605c25da576c5137841d6",
+          "bytes": 44331115,
+          "sha256": "fdc7cfe10cd8deb932a922a05d1205ffab066ab44ba248b1736b2d96831e2a50",
+          "local_download": false
+        },
+        {
+          "id": 11197423463,
+          "name": "chainbench-reading-bundle-b22aeb16313c5ab5f2d605c25da576c5137841d6",
+          "bytes": 44046713,
+          "sha256": "d87536e57622ad4b60d2dbe4cb5daa6a097679e502fe943df8fe2541ae41b58b",
+          "local_download": false
+        },
+        {
+          "id": 11197378257,
+          "name": "saved-comparison-review-b22aeb16313c5ab5f2d605c25da576c5137841d6",
+          "bytes": 836095,
+          "sha256": "3863fb59f84f616ad8c3a60a9d428ee027af48da3a9484b68927f854cd07d852",
+          "local_download": false
+        },
+        {
+          "id": 11197283628,
+          "name": "chainbench-extracted-browser-b22aeb16313c5ab5f2d605c25da576c5137841d6",
+          "bytes": 9326131,
+          "sha256": "138c5f0ce777f3e128059c89fbd5fc3b5d555054d88c2fa4654676a7af5f982f",
+          "local_download": false
+        }
+      ]
+    },
+    {
+      "run": 36934602943,
+      "files": [
+        {
+          "id": 11198220045,
+          "name": "saved-comparison-review-b22aeb16313c5ab5f2d605c25da576c5137841d6",
+          "bytes": 836094,
+          "sha256": "4b6afacb7f3df948f627013d15831a9a3bafe1d4e326c778183ba4d25cebcf0c",
+          "local_download": false
+        },
+        {
+          "id": 11197606875,
+          "name": "distributions-36934602943",
+          "bytes": 45360768,
+          "sha256": "3f36d7b30bde1919abef10edc8315fcf1a81b3c1aef054b2b79bb44dd27f4ce8",
+          "local_download": false
+        },
+        {
+          "id": 11197513202,
+          "name": "chainbench-reading-bundle-b22aeb16313c5ab5f2d605c25da576c5137841d6",
+          "bytes": 44002397,
+          "sha256": "e166e307746c1a3c5fddd0015600097ee529746780c5bbc17658d3216ca094d6",
+          "local_download": false
+        },
+        {
+          "id": 11197493366,
+          "name": "chainbench-review-packet-b22aeb16313c5ab5f2d605c25da576c5137841d6",
+          "bytes": 313460,
+          "sha256": "9f93a87389b12fe10457db3ac9a40c2fae55658fcf4214f30a07036206113eda",
+          "local_download": false
+        },
+        {
+          "id": 11197428575,
+          "name": "chainbench-reading-release-b22aeb16313c5ab5f2d605c25da576c5137841d6",
+          "bytes": 44283124,
+          "sha256": "bfec387665da3e65d6ba1a0af73806611f3b65f14ca92ed70c2369243e917c37",
+          "local_download": false
+        },
+        {
+          "id": 11197258453,
+          "name": "chainbench-extracted-browser-b22aeb16313c5ab5f2d605c25da576c5137841d6",
+          "bytes": 9327305,
+          "sha256": "52a7998fc4e6d975bef329037ba6c2516fca93c594031b11a157ae198ac1862f",
+          "local_download": false
+        }
+      ]
+    }
+  ],
+  "release_result": {
+    "status": "success",
+    "run": 36934602943,
+    "attempt": 1,
+    "head": "b22aeb16313c5ab5f2d605c25da576c5137841d6",
+    "jobs": [
+      {
+        "id": 110611800438,
+        "name": "verify / offline interactive reports browser",
+        "status": "success",
+        "actual_completed_log_read": true,
+        "checkout_verified": true
+      },
+      {
+        "id": 110611800637,
+        "name": "verify / test (ubuntu-latest, Python 3.10, current)",
+        "status": "success",
+        "actual_completed_log_read": true,
+        "checkout_verified": true,
+        "passed": 1474,
+        "seconds": 603.8
+      },
+      {
+        "id": 110611800712,
+        "name": "verify / test (ubuntu-latest, Python 3.11, current)",
+        "status": "success",
+        "actual_completed_log_read": true,
+        "checkout_verified": true,
+        "passed": 1474,
+        "seconds": 390.13
+      },
+      {
+        "id": 110611800749,
+        "name": "verify / audited offline reading assets / reading-bundle",
+        "status": "success",
+        "actual_completed_log_read": true,
+        "checkout_verified": true
+      },
+      {
+        "id": 110611800800,
+        "name": "verify / test (windows-latest, Python 3.12, current)",
+        "status": "success",
+        "actual_completed_log_read": true,
+        "checkout_verified": true,
+        "passed": 1474,
+        "seconds": 807.74
+      },
+      {
+        "id": 110611800927,
+        "name": "verify / test (ubuntu-latest, Python 3.12, current)",
+        "status": "success",
+        "actual_completed_log_read": true,
+        "checkout_verified": true,
+        "passed": 1474,
+        "seconds": 573.12,
+        "fault_injections": 6
+      },
+      {
+        "id": 110611800955,
+        "name": "verify / test (macos-26-intel, Python 3.12, current)",
+        "status": "success",
+        "actual_completed_log_read": true,
+        "checkout_verified": true,
+        "passed": 1474,
+        "seconds": 1170.21
+      },
+      {
+        "id": 110611800964,
+        "name": "verify / test (ubuntu-latest, Python 3.10, minimum)",
+        "status": "success",
+        "actual_completed_log_read": true,
+        "checkout_verified": true,
+        "passed": 1474,
+        "seconds": 625.27
+      },
+      {
+        "id": 110613055142,
+        "name": "verify / wheel and sdist clean installation",
+        "status": "success",
+        "actual_completed_log_read": true,
+        "checkout_verified": true,
+        "both_clean_installs": true,
+        "publication_evidence_files": 8
+      },
+      {
+        "id": 110618229967,
+        "name": "publish verified alpha release",
+        "status": "success",
+        "actual_completed_log_read": true,
+        "checkout_verified": true,
+        "downloaded_same_run_artifact": true,
+        "public_release_url": "https://github.com/chocoemong17/chainbench/releases/tag/v0.6.0",
+        "publisher_upload_download_hash_gates_completed": true
+      }
+    ],
+    "artifacts": [
+      {
+        "id": 11198220045,
+        "name": "saved-comparison-review-b22aeb16313c5ab5f2d605c25da576c5137841d6",
+        "bytes": 836094,
+        "sha256": "4b6afacb7f3df948f627013d15831a9a3bafe1d4e326c778183ba4d25cebcf0c",
+        "local_download": false
+      },
+      {
+        "id": 11197606875,
+        "name": "distributions-36934602943",
+        "bytes": 45360768,
+        "sha256": "3f36d7b30bde1919abef10edc8315fcf1a81b3c1aef054b2b79bb44dd27f4ce8",
+        "local_download": false
+      },
+      {
+        "id": 11197529580,
+        "name": "reproduction-browser-36934602943",
+        "bytes": 117287925,
+        "sha256": "0dd6b8a6b945d32e9b8f51d57b911e31d2cbc973813fa206bc5ad8216b1e98d6",
+        "local_download": false
+      },
+      {
+        "id": 11197513202,
+        "name": "chainbench-reading-bundle-b22aeb16313c5ab5f2d605c25da576c5137841d6",
+        "bytes": 44002397,
+        "sha256": "e166e307746c1a3c5fddd0015600097ee529746780c5bbc17658d3216ca094d6",
+        "local_download": false
+      },
+      {
+        "id": 11197493366,
+        "name": "chainbench-review-packet-b22aeb16313c5ab5f2d605c25da576c5137841d6",
+        "bytes": 313460,
+        "sha256": "9f93a87389b12fe10457db3ac9a40c2fae55658fcf4214f30a07036206113eda",
+        "local_download": false
+      },
+      {
+        "id": 11197428575,
+        "name": "chainbench-reading-release-b22aeb16313c5ab5f2d605c25da576c5137841d6",
+        "bytes": 44283124,
+        "sha256": "bfec387665da3e65d6ba1a0af73806611f3b65f14ca92ed70c2369243e917c37",
+        "local_download": false
+      },
+      {
+        "id": 11197258453,
+        "name": "chainbench-extracted-browser-b22aeb16313c5ab5f2d605c25da576c5137841d6",
+        "bytes": 9327305,
+        "sha256": "52a7998fc4e6d975bef329037ba6c2516fca93c594031b11a157ae198ac1862f",
+        "local_download": false
+      }
+    ]
+  },
+  "publication_receipt": "v060-publication-verification.json",
+  "completed_release_evidence_archive": "https://github.com/chocoemong17/chainbench/tree/archive/local-reviews-20261001/cloud/release-v0.6.0",
+  "main_result": {
+    "status": "success",
+    "run": 36934601939,
+    "attempt": 1,
+    "head": "b22aeb16313c5ab5f2d605c25da576c5137841d6",
+    "completed_at": "2026-10-01T23:05:58Z",
+    "jobs": [
+      {
+        "id": 110611797560,
+        "name": "offline interactive reports browser",
+        "status": "success",
+        "actual_completed_log_read": true,
+        "checkout_verified": true
+      },
+      {
+        "id": 110611797812,
+        "name": "test (ubuntu-latest, Python 3.12, current)",
+        "status": "success",
+        "actual_completed_log_read": true,
+        "checkout_verified": true,
+        "passed": 1474,
+        "seconds": 750.18,
+        "fault_injections": 6
+      },
+      {
+        "id": 110611797934,
+        "name": "test (ubuntu-latest, Python 3.10, current)",
+        "status": "success",
+        "actual_completed_log_read": true,
+        "checkout_verified": true,
+        "passed": 1474,
+        "seconds": 666.95
+      },
+      {
+        "id": 110611798005,
+        "name": "test (ubuntu-latest, Python 3.11, current)",
+        "status": "success",
+        "actual_completed_log_read": true,
+        "checkout_verified": true,
+        "passed": 1474,
+        "seconds": 622.32
+      },
+      {
+        "id": 110611798038,
+        "name": "test (ubuntu-latest, Python 3.10, minimum)",
+        "status": "success",
+        "actual_completed_log_read": true,
+        "checkout_verified": true,
+        "passed": 1474,
+        "seconds": 490.66
+      },
+      {
+        "id": 110611798103,
+        "name": "audited offline reading assets / reading-bundle",
+        "status": "success",
+        "actual_completed_log_read": true,
+        "checkout_verified": true
+      },
+      {
+        "id": 110612681615,
+        "name": "wheel and sdist clean installation",
+        "status": "success",
+        "actual_completed_log_read": true,
+        "checkout_verified": true,
+        "both_clean_installs": true,
+        "publication_evidence_files": 8
+      },
+      {
+        "id": 110611797876,
+        "name": "test (windows-latest, Python 3.12, current)",
+        "status": "success",
+        "actual_completed_log_read": true,
+        "checkout_verified": true,
+        "passed": 1474,
+        "seconds": 841.05
+      },
+      {
+        "id": 110611797911,
+        "name": "test (macos-26-intel, Python 3.12, current)",
+        "status": "success",
+        "actual_completed_log_read": true,
+        "checkout_verified": true,
+        "passed": 1474,
+        "seconds": 2579.94,
+        "check_all": "7 CONSISTENT, 1 INFO"
+      }
+    ]
+  }
+}
+

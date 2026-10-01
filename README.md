@@ -23,8 +23,10 @@ retains the actual release/job/asset IDs, source, checksums and evidence.
 [PR 84 verification](cloud/release-v0.6.0/pr84-verification.json) retains its fully
 passed nine-job gate and the earlier documentation-superseded cancellation.
 The separate [main push run](https://github.com/chocoemong17/chainbench/actions/runs/36934601939)
-currently has eight passes with Intel macOS still running. Its outcome is not
-inferred from the completed release run.
+also passed all nine jobs on attempt 1. The final Intel macOS log records 1,474
+passed tests in 2,579.94 seconds; all six configurations passed. The completed
+[main verification](cloud/release-v0.6.0/main-verification.json) preserves the
+actual source-checked logs and this run's separate generated-output hashes.
 
 These checks cover selected public protocols and declared synthetic inputs.
 They do not establish whole-paper reproduction, universal rankings or independent
