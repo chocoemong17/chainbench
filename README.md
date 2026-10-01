@@ -1,6 +1,38 @@
-# Preserved development reviews and verified cloud outputs
+# ChainBench v0.6.0: read the tour and inspect the evidence
 
-Current source: [main afa81a6](https://github.com/chocoemong17/chainbench/tree/afa81a6cf33c56d955ef60a5840d2a2cb94722e4).
+Start with the [two-page Korean FISTA PDF](https://github.com/chocoemong17/chainbench/releases/download/v0.6.0/chainbench-0.6.0-review.pdf)
+and the [complete 25-page offline reading ZIP](https://github.com/chocoemong17/chainbench/releases/download/v0.6.0/chainbench-0.6.0-reading.zip).
+Extract the whole ZIP and open `index.html`; no Python installation or server is
+needed to read it. The PDF is a focused guide to fixed and backtracking steps;
+the full tour retains the other paper examples, geometry views and all cases.
+[Download instructions](https://github.com/chocoemong17/chainbench/blob/v0.6.0/docs/OFFLINE_DOWNLOAD.md).
+
+The [published alpha](https://github.com/chocoemong17/chainbench/releases/tag/v0.6.0)
+is pinned to source `b22aeb16313c5ab5f2d605c25da576c5137841d6`.
+Its [release workflow](https://github.com/chocoemong17/chainbench/actions/runs/36934602943)
+passed all nine validation jobs and publication on attempt 1: 1,474 tests in each
+of six environments, both clean Python distributions, six fault injections, the
+complete offline browser suite and extracted-ZIP desktop/mobile reading.
+The same-run tested files were published, then their public URLs, sizes and small
+verification records were checked without authentication. The ZIP and PDF hashes
+match the exact audited bytes. All seven prior tag targets and 35 assets remain
+unchanged. Large generated files stayed on GitHub; the local task folder is below 1 GB.
+
+[Publication and public-download verification](cloud/release-v0.6.0/publication-verification.json)
+retains the actual release/job/asset IDs, source, checksums and evidence.
+[PR 84 verification](cloud/release-v0.6.0/pr84-verification.json) retains its fully
+passed nine-job gate and the earlier documentation-superseded cancellation.
+The separate [main push run](https://github.com/chocoemong17/chainbench/actions/runs/36934601939)
+currently has eight passes with Intel macOS still running. Its outcome is not
+inferred from the completed release run.
+
+These checks cover selected public protocols and declared synthetic inputs.
+They do not establish whole-paper reproduction, universal rankings or independent
+outside adoption. The archived snapshots below preserve their own source identities.
+
+## Earlier development reviews and cloud outputs
+
+Prior verified source: [main afa81a6](https://github.com/chocoemong17/chainbench/tree/afa81a6cf33c56d955ef60a5840d2a2cb94722e4).
 [Separate main push CI](https://github.com/chocoemong17/chainbench/actions/runs/36926953569)
 passed all eight jobs, with 1,437 tests in each of six environments, both clean
 installs, the five-file publication gate, five fault injections and full browser checks.
@@ -10,7 +42,7 @@ checks and distinct superseded candidates. This change tightens saved-comparison
 publication evidence; the historical rendered review packets below keep their
 original source identities.
 
-Latest development review: [saved-experiment comparison PDF](cloud/comparison-c16e8a9/ChainBench_saved_comparison_review.pdf)
+Earlier saved-comparison review: [saved-experiment comparison PDF](cloud/comparison-c16e8a9/ChainBench_saved_comparison_review.pdf)
 and [actual offline HTML, input records and verification](cloud/comparison-c16e8a9).
 Compare two to four stored runs with explicit setup/input/environment differences.
 Its full PR gate passed all eight jobs, including 1,394 tests per configuration.
@@ -31,7 +63,7 @@ handoff requirements to the implemented source and retains the real CI history.
 Prior integrated source: [main commit e3858108ea492df04121c14d5306ac2bab1454fa](https://github.com/chocoemong17/chainbench/tree/e3858108ea492df04121c14d5306ac2bab1454fa).
 
 For the complete interactive tour, download the reading-bundle artifact from the
-[verified current-main cloud run](https://github.com/chocoemong17/chainbench/actions/runs/36926953557),
+[verified afa81a6 cloud run](https://github.com/chocoemong17/chainbench/actions/runs/36926953557),
 extract the folder and open `index.html`. The 25 HTML pages retain all 24 numerical
 records for offline reading. Actions downloads require GitHub sign-in and expire
 after seven days; the source workflow can regenerate them. The previews on this

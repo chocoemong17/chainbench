@@ -1,0 +1,460 @@
+{
+  "pr": 84,
+  "issue": 83,
+  "branch": "feat/versioned-reading-release",
+  "base": "afa81a6cf33c56d955ef60a5840d2a2cb94722e4",
+  "head": "e5ecaf6447d64f8e1b34e408c789cfbb0ed7a0e3",
+  "tree": "f63246d907de5566d27d968af54cbbb3a0363dcb",
+  "tests": 36931764700,
+  "status": "success",
+  "local_tree_matches_remote": true,
+  "local_full_tests_run": false,
+  "recorded_at": "2026-10-01T21:52:00.450878+00:00",
+  "history": [
+    {
+      "head": "0001a7b0960f7bef17e330789d0649702a67267a",
+      "tree": "ae762cc4ff526056c32d8d9a01fb450078effd58",
+      "tests": 36931388674,
+      "status": "cancelled",
+      "reason": "Repair obsolete reading anchors and checkout-only guidance; clarify 34 payload hashes plus bundle manifest",
+      "jobs": [
+        {
+          "id": 110601191819,
+          "name": "offline interactive reports browser",
+          "status": "completed",
+          "conclusion": "cancelled"
+        },
+        {
+          "id": 110601192048,
+          "name": "test (macos-26-intel, Python 3.12, current)",
+          "status": "completed",
+          "conclusion": "cancelled"
+        },
+        {
+          "id": 110601192087,
+          "name": "test (windows-latest, Python 3.12, current)",
+          "status": "completed",
+          "conclusion": "cancelled"
+        },
+        {
+          "id": 110601192103,
+          "name": "test (ubuntu-latest, Python 3.12, current)",
+          "status": "completed",
+          "conclusion": "cancelled"
+        },
+        {
+          "id": 110601192115,
+          "name": "audited offline reading assets / reading-bundle",
+          "status": "completed",
+          "conclusion": "cancelled"
+        },
+        {
+          "id": 110601192124,
+          "name": "test (ubuntu-latest, Python 3.11, current)",
+          "status": "completed",
+          "conclusion": "cancelled"
+        },
+        {
+          "id": 110601192174,
+          "name": "test (ubuntu-latest, Python 3.10, minimum)",
+          "status": "completed",
+          "conclusion": "cancelled"
+        },
+        {
+          "id": 110601192213,
+          "name": "test (ubuntu-latest, Python 3.10, current)",
+          "status": "completed",
+          "conclusion": "cancelled"
+        },
+        {
+          "id": 110602709561,
+          "name": "wheel and sdist clean installation",
+          "status": "completed",
+          "conclusion": "cancelled"
+        }
+      ]
+    }
+  ],
+  "merge": "882926eb3fd85501a982795b3f83c42b83802799",
+  "last_checked": "2026-10-01T22:24:20.624018+00:00",
+  "last_observed_jobs": [
+    {
+      "id": 110602742309,
+      "name": "audited offline reading assets / reading-bundle",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 110602742326,
+      "name": "test (ubuntu-latest, Python 3.12, current)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 110602742405,
+      "name": "test (windows-latest, Python 3.12, current)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 110602742438,
+      "name": "test (ubuntu-latest, Python 3.10, minimum)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 110602742482,
+      "name": "test (ubuntu-latest, Python 3.11, current)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 110602742491,
+      "name": "test (ubuntu-latest, Python 3.10, current)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 110602742637,
+      "name": "offline interactive reports browser",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 110602743527,
+      "name": "test (macos-26-intel, Python 3.12, current)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 110604361437,
+      "name": "wheel and sdist clean installation",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "tested_merge_tree_matches_head": true,
+  "reading_result": {
+    "job": 110602742309,
+    "status": "success",
+    "attempt": 1,
+    "actual_completed_log_read": true,
+    "proof": {
+      "kind": "chainbench.reading-assets",
+      "schema_version": 1,
+      "version": "0.6.0",
+      "source_commit": "882926eb3fd85501a982795b3f83c42b83802799",
+      "bundle_manifest_sha256": "cf2a3c3b774c768fd6ec51dadb0246e5e6e84e150e6f80b3b717122ee75e394e",
+      "assets": {
+        "chainbench-0.6.0-reading.zip": {
+          "bytes": 44911877,
+          "sha256": "4dd9446eecbb27b7f3c71aad3f023c4bae77b50354f88f746aaf176af32924c2"
+        },
+        "chainbench-0.6.0-review.pdf": {
+          "bytes": 286444,
+          "sha256": "3436847144c7031439a6951eb97a05cc8cd0b6cec34d12937a45fcb6d6c3acfc"
+        }
+      }
+    },
+    "pdf": {
+      "source_commit": "882926eb3fd85501a982795b3f83c42b83802799",
+      "run_url": "https://github.com/chocoemong17/chainbench/actions/runs/36931764700",
+      "manifest_sha256": "0758a9056a3fbce46f95407dd2d75e8844297a3125867d76fd415fdfe1ace07b",
+      "renderer_sha256": "f4b458d131d95b77572ad26d0644061faa68da5035925146af6af7667ceb9769",
+      "html_pages": 25,
+      "numerical_records": 24,
+      "pdf_pages": 2,
+      "geometry": [
+        {
+          "bottom": 732.09375,
+          "footer": 743.953125,
+          "left": 45.34375,
+          "right": 1077.171875,
+          "width": 1123
+        },
+        {
+          "bottom": 1403.71875,
+          "footer": 1537.640625,
+          "left": 45.34375,
+          "right": 1077.171875,
+          "width": 1123
+        }
+      ],
+      "font_counts": [
+        71,
+        62
+      ],
+      "all_fonts_embedded": true,
+      "files": {
+        "ChainBench_FISTA_review.pdf": {
+          "bytes": 286444,
+          "sha256": "3436847144c7031439a6951eb97a05cc8cd0b6cec34d12937a45fcb6d6c3acfc"
+        },
+        "page-1.png": {
+          "bytes": 83880,
+          "sha256": "8a127bdc291ce58885f58442d6d2f5b0a16613729f972d9b028e5817351aa422"
+        },
+        "page-2.png": {
+          "bytes": 77044,
+          "sha256": "903efd67abb1539c80f3964db24fb3d8ee5891957b7353576c6b06686b8f48ab"
+        },
+        "review.html": {
+          "bytes": 66840,
+          "sha256": "8c02e95769e98e1ca6aa8b095b71de86414fb9b0b12604ea6e08fc7cb22633da"
+        }
+      }
+    },
+    "extracted_browser": {
+      "viewports": [
+        {
+          "width": 1440,
+          "reports_opened": 24,
+          "return_links": "passed",
+          "preview_images": "loaded",
+          "all_seeds": "retained",
+          "unresolved_seed24": "retained",
+          "language": "passed",
+          "overflow": false,
+          "atlas_workflow_links": 25,
+          "case_preserved_table_nodes": {
+            "index.html": 49,
+            "atlas.html": 0,
+            "shewchuk.html": 255,
+            "deblur.html": 0,
+            "heavy-ball.html": 95,
+            "simplex.html": 197,
+            "proximal.html": 193,
+            "landscape.html": 38,
+            "stress-gd-baseline.html": 134,
+            "stress-nesterov-1983.html": 134,
+            "stress-polyak-1964.html": 134,
+            "stress-hestenes-stiefel-1952.html": 134,
+            "stress-jaggi-2013.html": 134,
+            "stress-rockafellar-1976.html": 134,
+            "stress-beck-teboulle-2009.html": 134,
+            "stress-ista-vs-fista.html": 134,
+            "tight-gd.html": 4,
+            "wavelet.html": 13,
+            "fw-sparsity.html": 28,
+            "kaczmarz.html": 1674,
+            "sampling.html": 18,
+            "cg-spectrum.html": 864,
+            "adam.html": 281,
+            "admm.html": 1576,
+            "backtracking.html": 612
+          }
+        },
+        {
+          "width": 390,
+          "reports_opened": 24,
+          "return_links": "passed",
+          "preview_images": "loaded",
+          "all_seeds": "retained",
+          "unresolved_seed24": "retained",
+          "language": "passed",
+          "overflow": false,
+          "atlas_workflow_links": 25,
+          "case_preserved_table_nodes": {
+            "index.html": 49,
+            "atlas.html": 0,
+            "shewchuk.html": 255,
+            "deblur.html": 0,
+            "heavy-ball.html": 95,
+            "simplex.html": 197,
+            "proximal.html": 193,
+            "landscape.html": 38,
+            "stress-gd-baseline.html": 134,
+            "stress-nesterov-1983.html": 134,
+            "stress-polyak-1964.html": 134,
+            "stress-hestenes-stiefel-1952.html": 134,
+            "stress-jaggi-2013.html": 134,
+            "stress-rockafellar-1976.html": 134,
+            "stress-beck-teboulle-2009.html": 134,
+            "stress-ista-vs-fista.html": 134,
+            "tight-gd.html": 4,
+            "wavelet.html": 13,
+            "fw-sparsity.html": 28,
+            "kaczmarz.html": 1674,
+            "sampling.html": 18,
+            "cg-spectrum.html": 864,
+            "adam.html": 281,
+            "admm.html": 1576,
+            "backtracking.html": 612
+          }
+        }
+      ],
+      "network_requests": [],
+      "javascript_errors": [],
+      "browser": "153.0.8010.12",
+      "backtracking_trials": [
+        {
+          "width": 1440,
+          "cases": 36,
+          "states": 790
+        },
+        {
+          "width": 390,
+          "cases": 36,
+          "states": 790
+        }
+      ],
+      "no_script": "index, static figures and local navigation work"
+    },
+    "artifacts": [
+      {
+        "id": 11197006223,
+        "name": "chainbench-review-packet-882926eb3fd85501a982795b3f83c42b83802799",
+        "bytes": 313600,
+        "sha256": "87a46d75f3ebaf77720854f1a8e3d2e92aa95331ca08e6c897c524007fdfc144",
+        "local_download": false
+      },
+      {
+        "id": 11196921162,
+        "name": "chainbench-reading-release-882926eb3fd85501a982795b3f83c42b83802799",
+        "bytes": 44283211,
+        "sha256": "e7d3cd85fb4fe263f0ba0325342dda595f2a8e4c71b779e648782daaeaf73bdd",
+        "local_download": false
+      },
+      {
+        "id": 11196896210,
+        "name": "chainbench-reading-bundle-882926eb3fd85501a982795b3f83c42b83802799",
+        "bytes": 44002397,
+        "sha256": "e19d8396ec856b7028b0ade011f67f4fbbcce5859792e2c540515a5ab97ccfc2",
+        "local_download": false
+      },
+      {
+        "id": 11196836286,
+        "name": "chainbench-extracted-browser-882926eb3fd85501a982795b3f83c42b83802799",
+        "bytes": 9327305,
+        "sha256": "b10631ec907a241e782df0e769a759844576777eee6049aa40cb7c3b282785d6",
+        "local_download": false
+      }
+    ]
+  },
+  "verified_completed_jobs": [
+    {
+      "id": 110602742309,
+      "name": "audited offline reading assets / reading-bundle",
+      "status": "success",
+      "actual_completed_log_read": true
+    },
+    {
+      "id": 110602742326,
+      "name": "test (ubuntu-latest, Python 3.12, current)",
+      "status": "success",
+      "actual_completed_log_read": true,
+      "passed": 1474,
+      "seconds": 427.44,
+      "fault_injections": 6
+    },
+    {
+      "id": 110602742405,
+      "name": "test (windows-latest, Python 3.12, current)",
+      "status": "success",
+      "actual_completed_log_read": true,
+      "passed": 1474,
+      "seconds": 764.84
+    },
+    {
+      "id": 110602742438,
+      "name": "test (ubuntu-latest, Python 3.10, minimum)",
+      "status": "success",
+      "actual_completed_log_read": true,
+      "passed": 1474,
+      "seconds": 859.94
+    },
+    {
+      "id": 110602742482,
+      "name": "test (ubuntu-latest, Python 3.11, current)",
+      "status": "success",
+      "actual_completed_log_read": true,
+      "passed": 1474,
+      "seconds": 493.65
+    },
+    {
+      "id": 110602742491,
+      "name": "test (ubuntu-latest, Python 3.10, current)",
+      "status": "success",
+      "actual_completed_log_read": true,
+      "passed": 1474,
+      "seconds": 696.95
+    },
+    {
+      "id": 110602742637,
+      "name": "offline interactive reports browser",
+      "status": "success",
+      "actual_completed_log_read": true
+    },
+    {
+      "id": 110602743527,
+      "name": "test (macos-26-intel, Python 3.12, current)",
+      "status": "success",
+      "actual_completed_log_read": true,
+      "passed": 1474,
+      "seconds": 1456.27
+    },
+    {
+      "id": 110604361437,
+      "name": "wheel and sdist clean installation",
+      "status": "success",
+      "actual_completed_log_read": true,
+      "both_clean_installs": true,
+      "publication_evidence_files": 8
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 11197400283,
+      "name": "distributions-36931764700",
+      "bytes": 45360857,
+      "sha256": "0951177dd0d5a93206cfc37be3bfd96713fcc735e27d8f4ca6392404da3cab9a",
+      "local_download": false
+    },
+    {
+      "id": 11197006223,
+      "name": "chainbench-review-packet-882926eb3fd85501a982795b3f83c42b83802799",
+      "bytes": 313600,
+      "sha256": "87a46d75f3ebaf77720854f1a8e3d2e92aa95331ca08e6c897c524007fdfc144",
+      "local_download": false
+    },
+    {
+      "id": 11196921162,
+      "name": "chainbench-reading-release-882926eb3fd85501a982795b3f83c42b83802799",
+      "bytes": 44283211,
+      "sha256": "e7d3cd85fb4fe263f0ba0325342dda595f2a8e4c71b779e648782daaeaf73bdd",
+      "local_download": false
+    },
+    {
+      "id": 11196896210,
+      "name": "chainbench-reading-bundle-882926eb3fd85501a982795b3f83c42b83802799",
+      "bytes": 44002397,
+      "sha256": "e19d8396ec856b7028b0ade011f67f4fbbcce5859792e2c540515a5ab97ccfc2",
+      "local_download": false
+    },
+    {
+      "id": 11196836286,
+      "name": "chainbench-extracted-browser-882926eb3fd85501a982795b3f83c42b83802799",
+      "bytes": 9327305,
+      "sha256": "b10631ec907a241e782df0e769a759844576777eee6049aa40cb7c3b282785d6",
+      "local_download": false
+    },
+    {
+      "id": 11196493103,
+      "name": "saved-comparison-review-882926eb3fd85501a982795b3f83c42b83802799",
+      "bytes": 836652,
+      "sha256": "b1a5a68414e343abbf486b76951fa2b78ca2e546272861f431e5884e455cade9",
+      "local_download": false
+    },
+    {
+      "id": 11196174979,
+      "name": "reproduction-browser-36931764700",
+      "bytes": 117208206,
+      "sha256": "9e5611e06f53ba93ecd28f007ed51a0848b729e14a10d67535cd40533221120d",
+      "local_download": false
+    }
+  ],
+  "attempt": 1,
+  "merged_main": "b22aeb16313c5ab5f2d605c25da576c5137841d6",
+  "merged_tree_matches_tested_tree": true,
+  "issue_83_state": "closed"
+}

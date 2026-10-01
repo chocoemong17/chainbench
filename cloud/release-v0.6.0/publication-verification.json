@@ -1,0 +1,723 @@
+{
+  "id": 401409578,
+  "tag": "v0.6.0",
+  "published_at": "2026-10-01T22:42:15Z",
+  "source": "b22aeb16313c5ab5f2d605c25da576c5137841d6",
+  "assets": [
+    {
+      "id": 604277103,
+      "name": "build-environment.txt",
+      "bytes": 247,
+      "sha256": "f021d1598224eaf7a19a2327f1a84cf391f027051b4e4a2ffb392901d4ecf03c",
+      "url": "https://github.com/chocoemong17/chainbench/releases/download/v0.6.0/build-environment.txt"
+    },
+    {
+      "id": 604277102,
+      "name": "chainbench-0.6.0-py3-none-any.whl",
+      "bytes": 368529,
+      "sha256": "4916454cfe3e2c68dc4cd45ff9636de7ec064b099faba99e44637506f9085433",
+      "url": "https://github.com/chocoemong17/chainbench/releases/download/v0.6.0/chainbench-0.6.0-py3-none-any.whl"
+    },
+    {
+      "id": 604277108,
+      "name": "chainbench-0.6.0-reading.zip",
+      "bytes": 44911739,
+      "sha256": "f654f06af572b98cfade39ee80933cbe70121d99443c5b7c4bd906f98c6337c2",
+      "url": "https://github.com/chocoemong17/chainbench/releases/download/v0.6.0/chainbench-0.6.0-reading.zip"
+    },
+    {
+      "id": 604277107,
+      "name": "chainbench-0.6.0-review.pdf",
+      "bytes": 286445,
+      "sha256": "3d3dd41a281d90d2862dd9046fcfddbd69f61235d258887af44b5f836697fddb",
+      "url": "https://github.com/chocoemong17/chainbench/releases/download/v0.6.0/chainbench-0.6.0-review.pdf"
+    },
+    {
+      "id": 604277115,
+      "name": "chainbench-0.6.0.tar.gz",
+      "bytes": 712686,
+      "sha256": "5c91960ad342060631da2ca16cff0f0e0c586e8fc53181b276f286e6dade0ca4",
+      "url": "https://github.com/chocoemong17/chainbench/releases/download/v0.6.0/chainbench-0.6.0.tar.gz"
+    },
+    {
+      "id": 604277113,
+      "name": "reading-verification.json",
+      "bytes": 567,
+      "sha256": "dcb4be2590039f68ae10ebdd3587fd8d9c1ff58c58102770276f3a63a93c780c",
+      "url": "https://github.com/chocoemong17/chainbench/releases/download/v0.6.0/reading-verification.json"
+    },
+    {
+      "id": 604277104,
+      "name": "SHA256SUMS",
+      "bytes": 643,
+      "sha256": "5010df9b96f89a18b86e611d144f5e199af8b8e916a4f04b86f37a8c8a061c80",
+      "url": "https://github.com/chocoemong17/chainbench/releases/download/v0.6.0/SHA256SUMS"
+    },
+    {
+      "id": 604277120,
+      "name": "verification.json",
+      "bytes": 10292,
+      "sha256": "5f1bde1df7fe5cb6aa3cef997e9f9faea237f15512923be351c1f8f2450728b3",
+      "url": "https://github.com/chocoemong17/chainbench/releases/download/v0.6.0/verification.json"
+    }
+  ],
+  "checked_at": "2026-10-01T22:43:31.334492+00:00",
+  "release_workflow": 36934602943,
+  "publish_job": 110618229967,
+  "publish_job_completed_log_read": true,
+  "public_downloads": [
+    {
+      "name": "build-environment.txt",
+      "http_status": 200,
+      "content_length": 247,
+      "final_host": "release-assets.githubusercontent.com",
+      "authentication_supplied": false,
+      "download_sha256_verified": true
+    },
+    {
+      "name": "chainbench-0.6.0-py3-none-any.whl",
+      "http_status": 200,
+      "content_length": 368529,
+      "final_host": "release-assets.githubusercontent.com",
+      "authentication_supplied": false
+    },
+    {
+      "name": "chainbench-0.6.0-reading.zip",
+      "http_status": 200,
+      "content_length": 44911739,
+      "final_host": "release-assets.githubusercontent.com",
+      "authentication_supplied": false
+    },
+    {
+      "name": "chainbench-0.6.0-review.pdf",
+      "http_status": 200,
+      "content_length": 286445,
+      "final_host": "release-assets.githubusercontent.com",
+      "authentication_supplied": false
+    },
+    {
+      "name": "chainbench-0.6.0.tar.gz",
+      "http_status": 200,
+      "content_length": 712686,
+      "final_host": "release-assets.githubusercontent.com",
+      "authentication_supplied": false
+    },
+    {
+      "name": "reading-verification.json",
+      "http_status": 200,
+      "content_length": 567,
+      "final_host": "release-assets.githubusercontent.com",
+      "authentication_supplied": false,
+      "download_sha256_verified": true
+    },
+    {
+      "name": "SHA256SUMS",
+      "http_status": 200,
+      "content_length": 643,
+      "final_host": "release-assets.githubusercontent.com",
+      "authentication_supplied": false,
+      "download_sha256_verified": true
+    },
+    {
+      "name": "verification.json",
+      "http_status": 200,
+      "content_length": 10292,
+      "final_host": "release-assets.githubusercontent.com",
+      "authentication_supplied": false,
+      "download_sha256_verified": true
+    }
+  ],
+  "small_files_downloaded_bytes": 11749,
+  "binary_assets_downloaded_locally": false,
+  "reading_verification": {
+    "assets": {
+      "chainbench-0.6.0-reading.zip": {
+        "bytes": 44911739,
+        "sha256": "f654f06af572b98cfade39ee80933cbe70121d99443c5b7c4bd906f98c6337c2"
+      },
+      "chainbench-0.6.0-review.pdf": {
+        "bytes": 286445,
+        "sha256": "3d3dd41a281d90d2862dd9046fcfddbd69f61235d258887af44b5f836697fddb"
+      }
+    },
+    "bundle_manifest_sha256": "42e0a436edba1bf3ac9ae84fbebfe0266922ca44c9a0c88065a353c18e9334c9",
+    "kind": "chainbench.reading-assets",
+    "schema_version": 1,
+    "source_commit": "b22aeb16313c5ab5f2d605c25da576c5137841d6",
+    "version": "0.6.0"
+  },
+  "install_verification": {
+    "python": "3.12.14",
+    "artifacts": [
+      {
+        "artifact": "chainbench-0.6.0-py3-none-any.whl",
+        "sha256": "4916454cfe3e2c68dc4cd45ff9636de7ec064b099faba99e44637506f9085433",
+        "version": "0.6.0",
+        "checks": 8,
+        "slugs": [
+          "gd-baseline",
+          "nesterov-1983",
+          "polyak-1964",
+          "hestenes-stiefel-1952",
+          "jaggi-2013",
+          "rockafellar-1976",
+          "beck-teboulle-2009",
+          "ista-vs-fista"
+        ],
+        "statuses": [
+          "CONSISTENT",
+          "CONSISTENT",
+          "CONSISTENT",
+          "CONSISTENT",
+          "CONSISTENT",
+          "CONSISTENT",
+          "CONSISTENT",
+          "INFO"
+        ],
+        "installed_outside_checkout": true,
+        "pip_check": "passed",
+        "exports": [
+          "html",
+          "markdown",
+          "csv",
+          "json"
+        ],
+        "plot_svg": "passed",
+        "visual_evidence": "matched",
+        "experiments": [
+          {
+            "preset": "quadratic",
+            "config_sha256": "5948d1f18bb4e37c0cc6a1775983d0e45d24f747b863c16108b60c8cdf44347f",
+            "methods": [
+              "gd",
+              "smooth-fista",
+              "heavy-ball",
+              "cg",
+              "proximal-point"
+            ],
+            "rows": 137,
+            "exports": [
+              "json",
+              "csv",
+              "markdown",
+              "html"
+            ],
+            "saved_config_rerun": "matched"
+          },
+          {
+            "preset": "diagonal-lasso",
+            "config_sha256": "fcebaccd5ab774f682042b75ee941611663a387cc80aa9ec7a66db9ad6e26dcb",
+            "methods": [
+              "ista",
+              "fista"
+            ],
+            "rows": 62,
+            "exports": [
+              "json",
+              "csv",
+              "markdown",
+              "html"
+            ],
+            "saved_config_rerun": "matched"
+          },
+          {
+            "preset": "simplex",
+            "config_sha256": "94d543bc70b9494e094388eab757115ba16d86f2a3b9cfcde47172c78e3e7972",
+            "methods": [
+              "frank-wolfe"
+            ],
+            "rows": 31,
+            "exports": [
+              "json",
+              "csv",
+              "markdown",
+              "html"
+            ],
+            "saved_config_rerun": "matched"
+          }
+        ],
+        "instance_controls": {
+          "direct_override": "passed",
+          "seeded_config_sha256": "19a4979b5568006e6492cd19122c62447fa401edfadba8d1d1b271caf555113b"
+        },
+        "advanced_workflows": {
+          "learning": "matched",
+          "sweep": "matched",
+          "replay": "matched",
+          "gd_tight": "matched",
+          "stress": "matched",
+          "landscape": "matched",
+          "shewchuk_reproduction": "matched",
+          "simplex_geometry": "matched",
+          "inspectable_stress": "matched",
+          "proximal_geometry": "matched",
+          "offline_tour": "matched",
+          "fista_deblurring": "matched",
+          "heavy_ball_counterexample": "matched",
+          "noisy_wavelet": "matched",
+          "fw_sparsity": "matched",
+          "extended_tour": "matched",
+          "kaczmarz_expectation": "matched",
+          "nonuniform_sampling": "matched",
+          "cg_spectrum": "matched",
+          "adam_counterexample": "matched",
+          "admm_geometry": "matched",
+          "fista_backtracking": "matched"
+        },
+        "saved_comparison": [
+          {
+            "metric": "gap",
+            "records": 2,
+            "pairs": 1,
+            "plots": 4,
+            "retained_samples": "exact",
+            "shared_recorded_problem": true
+          },
+          {
+            "metric": "stationarity",
+            "records": 2,
+            "pairs": 1,
+            "plots": 4,
+            "retained_samples": "exact",
+            "shared_recorded_problem": true
+          },
+          {
+            "metric": "distance_to_reference",
+            "records": 2,
+            "pairs": 1,
+            "plots": 4,
+            "retained_samples": "exact",
+            "shared_recorded_problem": true
+          },
+          {
+            "metric": "gap",
+            "records": 3,
+            "pairs": 3,
+            "plots": 3,
+            "retained_samples": "exact",
+            "shared_recorded_problem": false
+          },
+          {
+            "metric": "stationarity",
+            "records": 3,
+            "pairs": 3,
+            "plots": 3,
+            "retained_samples": "exact",
+            "shared_recorded_problem": false
+          },
+          {
+            "metric": "distance_to_reference",
+            "records": 3,
+            "pairs": 3,
+            "plots": 3,
+            "retained_samples": "exact",
+            "shared_recorded_problem": false
+          },
+          {
+            "metric": "gap",
+            "records": 4,
+            "pairs": 6,
+            "plots": 4,
+            "retained_samples": "exact",
+            "shared_recorded_problem": false
+          },
+          {
+            "metric": "stationarity",
+            "records": 4,
+            "pairs": 6,
+            "plots": 4,
+            "retained_samples": "exact",
+            "shared_recorded_problem": false
+          },
+          {
+            "metric": "distance_to_reference",
+            "records": 4,
+            "pairs": 6,
+            "plots": 4,
+            "retained_samples": "exact",
+            "shared_recorded_problem": false
+          }
+        ]
+      },
+      {
+        "artifact": "chainbench-0.6.0.tar.gz",
+        "sha256": "5c91960ad342060631da2ca16cff0f0e0c586e8fc53181b276f286e6dade0ca4",
+        "version": "0.6.0",
+        "checks": 8,
+        "slugs": [
+          "gd-baseline",
+          "nesterov-1983",
+          "polyak-1964",
+          "hestenes-stiefel-1952",
+          "jaggi-2013",
+          "rockafellar-1976",
+          "beck-teboulle-2009",
+          "ista-vs-fista"
+        ],
+        "statuses": [
+          "CONSISTENT",
+          "CONSISTENT",
+          "CONSISTENT",
+          "CONSISTENT",
+          "CONSISTENT",
+          "CONSISTENT",
+          "CONSISTENT",
+          "INFO"
+        ],
+        "installed_outside_checkout": true,
+        "pip_check": "passed",
+        "exports": [
+          "html",
+          "markdown",
+          "csv",
+          "json"
+        ],
+        "plot_svg": "passed",
+        "visual_evidence": "matched",
+        "experiments": [
+          {
+            "preset": "quadratic",
+            "config_sha256": "5948d1f18bb4e37c0cc6a1775983d0e45d24f747b863c16108b60c8cdf44347f",
+            "methods": [
+              "gd",
+              "smooth-fista",
+              "heavy-ball",
+              "cg",
+              "proximal-point"
+            ],
+            "rows": 137,
+            "exports": [
+              "json",
+              "csv",
+              "markdown",
+              "html"
+            ],
+            "saved_config_rerun": "matched"
+          },
+          {
+            "preset": "diagonal-lasso",
+            "config_sha256": "fcebaccd5ab774f682042b75ee941611663a387cc80aa9ec7a66db9ad6e26dcb",
+            "methods": [
+              "ista",
+              "fista"
+            ],
+            "rows": 62,
+            "exports": [
+              "json",
+              "csv",
+              "markdown",
+              "html"
+            ],
+            "saved_config_rerun": "matched"
+          },
+          {
+            "preset": "simplex",
+            "config_sha256": "94d543bc70b9494e094388eab757115ba16d86f2a3b9cfcde47172c78e3e7972",
+            "methods": [
+              "frank-wolfe"
+            ],
+            "rows": 31,
+            "exports": [
+              "json",
+              "csv",
+              "markdown",
+              "html"
+            ],
+            "saved_config_rerun": "matched"
+          }
+        ],
+        "instance_controls": {
+          "direct_override": "passed",
+          "seeded_config_sha256": "19a4979b5568006e6492cd19122c62447fa401edfadba8d1d1b271caf555113b"
+        },
+        "advanced_workflows": {
+          "learning": "matched",
+          "sweep": "matched",
+          "replay": "matched",
+          "gd_tight": "matched",
+          "stress": "matched",
+          "landscape": "matched",
+          "shewchuk_reproduction": "matched",
+          "simplex_geometry": "matched",
+          "inspectable_stress": "matched",
+          "proximal_geometry": "matched",
+          "offline_tour": "matched",
+          "fista_deblurring": "matched",
+          "heavy_ball_counterexample": "matched",
+          "noisy_wavelet": "matched",
+          "fw_sparsity": "matched",
+          "extended_tour": "matched",
+          "kaczmarz_expectation": "matched",
+          "nonuniform_sampling": "matched",
+          "cg_spectrum": "matched",
+          "adam_counterexample": "matched",
+          "admm_geometry": "matched",
+          "fista_backtracking": "matched"
+        },
+        "saved_comparison": [
+          {
+            "metric": "gap",
+            "records": 2,
+            "pairs": 1,
+            "plots": 4,
+            "retained_samples": "exact",
+            "shared_recorded_problem": true
+          },
+          {
+            "metric": "stationarity",
+            "records": 2,
+            "pairs": 1,
+            "plots": 4,
+            "retained_samples": "exact",
+            "shared_recorded_problem": true
+          },
+          {
+            "metric": "distance_to_reference",
+            "records": 2,
+            "pairs": 1,
+            "plots": 4,
+            "retained_samples": "exact",
+            "shared_recorded_problem": true
+          },
+          {
+            "metric": "gap",
+            "records": 3,
+            "pairs": 3,
+            "plots": 3,
+            "retained_samples": "exact",
+            "shared_recorded_problem": false
+          },
+          {
+            "metric": "stationarity",
+            "records": 3,
+            "pairs": 3,
+            "plots": 3,
+            "retained_samples": "exact",
+            "shared_recorded_problem": false
+          },
+          {
+            "metric": "distance_to_reference",
+            "records": 3,
+            "pairs": 3,
+            "plots": 3,
+            "retained_samples": "exact",
+            "shared_recorded_problem": false
+          },
+          {
+            "metric": "gap",
+            "records": 4,
+            "pairs": 6,
+            "plots": 4,
+            "retained_samples": "exact",
+            "shared_recorded_problem": false
+          },
+          {
+            "metric": "stationarity",
+            "records": 4,
+            "pairs": 6,
+            "plots": 4,
+            "retained_samples": "exact",
+            "shared_recorded_problem": false
+          },
+          {
+            "metric": "distance_to_reference",
+            "records": 4,
+            "pairs": 6,
+            "plots": 4,
+            "retained_samples": "exact",
+            "shared_recorded_problem": false
+          }
+        ]
+      }
+    ],
+    "source_commit": "b22aeb16313c5ab5f2d605c25da576c5137841d6"
+  },
+  "checksum_manifest": "f021d1598224eaf7a19a2327f1a84cf391f027051b4e4a2ffb392901d4ecf03c  build-environment.txt\n4916454cfe3e2c68dc4cd45ff9636de7ec064b099faba99e44637506f9085433  chainbench-0.6.0-py3-none-any.whl\nf654f06af572b98cfade39ee80933cbe70121d99443c5b7c4bd906f98c6337c2  chainbench-0.6.0-reading.zip\n3d3dd41a281d90d2862dd9046fcfddbd69f61235d258887af44b5f836697fddb  chainbench-0.6.0-review.pdf\n5c91960ad342060631da2ca16cff0f0e0c586e8fc53181b276f286e6dade0ca4  chainbench-0.6.0.tar.gz\ndcb4be2590039f68ae10ebdd3587fd8d9c1ff58c58102770276f3a63a93c780c  reading-verification.json\n5f1bde1df7fe5cb6aa3cef997e9f9faea237f15512923be351c1f8f2450728b3  verification.json\n",
+  "prior_releases_unchanged": 7,
+  "prior_assets_unchanged": 35,
+  "all_prior_tags_verified": [
+    {
+      "tag": "v0.5.0",
+      "source": "43ba91a8e7fe8d4baf287e3faa154ab5a5819c31",
+      "unchanged": true
+    },
+    {
+      "tag": "v0.4.0",
+      "source": "5d255584879319c04c54a2ebc750c622f74a62f1",
+      "unchanged": true
+    },
+    {
+      "tag": "v0.3.0",
+      "source": "7369f7ea492903bf99d5649062462f99a3893da1",
+      "unchanged": true
+    },
+    {
+      "tag": "v0.2.1",
+      "source": "161e7948a3c501aca48a7145f46ba29636e9b9fa",
+      "unchanged": true
+    },
+    {
+      "tag": "v0.2.0",
+      "source": "a5a274f9f5891a84cbb9acc4e2df8d1e0584491c",
+      "unchanged": true
+    },
+    {
+      "tag": "v0.1.1",
+      "source": "7526f073c30c96c02f642214287a5a2c655a6fba",
+      "unchanged": true
+    },
+    {
+      "tag": "v0.1.0",
+      "source": "167be40a417c0fa07d15748339cd33757264452a",
+      "unchanged": true
+    }
+  ],
+  "release_gate": {
+    "status": "success",
+    "run": 36934602943,
+    "attempt": 1,
+    "head": "b22aeb16313c5ab5f2d605c25da576c5137841d6",
+    "jobs": [
+      {
+        "id": 110611800438,
+        "name": "verify / offline interactive reports browser",
+        "status": "success",
+        "actual_completed_log_read": true,
+        "checkout_verified": true
+      },
+      {
+        "id": 110611800637,
+        "name": "verify / test (ubuntu-latest, Python 3.10, current)",
+        "status": "success",
+        "actual_completed_log_read": true,
+        "checkout_verified": true,
+        "passed": 1474,
+        "seconds": 603.8
+      },
+      {
+        "id": 110611800712,
+        "name": "verify / test (ubuntu-latest, Python 3.11, current)",
+        "status": "success",
+        "actual_completed_log_read": true,
+        "checkout_verified": true,
+        "passed": 1474,
+        "seconds": 390.13
+      },
+      {
+        "id": 110611800749,
+        "name": "verify / audited offline reading assets / reading-bundle",
+        "status": "success",
+        "actual_completed_log_read": true,
+        "checkout_verified": true
+      },
+      {
+        "id": 110611800800,
+        "name": "verify / test (windows-latest, Python 3.12, current)",
+        "status": "success",
+        "actual_completed_log_read": true,
+        "checkout_verified": true,
+        "passed": 1474,
+        "seconds": 807.74
+      },
+      {
+        "id": 110611800927,
+        "name": "verify / test (ubuntu-latest, Python 3.12, current)",
+        "status": "success",
+        "actual_completed_log_read": true,
+        "checkout_verified": true,
+        "passed": 1474,
+        "seconds": 573.12,
+        "fault_injections": 6
+      },
+      {
+        "id": 110611800955,
+        "name": "verify / test (macos-26-intel, Python 3.12, current)",
+        "status": "success",
+        "actual_completed_log_read": true,
+        "checkout_verified": true,
+        "passed": 1474,
+        "seconds": 1170.21
+      },
+      {
+        "id": 110611800964,
+        "name": "verify / test (ubuntu-latest, Python 3.10, minimum)",
+        "status": "success",
+        "actual_completed_log_read": true,
+        "checkout_verified": true,
+        "passed": 1474,
+        "seconds": 625.27
+      },
+      {
+        "id": 110613055142,
+        "name": "verify / wheel and sdist clean installation",
+        "status": "success",
+        "actual_completed_log_read": true,
+        "checkout_verified": true,
+        "both_clean_installs": true,
+        "publication_evidence_files": 8
+      },
+      {
+        "id": 110618229967,
+        "name": "publish verified alpha release",
+        "status": "success",
+        "actual_completed_log_read": true,
+        "checkout_verified": true,
+        "downloaded_same_run_artifact": true,
+        "public_release_url": "https://github.com/chocoemong17/chainbench/releases/tag/v0.6.0",
+        "publisher_upload_download_hash_gates_completed": true
+      }
+    ],
+    "artifacts": [
+      {
+        "id": 11198220045,
+        "name": "saved-comparison-review-b22aeb16313c5ab5f2d605c25da576c5137841d6",
+        "bytes": 836094,
+        "sha256": "4b6afacb7f3df948f627013d15831a9a3bafe1d4e326c778183ba4d25cebcf0c",
+        "local_download": false
+      },
+      {
+        "id": 11197606875,
+        "name": "distributions-36934602943",
+        "bytes": 45360768,
+        "sha256": "3f36d7b30bde1919abef10edc8315fcf1a81b3c1aef054b2b79bb44dd27f4ce8",
+        "local_download": false
+      },
+      {
+        "id": 11197529580,
+        "name": "reproduction-browser-36934602943",
+        "bytes": 117287925,
+        "sha256": "0dd6b8a6b945d32e9b8f51d57b911e31d2cbc973813fa206bc5ad8216b1e98d6",
+        "local_download": false
+      },
+      {
+        "id": 11197513202,
+        "name": "chainbench-reading-bundle-b22aeb16313c5ab5f2d605c25da576c5137841d6",
+        "bytes": 44002397,
+        "sha256": "e166e307746c1a3c5fddd0015600097ee529746780c5bbc17658d3216ca094d6",
+        "local_download": false
+      },
+      {
+        "id": 11197493366,
+        "name": "chainbench-review-packet-b22aeb16313c5ab5f2d605c25da576c5137841d6",
+        "bytes": 313460,
+        "sha256": "9f93a87389b12fe10457db3ac9a40c2fae55658fcf4214f30a07036206113eda",
+        "local_download": false
+      },
+      {
+        "id": 11197428575,
+        "name": "chainbench-reading-release-b22aeb16313c5ab5f2d605c25da576c5137841d6",
+        "bytes": 44283124,
+        "sha256": "bfec387665da3e65d6ba1a0af73806611f3b65f14ca92ed70c2369243e917c37",
+        "local_download": false
+      },
+      {
+        "id": 11197258453,
+        "name": "chainbench-extracted-browser-b22aeb16313c5ab5f2d605c25da576c5137841d6",
+        "bytes": 9327305,
+        "sha256": "52a7998fc4e6d975bef329037ba6c2516fca93c594031b11a157ae198ac1862f",
+        "local_download": false
+      }
+    ]
+  },
+  "last_checked": "2026-10-01T22:44:40.903475+00:00"
+}
