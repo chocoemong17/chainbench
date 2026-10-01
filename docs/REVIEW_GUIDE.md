@@ -6,8 +6,15 @@ keeping their claims separate. It is a development snapshot, not a new release.
 
 ## Download first, or recompute a pinned development snapshot
 
+For a preview without installation or GitHub sign-in, open the archived
+[two-page Korean FISTA PDF](https://github.com/chocoemong17/chainbench/blob/archive/local-reviews-20261001/cloud/33b6243/ChainBench_FISTA_review.pdf)
+and [five geometry views with reading notes](https://github.com/chocoemong17/chainbench/tree/archive/local-reviews-20261001/cloud/33b6243/browser-gallery).
+The PDF and gallery record their tested source commit, actual cloud output and
+hashes. They remain available beyond the Actions artifact lifetime. The gallery
+contains selected display examples; the full reports retain every declared case.
+
 The [consolidated development PR](https://github.com/chocoemong17/chainbench/pull/73)
-links the current candidate and its actual checks. Open a successful
+is merged into `main` and links its actual checks. Open a successful
 [cloud reading bundle run](https://github.com/chocoemong17/chainbench/actions/workflows/cloud-tour.yml)
 and download `chainbench-reading-bundle-<commit>` from **Artifacts**. Extract the
 whole archive and open `index.html`; generation takes place on GitHub.

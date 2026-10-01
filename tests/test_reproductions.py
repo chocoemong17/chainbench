@@ -11,6 +11,7 @@ from unittest.mock import patch
 
 import numpy as np
 import pytest
+from _numeric_records import assert_recomputed_record
 
 from chainbench.cli import main
 from chainbench.reproduction_views import contour_svg, reproduction_html, surface_svg
@@ -59,7 +60,7 @@ def test_published_setup_and_independent_rational_iterates():
 @pytest.mark.parametrize('steps', [2, 12, 40])
 def test_complete_start_grid_metrics_hashes_and_real_termination(steps):
     result = run_reproduction(steps)
-    assert result == run_reproduction(steps)
+    assert_recomputed_record(result, run_reproduction(steps))
     assert len(result['cases']) == 10
     assert {tuple(c['start']) for c in result['cases'][1:]} == {
         (x, y) for x in [-3, 0, 3] for y in [-4, 0, 3]}

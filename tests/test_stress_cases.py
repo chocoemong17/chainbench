@@ -7,6 +7,7 @@ from pathlib import Path
 
 import numpy as np
 import pytest
+from _numeric_records import assert_recomputed_record
 
 from chainbench.cli import main
 from chainbench.problems import DiagonalLassoProblem, QuadraticProblem
@@ -97,7 +98,7 @@ def test_full_strata_and_independent_metrics(topic):
             metric = runs['fista']['gaps'][-1]/runs['ista']['gaps'][-1]
             assert row['threshold'] is None
         assert row['metric'] == pytest.approx(metric, abs=1e-14)
-        assert row == run_stress_case(topic, row['seed'])['case']
+        assert_recomputed_record(row, run_stress_case(topic, row['seed'])['case'])
     if result['rows'][0]['family'] == 'quadratic':
         assert len({(r['dim'], r['orientation'], r['start_kind']) for r in result['rows']}) == 16
 
@@ -184,7 +185,7 @@ def test_single_case_cli_reruns_selected_case_and_protects_output(tmp_path, caps
     args = ['stress-case', 'nesterov-1983', '--seed', '10']
     assert main(args+['--format', 'json']) == 0
     actual = json.loads(capsys.readouterr().out)
-    assert actual['case'] == selected
+    assert_recomputed_record(actual['case'], selected)
     path = tmp_path/'case.html'
     assert main(args+['--lang', 'ko', '--output', str(path)]) == 0
     before = path.read_bytes()

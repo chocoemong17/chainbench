@@ -75,6 +75,13 @@ The historical algorithm source is Hestenes and Stiefel (1952). The exact bound 
 
 where kappa=L/mu and ||e||_Q=sqrt(e^T Q e). Only positive iterations are summarized: k=0 would always contribute an uninformative ratio of 0.5. As of v0.1.1, CG solves a normalized correction equation `(Q/L) z = (b-Q*x0)/(L*s)`, with `s` chosen from the scaled initial residual, and recovers `x=x0+s*z`. This positive scaling does not change the exact-arithmetic iterates. Stopping uses the recomputed true residual `||b-Q*x|| <= max(atol, rtol*||b-Q*x0||)` rather than just the recurrence residual. The returned trace distinguishes convergence from exhausted iteration budgets. This follows the residual-rechecking caution in Shewchuk Section 11.2; it costs an additional matrix-vector product per update. The initial-residual reference differs from libraries that use `||b||` for relative tolerance. This floating-point test is not a claim of exact finite termination in dimension n.
 
+The development implementation now uses compensated accumulation of rounded
+float64 products for CG's scalar inner products. NumPy matrix-vector products
+and the recomputed true-residual stopping rule remain unchanged. This fixes
+observed repeated-run drift without enlarging comparison or theorem thresholds;
+finite trajectories may differ from earlier builds.
+[Arithmetic diagnosis and limits](CG_ARITHMETIC.md).
+
 ## Frank-Wolfe
 
 Frank and Wolfe (1956), *An algorithm for quadratic programming*, is the historical

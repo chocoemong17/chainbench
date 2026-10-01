@@ -3,6 +3,7 @@ from html.parser import HTMLParser
 
 import numpy as np
 import pytest
+from _numeric_records import assert_recomputed_record
 
 from chainbench.cli import main
 from chainbench.landscape import METHODS, contour_svg, landscape_html, run_landscape, surface_svg
@@ -49,7 +50,7 @@ def test_every_lesson_has_deep_context_and_evidence_label():
 def test_seeded_stress_is_reproducible_and_finite(topic):
     a = run_stress(topic, trials=3, seed=11)
     b = run_stress(topic, trials=3, seed=11)
-    assert a == b
+    assert_recomputed_record(a, b)
     assert a["trials"] == 3
     assert len(a["rows"]) == 3
     assert all(np.isfinite(row["metric"]) and row["metric"] >= 0 for row in a["rows"])

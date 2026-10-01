@@ -12,7 +12,13 @@ Python 3.10+ and NumPy generate the pages; a browser is enough to read or share 
 
 **New here? [Start with the review guide](docs/REVIEW_GUIDE.md)** — download the reading
 bundle from GitHub, or use a pinned source checkout and specific questions to investigate.
-The development features are consolidated in [PR #73](https://github.com/chocoemong17/chainbench/pull/73),
+For a quick preview without installation or sign-in, open the
+[two-page FISTA PDF](https://github.com/chocoemong17/chainbench/blob/archive/local-reviews-20261001/cloud/33b6243/ChainBench_FISTA_review.pdf)
+or [five actual geometry views with Korean reading notes](https://github.com/chocoemong17/chainbench/tree/archive/local-reviews-20261001/cloud/33b6243/browser-gallery).
+These archived previews include their source and verification records.
+
+The development features are available on `main` through merged
+[PR #73](https://github.com/chocoemong17/chainbench/pull/73),
 with actual cloud CI linked there; the frozen **v0.5.0 release does not contain
 the tour, paper reproductions or new geometry commands**.
 

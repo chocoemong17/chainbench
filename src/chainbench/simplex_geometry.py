@@ -52,7 +52,8 @@ def run_simplex_geometry(steps: int = 18) -> dict:
                                              'upper': value}})
             for row, following in zip(rows, rows[1:]):
                 row['segment'] = segment_profile(target, row['x'], row['vertex'],
-                                                 row['gamma'], following['x'])
+                                                 row['gamma'], following['x'],
+                                                 following_value=following['gap'])
             rows[-1]['segment'] = None
             actual = np.array([*target, *start], dtype='<f8').tobytes()
             cases.append({'id': f'{target_name}-{start_name}', 'target_name': target_name,

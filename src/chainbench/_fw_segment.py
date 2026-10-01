@@ -8,6 +8,8 @@ from __future__ import annotations
 
 import numpy as np
 
+from ._validation import scalar
+
 
 def segment_metadata():
     return {
@@ -29,7 +31,7 @@ def segment_metadata():
     }
 
 
-def segment_profile(target, current, vertex, gamma, following):
+def segment_profile(target, current, vertex, gamma, following, *, following_value=None):
     target, x, s, following = (
         np.asarray(v, dtype=float) for v in (target, current, vertex, following)
     )
@@ -50,6 +52,13 @@ def segment_profile(target, current, vertex, gamma, following):
     if not np.array_equal(points[scheduled_index], following):
         raise ValueError("the recorded next point differs from the scheduled convex combination")
     objective = np.array([float(0.5 * error @ error) for error in points - target])
+    if following_value is not None:
+        following_value = scalar(following_value, "recorded next objective")
+        if not np.isclose(objective[scheduled_index], following_value, rtol=0, atol=3e-15):
+            raise ValueError("the recorded next objective differs from the segment objective")
+        # Repeated BLAS evaluation need not be bitwise identical. Retain the
+        # actual row's value after checking the existing Decimal audit tolerance.
+        objective[scheduled_index] = following_value
     error = x - target
     value = float(0.5 * error @ error)
     affine = value + parameter * slope

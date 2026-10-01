@@ -2,17 +2,51 @@
 
 ## Unreleased
 
+The development toolkit is now integrated into `main` through [PR #73](https://github.com/chocoemong17/chainbench/pull/73).
+Its [final candidate CI](https://github.com/chocoemong17/chainbench/actions/runs/36880865578)
+passed all eight jobs, including 1,288 tests in each of six compatibility configurations,
+clean wheel/sdist installations and offline browser checks. The failed Windows
+fixture-decoding run and its UTF-8 repair remain recorded in the PR.
+
+The complete extended tour now has 25 HTML pages and 24 numerical records,
+including the later Adam, ADMM and FISTA backtracking reports. Cloud generation
+also produces a checked two-page FISTA PDF. The README and reading guide link
+archived PDF/geometry previews that remain readable without Actions sign-in.
+The entries below describe successive implementation stages; earlier 19- and
+20-page counts describe those stages, not the complete current extended tour.
+The frozen v0.5.0 release remains unchanged. Later commits retain their own CI.
+
+- Keep the complete macOS Python 3.12 gate on the standard macOS 26 Intel runner
+  after the ARM64 pool failed to allocate a runner. Preserve the cancelled attempt
+  and distinguish Intel validation from earlier Apple Silicon results.
+- Compare independent numerical reruns with the existing canonical trajectory
+  tolerance after Intel macOS exposed exact-equality assumptions. Keep provenance,
+  types, counts and inputs exact; preserve same-record serialization/preview checks
+  and every independent scientific validator. Add corrupt-record rejection cases.
+- Stabilize CG's three scalar inner-product quantities with compensated accumulation.
+  A complete Intel audit found late trajectory drift up to 4.32e-4; single-thread
+  execution did not fix it. The controlled scalar-reduction replacement removed
+  discrepancies beyond the existing comparison tolerance. Preserve matrix-vector
+  products, true-residual stopping, exact-start behavior and mathematical bounds.
+  Add cancellation, nonfinite-arithmetic and repeated-seed regressions.
+  [Diagnosis, numerical changes and limits](docs/CG_ARITHMETIC.md).
+- Preserve the actual recorded next objective in Frank–Wolfe segment views after
+  validating its direct evaluation. A minimum-version BLAS path exposed a
+  last-bit difference from reevaluation. Keep the trajectory, independent Decimal
+  audit and exact stored-record identity checks unchanged; add retention and
+  invalid-value regressions.
+
 - Explain randomized Kaczmarz's conditional expectation through actual orthogonal
   error triangles and all possible row choices from each recorded input point.
   Keep candidate projections separate from sampled history, synchronize the
   completed update and retain zero-error/degenerate states. Add independent
-  rational checks and full browser-state coverage. Remote validation is pending.
+  rational checks and full browser-state coverage.
 
 - Extend the optional tour to twenty HTML pages with the randomized Kaczmarz
   construction, actual coordinate preview and links comparing deterministic,
   support-constrained and expected-error attainment. Retain the seventeen-page
   base and all existing numeric records. Validate new metadata/standalone parity
-  while accepting prior two-extension manifests. Remote validation is pending.
+  while accepting prior two-extension manifests.
 - Require the randomized workflow's installation result at the release gate and
   check the actual smoke-summary contract against that gate, preventing key drift.
 
@@ -21,35 +55,35 @@
   direction probabilities, all seeds and the finite batch mean. Retain every
   update after zero and unresolved trials; never test single paths against an
   expectation bound. Add rational/state validators and offline browser checks.
-  Source-version notation caveat is explicit. Remote validation is pending.
+  Source-version notation caveat is explicit.
 
 - Explain the same quadratic PPA updates through their shifted subproblem and
   gradient balance. Synchronize completed solves with the existing landscape
   player, retain floating residuals and native tables, and omit the panel without
   PPA. Independent numerical and browser checks cover the added explanation.
-  Remote validation is pending.
+
 
 - Connect the same nine ISTA/FISTA trajectories to the minimized upper model,
   actual update slices and the distinction between current and extrapolated
   descent references. Include every stage, L1 corner and numerical value.
 - Add independent model expansion, rational reference and corrupt-record checks,
-  synchronized browser validation, and native tables. Remote validation is pending.
+  synchronized browser validation, and native tables.
 
 - Connect every atlas topic to its experiment/geometry/stress workflows through
   question-led cards. Bind direct tour links to included artifacts and declared
   commands, provide related-lesson links, and retain standalone command fallbacks.
-  Preserve calculations and 17/19-page counts. Remote validation is pending.
+  Preserve calculations and 17/19-page counts.
 
 - Connect source finite-spectrum/interval comparison polynomials to actual CG
   eigenmode errors and weighted energy in the existing Shewchuk reproduction.
   Retain absent-mode ratios as null and measured roundoff. Correct the Eq. (52)
-  page locator; preserve algorithms, starts and stopping. Remote validation pending.
+  page locator; preserve algorithms, starts and stopping.
 
 - Add optional `tour --extended` with the 200-update noisy Haar protocol and
   40-update Frank–Wolfe sparsity construction. Connect their actual previews and
   related reports, retain base records, validate extension metadata and require
   both tour variants in distribution evidence. The base tour remains seventeen
-  HTML pages; the extended tour has nineteen. New remote validation is pending.
+  HTML pages; the extended tour has nineteen.
 
 - Repair the existing landscape comparison: consistent method colors, equal
   contour coordinate scales, numeric 3D axes, visible actual inputs/settings and

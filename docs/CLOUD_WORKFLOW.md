@@ -49,6 +49,27 @@ The tests workflow retains the full cross-platform suite, wheel/sdist clean
 installation and offline browser checks. A successful reading-bundle job does
 not substitute for the remaining CI jobs. Existing releases stay unchanged.
 
+The macOS Python 3.12 gate uses GitHub's standard `macos-26-intel` runner.
+The earlier `macos-latest` ARM64 job was cancelled without acquiring a runner;
+[GitHub recorded its capacity constraint](https://github.com/chocoemong17/chainbench/actions/runs/36882942713/job/110439029108).
+The Intel runner keeps the complete test suite and the same macOS generation.
+It is a free standard runner for this public repository, as listed in
+[GitHub's runner reference](https://docs.github.com/en/actions/reference/runners/github-hosted-runners).
+Current Intel passes establish that environment's result; earlier Apple Silicon
+passes and the cancelled attempt remain separate evidence.
+
+The first Intel run then exposed 12 tests that required exact equality across
+independent floating-point computations (1,276 passed). [Issue #77](https://github.com/chocoemong17/chainbench/issues/77)
+records the failure and the stricter distinction between numerical rerun comparison
+and exact serialization/provenance. This result is separate from the earlier
+ARM64 allocation failure; it is not counted as a passing validation.
+
+A stricter follow-up passed 1,315 Intel tests and failed three CG comparisons.
+Full-array diagnosis then found larger late trajectory drift; single-thread
+execution did not resolve it. The scalar-accumulation repair preserves the
+original comparison tolerance, matrix-vector products and stopping contract.
+[Actual runs, controlled experiments and limits](CG_ARITHMETIC.md).
+
 The 2026-10-01 migration uploads the accumulated implementation, including the
 latest FISTA backtracking reading path. Previous local browser checks covered
 25 pages and 1,580 backtracking trial states across desktop/mobile. The final

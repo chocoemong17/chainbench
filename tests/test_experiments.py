@@ -6,6 +6,7 @@ from pathlib import Path
 
 import numpy as np
 import pytest
+from _numeric_records import assert_recomputed_record
 
 from chainbench import __version__
 from chainbench.cli import main
@@ -38,7 +39,7 @@ def test_complete_observations_and_reproducible_metadata(name):
     original = copy.deepcopy(config)
     result = run_experiment(config)
     assert config == original
-    assert result == run_experiment(config)
+    assert_recomputed_record(result, run_experiment(config))
     assert result["kind"] == "chainbench.experiment"
     assert result["environment"]["chainbench"] == __version__
     assert set(result["environment"]) == {"chainbench", "python", "numpy", "os"}
@@ -221,7 +222,7 @@ def test_installed_style_cli_can_save_config_rerun_and_export(tmp_path, name, ca
     assert main(["preset", name, "--output", str(config_path)]) == 0
     assert main(["experiment", "--config", str(config_path), "--output", str(report)]) == 0
     actual = json.loads(report.read_text())
-    assert actual == run_experiment(preset_config(name))
+    assert_recomputed_record(actual, run_experiment(preset_config(name)))
     assert main(["experiment", "--preset", name, "--format", "csv"]) == 0
     assert "config_sha256" in capsys.readouterr().out
     with pytest.raises(SystemExit) as exc:
