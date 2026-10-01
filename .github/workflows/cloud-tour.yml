@@ -24,19 +24,27 @@ jobs:
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
         with:
           python-version: '3.12'
-      - run: python -m pip install .
+      - run: python -m pip install . 'playwright==1.63.0' 'pymupdf==1.28.2'
+      - run: python -m playwright install --with-deps chromium
+      - run: sudo apt-get install -y fonts-noto-cjk
       - name: Generate every report on the runner
         run: python -m chainbench tour --extended --lang ko --output reading-bundle
-      - name: Independently audit hashes, links and all numerical records
+      - name: Audit every record and render the two-page review packet
         run: |
-          PYTHONPATH=scripts python -c "from pathlib import Path; from smoke_workflows import validate_tour; r=validate_tour(Path('reading-bundle')); assert len(r)==24; print('24 numerical records independently validated')"
+          python scripts/render_review_packet.py --tour reading-bundle --output review-packet --run-url "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
       - name: Record the source revision and environment
         run: |
-          git rev-parse HEAD > reading-bundle/source-commit.txt
-          python -m pip freeze > reading-bundle/environment.txt
+          git rev-parse HEAD > review-packet/source-commit.txt
+          python -m pip freeze > review-packet/environment.txt
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: chainbench-reading-bundle-${{ github.sha }}
           path: reading-bundle/
+          if-no-files-found: error
+          retention-days: 7
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: chainbench-review-packet-${{ github.sha }}
+          path: review-packet/
           if-no-files-found: error
           retention-days: 7

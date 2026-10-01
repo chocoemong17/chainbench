@@ -63,7 +63,6 @@ It keeps all sixteen base report records and adds:
 | `cg-spectrum.html` | n=16, interval [2,7]; all 3 spectra × 2 bases × 3 initial-error profiles; budget 32, true-residual rtol=10⁻¹² | Controlled spectral illustrations, not Figure 31(d)'s unspecified original inputs |
 | `adam.html` | C=3,10,100 × alpha fractions 0.1,0.5,0.9; both source variants, all 3,000 rounds | Published Theorem 1 counterexample family with declared finite inputs; online regret, not a fixed-objective gap |
 | `admm.html` | All 2 matrices × 3 regularization fractions × 2 starts × 3 fixed penalties; 60 updates, no early stop | Controlled 2D splitting geometry, not the source's dense experiment; original-primal gap versus infeasible split value |
-
 | `backtracking.html` | 3 λ values × 4 starts × 3 initial L guesses; 18 accepted updates, all trials | Controlled FISTA candidate tests; original gap and signed model difference |
 
 The step-selection section follows the proximal geometry and connects fixed-L

@@ -4,26 +4,46 @@ Start with a question you can inspect in the output. The tour connects published
 examples, controlled geometry, finite breadth and a tight construction, while
 keeping their claims separate. It is a development snapshot, not a new release.
 
-## Run the tested development snapshot
+## Download first, or recompute a pinned development snapshot
+
+The [consolidated development PR](https://github.com/chocoemong17/chainbench/pull/73)
+links the current candidate and its actual checks. Open a successful
+[cloud reading bundle run](https://github.com/chocoemong17/chainbench/actions/workflows/cloud-tour.yml)
+and download `chainbench-reading-bundle-<commit>` from **Artifacts**. Extract the
+whole archive and open `index.html`; generation takes place on GitHub.
+GitHub requires sign-in to download Actions artifacts. After download, the tour
+needs no account, server or network. Artifacts expire after seven days.
+
+Runs with the PDF workflow also provide `chainbench-review-packet-<commit>`:
+a two-page Korean FISTA reading guide, rendered-page previews and `evidence.json`.
+Its actual figure, symbolic flows and comparison table come from the audited tour.
+The evidence records the source revision, manifest hash and PDF checks. This short
+guide covers step selection; the full bundle contains all the other reports.
+Packet generation is not a claim that the remaining CI jobs passed.
 
 Use Git and Python 3.10+ in your preferred Python environment. These commands use
-a new checkout and pin the implementation behind the previews:
+a new checkout and pin the implementation behind the complete extended tour:
 
 ```bash
 git clone https://github.com/chocoemong17/chainbench.git chainbench-review
 cd chainbench-review
-git checkout --detach ae20f1d869a39a3d3e3d30a51d9f31b0343c1b18
+git checkout --detach 9f797d5e2f7a2f3db2e3051ffa09a95e4c57ebf6
 python -m pip install .
 git rev-parse HEAD
-python -m chainbench tour --lang ko --output tour
+python -m chainbench tour --extended --lang ko --output tour
 ```
 
 Open `tour/index.html`. This immutable computation snapshot includes every command
 on this page, including the five-method landscape comparison, CG metric view,
 heavy-ball counterexample and earlier stacked features.
-The [development issue](https://github.com/chocoemong17/chainbench/issues/71) links
-its PR and CI evidence, where the exact tested PR-head commit is recorded. The
-implementation snapshot has 731 tests; documentation-only updates can follow it.
+The [snapshot's tests](https://github.com/chocoemong17/chainbench/actions/runs/36875447704)
+and [reading-bundle generation](https://github.com/chocoemong17/chainbench/actions/runs/36875447467)
+record the actual outcomes. The suite contains 1,288 tests; read the run status
+rather than treating a test count as a passing result. The
+[preceding run](https://github.com/chocoemong17/chainbench/actions/runs/36873275915)
+exposed 12 Windows fixture-decoding failures, fixed by explicit UTF-8 reads in
+this snapshot. The failed run remains available. Documentation and PDF tooling
+can follow this immutable computation snapshot.
 Pipeline checks are maintainer validation, not independent review or a guarantee
 over arbitrary inputs.
 
@@ -31,7 +51,8 @@ The checkout is intentionally detached for an identifiable review. The commands
 do not merge PRs or publish a release. The package version still says 0.5.0, so
 record the commit too. New README edits may postdate this implementation snapshot.
 
-The tour generates seventeen HTML files and a manifest, about 45 MB uncompressed.
+The extended tour generates twenty-five HTML files and a manifest. The index
+reports the actual uncompressed size; each file's bytes and SHA-256 are recorded.
 Use a new output directory; existing directories are refused. After generation,
 share the whole folder. It needs no server, account or network to read. The original
 papers' links require a connection; all report content and controls are local.
@@ -110,6 +131,24 @@ bound and matching construction establish the tight result under its stated
 assumptions. The numerical equality only checks this implementation. Changing the
 horizon changes the function. [Theorems, scope and algebra](GD_TIGHT_CASE.md).
 
+### 6. Continue into the extended reports
+
+| Question | Open in the bundle | What to distinguish |
+| --- | --- | --- |
+| What does shrinkage do to noisy image coefficients? | `wavelet.html` | Actual three-stage Haar coefficients; new noise draw; unknown optimum |
+| When is an accuracy floor caused by sparse support? | `fw-sparsity.html` | Sharp support minimum versus an iteration bound |
+| How does a randomized projection relate to its expectation? | `kaczmarz.html` | All 64 trials per case, conditional row outcomes and exact expectation |
+| Why change the row-selection probabilities? | `sampling.html` | Three declared Fourier inputs; actual complex updates; finite paths |
+| Does the condition number explain every CG path? | `cg-spectrum.html` | 18 inputs with the same interval; actual mode energy and comparison polynomials |
+| What changes when the loss changes each round? | `adam.html` | Source analysis variants, online regret and the retained slow AMSGrad case |
+| What do the copies and dual memory do in ADMM? | `admm.html` | 36 cases; original objective versus infeasible split values and residual tests |
+| Why is a proposed FISTA step rejected? | `backtracking.html` | Every trial in 36 runs; local candidate test, carried L and accepted path |
+
+The index connects fixed-L FISTA, backtracking and ADMM with explicit flows and
+notation comparisons. The same shrinkage operation appears in different
+subproblems; variables, thresholds and iteration costs must be read in context.
+[Settings, source contracts and evidence levels](OFFLINE_TOUR.md#optional-extended-path).
+
 The **atlas** connects the eight topics through assumptions, symbolic update flows,
 operation/state comparisons, selected bounds and limitations. A historical link is
 not a claim that every recurrence is transcribed from the oldest cited paper.
@@ -151,9 +190,10 @@ author signature or a proof.
 
 ## What remains limited
 
-The project covers selected results from public optimization literature. The image
-run is one synthetic noiseless protocol; the noisy experiment and MTWIST are not
-implemented. The geometric cases are controlled illustrations. Stress covers a
+The project covers selected results from public optimization literature. The two
+image workflows use declared synthetic protocols. The noisy Haar experiment uses
+a new noise draw and an unknown optimum; original-paper noise/endpoints and MTWIST
+are not reproduced. The geometric cases are controlled illustrations. Stress covers a
 declared family rather than arbitrary datasets. The tight construction applies
 only within its cited assumptions. There is no production-solver claim or universal
 speed ranking; iteration counts do not normalize per-step computational cost.

@@ -1,93 +1,67 @@
-## After v0.5.0: published examples before algorithm counts
+# Roadmap: published examples before algorithm counts
 
-- The Kaczmarz page now connects its unchanged runs to the proof's conditional
-  Pythagorean step: actual removed/remaining error vectors and a probability
-  average over every possible row. Candidate points are explicitly hypothetical.
-  [Source, coordinates and zero-error handling](docs/KACZMARZ_EXPECTATION.md#development-the-conditional-step-in-the-proof).
-  Remote validation is pending.
+## Current development candidate
 
-- The optional extended reading path now connects the Kaczmarz expectation
-  construction to the deterministic GD and FW support cases. Twenty HTML pages
-  retain all previous records and the sixteen base reports; earlier manifest
-  selections remain readable. [Navigation and evidence levels](docs/OFFLINE_TOUR.md).
-  New remote validation is pending.
+[PR #73](https://github.com/chocoemong17/chainbench/pull/73) consolidates the
+implementation and links its actual cloud checks. The package version remains
+0.5.0, but these development features are not in the frozen v0.5.0 release.
+[Start with the reading guide](docs/REVIEW_GUIDE.md) for a pinned computation
+snapshot, artifact downloads and specific questions to inspect.
 
-- Implemented locally: six members of Strohmer–Vershynin's published expected
-  squared-error bound attainment. Actual 3D projections, every declared random
-  trial and finite means distinguish expectation from individual paths.
-  [Source version, inputs and notation caveat](docs/KACZMARZ_EXPECTATION.md).
-  The fixed suite remains eight checks; authenticated publication and remote CI
-  are pending.
+The complete extended tour has 25 HTML pages and 24 numerical records. GitHub
+Actions generates the bundle, audits its hashes and numerical evidence, and
+renders a separate two-page FISTA review packet. Source stays in GitHub; full
+tests, builds and browser checks run there too. The local task folder stays below
+1 GB. [Cloud workflow and artifact lifetime](docs/CLOUD_WORKFLOW.md).
 
-- Implemented locally: the PPA step now exposes its exact quadratic subproblem,
-  local contours and next-point gradient balance, retaining numerical residuals
-  and unchanged-coordinate states. [Source and scope](docs/LANDSCAPE_CONTEXT.md).
-  Remote validation is pending.
+Implemented in the development source:
 
-- Implemented locally: ISTA/FISTA's actual upper-model slices explain why the
-  proximal step descends from its anchor and why FISTA need not descend from its
-  previous iterate. All nine cases, actual stages and native tables are retained.
-  [Source and scope](docs/PROXIMAL_GEOMETRY.md). Remote validation is pending.
+- **Published examples and their limits.** Shewchuk's original 2D CG/SD setup and
+  declared added starts; Beck–Teboulle's noiseless image protocol and a separate
+  noisy Haar protocol with a new noise draw; Strohmer–Vershynin's nonuniform
+  Fourier sampling protocol with three new inputs. Each names its exact source,
+  changed inputs and omitted scope. [Source map](docs/SOURCE_MAP.md).
+- **Actual movement in space.** Linked contours, objective heights and iteration
+  controls for quadratic methods, simplex oracle steps, proximal shrinkage and
+  ADMM's solve/shrink/dual-memory stages. Local models, PPA subproblems and
+  residuals explain computed steps. [Geometry comparison](docs/LANDSCAPE_CONTEXT.md).
+- **FISTA step selection.** All 36 backtracking runs, every rejected proposal,
+  carried curvature and signed objective/model difference; a guide compares them
+  with the fixed-L report without equating iteration costs.
+  [Exact recurrence and scope](docs/FISTA_BACKTRACKING.md).
+- **Several inputs, including inconvenient ones.** All seeds 0–31 for each of
+  eight stress topics, unresolved ratios, multiple starts and dimensions; all
+  declared geometry cases and 18 same-condition-number CG spectral examples.
+  [Sampling contract](docs/STRESS_SAMPLING.md), [CG spectra](docs/CG_SPECTRUM.md).
+- **Counterexamples and sharp constructions.** Heavy-ball's published cycle,
+  the source Adam/AMSGrad analysis variants and average regret, the public tight
+  GD construction, sharp FW support floors and Kaczmarz expectation attainment.
+  Finite paths, expectations and theorem statements remain separate.
+  [Evidence levels](docs/OFFLINE_TOUR.md).
+- **Connected paper explanations.** Eight bilingual atlas topics, symbolic
+  process flows, operation/state comparisons and topic-specific report links.
+  Return links and native tables preserve offline and no-script reading.
+  [Learning paths](docs/LEARNING_WORKFLOWS.md).
 
-- Implemented locally: topic-specific reading cards connect the atlas to the
-  actual included reports, with declared commands and related-lesson return
-  links. Standalone/focused exports remain usable without companion files;
-  base tours do not link to absent extended reports. Remote validation is pending.
+The first consolidated remote run found 12 Windows UTF-8 fixture-read failures;
+Linux/macOS, clean wheel/sdist installation and browser checks passed. The repair
+and its follow-up run are recorded in [issue #74](https://github.com/chocoemong17/chainbench/issues/74).
+The failure remains part of the record. Read the candidate's current CI status;
+local checks and a successful PDF job do not substitute for full remote validation.
 
-- Implemented locally: Shewchuk's polynomial comparison beside actual CG mode
-  errors, with all existing starts, explicit zero-initial-mode semantics and
-  source page corrections. [Source and scope](docs/CG_SPECTRAL_EXPLANATION.md).
-  This explanation keeps the existing solver and awaits remote validation.
+## Next work, in priority order
 
-- Implemented locally: `tour --extended` connects the noisy Haar and sharp
-  sparsity reports through nineteen offline pages, with actual previews, explicit
-  settings and independently validated records. The base seventeen-page path is
-  preserved. [Bundle contract](docs/OFFLINE_TOUR.md). Remote validation is pending.
+1. Repair concrete correctness, portability or usability defects found in the
+   current candidate; preserve all declared examples and existing validation.
+2. Make the available explanations easier to inspect and share. The cloud PDF
+   packet and updated reading route are tracked in
+   [issue #75](https://github.com/chocoemong17/chainbench/issues/75).
+3. Use actual reader feedback to choose the next explanation or public experiment.
+   Add a paper only with a precise source-to-recurrence mapping, explicit input
+   differences, multiple meaningful examples and independent numerical checks.
 
-- Implemented locally in development: Jaggi's published sharp sparsity construction,
-  Lemmas 3–4 / Appendix C, with actual FW weights, equal weights on the same
-  support, four declared dimensions and the conditional dual floor. This is
-  support-constrained attainment, not a claim of exact iteration worst cases.
-  [Source and scope](docs/FW_SPARSITY.md). New PR/CI evidence awaits authentication.
-
-- Recompute the public Lessard–Recht–Packard heavy-ball counterexample, with the
-  original start, all eight declared variations, actual state geometry and the
-  source's rational cycle. Separate its scope from the quadratic check and the
-  full IQC framework. See [source and differences](docs/HEAVY_BALL_COUNTEREXAMPLE.md).
-
-- Tight-GD now resolves its shrinking quadratic centre, exposes every actual
-  step and constant gradient, and explains the algebraic attainment separately
-  from the class-wide bound. See [source and scope](docs/GD_TIGHT_CASE.md).
-
-- The development-source `tour` command connects these reports through one offline
-  reading path, with explicit evidence levels, all seeded cases and file hashes.
-  See [the bounded bundle](docs/OFFLINE_TOUR.md).
-- Implemented on the development branch: exact-setup numerical reproduction of
-  Shewchuk Figures 8 and 30, linked geometry/energy views, and every start in a declared
-  nine-point grid. See [the source and scope](docs/SHEWCHUK_REPRODUCTION.md).
-- Implemented on the development branch: Frank–Wolfe simplex/oracle movement,
-  explicitly tied to Jaggi Algorithm 1, with all twelve target/start cases. See the
-  [geometry and certificate contract](docs/SIMPLEX_GEOMETRY.md).
-- Implemented on the development branch: inspectable individual and nearest-rank
-  cases, four dimensions, quadratic orientations/starts, actual input arrays, and
-  explicit unresolved ratios. See [sampler v2](docs/STRESS_SAMPLING.md).
-- Implemented on the development branch: ISTA/FISTA composite contours and 3D
-  heights, extrapolation/gradient/shrinkage inspection, and all nine lambda/start
-  cases. See [proximal geometry](docs/PROXIMAL_GEOMETRY.md).
-- Implemented in development: the noiseless 64×64 ISTA/FISTA subset of Figure 5,
-  using the attributed public procedural image, explicit operator and lambda=0
-  coordinate equivalence. See [source differences](docs/FISTA_DEBLURRING.md).
-- Implemented locally in development: the noisy 256×256, positive-penalty Figure 4
-  protocol with actual three-stage Haar coefficients, a declared new noise draw,
-  full 200-update budget and unknown optimum. Original noise/endpoints are not
-  claimed to match. See [the separate source contract](docs/FISTA_WAVELET.md).
-  Remote PR/CI evidence is pending GitHub authentication for this addition.
-- Implemented on the development branch: symbolic update flows for all eight
-  topics, an operation/state comparison and linked method relationships. Historical
-  attribution is separated from mathematical specialization and measured evidence.
-- The new commands are not yet a release; previous tags/assets remain unchanged.
-- Canonical `learn`/`report`/`plot` views now retain their computation-derived
-  inputs and settings too; see [the instance contract](docs/CANONICAL_CONTEXT.md).
+Main, prior tags and historical review packets remain available. No acceptance,
+independent review or production performance is inferred from CI results.
 
 ## v0.5.0: evidence breadth and geometry
 

@@ -10,10 +10,10 @@ rules and actual calculations. Explore 2D contours, 3D objective surfaces, image
 reconstructions and reproducible instance families in local, bilingual reports.
 Python 3.10+ and NumPy generate the pages; a browser is enough to read or share them.
 
-**New here? [Start with the review guide](docs/REVIEW_GUIDE.md)** — it gives a runnable,
-tested source checkout and specific questions to investigate. The development
-features shown below include a PR stack and newer local additions awaiting remote
-validation; the frozen **v0.5.0 release does not contain
+**New here? [Start with the review guide](docs/REVIEW_GUIDE.md)** — download the reading
+bundle from GitHub, or use a pinned source checkout and specific questions to investigate.
+The development features are consolidated in [PR #73](https://github.com/chocoemong17/chainbench/pull/73),
+with actual cloud CI linked there; the frozen **v0.5.0 release does not contain
 the tour, paper reproductions or new geometry commands**.
 
 ## From a paper's experiment to actual pixels
@@ -44,6 +44,9 @@ Open [cloud reading bundle runs](https://github.com/chocoemong17/chainbench/acti
 choose a successful run and download its `chainbench-reading-bundle-<commit>` artifact.
 Extract it and open `index.html` to explore all 25 pages offline. Generation and
 validation run on GitHub; artifact retention is seven days.
+The separate `chainbench-review-packet-<commit>` artifact contains a two-page
+Korean FISTA comparison PDF, page previews and generation evidence. GitHub
+requires sign-in for artifact downloads; the extracted reports work offline.
 [Cloud workflow and evidence scope](docs/CLOUD_WORKFLOW.md).
 
 ## Run the development tour
@@ -103,7 +106,7 @@ The randomized Kaczmarz case study adds Strohmer–Vershynin's
 construction: rotate actual 3D coordinate projections, compare six inputs and
 keep every seed while distinguishing exact expectation from a finite sample mean.
 [Source and scope](docs/KACZMARZ_EXPECTATION.md). It can be opened separately or
-in the extended tour; authenticated PR publication and remote CI are still pending:
+in the extended tour; see PR #73 for the consolidated source and current CI:
 
 ```bash
 python -m chainbench case-study kaczmarz-expectation --lang ko --output kaczmarz.html
@@ -232,7 +235,7 @@ The subsequent [Frank–Wolfe sparsity construction](docs/FW_SPARSITY.md) connec
 Jaggi's sharp support floor to actual atom weights across four dimensions and a
 three-coordinate objective surface. It distinguishes support size from iteration,
 and ends the dual lower bound at full support. This addition is prepared on the
-local `feat/fw-sparsity-bound` branch; its new remote PR and CI are pending.
+consolidated development branch; PR #73 links the source and current remote CI.
 
 The [heavy-ball counterexample](docs/HEAVY_BALL_COUNTEREXAMPLE.md) connects the
 actual function, signed iterates and `(previous, current)` state plane. Its published
