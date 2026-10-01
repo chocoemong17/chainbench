@@ -1,0 +1,891 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="no-referrer"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data:; style-src 'unsafe-inline'; script-src 'unsafe-inline'; connect-src 'none'; base-uri 'none'; form-action 'none'"><title>ChainBench · Saved experiments · compare the context</title><style>
+:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;background:#f3f1ec;
+color:#172238;line-height:1.68;--ink:#172238;--muted:#64748b;--navy:#13233f;--blue:#2864d7;
+--cream:#fbfaf7;--line:#ded9cf;--orange:#d97706;--green:#0f766e}*{box-sizing:border-box}
+html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 8% 0,#fff 0,#f3f1ec 38%,#eef1f5 100%)}
+a{color:#235bbd;text-underline-offset:3px}main{max-width:1320px;margin:auto;padding:30px 28px 80px}
+header{position:relative;overflow:hidden;border-radius:28px;background:linear-gradient(135deg,#101f39,#1b355b 65%,#244c79);
+color:#fff;padding:44px 48px;margin-bottom:28px;box-shadow:0 24px 60px #0f172a20}header:after{content:'';position:absolute;
+width:360px;height:360px;border-radius:50%;right:-120px;top:-170px;background:#ffffff0d}h1,h2{font-family:Georgia,'Times New Roman',serif;
+letter-spacing:-.018em}h1{font-size:clamp(34px,5vw,58px);line-height:1.06;margin:8px 0 18px;max-width:980px}
+h2{font-size:30px;line-height:1.2;margin:0 0 14px}h3{font-size:17px;margin:0 0 8px}p{margin:8px 0 15px}.eyebrow{
+font-size:11px;text-transform:uppercase;letter-spacing:.16em;font-weight:800;color:#8fa9cb}header a{color:#e7f0ff}
+.controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:16px 0}button,input,select{font:inherit;padding:10px 14px;
+border-radius:11px;border:1px solid #c6ceda;background:#fff;color:#18304f}button{cursor:pointer;font-weight:650}button:hover{background:#edf3fc}
+button:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible{outline:3px solid #ef9f47;outline-offset:3px}
+section,.panel{min-width:0;background:#fff;border:1px solid var(--line);border-radius:22px;padding:28px;margin:22px 0;scroll-margin-top:22px;
+box-shadow:0 8px 32px #18253c0b}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin:22px 0}
+.card{position:relative;background:linear-gradient(180deg,#fff,#fbfcff);border:1px solid #dce2ea;border-radius:19px;padding:20px;text-decoration:none;color:var(--ink);
+min-width:0;display:flex;flex-direction:column;gap:8px;box-shadow:0 7px 22px #1722380a}.card:before{content:'';height:4px;border-radius:8px;
+background:linear-gradient(90deg,#245fc8,#7c3aed,#0f766e);position:absolute;left:18px;right:18px;top:0}.card img{width:100%;height:auto;margin-top:auto;border-radius:12px}
+.card:hover{border-color:#82a8ea;box-shadow:0 13px 34px #17223816;transform:translateY(-1px)}.pairs,.deep-grid,.visual-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.deep-grid{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}.deep-grid article{padding:17px;border-radius:15px;background:#f8fafc;border:1px solid #e6eaf0}
+.visual-grid{align-items:start}.callout{padding:15px 18px;border-radius:14px;background:#edf4ff;border-left:5px solid #4b76c5}.caution{background:#fff5e5;border-left-color:#d99a35}
+.badge{border-radius:999px;padding:4px 10px;background:#eef2fa;font-size:11px;font-weight:750;display:inline-block}.evidence-banner{padding:18px 20px;border-radius:17px;
+background:linear-gradient(90deg,#ecfdf5,#eff6ff);border:1px solid #cfe8df;margin:18px 0}.evidence-tag{display:inline-block;margin-right:10px;padding:5px 10px;border-radius:999px;
+font-size:11px;font-weight:800;letter-spacing:.08em;background:#0f766e;color:#fff}.evidence-ladder{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}.evidence-step{
+padding:14px;border-radius:14px;background:#fff;border:1px solid #d9e1ea}.evidence-step strong{display:block;font-size:13px}.evidence-step span{font-size:12px;color:#64748b}
+.metric-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0}.metric{padding:16px;border-radius:15px;background:#172238;color:#fff}.metric span{display:block;
+font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#aec1df}.metric strong{font-family:Georgia,serif;font-size:28px}.small{font-size:13px;color:#56657b}.formula{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:15px;padding:18px;background:#f0f3f7;border-radius:12px;overflow-wrap:anywhere;white-space:pre-wrap;border:1px solid #e1e6ed}
+.plot{overflow-x:auto;margin:14px 0}.plot svg{width:100%;min-width:580px;height:auto;display:block;border-radius:14px}summary{font-weight:700;cursor:pointer;padding:10px 0}
+pre{font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere;background:#f1f4f8;border-radius:12px;padding:16px}code{overflow-wrap:anywhere}table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{padding:10px;border-bottom:1px solid #e1e7ef;text-align:left;vertical-align:top}th{font-size:11px;text-transform:none;letter-spacing:normal;color:#637087}.scroll{overflow:auto}
+nav a{display:inline-block;padding:6px 10px}footer{font-size:12px;color:#66768f;margin-top:34px}.pill{padding:5px 10px;border-radius:20px;background:#e6edfa;display:inline-block}.timeline{display:grid;
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:18px 0}.timeline div{padding:12px 14px;border-radius:13px;background:#fff;border-top:3px solid #2864d7}.timeline strong{display:block;font-size:13px}.timeline span{font-size:12px;color:#667085}.trajectory-player{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:14px 16px;border-radius:16px;background:#101f39;color:white;margin:18px 0}.trajectory-player button{width:44px;height:40px;padding:0;border:0;background:#fff;color:#13233f;border-radius:999px}.trajectory-player input[type=range]{flex:1;min-width:220px;padding:0;border:0;background:transparent}.trajectory-player strong{min-width:56px;font-variant-numeric:tabular-nums}
+html[lang='ko'] [lang='en'],html[lang='en'] [lang='ko']{display:none}[hidden]{display:none!important}@media(max-width:760px){main{padding:15px 12px 44px}header{padding:26px 22px}.pairs,.visual-grid{grid-template-columns:1fr}
+section,.panel{padding:18px}.cards{grid-template-columns:1fr}h2{font-size:25px}.evidence-ladder{grid-template-columns:1fr 1fr}.plot svg{min-width:640px}}@media(max-width:480px){.evidence-ladder{grid-template-columns:1fr}}
+@media print{button,input,nav,.controls{display:none}body{background:#fff}header{background:white;color:black;box-shadow:none;border:1px solid #ddd}.cards{display:none}section{break-inside:avoid}.plot svg{min-width:0}.evidence-ladder{grid-template-columns:repeat(2,1fr)}details>*{display:block}}
+</style></head><body><main><header><div class="eyebrow">CHAINBENCH / LEARN · EXPERIMENT · AUDIT</div><h1>Saved experiments · compare the context</h1><p><span lang="ko">실제로 저장한 실험 2–4개를 나란히 읽습니다. 먼저 문제·입력·예산의 차이를 확인한 뒤 곡선을 비교하세요.</span><span lang="en">Read two to four saved experiments together. Inspect problem, input and budget differences before comparing curves.</span></p><div class="controls"><span>v0.5.0 · local &amp; offline</span><button type="button" data-action="language">한국어 / English</button></div></header><style>.comparison-table{min-width:640px}.comparison-table th,.comparison-table td{white-space:nowrap}.comparison-scroll-hint{display:none}@media(max-width:760px){.comparison-scroll-hint{display:block}}@media print{.comparison-scroll-hint{display:none}}</style><nav class="panel"><a href="#comparison-context"><span lang="ko">무엇이 달라졌나</span><span lang="en">What changed?</span></a><a href="#record-A"><span lang="ko">기록 </span><span lang="en">Record </span>A</a><a href="#record-B"><span lang="ko">기록 </span><span lang="en">Record </span>B</a></nav><section id="comparison-context"><h2><span lang="ko">같은 문제를 비교하고 있나요?</span><span lang="en">Are these the same recorded problem?</span></h2><p class="callout caution"><span lang="ko">저장된 관측을 읽는 기능입니다. 알고리즘을 다시 실행하거나 입력 배열·작성자를 인증하지 않습니다. 같은 해시도 독립적인 재현을 입증하지 않으며, 같은 기록을 두 번 넣어도 새 증거가 되지 않습니다.</span><span lang="en">These are supplied observations. No solver is rerun and no input arrays or authors are authenticated. Matching hashes do not establish independent reproduction; duplicate records add no evidence.</span></p><p class="comparison-scroll-hint small"><span lang="ko">표를 가로로 스크롤해 환경과 원본 기록의 차이까지 확인하세요. 영역을 선택한 뒤 방향키로도 이동할 수 있습니다.</span><span lang="en">Scroll the table horizontally to reach environment and whole-record differences. Focus the region to use the arrow keys.</span></p><div class="scroll" tabindex="0" role="region" aria-label="Record diagnostics"><table class="comparison-table"><thead><tr><th scope="col"><span lang="ko">기록 쌍</span><span lang="en">Pair</span></th><th scope="col"><span lang="ko">전체 설정</span><span lang="en">Full config</span></th><th scope="col"><span lang="ko">입력 해시</span><span lang="en">Input digest</span></th><th scope="col"><span lang="ko">문제·시작점</span><span lang="en">Problem and start</span></th><th scope="col"><span lang="ko">환경</span><span lang="en">Environment</span></th><th scope="col"><span lang="ko">원본 기록</span><span lang="en">Whole record</span></th></tr></thead><tbody><tr data-pair="A-B"><th scope="row">A / B</th><td><span lang="ko">다름</span><span lang="en">different</span></td><td><span lang="ko">같음</span><span lang="en">same</span></td><td><span lang="ko">같음</span><span lang="en">same</span></td><td><span lang="ko">같음</span><span lang="en">same</span></td><td><span lang="ko">다름</span><span lang="en">different</span></td></tr></tbody></table></div><details><summary><span lang="ko">차이가 나는 실제 필드 보기</span><span lang="en">Inspect the actual differing fields</span></summary><pre>[
+  {
+    &quot;left&quot;: &quot;A&quot;,
+    &quot;right&quot;: &quot;B&quot;,
+    &quot;identical_record&quot;: false,
+    &quot;same_config&quot;: false,
+    &quot;same_input_digest&quot;: true,
+    &quot;same_recorded_problem&quot;: true,
+    &quot;same_environment&quot;: true,
+    &quot;shared_methods&quot;: [
+      &quot;gd&quot;,
+      &quot;cg&quot;
+    ],
+    &quot;config_differences&quot;: [
+      {
+        &quot;field&quot;: &quot;steps&quot;,
+        &quot;left&quot;: 8,
+        &quot;right&quot;: 12
+      }
+    ],
+    &quot;fixture_differences&quot;: [],
+    &quot;environment_differences&quot;: [],
+    &quot;parameter_differences&quot;: []
+  }
+]</pre></details></section><section><h2><span lang="ko">공통 축에서 읽기</span><span lang="en">Read on shared axes</span></h2><p><span lang="ko">입력 해시·문제 설정·시작점·측정 정의가 모두 같은 경우에만 같은 방법의 기록을 겹쳐 보여 줍니다. 설정이나 종료 기준의 차이는 위 표와 각 기록에 남습니다.</span><span lang="en">Overlay the same method only when every record agrees on its input digest, problem setup, start and measurement definitions. Settings and stopping differences remain visible above and below.</span></p><p class="comparison-scroll-hint small"><span lang="ko">그래프를 가로로 스크롤하면 끝까지 볼 수 있습니다. 키보드로 영역을 선택한 뒤 방향키도 사용할 수 있습니다.</span><span lang="en">Scroll the chart horizontally to inspect its full width, or focus it and use the arrow keys.</span></p><div class="plot" tabindex="0" role="region" aria-label="gd · shared recorded problem" data-comparison-chart="shared-gd"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 400" role="img" aria-label="gd · shared recorded problem" font-family="system-ui,sans-serif"><title>gd · shared recorded problem</title><desc>Log10 y-axis.</desc><metadata>{&quot;title&quot;: &quot;gd \u00b7 shared recorded problem&quot;, &quot;x_label&quot;: &quot;recorded iteration k&quot;, &quot;y_label&quot;: &quot;objective gap&quot;, &quot;series&quot;: [{&quot;label&quot;: &quot;A \u00b7 gd&quot;, &quot;x&quot;: [0, 1, 2, 3, 4, 5, 6, 7, 8], &quot;y&quot;: [0.17181580204572672, 0.10801494094080133, 0.07582032507069524, 0.05550151370983923, 0.04168167661853592, 0.03185139104300255, 0.024653588831323098, 0.01927262834485851, 0.015184422579864123], &quot;role&quot;: &quot;observed&quot;}, {&quot;label&quot;: &quot;B \u00b7 gd&quot;, &quot;x&quot;: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], &quot;y&quot;: [0.17181580204572672, 0.10801494094080133, 0.07582032507069524, 0.05550151370983923, 0.04168167661853592, 0.03185139104300255, 0.024653588831323098, 0.01927262834485851, 0.015184422579864123, 0.012037629184863929, 0.009589567564567438, 0.007668562414887486, 0.006150622861962277], &quot;role&quot;: &quot;observed&quot;}], &quot;y_scale&quot;: &quot;log&quot;, &quot;instance&quot;: null}</metadata><rect width="760" height="400" rx="12" fill="white"/><text x="82.00" y="24.00" text-anchor="start" fill="#334155" font-size="16" font-weight="650">gd · shared recorded problem</text><path d="M82.00,69 V328.0" stroke="#e2e8f0"/><text x="82.00" y="348.00" text-anchor="middle" fill="#334155" font-size="12" font-weight="400">0</text><path d="M246.00,69 V328.0" stroke="#e2e8f0"/><text x="246.00" y="348.00" text-anchor="middle" fill="#334155" font-size="12" font-weight="400">3</text><path d="M410.00,69 V328.0" stroke="#e2e8f0"/><text x="410.00" y="348.00" text-anchor="middle" fill="#334155" font-size="12" font-weight="400">6</text><path d="M574.00,69 V328.0" stroke="#e2e8f0"/><text x="574.00" y="348.00" text-anchor="middle" fill="#334155" font-size="12" font-weight="400">9</text><path d="M738.00,69 V328.0" stroke="#e2e8f0"/><text x="738.00" y="348.00" text-anchor="end" fill="#334155" font-size="12" font-weight="400">12</text><path d="M82.0,290.20 H738.0" stroke="#e2e8f0"/><text x="72.00" y="294.20" text-anchor="end" fill="#334155" font-size="12" font-weight="400">10^-2</text><path d="M82.0,111.10 H738.0" stroke="#e2e8f0"/><text x="72.00" y="115.10" text-anchor="end" fill="#334155" font-size="12" font-weight="400">10^-1</text><path d="M82.0,69 V328.0 H738.0" fill="none" stroke="#64748b"/><text x="410.00" y="369.00" text-anchor="middle" fill="#334155" font-size="13" font-weight="400">recorded iteration k</text><text transform="translate(18 198.5) rotate(-90)" text-anchor="middle" fill="#334155" font-size="12">objective gap</text><polyline points="82.00,69.00 136.67,105.10 191.33,132.63 246.00,156.89 300.67,179.17 355.33,200.09 410.00,220.01 464.67,239.16 519.33,257.71" fill="none" stroke="#2563eb" stroke-width="2.3"/><path d="M82.0,42 h24" stroke="#2563eb" stroke-width="2.3"/><text x="112.00" y="46.00" text-anchor="start" fill="#334155" font-size="12" font-weight="400">A · gd</text><polyline points="82.00,69.00 136.67,105.10 191.33,132.63 246.00,156.89 300.67,179.17 355.33,200.09 410.00,220.01 464.67,239.16 519.33,257.71 574.00,275.77 628.67,293.46 683.33,310.84 738.00,328.00" fill="none" stroke="#dc2626" stroke-width="2.3" stroke-dasharray="7 4"/><path d="M410.0,42 h24" stroke="#dc2626" stroke-width="2.3" stroke-dasharray="7 4"/><text x="440.00" y="46.00" text-anchor="start" fill="#334155" font-size="12" font-weight="400">B · gd</text><text x="82.00" y="380.00" text-anchor="start" fill="#334155" font-size="10" font-weight="400">Log10 y-axis.</text></svg></div><p class="comparison-scroll-hint small"><span lang="ko">그래프를 가로로 스크롤하면 끝까지 볼 수 있습니다. 키보드로 영역을 선택한 뒤 방향키도 사용할 수 있습니다.</span><span lang="en">Scroll the chart horizontally to inspect its full width, or focus it and use the arrow keys.</span></p><div class="plot" tabindex="0" role="region" aria-label="cg · shared recorded problem" data-comparison-chart="shared-cg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 400" role="img" aria-label="cg · shared recorded problem" font-family="system-ui,sans-serif"><title>cg · shared recorded problem</title><desc>Log10 y-axis.</desc><metadata>{&quot;title&quot;: &quot;cg \u00b7 shared recorded problem&quot;, &quot;x_label&quot;: &quot;recorded iteration k&quot;, &quot;y_label&quot;: &quot;objective gap&quot;, &quot;series&quot;: [{&quot;label&quot;: &quot;A \u00b7 cg&quot;, &quot;x&quot;: [0, 1, 2, 3, 4], &quot;y&quot;: [0.17181580204572672, 0.07038634120729668, 0.025977936873869, 0.006008486211500001, 1.9070661336681157e-32], &quot;role&quot;: &quot;observed&quot;}, {&quot;label&quot;: &quot;B \u00b7 cg&quot;, &quot;x&quot;: [0, 1, 2, 3, 4], &quot;y&quot;: [0.17181580204572672, 0.07038634120729668, 0.025977936873869, 0.006008486211500001, 1.9070661336681157e-32], &quot;role&quot;: &quot;observed&quot;}], &quot;y_scale&quot;: &quot;log&quot;, &quot;instance&quot;: null}</metadata><rect width="760" height="400" rx="12" fill="white"/><text x="82.00" y="24.00" text-anchor="start" fill="#334155" font-size="16" font-weight="650">cg · shared recorded problem</text><path d="M82.00,69 V328.0" stroke="#e2e8f0"/><text x="82.00" y="348.00" text-anchor="middle" fill="#334155" font-size="12" font-weight="400">0</text><path d="M246.00,69 V328.0" stroke="#e2e8f0"/><text x="246.00" y="348.00" text-anchor="middle" fill="#334155" font-size="12" font-weight="400">1</text><path d="M410.00,69 V328.0" stroke="#e2e8f0"/><text x="410.00" y="348.00" text-anchor="middle" fill="#334155" font-size="12" font-weight="400">2</text><path d="M574.00,69 V328.0" stroke="#e2e8f0"/><text x="574.00" y="348.00" text-anchor="middle" fill="#334155" font-size="12" font-weight="400">3</text><path d="M738.00,69 V328.0" stroke="#e2e8f0"/><text x="738.00" y="348.00" text-anchor="end" fill="#334155" font-size="12" font-weight="400">4</text><path d="M82.0,321.98 H738.0" stroke="#e2e8f0"/><text x="72.00" y="325.98" text-anchor="end" fill="#334155" font-size="12" font-weight="400">10^-31</text><path d="M82.0,271.78 H738.0" stroke="#e2e8f0"/><text x="72.00" y="275.78" text-anchor="end" fill="#334155" font-size="12" font-weight="400">10^-25</text><path d="M82.0,221.57 H738.0" stroke="#e2e8f0"/><text x="72.00" y="225.57" text-anchor="end" fill="#334155" font-size="12" font-weight="400">10^-19</text><path d="M82.0,171.37 H738.0" stroke="#e2e8f0"/><text x="72.00" y="175.37" text-anchor="end" fill="#334155" font-size="12" font-weight="400">10^-13</text><path d="M82.0,121.17 H738.0" stroke="#e2e8f0"/><text x="72.00" y="125.17" text-anchor="end" fill="#334155" font-size="12" font-weight="400">10^-7</text><path d="M82.0,70.97 H738.0" stroke="#e2e8f0"/><text x="72.00" y="74.97" text-anchor="end" fill="#334155" font-size="12" font-weight="400">10^-1</text><path d="M82.0,69 V328.0 H738.0" fill="none" stroke="#64748b"/><text x="410.00" y="369.00" text-anchor="middle" fill="#334155" font-size="13" font-weight="400">recorded iteration k</text><text transform="translate(18 198.5) rotate(-90)" text-anchor="middle" fill="#334155" font-size="12">objective gap</text><polyline points="82.00,69.00 246.00,72.24 410.00,75.86 574.00,81.18 738.00,328.00" fill="none" stroke="#2563eb" stroke-width="2.3"/><path d="M82.0,42 h24" stroke="#2563eb" stroke-width="2.3"/><text x="112.00" y="46.00" text-anchor="start" fill="#334155" font-size="12" font-weight="400">A · cg</text><polyline points="82.00,69.00 246.00,72.24 410.00,75.86 574.00,81.18 738.00,328.00" fill="none" stroke="#dc2626" stroke-width="2.3" stroke-dasharray="7 4"/><path d="M410.0,42 h24" stroke="#dc2626" stroke-width="2.3" stroke-dasharray="7 4"/><text x="440.00" y="46.00" text-anchor="start" fill="#334155" font-size="12" font-weight="400">B · cg</text><text x="82.00" y="380.00" text-anchor="start" fill="#334155" font-size="10" font-weight="400">Log10 y-axis.</text></svg></div><p class="small"><span lang="ko">종료 이후의 점을 늘리거나 보간하지 않습니다. k는 계산 시간이 아닌 기록된 반복 번호입니다. 0은 로그축 바닥의 삼각형으로 표시합니다.</span><span lang="en">No samples are extended or interpolated after termination. k is recorded iteration, not elapsed time. Zero values appear as triangles at the log-axis baseline.</span></p></section><p class="callout caution"><span lang="ko">아래 패널의 y축 범위는 각각 다릅니다. 문제·목적함수의 척도가 다르면 마지막 값이나 선의 기울기만으로 우열을 정할 수 없습니다.</span><span lang="en">The panels below have independent y ranges. When problems or objective scales differ, final values and apparent slopes cannot determine a ranking.</span></p><section id="record-A" data-record="A"><h2><span lang="ko">기록 </span><span lang="en">Record </span>A</h2><p>quadratic · dimension 4 · budget 8 · start zeros</p><p class="small"><span lang="ko">기록 SHA-256</span><span lang="en">Record SHA-256</span>: <code>4b222bcb395e9df9be3fab2f5b732262358b07d422ce256e1b677f467bb3112f</code></p><p class="comparison-scroll-hint small"><span lang="ko">그래프를 가로로 스크롤하면 끝까지 볼 수 있습니다. 키보드로 영역을 선택한 뒤 방향키도 사용할 수 있습니다.</span><span lang="en">Scroll the chart horizontally to inspect its full width, or focus it and use the arrow keys.</span></p><div class="plot" tabindex="0" role="region" aria-label="Record A" data-comparison-chart="record-A"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 400" role="img" aria-label="Record A" font-family="system-ui,sans-serif"><title>Record A</title><desc>Log10 y-axis.</desc><metadata>{&quot;title&quot;: &quot;Record A&quot;, &quot;x_label&quot;: &quot;recorded iteration k&quot;, &quot;y_label&quot;: &quot;objective gap&quot;, &quot;series&quot;: [{&quot;label&quot;: &quot;A \u00b7 gd&quot;, &quot;x&quot;: [0, 1, 2, 3, 4, 5, 6, 7, 8], &quot;y&quot;: [0.17181580204572672, 0.10801494094080133, 0.07582032507069524, 0.05550151370983923, 0.04168167661853592, 0.03185139104300255, 0.024653588831323098, 0.01927262834485851, 0.015184422579864123], &quot;role&quot;: &quot;observed&quot;}, {&quot;label&quot;: &quot;A \u00b7 cg&quot;, &quot;x&quot;: [0, 1, 2, 3, 4], &quot;y&quot;: [0.17181580204572672, 0.07038634120729668, 0.025977936873869, 0.006008486211500001, 1.9070661336681157e-32], &quot;role&quot;: &quot;observed&quot;}], &quot;y_scale&quot;: &quot;log&quot;, &quot;instance&quot;: null}</metadata><rect width="760" height="400" rx="12" fill="white"/><text x="82.00" y="24.00" text-anchor="start" fill="#334155" font-size="16" font-weight="650">Record A</text><path d="M82.00,69 V328.0" stroke="#e2e8f0"/><text x="82.00" y="348.00" text-anchor="middle" fill="#334155" font-size="12" font-weight="400">0</text><path d="M246.00,69 V328.0" stroke="#e2e8f0"/><text x="246.00" y="348.00" text-anchor="middle" fill="#334155" font-size="12" font-weight="400">2</text><path d="M410.00,69 V328.0" stroke="#e2e8f0"/><text x="410.00" y="348.00" text-anchor="middle" fill="#334155" font-size="12" font-weight="400">4</text><path d="M574.00,69 V328.0" stroke="#e2e8f0"/><text x="574.00" y="348.00" text-anchor="middle" fill="#334155" font-size="12" font-weight="400">6</text><path d="M738.00,69 V328.0" stroke="#e2e8f0"/><text x="738.00" y="348.00" text-anchor="end" fill="#334155" font-size="12" font-weight="400">8</text><path d="M82.0,321.98 H738.0" stroke="#e2e8f0"/><text x="72.00" y="325.98" text-anchor="end" fill="#334155" font-size="12" font-weight="400">10^-31</text><path d="M82.0,271.78 H738.0" stroke="#e2e8f0"/><text x="72.00" y="275.78" text-anchor="end" fill="#334155" font-size="12" font-weight="400">10^-25</text><path d="M82.0,221.57 H738.0" stroke="#e2e8f0"/><text x="72.00" y="225.57" text-anchor="end" fill="#334155" font-size="12" font-weight="400">10^-19</text><path d="M82.0,171.37 H738.0" stroke="#e2e8f0"/><text x="72.00" y="175.37" text-anchor="end" fill="#334155" font-size="12" font-weight="400">10^-13</text><path d="M82.0,121.17 H738.0" stroke="#e2e8f0"/><text x="72.00" y="125.17" text-anchor="end" fill="#334155" font-size="12" font-weight="400">10^-7</text><path d="M82.0,70.97 H738.0" stroke="#e2e8f0"/><text x="72.00" y="74.97" text-anchor="end" fill="#334155" font-size="12" font-weight="400">10^-1</text><path d="M82.0,69 V328.0 H738.0" fill="none" stroke="#64748b"/><text x="410.00" y="369.00" text-anchor="middle" fill="#334155" font-size="13" font-weight="400">recorded iteration k</text><text transform="translate(18 198.5) rotate(-90)" text-anchor="middle" fill="#334155" font-size="12">objective gap</text><polyline points="82.00,69.00 164.00,70.69 246.00,71.97 328.00,73.11 410.00,74.15 492.00,75.12 574.00,76.05 656.00,76.95 738.00,77.82" fill="none" stroke="#2563eb" stroke-width="2.3"/><path d="M82.0,42 h24" stroke="#2563eb" stroke-width="2.3"/><text x="112.00" y="46.00" text-anchor="start" fill="#334155" font-size="12" font-weight="400">A · gd</text><polyline points="82.00,69.00 164.00,72.24 246.00,75.86 328.00,81.18 410.00,328.00" fill="none" stroke="#dc2626" stroke-width="2.3" stroke-dasharray="7 4"/><path d="M410.0,42 h24" stroke="#dc2626" stroke-width="2.3" stroke-dasharray="7 4"/><text x="440.00" y="46.00" text-anchor="start" fill="#334155" font-size="12" font-weight="400">A · cg</text><text x="82.00" y="380.00" text-anchor="start" fill="#334155" font-size="10" font-weight="400">Log10 y-axis.</text></svg></div><div class="scroll" tabindex="0" role="region" aria-label="Recorded method endpoints"><table><thead><tr><th scope="col">Method</th><th scope="col">Updates</th><th scope="col">Termination</th><th scope="col">gap</th></tr></thead><tbody><tr><th scope="row">gd</th><td>8</td><td>budget_complete</td><td>0.015184423</td></tr><tr><th scope="row">cg</th><td>4</td><td>converged</td><td>1.9070661e-32</td></tr></tbody></table></div><p class="small"><span lang="ko">budget_complete는 요청한 갱신을 마쳤다는 뜻이며 수렴 인증이 아닙니다.</span><span lang="en">budget_complete means the requested updates ran; it does not certify convergence.</span></p><details><summary><span lang="ko">문제·설정·환경·방법 매개변수</span><span lang="en">Problem, settings, environment and method parameters</span></summary><pre>{
+  &quot;fixture&quot;: {
+    &quot;L&quot;: 1.0000000000000002,
+    &quot;definition&quot;: &quot;chainbench.deterministic.v1&quot;,
+    &quot;dimension&quot;: 4,
+    &quot;f_star&quot;: -0.17181580204572672,
+    &quot;input_sha256&quot;: &quot;7a09140a16818e04b854765102b5ba74858c50b1e4a035146f70dbfaefc82c02&quot;,
+    &quot;kind&quot;: &quot;quadratic&quot;,
+    &quot;mu&quot;: 0.10000000000000005,
+    &quot;start&quot;: &quot;zeros&quot;,
+    &quot;stationarity_metric&quot;: &quot;gradient_norm&quot;
+  },
+  &quot;config&quot;: {
+    &quot;include_iterates&quot;: false,
+    &quot;method_options&quot;: {
+      &quot;cg&quot;: {
+        &quot;atol&quot;: 0.0,
+        &quot;rtol&quot;: 1e-12
+      }
+    },
+    &quot;methods&quot;: [
+      &quot;gd&quot;,
+      &quot;cg&quot;
+    ],
+    &quot;problem&quot;: {
+      &quot;L&quot;: 1.0,
+      &quot;condition_number&quot;: 10.0,
+      &quot;dimension&quot;: 4,
+      &quot;kind&quot;: &quot;quadratic&quot;,
+      &quot;rotation&quot;: &quot;householder&quot;
+    },
+    &quot;schema_version&quot;: 1,
+    &quot;steps&quot;: 8
+  },
+  &quot;environment&quot;: {
+    &quot;chainbench&quot;: &quot;0.5.0&quot;,
+    &quot;numpy&quot;: &quot;2.5.3&quot;,
+    &quot;os&quot;: &quot;Linux&quot;,
+    &quot;python&quot;: &quot;3.12.14&quot;
+  },
+  &quot;parameters&quot;: {
+    &quot;gd&quot;: {
+      &quot;step_size&quot;: 0.9999999999999998
+    },
+    &quot;cg&quot;: {
+      &quot;atol&quot;: 0.0,
+      &quot;rtol&quot;: 1e-12,
+      &quot;stopping_threshold&quot;: 2.8160408573904856e-13
+    }
+  }
+}</pre></details></section><section id="record-B" data-record="B"><h2><span lang="ko">기록 </span><span lang="en">Record </span>B</h2><p>quadratic · dimension 4 · budget 12 · start zeros</p><p class="small"><span lang="ko">기록 SHA-256</span><span lang="en">Record SHA-256</span>: <code>b33b315d85a1d1aaf7d19e40dedc87b889caf0ea4939f5c4ad4db7792e8563d6</code></p><p class="comparison-scroll-hint small"><span lang="ko">그래프를 가로로 스크롤하면 끝까지 볼 수 있습니다. 키보드로 영역을 선택한 뒤 방향키도 사용할 수 있습니다.</span><span lang="en">Scroll the chart horizontally to inspect its full width, or focus it and use the arrow keys.</span></p><div class="plot" tabindex="0" role="region" aria-label="Record B" data-comparison-chart="record-B"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 400" role="img" aria-label="Record B" font-family="system-ui,sans-serif"><title>Record B</title><desc>Log10 y-axis.</desc><metadata>{&quot;title&quot;: &quot;Record B&quot;, &quot;x_label&quot;: &quot;recorded iteration k&quot;, &quot;y_label&quot;: &quot;objective gap&quot;, &quot;series&quot;: [{&quot;label&quot;: &quot;B \u00b7 gd&quot;, &quot;x&quot;: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], &quot;y&quot;: [0.17181580204572672, 0.10801494094080133, 0.07582032507069524, 0.05550151370983923, 0.04168167661853592, 0.03185139104300255, 0.024653588831323098, 0.01927262834485851, 0.015184422579864123, 0.012037629184863929, 0.009589567564567438, 0.007668562414887486, 0.006150622861962277], &quot;role&quot;: &quot;observed&quot;}, {&quot;label&quot;: &quot;B \u00b7 cg&quot;, &quot;x&quot;: [0, 1, 2, 3, 4], &quot;y&quot;: [0.17181580204572672, 0.07038634120729668, 0.025977936873869, 0.006008486211500001, 1.9070661336681157e-32], &quot;role&quot;: &quot;observed&quot;}], &quot;y_scale&quot;: &quot;log&quot;, &quot;instance&quot;: null}</metadata><rect width="760" height="400" rx="12" fill="white"/><text x="82.00" y="24.00" text-anchor="start" fill="#334155" font-size="16" font-weight="650">Record B</text><path d="M82.00,69 V328.0" stroke="#e2e8f0"/><text x="82.00" y="348.00" text-anchor="middle" fill="#334155" font-size="12" font-weight="400">0</text><path d="M246.00,69 V328.0" stroke="#e2e8f0"/><text x="246.00" y="348.00" text-anchor="middle" fill="#334155" font-size="12" font-weight="400">3</text><path d="M410.00,69 V328.0" stroke="#e2e8f0"/><text x="410.00" y="348.00" text-anchor="middle" fill="#334155" font-size="12" font-weight="400">6</text><path d="M574.00,69 V328.0" stroke="#e2e8f0"/><text x="574.00" y="348.00" text-anchor="middle" fill="#334155" font-size="12" font-weight="400">9</text><path d="M738.00,69 V328.0" stroke="#e2e8f0"/><text x="738.00" y="348.00" text-anchor="end" fill="#334155" font-size="12" font-weight="400">12</text><path d="M82.0,321.98 H738.0" stroke="#e2e8f0"/><text x="72.00" y="325.98" text-anchor="end" fill="#334155" font-size="12" font-weight="400">10^-31</text><path d="M82.0,271.78 H738.0" stroke="#e2e8f0"/><text x="72.00" y="275.78" text-anchor="end" fill="#334155" font-size="12" font-weight="400">10^-25</text><path d="M82.0,221.57 H738.0" stroke="#e2e8f0"/><text x="72.00" y="225.57" text-anchor="end" fill="#334155" font-size="12" font-weight="400">10^-19</text><path d="M82.0,171.37 H738.0" stroke="#e2e8f0"/><text x="72.00" y="175.37" text-anchor="end" fill="#334155" font-size="12" font-weight="400">10^-13</text><path d="M82.0,121.17 H738.0" stroke="#e2e8f0"/><text x="72.00" y="125.17" text-anchor="end" fill="#334155" font-size="12" font-weight="400">10^-7</text><path d="M82.0,70.97 H738.0" stroke="#e2e8f0"/><text x="72.00" y="74.97" text-anchor="end" fill="#334155" font-size="12" font-weight="400">10^-1</text><path d="M82.0,69 V328.0 H738.0" fill="none" stroke="#64748b"/><text x="410.00" y="369.00" text-anchor="middle" fill="#334155" font-size="13" font-weight="400">recorded iteration k</text><text transform="translate(18 198.5) rotate(-90)" text-anchor="middle" fill="#334155" font-size="12">objective gap</text><polyline points="82.00,69.00 136.67,70.69 191.33,71.97 246.00,73.11 300.67,74.15 355.33,75.12 410.00,76.05 464.67,76.95 519.33,77.82 574.00,78.66 628.67,79.49 683.33,80.30 738.00,81.10" fill="none" stroke="#2563eb" stroke-width="2.3"/><path d="M82.0,42 h24" stroke="#2563eb" stroke-width="2.3"/><text x="112.00" y="46.00" text-anchor="start" fill="#334155" font-size="12" font-weight="400">B · gd</text><polyline points="82.00,69.00 136.67,72.24 191.33,75.86 246.00,81.18 300.67,328.00" fill="none" stroke="#dc2626" stroke-width="2.3" stroke-dasharray="7 4"/><path d="M410.0,42 h24" stroke="#dc2626" stroke-width="2.3" stroke-dasharray="7 4"/><text x="440.00" y="46.00" text-anchor="start" fill="#334155" font-size="12" font-weight="400">B · cg</text><text x="82.00" y="380.00" text-anchor="start" fill="#334155" font-size="10" font-weight="400">Log10 y-axis.</text></svg></div><div class="scroll" tabindex="0" role="region" aria-label="Recorded method endpoints"><table><thead><tr><th scope="col">Method</th><th scope="col">Updates</th><th scope="col">Termination</th><th scope="col">gap</th></tr></thead><tbody><tr><th scope="row">gd</th><td>12</td><td>budget_complete</td><td>0.0061506229</td></tr><tr><th scope="row">cg</th><td>4</td><td>converged</td><td>1.9070661e-32</td></tr></tbody></table></div><p class="small"><span lang="ko">budget_complete는 요청한 갱신을 마쳤다는 뜻이며 수렴 인증이 아닙니다.</span><span lang="en">budget_complete means the requested updates ran; it does not certify convergence.</span></p><details><summary><span lang="ko">문제·설정·환경·방법 매개변수</span><span lang="en">Problem, settings, environment and method parameters</span></summary><pre>{
+  &quot;fixture&quot;: {
+    &quot;L&quot;: 1.0000000000000002,
+    &quot;definition&quot;: &quot;chainbench.deterministic.v1&quot;,
+    &quot;dimension&quot;: 4,
+    &quot;f_star&quot;: -0.17181580204572672,
+    &quot;input_sha256&quot;: &quot;7a09140a16818e04b854765102b5ba74858c50b1e4a035146f70dbfaefc82c02&quot;,
+    &quot;kind&quot;: &quot;quadratic&quot;,
+    &quot;mu&quot;: 0.10000000000000005,
+    &quot;start&quot;: &quot;zeros&quot;,
+    &quot;stationarity_metric&quot;: &quot;gradient_norm&quot;
+  },
+  &quot;config&quot;: {
+    &quot;include_iterates&quot;: false,
+    &quot;method_options&quot;: {
+      &quot;cg&quot;: {
+        &quot;atol&quot;: 0.0,
+        &quot;rtol&quot;: 1e-12
+      }
+    },
+    &quot;methods&quot;: [
+      &quot;gd&quot;,
+      &quot;cg&quot;
+    ],
+    &quot;problem&quot;: {
+      &quot;L&quot;: 1.0,
+      &quot;condition_number&quot;: 10.0,
+      &quot;dimension&quot;: 4,
+      &quot;kind&quot;: &quot;quadratic&quot;,
+      &quot;rotation&quot;: &quot;householder&quot;
+    },
+    &quot;schema_version&quot;: 1,
+    &quot;steps&quot;: 12
+  },
+  &quot;environment&quot;: {
+    &quot;chainbench&quot;: &quot;0.5.0&quot;,
+    &quot;numpy&quot;: &quot;2.5.3&quot;,
+    &quot;os&quot;: &quot;Linux&quot;,
+    &quot;python&quot;: &quot;3.12.14&quot;
+  },
+  &quot;parameters&quot;: {
+    &quot;gd&quot;: {
+      &quot;step_size&quot;: 0.9999999999999998
+    },
+    &quot;cg&quot;: {
+      &quot;atol&quot;: 0.0,
+      &quot;rtol&quot;: 1e-12,
+      &quot;stopping_threshold&quot;: 2.8160408573904856e-13
+    }
+  }
+}</pre></details></section><details class="panel"><summary><span lang="ko">원본 수치·설정·환경 확인</span><span lang="en">Exact samples, settings and environment</span></summary><button type="button" data-download="chainbench-evidence" data-filename="comparison.json"><span lang="ko">JSON 저장</span><span lang="en">Save JSON</span></button><pre id="chainbench-evidence">{
+  &quot;kind&quot;: &quot;chainbench.comparison&quot;,
+  &quot;schema_version&quot;: 1,
+  &quot;metric&quot;: &quot;gap&quot;,
+  &quot;records&quot;: [
+    {
+      &quot;id&quot;: &quot;A&quot;,
+      &quot;record_sha256&quot;: &quot;4b222bcb395e9df9be3fab2f5b732262358b07d422ce256e1b677f467bb3112f&quot;,
+      &quot;experiment&quot;: {
+        &quot;config&quot;: {
+          &quot;include_iterates&quot;: false,
+          &quot;method_options&quot;: {
+            &quot;cg&quot;: {
+              &quot;atol&quot;: 0.0,
+              &quot;rtol&quot;: 1e-12
+            }
+          },
+          &quot;methods&quot;: [
+            &quot;gd&quot;,
+            &quot;cg&quot;
+          ],
+          &quot;problem&quot;: {
+            &quot;L&quot;: 1.0,
+            &quot;condition_number&quot;: 10.0,
+            &quot;dimension&quot;: 4,
+            &quot;kind&quot;: &quot;quadratic&quot;,
+            &quot;rotation&quot;: &quot;householder&quot;
+          },
+          &quot;schema_version&quot;: 1,
+          &quot;steps&quot;: 8
+        },
+        &quot;config_sha256&quot;: &quot;6976edf78c126c393b42e84907213ab274daaebddb2dbff106eacc1fffdf9220&quot;,
+        &quot;environment&quot;: {
+          &quot;chainbench&quot;: &quot;0.5.0&quot;,
+          &quot;numpy&quot;: &quot;2.5.3&quot;,
+          &quot;os&quot;: &quot;Linux&quot;,
+          &quot;python&quot;: &quot;3.12.14&quot;
+        },
+        &quot;fixture&quot;: {
+          &quot;L&quot;: 1.0000000000000002,
+          &quot;definition&quot;: &quot;chainbench.deterministic.v1&quot;,
+          &quot;dimension&quot;: 4,
+          &quot;f_star&quot;: -0.17181580204572672,
+          &quot;input_sha256&quot;: &quot;7a09140a16818e04b854765102b5ba74858c50b1e4a035146f70dbfaefc82c02&quot;,
+          &quot;kind&quot;: &quot;quadratic&quot;,
+          &quot;mu&quot;: 0.10000000000000005,
+          &quot;start&quot;: &quot;zeros&quot;,
+          &quot;stationarity_metric&quot;: &quot;gradient_norm&quot;
+        },
+        &quot;kind&quot;: &quot;chainbench.experiment&quot;,
+        &quot;notice&quot;: &quot;Finite deterministic observations, not a proof, solver certification or universal ranking. Equal iteration budgets do not imply equal work: CG rechecks residuals, proximal point solves a linear system, and dense spectral setup is outside the iteration budget.&quot;,
+        &quot;runs&quot;: [
+          {
+            &quot;method&quot;: &quot;gd&quot;,
+            &quot;parameters&quot;: {
+              &quot;step_size&quot;: 0.9999999999999998
+            },
+            &quot;rows&quot;: [
+              {
+                &quot;distance_to_reference&quot;: 1.4907119849998598,
+                &quot;gap&quot;: 0.17181580204572672,
+                &quot;iteration&quot;: 0,
+                &quot;objective&quot;: 0.0,
+                &quot;stationarity&quot;: 0.28160408573904855
+              },
+              {
+                &quot;distance_to_reference&quot;: 1.2705352711138092,
+                &quot;gap&quot;: 0.10801494094080133,
+                &quot;iteration&quot;: 1,
+                &quot;objective&quot;: -0.06380086110492536,
+                &quot;stationarity&quot;: 0.19041151161951966
+              },
+              {
+                &quot;distance_to_reference&quot;: 1.1038372412354396,
+                &quot;gap&quot;: 0.07582032507069524,
+                &quot;iteration&quot;: 2,
+                &quot;objective&quot;: -0.09599547697503148,
+                &quot;stationarity&quot;: 0.14970921975983328
+              },
+              {
+                &quot;distance_to_reference&quot;: 0.9682913845204775,
+                &quot;gap&quot;: 0.05550151370983923,
+                &quot;iteration&quot;: 3,
+                &quot;objective&quot;: -0.11631428833588749,
+                &quot;stationarity&quot;: 0.12269339228575854
+              },
+              {
+                &quot;distance_to_reference&quot;: 0.8547723784773426,
+                &quot;gap&quot;: 0.04168167661853592,
+                &quot;iteration&quot;: 4,
+                &quot;objective&quot;: -0.13013412542719077,
+                &quot;stationarity&quot;: 0.10307158268518436
+              },
+              {
+                &quot;distance_to_reference&quot;: 0.7579794612592736,
+                &quot;gap&quot;: 0.03185139104300255,
+                &quot;iteration&quot;: 5,
+                &quot;objective&quot;: -0.13996441100272417,
+                &quot;stationarity&quot;: 0.087956409018196
+              },
+              {
+                &quot;distance_to_reference&quot;: 0.6744357859768894,
+                &quot;gap&quot;: 0.024653588831323098,
+                &quot;iteration&quot;: 6,
+                &quot;objective&quot;: -0.1471622132144036,
+                &quot;stationarity&quot;: 0.07589154171099653
+              },
+              {
+                &quot;distance_to_reference&quot;: 0.601671671415768,
+                &quot;gap&quot;: 0.01927262834485851,
+                &quot;iteration&quot;: 7,
+                &quot;objective&quot;: -0.15254317370086823,
+                &quot;stationarity&quot;: 0.06603957407712176
+              },
+              {
+                &quot;distance_to_reference&quot;: 0.5378471085253669,
+                &quot;gap&quot;: 0.015184422579864123,
+                &quot;iteration&quot;: 8,
+                &quot;objective&quot;: -0.15663137946586259,
+                &quot;stationarity&quot;: 0.057860008397711306
+              }
+            ],
+            &quot;termination&quot;: &quot;budget_complete&quot;,
+            &quot;updates&quot;: 8
+          },
+          {
+            &quot;method&quot;: &quot;cg&quot;,
+            &quot;parameters&quot;: {
+              &quot;atol&quot;: 0.0,
+              &quot;rtol&quot;: 1e-12,
+              &quot;stopping_threshold&quot;: 2.8160408573904856e-13
+            },
+            &quot;rows&quot;: [
+              {
+                &quot;distance_to_reference&quot;: 1.4907119849998598,
+                &quot;gap&quot;: 0.17181580204572672,
+                &quot;iteration&quot;: 0,
+                &quot;objective&quot;: 0.0,
+                &quot;stationarity&quot;: 0.28160408573904855
+              },
+              {
+                &quot;distance_to_reference&quot;: 0.9914995460777261,
+                &quot;gap&quot;: 0.07038634120729668,
+                &quot;iteration&quot;: 1,
+                &quot;objective&quot;: -0.10142946083843002,
+                &quot;stationarity&quot;: 0.21152309781925607
+              },
+              {
+                &quot;distance_to_reference&quot;: 0.6201876928435941,
+                &quot;gap&quot;: 0.025977936873869,
+                &quot;iteration&quot;: 2,
+                &quot;objective&quot;: -0.14583786517185768,
+                &quot;stationarity&quot;: 0.11170836076051588
+              },
+              {
+                &quot;distance_to_reference&quot;: 0.300931902665243,
+                &quot;gap&quot;: 0.006008486211500001,
+                &quot;iteration&quot;: 3,
+                &quot;objective&quot;: -0.16580731583422664,
+                &quot;stationarity&quot;: 0.044193439045196056
+              },
+              {
+                &quot;distance_to_reference&quot;: 3.3766115072321297e-16,
+                &quot;gap&quot;: 1.9070661336681157e-32,
+                &quot;iteration&quot;: 4,
+                &quot;objective&quot;: -0.17181580204572672,
+                &quot;stationarity&quot;: 1.699674944388148e-16
+              }
+            ],
+            &quot;termination&quot;: &quot;converged&quot;,
+            &quot;updates&quot;: 4
+          }
+        ],
+        &quot;schema_version&quot;: 1
+      }
+    },
+    {
+      &quot;id&quot;: &quot;B&quot;,
+      &quot;record_sha256&quot;: &quot;b33b315d85a1d1aaf7d19e40dedc87b889caf0ea4939f5c4ad4db7792e8563d6&quot;,
+      &quot;experiment&quot;: {
+        &quot;config&quot;: {
+          &quot;include_iterates&quot;: false,
+          &quot;method_options&quot;: {
+            &quot;cg&quot;: {
+              &quot;atol&quot;: 0.0,
+              &quot;rtol&quot;: 1e-12
+            }
+          },
+          &quot;methods&quot;: [
+            &quot;gd&quot;,
+            &quot;cg&quot;
+          ],
+          &quot;problem&quot;: {
+            &quot;L&quot;: 1.0,
+            &quot;condition_number&quot;: 10.0,
+            &quot;dimension&quot;: 4,
+            &quot;kind&quot;: &quot;quadratic&quot;,
+            &quot;rotation&quot;: &quot;householder&quot;
+          },
+          &quot;schema_version&quot;: 1,
+          &quot;steps&quot;: 12
+        },
+        &quot;config_sha256&quot;: &quot;eca4017dd8890b0624aae6752188031450b94ad13fb738c58577d839cd654bd0&quot;,
+        &quot;environment&quot;: {
+          &quot;chainbench&quot;: &quot;0.5.0&quot;,
+          &quot;numpy&quot;: &quot;2.5.3&quot;,
+          &quot;os&quot;: &quot;Linux&quot;,
+          &quot;python&quot;: &quot;3.12.14&quot;
+        },
+        &quot;fixture&quot;: {
+          &quot;L&quot;: 1.0000000000000002,
+          &quot;definition&quot;: &quot;chainbench.deterministic.v1&quot;,
+          &quot;dimension&quot;: 4,
+          &quot;f_star&quot;: -0.17181580204572672,
+          &quot;input_sha256&quot;: &quot;7a09140a16818e04b854765102b5ba74858c50b1e4a035146f70dbfaefc82c02&quot;,
+          &quot;kind&quot;: &quot;quadratic&quot;,
+          &quot;mu&quot;: 0.10000000000000005,
+          &quot;start&quot;: &quot;zeros&quot;,
+          &quot;stationarity_metric&quot;: &quot;gradient_norm&quot;
+        },
+        &quot;kind&quot;: &quot;chainbench.experiment&quot;,
+        &quot;notice&quot;: &quot;Finite deterministic observations, not a proof, solver certification or universal ranking. Equal iteration budgets do not imply equal work: CG rechecks residuals, proximal point solves a linear system, and dense spectral setup is outside the iteration budget.&quot;,
+        &quot;runs&quot;: [
+          {
+            &quot;method&quot;: &quot;gd&quot;,
+            &quot;parameters&quot;: {
+              &quot;step_size&quot;: 0.9999999999999998
+            },
+            &quot;rows&quot;: [
+              {
+                &quot;distance_to_reference&quot;: 1.4907119849998598,
+                &quot;gap&quot;: 0.17181580204572672,
+                &quot;iteration&quot;: 0,
+                &quot;objective&quot;: 0.0,
+                &quot;stationarity&quot;: 0.28160408573904855
+              },
+              {
+                &quot;distance_to_reference&quot;: 1.2705352711138092,
+                &quot;gap&quot;: 0.10801494094080133,
+                &quot;iteration&quot;: 1,
+                &quot;objective&quot;: -0.06380086110492536,
+                &quot;stationarity&quot;: 0.19041151161951966
+              },
+              {
+                &quot;distance_to_reference&quot;: 1.1038372412354396,
+                &quot;gap&quot;: 0.07582032507069524,
+                &quot;iteration&quot;: 2,
+                &quot;objective&quot;: -0.09599547697503148,
+                &quot;stationarity&quot;: 0.14970921975983328
+              },
+              {
+                &quot;distance_to_reference&quot;: 0.9682913845204775,
+                &quot;gap&quot;: 0.05550151370983923,
+                &quot;iteration&quot;: 3,
+                &quot;objective&quot;: -0.11631428833588749,
+                &quot;stationarity&quot;: 0.12269339228575854
+              },
+              {
+                &quot;distance_to_reference&quot;: 0.8547723784773426,
+                &quot;gap&quot;: 0.04168167661853592,
+                &quot;iteration&quot;: 4,
+                &quot;objective&quot;: -0.13013412542719077,
+                &quot;stationarity&quot;: 0.10307158268518436
+              },
+              {
+                &quot;distance_to_reference&quot;: 0.7579794612592736,
+                &quot;gap&quot;: 0.03185139104300255,
+                &quot;iteration&quot;: 5,
+                &quot;objective&quot;: -0.13996441100272417,
+                &quot;stationarity&quot;: 0.087956409018196
+              },
+              {
+                &quot;distance_to_reference&quot;: 0.6744357859768894,
+                &quot;gap&quot;: 0.024653588831323098,
+                &quot;iteration&quot;: 6,
+                &quot;objective&quot;: -0.1471622132144036,
+                &quot;stationarity&quot;: 0.07589154171099653
+              },
+              {
+                &quot;distance_to_reference&quot;: 0.601671671415768,
+                &quot;gap&quot;: 0.01927262834485851,
+                &quot;iteration&quot;: 7,
+                &quot;objective&quot;: -0.15254317370086823,
+                &quot;stationarity&quot;: 0.06603957407712176
+              },
+              {
+                &quot;distance_to_reference&quot;: 0.5378471085253669,
+                &quot;gap&quot;: 0.015184422579864123,
+                &quot;iteration&quot;: 8,
+                &quot;objective&quot;: -0.15663137946586259,
+                &quot;stationarity&quot;: 0.057860008397711306
+              },
+              {
+                &quot;distance_to_reference&quot;: 0.48154916924590835,
+                &quot;gap&quot;: 0.012037629184863929,
+                &quot;iteration&quot;: 9,
+                &quot;objective&quot;: -0.15977817286086277,
+                &quot;stationarity&quot;: 0.05097652847656416
+              },
+              {
+                &quot;distance_to_reference&quot;: 0.431668497944303,
+                &quot;gap&quot;: 0.009589567564567438,
+                &quot;iteration&quot;: 10,
+                &quot;objective&quot;: -0.16222623448115925,
+                &quot;stationarity&quot;: 0.04511593246423207
+              },
+              {
+                &quot;distance_to_reference&quot;: 0.38731753022725185,
+                &quot;gap&quot;: 0.007668562414887486,
+                &quot;iteration&quot;: 11,
+                &quot;objective&quot;: -0.16414723963083921,
+                &quot;stationarity&quot;: 0.04007536003529818
+              },
+              {
+                &quot;distance_to_reference&quot;: 0.34777385474435385,
+                &quot;gap&quot;: 0.006150622861962277,
+                &quot;iteration&quot;: 12,
+                &quot;objective&quot;: -0.16566517918376444,
+                &quot;stationarity&quot;: 0.03570201832595055
+              }
+            ],
+            &quot;termination&quot;: &quot;budget_complete&quot;,
+            &quot;updates&quot;: 12
+          },
+          {
+            &quot;method&quot;: &quot;cg&quot;,
+            &quot;parameters&quot;: {
+              &quot;atol&quot;: 0.0,
+              &quot;rtol&quot;: 1e-12,
+              &quot;stopping_threshold&quot;: 2.8160408573904856e-13
+            },
+            &quot;rows&quot;: [
+              {
+                &quot;distance_to_reference&quot;: 1.4907119849998598,
+                &quot;gap&quot;: 0.17181580204572672,
+                &quot;iteration&quot;: 0,
+                &quot;objective&quot;: 0.0,
+                &quot;stationarity&quot;: 0.28160408573904855
+              },
+              {
+                &quot;distance_to_reference&quot;: 0.9914995460777261,
+                &quot;gap&quot;: 0.07038634120729668,
+                &quot;iteration&quot;: 1,
+                &quot;objective&quot;: -0.10142946083843002,
+                &quot;stationarity&quot;: 0.21152309781925607
+              },
+              {
+                &quot;distance_to_reference&quot;: 0.6201876928435941,
+                &quot;gap&quot;: 0.025977936873869,
+                &quot;iteration&quot;: 2,
+                &quot;objective&quot;: -0.14583786517185768,
+                &quot;stationarity&quot;: 0.11170836076051588
+              },
+              {
+                &quot;distance_to_reference&quot;: 0.300931902665243,
+                &quot;gap&quot;: 0.006008486211500001,
+                &quot;iteration&quot;: 3,
+                &quot;objective&quot;: -0.16580731583422664,
+                &quot;stationarity&quot;: 0.044193439045196056
+              },
+              {
+                &quot;distance_to_reference&quot;: 3.3766115072321297e-16,
+                &quot;gap&quot;: 1.9070661336681157e-32,
+                &quot;iteration&quot;: 4,
+                &quot;objective&quot;: -0.17181580204572672,
+                &quot;stationarity&quot;: 1.699674944388148e-16
+              }
+            ],
+            &quot;termination&quot;: &quot;converged&quot;,
+            &quot;updates&quot;: 4
+          }
+        ],
+        &quot;schema_version&quot;: 1
+      }
+    }
+  ],
+  &quot;pairs&quot;: [
+    {
+      &quot;left&quot;: &quot;A&quot;,
+      &quot;right&quot;: &quot;B&quot;,
+      &quot;identical_record&quot;: false,
+      &quot;same_config&quot;: false,
+      &quot;same_input_digest&quot;: true,
+      &quot;same_recorded_problem&quot;: true,
+      &quot;same_environment&quot;: true,
+      &quot;shared_methods&quot;: [
+        &quot;gd&quot;,
+        &quot;cg&quot;
+      ],
+      &quot;config_differences&quot;: [
+        {
+          &quot;field&quot;: &quot;steps&quot;,
+          &quot;left&quot;: 8,
+          &quot;right&quot;: 12
+        }
+      ],
+      &quot;fixture_differences&quot;: [],
+      &quot;environment_differences&quot;: [],
+      &quot;parameter_differences&quot;: []
+    }
+  ],
+  &quot;shared_recorded_problem&quot;: true,
+  &quot;charts&quot;: [
+    {
+      &quot;chart&quot;: {
+        &quot;instance&quot;: null,
+        &quot;series&quot;: [
+          {
+            &quot;label&quot;: &quot;A · gd&quot;,
+            &quot;role&quot;: &quot;observed&quot;,
+            &quot;x&quot;: [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8
+            ],
+            &quot;y&quot;: [
+              0.17181580204572672,
+              0.10801494094080133,
+              0.07582032507069524,
+              0.05550151370983923,
+              0.04168167661853592,
+              0.03185139104300255,
+              0.024653588831323098,
+              0.01927262834485851,
+              0.015184422579864123
+            ]
+          },
+          {
+            &quot;label&quot;: &quot;A · cg&quot;,
+            &quot;role&quot;: &quot;observed&quot;,
+            &quot;x&quot;: [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            &quot;y&quot;: [
+              0.17181580204572672,
+              0.07038634120729668,
+              0.025977936873869,
+              0.006008486211500001,
+              1.9070661336681157e-32
+            ]
+          }
+        ],
+        &quot;title&quot;: &quot;Record A&quot;,
+        &quot;x_label&quot;: &quot;recorded iteration k&quot;,
+        &quot;y_label&quot;: &quot;objective gap&quot;,
+        &quot;y_scale&quot;: &quot;log&quot;
+      },
+      &quot;id&quot;: &quot;record-A&quot;,
+      &quot;records&quot;: [
+        &quot;A&quot;
+      ]
+    },
+    {
+      &quot;chart&quot;: {
+        &quot;instance&quot;: null,
+        &quot;series&quot;: [
+          {
+            &quot;label&quot;: &quot;B · gd&quot;,
+            &quot;role&quot;: &quot;observed&quot;,
+            &quot;x&quot;: [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12
+            ],
+            &quot;y&quot;: [
+              0.17181580204572672,
+              0.10801494094080133,
+              0.07582032507069524,
+              0.05550151370983923,
+              0.04168167661853592,
+              0.03185139104300255,
+              0.024653588831323098,
+              0.01927262834485851,
+              0.015184422579864123,
+              0.012037629184863929,
+              0.009589567564567438,
+              0.007668562414887486,
+              0.006150622861962277
+            ]
+          },
+          {
+            &quot;label&quot;: &quot;B · cg&quot;,
+            &quot;role&quot;: &quot;observed&quot;,
+            &quot;x&quot;: [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            &quot;y&quot;: [
+              0.17181580204572672,
+              0.07038634120729668,
+              0.025977936873869,
+              0.006008486211500001,
+              1.9070661336681157e-32
+            ]
+          }
+        ],
+        &quot;title&quot;: &quot;Record B&quot;,
+        &quot;x_label&quot;: &quot;recorded iteration k&quot;,
+        &quot;y_label&quot;: &quot;objective gap&quot;,
+        &quot;y_scale&quot;: &quot;log&quot;
+      },
+      &quot;id&quot;: &quot;record-B&quot;,
+      &quot;records&quot;: [
+        &quot;B&quot;
+      ]
+    },
+    {
+      &quot;chart&quot;: {
+        &quot;instance&quot;: null,
+        &quot;series&quot;: [
+          {
+            &quot;label&quot;: &quot;A · gd&quot;,
+            &quot;role&quot;: &quot;observed&quot;,
+            &quot;x&quot;: [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8
+            ],
+            &quot;y&quot;: [
+              0.17181580204572672,
+              0.10801494094080133,
+              0.07582032507069524,
+              0.05550151370983923,
+              0.04168167661853592,
+              0.03185139104300255,
+              0.024653588831323098,
+              0.01927262834485851,
+              0.015184422579864123
+            ]
+          },
+          {
+            &quot;label&quot;: &quot;B · gd&quot;,
+            &quot;role&quot;: &quot;observed&quot;,
+            &quot;x&quot;: [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12
+            ],
+            &quot;y&quot;: [
+              0.17181580204572672,
+              0.10801494094080133,
+              0.07582032507069524,
+              0.05550151370983923,
+              0.04168167661853592,
+              0.03185139104300255,
+              0.024653588831323098,
+              0.01927262834485851,
+              0.015184422579864123,
+              0.012037629184863929,
+              0.009589567564567438,
+              0.007668562414887486,
+              0.006150622861962277
+            ]
+          }
+        ],
+        &quot;title&quot;: &quot;gd · shared recorded problem&quot;,
+        &quot;x_label&quot;: &quot;recorded iteration k&quot;,
+        &quot;y_label&quot;: &quot;objective gap&quot;,
+        &quot;y_scale&quot;: &quot;log&quot;
+      },
+      &quot;id&quot;: &quot;shared-gd&quot;,
+      &quot;records&quot;: [
+        &quot;A&quot;,
+        &quot;B&quot;
+      ]
+    },
+    {
+      &quot;chart&quot;: {
+        &quot;instance&quot;: null,
+        &quot;series&quot;: [
+          {
+            &quot;label&quot;: &quot;A · cg&quot;,
+            &quot;role&quot;: &quot;observed&quot;,
+            &quot;x&quot;: [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            &quot;y&quot;: [
+              0.17181580204572672,
+              0.07038634120729668,
+              0.025977936873869,
+              0.006008486211500001,
+              1.9070661336681157e-32
+            ]
+          },
+          {
+            &quot;label&quot;: &quot;B · cg&quot;,
+            &quot;role&quot;: &quot;observed&quot;,
+            &quot;x&quot;: [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            &quot;y&quot;: [
+              0.17181580204572672,
+              0.07038634120729668,
+              0.025977936873869,
+              0.006008486211500001,
+              1.9070661336681157e-32
+            ]
+          }
+        ],
+        &quot;title&quot;: &quot;cg · shared recorded problem&quot;,
+        &quot;x_label&quot;: &quot;recorded iteration k&quot;,
+        &quot;y_label&quot;: &quot;objective gap&quot;,
+        &quot;y_scale&quot;: &quot;log&quot;
+      },
+      &quot;id&quot;: &quot;shared-cg&quot;,
+      &quot;records&quot;: [
+        &quot;A&quot;,
+        &quot;B&quot;
+      ]
+    }
+  ],
+  &quot;notice&quot;: &quot;Comparison of supplied schema-1 observations, not a rerun or authentication. Matching declared input fingerprints do not verify the actual input arrays or authorship. Different objectives can have different scales; equal updates are not equal work. No solver ranking, theorem certificate or independent reproduction is inferred.&quot;
+}</pre></details><footer><span lang="ko">실행 결과는 유한한 수치 관측입니다. 정리의 증명이나 실제 사용자 수를 뜻하지 않습니다.</span><span lang="en">Finite numerical observations are not theorem proofs or evidence of adoption.</span></footer></main><script>
+'use strict';
+const root = document.documentElement;
+document.querySelectorAll('[data-action="language"]').forEach(b => b.addEventListener('click', () => {
+ root.lang = root.lang === 'ko' ? 'en' : 'ko';
+}));
+const filter = document.getElementById('lesson-filter');
+if(filter) filter.addEventListener('input', () => {
+ const query = filter.value.toLowerCase().trim();
+ document.querySelectorAll('[data-search]').forEach(el => {
+  el.hidden = !el.dataset.search.toLowerCase().includes(query);
+ });
+});
+document.querySelectorAll('[data-download]').forEach(button => {
+ button.addEventListener('click', () => {
+  const pre = document.getElementById(button.dataset.download);
+  if(!pre) return;
+  const url = URL.createObjectURL(new Blob([pre.textContent], {type:'application/json'}));
+  const a = document.createElement('a'); a.href = url; a.download = button.dataset.filename;
+  a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+ });
+});
+document.querySelectorAll('[data-trajectory-player]').forEach(player => {
+ const slider = player.querySelector('[data-trajectory-slider]');
+ const label = player.querySelector('[data-trajectory-label]');
+ const play = player.querySelector('[data-trajectory-play]');
+ if(!slider || !label || !play) return;
+ document.documentElement.classList.add('trajectory-enabled');
+ const readouts=Array.from(document.querySelectorAll('[data-landscape-readout]'));
+ const record=readouts.length ? JSON.parse(document.getElementById('chainbench-evidence').textContent) : null;
+ const lines = Array.from(document.querySelectorAll('[data-trajectory-line]'));
+ const markers = Array.from(document.querySelectorAll('[data-trajectory-marker]'));
+ const parse = el => el.dataset.trajectoryPoints.split('|').map(pair => pair.split(',').map(Number));
+ const linePoints = new Map(lines.map(el => [el, parse(el)]));
+ const markerPoints = new Map(markers.map(el => [el, parse(el)]));
+ let timer = null;
+ const update = () => {
+  const step = Number(slider.value);
+  label.textContent = `k = ${step}`;
+  linePoints.forEach((points, el) => {
+   const index = Math.min(step, points.length - 1);
+   el.setAttribute('points', points.slice(0, index + 1).map(p => `${p[0]},${p[1]}`).join(' '));
+  });
+  markerPoints.forEach((points, el) => {
+   const index = Math.min(step, points.length - 1);
+   el.setAttribute('cx', points[index][0]); el.setAttribute('cy', points[index][1]);
+  });
+  readouts.forEach(el=>{
+   const method=el.dataset.landscapeReadout,run=record.runs[method],k=Math.min(step,run.updates);
+   const held=step>run.updates?' (last computed / 마지막 계산점)':'';
+   el.textContent=method+' · k='+k+held+' · x=('+record.traces[method][k].map(v=>v.toPrecision(6)).join(', ')+')'
+    +' · f−f*='+record.gaps[method][k].toExponential(5)+' · ||r||₂='+run.residual_norms[k].toExponential(5);
+  });
+  document.dispatchEvent(new CustomEvent('chainbench:trajectory',{detail:{step}}));
+ };
+ const stop = () => { if(timer) clearInterval(timer); timer = null; play.textContent = '▶'; play.setAttribute('aria-pressed','false'); };
+ slider.addEventListener('input', () => { stop(); update(); });
+ play.addEventListener('click', () => {
+  if(timer){ stop(); return; }
+  if(Number(slider.value) >= Number(slider.max)) slider.value = '0';
+  play.textContent = '❚❚'; play.setAttribute('aria-pressed','true'); update();
+  timer = setInterval(() => {
+   const next = Number(slider.value) + 1;
+   if(next > Number(slider.max)){ stop(); return; }
+   slider.value = String(next); update();
+  }, 520);
+ });
+ document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();});
+ update();
+});
+</script></body></html>

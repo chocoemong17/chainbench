@@ -1,0 +1,186 @@
+{
+  "kind": "chainbench.experiment",
+  "schema_version": 1,
+  "config": {
+    "schema_version": 1,
+    "problem": {
+      "kind": "diagonal-lasso",
+      "dimension": 4,
+      "lam": 0.12
+    },
+    "steps": 8,
+    "methods": [
+      "ista",
+      "fista"
+    ],
+    "method_options": {},
+    "include_iterates": false
+  },
+  "config_sha256": "a906adb040df566d1db732182386d5ef285f0a17ab64faf6cb436987be4f250d",
+  "environment": {
+    "chainbench": "0.5.0",
+    "python": "3.12.14",
+    "numpy": "2.5.3",
+    "os": "Linux"
+  },
+  "fixture": {
+    "definition": "chainbench.deterministic.v1",
+    "kind": "diagonal-lasso",
+    "dimension": 4,
+    "input_sha256": "dc9cf74762cf560a6a4d53c5944e750ff0f4b0c08e45ae1b388c4f89b2b4b996",
+    "L": 4.0,
+    "mu": null,
+    "f_star": 0.27696375758572717,
+    "stationarity_metric": "proximal_gradient_mapping_norm",
+    "start": "zeros"
+  },
+  "notice": "Finite deterministic observations, not a proof, solver certification or universal ranking. Equal iteration budgets do not imply equal work: CG rechecks residuals, proximal point solves a linear system, and dense spectral setup is outside the iteration budget.",
+  "runs": [
+    {
+      "method": "ista",
+      "parameters": {
+        "step_size": 0.25
+      },
+      "updates": 8,
+      "termination": "budget_complete",
+      "rows": [
+        {
+          "iteration": 0,
+          "objective": 1.2898185777286035,
+          "gap": 1.0128548201428766,
+          "stationarity": 2.4202520197208717,
+          "distance_to_reference": 0.9723514209102209
+        },
+        {
+          "iteration": 1,
+          "objective": 0.4466593995827191,
+          "gap": 0.16969564199699189,
+          "stationarity": 0.6930317189719133,
+          "distance_to_reference": 0.5465470753177937
+        },
+        {
+          "iteration": 2,
+          "objective": 0.35224011738041494,
+          "gap": 0.0752763597946878,
+          "stationarity": 0.4100518271037617,
+          "distance_to_reference": 0.39879364809418033
+        },
+        {
+          "iteration": 3,
+          "objective": 0.3174976582542698,
+          "gap": 0.0405339006685427,
+          "stationarity": 0.27575002302007046,
+          "distance_to_reference": 0.3070324417264778
+        },
+        {
+          "iteration": 4,
+          "objective": 0.3010962028780083,
+          "gap": 0.024132445292281205,
+          "stationarity": 0.20348967945747506,
+          "distance_to_reference": 0.24184168231242398
+        },
+        {
+          "iteration": 5,
+          "objective": 0.2919460273895497,
+          "gap": 0.014982269803822541,
+          "stationarity": 0.15739231103606693,
+          "distance_to_reference": 0.19220550750246163
+        },
+        {
+          "iteration": 6,
+          "objective": 0.28641450390674,
+          "gap": 0.009450746321012818,
+          "stationarity": 0.12411525779960454,
+          "distance_to_reference": 0.15332631389877568
+        },
+        {
+          "iteration": 7,
+          "objective": 0.28296097935311737,
+          "gap": 0.005997221767390186,
+          "stationarity": 0.09858742612848417,
+          "distance_to_reference": 0.12256018741393751
+        },
+        {
+          "iteration": 8,
+          "objective": 0.28077879930569205,
+          "gap": 0.0038150417199648364,
+          "stationarity": 0.07851780332141316,
+          "distance_to_reference": 0.09813890822942888
+        }
+      ]
+    },
+    {
+      "method": "fista",
+      "parameters": {
+        "step_size": 0.25
+      },
+      "updates": 8,
+      "termination": "budget_complete",
+      "rows": [
+        {
+          "iteration": 0,
+          "objective": 1.2898185777286035,
+          "gap": 1.0128548201428766,
+          "stationarity": 2.4202520197208717,
+          "distance_to_reference": 0.9723514209102209
+        },
+        {
+          "iteration": 1,
+          "objective": 0.4466593995827191,
+          "gap": 0.16969564199699189,
+          "stationarity": 0.6930317189719133,
+          "distance_to_reference": 0.5465470753177937
+        },
+        {
+          "iteration": 2,
+          "objective": 0.35224011738041494,
+          "gap": 0.0752763597946878,
+          "stationarity": 0.4100518271037617,
+          "distance_to_reference": 0.39879364809418033
+        },
+        {
+          "iteration": 3,
+          "objective": 0.31034269153018135,
+          "gap": 0.03337893394445418,
+          "stationarity": 0.2428299102333528,
+          "distance_to_reference": 0.2825166072595264
+        },
+        {
+          "iteration": 4,
+          "objective": 0.2913679950555379,
+          "gap": 0.014404237469810784,
+          "stationarity": 0.15271170994692185,
+          "distance_to_reference": 0.18926237697192172
+        },
+        {
+          "iteration": 5,
+          "objective": 0.2821548185128853,
+          "gap": 0.005191060927158134,
+          "stationarity": 0.09282463322221596,
+          "distance_to_reference": 0.11364398183931686
+        },
+        {
+          "iteration": 6,
+          "objective": 0.27817161936156143,
+          "gap": 0.0012078617758343076,
+          "stationarity": 0.04574253573383007,
+          "distance_to_reference": 0.055624059970005246
+        },
+        {
+          "iteration": 7,
+          "objective": 0.2770404854918468,
+          "gap": 7.672790611961117e-05,
+          "stationarity": 0.01153258173062324,
+          "distance_to_reference": 0.018659206115075287
+        },
+        {
+          "iteration": 8,
+          "objective": 0.27704749173992654,
+          "gap": 8.373415419936844e-05,
+          "stationarity": 0.01100810117347661,
+          "distance_to_reference": 0.01877743823029424
+        }
+      ]
+    }
+  ]
+}

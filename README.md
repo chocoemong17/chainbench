@@ -1,16 +1,25 @@
 # Preserved development reviews and verified cloud outputs
 
-Start with the [two-page Korean FISTA PDF](cloud/e385810/ChainBench_FISTA_review.pdf),
+Latest development review: [saved-experiment comparison PDF](cloud/comparison-c16e8a9/ChainBench_saved_comparison_review.pdf)
+and [actual offline HTML, input records and verification](cloud/comparison-c16e8a9).
+Compare two to four stored runs with explicit setup/input/environment differences.
+Its full PR gate passed all eight jobs, including 1,394 tests per configuration.
+The packet is pinned to the tested PR; its tree is identical to the merged source.
+Current source: [main f8fdc61](https://github.com/chocoemong17/chainbench/tree/f8fdc61502426a0f60c99274e4960bf568812b45).
+[Separate main push CI](https://github.com/chocoemong17/chainbench/actions/runs/36919253999)
+records post-merge verification.
+
+For the broader optimization toolkit, start with the [two-page Korean FISTA PDF](cloud/e385810/ChainBench_FISTA_review.pdf),
 [five geometry previews](cloud/33b6243/browser-gallery), or
 [CG desktop/mobile views after the arithmetic repair](cloud/b857694/cg-repair).
 Each review records its source revision and actual verification scope.
 
 The [integration and validation record](cloud/integration-20261001) maps the
 handoff requirements to the implemented source and retains the real CI history.
-Current integrated source: [main commit e3858108ea492df04121c14d5306ac2bab1454fa](https://github.com/chocoemong17/chainbench/tree/e3858108ea492df04121c14d5306ac2bab1454fa).
+Prior integrated source: [main commit e3858108ea492df04121c14d5306ac2bab1454fa](https://github.com/chocoemong17/chainbench/tree/e3858108ea492df04121c14d5306ac2bab1454fa).
 
 For the complete interactive tour, download the reading-bundle artifact from the
-[verified main cloud run](https://github.com/chocoemong17/chainbench/actions/runs/36907555063),
+[verified current-main cloud run](https://github.com/chocoemong17/chainbench/actions/runs/36919253985),
 extract the folder and open `index.html`. The 25 HTML pages retain all 24 numerical
 records for offline reading. Actions downloads require GitHub sign-in and expire
 after seven days; the source workflow can regenerate them. The previews on this

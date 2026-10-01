@@ -1,0 +1,167 @@
+{
+  "kind": "chainbench.experiment",
+  "schema_version": 1,
+  "config": {
+    "schema_version": 1,
+    "problem": {
+      "kind": "quadratic",
+      "dimension": 4,
+      "condition_number": 100.0,
+      "L": 1.0,
+      "rotation": "householder"
+    },
+    "steps": 8,
+    "methods": [
+      "gd",
+      "cg"
+    ],
+    "method_options": {
+      "cg": {
+        "rtol": 1e-12,
+        "atol": 0.0
+      }
+    },
+    "include_iterates": false
+  },
+  "config_sha256": "a2726deae46d9914cd60f00853551260c4bbf9e0fcbab5b3a8436a1594d9db8a",
+  "environment": {
+    "chainbench": "0.5.0",
+    "python": "3.12.14",
+    "numpy": "2.5.3",
+    "os": "Linux"
+  },
+  "fixture": {
+    "definition": "chainbench.deterministic.v1",
+    "kind": "quadratic",
+    "dimension": 4,
+    "input_sha256": "21651e6bba5c7751399c5f05b751bc7894c15bcea2cfa2f7a94ba2c809428da5",
+    "L": 1.0,
+    "mu": 0.010000000000000012,
+    "f_star": -0.039650430552462715,
+    "stationarity_metric": "gradient_norm",
+    "start": "zeros"
+  },
+  "notice": "Finite deterministic observations, not a proof, solver certification or universal ranking. Equal iteration budgets do not imply equal work: CG rechecks residuals, proximal point solves a linear system, and dense spectral setup is outside the iteration budget.",
+  "runs": [
+    {
+      "method": "gd",
+      "parameters": {
+        "step_size": 1.0
+      },
+      "updates": 8,
+      "termination": "budget_complete",
+      "rows": [
+        {
+          "iteration": 0,
+          "objective": 0.0,
+          "gap": 0.039650430552462715,
+          "stationarity": 0.1376796377548443,
+          "distance_to_reference": 1.4907119849998598
+        },
+        {
+          "iteration": 1,
+          "objective": -0.01219629376341623,
+          "gap": 0.027454136789046492,
+          "stationarity": 0.06712682440216494,
+          "distance_to_reference": 1.4431133644536305
+        },
+        {
+          "iteration": 2,
+          "objective": -0.01633210753592072,
+          "gap": 0.023318323016542006,
+          "stationarity": 0.05634835984287862,
+          "distance_to_reference": 1.406152781906294
+        },
+        {
+          "iteration": 3,
+          "objective": -0.01927103091011339,
+          "gap": 0.02037939964234933,
+          "stationarity": 0.048200752535832746,
+          "distance_to_reference": 1.3737421488960817
+        },
+        {
+          "iteration": 4,
+          "objective": -0.021441337314214028,
+          "gap": 0.0182090932382487,
+          "stationarity": 0.04206232550393038,
+          "distance_to_reference": 1.3446089415250992
+        },
+        {
+          "iteration": 5,
+          "objective": -0.02310945890805615,
+          "gap": 0.016540971644406575,
+          "stationarity": 0.03743079951464746,
+          "distance_to_reference": 1.3179173236220287
+        },
+        {
+          "iteration": 6,
+          "objective": -0.024441955873680206,
+          "gap": 0.015208474678782507,
+          "stationarity": 0.03390728420371507,
+          "distance_to_reference": 1.2931137807933728
+        },
+        {
+          "iteration": 7,
+          "objective": -0.025543683309398206,
+          "gap": 0.014106747243064509,
+          "stationarity": 0.0311836133019536,
+          "distance_to_reference": 1.2698263878517693
+        },
+        {
+          "iteration": 8,
+          "objective": -0.026481304974566633,
+          "gap": 0.013169125577896078,
+          "stationarity": 0.02902935628810905,
+          "distance_to_reference": 1.247799857369354
+        }
+      ]
+    },
+    {
+      "method": "cg",
+      "parameters": {
+        "rtol": 1e-12,
+        "atol": 0.0,
+        "stopping_threshold": 1.376796377548443e-13
+      },
+      "updates": 4,
+      "termination": "converged",
+      "rows": [
+        {
+          "iteration": 0,
+          "objective": 0.0,
+          "gap": 0.039650430552462715,
+          "stationarity": 0.1376796377548443,
+          "distance_to_reference": 1.4907119849998598
+        },
+        {
+          "iteration": 1,
+          "objective": -0.013289585446309688,
+          "gap": 0.026360845106153025,
+          "stationarity": 0.07611349205100702,
+          "distance_to_reference": 1.4272713809464825
+        },
+        {
+          "iteration": 2,
+          "objective": -0.02591012269185265,
+          "gap": 0.01374030786061008,
+          "stationarity": 0.03241040671244689,
+          "distance_to_reference": 1.2573259350379897
+        },
+        {
+          "iteration": 3,
+          "objective": -0.03570843145350625,
+          "gap": 0.003941999098956468,
+          "stationarity": 0.009479220094778125,
+          "distance_to_reference": 0.8746023483219817
+        },
+        {
+          "iteration": 4,
+          "objective": -0.039650430552462715,
+          "gap": 1.6189634944062628e-29,
+          "stationarity": 5.624511772012776e-15,
+          "distance_to_reference": 6.214522345989945e-15
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "scope": "Files retained in this review directory; excludes this manifest itself. Full CI artifact has additional reproducible screenshots/download copies.",
+  "source_head": "c16e8a904591e6f0168ce48e5567c3f6bb571609",
+  "source_merge": "f81913ce6e27777227384af340dd9cac1f77edf9",
+  "tree": "fb47ed6fd80c56d20eb2c4d887dae02929ae04bd",
+  "files": [
+    {
+      "path": "ChainBench_saved_comparison_review.pdf",
+      "bytes": 109974,
+      "sha256": "1236886b07ede795720f1a1c483a953553dd68bd2a35cb85c7e39474f5256e14",
+      "git_blob": "6bdec9f2e7b1f2967ee61ea538e33ea42988ac14"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3911,
+      "sha256": "02ecd6e8f369614aa68341e1873f68cf970ab55aa0b0944881b775b78456b10c",
+      "git_blob": "7b2a7cfdeed873ab205331a06f92b591064bda2f"
+    },
+    {
+      "path": "browser-verification.json",
+      "bytes": 5232,
+      "sha256": "d2096fb0125b2daee7ccfd6332cca7730e92a14ddb8070f71f4bedfa2339eb08",
+      "git_blob": "d86dbad768fa9291a351036781cc3542f376f705"
+    },
+    {
+      "path": "input-a.json",
+      "bytes": 4940,
+      "sha256": "c826b2c9974f46c20f6fe7d54b9e6864e66bb9caf929d442c5f50d1fd94286e2",
+      "git_blob": "1c173f75c9d7ccba3bdc3fafbebb2a126a2c8ef4"
+    },
+    {
+      "path": "input-b.json",
+      "bytes": 5875,
+      "sha256": "0b4e8ab7927668919f45f156cd6a6e4d99316723b9903f1cdda577f5338ca3a7",
+      "git_blob": "e10fef496dfb320d501980298798a8371b67e094"
+    },
+    {
+      "path": "input-c.json",
+      "bytes": 4925,
+      "sha256": "80e378af3fcd580b7497ed1e3cd7538cec3c19b5150571292dacbf5c400ed8cc",
+      "git_blob": "e7e35e953a3cc17ef020943e5495257a28873d55"
+    },
+    {
+      "path": "input-d.json",
+      "bytes": 5671,
+      "sha256": "8ce9049e7dfd04afd0da7605895ddd1fd5d97ce6ed82cabb3ed982ce102565a2",
+      "git_blob": "65d634bbda0c9e4a8f47811b82bc4c9624ea898a"
+    },
+    {
+      "path": "matched.html",
+      "bytes": 64442,
+      "sha256": "c7559a347655628949e046af9a45435bf652c6a485c0dc3da0db42d6cf9eb588",
+      "git_blob": "1fa44635301c2e205f7d55a71d4a65a7101d2f13"
+    },
+    {
+      "path": "mixed-context-390.png",
+      "bytes": 45831,
+      "sha256": "6053eec7f0e779c66892dc158abefef65ae130729a62a219e90104b81b7bd3a6",
+      "git_blob": "58efc6da3c0284dc605561af2bfd84aa962e251e"
+    },
+    {
+      "path": "mixed-context-right-390.png",
+      "bytes": 45313,
+      "sha256": "26ee20a2736572d383bce666877427b85fbcd96ee2544eda4705a284bfa2995c",
+      "git_blob": "597bde125a1fed61a6f2f430504a25f367e937c2"
+    },
+    {
+      "path": "mixed.html",
+      "bytes": 119973,
+      "sha256": "65e09ca8636cb91c769e0204252c4f585afb1959c54fb634cf6d404bebefbbc9",
+      "git_blob": "9473975ec205e40e9ebad30cfad064b7df386448"
+    },
+    {
+      "path": "review-page-1.png",
+      "bytes": 92943,
+      "sha256": "b651af0714da6ff8164f4d2c7a3bbcd07864fc5b4073b7b58fe45e3a62106472",
+      "git_blob": "290afb464ed54c59d690b8b76d6ffb54d7939ac5"
+    },
+    {
+      "path": "review-page-2.png",
+      "bytes": 102599,
+      "sha256": "1fd5c6d1f659ac17a77fb03fb3d5c4152168d3c1c7990c322f1e428ddece8665",
+      "git_blob": "35b8c7f71e565bb8827627fd7757f5f983e19853"
+    },
+    {
+      "path": "shared-gd-390.png",
+      "bytes": 12643,
+      "sha256": "9e06256d5e77e920c822e332d1c7cb2b37a164a78cd840c419f04d97aef106c9",
+      "git_blob": "c6e84c80a821f3abff9a976e3e96b108048913ca"
+    },
+    {
+      "path": "shared-gd-right-390.png",
+      "bytes": 7686,
+      "sha256": "d63d42231e4e6c2b686bfd16e8d327d0bade45eed1e77e3dea201bda51af8239",
+      "git_blob": "d2f567e47a56f54147d66bff94a2bc61cd2c484f"
+    },
+    {
+      "path": "verification.json",
+      "bytes": 7736,
+      "sha256": "a47403142600ee834f6c41ad27659d11553fc9780c7144f3642efb68c2265b14",
+      "git_blob": "ce102ed207f173546a992d5caaa9dcc6245f046a"
+    }
+  ]
+}

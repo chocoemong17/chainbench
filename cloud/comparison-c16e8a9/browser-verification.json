@@ -1,0 +1,171 @@
+{
+  "source_commit": "f81913ce6e27777227384af340dd9cac1f77edf9",
+  "audits": {
+    "matched": {
+      "records": 2,
+      "pairs": 1,
+      "plots": 4,
+      "retained_samples": "exact",
+      "shared_recorded_problem": true
+    },
+    "mixed": {
+      "records": 4,
+      "pairs": 6,
+      "plots": 4,
+      "retained_samples": "exact",
+      "shared_recorded_problem": false
+    }
+  },
+  "viewports": [
+    {
+      "width": 1440,
+      "case": "matched",
+      "records": 2,
+      "keyboard": "passed",
+      "horizontal_regions": "full width",
+      "download": "exact",
+      "horizontal_page_overflow": false
+    },
+    {
+      "width": 1440,
+      "case": "mixed",
+      "records": 4,
+      "keyboard": "passed",
+      "horizontal_regions": "full width",
+      "download": "exact",
+      "horizontal_page_overflow": false
+    },
+    {
+      "width": 390,
+      "case": "matched",
+      "records": 2,
+      "keyboard": "passed",
+      "horizontal_regions": "keyboard checked",
+      "download": "exact",
+      "horizontal_page_overflow": false
+    },
+    {
+      "width": 390,
+      "case": "mixed",
+      "records": 4,
+      "keyboard": "passed",
+      "horizontal_regions": "keyboard checked",
+      "download": "exact",
+      "horizontal_page_overflow": false
+    }
+  ],
+  "network_requests": [],
+  "javascript_errors": [],
+  "browser": "153.0.8010.12",
+  "no_script": "both reports, diagnostic tables, static curves and native details passed",
+  "pdf": {
+    "pages": 2,
+    "final_section_present": true
+  },
+  "outputs": {
+    "ChainBench_saved_comparison_review.pdf": {
+      "bytes": 109974,
+      "sha256": "1236886b07ede795720f1a1c483a953553dd68bd2a35cb85c7e39474f5256e14"
+    },
+    "input-a.json": {
+      "bytes": 4940,
+      "sha256": "c826b2c9974f46c20f6fe7d54b9e6864e66bb9caf929d442c5f50d1fd94286e2"
+    },
+    "input-b.json": {
+      "bytes": 5875,
+      "sha256": "0b4e8ab7927668919f45f156cd6a6e4d99316723b9903f1cdda577f5338ca3a7"
+    },
+    "input-c.json": {
+      "bytes": 4925,
+      "sha256": "80e378af3fcd580b7497ed1e3cd7538cec3c19b5150571292dacbf5c400ed8cc"
+    },
+    "input-d.json": {
+      "bytes": 5671,
+      "sha256": "8ce9049e7dfd04afd0da7605895ddd1fd5d97ce6ed82cabb3ed982ce102565a2"
+    },
+    "matched-context-1440.png": {
+      "bytes": 35858,
+      "sha256": "534b59e70964f81070bc2359cbc73433a2700b0ed8eadb7798c8bd9efc1581ae"
+    },
+    "matched-context-390.png": {
+      "bytes": 40192,
+      "sha256": "7889648f22322057bbd79b80430a0a767ff922bb1215859e0089fafcf8febaa4"
+    },
+    "matched-context-print.png": {
+      "bytes": 35889,
+      "sha256": "6ca67894cce6254e9c36eb43487bde56b6859298c2336548dced30b9dd0e25f3"
+    },
+    "matched-context-right-390.png": {
+      "bytes": 39906,
+      "sha256": "f5a2d5d4b4263f12064b42340b8a957932c4974fd99401765aa8ea05b40654fb"
+    },
+    "matched-download-1440.json": {
+      "bytes": 20104,
+      "sha256": "4a7c3da7fc0b0dfaa9ad23f40cff2d946b53d9b6da36f39301f7cfb889d0aeff"
+    },
+    "matched-download-390.json": {
+      "bytes": 20104,
+      "sha256": "4a7c3da7fc0b0dfaa9ad23f40cff2d946b53d9b6da36f39301f7cfb889d0aeff"
+    },
+    "matched.html": {
+      "bytes": 64442,
+      "sha256": "c7559a347655628949e046af9a45435bf652c6a485c0dc3da0db42d6cf9eb588"
+    },
+    "mixed-context-1440.png": {
+      "bytes": 44454,
+      "sha256": "7989c31b4173ff02f5ef00d09d83e1a80936d65de812d83317dc330a43eb9e1e"
+    },
+    "mixed-context-390.png": {
+      "bytes": 45831,
+      "sha256": "6053eec7f0e779c66892dc158abefef65ae130729a62a219e90104b81b7bd3a6"
+    },
+    "mixed-context-print.png": {
+      "bytes": 44439,
+      "sha256": "10e5b9c48de89489f89ffbc5a4e22bc48b5ef087d601345e57d2f3c7a1c27a74"
+    },
+    "mixed-context-right-390.png": {
+      "bytes": 45313,
+      "sha256": "26ee20a2736572d383bce666877427b85fbcd96ee2544eda4705a284bfa2995c"
+    },
+    "mixed-download-1440.json": {
+      "bytes": 45010,
+      "sha256": "9117149bde02476a563c76c003eb0400f4d6a36709cab942649f3a2d592c5c8f"
+    },
+    "mixed-download-390.json": {
+      "bytes": 45010,
+      "sha256": "9117149bde02476a563c76c003eb0400f4d6a36709cab942649f3a2d592c5c8f"
+    },
+    "mixed.html": {
+      "bytes": 119973,
+      "sha256": "65e09ca8636cb91c769e0204252c4f585afb1959c54fb634cf6d404bebefbbc9"
+    },
+    "review-page-1.png": {
+      "bytes": 92943,
+      "sha256": "b651af0714da6ff8164f4d2c7a3bbcd07864fc5b4073b7b58fe45e3a62106472"
+    },
+    "review-page-2.png": {
+      "bytes": 102599,
+      "sha256": "1fd5c6d1f659ac17a77fb03fb3d5c4152168d3c1c7990c322f1e428ddece8665"
+    },
+    "review.html": {
+      "bytes": 141519,
+      "sha256": "55d8ea1902c7be1c0b878db7188b2a1af724a281822e2dace40b79f545a8fd48"
+    },
+    "shared-gd-1440.png": {
+      "bytes": 42381,
+      "sha256": "b7d923422d4ba480b5941a19837ede9db7a87abcbafd268a42e4af81db8fa588"
+    },
+    "shared-gd-390.png": {
+      "bytes": 12643,
+      "sha256": "9e06256d5e77e920c822e332d1c7cb2b37a164a78cd840c419f04d97aef106c9"
+    },
+    "shared-gd-print.png": {
+      "bytes": 24206,
+      "sha256": "bd8244d6e32c3f52ef6c2721bd428b4219e81043bd3942bfed899a6d2583850f"
+    },
+    "shared-gd-right-390.png": {
+      "bytes": 7686,
+      "sha256": "d63d42231e4e6c2b686bfd16e8d327d0bade45eed1e77e3dea201bda51af8239"
+    }
+  }
+}

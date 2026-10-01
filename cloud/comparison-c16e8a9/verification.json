@@ -1,0 +1,239 @@
+{
+  "pr": 80,
+  "issue": 79,
+  "head": "c16e8a904591e6f0168ce48e5567c3f6bb571609",
+  "tree": "fb47ed6fd80c56d20eb2c4d887dae02929ae04bd",
+  "tests": 36915684161,
+  "cloud": 36915684398,
+  "status": "success: all eight PR jobs plus cloud generation; merged",
+  "local_checks": [
+    "ruff --no-cache",
+    "AST syntax",
+    "git diff --check",
+    "git tree exact remote"
+  ],
+  "initial_candidate": {
+    "head": "391c3a23e3428ec8ec02968c54c614471760f5ce",
+    "tree": "0aea3adb3fb4f16d0c1cfc3b83146c02e4c2e77a",
+    "tests": 36913562584,
+    "cloud": 36913562560,
+    "status": "superseded during full CI after actual mobile inspection",
+    "browser_comparison_step": "passed",
+    "artifact": 11188461623,
+    "artifact_bytes": 632032,
+    "artifact_sha256": "174053a4c3821dcba028e69d589f2d8f7ab32e65f7bb21e42532923a24367715",
+    "actual_visual_inspection": [
+      "PDF page 1",
+      "PDF page 2",
+      "shared plot at 390px",
+      "mixed diagnostics at 390px"
+    ],
+    "finding": "narrow table wraps Korean one character per line; add horizontal table/plot hints and keyboard scroll checks",
+    "cloud_status": "success",
+    "cloud_job": 110541905613,
+    "tests_status": "cancelled by superseding mobile repair, all eight jobs cancelled"
+  },
+  "jobs_verified": [
+    {
+      "id": 110549424143,
+      "name": "wheel and sdist clean installation",
+      "status": "success",
+      "actual_logs": "both CLEAN INSTALL PASSED markers"
+    },
+    {
+      "id": 110549424201,
+      "name": "Ubuntu Python 3.11 current",
+      "status": "success",
+      "passed": 1394,
+      "seconds": 396.17
+    },
+    {
+      "id": 110549424046,
+      "name": "Ubuntu Python 3.12 current",
+      "status": "success",
+      "passed": 1394,
+      "seconds": 733.82,
+      "fault_injections": 4
+    },
+    {
+      "id": 110549424230,
+      "name": "Windows Python 3.12",
+      "status": "success",
+      "passed": 1394,
+      "seconds": 591.9
+    },
+    {
+      "id": 110549424385,
+      "name": "offline interactive reports browser",
+      "status": "success",
+      "actual_completed_log_read": true,
+      "scope": "new comparison plus all existing desktop/mobile/no-script/keyboard/download/tour checks and browser mutations"
+    },
+    {
+      "id": 110549423721,
+      "name": "Ubuntu Python 3.10 current",
+      "status": "success",
+      "passed": 1394,
+      "seconds": 767.78
+    },
+    {
+      "id": 110549424017,
+      "name": "Ubuntu Python 3.10 minimum",
+      "status": "success",
+      "passed": 1394,
+      "seconds": 775.18
+    },
+    {
+      "id": 110549424065,
+      "name": "Intel macOS Python 3.12",
+      "status": "success",
+      "passed": 1394,
+      "seconds": 1282.07
+    }
+  ],
+  "mobile_candidate": {
+    "head": "38491137e7820b7774b1e1dfcb3b925c5bd260c5",
+    "tree": "b82597dd14414cf5524b14fad068440bcb3287fc",
+    "tests": 36914060273,
+    "cloud": 36914060335,
+    "cloud_status": "success",
+    "cloud_job": 110543566855,
+    "cloud_outputs": {
+      "html_pages": 25,
+      "numerical_records": 24,
+      "pdf_pages": 2,
+      "artifacts": [
+        {
+          "id": 11188966188,
+          "bytes": 44046693,
+          "sha256": "b3e1b6f753f0c9bba11695eb49745024e286f17ad55b64eb3838de78b02dc009"
+        },
+        {
+          "id": 11189621015,
+          "bytes": 313570,
+          "sha256": "2b3d10fa5ae7fb838009b890aa2db13969c0eab8f8a71fbc8c9003bc05c3f6a7"
+        }
+      ]
+    },
+    "cloud_manifest_sha256": "d937ec8b9c73b287be70446da1447a5795ace04fb503433db959b60c6538c999",
+    "cloud_renderer_sha256": "f4b458d131d95b77572ad26d0644061faa68da5035925146af6af7667ceb9769",
+    "merge_ref": "cd65b069d75932c8046e0abeca10c7520e05234e",
+    "jobs_verified": [
+      {
+        "id": 110544151189,
+        "name": "wheel and sdist clean installation",
+        "status": "success",
+        "actual_logs": "both CLEAN INSTALL PASSED markers"
+      },
+      {
+        "id": 110544151688,
+        "name": "Ubuntu Python 3.10 current",
+        "status": "success",
+        "passed": 1394,
+        "seconds": 471.59
+      },
+      {
+        "id": 110544151739,
+        "name": "Ubuntu Python 3.11 current",
+        "status": "success",
+        "passed": 1394,
+        "seconds": 474.81
+      },
+      {
+        "id": 110544151669,
+        "name": "Ubuntu Python 3.12 current",
+        "status": "success",
+        "passed": 1394,
+        "seconds": 546.27,
+        "fault_injections": 4
+      }
+    ],
+    "browser_failure": {
+      "job": 110544151710,
+      "exception": "Page.wait_for_function: EvalError: raw expression violates CSP unsafe-eval prohibition",
+      "repair": "use function predicate with element argument, as in existing simplex gate; preserve page CSP and runtime"
+    },
+    "final_outcome": "4 passed jobs / 1 failed browser helper / 3 superseded-cancelled matrix jobs"
+  },
+  "merge_ref": "f81913ce6e27777227384af340dd9cac1f77edf9",
+  "comparison_packet": {
+    "artifact": 11189768123,
+    "bytes": 835529,
+    "sha256": "4cf25ec0d52b9071bd6c02a0b59772c18ee1989193e868348c657a2abbcf3107",
+    "browser_job": 110549424385,
+    "comparison_step": "passed",
+    "source_merge": "f81913ce6e27777227384af340dd9cac1f77edf9",
+    "selected_bytes": 628047,
+    "files": 14,
+    "all_output_hashes_verified": true,
+    "actual_visual_inspection": [
+      "PDF page 1",
+      "PDF page 2",
+      "390px mixed table left",
+      "390px mixed table right",
+      "390px shared plot right"
+    ],
+    "finding": "table no longer wraps each Korean character; keyboard-accessible full-width content and larger PDF table text"
+  },
+  "local_storage_allocated_bytes": 90173440,
+  "artifacts": [
+    {
+      "id": 11190191679,
+      "kind": "full browser",
+      "bytes": 117205940,
+      "sha256": "1911bcaf1caad92bb5fd86d87f3ecb8591c3f232410fc2f7ce441cc79f4a2052",
+      "local_download": false
+    },
+    {
+      "id": 11189898454,
+      "kind": "distributions",
+      "bytes": 1062322,
+      "sha256": "4ca7007842979ccb44f12b3b750d8788c4faf868978673084b6ea1fdc3231ba8",
+      "local_download": false
+    }
+  ],
+  "tests_status": "success",
+  "six_configurations_each_passed": 1394,
+  "pr_merge_tree_matches_head": true,
+  "main_before_merge": "e3858108ea492df04121c14d5306ac2bab1454fa",
+  "cloud_attempts": [
+    {
+      "attempt": 1,
+      "job": 110548954724,
+      "conclusion": "cancelled",
+      "stage": "python -m playwright install --with-deps chromium / apt repository list update",
+      "last_progress": "2026-10-01T19:38:20Z Ubuntu InRelease download",
+      "cancellation": "2026-10-01T20:03:05Z operation cancelled after approximately configured 25-minute job limit",
+      "project_generation_started": false,
+      "actual_log_read": true
+    },
+    {
+      "attempt": 2,
+      "job": 110559557303,
+      "conclusion": "success",
+      "html_pages": 25,
+      "numerical_records": 24,
+      "pdf_pages": 2,
+      "actual_log_read": true
+    }
+  ],
+  "cloud_status": "success",
+  "cloud_manifest_sha256": "4336dc564fcc5e8e751c6db90a2cb885935d09b3efa21637653b800945662564",
+  "cloud_renderer_sha256": "f4b458d131d95b77572ad26d0644061faa68da5035925146af6af7667ceb9769",
+  "merged_main": "f8fdc61502426a0f60c99274e4960bf568812b45",
+  "merged_tree_matches_tested_tree": true,
+  "cloud_artifacts": [
+    {
+      "id": 11191491527,
+      "bytes": 44002388,
+      "sha256": "caeab20009de67b8455205f15a62c1e2546e93ee280110691e4d455f50475f92"
+    },
+    {
+      "id": 11191576443,
+      "bytes": 313140,
+      "sha256": "9484a77d5ab18498c9a42ea9f19f6c05823f0ffff63c96fa47f383a0ec4067a2"
+    }
+  ],
+  "review_scope": "Fully tested PR snapshot; identical source tree merged as main. Separate main push CI still running at packet publication.",
+  "recorded_at": "2026-10-01T20:17:55.340276+00:00"
+}
