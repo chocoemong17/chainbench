@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 import copy
-import http.client
+import http.client as http_client
 import json
 import math
 import socket
@@ -43,7 +43,7 @@ def http(server, *, method='POST', path='/api/run', body=None, replace=None, omi
     headers.update(replace or {})
     for key in omit:
         headers.pop(key)
-    connection = http.client.HTTPConnection('127.0.0.1', server.server_port, timeout=30)
+    connection = http_client.HTTPConnection('127.0.0.1', server.server_port, timeout=30)
     try:
         connection.putrequest(method, path, skip_host=True, skip_accept_encoding=True)
         for name, value in [*headers.items(), *extra]:
