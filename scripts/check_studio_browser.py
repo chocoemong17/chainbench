@@ -74,6 +74,9 @@ def main():
                         page.wait_for_function("!document.getElementById('studio-result').hidden")
                         record = value['result']
                         assert page.locator('#studio-hash').inner_text() == record['instance']['input_sha256']
+                        if page.locator('#studio-result details').get_attribute('open') is None:
+                            page.locator('#studio-result summary').focus()
+                            page.keyboard.press('Enter')
                         assert json.loads(page.locator('#studio-settings').inner_text()) == request
                         assert session['token'] not in json.dumps(value)
                         fingerprints[family, seed] = row['input_sha256']
