@@ -100,8 +100,9 @@ def main():
                                 assert json.loads(path.read_bytes()) == (record['instance'] if suffix == 'input.json' else record)
                             assert session['token'] not in path.read_text(encoding='utf8')
                         if family == 'quadratic' and seed == 0:
-                            frame.locator('#instance-context').screenshot(path=str(work/f'result-context-{width}.png'))
-                            frame.locator('[data-instance-chart="gap"]').screenshot(path=str(work/f'gap-{width}.png'))
+                            # Capture the live frame as a single viewport. Cropping a
+                            # descendant across two scrolling documents can never settle.
+                            page.locator('#studio-frame').screenshot(path=str(work/f'live-result-{width}.png'))
                         assert page.evaluate('document.documentElement.scrollWidth <= innerWidth+1')
                         summary['cases'].append(row)
                 assert all(fingerprints[family, 0] != fingerprints[family, 7] for family in FAMILIES)
@@ -131,6 +132,8 @@ def main():
         assert not list(Path(directory).iterdir()), 'Studio created files in its working directory'
         for js in (True, False):
             context = browser.new_context(offline=True, java_script_enabled=js, viewport={'width': 390, 'height': 900})
+            context.on('request', lambda request: proof['outside_requests'].append(request.url)
+                       if request.url.startswith(('https://', 'http://')) else None)
             page = context.new_page()
             page.on('pageerror', lambda error: proof['javascript_errors'].append(str(error)))
             for path in sorted(work.glob('*.html')):
@@ -140,6 +143,12 @@ def main():
                 record = json.loads(path.with_suffix('.result.json').read_bytes()) if 'after-shutdown' not in path.name else None
                 if record:
                     audit_instance_result(record, record['instance'], path.read_text(encoding='utf8'))
+                if js and path.name in ('quadratic-0-1440.html', 'quadratic-0-390.html'):
+                    width = int(path.stem.rsplit('-', 1)[1])
+                    page.set_viewport_size({'width': width, 'height': 1000})
+                    page.locator('#instance-context').screenshot(path=str(work/f'result-context-{width}.png'))
+                    page.locator('[data-instance-chart="gap"]').screenshot(path=str(work/f'gap-{width}.png'))
+                    page.set_viewport_size({'width': 390, 'height': 900})
                 proof['offline_downloads'].append({'file': path.name, 'javascript': js, 'readable': True})
             context.close()
         with studio_session(['chainbench'], Path(directory), os.environ.copy()) as session:
