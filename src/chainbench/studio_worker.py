@@ -4,6 +4,7 @@ from __future__ import annotations
 import json
 import sys
 
+from .experiments import canonical_json
 from .instance_reporting import instance_html
 from .instances import generate_instance, parse_json, run_instance
 from .studio import MAX_REQUEST_BYTES, MAX_RESPONSE_BYTES, normalize_request
@@ -16,6 +17,7 @@ def calculate(value):
         **{k: request[k] for k in ('L', 'condition_number', 'lam') if k in request})
     result = run_instance(instance)
     return {'kind': 'chainbench.studio-result', 'request': request, 'result': result,
+            'input_json': canonical_json(instance), 'result_json': canonical_json(result),
             'html': instance_html(result, request['lang'])}
 
 

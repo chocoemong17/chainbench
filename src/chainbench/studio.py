@@ -65,7 +65,7 @@ def run_worker(request, *, timeout=COMPUTE_TIMEOUT):
     if result.returncode or not result.stdout or len(result.stdout) > MAX_RESPONSE_BYTES:
         raise RuntimeError('The calculation could not produce a bounded result')
     value = json.loads(result.stdout)
-    if type(value) is not dict or set(value) != {'kind', 'request', 'result', 'html'}:
+    if type(value) is not dict or set(value) != {'kind', 'request', 'result', 'input_json', 'result_json', 'html'}:
         raise RuntimeError('Invalid calculation response')
     if value['kind'] != 'chainbench.studio-result' or value['request'] != request:
         raise RuntimeError('Calculation settings changed')

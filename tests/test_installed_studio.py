@@ -21,7 +21,7 @@ def test_actual_studio_cases_have_independently_audited_arrays_metrics_and_plots
     assert result['rows'] == 3*len(FAMILIES[family])
 
 
-@pytest.mark.parametrize('damage', ['request', 'metric', 'html', 'start', 'digest'])
+@pytest.mark.parametrize('damage', ['request', 'metric', 'html', 'start', 'digest', 'input-json', 'result-json'])
 def test_studio_auditor_rejects_changed_outputs(damage):
     request = case_request('diagonal-lasso', 0)
     value = copy.deepcopy(calculate(request))
@@ -33,6 +33,10 @@ def test_studio_auditor_rejects_changed_outputs(damage):
         value['html'] = value['html'].replace('<metadata>', '<removed>', 1)
     elif damage == 'start':
         value['result']['instance']['x0'][0] += .01
+    elif damage == 'input-json':
+        value['input_json'] += ' '
+    elif damage == 'result-json':
+        value['result_json'] += ' '
     else:
         value['result']['instance']['input_sha256'] = '0'*64
     with pytest.raises(RuntimeError):

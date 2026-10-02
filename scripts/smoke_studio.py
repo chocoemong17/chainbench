@@ -9,7 +9,7 @@ import threading
 from contextlib import contextmanager
 from urllib.parse import urlsplit
 
-from smoke_instances import audit_instance_result, require
+from smoke_instances import audit_instance_result, canonical, require
 from studio_evidence import FAMILIES, REJECTIONS, case_request, require_studio
 
 
@@ -56,6 +56,8 @@ def audit_response(value, request):
     require(value['kind'] == 'chainbench.studio-result' and value['request'] == request)
     result, html = value['result'], value['html']
     instance = result['instance']
+    require(value['input_json'] == canonical(instance) and value['result_json'] == canonical(result),
+            'Download JSON changed original numeric representation')
     require(instance['origin']['parameters']['seed'] == request['seed'])
     require(instance['run']['steps'] == request['steps'] and len(instance['x0']) == request['dimension'])
     require(instance['run']['methods'] == request['methods'] and instance['run']['include_iterates'] is True)

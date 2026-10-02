@@ -55,6 +55,9 @@ update budget.
 
 The server writes none of these files. Downloading saves them through the
 browser. Current downloads remain available after explicit server shutdown.
+JSON downloads retain the original Python serialization, including signed zero
+and float representations used by the sealed hashes. The browser does not
+parse and reserialize those download bytes.
 For an exact-input rerun, use the development CLI:
 
 ```bash

@@ -98,10 +98,11 @@ def main():
                                 assert path.read_text(encoding='utf8') == value['html']
                             else:
                                 assert json.loads(path.read_bytes()) == (record['instance'] if suffix == 'input.json' else record)
+                                assert path.read_text(encoding='utf8') == value['input_json' if suffix == 'input.json' else 'result_json']
                             assert session['token'] not in path.read_text(encoding='utf8')
                         if family == 'quadratic' and seed == 0:
                             # Capture the live frame as a single viewport. Cropping a
-                            # descendant across two scrolling documents can never settle.
+                            # descendant across two scrolling documents was unstable in Chromium.
                             page.locator('#studio-frame').screenshot(path=str(work/f'live-result-{width}.png'))
                         assert page.evaluate('document.documentElement.scrollWidth <= innerWidth+1')
                         summary['cases'].append(row)

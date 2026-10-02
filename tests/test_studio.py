@@ -4,6 +4,7 @@ from __future__ import annotations
 import copy
 import http.client
 import json
+import math
 import socket
 import subprocess
 import threading
@@ -11,8 +12,8 @@ import time
 
 import pytest
 
-from chainbench import studio
-from chainbench.instances import replay_instance
+from chainbench import studio, studio_worker
+from chainbench.instances import import_instance, replay_instance, validate_instance
 from chainbench.studio_worker import calculate
 
 
@@ -205,3 +206,17 @@ def test_largest_studio_case_stays_within_output_cap():
     assert len(data) <= studio.MAX_RESPONSE_BYTES
     assert all(len(run['rows']) == run['updates']+1 <= 201 for run in result['runs'])
     assert result['instance']['run']['include_iterates'] is True
+
+
+def test_download_transport_preserves_signed_zero_and_sealed_float_representation(monkeypatch):
+    instance = import_instance({'schema_version': 1, 'problem': {'kind': 'quadratic',
+        'Q': [[1., 0.], [0., 1.]], 'b': [0., 0.], 'x_star': [0., 0.]}, 'x0': [-0., 0.],
+        'run': {'steps': 2, 'methods': ['gd'], 'include_iterates': True}})
+    monkeypatch.setattr(studio_worker, 'generate_instance', lambda *args, **kwargs: instance)
+    transport = json.loads(json.dumps(calculate(request())))
+    saved = json.loads(transport['input_json'])
+    validate_instance(saved)
+    assert math.copysign(1, saved['x0'][0]) == -1
+    report = json.loads(transport['result_json'])
+    assert math.copysign(1, report['runs'][0]['rows'][0]['iterate'][0]) == -1
+    assert replay_instance(report)['status'] == 'MATCH'

@@ -55,8 +55,8 @@ STUDIO_SCRIPT = """
      $('studio-summary').textContent=record.fixture.kind+' · d='+record.fixture.dimension+' · '
        +record.runs.map(r=>r.method+': '+r.updates).join(' / ');
      $('studio-hash').textContent=record.instance.input_sha256;
-     download('download-input','studio-input.json',JSON.stringify(record.instance,null,2),'application/json');
-     download('download-result','studio-result.json',JSON.stringify(record,null,2),'application/json');
+     download('download-input','studio-input.json',data.input_json,'application/json');
+     download('download-result','studio-result.json',data.result_json,'application/json');
      download('download-html','studio-report.html',data.html,'text/html');
      $('studio-frame').srcdoc=data.html;result.hidden=false;
      say('계산 완료. 아래 결과는 표시된 입력과 설정에서 나온 실제 기록입니다.',
