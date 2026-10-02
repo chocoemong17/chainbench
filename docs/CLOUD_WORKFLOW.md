@@ -4,6 +4,14 @@ The repository and pull requests are the source of truth. Full tests, clean
 package installation, browser checks and report generation run on GitHub Actions.
 The local task folder has a strict 1 GB ceiling; generated copies are disposable.
 
+The development `studio-review-<commit>` artifact exercises the opt-in loopback
+studio entirely on the runner. It contains actual browser-downloaded inputs,
+results and offline HTML for three families and two seeds at two viewport sizes,
+selected screenshots, a two-page PDF and source/member verification. Full tests
+also cover its request boundaries and worker cleanup; both installed distributions
+repeat independent numeric and lifecycle audits required at publication.
+[Studio usage and limits](STUDIO.md). No studio is started in the local task folder.
+
 The **tests** workflow calls the reusable **cloud reading bundle** workflow, which
 generates the complete 25-page Korean/English
 tour and independently audits every file, link and all 24 numerical records.

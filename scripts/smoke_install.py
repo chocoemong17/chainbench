@@ -432,6 +432,8 @@ def main() -> None:
             comparison = exercise_comparison(cli, work, env, run)
             from smoke_instances import exercise_instances
             stored = exercise_instances(cli, work, env, run)
+            from smoke_studio import exercise_studio
+            studio = exercise_studio(cli, work, env)
             records.append({
                 "artifact": artifact.name,
                 "sha256": hashlib.sha256(artifact.read_bytes()).hexdigest(),
@@ -443,6 +445,7 @@ def main() -> None:
                 "plot_svg": "passed", "visual_evidence": "matched", "experiments": experiments,
                 "instance_controls": instance_controls, "advanced_workflows": advanced,
                 "saved_comparison": comparison, "stored_instances": stored,
+                "studio": studio,
             })
             print(f"CLEAN INSTALL PASSED: {artifact.name}", flush=True)
     report = {"python": platform.python_version(), "artifacts": records,

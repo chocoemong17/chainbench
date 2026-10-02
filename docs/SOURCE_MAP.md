@@ -287,3 +287,9 @@ solver recurrences above with explicit arrays and x0. It adds no mathematical
 claim or literature-check threshold. PSD reference distance is not distance to
 the set of minimizers. The supplied quadratic reference is checked numerically,
 not symbolically certified. [Inputs, generator, hashes and replay contract](STORED_INPUTS.md).
+
+The opt-in [experiment studio](STUDIO.md) exposes a narrower parameter range of
+this same generator and the same recurrences. It computes new observations in
+Python; the embedded report then inspects stored rows. It adds no algorithm,
+theorem threshold or universal ranking. Its install/browser checks independently
+bind each displayed/downloaded report to the actual numeric input and request.

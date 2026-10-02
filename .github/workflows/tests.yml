@@ -118,6 +118,13 @@ jobs:
       - run: python -m pip install . 'playwright==1.63.0' 'pymupdf==1.28.2'
       - run: python -m playwright install --with-deps chromium
       - run: sudo apt-get install -y fonts-noto-cjk
+      - run: python scripts/check_studio_browser.py --output studio-review
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: studio-review-${{ github.sha }}
+          path: studio-review/
+          if-no-files-found: error
+          retention-days: 7
       - run: python scripts/check_instances_browser.py --output instance-review
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:

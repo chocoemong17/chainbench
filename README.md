@@ -24,6 +24,12 @@ Inspect changed inputs, settings and environments before reading the actual curv
 
 Development source also supports [stored numeric inputs and exact replay](docs/STORED_INPUTS.md):
 `instance generate`, `instance import`, `instance run` and `instance replay`.
+
+To choose conditions in a browser and perform new calculations, run
+`chainbench studio --lang ko` from the current development installation.
+The [experiment studio](docs/STUDIO.md) runs on your own computer, offers three
+problem families and saves standalone reports that work after it stops.
+This development command is separate from the frozen v0.6.0 downloads below.
 Save the actual arrays and starting point, inspect their trajectories, and rerun
 those same numbers. This addition is not in the frozen v0.6.0 downloads.
 

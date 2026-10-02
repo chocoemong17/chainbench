@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Add an opt-in loopback experiment studio with bilingual family/parameter/method
+  controls, actual bounded Python computation, exact numeric/HTML downloads and
+  explicit shutdown. Require Host/Origin/session-token/protocol checks, child
+  timeout/cleanup, independent installed-output audits and live/offline browser
+  validation. Require studio evidence in both distribution publication gates;
+  add an eighth targeted fault injection. [Usage and boundaries](docs/STUDIO.md).
+
 - Add sealed numeric-instance generation/import/execution/replay with explicit
   starts, strict array/provenance/resource validation and a bilingual offline
   trajectory inspector. Replay uses saved float64 arrays without a generator.

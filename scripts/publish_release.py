@@ -12,9 +12,11 @@ from pathlib import Path
 try:
     from .instance_evidence import require_stored_instances
     from .reading_release import asset_names, verify_assets
+    from .studio_evidence import require_studio
 except ImportError:  # Direct script invocation; the script directory is on sys.path.
     from instance_evidence import require_stored_instances
     from reading_release import asset_names, verify_assets
+    from studio_evidence import require_studio
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -134,7 +136,8 @@ def verified_files(version: str, sha: str) -> list[Path]:
         require_saved_comparison(comparison)
         stored = record.get("stored_instances")
         stored_scope = require_stored_instances(stored)
-        summary = (slugs, statuses, experiments, controls, advanced, comparison, stored_scope)
+        studio_scope = require_studio(record.get('studio'))
+        summary = (slugs, statuses, experiments, controls, advanced, comparison, stored_scope, studio_scope)
         if baseline is not None and summary != baseline:
             raise RuntimeError("Wheel and sdist results disagree")
         baseline = summary

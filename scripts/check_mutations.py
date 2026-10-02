@@ -1,4 +1,4 @@
-"""Seven targeted fault injections; detection is not a general mutation-coverage claim."""
+"""Eight targeted fault injections; detection is not a general mutation-coverage claim."""
 from __future__ import annotations
 
 import json
@@ -12,6 +12,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 CASES = [
+    ("missing-studio-publication-gate", "scripts/publish_release.py",
+     "studio_scope = require_studio(record.get('studio'))", "studio_scope = {}", "",
+     "tests/test_publication_evidence.py::test_missing_studio_is_rejected"),
     ("unsafe-cg-norm", "src/chainbench/methods.py", "return float(np.hypot.reduce(x))",
      "return float(np.linalg.norm(x))", "", "tests/test_audit_regressions.py::test_cg_is_invariant_to_global_system_scale"),
     ("missing-fista-momentum", "src/chainbench/methods.py",

@@ -49,6 +49,7 @@ from .reproductions import run_reproduction
 from .simplex_geometry import run_simplex_geometry, simplex_html
 from .stress import TOPICS as STRESS_TOPICS
 from .stress import run_stress, run_stress_case, stress_case_html, stress_html
+from .studio import add_studio_parser, execute_studio
 from .tour import build_tour
 from .visuals import render_check_svg
 from .wavelet_deblurring import run_wavelet_deblurring
@@ -245,6 +246,7 @@ def main(argv: list[str] | None = None) -> int:
     plot.add_argument("--force", action="store_true")
 
     add_instance_parser(sub)
+    add_studio_parser(sub)
 
     preset = sub.add_parser("preset", help="print or save an installed experiment configuration")
     preset.add_argument("name", choices=PRESETS)
@@ -373,6 +375,8 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     try:
+        if args.command == 'studio':
+            return execute_studio(args)
         if args.command == 'instance':
             return execute_instance(args, _write)
         if args.command == 'tour':
