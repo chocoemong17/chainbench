@@ -41,8 +41,10 @@ explicit starting points and the distinction between zero gap and distance to a
 selected reference. This source is merged through [PR 86](https://github.com/chocoemong17/chainbench/pull/86),
 whose nine-job gate passed 1,576 tests in each of six environments, both installed
 distributions and the full old/new browser checks. The review source tree equals
-main `9fa4a6e`; its separate main push CI is still running. This development
-addition does not alter the published v0.6.0 files below.
+main `9fa4a6e`; its [separate main push CI](https://github.com/chocoemong17/chainbench/actions/runs/36944034726)
+also passed all nine jobs, 1,576 tests per configuration and seven fault injections.
+[Main verification](cloud/instances-ca099e7/main-verification.json) retains that
+run's distinct outcomes. This development addition does not alter published v0.6.0 files.
 
 ## Earlier development reviews and cloud outputs
 

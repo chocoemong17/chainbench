@@ -25,7 +25,10 @@ on attempt 1: 1,576 tests in each of six environments, seven fault injections,
 both clean distribution installations, strict publication evidence and all
 existing/new browser and reading checks. [Verification and history](pr86-verification.json).
 The separate [main push run](https://github.com/chocoemong17/chainbench/actions/runs/36944034726)
-was still running when this PR review was archived; its outcome is tracked separately.
+also passed all nine jobs on attempt 1, including 1,576 tests in each of six environments,
+seven fault injections, both clean installs and all browser/reading checks.
+[Separate main verification](main-verification.json) retains its actual outcomes;
+these review bytes remain the earlier tested PR outputs.
 
 [The browser proof](browser-verification.json) records ten independent scalar
 and input-byte audits, eleven reports at 1440px/390px, exact keyboard-selected
