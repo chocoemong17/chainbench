@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "problem": {
+    "kind": "quadratic",
+    "Q": [
+      [
+        2,
+        1
+      ],
+      [
+        1,
+        2
+      ]
+    ],
+    "b": [
+      1,
+      -1
+    ],
+    "x_star": [
+      1,
+      -1
+    ]
+  },
+  "x0": [
+    2,
+    -1
+  ],
+  "run": {
+    "steps": 2,
+    "include_iterates": true
+  }
+}

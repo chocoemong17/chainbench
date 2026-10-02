@@ -106,3 +106,9 @@ browser checks but failed 12 Windows tests because test fixtures were decoded
 with cp1252. Explicit UTF-8 fixture reads repair this in the follow-up commit;
 [issue #74](https://github.com/chocoemong17/chainbench/issues/74) preserves the failure.
 See [PR #73](https://github.com/chocoemong17/chainbench/pull/73) for current results.
+
+The development `stored-input-review-<commit>` artifact contains ten generated or
+imported numeric instances, their actual HTML/JSON, an exact-input replay page,
+two-page review PDF and independent/browser evidence. Generation and rendering
+run on Actions. Both installed distributions repeat the numeric/input audits;
+the publication gate requires every case. [Full contract](STORED_INPUTS.md).

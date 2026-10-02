@@ -102,6 +102,15 @@ def normalize_config(config: dict) -> dict:
         })
     elif kind == "diagonal-lasso":
         problem["lam"] = _bounded(p.get("lam", .12), "lam", 0, 1e3)
+    return {"schema_version": SCHEMA_VERSION, "problem": problem,
+            **normalize_execution(raw, kind, dim)}
+
+
+def normalize_execution(raw: dict, kind: str, dim: int) -> dict:
+    """Shared bounded method settings; callers validate their own input schema."""
+    steps = count(raw.get("steps", 30), "steps")
+    if steps > MAX_STEPS:
+        raise ValueError(f"steps must not exceed {MAX_STEPS}")
     methods = raw.get("methods", list(METHODS[kind]))
     if not isinstance(methods, list) or not methods:
         raise ValueError("methods must be a nonempty list")
@@ -135,7 +144,7 @@ def normalize_config(config: dict) -> dict:
             work += steps * dim ** 3
     if work > MAX_WORK:
         raise ValueError("experiment exceeds the work limit; reduce dimension, steps or methods")
-    return {"schema_version": SCHEMA_VERSION, "problem": problem, "steps": steps,
+    return {"steps": steps,
             "methods": list(methods), "method_options": resolved, "include_iterates": include}
 
 
@@ -225,21 +234,14 @@ def _stationarity(problem, x: np.ndarray) -> float:
     return max(0., gap)
 
 
-def run_experiment(config: dict) -> dict:
-    """Run selected existing algorithms and return a JSON-serializable provenance envelope.
-
-    No network, arbitrary code, external file references, wall-clock leaderboard or
-    theorem pass/fail labels are part of this interface.
-    """
-    normalized = normalize_config(config)
-    kind, steps = normalized["problem"]["kind"], normalized["steps"]
+def observe_problem(problem, normalized: dict, *, x0: np.ndarray | None = None) -> list[dict]:
+    """Observe the existing recurrences on supplied inputs without generating a fixture."""
+    steps = normalized["steps"]
+    start = {} if x0 is None else {"x0": x0}
     dispatch = {"gd": gradient_descent, "smooth-fista": accelerated_gradient,
                 "cg": conjugate_gradient, "proximal-point": proximal_point,
                 "ista": ista, "fista": fista, "frank-wolfe": frank_wolfe}
     with np.errstate(over="raise", invalid="raise", divide="raise"):
-        problem = _problem(normalized)
-        metric = {"quadratic": "gradient_norm", "diagonal-lasso": "proximal_gradient_mapping_norm",
-                  "simplex": "frank_wolfe_gap"}[kind]
         runs = []
         for method in normalized["methods"]:
             options = normalized["method_options"].get(method, {})
@@ -249,10 +251,10 @@ def run_experiment(config: dict) -> dict:
             elif method == "frank-wolfe":
                 parameters["schedule"] = "gamma[k]=2/(k+2), k starts at 0"
             if method == "heavy-ball":
-                trace, alpha, beta = heavy_ball(problem, steps)
+                trace, alpha, beta = heavy_ball(problem, steps, **start)
                 parameters.update({"alpha": alpha, "beta": beta})
             else:
-                trace = dispatch[method](problem, steps, **options)
+                trace = dispatch[method](problem, steps, **start, **options)
             updates = len(trace.iterates) - 1
             if len(trace.values) != updates + 1 or not 0 <= updates <= steps:
                 raise ValueError("method returned a malformed trajectory")
@@ -280,6 +282,22 @@ def run_experiment(config: dict) -> dict:
                 rows.append(row)
             runs.append({"method": method, "parameters": parameters, "updates": updates,
                          "termination": termination, "rows": rows})
+    return runs
+
+
+def run_experiment(config: dict) -> dict:
+    """Run selected existing algorithms and return a JSON-serializable provenance envelope.
+
+    No network, arbitrary code, external file references, wall-clock leaderboard or
+    theorem pass/fail labels are part of this interface.
+    """
+    normalized = normalize_config(config)
+    kind = normalized["problem"]["kind"]
+    with np.errstate(over="raise", invalid="raise", divide="raise"):
+        problem = _problem(normalized)
+        runs = observe_problem(problem, normalized)
+        metric = {"quadratic": "gradient_norm", "diagonal-lasso": "proximal_gradient_mapping_norm",
+                  "simplex": "frank_wolfe_gap"}[kind]
         fixture = {"definition": "chainbench.deterministic.v1", "kind": kind,
                    "dimension": problem.dim, "input_sha256": _input_digest(problem),
                    "L": problem.L if not isinstance(problem, SimplexQuadraticProblem) else 1.,

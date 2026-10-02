@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+- Add sealed numeric-instance generation/import/execution/replay with explicit
+  starts, strict array/provenance/resource validation and a bilingual offline
+  trajectory inspector. Replay uses saved float64 arrays without a generator.
+  Preserve legacy schemas and existing solver recurrences. Include independent
+  installed-output audits, complete browser checks and mandatory publication
+  evidence with a seventh targeted fault injection. [Contract](docs/STORED_INPUTS.md).
+
 ## 0.6.0
 
 - Publish the complete 25-page offline reading ZIP and two-page PDF alongside the

@@ -2,8 +2,9 @@
 
 The v0.6.0 alpha provides the full Korean/English reading tour and a short PDF
 guide as named assets on the [GitHub release](https://github.com/chocoemong17/chainbench/releases/tag/v0.6.0).
-During release preparation these links become available only after the main-branch
-validation and publication gates finish; a version number in source is not a release.
+The [completed release gate](https://github.com/chocoemong17/chainbench/actions/runs/36934602943)
+validated and published these exact versioned files. Later source additions have
+their own CI records and are not silently included in this frozen download.
 
 1. Start with the [two-page FISTA PDF](https://github.com/chocoemong17/chainbench/releases/download/v0.6.0/chainbench-0.6.0-review.pdf).
    It introduces fixed and backtracking steps with an actual rejected proposal,

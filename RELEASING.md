@@ -33,3 +33,9 @@ python scripts/smoke_install.py
 `dist/verification.json` records what was actually installed and executed. A successful build alone is not a successful clean installation. A generated release alone is not evidence of external adoption.
 
 Technical reference for tag matching: [GitHub Git references REST API](https://docs.github.com/en/rest/git/refs). The endpoint is a prefix search; the publisher selects only the exact tag. Release enumeration uses [GitHub CLI pagination](https://cli.github.com/manual/gh_api), so a network error never implies an empty result.
+
+Development stored-input evidence is mandatory for both installed distributions:
+ten named generated/imported cases, exact input/manifest fingerprints, independent
+scalar audits, retained HTML samples and actual replay agreement. Missing,
+misordered or malformed cases fail publication; the seventh fault injection
+checks this boundary. [Workflow contract](docs/STORED_INPUTS.md).

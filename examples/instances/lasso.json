@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "problem": {
+    "kind": "diagonal-lasso",
+    "a": [
+      2,
+      -1
+    ],
+    "b": [
+      1,
+      1
+    ],
+    "lam": 0.5
+  },
+  "x0": [
+    1,
+    -1
+  ],
+  "run": {
+    "steps": 2,
+    "include_iterates": true
+  }
+}
