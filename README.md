@@ -32,6 +32,18 @@ These checks cover selected public protocols and declared synthetic inputs.
 They do not establish whole-paper reproduction, universal rankings or independent
 outside adoption. The archived snapshots below preserve their own source identities.
 
+## Latest development: exact stored-input replay
+
+[Read the two-page review PDF](cloud/instances-ca099e7/ChainBench_stored_inputs_review.pdf)
+and [download all ten input cases and eleven offline reports](cloud/instances-ca099e7/reading-review.zip).
+[Inputs, HTML copies, hashes and verification](cloud/instances-ca099e7) explain
+explicit starting points and the distinction between zero gap and distance to a
+selected reference. This source is merged through [PR 86](https://github.com/chocoemong17/chainbench/pull/86),
+whose nine-job gate passed 1,576 tests in each of six environments, both installed
+distributions and the full old/new browser checks. The review source tree equals
+main `9fa4a6e`; its separate main push CI is still running. This development
+addition does not alter the published v0.6.0 files below.
+
 ## Earlier development reviews and cloud outputs
 
 Prior verified source: [main afa81a6](https://github.com/chocoemong17/chainbench/tree/afa81a6cf33c56d955ef60a5840d2a2cb94722e4).

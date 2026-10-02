@@ -1,0 +1,4312 @@
+{
+  "pr": 86,
+  "issue": 85,
+  "base": "b22aeb16313c5ab5f2d605c25da576c5137841d6",
+  "head": "ca099e718803a07c96c73ecda736f66c6d124e16",
+  "tree": "1abac02dd4b7d2845e4ae50abf758d3bef8ef9af",
+  "run": 36941657065,
+  "status": "success",
+  "local_full_execution": false,
+  "superseded": {
+    "head": "e658aa3661bc5a86b814b5f4f548e8aaab8fde98",
+    "tree": "8c99747c51ece2cac6a77554f3012c0ebc48ae8c",
+    "tested_merge": "b19c6e45194ac855a207f0a8c7ff48a3c42a2cb1",
+    "run": 36941204569,
+    "reason": "Actual PDF inspection found repeated narrow-log distance tick labels. Final candidate uses a linear reference-distance axis and mobile scrolling guidance; numeric inputs/solvers unchanged.",
+    "last_observed_jobs": [
+      {
+        "id": 110632848081,
+        "name": "offline interactive reports browser",
+        "status": "completed",
+        "conclusion": "cancelled"
+      },
+      {
+        "id": 110632848320,
+        "name": "test (macos-26-intel, Python 3.12, current)",
+        "status": "completed",
+        "conclusion": "cancelled"
+      },
+      {
+        "id": 110632848326,
+        "name": "test (ubuntu-latest, Python 3.10, current)",
+        "status": "completed",
+        "conclusion": "cancelled"
+      },
+      {
+        "id": 110632848370,
+        "name": "test (ubuntu-latest, Python 3.11, current)",
+        "status": "completed",
+        "conclusion": "cancelled"
+      },
+      {
+        "id": 110632848418,
+        "name": "test (ubuntu-latest, Python 3.10, minimum)",
+        "status": "completed",
+        "conclusion": "cancelled"
+      },
+      {
+        "id": 110632848420,
+        "name": "test (windows-latest, Python 3.12, current)",
+        "status": "completed",
+        "conclusion": "cancelled"
+      },
+      {
+        "id": 110632848426,
+        "name": "audited offline reading assets / reading-bundle",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 110632848431,
+        "name": "test (ubuntu-latest, Python 3.12, current)",
+        "status": "completed",
+        "conclusion": "cancelled"
+      },
+      {
+        "id": 110634077442,
+        "name": "wheel and sdist clean installation",
+        "status": "completed",
+        "conclusion": "cancelled"
+      }
+    ],
+    "browser_step_passed": true,
+    "full_browser_job": "cancelled",
+    "artifact": {
+      "id": 11199809670,
+      "bytes": 1029114,
+      "sha256": "847fcff9706b92eabf214bd0ec07ec3db3ddfc999c142a09c24aec59b090f91c"
+    },
+    "visual_inspection": [
+      "two PDF pages",
+      "mobile input context",
+      "mobile scrollable gap plot"
+    ],
+    "browser_proof": {
+      "source_commit": "b19c6e45194ac855a207f0a8c7ff48a3c42a2cb1",
+      "audits": [
+        {
+          "case": "generated-quadratic-0",
+          "family": "quadratic",
+          "methods": [
+            "gd",
+            "smooth-fista",
+            "heavy-ball",
+            "cg",
+            "proximal-point"
+          ],
+          "rows": 33,
+          "numeric_audit": true,
+          "exact_inputs": true,
+          "html_samples": true,
+          "replay": "MATCH",
+          "input_sha256": "d1a0979fdaf70c194d0d45ac148951e53e1ace20c44ec0fcb19a757aba5bb060",
+          "manifest_sha256": "be96f656483796a2a1b2e3439974d555d0985f3740422e64d890ee045741b12d"
+        },
+        {
+          "case": "generated-quadratic-7",
+          "family": "quadratic",
+          "methods": [
+            "gd",
+            "smooth-fista",
+            "heavy-ball",
+            "cg",
+            "proximal-point"
+          ],
+          "rows": 33,
+          "numeric_audit": true,
+          "exact_inputs": true,
+          "html_samples": true,
+          "replay": "MATCH",
+          "input_sha256": "1555e289c0408c3e98ccac2a197a8c4c964ee477454a36ad2364cb32a3c69f72",
+          "manifest_sha256": "13ecf294b037c758ad2faea7e3635a441a000f230baa5b6eb993fff6301293ef"
+        },
+        {
+          "case": "generated-diagonal-lasso-0",
+          "family": "diagonal-lasso",
+          "methods": [
+            "ista",
+            "fista"
+          ],
+          "rows": 14,
+          "numeric_audit": true,
+          "exact_inputs": true,
+          "html_samples": true,
+          "replay": "MATCH",
+          "input_sha256": "be17c3a383000aaa2f482dcf7839581a8a8ea81549d8796280d52f060a100084",
+          "manifest_sha256": "d96a8905b7cc82680456f9e99972f36393ed60eb3ad9967fd805411f84326823"
+        },
+        {
+          "case": "generated-diagonal-lasso-7",
+          "family": "diagonal-lasso",
+          "methods": [
+            "ista",
+            "fista"
+          ],
+          "rows": 14,
+          "numeric_audit": true,
+          "exact_inputs": true,
+          "html_samples": true,
+          "replay": "MATCH",
+          "input_sha256": "9d946279a3b5b8eedf620a216700214bd33cfac517b35e78b790c27586f79dae",
+          "manifest_sha256": "e28a150bfa6eec71f99f57b7edcb29b99df24d14463c75849aec38a544b98351"
+        },
+        {
+          "case": "generated-simplex-0",
+          "family": "simplex",
+          "methods": [
+            "frank-wolfe"
+          ],
+          "rows": 7,
+          "numeric_audit": true,
+          "exact_inputs": true,
+          "html_samples": true,
+          "replay": "MATCH",
+          "input_sha256": "89109a3c73231c0a5417981e2f1725dc020cb9a86a827975a636884542a16cf0",
+          "manifest_sha256": "f68229218d5659a7fcc4ecb9c577c463b314ec456bd8f01a67dbde16a9ac4cb2"
+        },
+        {
+          "case": "generated-simplex-7",
+          "family": "simplex",
+          "methods": [
+            "frank-wolfe"
+          ],
+          "rows": 7,
+          "numeric_audit": true,
+          "exact_inputs": true,
+          "html_samples": true,
+          "replay": "MATCH",
+          "input_sha256": "8eb81aea1b7eb76a681bfcf98479676abdffc34d2d64ffa165300606a25633e5",
+          "manifest_sha256": "3717b6dbe156bf693a7ee860986086399d4267784f398c4cc00560b767ebc3a8"
+        },
+        {
+          "case": "imported-quadratic",
+          "family": "quadratic",
+          "methods": [
+            "gd",
+            "smooth-fista",
+            "heavy-ball",
+            "cg",
+            "proximal-point"
+          ],
+          "rows": 15,
+          "numeric_audit": true,
+          "exact_inputs": true,
+          "html_samples": true,
+          "replay": "MATCH",
+          "input_sha256": "a07c9509522ec19b2cac93e202d4d3f95150dda7c100acbac86a5cb55509f604",
+          "manifest_sha256": "ec830270aef51e9c2b5d174e08964cb8d37deaaafb33bc1df34a0919f559b921"
+        },
+        {
+          "case": "imported-psd",
+          "family": "quadratic",
+          "methods": [
+            "gd",
+            "smooth-fista",
+            "proximal-point"
+          ],
+          "rows": 9,
+          "numeric_audit": true,
+          "exact_inputs": true,
+          "html_samples": true,
+          "replay": "MATCH",
+          "input_sha256": "88384f21ca0637e0fe5ac65b2f41ffb523682c1b032afa03175400505a95fa26",
+          "manifest_sha256": "eb3952c8d6704b5e488defb65de4d31a5b0834ea451e6e66ea750417d662b6dc"
+        },
+        {
+          "case": "imported-lasso",
+          "family": "diagonal-lasso",
+          "methods": [
+            "ista",
+            "fista"
+          ],
+          "rows": 6,
+          "numeric_audit": true,
+          "exact_inputs": true,
+          "html_samples": true,
+          "replay": "MATCH",
+          "input_sha256": "27811725e9cb4fe9aeba65aea3a2484dfcdfc5a604f127023f2bbd4249d4f0d3",
+          "manifest_sha256": "c2a52e2c3f391254abaf41c2608e7da3f2c635a44e788fd453e868320eef3041"
+        },
+        {
+          "case": "imported-simplex",
+          "family": "simplex",
+          "methods": [
+            "frank-wolfe"
+          ],
+          "rows": 3,
+          "numeric_audit": true,
+          "exact_inputs": true,
+          "html_samples": true,
+          "replay": "MATCH",
+          "input_sha256": "aadf43436e82702639886862be8403cfb8bb838d1597dabef1a67b0f5f1adada",
+          "manifest_sha256": "c5083c15e8bbd086d4f1cb49c744e91abd8653d502f45572f79ad53674e40f6d"
+        }
+      ],
+      "viewports": [
+        {
+          "case": "generated-quadratic-0",
+          "width": 1440,
+          "plots": 3,
+          "methods": 5,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "generated-quadratic-7",
+          "width": 1440,
+          "plots": 3,
+          "methods": 5,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "generated-diagonal-lasso-0",
+          "width": 1440,
+          "plots": 3,
+          "methods": 2,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "generated-diagonal-lasso-7",
+          "width": 1440,
+          "plots": 3,
+          "methods": 2,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "generated-simplex-0",
+          "width": 1440,
+          "plots": 3,
+          "methods": 1,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "generated-simplex-7",
+          "width": 1440,
+          "plots": 3,
+          "methods": 1,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "imported-quadratic",
+          "width": 1440,
+          "plots": 3,
+          "methods": 5,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "imported-psd",
+          "width": 1440,
+          "plots": 3,
+          "methods": 3,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "imported-lasso",
+          "width": 1440,
+          "plots": 3,
+          "methods": 2,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "imported-simplex",
+          "width": 1440,
+          "plots": 3,
+          "methods": 1,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "replay",
+          "width": 1440,
+          "plots": 3,
+          "methods": 5,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "generated-quadratic-0",
+          "width": 390,
+          "plots": 3,
+          "methods": 5,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "generated-quadratic-7",
+          "width": 390,
+          "plots": 3,
+          "methods": 5,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "generated-diagonal-lasso-0",
+          "width": 390,
+          "plots": 3,
+          "methods": 2,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "generated-diagonal-lasso-7",
+          "width": 390,
+          "plots": 3,
+          "methods": 2,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "generated-simplex-0",
+          "width": 390,
+          "plots": 3,
+          "methods": 1,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "generated-simplex-7",
+          "width": 390,
+          "plots": 3,
+          "methods": 1,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "imported-quadratic",
+          "width": 390,
+          "plots": 3,
+          "methods": 5,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "imported-psd",
+          "width": 390,
+          "plots": 3,
+          "methods": 3,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "imported-lasso",
+          "width": 390,
+          "plots": 3,
+          "methods": 2,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "imported-simplex",
+          "width": 390,
+          "plots": 3,
+          "methods": 1,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "replay",
+          "width": 390,
+          "plots": 3,
+          "methods": 5,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        }
+      ],
+      "network_requests": [],
+      "javascript_errors": [],
+      "browser": "153.0.8010.12",
+      "no_script": {
+        "reports": 11,
+        "static_plots_and_input_details": true
+      },
+      "pdf": {
+        "pages": 2,
+        "final_section_present": true
+      },
+      "files": {
+        "ChainBench_stored_inputs_review.pdf": {
+          "bytes": 219828,
+          "sha256": "b8596a798117a5d12a1a2f8c1068b431b32a89fad04aba8b4cc7a26ae69d72c3"
+        },
+        "generated-diagonal-lasso-0-download-1440.json": {
+          "bytes": 7993,
+          "sha256": "7de4f9e722e96b7dd7ffeef671dd8048f4e6e1546a82e6a36219c861b79ae9c8"
+        },
+        "generated-diagonal-lasso-0-download-390.json": {
+          "bytes": 7993,
+          "sha256": "7de4f9e722e96b7dd7ffeef671dd8048f4e6e1546a82e6a36219c861b79ae9c8"
+        },
+        "generated-diagonal-lasso-0-input.json": {
+          "bytes": 751,
+          "sha256": "1b41fb97decaf05938c581a69abef7fe01483c43744b5938b6c085bebfd33134"
+        },
+        "generated-diagonal-lasso-0-result.json": {
+          "bytes": 5204,
+          "sha256": "447c1487022f9373d283b1e44140d8abec2f7272217f6ba8eeb67603ff7846dc"
+        },
+        "generated-diagonal-lasso-0.html": {
+          "bytes": 41801,
+          "sha256": "403b5414bf981ad6cc54fc2348101837f596f2699b1739ea449e59ee43fd83bc"
+        },
+        "generated-diagonal-lasso-7-download-1440.json": {
+          "bytes": 8079,
+          "sha256": "f72c03616ddb566a02dcc5bc845ba15e948e9a14b0967243b51d04778256089d"
+        },
+        "generated-diagonal-lasso-7-download-390.json": {
+          "bytes": 8079,
+          "sha256": "f72c03616ddb566a02dcc5bc845ba15e948e9a14b0967243b51d04778256089d"
+        },
+        "generated-diagonal-lasso-7-input.json": {
+          "bytes": 754,
+          "sha256": "fdeb4ce6489eb732a402b5529a73021580984609100393e7f3a41d62e53b4b6f"
+        },
+        "generated-diagonal-lasso-7-result.json": {
+          "bytes": 5290,
+          "sha256": "fcf0f63d775456c810276481f3eda97efd60f5743f614c8f532d485eb6efdb87"
+        },
+        "generated-diagonal-lasso-7.html": {
+          "bytes": 41318,
+          "sha256": "2c303b0346f2c3ca3f7e188c9c66256d7ffbeb9fce6e749a7da11ee51c25093b"
+        },
+        "generated-quadratic-0-download-1440.json": {
+          "bytes": 17038,
+          "sha256": "2e7c5005e76784354ed4074b3a478c44ffc5d830441183c7ca3253871343beb8"
+        },
+        "generated-quadratic-0-download-390.json": {
+          "bytes": 17038,
+          "sha256": "2e7c5005e76784354ed4074b3a478c44ffc5d830441183c7ca3253871343beb8"
+        },
+        "generated-quadratic-0-input.json": {
+          "bytes": 1210,
+          "sha256": "0120d3aea3356c4a3ea52ed28aac3d8b4519a2854f042ae12e5c4d134d24258d"
+        },
+        "generated-quadratic-0-result.json": {
+          "bytes": 10717,
+          "sha256": "c702d316b7a6f6a16db5cf5b3b964a227a918fa73fdee4845c85b51e89d9b8ea"
+        },
+        "generated-quadratic-0.html": {
+          "bytes": 61605,
+          "sha256": "a1dc4eec83acab7ca87c2f9f34368e8aacf4a414ca654090a68d15155530d540"
+        },
+        "generated-quadratic-7-download-1440.json": {
+          "bytes": 17017,
+          "sha256": "8a69dd14453d62d86a14d48459c07ae8604a15d6da193c34f14e7468bff464a1"
+        },
+        "generated-quadratic-7-download-390.json": {
+          "bytes": 17017,
+          "sha256": "8a69dd14453d62d86a14d48459c07ae8604a15d6da193c34f14e7468bff464a1"
+        },
+        "generated-quadratic-7-input.json": {
+          "bytes": 1206,
+          "sha256": "6ecfbd9b77dad4224da58247de3ff23464659e9cf15a84a89b8c4434aa639702"
+        },
+        "generated-quadratic-7-result.json": {
+          "bytes": 10696,
+          "sha256": "962345533942cd85ecc6a57133b382d3e6efedf03d4cf168bfd86645c5e05114"
+        },
+        "generated-quadratic-7.html": {
+          "bytes": 61274,
+          "sha256": "573f085064deccc1c435e37e1f258471f364f41abfe7828acbc757d1f830e17d"
+        },
+        "generated-simplex-0-download-1440.json": {
+          "bytes": 4695,
+          "sha256": "c827dbdef5318943a230243c5337ab59d101d83c3dc8f14797c381d49226f2ed"
+        },
+        "generated-simplex-0-download-390.json": {
+          "bytes": 4695,
+          "sha256": "c827dbdef5318943a230243c5337ab59d101d83c3dc8f14797c381d49226f2ed"
+        },
+        "generated-simplex-0-input.json": {
+          "bytes": 638,
+          "sha256": "7dcb2822802f9501b9a42d49d0584a042afffe6d9ea24eb4df5929ffd3d08634"
+        },
+        "generated-simplex-0-result.json": {
+          "bytes": 3129,
+          "sha256": "330aff1516ecba6ea5a45a51dac3404c7e22039512dc1a6d397bbf25ac3ac9fe"
+        },
+        "generated-simplex-0.html": {
+          "bytes": 35846,
+          "sha256": "00841b928de58063909d175b2a69ca7f9e3910f691541d110b1354bf2e0fcffd"
+        },
+        "generated-simplex-7-download-1440.json": {
+          "bytes": 4702,
+          "sha256": "22fa63b192f4cb609d444b386c365f43db5649661e2dad1b6129f1d2ea72c78b"
+        },
+        "generated-simplex-7-download-390.json": {
+          "bytes": 4702,
+          "sha256": "22fa63b192f4cb609d444b386c365f43db5649661e2dad1b6129f1d2ea72c78b"
+        },
+        "generated-simplex-7-input.json": {
+          "bytes": 641,
+          "sha256": "962ba97954718de54f7da4c1a4102432cf0b3b345bafd872e7f185b8203adede"
+        },
+        "generated-simplex-7-result.json": {
+          "bytes": 3136,
+          "sha256": "a8748132509aa8e2f58010e17d287affed8e046ea73dac24f179e51dd812257d"
+        },
+        "generated-simplex-7.html": {
+          "bytes": 35859,
+          "sha256": "c58c08bcbc00f79110d0816d645c6288d0ae2f243baeb46769f998fa1efcdf68"
+        },
+        "imported-lasso-download-1440.json": {
+          "bytes": 3567,
+          "sha256": "38b25be8c39835529d13e506a9051b33081f4a56b527682cbf4b0a80754d2ecc"
+        },
+        "imported-lasso-download-390.json": {
+          "bytes": 3567,
+          "sha256": "38b25be8c39835529d13e506a9051b33081f4a56b527682cbf4b0a80754d2ecc"
+        },
+        "imported-lasso-input.json": {
+          "bytes": 426,
+          "sha256": "cb180ec8efba38d8a37c749f907c68d769662270e12d2dd3bb5f1ee02c056c3d"
+        },
+        "imported-lasso-raw.json": {
+          "bytes": 161,
+          "sha256": "3136cd7b8f4252e7805d372d5b6f453d419f941d695de64c8fe9ff2183cc2df2"
+        },
+        "imported-lasso-result.json": {
+          "bytes": 2285,
+          "sha256": "25d8fbcfab0561b093a304ca41943a46c3493d0804698147adda9ad9b5ecc3db"
+        },
+        "imported-lasso.html": {
+          "bytes": 35499,
+          "sha256": "a78c21b17c2d9aa010e1e737fb446083823e2d14938bc039ec3c96bab8e1a1ce"
+        },
+        "imported-psd-context-1440.png": {
+          "bytes": 62908,
+          "sha256": "021853beb186a4045636050910308c1a194cdde4a4c4f966f17ac5502018e4ff"
+        },
+        "imported-psd-context-390.png": {
+          "bytes": 61025,
+          "sha256": "4b5a804c51d8c904fd66e4c3999b346be0a2b9b6b4fca1746692e51affaa6f8e"
+        },
+        "imported-psd-download-1440.json": {
+          "bytes": 4680,
+          "sha256": "193c1744be7ecf781c77efde8f242cdc356aaaddec005ff4b8ac0f24d21c99b1"
+        },
+        "imported-psd-download-390.json": {
+          "bytes": 4680,
+          "sha256": "193c1744be7ecf781c77efde8f242cdc356aaaddec005ff4b8ac0f24d21c99b1"
+        },
+        "imported-psd-gap-1440.png": {
+          "bytes": 41516,
+          "sha256": "1931b184d03b384fb8d37d492f6ce8b6157bd4897c979ee044f8b2f3f8e7ef86"
+        },
+        "imported-psd-gap-390.png": {
+          "bytes": 13242,
+          "sha256": "b3027cf4994fc806a0e67092da3bde6488ef1c6d920f44425e0b765e40121ac7"
+        },
+        "imported-psd-input.json": {
+          "bytes": 507,
+          "sha256": "41bede3f12210d18e821ab9ba6adbcc474220ea22803426a1bc55857e7da50a9"
+        },
+        "imported-psd-raw.json": {
+          "bytes": 225,
+          "sha256": "0eac25bfadcd5f89d5fa7dda473600586a50a10169f35f8165ed45727dfae609"
+        },
+        "imported-psd-result.json": {
+          "bytes": 2809,
+          "sha256": "a3f4c425821bc7c4cad3d0c4c788b69a5ad3497b84f3f371b591a760c9613e1f"
+        },
+        "imported-psd.html": {
+          "bytes": 39792,
+          "sha256": "89571cf7c407d06a9bfcfd9036207419f10aaf7051fd7c8f042e549060ee018b"
+        },
+        "imported-quadratic-context-1440.png": {
+          "bytes": 63137,
+          "sha256": "4c0de88510a78862d8c74469864f797cc67a9d5af76494b3032328130e64bb6d"
+        },
+        "imported-quadratic-context-390.png": {
+          "bytes": 61000,
+          "sha256": "22f8279180fb530912c33c11e8465f6327c46a884adf13bffc494b6aaeb39b16"
+        },
+        "imported-quadratic-download-1440.json": {
+          "bytes": 7423,
+          "sha256": "96e75651a10dce37072c03b0a027d6cede78d5ecfc24d6170c1c22214567fb79"
+        },
+        "imported-quadratic-download-390.json": {
+          "bytes": 7423,
+          "sha256": "96e75651a10dce37072c03b0a027d6cede78d5ecfc24d6170c1c22214567fb79"
+        },
+        "imported-quadratic-gap-1440.png": {
+          "bytes": 52425,
+          "sha256": "9a6fade2d78f1ba626887eedf1d60652adf9d13d84032f1829659d9204ce28a3"
+        },
+        "imported-quadratic-gap-390.png": {
+          "bytes": 13722,
+          "sha256": "710db862be1d54a8e6f8a15c247a9688c01c64996b6cb02daaa33b3e7879b47e"
+        },
+        "imported-quadratic-input.json": {
+          "bytes": 557,
+          "sha256": "25d9e219272a1cf952e929f83d725091f70e62d599b64f74993afdc55ebb7b22"
+        },
+        "imported-quadratic-raw.json": {
+          "bytes": 173,
+          "sha256": "accec43fc0d29b5d92d3426fadee7c6df804e52b582fef0a35cb86db794318d3"
+        },
+        "imported-quadratic-result.json": {
+          "bytes": 4551,
+          "sha256": "6e049b18e29e2d9fb4fdcb9451b152250c1a2f224a8615042f454e4131ab179c"
+        },
+        "imported-quadratic.html": {
+          "bytes": 47307,
+          "sha256": "1d18aceeac7e91d9221aa1affef60dd55d188512231c7f1ff7c4af5add7df4aa"
+        },
+        "imported-simplex-download-1440.json": {
+          "bytes": 2566,
+          "sha256": "d25c3d1d1512e89810c4c913459b3028a1925ad7cdd3d3e0f3694629da38ccda"
+        },
+        "imported-simplex-download-390.json": {
+          "bytes": 2566,
+          "sha256": "d25c3d1d1512e89810c4c913459b3028a1925ad7cdd3d3e0f3694629da38ccda"
+        },
+        "imported-simplex-input.json": {
+          "bytes": 399,
+          "sha256": "4f22a8dde5d8a582c42a721cb42a990d737912fd3c90cdd0d0747f54249a1e23"
+        },
+        "imported-simplex-raw.json": {
+          "bytes": 142,
+          "sha256": "2c2973ec0c52db692a0376492a6fe3a794e274293c8833866764f178cb9f3b67"
+        },
+        "imported-simplex-result.json": {
+          "bytes": 1789,
+          "sha256": "070e1689def5651e39a4b09830b41f42547adc60bfbacb11973d1bfb7cbd569e"
+        },
+        "imported-simplex.html": {
+          "bytes": 32280,
+          "sha256": "c26b6e85dee0cdea08ce4aba1c66b35ac15deaec652548b0e47ee3b51c44eaf6"
+        },
+        "psd-distance.png": {
+          "bytes": 51299,
+          "sha256": "14fec030c83532715a8de24960d9e421e9f1a71c5d43fb0c37ac193323b1bea4"
+        },
+        "replay-download-1440.json": {
+          "bytes": 8881,
+          "sha256": "1d38061771987d18264c17526fef92b5ee16da40280d31a3b4919b4f89a06fe3"
+        },
+        "replay-download-390.json": {
+          "bytes": 8881,
+          "sha256": "1d38061771987d18264c17526fef92b5ee16da40280d31a3b4919b4f89a06fe3"
+        },
+        "replay.html": {
+          "bytes": 50052,
+          "sha256": "0844fae089ab58c001acb5910d72a93bf53390c57253e1e0b253112d08797fd6"
+        },
+        "review-page-1.png": {
+          "bytes": 71173,
+          "sha256": "6d2482080794388603678e794715888516fb465d7d7e73f7a7d915680bf885e4"
+        },
+        "review-page-2.png": {
+          "bytes": 81951,
+          "sha256": "a74d05738a9c18770c17a9a54351b403a894c25a4de3957427888ee69b6991d1"
+        },
+        "review.html": {
+          "bytes": 140895,
+          "sha256": "694b5d3838d70684265811ac1d0048e7e66fa52fb4f75ebb01c48cc1c50ccd3c"
+        }
+      }
+    },
+    "reading": {
+      "id": 110632848426,
+      "status": "success",
+      "actual_completed_log_read": true,
+      "source": "b19c6e45194ac855a207f0a8c7ff48a3c42a2cb1",
+      "html_pages": 25,
+      "numerical_records": 24,
+      "pdf_pages": 2
+    },
+    "cancelled_linux_log_read": true,
+    "cancelled_linux_log_note": "Partial pytest progress had no printed failures before cancellation; the full suite did not complete."
+  },
+  "last_checked": "2026-10-02T00:05:24.113009+00:00",
+  "tested_merge": "2eeeb0825b63ee3c9a01cb2c08f849bf37f719e5",
+  "tested_merge_tree_matches_head": true,
+  "final_browser_step": {
+    "status": "success",
+    "artifact": {
+      "id": 11200570725,
+      "name": "stored-input-review-2eeeb0825b63ee3c9a01cb2c08f849bf37f719e5",
+      "size_in_bytes": 989213,
+      "url": "https://api.github.com/repos/chocoemong17/chainbench/actions/artifacts/11200570725",
+      "archive_download_url": "https://api.github.com/repos/chocoemong17/chainbench/actions/artifacts/11200570725/zip",
+      "expired": false,
+      "created_at": "2026-10-01T23:38:29Z",
+      "expires_at": "2026-10-08T23:38:28Z",
+      "updated_at": "2026-10-01T23:38:29Z",
+      "digest": "sha256:03bbdb25bd68b923ad3b4ca03bc635efbdfb0598a157780089f80728c6adbb1b",
+      "workflow_run": {
+        "id": 36941657065,
+        "repository_id": 1392555473,
+        "head_repository_id": 1392555473,
+        "head_branch": "feat/stored-input-replay",
+        "head_sha": "ca099e718803a07c96c73ecda736f66c6d124e16"
+      }
+    },
+    "all_member_hashes_verified": true,
+    "expanded_bytes": 1627076,
+    "proof": {
+      "source_commit": "2eeeb0825b63ee3c9a01cb2c08f849bf37f719e5",
+      "audits": [
+        {
+          "case": "generated-quadratic-0",
+          "family": "quadratic",
+          "methods": [
+            "gd",
+            "smooth-fista",
+            "heavy-ball",
+            "cg",
+            "proximal-point"
+          ],
+          "rows": 33,
+          "numeric_audit": true,
+          "exact_inputs": true,
+          "html_samples": true,
+          "replay": "MATCH",
+          "input_sha256": "1b5fbd31926e3b7a33b056780a0b09099bebd7be87dbcbd6e6bb3f6a39db3959",
+          "manifest_sha256": "6a318f0276d4e420d58f49a64ebe112a00c3fb4dd0f1642d765c1c1d4940aa4d"
+        },
+        {
+          "case": "generated-quadratic-7",
+          "family": "quadratic",
+          "methods": [
+            "gd",
+            "smooth-fista",
+            "heavy-ball",
+            "cg",
+            "proximal-point"
+          ],
+          "rows": 33,
+          "numeric_audit": true,
+          "exact_inputs": true,
+          "html_samples": true,
+          "replay": "MATCH",
+          "input_sha256": "233b4040d2ffddc7eb1e3bd8e2df303f3c4bd7188f0474b39f1f3df5ea531882",
+          "manifest_sha256": "d7ba39a1e54224fea0b4cbd2f5584806e6b5056b4ab604bd0705e79345920236"
+        },
+        {
+          "case": "generated-diagonal-lasso-0",
+          "family": "diagonal-lasso",
+          "methods": [
+            "ista",
+            "fista"
+          ],
+          "rows": 14,
+          "numeric_audit": true,
+          "exact_inputs": true,
+          "html_samples": true,
+          "replay": "MATCH",
+          "input_sha256": "be17c3a383000aaa2f482dcf7839581a8a8ea81549d8796280d52f060a100084",
+          "manifest_sha256": "d96a8905b7cc82680456f9e99972f36393ed60eb3ad9967fd805411f84326823"
+        },
+        {
+          "case": "generated-diagonal-lasso-7",
+          "family": "diagonal-lasso",
+          "methods": [
+            "ista",
+            "fista"
+          ],
+          "rows": 14,
+          "numeric_audit": true,
+          "exact_inputs": true,
+          "html_samples": true,
+          "replay": "MATCH",
+          "input_sha256": "9d946279a3b5b8eedf620a216700214bd33cfac517b35e78b790c27586f79dae",
+          "manifest_sha256": "e28a150bfa6eec71f99f57b7edcb29b99df24d14463c75849aec38a544b98351"
+        },
+        {
+          "case": "generated-simplex-0",
+          "family": "simplex",
+          "methods": [
+            "frank-wolfe"
+          ],
+          "rows": 7,
+          "numeric_audit": true,
+          "exact_inputs": true,
+          "html_samples": true,
+          "replay": "MATCH",
+          "input_sha256": "89109a3c73231c0a5417981e2f1725dc020cb9a86a827975a636884542a16cf0",
+          "manifest_sha256": "f68229218d5659a7fcc4ecb9c577c463b314ec456bd8f01a67dbde16a9ac4cb2"
+        },
+        {
+          "case": "generated-simplex-7",
+          "family": "simplex",
+          "methods": [
+            "frank-wolfe"
+          ],
+          "rows": 7,
+          "numeric_audit": true,
+          "exact_inputs": true,
+          "html_samples": true,
+          "replay": "MATCH",
+          "input_sha256": "8eb81aea1b7eb76a681bfcf98479676abdffc34d2d64ffa165300606a25633e5",
+          "manifest_sha256": "3717b6dbe156bf693a7ee860986086399d4267784f398c4cc00560b767ebc3a8"
+        },
+        {
+          "case": "imported-quadratic",
+          "family": "quadratic",
+          "methods": [
+            "gd",
+            "smooth-fista",
+            "heavy-ball",
+            "cg",
+            "proximal-point"
+          ],
+          "rows": 15,
+          "numeric_audit": true,
+          "exact_inputs": true,
+          "html_samples": true,
+          "replay": "MATCH",
+          "input_sha256": "a07c9509522ec19b2cac93e202d4d3f95150dda7c100acbac86a5cb55509f604",
+          "manifest_sha256": "ec830270aef51e9c2b5d174e08964cb8d37deaaafb33bc1df34a0919f559b921"
+        },
+        {
+          "case": "imported-psd",
+          "family": "quadratic",
+          "methods": [
+            "gd",
+            "smooth-fista",
+            "proximal-point"
+          ],
+          "rows": 9,
+          "numeric_audit": true,
+          "exact_inputs": true,
+          "html_samples": true,
+          "replay": "MATCH",
+          "input_sha256": "88384f21ca0637e0fe5ac65b2f41ffb523682c1b032afa03175400505a95fa26",
+          "manifest_sha256": "eb3952c8d6704b5e488defb65de4d31a5b0834ea451e6e66ea750417d662b6dc"
+        },
+        {
+          "case": "imported-lasso",
+          "family": "diagonal-lasso",
+          "methods": [
+            "ista",
+            "fista"
+          ],
+          "rows": 6,
+          "numeric_audit": true,
+          "exact_inputs": true,
+          "html_samples": true,
+          "replay": "MATCH",
+          "input_sha256": "27811725e9cb4fe9aeba65aea3a2484dfcdfc5a604f127023f2bbd4249d4f0d3",
+          "manifest_sha256": "c2a52e2c3f391254abaf41c2608e7da3f2c635a44e788fd453e868320eef3041"
+        },
+        {
+          "case": "imported-simplex",
+          "family": "simplex",
+          "methods": [
+            "frank-wolfe"
+          ],
+          "rows": 3,
+          "numeric_audit": true,
+          "exact_inputs": true,
+          "html_samples": true,
+          "replay": "MATCH",
+          "input_sha256": "aadf43436e82702639886862be8403cfb8bb838d1597dabef1a67b0f5f1adada",
+          "manifest_sha256": "c5083c15e8bbd086d4f1cb49c744e91abd8653d502f45572f79ad53674e40f6d"
+        }
+      ],
+      "viewports": [
+        {
+          "case": "generated-quadratic-0",
+          "width": 1440,
+          "plots": 3,
+          "methods": 5,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "generated-quadratic-7",
+          "width": 1440,
+          "plots": 3,
+          "methods": 5,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "generated-diagonal-lasso-0",
+          "width": 1440,
+          "plots": 3,
+          "methods": 2,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "generated-diagonal-lasso-7",
+          "width": 1440,
+          "plots": 3,
+          "methods": 2,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "generated-simplex-0",
+          "width": 1440,
+          "plots": 3,
+          "methods": 1,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "generated-simplex-7",
+          "width": 1440,
+          "plots": 3,
+          "methods": 1,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "imported-quadratic",
+          "width": 1440,
+          "plots": 3,
+          "methods": 5,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "imported-psd",
+          "width": 1440,
+          "plots": 3,
+          "methods": 3,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "imported-lasso",
+          "width": 1440,
+          "plots": 3,
+          "methods": 2,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "imported-simplex",
+          "width": 1440,
+          "plots": 3,
+          "methods": 1,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "replay",
+          "width": 1440,
+          "plots": 3,
+          "methods": 5,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "generated-quadratic-0",
+          "width": 390,
+          "plots": 3,
+          "methods": 5,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "generated-quadratic-7",
+          "width": 390,
+          "plots": 3,
+          "methods": 5,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "generated-diagonal-lasso-0",
+          "width": 390,
+          "plots": 3,
+          "methods": 2,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "generated-diagonal-lasso-7",
+          "width": 390,
+          "plots": 3,
+          "methods": 2,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "generated-simplex-0",
+          "width": 390,
+          "plots": 3,
+          "methods": 1,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "generated-simplex-7",
+          "width": 390,
+          "plots": 3,
+          "methods": 1,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "imported-quadratic",
+          "width": 390,
+          "plots": 3,
+          "methods": 5,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "imported-psd",
+          "width": 390,
+          "plots": 3,
+          "methods": 3,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "imported-lasso",
+          "width": 390,
+          "plots": 3,
+          "methods": 2,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "imported-simplex",
+          "width": 390,
+          "plots": 3,
+          "methods": 1,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "replay",
+          "width": 390,
+          "plots": 3,
+          "methods": 5,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        }
+      ],
+      "network_requests": [],
+      "javascript_errors": [],
+      "browser": "153.0.8010.12",
+      "no_script": {
+        "reports": 11,
+        "static_plots_and_input_details": true
+      },
+      "pdf": {
+        "pages": 2,
+        "final_section_present": true
+      },
+      "files": {
+        "ChainBench_stored_inputs_review.pdf": {
+          "bytes": 210328,
+          "sha256": "7f9b2f36c978e9483f9da27bcb7031bea070f7dcef9b99220b7b7f7857244529"
+        },
+        "generated-diagonal-lasso-0-download-1440.json": {
+          "bytes": 7990,
+          "sha256": "b06f6351ce852372ad4c4d32090597dcc6b9e389f578695a630eb3c671654d90"
+        },
+        "generated-diagonal-lasso-0-download-390.json": {
+          "bytes": 7990,
+          "sha256": "b06f6351ce852372ad4c4d32090597dcc6b9e389f578695a630eb3c671654d90"
+        },
+        "generated-diagonal-lasso-0-input.json": {
+          "bytes": 751,
+          "sha256": "1b41fb97decaf05938c581a69abef7fe01483c43744b5938b6c085bebfd33134"
+        },
+        "generated-diagonal-lasso-0-result.json": {
+          "bytes": 5201,
+          "sha256": "1cfbb62367b3ad07c32ce33fbfb92f9e13724704be6be8605b687c1bc7e03bec"
+        },
+        "generated-diagonal-lasso-0.html": {
+          "bytes": 42182,
+          "sha256": "bd7298a72086ef1a817298979a012f7cfcedd9fdd2407d3bd93f7e53be716db1"
+        },
+        "generated-diagonal-lasso-7-download-1440.json": {
+          "bytes": 8079,
+          "sha256": "f72c03616ddb566a02dcc5bc845ba15e948e9a14b0967243b51d04778256089d"
+        },
+        "generated-diagonal-lasso-7-download-390.json": {
+          "bytes": 8079,
+          "sha256": "f72c03616ddb566a02dcc5bc845ba15e948e9a14b0967243b51d04778256089d"
+        },
+        "generated-diagonal-lasso-7-input.json": {
+          "bytes": 754,
+          "sha256": "fdeb4ce6489eb732a402b5529a73021580984609100393e7f3a41d62e53b4b6f"
+        },
+        "generated-diagonal-lasso-7-result.json": {
+          "bytes": 5290,
+          "sha256": "fcf0f63d775456c810276481f3eda97efd60f5743f614c8f532d485eb6efdb87"
+        },
+        "generated-diagonal-lasso-7.html": {
+          "bytes": 42166,
+          "sha256": "2612e38bef13da9caa9dff4dfcffd08a50eba4ddc351ecbf5591b8a6792f2bf0"
+        },
+        "generated-quadratic-0-download-1440.json": {
+          "bytes": 17032,
+          "sha256": "f088dfd729061d04f5f231cb8a5c2e1b368dfa5658b7ac19c006f54adf7f0bfd"
+        },
+        "generated-quadratic-0-download-390.json": {
+          "bytes": 17032,
+          "sha256": "f088dfd729061d04f5f231cb8a5c2e1b368dfa5658b7ac19c006f54adf7f0bfd"
+        },
+        "generated-quadratic-0-input.json": {
+          "bytes": 1214,
+          "sha256": "68fb61b27f1803b871a9563a43ac4e20dae5a50421bfc6868cf8b23ab38e76e3"
+        },
+        "generated-quadratic-0-result.json": {
+          "bytes": 10711,
+          "sha256": "d351cc5daf264871545284bbb56764d3c564fb8edc6f4fab10668f5c4daccb19"
+        },
+        "generated-quadratic-0.html": {
+          "bytes": 61825,
+          "sha256": "3c0b38f8a4166099fe436ab6bc5b8b44494a8d4c38d9e277fdcff953ceb525ea"
+        },
+        "generated-quadratic-7-download-1440.json": {
+          "bytes": 16948,
+          "sha256": "756be07a1bd695dba0ef4d6c1d7797b93cbc099c278e3774bcc2c8564a78da7d"
+        },
+        "generated-quadratic-7-download-390.json": {
+          "bytes": 16948,
+          "sha256": "756be07a1bd695dba0ef4d6c1d7797b93cbc099c278e3774bcc2c8564a78da7d"
+        },
+        "generated-quadratic-7-input.json": {
+          "bytes": 1206,
+          "sha256": "c6018abd43f0a4866b415e1f00d4ee290de989771f0a9a0ba85a702aad7246f5"
+        },
+        "generated-quadratic-7-result.json": {
+          "bytes": 10627,
+          "sha256": "71b73d97d1062a68c66aabde6555c587ce5f748d302c411cb1fe713e03fbe2d9"
+        },
+        "generated-quadratic-7.html": {
+          "bytes": 61555,
+          "sha256": "e5008845dde7ab6a9b46a0089fad6f1148d5b728dad43999b1b7ffb492810500"
+        },
+        "generated-simplex-0-download-1440.json": {
+          "bytes": 4695,
+          "sha256": "07637e8e7736a317cac1e745ebd9b9cfecac7e0ee9d1e40145759026f7d4e006"
+        },
+        "generated-simplex-0-download-390.json": {
+          "bytes": 4695,
+          "sha256": "07637e8e7736a317cac1e745ebd9b9cfecac7e0ee9d1e40145759026f7d4e006"
+        },
+        "generated-simplex-0-input.json": {
+          "bytes": 638,
+          "sha256": "7dcb2822802f9501b9a42d49d0584a042afffe6d9ea24eb4df5929ffd3d08634"
+        },
+        "generated-simplex-0-result.json": {
+          "bytes": 3129,
+          "sha256": "06bd871196a63064ff1b7e6f1c5dc7dd10e6532e1cdca8e8b1c338a69ba53060"
+        },
+        "generated-simplex-0.html": {
+          "bytes": 36230,
+          "sha256": "7a1bbc36ab6e02dd4508fdb9db7f695febd4c5aa7ffb047c69823527b21f88b1"
+        },
+        "generated-simplex-7-download-1440.json": {
+          "bytes": 4703,
+          "sha256": "71f47aeec6052eb8f79ac84f95837c61515503a608c1bf6c7790fb50a2ff4eeb"
+        },
+        "generated-simplex-7-download-390.json": {
+          "bytes": 4703,
+          "sha256": "71f47aeec6052eb8f79ac84f95837c61515503a608c1bf6c7790fb50a2ff4eeb"
+        },
+        "generated-simplex-7-input.json": {
+          "bytes": 641,
+          "sha256": "962ba97954718de54f7da4c1a4102432cf0b3b345bafd872e7f185b8203adede"
+        },
+        "generated-simplex-7-result.json": {
+          "bytes": 3137,
+          "sha256": "2c18b3e21cc95f1e08736c310e74f57a7a8a2863f7198d3aad222e40c3b4ae84"
+        },
+        "generated-simplex-7.html": {
+          "bytes": 36245,
+          "sha256": "1c0c4137396334590cb0b6ee781d6080d05dff1185bee69d84f71d90ec8570aa"
+        },
+        "imported-lasso-download-1440.json": {
+          "bytes": 3567,
+          "sha256": "38b25be8c39835529d13e506a9051b33081f4a56b527682cbf4b0a80754d2ecc"
+        },
+        "imported-lasso-download-390.json": {
+          "bytes": 3567,
+          "sha256": "38b25be8c39835529d13e506a9051b33081f4a56b527682cbf4b0a80754d2ecc"
+        },
+        "imported-lasso-input.json": {
+          "bytes": 426,
+          "sha256": "cb180ec8efba38d8a37c749f907c68d769662270e12d2dd3bb5f1ee02c056c3d"
+        },
+        "imported-lasso-raw.json": {
+          "bytes": 161,
+          "sha256": "3136cd7b8f4252e7805d372d5b6f453d419f941d695de64c8fe9ff2183cc2df2"
+        },
+        "imported-lasso-result.json": {
+          "bytes": 2285,
+          "sha256": "25d8fbcfab0561b093a304ca41943a46c3493d0804698147adda9ad9b5ecc3db"
+        },
+        "imported-lasso.html": {
+          "bytes": 35883,
+          "sha256": "f2d938568cc1236c829fd822401430fd3a23d04604dcf52d6d6e799d109f4b70"
+        },
+        "imported-psd-context-1440.png": {
+          "bytes": 62927,
+          "sha256": "cf4b8e48f2455676cff252c48a0c2f5f64d8fb6ba14d2599c3a260821fdec4d2"
+        },
+        "imported-psd-context-390.png": {
+          "bytes": 61064,
+          "sha256": "596a2e02045375d3c24c0324020508866237cfc7994ad25ad77104519dd38d03"
+        },
+        "imported-psd-download-1440.json": {
+          "bytes": 4680,
+          "sha256": "193c1744be7ecf781c77efde8f242cdc356aaaddec005ff4b8ac0f24d21c99b1"
+        },
+        "imported-psd-download-390.json": {
+          "bytes": 4680,
+          "sha256": "193c1744be7ecf781c77efde8f242cdc356aaaddec005ff4b8ac0f24d21c99b1"
+        },
+        "imported-psd-gap-1440.png": {
+          "bytes": 41532,
+          "sha256": "bbead62610a8f718e67b94a98d92e125b59fdf29e6cc548b6c22764abe60fd23"
+        },
+        "imported-psd-gap-390.png": {
+          "bytes": 13254,
+          "sha256": "f43fda1ae663b17cffcd6e57b5bf3fc768302a018438a406407b2f48e730b4d1"
+        },
+        "imported-psd-input.json": {
+          "bytes": 507,
+          "sha256": "41bede3f12210d18e821ab9ba6adbcc474220ea22803426a1bc55857e7da50a9"
+        },
+        "imported-psd-raw.json": {
+          "bytes": 225,
+          "sha256": "0eac25bfadcd5f89d5fa7dda473600586a50a10169f35f8165ed45727dfae609"
+        },
+        "imported-psd-result.json": {
+          "bytes": 2809,
+          "sha256": "a3f4c425821bc7c4cad3d0c4c788b69a5ad3497b84f3f371b591a760c9613e1f"
+        },
+        "imported-psd.html": {
+          "bytes": 40177,
+          "sha256": "c753d74ebf5fc7eca6838faa47c494b4de772ac8489753f1b394c6d9e52d95ef"
+        },
+        "imported-quadratic-context-1440.png": {
+          "bytes": 63108,
+          "sha256": "bcf5ff8fce267bc1aa9272e8758e4b863564d0a35d625f1799a7da4702889eb2"
+        },
+        "imported-quadratic-context-390.png": {
+          "bytes": 60983,
+          "sha256": "5f5acda83aa254efbe10a9e5591b3d6a4e85927f2a0faa2823ca526c223e272f"
+        },
+        "imported-quadratic-download-1440.json": {
+          "bytes": 7406,
+          "sha256": "0f4a34483450515e0a1a6d6a7c7eb66d4755c0ce66bfc5c0cef2797d6a6e52eb"
+        },
+        "imported-quadratic-download-390.json": {
+          "bytes": 7406,
+          "sha256": "0f4a34483450515e0a1a6d6a7c7eb66d4755c0ce66bfc5c0cef2797d6a6e52eb"
+        },
+        "imported-quadratic-gap-1440.png": {
+          "bytes": 52441,
+          "sha256": "307148cb76f21e7a68df0ec755404e16c0fea479a215618710bbf5ae2ded7594"
+        },
+        "imported-quadratic-gap-390.png": {
+          "bytes": 13668,
+          "sha256": "5f4acb6f90e2229e7ac34133e7229a92b47b12ddef5bd0314dddcf8e8deda5a0"
+        },
+        "imported-quadratic-input.json": {
+          "bytes": 557,
+          "sha256": "25d9e219272a1cf952e929f83d725091f70e62d599b64f74993afdc55ebb7b22"
+        },
+        "imported-quadratic-raw.json": {
+          "bytes": 173,
+          "sha256": "accec43fc0d29b5d92d3426fadee7c6df804e52b582fef0a35cb86db794318d3"
+        },
+        "imported-quadratic-result.json": {
+          "bytes": 4534,
+          "sha256": "a4446b3e9bce89b2b6ebd7bbb8e038df37900d9a47edc8f518e5a4b666c5adab"
+        },
+        "imported-quadratic.html": {
+          "bytes": 47516,
+          "sha256": "9cf8c59805d3f4ecc7d01baef335f50b53c977e81ed54d444799469d6bdc8cdf"
+        },
+        "imported-simplex-download-1440.json": {
+          "bytes": 2566,
+          "sha256": "d25c3d1d1512e89810c4c913459b3028a1925ad7cdd3d3e0f3694629da38ccda"
+        },
+        "imported-simplex-download-390.json": {
+          "bytes": 2566,
+          "sha256": "d25c3d1d1512e89810c4c913459b3028a1925ad7cdd3d3e0f3694629da38ccda"
+        },
+        "imported-simplex-input.json": {
+          "bytes": 399,
+          "sha256": "4f22a8dde5d8a582c42a721cb42a990d737912fd3c90cdd0d0747f54249a1e23"
+        },
+        "imported-simplex-raw.json": {
+          "bytes": 142,
+          "sha256": "2c2973ec0c52db692a0376492a6fe3a794e274293c8833866764f178cb9f3b67"
+        },
+        "imported-simplex-result.json": {
+          "bytes": 1789,
+          "sha256": "070e1689def5651e39a4b09830b41f42547adc60bfbacb11973d1bfb7cbd569e"
+        },
+        "imported-simplex.html": {
+          "bytes": 32664,
+          "sha256": "265934c49614bcaca934558b6ad055b12e1c2b21026ac0f36f13f4960fb11503"
+        },
+        "psd-distance.png": {
+          "bytes": 39115,
+          "sha256": "4913ba4aa903e7811b54b8031b9746ffe2ca1bb5722aa935b38f909accc67833"
+        },
+        "replay-download-1440.json": {
+          "bytes": 8864,
+          "sha256": "b8f9c12085edc376748d52a316ce1c85b0b3922db88beaf7a36ee4f40f50b5ca"
+        },
+        "replay-download-390.json": {
+          "bytes": 8864,
+          "sha256": "b8f9c12085edc376748d52a316ce1c85b0b3922db88beaf7a36ee4f40f50b5ca"
+        },
+        "replay.html": {
+          "bytes": 50261,
+          "sha256": "adb2db8f82a55a28d3fd26c3e4012086c29c56d87054070fe96d46a51805a64f"
+        },
+        "review-page-1.png": {
+          "bytes": 70942,
+          "sha256": "455940d9d10648f2c4a40e80c2ebc3c392d8126ba5be74bb28515b462a313c78"
+        },
+        "review-page-2.png": {
+          "bytes": 75829,
+          "sha256": "83aac4a607813485e9670b93f8a2973e9b62bb58e31a826348c2badf0e31c2af"
+        },
+        "review.html": {
+          "bytes": 124675,
+          "sha256": "a599cfaacfc2d598983f9f9bfb3fc3b05f9da86b0991a840c0a4adca81704c45"
+        }
+      }
+    },
+    "visual_inspection": [
+      "PDF page 1 verified",
+      "PDF page 2 linear-distance labels verified",
+      "all final artifact member hashes verified"
+    ]
+  },
+  "completed_jobs": [
+    {
+      "id": 110634696335,
+      "name": "audited offline reading assets / reading-bundle",
+      "status": "success",
+      "actual_completed_log_read": true,
+      "checkout_verified": true,
+      "html_pages": 25,
+      "numerical_records": 24,
+      "pdf_pages": 2
+    },
+    {
+      "id": 110634696360,
+      "name": "test (ubuntu-latest, Python 3.10, current)",
+      "status": "success",
+      "actual_completed_log_read": true,
+      "checkout_verified": true,
+      "passed": 1576,
+      "seconds": 576.23
+    },
+    {
+      "id": 110634696611,
+      "name": "test (ubuntu-latest, Python 3.11, current)",
+      "status": "success",
+      "actual_completed_log_read": true,
+      "checkout_verified": true,
+      "passed": 1576,
+      "seconds": 629.12
+    },
+    {
+      "id": 110634696055,
+      "name": "offline interactive reports browser",
+      "status": "success",
+      "actual_completed_log_read": true,
+      "checkout_verified": true,
+      "full_browser_suite": true,
+      "stored_input_reports": 11,
+      "stored_input_viewports": [
+        1440,
+        390
+      ],
+      "new_pdf_pages": 2
+    },
+    {
+      "id": 110634696304,
+      "name": "test (windows-latest, Python 3.12, current)",
+      "status": "success",
+      "actual_completed_log_read": true,
+      "checkout_verified": true,
+      "passed": 1576,
+      "seconds": 767.13
+    },
+    {
+      "id": 110634696394,
+      "name": "test (ubuntu-latest, Python 3.12, current)",
+      "status": "success",
+      "actual_completed_log_read": true,
+      "checkout_verified": true,
+      "passed": 1576,
+      "seconds": 738.59,
+      "fault_injections": 7
+    },
+    {
+      "id": 110635795135,
+      "name": "wheel and sdist clean installation",
+      "status": "success",
+      "actual_completed_log_read": true,
+      "checkout_verified": true,
+      "both_clean_installs": true,
+      "publication_evidence_files": 8,
+      "stored_input_cases_per_distribution": 10,
+      "evidence_basis": "actual completed clean-install and strict publication-gate logs; full verification JSON remains in the remote distributions artifact"
+    },
+    {
+      "id": 110634696390,
+      "name": "test (ubuntu-latest, Python 3.10, minimum)",
+      "status": "success",
+      "actual_completed_log_read": true,
+      "checkout_verified": true,
+      "passed": 1576,
+      "seconds": 846.32
+    },
+    {
+      "id": 110634696474,
+      "name": "test (macos-26-intel, Python 3.12, current)",
+      "status": "success",
+      "actual_completed_log_read": true,
+      "checkout_verified": true,
+      "passed": 1576,
+      "seconds": 1395.39
+    }
+  ],
+  "reading_results": [
+    {
+      "source_commit": "2eeeb0825b63ee3c9a01cb2c08f849bf37f719e5",
+      "run_url": "https://github.com/chocoemong17/chainbench/actions/runs/36941657065",
+      "manifest_sha256": "0758a9056a3fbce46f95407dd2d75e8844297a3125867d76fd415fdfe1ace07b",
+      "numerical_records": 24,
+      "html_pages": 25,
+      "backtracking_runs": 36,
+      "candidate_trials": 790,
+      "accepted_updates_per_run": 18,
+      "renderer_sha256": "f4b458d131d95b77572ad26d0644061faa68da5035925146af6af7667ceb9769",
+      "environment": {
+        "python": "3.12.14",
+        "playwright": "1.63.0",
+        "pymupdf": "1.28.2"
+      },
+      "scope": "Tour record audit and PDF layout only; not full CI or independent review",
+      "browser": "153.0.8010.12",
+      "geometry": [
+        {
+          "bottom": 732.09375,
+          "footer": 743.953125,
+          "left": 45.34375,
+          "right": 1077.171875,
+          "width": 1123
+        },
+        {
+          "bottom": 1403.71875,
+          "footer": 1537.640625,
+          "left": 45.34375,
+          "right": 1077.171875,
+          "width": 1123
+        }
+      ],
+      "pdf_fonts": [
+        [
+          {
+            "name": "AAAAAA+LiberationSans",
+            "type": "Type0",
+            "resource": "F4",
+            "embedded_bytes": 21164
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F5",
+            "glyph_programs": 4,
+            "embedded_bytes": 1147
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F6",
+            "glyph_programs": 10,
+            "embedded_bytes": 4367
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F7",
+            "glyph_programs": 4,
+            "embedded_bytes": 804
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F8",
+            "glyph_programs": 2,
+            "embedded_bytes": 691
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F9",
+            "glyph_programs": 2,
+            "embedded_bytes": 564
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F10",
+            "glyph_programs": 8,
+            "embedded_bytes": 2416
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F11",
+            "glyph_programs": 5,
+            "embedded_bytes": 1633
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F12",
+            "glyph_programs": 6,
+            "embedded_bytes": 2490
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F13",
+            "glyph_programs": 3,
+            "embedded_bytes": 1024
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F14",
+            "glyph_programs": 3,
+            "embedded_bytes": 959
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F15",
+            "glyph_programs": 3,
+            "embedded_bytes": 662
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F16",
+            "glyph_programs": 3,
+            "embedded_bytes": 865
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F17",
+            "glyph_programs": 10,
+            "embedded_bytes": 3403
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F18",
+            "glyph_programs": 19,
+            "embedded_bytes": 8391
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F19",
+            "glyph_programs": 13,
+            "embedded_bytes": 2746
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F20",
+            "glyph_programs": 57,
+            "embedded_bytes": 15424
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F21",
+            "glyph_programs": 7,
+            "embedded_bytes": 1380
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F22",
+            "glyph_programs": 6,
+            "embedded_bytes": 3043
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F23",
+            "glyph_programs": 6,
+            "embedded_bytes": 2023
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F24",
+            "glyph_programs": 12,
+            "embedded_bytes": 4994
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F25",
+            "glyph_programs": 5,
+            "embedded_bytes": 1895
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F26",
+            "glyph_programs": 4,
+            "embedded_bytes": 1392
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F27",
+            "glyph_programs": 6,
+            "embedded_bytes": 2093
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F28",
+            "glyph_programs": 5,
+            "embedded_bytes": 1611
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F29",
+            "glyph_programs": 9,
+            "embedded_bytes": 4410
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F30",
+            "glyph_programs": 2,
+            "embedded_bytes": 627
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F31",
+            "glyph_programs": 2,
+            "embedded_bytes": 669
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F32",
+            "glyph_programs": 2,
+            "embedded_bytes": 819
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F33",
+            "glyph_programs": 2,
+            "embedded_bytes": 734
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F34",
+            "glyph_programs": 4,
+            "embedded_bytes": 1210
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F35",
+            "glyph_programs": 2,
+            "embedded_bytes": 535
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F36",
+            "glyph_programs": 3,
+            "embedded_bytes": 757
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F37",
+            "glyph_programs": 4,
+            "embedded_bytes": 1147
+          },
+          {
+            "name": "DAAAAA+LiberationSerif",
+            "type": "Type0",
+            "resource": "F38",
+            "embedded_bytes": 28832
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F42",
+            "glyph_programs": 4,
+            "embedded_bytes": 1232
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F43",
+            "glyph_programs": 11,
+            "embedded_bytes": 5703
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F44",
+            "glyph_programs": 7,
+            "embedded_bytes": 2195
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F45",
+            "glyph_programs": 5,
+            "embedded_bytes": 1311
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F46",
+            "glyph_programs": 10,
+            "embedded_bytes": 3323
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F47",
+            "glyph_programs": 6,
+            "embedded_bytes": 1935
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F48",
+            "glyph_programs": 3,
+            "embedded_bytes": 894
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F49",
+            "glyph_programs": 9,
+            "embedded_bytes": 3213
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F50",
+            "glyph_programs": 2,
+            "embedded_bytes": 814
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F51",
+            "glyph_programs": 8,
+            "embedded_bytes": 2609
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F52",
+            "glyph_programs": 5,
+            "embedded_bytes": 1605
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F53",
+            "glyph_programs": 12,
+            "embedded_bytes": 7264
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F54",
+            "glyph_programs": 4,
+            "embedded_bytes": 1250
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F55",
+            "glyph_programs": 5,
+            "embedded_bytes": 1918
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F56",
+            "glyph_programs": 3,
+            "embedded_bytes": 896
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F57",
+            "glyph_programs": 6,
+            "embedded_bytes": 1761
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F58",
+            "glyph_programs": 2,
+            "embedded_bytes": 611
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F59",
+            "glyph_programs": 3,
+            "embedded_bytes": 939
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F60",
+            "glyph_programs": 4,
+            "embedded_bytes": 1337
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F61",
+            "glyph_programs": 5,
+            "embedded_bytes": 2922
+          },
+          {
+            "name": "EAAAAA+DejaVuSansMono",
+            "type": "Type0",
+            "resource": "F62",
+            "embedded_bytes": 22516
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F63",
+            "glyph_programs": 2,
+            "embedded_bytes": 819
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F64",
+            "glyph_programs": 4,
+            "embedded_bytes": 1051
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F65",
+            "glyph_programs": 2,
+            "embedded_bytes": 750
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F66",
+            "glyph_programs": 2,
+            "embedded_bytes": 712
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F67",
+            "glyph_programs": 2,
+            "embedded_bytes": 605
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F68",
+            "glyph_programs": 3,
+            "embedded_bytes": 1173
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F69",
+            "glyph_programs": 3,
+            "embedded_bytes": 890
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F70",
+            "glyph_programs": 2,
+            "embedded_bytes": 604
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F71",
+            "glyph_programs": 4,
+            "embedded_bytes": 1397
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F72",
+            "glyph_programs": 2,
+            "embedded_bytes": 693
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F73",
+            "glyph_programs": 8,
+            "embedded_bytes": 3336
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F74",
+            "glyph_programs": 3,
+            "embedded_bytes": 1011
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F75",
+            "glyph_programs": 3,
+            "embedded_bytes": 1097
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F76",
+            "glyph_programs": 2,
+            "embedded_bytes": 396
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F77",
+            "glyph_programs": 3,
+            "embedded_bytes": 1000
+          }
+        ],
+        [
+          {
+            "name": "AAAAAA+LiberationSans",
+            "type": "Type0",
+            "resource": "F4",
+            "embedded_bytes": 21164
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F5",
+            "glyph_programs": 4,
+            "embedded_bytes": 1147
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F6",
+            "glyph_programs": 10,
+            "embedded_bytes": 4367
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F7",
+            "glyph_programs": 4,
+            "embedded_bytes": 804
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F10",
+            "glyph_programs": 8,
+            "embedded_bytes": 2416
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F11",
+            "glyph_programs": 5,
+            "embedded_bytes": 1633
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F12",
+            "glyph_programs": 6,
+            "embedded_bytes": 2490
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F15",
+            "glyph_programs": 3,
+            "embedded_bytes": 662
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F16",
+            "glyph_programs": 3,
+            "embedded_bytes": 865
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F17",
+            "glyph_programs": 10,
+            "embedded_bytes": 3403
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F18",
+            "glyph_programs": 19,
+            "embedded_bytes": 8391
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F19",
+            "glyph_programs": 13,
+            "embedded_bytes": 2746
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F20",
+            "glyph_programs": 57,
+            "embedded_bytes": 15424
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F21",
+            "glyph_programs": 7,
+            "embedded_bytes": 1380
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F22",
+            "glyph_programs": 6,
+            "embedded_bytes": 3043
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F23",
+            "glyph_programs": 6,
+            "embedded_bytes": 2023
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F24",
+            "glyph_programs": 12,
+            "embedded_bytes": 4994
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F25",
+            "glyph_programs": 5,
+            "embedded_bytes": 1895
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F26",
+            "glyph_programs": 4,
+            "embedded_bytes": 1392
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F27",
+            "glyph_programs": 6,
+            "embedded_bytes": 2093
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F28",
+            "glyph_programs": 5,
+            "embedded_bytes": 1611
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F29",
+            "glyph_programs": 9,
+            "embedded_bytes": 4410
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F30",
+            "glyph_programs": 2,
+            "embedded_bytes": 627
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F31",
+            "glyph_programs": 2,
+            "embedded_bytes": 669
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F33",
+            "glyph_programs": 2,
+            "embedded_bytes": 734
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F34",
+            "glyph_programs": 4,
+            "embedded_bytes": 1210
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F36",
+            "glyph_programs": 3,
+            "embedded_bytes": 757
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F37",
+            "glyph_programs": 4,
+            "embedded_bytes": 1147
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F42",
+            "glyph_programs": 4,
+            "embedded_bytes": 1232
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F43",
+            "glyph_programs": 11,
+            "embedded_bytes": 5703
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F44",
+            "glyph_programs": 7,
+            "embedded_bytes": 2195
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F45",
+            "glyph_programs": 5,
+            "embedded_bytes": 1311
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F46",
+            "glyph_programs": 10,
+            "embedded_bytes": 3323
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F47",
+            "glyph_programs": 6,
+            "embedded_bytes": 1935
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F48",
+            "glyph_programs": 3,
+            "embedded_bytes": 894
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F49",
+            "glyph_programs": 9,
+            "embedded_bytes": 3213
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F51",
+            "glyph_programs": 8,
+            "embedded_bytes": 2609
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F52",
+            "glyph_programs": 5,
+            "embedded_bytes": 1605
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F53",
+            "glyph_programs": 12,
+            "embedded_bytes": 7264
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F54",
+            "glyph_programs": 4,
+            "embedded_bytes": 1250
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F55",
+            "glyph_programs": 5,
+            "embedded_bytes": 1918
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F56",
+            "glyph_programs": 3,
+            "embedded_bytes": 896
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F57",
+            "glyph_programs": 6,
+            "embedded_bytes": 1761
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F59",
+            "glyph_programs": 3,
+            "embedded_bytes": 939
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F60",
+            "glyph_programs": 4,
+            "embedded_bytes": 1337
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F61",
+            "glyph_programs": 5,
+            "embedded_bytes": 2922
+          },
+          {
+            "name": "EAAAAA+DejaVuSansMono",
+            "type": "Type0",
+            "resource": "F62",
+            "embedded_bytes": 22516
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F64",
+            "glyph_programs": 4,
+            "embedded_bytes": 1051
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F67",
+            "glyph_programs": 2,
+            "embedded_bytes": 605
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F68",
+            "glyph_programs": 3,
+            "embedded_bytes": 1173
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F69",
+            "glyph_programs": 3,
+            "embedded_bytes": 890
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F71",
+            "glyph_programs": 4,
+            "embedded_bytes": 1397
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F73",
+            "glyph_programs": 8,
+            "embedded_bytes": 3336
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F74",
+            "glyph_programs": 3,
+            "embedded_bytes": 1011
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F75",
+            "glyph_programs": 3,
+            "embedded_bytes": 1097
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F77",
+            "glyph_programs": 3,
+            "embedded_bytes": 1000
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F80",
+            "glyph_programs": 27,
+            "embedded_bytes": 7090
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F81",
+            "glyph_programs": 2,
+            "embedded_bytes": 763
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F82",
+            "glyph_programs": 2,
+            "embedded_bytes": 648
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F83",
+            "glyph_programs": 2,
+            "embedded_bytes": 854
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F84",
+            "glyph_programs": 4,
+            "embedded_bytes": 1270
+          },
+          {
+            "name": "",
+            "type": "Type3",
+            "resource": "F85",
+            "glyph_programs": 2,
+            "embedded_bytes": 711
+          }
+        ]
+      ],
+      "pdf_pages": 2,
+      "files": {
+        "ChainBench_FISTA_review.pdf": {
+          "bytes": 286358,
+          "sha256": "dccac0109dbbde7966f5578bb13d36a0fe8f9c06ac62ea9761ee5bc6fc8bb50a"
+        },
+        "page-1.png": {
+          "bytes": 83880,
+          "sha256": "8a127bdc291ce58885f58442d6d2f5b0a16613729f972d9b028e5817351aa422"
+        },
+        "page-2.png": {
+          "bytes": 76910,
+          "sha256": "40267099415fa49e7171bf3759742cfa2c98a52d23c565debaf167401dd917fc"
+        },
+        "review.html": {
+          "bytes": 66840,
+          "sha256": "13c55bc68c7c3102ff1f98dd7f5962f491c8057c8f6a636405179568638f5fdd"
+        }
+      }
+    },
+    {
+      "kind": "chainbench.reading-assets",
+      "schema_version": 1,
+      "version": "0.6.0",
+      "source_commit": "2eeeb0825b63ee3c9a01cb2c08f849bf37f719e5",
+      "bundle_manifest_sha256": "2fc5d222c0fe73b57df8d6a476bc10e913338fed2ab9969c97407c267f966eaa",
+      "assets": {
+        "chainbench-0.6.0-reading.zip": {
+          "bytes": 44911690,
+          "sha256": "b294ad3e7e171a899e3996c180f5918fb348a7bcf0cdd4537cdf9c6effb7e2b2"
+        },
+        "chainbench-0.6.0-review.pdf": {
+          "bytes": 286358,
+          "sha256": "dccac0109dbbde7966f5578bb13d36a0fe8f9c06ac62ea9761ee5bc6fc8bb50a"
+        }
+      }
+    },
+    {
+      "assets": {
+        "chainbench-0.6.0-reading.zip": {
+          "bytes": 44911690,
+          "sha256": "b294ad3e7e171a899e3996c180f5918fb348a7bcf0cdd4537cdf9c6effb7e2b2"
+        },
+        "chainbench-0.6.0-review.pdf": {
+          "bytes": 286358,
+          "sha256": "dccac0109dbbde7966f5578bb13d36a0fe8f9c06ac62ea9761ee5bc6fc8bb50a"
+        }
+      },
+      "bundle_manifest_sha256": "2fc5d222c0fe73b57df8d6a476bc10e913338fed2ab9969c97407c267f966eaa",
+      "kind": "chainbench.reading-assets",
+      "schema_version": 1,
+      "source_commit": "2eeeb0825b63ee3c9a01cb2c08f849bf37f719e5",
+      "version": "0.6.0"
+    },
+    {
+      "viewports": [
+        {
+          "width": 1440,
+          "reports_opened": 24,
+          "return_links": "passed",
+          "preview_images": "loaded",
+          "all_seeds": "retained",
+          "unresolved_seed24": "retained",
+          "language": "passed",
+          "overflow": false,
+          "atlas_workflow_links": 25,
+          "case_preserved_table_nodes": {
+            "index.html": 49,
+            "atlas.html": 0,
+            "shewchuk.html": 255,
+            "deblur.html": 0,
+            "heavy-ball.html": 95,
+            "simplex.html": 197,
+            "proximal.html": 193,
+            "landscape.html": 38,
+            "stress-gd-baseline.html": 134,
+            "stress-nesterov-1983.html": 134,
+            "stress-polyak-1964.html": 134,
+            "stress-hestenes-stiefel-1952.html": 134,
+            "stress-jaggi-2013.html": 134,
+            "stress-rockafellar-1976.html": 134,
+            "stress-beck-teboulle-2009.html": 134,
+            "stress-ista-vs-fista.html": 134,
+            "tight-gd.html": 4,
+            "wavelet.html": 13,
+            "fw-sparsity.html": 28,
+            "kaczmarz.html": 1674,
+            "sampling.html": 18,
+            "cg-spectrum.html": 864,
+            "adam.html": 281,
+            "admm.html": 1576,
+            "backtracking.html": 612
+          }
+        },
+        {
+          "width": 390,
+          "reports_opened": 24,
+          "return_links": "passed",
+          "preview_images": "loaded",
+          "all_seeds": "retained",
+          "unresolved_seed24": "retained",
+          "language": "passed",
+          "overflow": false,
+          "atlas_workflow_links": 25,
+          "case_preserved_table_nodes": {
+            "index.html": 49,
+            "atlas.html": 0,
+            "shewchuk.html": 255,
+            "deblur.html": 0,
+            "heavy-ball.html": 95,
+            "simplex.html": 197,
+            "proximal.html": 193,
+            "landscape.html": 38,
+            "stress-gd-baseline.html": 134,
+            "stress-nesterov-1983.html": 134,
+            "stress-polyak-1964.html": 134,
+            "stress-hestenes-stiefel-1952.html": 134,
+            "stress-jaggi-2013.html": 134,
+            "stress-rockafellar-1976.html": 134,
+            "stress-beck-teboulle-2009.html": 134,
+            "stress-ista-vs-fista.html": 134,
+            "tight-gd.html": 4,
+            "wavelet.html": 13,
+            "fw-sparsity.html": 28,
+            "kaczmarz.html": 1674,
+            "sampling.html": 18,
+            "cg-spectrum.html": 864,
+            "adam.html": 281,
+            "admm.html": 1576,
+            "backtracking.html": 612
+          }
+        }
+      ],
+      "network_requests": [],
+      "javascript_errors": [],
+      "browser": "153.0.8010.12",
+      "backtracking_trials": [
+        {
+          "width": 1440,
+          "cases": 36,
+          "states": 790
+        },
+        {
+          "width": 390,
+          "cases": 36,
+          "states": 790
+        }
+      ],
+      "no_script": "index, static figures and local navigation work"
+    }
+  ],
+  "last_observed_jobs": [
+    {
+      "id": 110634696055,
+      "name": "offline interactive reports browser",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 110634696304,
+      "name": "test (windows-latest, Python 3.12, current)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 110634696335,
+      "name": "audited offline reading assets / reading-bundle",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 110634696360,
+      "name": "test (ubuntu-latest, Python 3.10, current)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 110634696390,
+      "name": "test (ubuntu-latest, Python 3.10, minimum)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 110634696394,
+      "name": "test (ubuntu-latest, Python 3.12, current)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 110634696474,
+      "name": "test (macos-26-intel, Python 3.12, current)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 110634696611,
+      "name": "test (ubuntu-latest, Python 3.11, current)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 110635795135,
+      "name": "wheel and sdist clean installation",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 11201090209,
+      "name": "chainbench-reading-bundle-2eeeb0825b63ee3c9a01cb2c08f849bf37f719e5",
+      "bytes": 44002397,
+      "sha256": "b40b27c065c8f24ca4fa1b561987759f3cca9ac64383731f4f20c903b86d3cde",
+      "local_download": false
+    },
+    {
+      "id": 11201086609,
+      "name": "reproduction-browser-36941657065",
+      "bytes": 117288425,
+      "sha256": "7cb6a6fa2ccbfdd74bda2fae5e0b234d57613561c51c2be681021439ada15b69",
+      "local_download": false
+    },
+    {
+      "id": 11200765642,
+      "name": "chainbench-reading-release-2eeeb0825b63ee3c9a01cb2c08f849bf37f719e5",
+      "bytes": 44283021,
+      "sha256": "09bcd0f14e9892068f3675d63ff0636bb48c13abed538fa2e38d05c371afc8a2",
+      "local_download": false
+    },
+    {
+      "id": 11200755658,
+      "name": "chainbench-review-packet-2eeeb0825b63ee3c9a01cb2c08f849bf37f719e5",
+      "bytes": 313432,
+      "sha256": "703568027d95592aa88d08346a772ea76b4aa098466b3fa9c07b91d16d06ec7e",
+      "local_download": false
+    },
+    {
+      "id": 11200741827,
+      "name": "distributions-36941657065",
+      "bytes": 45404537,
+      "sha256": "48c1fa0263d875bbdda0b1f42395ed41c8d44e9553ead183c85147733992a145",
+      "local_download": false
+    },
+    {
+      "id": 11200715799,
+      "name": "chainbench-extracted-browser-2eeeb0825b63ee3c9a01cb2c08f849bf37f719e5",
+      "bytes": 9327305,
+      "sha256": "a97dbf5458cfb99e3aee06c6ce79664aa0a64785f1524977d5a4a8a312778ca5",
+      "local_download": false
+    },
+    {
+      "id": 11200570725,
+      "name": "stored-input-review-2eeeb0825b63ee3c9a01cb2c08f849bf37f719e5",
+      "bytes": 989213,
+      "sha256": "03bbdb25bd68b923ad3b4ca03bc635efbdfb0598a157780089f80728c6adbb1b",
+      "local_download": true
+    },
+    {
+      "id": 11200149330,
+      "name": "saved-comparison-review-2eeeb0825b63ee3c9a01cb2c08f849bf37f719e5",
+      "bytes": 836188,
+      "sha256": "fc9c2c8ea1e65d10e5d1610e20949131cc90245d640b1289f194ba99b44d7c7c",
+      "local_download": false
+    }
+  ],
+  "full_browser_results": [
+    {
+      "source_commit": "2eeeb0825b63ee3c9a01cb2c08f849bf37f719e5",
+      "audits": [
+        {
+          "case": "generated-quadratic-0",
+          "family": "quadratic",
+          "methods": [
+            "gd",
+            "smooth-fista",
+            "heavy-ball",
+            "cg",
+            "proximal-point"
+          ],
+          "rows": 33,
+          "numeric_audit": true,
+          "exact_inputs": true,
+          "html_samples": true,
+          "replay": "MATCH",
+          "input_sha256": "1b5fbd31926e3b7a33b056780a0b09099bebd7be87dbcbd6e6bb3f6a39db3959",
+          "manifest_sha256": "6a318f0276d4e420d58f49a64ebe112a00c3fb4dd0f1642d765c1c1d4940aa4d"
+        },
+        {
+          "case": "generated-quadratic-7",
+          "family": "quadratic",
+          "methods": [
+            "gd",
+            "smooth-fista",
+            "heavy-ball",
+            "cg",
+            "proximal-point"
+          ],
+          "rows": 33,
+          "numeric_audit": true,
+          "exact_inputs": true,
+          "html_samples": true,
+          "replay": "MATCH",
+          "input_sha256": "233b4040d2ffddc7eb1e3bd8e2df303f3c4bd7188f0474b39f1f3df5ea531882",
+          "manifest_sha256": "d7ba39a1e54224fea0b4cbd2f5584806e6b5056b4ab604bd0705e79345920236"
+        },
+        {
+          "case": "generated-diagonal-lasso-0",
+          "family": "diagonal-lasso",
+          "methods": [
+            "ista",
+            "fista"
+          ],
+          "rows": 14,
+          "numeric_audit": true,
+          "exact_inputs": true,
+          "html_samples": true,
+          "replay": "MATCH",
+          "input_sha256": "be17c3a383000aaa2f482dcf7839581a8a8ea81549d8796280d52f060a100084",
+          "manifest_sha256": "d96a8905b7cc82680456f9e99972f36393ed60eb3ad9967fd805411f84326823"
+        },
+        {
+          "case": "generated-diagonal-lasso-7",
+          "family": "diagonal-lasso",
+          "methods": [
+            "ista",
+            "fista"
+          ],
+          "rows": 14,
+          "numeric_audit": true,
+          "exact_inputs": true,
+          "html_samples": true,
+          "replay": "MATCH",
+          "input_sha256": "9d946279a3b5b8eedf620a216700214bd33cfac517b35e78b790c27586f79dae",
+          "manifest_sha256": "e28a150bfa6eec71f99f57b7edcb29b99df24d14463c75849aec38a544b98351"
+        },
+        {
+          "case": "generated-simplex-0",
+          "family": "simplex",
+          "methods": [
+            "frank-wolfe"
+          ],
+          "rows": 7,
+          "numeric_audit": true,
+          "exact_inputs": true,
+          "html_samples": true,
+          "replay": "MATCH",
+          "input_sha256": "89109a3c73231c0a5417981e2f1725dc020cb9a86a827975a636884542a16cf0",
+          "manifest_sha256": "f68229218d5659a7fcc4ecb9c577c463b314ec456bd8f01a67dbde16a9ac4cb2"
+        },
+        {
+          "case": "generated-simplex-7",
+          "family": "simplex",
+          "methods": [
+            "frank-wolfe"
+          ],
+          "rows": 7,
+          "numeric_audit": true,
+          "exact_inputs": true,
+          "html_samples": true,
+          "replay": "MATCH",
+          "input_sha256": "8eb81aea1b7eb76a681bfcf98479676abdffc34d2d64ffa165300606a25633e5",
+          "manifest_sha256": "3717b6dbe156bf693a7ee860986086399d4267784f398c4cc00560b767ebc3a8"
+        },
+        {
+          "case": "imported-quadratic",
+          "family": "quadratic",
+          "methods": [
+            "gd",
+            "smooth-fista",
+            "heavy-ball",
+            "cg",
+            "proximal-point"
+          ],
+          "rows": 15,
+          "numeric_audit": true,
+          "exact_inputs": true,
+          "html_samples": true,
+          "replay": "MATCH",
+          "input_sha256": "a07c9509522ec19b2cac93e202d4d3f95150dda7c100acbac86a5cb55509f604",
+          "manifest_sha256": "ec830270aef51e9c2b5d174e08964cb8d37deaaafb33bc1df34a0919f559b921"
+        },
+        {
+          "case": "imported-psd",
+          "family": "quadratic",
+          "methods": [
+            "gd",
+            "smooth-fista",
+            "proximal-point"
+          ],
+          "rows": 9,
+          "numeric_audit": true,
+          "exact_inputs": true,
+          "html_samples": true,
+          "replay": "MATCH",
+          "input_sha256": "88384f21ca0637e0fe5ac65b2f41ffb523682c1b032afa03175400505a95fa26",
+          "manifest_sha256": "eb3952c8d6704b5e488defb65de4d31a5b0834ea451e6e66ea750417d662b6dc"
+        },
+        {
+          "case": "imported-lasso",
+          "family": "diagonal-lasso",
+          "methods": [
+            "ista",
+            "fista"
+          ],
+          "rows": 6,
+          "numeric_audit": true,
+          "exact_inputs": true,
+          "html_samples": true,
+          "replay": "MATCH",
+          "input_sha256": "27811725e9cb4fe9aeba65aea3a2484dfcdfc5a604f127023f2bbd4249d4f0d3",
+          "manifest_sha256": "c2a52e2c3f391254abaf41c2608e7da3f2c635a44e788fd453e868320eef3041"
+        },
+        {
+          "case": "imported-simplex",
+          "family": "simplex",
+          "methods": [
+            "frank-wolfe"
+          ],
+          "rows": 3,
+          "numeric_audit": true,
+          "exact_inputs": true,
+          "html_samples": true,
+          "replay": "MATCH",
+          "input_sha256": "aadf43436e82702639886862be8403cfb8bb838d1597dabef1a67b0f5f1adada",
+          "manifest_sha256": "c5083c15e8bbd086d4f1cb49c744e91abd8653d502f45572f79ad53674e40f6d"
+        }
+      ],
+      "viewports": [
+        {
+          "case": "generated-quadratic-0",
+          "width": 1440,
+          "plots": 3,
+          "methods": 5,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "generated-quadratic-7",
+          "width": 1440,
+          "plots": 3,
+          "methods": 5,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "generated-diagonal-lasso-0",
+          "width": 1440,
+          "plots": 3,
+          "methods": 2,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "generated-diagonal-lasso-7",
+          "width": 1440,
+          "plots": 3,
+          "methods": 2,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "generated-simplex-0",
+          "width": 1440,
+          "plots": 3,
+          "methods": 1,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "generated-simplex-7",
+          "width": 1440,
+          "plots": 3,
+          "methods": 1,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "imported-quadratic",
+          "width": 1440,
+          "plots": 3,
+          "methods": 5,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "imported-psd",
+          "width": 1440,
+          "plots": 3,
+          "methods": 3,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "imported-lasso",
+          "width": 1440,
+          "plots": 3,
+          "methods": 2,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "imported-simplex",
+          "width": 1440,
+          "plots": 3,
+          "methods": 1,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "replay",
+          "width": 1440,
+          "plots": 3,
+          "methods": 5,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "generated-quadratic-0",
+          "width": 390,
+          "plots": 3,
+          "methods": 5,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "generated-quadratic-7",
+          "width": 390,
+          "plots": 3,
+          "methods": 5,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "generated-diagonal-lasso-0",
+          "width": 390,
+          "plots": 3,
+          "methods": 2,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "generated-diagonal-lasso-7",
+          "width": 390,
+          "plots": 3,
+          "methods": 2,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "generated-simplex-0",
+          "width": 390,
+          "plots": 3,
+          "methods": 1,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "generated-simplex-7",
+          "width": 390,
+          "plots": 3,
+          "methods": 1,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "imported-quadratic",
+          "width": 390,
+          "plots": 3,
+          "methods": 5,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "imported-psd",
+          "width": 390,
+          "plots": 3,
+          "methods": 3,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "imported-lasso",
+          "width": 390,
+          "plots": 3,
+          "methods": 2,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "imported-simplex",
+          "width": 390,
+          "plots": 3,
+          "methods": 1,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        },
+        {
+          "case": "replay",
+          "width": 390,
+          "plots": 3,
+          "methods": 5,
+          "exact_keyboard_samples": true,
+          "exact_download": true,
+          "page_overflow": false
+        }
+      ],
+      "network_requests": [],
+      "javascript_errors": [],
+      "browser": "153.0.8010.12",
+      "no_script": {
+        "reports": 11,
+        "static_plots_and_input_details": true
+      },
+      "pdf": {
+        "pages": 2,
+        "final_section_present": true
+      },
+      "files": {
+        "ChainBench_stored_inputs_review.pdf": {
+          "bytes": 210328,
+          "sha256": "7f9b2f36c978e9483f9da27bcb7031bea070f7dcef9b99220b7b7f7857244529"
+        },
+        "generated-diagonal-lasso-0-download-1440.json": {
+          "bytes": 7990,
+          "sha256": "b06f6351ce852372ad4c4d32090597dcc6b9e389f578695a630eb3c671654d90"
+        },
+        "generated-diagonal-lasso-0-download-390.json": {
+          "bytes": 7990,
+          "sha256": "b06f6351ce852372ad4c4d32090597dcc6b9e389f578695a630eb3c671654d90"
+        },
+        "generated-diagonal-lasso-0-input.json": {
+          "bytes": 751,
+          "sha256": "1b41fb97decaf05938c581a69abef7fe01483c43744b5938b6c085bebfd33134"
+        },
+        "generated-diagonal-lasso-0-result.json": {
+          "bytes": 5201,
+          "sha256": "1cfbb62367b3ad07c32ce33fbfb92f9e13724704be6be8605b687c1bc7e03bec"
+        },
+        "generated-diagonal-lasso-0.html": {
+          "bytes": 42182,
+          "sha256": "bd7298a72086ef1a817298979a012f7cfcedd9fdd2407d3bd93f7e53be716db1"
+        },
+        "generated-diagonal-lasso-7-download-1440.json": {
+          "bytes": 8079,
+          "sha256": "f72c03616ddb566a02dcc5bc845ba15e948e9a14b0967243b51d04778256089d"
+        },
+        "generated-diagonal-lasso-7-download-390.json": {
+          "bytes": 8079,
+          "sha256": "f72c03616ddb566a02dcc5bc845ba15e948e9a14b0967243b51d04778256089d"
+        },
+        "generated-diagonal-lasso-7-input.json": {
+          "bytes": 754,
+          "sha256": "fdeb4ce6489eb732a402b5529a73021580984609100393e7f3a41d62e53b4b6f"
+        },
+        "generated-diagonal-lasso-7-result.json": {
+          "bytes": 5290,
+          "sha256": "fcf0f63d775456c810276481f3eda97efd60f5743f614c8f532d485eb6efdb87"
+        },
+        "generated-diagonal-lasso-7.html": {
+          "bytes": 42166,
+          "sha256": "2612e38bef13da9caa9dff4dfcffd08a50eba4ddc351ecbf5591b8a6792f2bf0"
+        },
+        "generated-quadratic-0-download-1440.json": {
+          "bytes": 17032,
+          "sha256": "f088dfd729061d04f5f231cb8a5c2e1b368dfa5658b7ac19c006f54adf7f0bfd"
+        },
+        "generated-quadratic-0-download-390.json": {
+          "bytes": 17032,
+          "sha256": "f088dfd729061d04f5f231cb8a5c2e1b368dfa5658b7ac19c006f54adf7f0bfd"
+        },
+        "generated-quadratic-0-input.json": {
+          "bytes": 1214,
+          "sha256": "68fb61b27f1803b871a9563a43ac4e20dae5a50421bfc6868cf8b23ab38e76e3"
+        },
+        "generated-quadratic-0-result.json": {
+          "bytes": 10711,
+          "sha256": "d351cc5daf264871545284bbb56764d3c564fb8edc6f4fab10668f5c4daccb19"
+        },
+        "generated-quadratic-0.html": {
+          "bytes": 61825,
+          "sha256": "3c0b38f8a4166099fe436ab6bc5b8b44494a8d4c38d9e277fdcff953ceb525ea"
+        },
+        "generated-quadratic-7-download-1440.json": {
+          "bytes": 16948,
+          "sha256": "756be07a1bd695dba0ef4d6c1d7797b93cbc099c278e3774bcc2c8564a78da7d"
+        },
+        "generated-quadratic-7-download-390.json": {
+          "bytes": 16948,
+          "sha256": "756be07a1bd695dba0ef4d6c1d7797b93cbc099c278e3774bcc2c8564a78da7d"
+        },
+        "generated-quadratic-7-input.json": {
+          "bytes": 1206,
+          "sha256": "c6018abd43f0a4866b415e1f00d4ee290de989771f0a9a0ba85a702aad7246f5"
+        },
+        "generated-quadratic-7-result.json": {
+          "bytes": 10627,
+          "sha256": "71b73d97d1062a68c66aabde6555c587ce5f748d302c411cb1fe713e03fbe2d9"
+        },
+        "generated-quadratic-7.html": {
+          "bytes": 61555,
+          "sha256": "e5008845dde7ab6a9b46a0089fad6f1148d5b728dad43999b1b7ffb492810500"
+        },
+        "generated-simplex-0-download-1440.json": {
+          "bytes": 4695,
+          "sha256": "07637e8e7736a317cac1e745ebd9b9cfecac7e0ee9d1e40145759026f7d4e006"
+        },
+        "generated-simplex-0-download-390.json": {
+          "bytes": 4695,
+          "sha256": "07637e8e7736a317cac1e745ebd9b9cfecac7e0ee9d1e40145759026f7d4e006"
+        },
+        "generated-simplex-0-input.json": {
+          "bytes": 638,
+          "sha256": "7dcb2822802f9501b9a42d49d0584a042afffe6d9ea24eb4df5929ffd3d08634"
+        },
+        "generated-simplex-0-result.json": {
+          "bytes": 3129,
+          "sha256": "06bd871196a63064ff1b7e6f1c5dc7dd10e6532e1cdca8e8b1c338a69ba53060"
+        },
+        "generated-simplex-0.html": {
+          "bytes": 36230,
+          "sha256": "7a1bbc36ab6e02dd4508fdb9db7f695febd4c5aa7ffb047c69823527b21f88b1"
+        },
+        "generated-simplex-7-download-1440.json": {
+          "bytes": 4703,
+          "sha256": "71f47aeec6052eb8f79ac84f95837c61515503a608c1bf6c7790fb50a2ff4eeb"
+        },
+        "generated-simplex-7-download-390.json": {
+          "bytes": 4703,
+          "sha256": "71f47aeec6052eb8f79ac84f95837c61515503a608c1bf6c7790fb50a2ff4eeb"
+        },
+        "generated-simplex-7-input.json": {
+          "bytes": 641,
+          "sha256": "962ba97954718de54f7da4c1a4102432cf0b3b345bafd872e7f185b8203adede"
+        },
+        "generated-simplex-7-result.json": {
+          "bytes": 3137,
+          "sha256": "2c18b3e21cc95f1e08736c310e74f57a7a8a2863f7198d3aad222e40c3b4ae84"
+        },
+        "generated-simplex-7.html": {
+          "bytes": 36245,
+          "sha256": "1c0c4137396334590cb0b6ee781d6080d05dff1185bee69d84f71d90ec8570aa"
+        },
+        "imported-lasso-download-1440.json": {
+          "bytes": 3567,
+          "sha256": "38b25be8c39835529d13e506a9051b33081f4a56b527682cbf4b0a80754d2ecc"
+        },
+        "imported-lasso-download-390.json": {
+          "bytes": 3567,
+          "sha256": "38b25be8c39835529d13e506a9051b33081f4a56b527682cbf4b0a80754d2ecc"
+        },
+        "imported-lasso-input.json": {
+          "bytes": 426,
+          "sha256": "cb180ec8efba38d8a37c749f907c68d769662270e12d2dd3bb5f1ee02c056c3d"
+        },
+        "imported-lasso-raw.json": {
+          "bytes": 161,
+          "sha256": "3136cd7b8f4252e7805d372d5b6f453d419f941d695de64c8fe9ff2183cc2df2"
+        },
+        "imported-lasso-result.json": {
+          "bytes": 2285,
+          "sha256": "25d8fbcfab0561b093a304ca41943a46c3493d0804698147adda9ad9b5ecc3db"
+        },
+        "imported-lasso.html": {
+          "bytes": 35883,
+          "sha256": "f2d938568cc1236c829fd822401430fd3a23d04604dcf52d6d6e799d109f4b70"
+        },
+        "imported-psd-context-1440.png": {
+          "bytes": 62927,
+          "sha256": "cf4b8e48f2455676cff252c48a0c2f5f64d8fb6ba14d2599c3a260821fdec4d2"
+        },
+        "imported-psd-context-390.png": {
+          "bytes": 61064,
+          "sha256": "596a2e02045375d3c24c0324020508866237cfc7994ad25ad77104519dd38d03"
+        },
+        "imported-psd-download-1440.json": {
+          "bytes": 4680,
+          "sha256": "193c1744be7ecf781c77efde8f242cdc356aaaddec005ff4b8ac0f24d21c99b1"
+        },
+        "imported-psd-download-390.json": {
+          "bytes": 4680,
+          "sha256": "193c1744be7ecf781c77efde8f242cdc356aaaddec005ff4b8ac0f24d21c99b1"
+        },
+        "imported-psd-gap-1440.png": {
+          "bytes": 41532,
+          "sha256": "bbead62610a8f718e67b94a98d92e125b59fdf29e6cc548b6c22764abe60fd23"
+        },
+        "imported-psd-gap-390.png": {
+          "bytes": 13254,
+          "sha256": "f43fda1ae663b17cffcd6e57b5bf3fc768302a018438a406407b2f48e730b4d1"
+        },
+        "imported-psd-input.json": {
+          "bytes": 507,
+          "sha256": "41bede3f12210d18e821ab9ba6adbcc474220ea22803426a1bc55857e7da50a9"
+        },
+        "imported-psd-raw.json": {
+          "bytes": 225,
+          "sha256": "0eac25bfadcd5f89d5fa7dda473600586a50a10169f35f8165ed45727dfae609"
+        },
+        "imported-psd-result.json": {
+          "bytes": 2809,
+          "sha256": "a3f4c425821bc7c4cad3d0c4c788b69a5ad3497b84f3f371b591a760c9613e1f"
+        },
+        "imported-psd.html": {
+          "bytes": 40177,
+          "sha256": "c753d74ebf5fc7eca6838faa47c494b4de772ac8489753f1b394c6d9e52d95ef"
+        },
+        "imported-quadratic-context-1440.png": {
+          "bytes": 63108,
+          "sha256": "bcf5ff8fce267bc1aa9272e8758e4b863564d0a35d625f1799a7da4702889eb2"
+        },
+        "imported-quadratic-context-390.png": {
+          "bytes": 60983,
+          "sha256": "5f5acda83aa254efbe10a9e5591b3d6a4e85927f2a0faa2823ca526c223e272f"
+        },
+        "imported-quadratic-download-1440.json": {
+          "bytes": 7406,
+          "sha256": "0f4a34483450515e0a1a6d6a7c7eb66d4755c0ce66bfc5c0cef2797d6a6e52eb"
+        },
+        "imported-quadratic-download-390.json": {
+          "bytes": 7406,
+          "sha256": "0f4a34483450515e0a1a6d6a7c7eb66d4755c0ce66bfc5c0cef2797d6a6e52eb"
+        },
+        "imported-quadratic-gap-1440.png": {
+          "bytes": 52441,
+          "sha256": "307148cb76f21e7a68df0ec755404e16c0fea479a215618710bbf5ae2ded7594"
+        },
+        "imported-quadratic-gap-390.png": {
+          "bytes": 13668,
+          "sha256": "5f4acb6f90e2229e7ac34133e7229a92b47b12ddef5bd0314dddcf8e8deda5a0"
+        },
+        "imported-quadratic-input.json": {
+          "bytes": 557,
+          "sha256": "25d9e219272a1cf952e929f83d725091f70e62d599b64f74993afdc55ebb7b22"
+        },
+        "imported-quadratic-raw.json": {
+          "bytes": 173,
+          "sha256": "accec43fc0d29b5d92d3426fadee7c6df804e52b582fef0a35cb86db794318d3"
+        },
+        "imported-quadratic-result.json": {
+          "bytes": 4534,
+          "sha256": "a4446b3e9bce89b2b6ebd7bbb8e038df37900d9a47edc8f518e5a4b666c5adab"
+        },
+        "imported-quadratic.html": {
+          "bytes": 47516,
+          "sha256": "9cf8c59805d3f4ecc7d01baef335f50b53c977e81ed54d444799469d6bdc8cdf"
+        },
+        "imported-simplex-download-1440.json": {
+          "bytes": 2566,
+          "sha256": "d25c3d1d1512e89810c4c913459b3028a1925ad7cdd3d3e0f3694629da38ccda"
+        },
+        "imported-simplex-download-390.json": {
+          "bytes": 2566,
+          "sha256": "d25c3d1d1512e89810c4c913459b3028a1925ad7cdd3d3e0f3694629da38ccda"
+        },
+        "imported-simplex-input.json": {
+          "bytes": 399,
+          "sha256": "4f22a8dde5d8a582c42a721cb42a990d737912fd3c90cdd0d0747f54249a1e23"
+        },
+        "imported-simplex-raw.json": {
+          "bytes": 142,
+          "sha256": "2c2973ec0c52db692a0376492a6fe3a794e274293c8833866764f178cb9f3b67"
+        },
+        "imported-simplex-result.json": {
+          "bytes": 1789,
+          "sha256": "070e1689def5651e39a4b09830b41f42547adc60bfbacb11973d1bfb7cbd569e"
+        },
+        "imported-simplex.html": {
+          "bytes": 32664,
+          "sha256": "265934c49614bcaca934558b6ad055b12e1c2b21026ac0f36f13f4960fb11503"
+        },
+        "psd-distance.png": {
+          "bytes": 39115,
+          "sha256": "4913ba4aa903e7811b54b8031b9746ffe2ca1bb5722aa935b38f909accc67833"
+        },
+        "replay-download-1440.json": {
+          "bytes": 8864,
+          "sha256": "b8f9c12085edc376748d52a316ce1c85b0b3922db88beaf7a36ee4f40f50b5ca"
+        },
+        "replay-download-390.json": {
+          "bytes": 8864,
+          "sha256": "b8f9c12085edc376748d52a316ce1c85b0b3922db88beaf7a36ee4f40f50b5ca"
+        },
+        "replay.html": {
+          "bytes": 50261,
+          "sha256": "adb2db8f82a55a28d3fd26c3e4012086c29c56d87054070fe96d46a51805a64f"
+        },
+        "review-page-1.png": {
+          "bytes": 70942,
+          "sha256": "455940d9d10648f2c4a40e80c2ebc3c392d8126ba5be74bb28515b462a313c78"
+        },
+        "review-page-2.png": {
+          "bytes": 75829,
+          "sha256": "83aac4a607813485e9670b93f8a2973e9b62bb58e31a826348c2badf0e31c2af"
+        },
+        "review.html": {
+          "bytes": 124675,
+          "sha256": "a599cfaacfc2d598983f9f9bfb3fc3b05f9da86b0991a840c0a4adca81704c45"
+        }
+      }
+    },
+    {
+      "source_commit": "2eeeb0825b63ee3c9a01cb2c08f849bf37f719e5",
+      "audits": {
+        "matched": {
+          "metric": "gap",
+          "records": 2,
+          "pairs": 1,
+          "plots": 4,
+          "retained_samples": "exact",
+          "shared_recorded_problem": true
+        },
+        "mixed": {
+          "metric": "gap",
+          "records": 4,
+          "pairs": 6,
+          "plots": 4,
+          "retained_samples": "exact",
+          "shared_recorded_problem": false
+        }
+      },
+      "viewports": [
+        {
+          "width": 1440,
+          "case": "matched",
+          "records": 2,
+          "keyboard": "passed",
+          "horizontal_regions": "full width",
+          "download": "exact",
+          "horizontal_page_overflow": false
+        },
+        {
+          "width": 1440,
+          "case": "mixed",
+          "records": 4,
+          "keyboard": "passed",
+          "horizontal_regions": "full width",
+          "download": "exact",
+          "horizontal_page_overflow": false
+        },
+        {
+          "width": 390,
+          "case": "matched",
+          "records": 2,
+          "keyboard": "passed",
+          "horizontal_regions": "keyboard checked",
+          "download": "exact",
+          "horizontal_page_overflow": false
+        },
+        {
+          "width": 390,
+          "case": "mixed",
+          "records": 4,
+          "keyboard": "passed",
+          "horizontal_regions": "keyboard checked",
+          "download": "exact",
+          "horizontal_page_overflow": false
+        }
+      ],
+      "network_requests": [],
+      "javascript_errors": [],
+      "browser": "153.0.8010.12",
+      "no_script": "both reports, diagnostic tables, static curves and native details passed",
+      "pdf": {
+        "pages": 2,
+        "final_section_present": true
+      },
+      "outputs": {
+        "ChainBench_saved_comparison_review.pdf": {
+          "bytes": 110105,
+          "sha256": "75caaa3fc1fb3e77ec80bcf062053023f935134c5e3eb7993b141f1b95a2214d"
+        },
+        "input-a.json": {
+          "bytes": 4935,
+          "sha256": "1e340efc67331f3f6455afe57288f29508e04ee2be2139d1a11963645d43f75f"
+        },
+        "input-b.json": {
+          "bytes": 5870,
+          "sha256": "5b41b9f1932bcb02fd54dcf7e67a7cf73f959aaa5e4b25c738cdf95d20aeb911"
+        },
+        "input-c.json": {
+          "bytes": 4957,
+          "sha256": "41bf72dcd5d8d907cb9341b794be21083db212a5e228a757986a2407ec6c8ba6"
+        },
+        "input-d.json": {
+          "bytes": 5672,
+          "sha256": "a98ddf8dd54f3096a144f91f15e80a86eaac8a5af2d5d204def87a52f30047d2"
+        },
+        "matched-context-1440.png": {
+          "bytes": 35858,
+          "sha256": "534b59e70964f81070bc2359cbc73433a2700b0ed8eadb7798c8bd9efc1581ae"
+        },
+        "matched-context-390.png": {
+          "bytes": 40192,
+          "sha256": "7889648f22322057bbd79b80430a0a767ff922bb1215859e0089fafcf8febaa4"
+        },
+        "matched-context-print.png": {
+          "bytes": 35889,
+          "sha256": "6ca67894cce6254e9c36eb43487bde56b6859298c2336548dced30b9dd0e25f3"
+        },
+        "matched-context-right-390.png": {
+          "bytes": 39906,
+          "sha256": "f5a2d5d4b4263f12064b42340b8a957932c4974fd99401765aa8ea05b40654fb"
+        },
+        "matched-download-1440.json": {
+          "bytes": 20078,
+          "sha256": "ae8deef2ca71f23a6190486a1be3592b8bf2cbb0fac8f039cc0f3918a0e838e5"
+        },
+        "matched-download-390.json": {
+          "bytes": 20078,
+          "sha256": "ae8deef2ca71f23a6190486a1be3592b8bf2cbb0fac8f039cc0f3918a0e838e5"
+        },
+        "matched.html": {
+          "bytes": 64400,
+          "sha256": "2ca67a8642328f580cdea2436b2c600321f708651cdf7497b5140cc2e9963cab"
+        },
+        "mixed-context-1440.png": {
+          "bytes": 44454,
+          "sha256": "7989c31b4173ff02f5ef00d09d83e1a80936d65de812d83317dc330a43eb9e1e"
+        },
+        "mixed-context-390.png": {
+          "bytes": 45831,
+          "sha256": "6053eec7f0e779c66892dc158abefef65ae130729a62a219e90104b81b7bd3a6"
+        },
+        "mixed-context-print.png": {
+          "bytes": 44439,
+          "sha256": "10e5b9c48de89489f89ffbc5a4e22bc48b5ef087d601345e57d2f3c7a1c27a74"
+        },
+        "mixed-context-right-390.png": {
+          "bytes": 45313,
+          "sha256": "26ee20a2736572d383bce666877427b85fbcd96ee2544eda4705a284bfa2995c"
+        },
+        "mixed-download-1440.json": {
+          "bytes": 45108,
+          "sha256": "cb20d6cc6903391965e7078b9f61c89bda2fa0ff8de26861470d00296b425586"
+        },
+        "mixed-download-390.json": {
+          "bytes": 45108,
+          "sha256": "cb20d6cc6903391965e7078b9f61c89bda2fa0ff8de26861470d00296b425586"
+        },
+        "mixed.html": {
+          "bytes": 120175,
+          "sha256": "8441023acfb824d84972a881af98beb231bd831388d6bab4063bd3b051c28be7"
+        },
+        "review-page-1.png": {
+          "bytes": 93186,
+          "sha256": "a04d60777f3f889c84f320a260fb1d82fad16ae68d6bbb40e0d1a113e8dd15e0"
+        },
+        "review-page-2.png": {
+          "bytes": 102834,
+          "sha256": "c8bc81c69a8230d8a243e08963a7686fc3195ae5ee65937cce95de03a5b637e5"
+        },
+        "review.html": {
+          "bytes": 141519,
+          "sha256": "6e4e909d47fe0d4281d540cbd21d241342ef559018450660ca4582644192c621"
+        },
+        "shared-gd-1440.png": {
+          "bytes": 42381,
+          "sha256": "b7d923422d4ba480b5941a19837ede9db7a87abcbafd268a42e4af81db8fa588"
+        },
+        "shared-gd-390.png": {
+          "bytes": 12643,
+          "sha256": "9e06256d5e77e920c822e332d1c7cb2b37a164a78cd840c419f04d97aef106c9"
+        },
+        "shared-gd-print.png": {
+          "bytes": 24206,
+          "sha256": "bd8244d6e32c3f52ef6c2721bd428b4219e81043bd3942bfed899a6d2583850f"
+        },
+        "shared-gd-right-390.png": {
+          "bytes": 7686,
+          "sha256": "d63d42231e4e6c2b686bfd16e8d327d0bade45eed1e77e3dea201bda51af8239"
+        }
+      }
+    },
+    {
+      "viewports": [
+        {
+          "width": 1440,
+          "overflow": false,
+          "keyboard": "passed",
+          "playback": "passed",
+          "download": "matched",
+          "all_variations": 9,
+          "metric_states": 119,
+          "spectral_states": 119,
+          "source_polynomials": "independent samples matched"
+        },
+        {
+          "width": 390,
+          "overflow": false,
+          "keyboard": "passed",
+          "playback": "passed",
+          "download": "matched",
+          "all_variations": 9,
+          "metric_states": 119,
+          "spectral_states": 119,
+          "source_polynomials": "independent samples matched"
+        }
+      ],
+      "network_requests": [],
+      "javascript_errors": [],
+      "browser": "153.0.8010.12",
+      "no_script": "readable with native details and complete static paths"
+    },
+    {
+      "viewports": [
+        {
+          "width": 1440,
+          "all_cases": 12,
+          "overflow": false,
+          "keyboard": "passed",
+          "markers": "matched",
+          "certificate_steps": 216,
+          "certificate_coordinates_and_readouts": "matched",
+          "segment_frames": 216,
+          "segment_points": 44337,
+          "playback": "passed",
+          "download": "matched"
+        },
+        {
+          "width": 390,
+          "all_cases": 12,
+          "overflow": false,
+          "keyboard": "passed",
+          "markers": "matched",
+          "certificate_steps": 216,
+          "certificate_coordinates_and_readouts": "matched",
+          "segment_frames": 216,
+          "segment_points": 44337,
+          "playback": "passed",
+          "download": "matched"
+        }
+      ],
+      "network_requests": [],
+      "javascript_errors": [],
+      "browser": "153.0.8010.12",
+      "no_script": "complete static paths and native details remain readable"
+    },
+    {
+      "viewports": [
+        {
+          "width": 1440,
+          "all_cases": 16,
+          "ranked_links": "passed",
+          "keyboard": "passed",
+          "overflow": false,
+          "download": "matched"
+        },
+        {
+          "width": 390,
+          "all_cases": 16,
+          "ranked_links": "passed",
+          "keyboard": "passed",
+          "overflow": false,
+          "download": "matched"
+        }
+      ],
+      "network_requests": [],
+      "javascript_errors": [],
+      "browser": "153.0.8010.12",
+      "no_script": "every native case remains available with static charts and inputs"
+    },
+    {
+      "viewports": [
+        {
+          "width": 1440,
+          "all_cases": 9,
+          "both_methods": "passed",
+          "markers": "matched",
+          "keyboard": "passed",
+          "playback": "passed",
+          "zero_coordinate": "verified",
+          "download": "matched",
+          "overflow": false,
+          "upper_model_frames": 324,
+          "upper_model_points": 32752,
+          "dual_frames": 324,
+          "dual_points": 14904,
+          "first_increase": "verified"
+        },
+        {
+          "width": 390,
+          "all_cases": 9,
+          "both_methods": "passed",
+          "markers": "matched",
+          "keyboard": "passed",
+          "playback": "passed",
+          "zero_coordinate": "verified",
+          "download": "matched",
+          "overflow": false,
+          "upper_model_frames": 324,
+          "upper_model_points": 32752,
+          "dual_frames": 324,
+          "dual_points": 14904,
+          "first_increase": "verified"
+        }
+      ],
+      "network_requests": [],
+      "javascript_errors": [],
+      "browser": "153.0.8010.12",
+      "no_script": "full paths, stage tables and every case remain readable"
+    },
+    {
+      "viewports": [
+        {
+          "width": 1440,
+          "all_topics": 8,
+          "comparison_selection": "passed",
+          "keyboard": "passed",
+          "filtered_navigation": "passed",
+          "language": "passed",
+          "download": "matched",
+          "focused": "passed",
+          "overflow": false
+        },
+        {
+          "width": 390,
+          "all_topics": 8,
+          "comparison_selection": "passed",
+          "keyboard": "passed",
+          "filtered_navigation": "passed",
+          "language": "passed",
+          "download": "matched",
+          "focused": "passed",
+          "overflow": false
+        }
+      ],
+      "network_requests": [],
+      "javascript_errors": [],
+      "browser": "153.0.8010.12",
+      "no_script": "all eight comparison cards, flows and lessons readable"
+    },
+    {
+      "viewports": [
+        {
+          "width": 1440,
+          "matched_contexts": {
+            "report": 8,
+            "learning": 1
+          },
+          "expanded_inputs": "matched",
+          "standalone_caption": "passed",
+          "overflow": false
+        },
+        {
+          "width": 390,
+          "matched_contexts": {
+            "report": 8,
+            "learning": 1
+          },
+          "expanded_inputs": "matched",
+          "standalone_caption": "passed",
+          "overflow": false
+        }
+      ],
+      "network_requests": [],
+      "javascript_errors": [],
+      "browser": "153.0.8010.12",
+      "no_script": "visible context and full input details"
+    },
+    {
+      "cases": [
+        {
+          "horizon": 20,
+          "width": 1440,
+          "all_points": 21,
+          "coordinates_readouts_paths": "matched",
+          "keyboard_playback": "passed",
+          "svg_labels": "inside view boxes",
+          "overflow": false,
+          "download": "matched"
+        },
+        {
+          "horizon": 20,
+          "width": 390,
+          "all_points": 21,
+          "coordinates_readouts_paths": "matched",
+          "keyboard_playback": "passed",
+          "svg_labels": "inside view boxes",
+          "overflow": false,
+          "download": "matched"
+        },
+        {
+          "horizon": 500,
+          "width": 1440,
+          "all_points": 501,
+          "coordinates_readouts_paths": "matched",
+          "keyboard_playback": "passed",
+          "svg_labels": "inside view boxes",
+          "overflow": false,
+          "download": "matched"
+        },
+        {
+          "horizon": 500,
+          "width": 390,
+          "all_points": 501,
+          "coordinates_readouts_paths": "matched",
+          "keyboard_playback": "passed",
+          "svg_labels": "inside view boxes",
+          "overflow": false,
+          "download": "matched"
+        }
+      ],
+      "network_requests": [],
+      "javascript_errors": [],
+      "browser": "153.0.8010.12",
+      "no_script": "full path, centre, proof and every stored row available"
+    },
+    {
+      "viewports": [
+        {
+          "width": 1440,
+          "dimension": 3,
+          "verified_states": 41,
+          "bars": "all coordinates",
+          "curves": "all observations including duplicate supports",
+          "dual_full_support": "no invented bound"
+        },
+        {
+          "width": 1440,
+          "dimension": 8,
+          "verified_states": 41,
+          "bars": "all coordinates",
+          "curves": "all observations including duplicate supports",
+          "dual_full_support": "no invented bound"
+        },
+        {
+          "width": 1440,
+          "dimension": 32,
+          "verified_states": 41,
+          "bars": "all coordinates",
+          "curves": "all observations including duplicate supports",
+          "dual_full_support": "no invented bound"
+        },
+        {
+          "width": 1440,
+          "dimension": 128,
+          "verified_states": 41,
+          "bars": "all coordinates",
+          "curves": "all observations including duplicate supports",
+          "dual_full_support": "no invented bound"
+        },
+        {
+          "width": 390,
+          "dimension": 3,
+          "verified_states": 41,
+          "bars": "all coordinates",
+          "curves": "all observations including duplicate supports",
+          "dual_full_support": "no invented bound"
+        },
+        {
+          "width": 390,
+          "dimension": 8,
+          "verified_states": 41,
+          "bars": "all coordinates",
+          "curves": "all observations including duplicate supports",
+          "dual_full_support": "no invented bound"
+        },
+        {
+          "width": 390,
+          "dimension": 32,
+          "verified_states": 41,
+          "bars": "all coordinates",
+          "curves": "all observations including duplicate supports",
+          "dual_full_support": "no invented bound"
+        },
+        {
+          "width": 390,
+          "dimension": 128,
+          "verified_states": 41,
+          "bars": "all coordinates",
+          "curves": "all observations including duplicate supports",
+          "dual_full_support": "no invented bound"
+        }
+      ],
+      "javascript_errors": [],
+      "network_requests": [],
+      "browser": "153.0.8010.12",
+      "no_script": "all four cases, curves and complete tables available"
+    },
+    {
+      "viewports": [
+        {
+          "width": 1440,
+          "case": "cube",
+          "verified_states": 2624
+        },
+        {
+          "width": 1440,
+          "case": "half",
+          "verified_states": 2624
+        },
+        {
+          "width": 1440,
+          "case": "one-in-eight",
+          "verified_states": 2624
+        },
+        {
+          "width": 1440,
+          "case": "one-in-thirty-two",
+          "verified_states": 2624
+        },
+        {
+          "width": 1440,
+          "case": "three-directions",
+          "verified_states": 2624
+        },
+        {
+          "width": 1440,
+          "case": "eight-directions",
+          "verified_states": 2624
+        },
+        {
+          "width": 390,
+          "case": "cube",
+          "verified_states": 2624
+        },
+        {
+          "width": 390,
+          "case": "half",
+          "verified_states": 2624
+        },
+        {
+          "width": 390,
+          "case": "one-in-eight",
+          "verified_states": 2624
+        },
+        {
+          "width": 390,
+          "case": "one-in-thirty-two",
+          "verified_states": 2624
+        },
+        {
+          "width": 390,
+          "case": "three-directions",
+          "verified_states": 2624
+        },
+        {
+          "width": 390,
+          "case": "eight-directions",
+          "verified_states": 2624
+        }
+      ],
+      "javascript_errors": [],
+      "network_requests": [],
+      "browser": "153.0.8010.12",
+      "no_script": "all six cases and every seed table available"
+    },
+    {
+      "viewports": [
+        {
+          "width": 1440,
+          "states": 72,
+          "waveform_points": 75411,
+          "probabilities": 2100,
+          "keyboard": "passed",
+          "labels": "within SVG",
+          "download": "matched",
+          "all_curves": "matched",
+          "overflow": false
+        },
+        {
+          "width": 390,
+          "states": 72,
+          "waveform_points": 75411,
+          "probabilities": 2100,
+          "keyboard": "passed",
+          "labels": "within SVG",
+          "download": "matched",
+          "all_curves": "matched",
+          "overflow": false
+        }
+      ],
+      "network_requests": [],
+      "javascript_errors": [],
+      "browser": "153.0.8010.12",
+      "no_script": "native waveform gallery, all curves, all nodes/counts and current row visible"
+    },
+    {
+      "viewports": [
+        {
+          "width": 1440,
+          "snapshots": 8,
+          "all_pixels": "matched to raw arrays",
+          "all_curves": "matched",
+          "keyboard": "passed",
+          "labels": "inside SVG bounds",
+          "download": "matched",
+          "overflow": false
+        },
+        {
+          "width": 390,
+          "snapshots": 8,
+          "all_pixels": "matched to raw arrays",
+          "all_curves": "matched",
+          "keyboard": "passed",
+          "labels": "inside SVG bounds",
+          "download": "matched",
+          "overflow": false
+        }
+      ],
+      "network_requests": [],
+      "javascript_errors": [],
+      "browser": "153.0.8010.12",
+      "no_script": "full curves and every stored image remain available"
+    },
+    {
+      "viewports": [
+        {
+          "width": 1440,
+          "snapshots": 5,
+          "all_pixels": "matched to raw arrays",
+          "all_curves": "matched",
+          "keyboard": "passed",
+          "labels": "inside SVG bounds",
+          "download": "matched",
+          "overflow": false
+        },
+        {
+          "width": 390,
+          "snapshots": 5,
+          "all_pixels": "matched to raw arrays",
+          "all_curves": "matched",
+          "keyboard": "passed",
+          "labels": "inside SVG bounds",
+          "download": "matched",
+          "overflow": false
+        }
+      ],
+      "network_requests": [],
+      "javascript_errors": [],
+      "browser": "153.0.8010.12",
+      "no_script": "full curves and every stored image remain available"
+    },
+    {
+      "viewports": [
+        {
+          "width": 1440,
+          "cases": 9,
+          "steps_inspected": 459,
+          "coordinates_and_readouts": "matched",
+          "complete_metric_curves": "matched",
+          "keyboard_playback_language_download": "passed",
+          "overflow": false
+        },
+        {
+          "width": 390,
+          "cases": 9,
+          "steps_inspected": 459,
+          "coordinates_and_readouts": "matched",
+          "complete_metric_curves": "matched",
+          "keyboard_playback_language_download": "passed",
+          "overflow": false
+        }
+      ],
+      "network_requests": [],
+      "javascript_errors": [],
+      "browser": "153.0.8010.12",
+      "no_script": "full paths, curves, tables and all cases remain available"
+    },
+    {
+      "cases": [
+        {
+          "file": "landscape.html",
+          "width": 1440,
+          "states": 19,
+          "methods": [
+            "gd",
+            "smooth-fista",
+            "heavy-ball",
+            "cg",
+            "proximal-point"
+          ],
+          "offline": "passed"
+        },
+        {
+          "file": "landscape.html",
+          "width": 390,
+          "states": 19,
+          "methods": [
+            "gd",
+            "smooth-fista",
+            "heavy-ball",
+            "cg",
+            "proximal-point"
+          ],
+          "offline": "passed"
+        },
+        {
+          "file": "landscape-extreme.html",
+          "width": 1440,
+          "states": 81,
+          "methods": [
+            "proximal-point",
+            "cg",
+            "smooth-fista"
+          ],
+          "offline": "passed"
+        },
+        {
+          "file": "landscape-extreme.html",
+          "width": 390,
+          "states": 81,
+          "methods": [
+            "proximal-point",
+            "cg",
+            "smooth-fista"
+          ],
+          "offline": "passed"
+        }
+      ],
+      "network_requests": [],
+      "javascript_errors": [],
+      "browser": "153.0.8010.12"
+    },
+    {
+      "viewports": [
+        {
+          "width": 1440,
+          "reports_opened": 16,
+          "return_links": "passed",
+          "preview_images": "loaded",
+          "all_seeds": "retained",
+          "unresolved_seed24": "retained",
+          "language": "passed",
+          "overflow": false,
+          "atlas_workflow_links": 22,
+          "case_preserved_table_nodes": {
+            "index.html": 12,
+            "atlas.html": 0,
+            "shewchuk.html": 255,
+            "deblur.html": 0,
+            "heavy-ball.html": 95,
+            "simplex.html": 197,
+            "proximal.html": 193,
+            "landscape.html": 38,
+            "stress-gd-baseline.html": 134,
+            "stress-nesterov-1983.html": 134,
+            "stress-polyak-1964.html": 134,
+            "stress-hestenes-stiefel-1952.html": 134,
+            "stress-jaggi-2013.html": 134,
+            "stress-rockafellar-1976.html": 134,
+            "stress-beck-teboulle-2009.html": 134,
+            "stress-ista-vs-fista.html": 134,
+            "tight-gd.html": 4
+          }
+        },
+        {
+          "width": 390,
+          "reports_opened": 16,
+          "return_links": "passed",
+          "preview_images": "loaded",
+          "all_seeds": "retained",
+          "unresolved_seed24": "retained",
+          "language": "passed",
+          "overflow": false,
+          "atlas_workflow_links": 22,
+          "case_preserved_table_nodes": {
+            "index.html": 12,
+            "atlas.html": 0,
+            "shewchuk.html": 255,
+            "deblur.html": 0,
+            "heavy-ball.html": 95,
+            "simplex.html": 197,
+            "proximal.html": 193,
+            "landscape.html": 38,
+            "stress-gd-baseline.html": 134,
+            "stress-nesterov-1983.html": 134,
+            "stress-polyak-1964.html": 134,
+            "stress-hestenes-stiefel-1952.html": 134,
+            "stress-jaggi-2013.html": 134,
+            "stress-rockafellar-1976.html": 134,
+            "stress-beck-teboulle-2009.html": 134,
+            "stress-ista-vs-fista.html": 134,
+            "tight-gd.html": 4
+          }
+        }
+      ],
+      "network_requests": [],
+      "javascript_errors": [],
+      "browser": "153.0.8010.12",
+      "no_script": "index, static figures and local navigation work"
+    },
+    {
+      "viewports": [
+        {
+          "width": 1440,
+          "reports_opened": 24,
+          "return_links": "passed",
+          "preview_images": "loaded",
+          "all_seeds": "retained",
+          "unresolved_seed24": "retained",
+          "language": "passed",
+          "overflow": false,
+          "atlas_workflow_links": 25,
+          "case_preserved_table_nodes": {
+            "index.html": 49,
+            "atlas.html": 0,
+            "shewchuk.html": 255,
+            "deblur.html": 0,
+            "heavy-ball.html": 95,
+            "simplex.html": 197,
+            "proximal.html": 193,
+            "landscape.html": 38,
+            "stress-gd-baseline.html": 134,
+            "stress-nesterov-1983.html": 134,
+            "stress-polyak-1964.html": 134,
+            "stress-hestenes-stiefel-1952.html": 134,
+            "stress-jaggi-2013.html": 134,
+            "stress-rockafellar-1976.html": 134,
+            "stress-beck-teboulle-2009.html": 134,
+            "stress-ista-vs-fista.html": 134,
+            "tight-gd.html": 4,
+            "wavelet.html": 13,
+            "fw-sparsity.html": 28,
+            "kaczmarz.html": 1674,
+            "sampling.html": 18,
+            "cg-spectrum.html": 864,
+            "adam.html": 281,
+            "admm.html": 1576,
+            "backtracking.html": 612
+          }
+        },
+        {
+          "width": 390,
+          "reports_opened": 24,
+          "return_links": "passed",
+          "preview_images": "loaded",
+          "all_seeds": "retained",
+          "unresolved_seed24": "retained",
+          "language": "passed",
+          "overflow": false,
+          "atlas_workflow_links": 25,
+          "case_preserved_table_nodes": {
+            "index.html": 49,
+            "atlas.html": 0,
+            "shewchuk.html": 255,
+            "deblur.html": 0,
+            "heavy-ball.html": 95,
+            "simplex.html": 197,
+            "proximal.html": 193,
+            "landscape.html": 38,
+            "stress-gd-baseline.html": 134,
+            "stress-nesterov-1983.html": 134,
+            "stress-polyak-1964.html": 134,
+            "stress-hestenes-stiefel-1952.html": 134,
+            "stress-jaggi-2013.html": 134,
+            "stress-rockafellar-1976.html": 134,
+            "stress-beck-teboulle-2009.html": 134,
+            "stress-ista-vs-fista.html": 134,
+            "tight-gd.html": 4,
+            "wavelet.html": 13,
+            "fw-sparsity.html": 28,
+            "kaczmarz.html": 1674,
+            "sampling.html": 18,
+            "cg-spectrum.html": 864,
+            "adam.html": 281,
+            "admm.html": 1576,
+            "backtracking.html": 612
+          }
+        }
+      ],
+      "network_requests": [],
+      "javascript_errors": [],
+      "browser": "153.0.8010.12",
+      "backtracking_trials": [
+        {
+          "width": 1440,
+          "cases": 36,
+          "states": 790
+        },
+        {
+          "width": 390,
+          "cases": 36,
+          "states": 790
+        }
+      ],
+      "no_script": "index, static figures and local navigation work"
+    }
+  ],
+  "run_result": {
+    "id": 36941657065,
+    "attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "head": "ca099e718803a07c96c73ecda736f66c6d124e16",
+    "completed_at": "2026-10-02T00:01:11Z"
+  },
+  "merged_main": "9fa4a6ec3e63f7ff815ad9165377e518325c79a1",
+  "merged_main_tree": "1abac02dd4b7d2845e4ae50abf758d3bef8ef9af",
+  "merged_main_tree_matches_tested_pr": true,
+  "separate_main_ci": {
+    "id": 36944034726,
+    "status": "running",
+    "conclusion": null
+  }
+}
