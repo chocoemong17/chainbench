@@ -113,7 +113,7 @@ def main():
                     assert page.evaluate("document.documentElement.scrollWidth<=innerWidth")
                     movie = page.locator("#movie")
                     expect(movie).to_have_js_property("paused", True)
-                    page.wait_for_function('document.querySelector("video").readyState>=2')
+                    page.wait_for_function('()=>document.querySelector("video").readyState>=2')
                     assert abs(movie.evaluate("e=>e.duration") - 48) < 0.1
                     # Decode actual frames. Different timestamps must produce different pixels.
                     page.screenshot(
@@ -183,7 +183,7 @@ def main():
                     slider.press("Home")
                     slider.press("ArrowRight")
                     expect(slider).to_have_value("1")
-                    page.wait_for_function('!document.querySelector("video").seeking')
+                    page.wait_for_function('()=>!document.querySelector("video").seeking')
                     expect(slider).to_have_value("1")
                     assert (
                         1 / record["fps"] <= movie.evaluate("v=>v.currentTime") < 2 / record["fps"]
@@ -191,7 +191,7 @@ def main():
                     slider.press("ArrowRight")
                     expect(slider).to_have_value("2")
                     slider.press("End")
-                    page.wait_for_function('!document.querySelector("video").seeking')
+                    page.wait_for_function('()=>!document.querySelector("video").seeking')
                     expect(slider).to_have_value(str(len(record["frame_iterations"]) - 1))
                     assert page.evaluate("window.adamLesson.k") == record["steps"]
                     # A graph itself is a second natural way to scrub.
