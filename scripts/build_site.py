@@ -11,6 +11,8 @@ import re
 import shutil
 from pathlib import Path
 
+from render_adam_film import build_film
+
 from chainbench.landscape import run_landscape
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -50,6 +52,7 @@ def build(tour: Path, output: Path, source: str):
     (output / 'explorer-data.json').write_text(json.dumps({
         'kind': 'chainbench.browser-reference', 'source': source, 'cases': cases,
     }, ensure_ascii=False, allow_nan=False, separators=(',', ':')), encoding='utf8')
+    build_film(output / 'papers' / 'adam', source)
     (output / '.nojekyll').touch()
     inventory = {}
     for path in sorted(output.rglob('*')):

@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+### Adam single-paper format study
+
+- Add an isolated video-led Adam lesson: one 48-second film, two synchronized
+  graphs, English/Korean captions and a short route to the source paper.
+- Use a declared rotated Rosenbrock valley with GD, momentum and bias-corrected
+  Adam; retain actual numerical rows and encode movies only on GitHub Actions.
+
+
 - Add an English-first browser entry point with optional Korean, an actual
   three-case GD/FISTA browser calculation, a draggable iteration timeline and
   an on-demand 30-second visual explanation. Link directly to 25 bilingual reports.
