@@ -61,15 +61,29 @@ def cases():
         result.append(dict(id=f"rosenbrock-{angle}", family="rosenbrock",
                            scale=100, angle=angle, start=rotate([-1.2, 1], angle),
                            target=rotate([1, 1], angle), rate_scale=0.001))
+    for scale, angle in ((1000, 0), (100000, 0), (10000, 0.5), (10000, 1),
+                         (10000, 2), (10000, 5)):
+        result.append(dict(id=f"quartic-{scale}-{angle}", family="quartic",
+                           scale=scale, angle=angle, start=rotate([-3, 2], angle),
+                           target=[0, 0], rate_scale=1 / (28 * scale)))
+    for start in ([-2.4, 1.6], [-3.6, 2.4], [-3, 1], [-2, 3]):
+        result.append(dict(id=f"quartic-start-{start[0]}-{start[1]}", family="quartic",
+                           scale=10000, angle=0, start=start, target=[0, 0],
+                           rate_scale=1 / 280000))
     return result
 
 
 def settings(case, method):
     if method == "adam":
-        return [dict(alpha=float(a), beta=0.9) for a in np.geomspace(0.001, 1, 37)]
-    betas = (0,) if method == "gd" else (0.5, 0.9, 0.95, 0.99, 0.995, 0.999)
+        rates = sorted(set(np.geomspace(0.001, 1, 37)) | set(np.geomspace(0.001, 4, 65))
+                       | {0.2, 0.25, 0.3})
+        return [dict(alpha=float(a), beta=0.9) for a in rates]
+    betas = (0,) if method == "gd" else (
+        0, 0.5, 0.8, 0.9, 0.95, 0.975, 0.98, 0.985, 0.99, 0.9925,
+        0.995, 0.9975, 0.999, 0.9995, 0.9999)
+    rates = sorted(set(np.geomspace(0.0001, 8, 61)) | set(np.geomspace(0.0001, 64, 101)))
     return [dict(alpha=float(a * case["rate_scale"]), beta=b)
-            for b in betas for a in np.geomspace(0.0001, 8, 61)]
+            for b in betas for a in rates]
 
 
 def trajectories(case, method, configs, steps=STEPS):

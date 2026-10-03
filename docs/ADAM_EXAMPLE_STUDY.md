@@ -35,3 +35,21 @@ This is finite-grid example selection on known synthetic inputs, not a proof of
 optimal tuning. A candidate needs further nearby-setting/start checks and readable
 path/early-step views before being proposed for the lesson. All execution and
 plotting take place in GitHub Actions. No new video is made in this study.
+
+## Second pass: broaden tuning and test the candidate's limits
+
+The initial run ([37139450987](https://github.com/chocoemong17/chainbench/actions/runs/37139450987),
+source `c343b83`) passed 22 implementation tests. The aligned quartic with ratio
+10000 was a promising illustration (Adam 82 / Momentum 880 / GD not within
+1200 updates). Rotated and curved examples frequently favored Momentum.
+These exploratory observations motivate the next pass, not a universal ranking.
+
+The second pass retains all original rates and adds 101 GD/Momentum rates across
+0.0001–64 times the scale; 15 Momentum betas including 0, 0.975–0.9999;
+65 Adam rates over 0.001–4 and the round settings 0.2, 0.25, 0.3. Union grids
+remove duplicates. No candidate from the original search is discarded.
+It adds quartic ratios 1000/100000, rotations 0.5°/1°/2°/5°, and starts
+(-2.4,1.6), (-3.6,2.4), (-3,1), (-2,3), for 27 cases total. Each is retuned;
+frozen central settings will also be checked before recommending a final example.
+The target and 1200-update budget are unchanged. All explored families, including
+ones where Adam loses, remain available.
