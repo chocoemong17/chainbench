@@ -7,6 +7,8 @@ import functools
 import hashlib
 import http.server
 import json
+import re
+import urllib.request
 import threading
 from pathlib import Path
 
@@ -16,6 +18,50 @@ from playwright.sync_api import expect, sync_playwright
 class QuietHandler(http.server.SimpleHTTPRequestHandler):
     def log_message(self, *args):
         pass
+
+    def end_headers(self):
+        if self.path.split("?")[0].endswith((".mp4", ".webm")):
+            self.send_header("Accept-Ranges", "bytes")
+        super().end_headers()
+
+    def send_head(self):
+        self.range_left = None
+        path = Path(self.translate_path(self.path))
+        requested = self.headers.get("Range")
+        if not requested or path.suffix not in (".mp4", ".webm") or not path.is_file():
+            return super().send_head()
+        size = path.stat().st_size
+        match = re.fullmatch(r"bytes=(\d*)-(\d*)", requested)
+        if not match or not any(match.groups()):
+            self.send_error(416)
+            return None
+        a, b = match.groups()
+        start = int(a) if a else max(0, size - int(b))
+        end = min(size - 1, int(b)) if a and b else size - 1
+        if not 0 <= start <= end < size:
+            self.send_response(416)
+            self.send_header("Content-Range", f"bytes */{size}")
+            self.end_headers()
+            return None
+        file = path.open("rb")
+        file.seek(start)
+        self.range_left = end - start + 1
+        self.send_response(206)
+        self.send_header("Content-Type", self.guess_type(str(path)))
+        self.send_header("Content-Range", f"bytes {start}-{end}/{size}")
+        self.send_header("Content-Length", str(self.range_left))
+        self.end_headers()
+        return file
+
+    def copyfile(self, source, outputfile):
+        if self.range_left is None:
+            return super().copyfile(source, outputfile)
+        while self.range_left:
+            data = source.read(min(65536, self.range_left))
+            if not data:
+                break
+            outputfile.write(data)
+            self.range_left -= len(data)
 
 
 def main():
@@ -30,6 +76,13 @@ def main():
     )
     threading.Thread(target=server.serve_forever, daemon=True).start()
     origin = f"http://127.0.0.1:{server.server_port}"
+    for name in ["adam.mp4", "adam.webm"]:
+        req = urllib.request.Request(
+            origin + "/papers/adam/" + name, headers={"Range": "bytes=0-31"}
+        )
+        with urllib.request.urlopen(req) as response:
+            assert response.status == 206
+            assert response.read() == (args.site / "papers/adam" / name).read_bytes()[:32]
     proof = {"source": record["source"], "checks": [], "errors": [], "external_requests": []}
     try:
         with sync_playwright() as pw:
@@ -63,13 +116,27 @@ def main():
                     page.wait_for_function('document.querySelector("video").readyState>=2')
                     assert abs(movie.evaluate("e=>e.duration") - 48) < 0.1
                     # Decode actual frames. Different timestamps must produce different pixels.
+                    page.screenshot(
+                        path=str(args.output / f"{engine}-initial-{width}.png"), full_page=True
+                    )
                     decoded = []
                     for seconds in [7, 20, 36]:
                         movie.evaluate("(v,t)=>{v.currentTime=t;}", seconds)
-                        page.wait_for_function(
-                            '(t)=>{const v=document.querySelector("video");return !v.seeking&&Math.abs(v.currentTime-t)<.1;}',
-                            arg=seconds,
-                        )
+                        try:
+                            page.wait_for_function(
+                                '(t)=>{const v=document.querySelector("video");return !v.seeking&&Math.abs(v.currentTime-t)<.1;}',
+                                arg=seconds,
+                            )
+                        except Exception:
+                            print(
+                                engine,
+                                width,
+                                seconds,
+                                movie.evaluate(
+                                    "v=>({time:v.currentTime,ready:v.readyState,seeking:v.seeking,error:v.error?.message,source:v.currentSrc})"
+                                ),
+                            )
+                            raise
                         page.wait_for_timeout(180)
                         png = movie.screenshot(
                             path=str(args.output / f"{engine}-{width}-frame-{seconds}.png")

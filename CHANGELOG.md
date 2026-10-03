@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+### Adam single-paper format study
+
+- Add an isolated video-led Adam lesson: one 48-second film, two synchronized
+  graphs, English/Korean captions and a short route to the source paper.
+- Use a declared rotated Rosenbrock valley with GD, momentum and bias-corrected
+  Adam; retain actual numerical rows and encode movies only on GitHub Actions.
+
+
 - Add an English-first browser entry point with optional Korean, an actual
   three-case GD/FISTA browser calculation, a draggable iteration timeline and
   an on-demand 30-second visual explanation. Link directly to 25 bilingual reports.
@@ -318,10 +326,3 @@ Migration: use `report --format markdown` for the previous report default. The
 - Ubuntu Python 3.10-3.12, Windows/macOS Python 3.12 and minimum NumPy/pytest/Ruff validation; separate clean wheel and sdist installation.
 - Main-only gated GitHub prerelease workflow with verified distribution uploads and SHA256SUMS. No external registry publication or paid API usage.
 - Public contribution, methodology, source mapping, issue/PR, security and release documentation; complete MIT license.
-
-### Adam single-paper format study (unreleased)
-
-- Add an isolated video-led Adam lesson: one 48-second film, two synchronized
-  graphs, English/Korean captions and a short route to the source paper.
-- Use a declared rotated Rosenbrock valley with GD, momentum and bias-corrected
-  Adam; retain actual numerical rows and encode movies only on GitHub Actions.

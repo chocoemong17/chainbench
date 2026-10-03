@@ -28,7 +28,8 @@
   function buildChart(metric) {
     const svg=$(metric+'-chart'), left=56, top=18, width=480, height=232;
     const high=Math.ceil(Math.log10(Math.max(...methods.flatMap(m=>record.traces[m].rows.map(r=>r[metric])))));
-    const low=-12, px=k=>left+k/2400*width;
+    const minimum=Math.min(...methods.flatMap(m=>record.traces[m].rows.map(r=>r[metric])));
+    const low=Math.max(-12,Math.floor(Math.log10(Math.max(1e-12,minimum)))), px=k=>left+k/2400*width;
     const py=v=>top+(high-Math.log10(Math.max(1e-12,v)))/(high-low)*height;
     for(let power=high;power>=low;power-=2){const y=py(10**power);svg.append(node('line',{x1:left,x2:left+width,y1:y,y2:y,class:'grid'}),node('text',{x:left-10,y:y+4,'text-anchor':'end'},'10'+({'-12':'⁻¹²','-11':'⁻¹¹','-10':'⁻¹⁰','-9':'⁻⁹','-8':'⁻⁸','-7':'⁻⁷','-6':'⁻⁶','-5':'⁻⁵','-4':'⁻⁴','-3':'⁻³','-2':'⁻²','-1':'⁻¹','0':'⁰','1':'¹','2':'²','3':'³'}[power]??'^'+power)));}
     for(const k of [0,600,1200,1800,2400])svg.append(node('text',{x:px(k),y:278,'text-anchor':'middle'},k.toLocaleString('en')));
