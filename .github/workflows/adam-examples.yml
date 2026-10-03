@@ -22,12 +22,19 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m pip install 'numpy==2.5.3' 'pytest==9.1.1' 'matplotlib==3.11.1' 'ruff==0.16.9'
-      - run: ruff check scripts/study_adam_examples.py tests/test_adam_examples.py
+      - run: ruff check scripts/study_adam_examples.py scripts/plot_adam_examples.py tests/test_adam_examples.py
       - run: python -m pytest tests/test_adam_examples.py
       - run: python scripts/study_adam_examples.py --source "$GITHUB_SHA" --output adam-example-study
+      - run: python scripts/plot_adam_examples.py --input adam-example-study/study.json --output adam-example-review
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: adam-example-study-${{ github.sha }}
           path: adam-example-study/
+          if-no-files-found: error
+          retention-days: 14
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: adam-example-review-${{ github.sha }}
+          path: adam-example-review/
           if-no-files-found: error
           retention-days: 14

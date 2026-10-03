@@ -53,3 +53,24 @@ It adds quartic ratios 1000/100000, rotations 0.5°/1°/2°/5°, and starts
 frozen central settings will also be checked before recommending a final example.
 The target and 1200-update budget are unchanged. All explored families, including
 ones where Adam loses, remain available.
+
+## Final proposal protocol
+
+Before plotting, refine the central aligned ratio-10000 baselines once more:
+GD adds 101 rates over 1e-5–1e-4; Momentum adds 65 rates over 1e-6–1e-4 ×
+81 betas over 0.96–0.9999. Keep the entire previous grid. Adam uses the declared
+round rate **0.14** for the proposed illustration, even if another searched rate
+is faster. Baselines use their best found rates. The four nearby starts also run
+with these central settings frozen, alongside the earlier per-start retuning.
+
+Every point with a nonfinite coordinate or absolute coordinate ≥1e10 terminates
+that candidate's usable trace. It is recorded as failed, not silently clipped
+into the plotting window. All selected paths remain finite and unmodified.
+Plots show the first 100 actual updates and the first 60 steep-coordinate values;
+the progress chart uses a logarithmic distance axis and explicitly shows its range.
+The known unique minimum is (0,0): each nonnegative quartic term vanishes only there.
+
+The fixture's normalization illustrates the original paper's per-coordinate
+moment mechanism. It does not reproduce an original training experiment, and
+diagonal scale cancellation is only exact when epsilon is zero. The implemented
+epsilon remains 1e-8. No universal advantage under rotations is claimed.

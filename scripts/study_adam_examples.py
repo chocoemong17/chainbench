@@ -147,6 +147,49 @@ def rank(record):
             record["final_relative_loss"] if record["finite"] else math.inf)
 
 
+def final_candidate(results):
+    """Additional central refinement, then a frozen, round Adam rate of 0.14."""
+    central = next(r for r in results if r["case"]["id"] == "quartic-10000-0")
+    case = central["case"]
+    proposal = dict(case=case, methods={}, refinement={}, frozen_starts=[])
+    for method in METHODS:
+        original = settings(case, method)
+        extra = []
+        if method == "momentum":
+            extra = [dict(alpha=float(a), beta=float(b))
+                     for a in np.geomspace(1e-6, 1e-4, 65)
+                     for b in np.linspace(0.96, 0.9999, 81)]
+        elif method == "gd":
+            extra = [dict(alpha=float(a), beta=0) for a in np.geomspace(1e-5, 1e-4, 101)]
+        else:
+            extra = [dict(alpha=0.14, beta=0.9)]
+        configs = original + extra
+        p, f, d = trajectories(case, method, configs)
+        records = summarize(p, f, d, configs)
+        best = min(range(len(records)), key=lambda i: rank(records[i]))
+        # Baselines get the best found setting; Adam uses a simple, declared rate.
+        selected = len(configs) - 1 if method == "adam" else best
+        chosen = records[selected]
+        if not chosen["finite"]:
+            raise ValueError("The proposed trace is not finite")
+        proposal["refinement"][method] = dict(candidates=records, best=best)
+        proposal["methods"][method] = dict(summary=chosen, path=p[:, selected].tolist(),
+                                            loss=f[:, selected].tolist(),
+                                            distance=d[:, selected].tolist())
+    # These are sensitivity observations, not an independent random test sample.
+    for result in results:
+        if result["case"]["id"].startswith("quartic-start-"):
+            row = dict(case=result["case"], frozen={}, retuned={})
+            for method in METHODS:
+                config = proposal["methods"][method]["summary"]["settings"]
+                p, f, d = trajectories(result["case"], method, [config])
+                row["frozen"][method] = summarize(p, f, d, [config])[0]
+                data = result["methods"][method]
+                row["retuned"][method] = data["candidates"][data["selected"]]
+            proposal["frozen_starts"].append(row)
+    return proposal
+
+
 def study(output, source):
     output.mkdir(parents=True, exist_ok=True)
     results = []
@@ -168,6 +211,12 @@ def study(output, source):
             for method, data in result["methods"].items()}}, allow_nan=False), flush=True)
     report = dict(source=source, steps=STEPS, relative_distance_target=DISTANCE_TARGET,
                   relative_loss_target=LOSS_TARGET, cases=results)
+    report["proposal"] = final_candidate(results)
+    print(json.dumps({"proposal": {m: d["summary"] for m, d in
+                                     report["proposal"]["methods"].items()}},
+                     allow_nan=False), flush=True)
+    print(json.dumps({"frozen_starts": report["proposal"]["frozen_starts"]},
+                     allow_nan=False), flush=True)
     (output / "study.json").write_text(json.dumps(report, allow_nan=False), encoding="utf-8")
 
 
