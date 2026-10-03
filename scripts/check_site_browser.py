@@ -46,7 +46,13 @@ def main():
                 # No auto-play, including reduced-motion readers.
                 page.wait_for_timeout(650)
                 assert page.evaluate('window.chainbenchExplorer.k') == 0
-                assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
+                if not page.evaluate('document.documentElement.scrollWidth <= innerWidth'):
+                    page.screenshot(path=str(args.output / f'overflow-{width}.png'), full_page=True)
+                    offending = page.evaluate('''()=>[...document.querySelectorAll('body *')].filter(e=>{
+                      const r=e.getBoundingClientRect();return r.width&&r.right>innerWidth+.5;
+                    }).map(e=>({tag:e.tagName,id:e.id,class:e.className?.baseVal??e.className,
+                               right:e.getBoundingClientRect().right})).slice(0,25)''')
+                    raise AssertionError(('horizontal overflow', width, offending))
                 assert page.locator('img').evaluate_all('(imgs)=>imgs.every(i=>i.complete&&i.naturalWidth>0)')
                 for index, reference in enumerate(record['cases']):
                     page.select_option('#case', str(index))
