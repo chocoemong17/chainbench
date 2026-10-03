@@ -1,0 +1,26 @@
+name: Adam design study
+on:
+  push:
+    branches: [design/adam-film]
+    paths: [src/chainbench/adam_lesson.py, .github/workflows/adam-design.yml]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Inspect the declared difficult example
+        env:
+          PYTHONPATH: src
+        run: |
+          python - <<'PY'
+          from chainbench.adam_lesson import trajectory
+          for method in ('gd','momentum','adam'):
+              r=trajectory(method)
+              print(method, r['settings'])
+              for k in (0,1,10,60,300,1200,2400):
+                  print(r['rows'][k])
+          PY
