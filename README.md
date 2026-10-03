@@ -26,7 +26,7 @@ rules and actual calculations. Explore 2D contours, 3D objective surfaces, image
 reconstructions and reproducible instance families in local, bilingual reports.
 Python 3.10+ and NumPy generate the pages; a browser is enough to read or share them.
 
-**New here? [Download the offline tour and PDF](docs/OFFLINE_DOWNLOAD.md)**, then
+**Prefer an offline copy? [Download the offline tour and PDF](docs/OFFLINE_DOWNLOAD.md)**, then
 follow the [short reading route](docs/REVIEW_GUIDE.md#a-short-reading-route).
 This source targets v0.7.0; the download guide distinguishes the release gate
 from published assets. The preceding v0.6.0 downloads remain available.
