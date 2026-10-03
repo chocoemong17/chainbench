@@ -53,7 +53,8 @@
   }
   function frameAt(t){return Math.max(0,Math.min(record.frame_iterations.length-1,Math.floor(t*record.fps+1e-6)));}
   function syncAt(t){if(!record)return;const f=frameAt(t);$('iteration').value=String(f);draw(record.frame_iterations[f]);}
-  function seekFrame(f){if(!record)return;f=Math.max(0,Math.min(record.frame_iterations.length-1,f));movie.pause();movie.currentTime=f/record.fps;syncAt(movie.currentTime);}
+  // Seek inside a frame: media clocks may round an exact boundary down by a microsecond.
+  function seekFrame(f){if(!record)return;f=Math.max(0,Math.min(record.frame_iterations.length-1,f));movie.pause();movie.currentTime=(f+0.5)/record.fps;syncAt(movie.currentTime);}
   function seek(k){seekFrame(Math.round(timeAt(Math.max(0,Math.min(2400,k)))*record.fps));}
   $('iteration').addEventListener('input',e=>seekFrame(Number(e.target.value)));
   const sync=()=>{syncAt(movie.currentTime);if(!movie.paused&&!movie.ended)frame=requestAnimationFrame(sync);};

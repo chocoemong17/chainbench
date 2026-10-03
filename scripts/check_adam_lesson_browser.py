@@ -178,7 +178,18 @@ def main():
                     assert page.evaluate("window.adamLesson.k") == record["frame_iterations"][f]
                     slider.press("Home")
                     slider.press("ArrowRight")
-                    assert int(slider.input_value()) == 1
+                    expect(slider).to_have_value("1")
+                    page.wait_for_function('!document.querySelector("video").seeking')
+                    expect(slider).to_have_value("1")
+                    assert (
+                        1 / record["fps"] <= movie.evaluate("v=>v.currentTime") < 2 / record["fps"]
+                    )
+                    slider.press("ArrowRight")
+                    expect(slider).to_have_value("2")
+                    slider.press("End")
+                    page.wait_for_function('!document.querySelector("video").seeking')
+                    expect(slider).to_have_value(str(len(record["frame_iterations"]) - 1))
+                    assert page.evaluate("window.adamLesson.k") == record["steps"]
                     # A graph itself is a second natural way to scrub.
                     chart = page.locator("#loss-chart")
                     chart.scroll_into_view_if_needed()
