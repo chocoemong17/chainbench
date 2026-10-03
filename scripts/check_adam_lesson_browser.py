@@ -169,10 +169,17 @@ def main():
                             assert abs(float(displayed) - want) <= abs(want) * 0.006 + 1e-15
                     assert len(set(decoded)) == 3
                     # Actual playback, not just setting a timestamp.
-                    movie.evaluate("v=>v.play()")
                     start = movie.evaluate("v=>v.currentTime")
+                    print({"resume_from": start, "engine": engine, "width": width}, flush=True)
+                    movie.evaluate("v=>v.play()")
+                    print(
+                        movie.evaluate(
+                            "v=>({afterPlay:v.currentTime,paused:v.paused,ended:v.ended,ready:v.readyState})"
+                        ),
+                        flush=True,
+                    )
                     page.wait_for_function(
-                        '(start)=>{const v=document.querySelector("video");return !v.paused&&v.currentTime>start+.4;}',
+                        '(start)=>{const v=document.querySelector("video");return (!v.paused||v.ended)&&v.currentTime>start+.4;}',
                         arg=start,
                         timeout=10000,
                     )
