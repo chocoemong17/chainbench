@@ -43,6 +43,11 @@ def main():
                 page.goto(origin + '/', wait_until='networkidle')
                 expect(page.locator('#play')).to_be_enabled()
                 expect(page.locator('html')).to_have_attribute('lang', 'en')
+                # Native WebKit select chrome ignores the dark background. Keep
+                # explicit painted colors so its selected label stays readable.
+                expect(page.locator('#case')).to_have_css('appearance', 'none')
+                expect(page.locator('#case')).to_have_css('color', 'rgb(233, 246, 238)')
+                expect(page.locator('#case')).to_have_css('background-color', 'rgb(25, 70, 75)')
                 # No auto-play, including reduced-motion readers.
                 page.wait_for_timeout(650)
                 assert page.evaluate('window.chainbenchExplorer.k') == 0
