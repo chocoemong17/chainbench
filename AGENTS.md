@@ -10,6 +10,11 @@ Use substantive PRs and one coherent commit per tested change where possible; do
 
 Publishing is restricted to the tested main-branch commit through the gated release workflow. Do not overwrite releases, enable paid services, publish to registries, alter account security, or disable protective checks to force a release.
 
+Website publication uses the gated `pages.yml` workflow only after every job in
+the current main commit's `tests` workflow passes. Publish the exact verified
+website artifact; do not deploy untested PR builds. Package releases retain
+their separate release gate. See docs/WEBSITE.md.
+
 ## Cloud execution and local storage
 
 Use GitHub branches and pull requests as the authoritative work location. Run
