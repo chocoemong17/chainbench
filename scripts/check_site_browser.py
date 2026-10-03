@@ -53,7 +53,11 @@ def main():
                     }).map(e=>({tag:e.tagName,id:e.id,class:e.className?.baseVal??e.className,
                                right:e.getBoundingClientRect().right})).slice(0,25)''')
                     raise AssertionError(('horizontal overflow', width, offending))
-                assert page.locator('img').evaluate_all('(imgs)=>imgs.every(i=>i.complete&&i.naturalWidth>0)')
+                # Lazy previews load when approached, especially in WebKit.
+                for preview in page.locator('img').all():
+                    preview.scroll_into_view_if_needed()
+                    expect(preview).to_have_js_property('complete', True)
+                    assert preview.evaluate('(img)=>img.naturalWidth>0')
                 for index, reference in enumerate(record['cases']):
                     page.select_option('#case', str(index))
                     actual = page.evaluate('window.chainbenchExplorer.traces')

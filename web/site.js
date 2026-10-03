@@ -4,14 +4,15 @@
   const $ = id => document.getElementById(id);
   let cases = [], current = null, traces = {}, k = 0, timer = null;
   const copy = {
-    en: { play: 'Watch 30 seconds', pause: 'Pause', start: '01 / SAME START', move: '02 / FOLLOW THE STEP', memory: '03 / ADD MEMORY', compare: '04 / COMPARE THE GAP',
+    en: { play: 'Watch 30 seconds', pause: 'Pause', resume: 'Continue', start: '01 / SAME START', move: '02 / FOLLOW THE STEP', memory: '03 / ADD MEMORY', compare: '04 / COMPARE THE GAP',
       captions: ['Both methods start at the same point. Press Play or drag the iteration slider.', 'The gradient points uphill. Each method subtracts a scaled gradient; the curves trace their computed points.', 'Smooth FISTA uses an extrapolated point that remembers the previous move. Watch how its path differs.', 'Compare the actual objective gaps below the plot. A smaller gap here is an observation, not a promise for every problem.'],
       contour: 'Each contour joins points with the same objective.', cases: ['Gentle valley', 'Narrow valley', 'Rotated valley'], error: 'The experiment could not load. Reload the page or open a paper report below.' },
-    ko: { play: '30초로 살펴보기', pause: '일시정지', start: '01 / 같은 출발점', move: '02 / 이동 따라가기', memory: '03 / 이전 이동 활용', compare: '04 / 오차 비교',
+    ko: { play: '30초로 살펴보기', pause: '일시정지', resume: '이어서 보기', start: '01 / 같은 출발점', move: '02 / 이동 따라가기', memory: '03 / 이전 이동 활용', compare: '04 / 오차 비교',
       captions: ['두 방법은 같은 점에서 출발합니다. 재생하거나 반복 횟수 슬라이더를 끌어 보세요.', '기울기는 올라가는 방향입니다. 각 방법은 보폭을 곱한 기울기를 빼며, 선은 실제로 계산한 점들을 잇습니다.', 'Smooth FISTA는 이전 이동을 활용한 외삽점에서 시작합니다. 두 경로가 어떻게 달라지는지 보세요.', '그림 아래 실제 목적함수 오차를 비교하세요. 여기서 더 작은 오차가 모든 문제에서의 우위를 보장하지는 않습니다.'],
       contour: '각 등고선은 목적함숫값이 같은 점들을 잇습니다.', cases: ['완만한 골짜기', '좁은 골짜기', '회전한 골짜기'], error: '실험을 불러오지 못했습니다. 새로고침하거나 아래 논문 보고서를 열어 주세요.' }
   };
   const language = () => copy[root.lang] || copy.en;
+  const idlePlayLabel = () => k > 0 && current && k < current.steps ? language().resume : language().play;
   try {
     const requested = new URL(location.href).searchParams.get('lang');
     const saved = localStorage.getItem('chainbench-language');
@@ -21,7 +22,7 @@
     const c = language();
     $('language').textContent = root.lang === 'en' ? '한국어' : 'English';
     $('language').setAttribute('aria-label', root.lang === 'en' ? 'Switch language to Korean' : '영어로 전환');
-    $('play-label').textContent = timer ? c.pause : c.play;
+    $('play-label').textContent = timer ? c.pause : idlePlayLabel();
     $('plot-caption').textContent = c.contour;
     [...$('case').options].forEach((option, i) => { option.textContent = c.cases[i]; });
     $('iteration').setAttribute('aria-label', root.lang === 'en' ? 'Iteration k' : '반복 횟수 k');
@@ -86,12 +87,13 @@
     const chapter = k === 0 ? 0 : k <= 12 ? 1 : k <= 40 ? 2 : 3, c = language();
     $('chapter').textContent = [c.start, c.move, c.memory, c.compare][chapter];
     $('narration').textContent = c.captions[chapter];
-    // Read-only evidence interface used by the independent browser comparison.
+    if (!timer) $('play-label').textContent = idlePlayLabel();
+    // Inspection interface used by the independent browser comparison.
     window.chainbenchExplorer = { caseIndex: Number($('case').value), k, traces, problem: current.problem };
   }
   function stop() {
     clearInterval(timer); timer = null; $('play').setAttribute('aria-pressed', 'false');
-    $('play-icon').textContent = '▶'; $('play-label').textContent = language().play;
+    $('play-icon').textContent = '▶'; $('play-label').textContent = idlePlayLabel();
   }
   function selectCase() {
     stop(); current = cases[Number($('case').value)]; k = 0;
