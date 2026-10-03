@@ -42,7 +42,10 @@ matches candidate `8673fc1`. The packet retains both seeds for all three familie
 mobile/desktop browser evidence and the genuine failed-candidate history.
 All six compatibility logs record 1,680 passed tests. The source is merged as
 main `617f623`; its tree equals the tested candidate. The [separate main CI](https://github.com/chocoemong17/chainbench/actions/runs/37102622981)
-is in progress. A new release is not yet claimed.
+also passed all nine jobs with 1,680 tests in each of six environments.
+[Main verification](cloud/studio-8673fc1/main-verification.json) preserves the
+source-checked completed logs, eight fault outcomes and separate artifact hashes.
+A new release is not yet claimed.
 
 ## Earlier development: exact stored-input replay
 

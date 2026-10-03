@@ -20,7 +20,12 @@ configurations, including Intel macOS (1,593.76 seconds). Both clean installatio
 eight targeted fault injections, full browser and audited reading checks passed.
 PR #88 is merged as main `617f6230d2ad97f6b4ae8a141c471c64e7a1d04b`; its tree
 is identical to the tested source. The [separate main CI](https://github.com/chocoemong17/chainbench/actions/runs/37102622981)
-is in progress. A new release is not yet claimed.
+also passed all nine jobs. All six environments record 1,680 passed tests; Intel
+macOS completed in 1,519.77 seconds. Every completed job log and source was
+checked, including all eight targeted faults, both clean installations and the
+complete browser/reading checks. [Separate main evidence](main-verification.json)
+retains this run's outcomes and distinct artifact hashes. Release preparation is
+in [PR #89](https://github.com/chocoemong17/chainbench/pull/89); a new release is not yet claimed.
 
 The browser checks include twelve live cases, two selected-method runs, exact
 JSON/HTML downloads, keyboard-selected rows, shutdown and 28 offline reads with
