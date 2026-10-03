@@ -138,6 +138,10 @@ def main():
                             )
                             raise
                         page.wait_for_timeout(180)
+                        assert movie.evaluate("""v=>{
+                            const cue=[...v.textTracks].find(t=>t.language==='en').activeCues[0];
+                            return cue.line===18&&cue.position===40&&cue.size===74;
+                        }"""), "Captions must leave the lower trajectory unobstructed"
                         png = movie.screenshot(
                             path=str(args.output / f"{engine}-{width}-frame-{seconds}.png")
                         )
