@@ -17,7 +17,8 @@ jobs:
           PYTHONPATH: src
         run: |
           python - <<'PY'
-          from chainbench.adam_lesson import trajectory
+          import runpy
+          trajectory=runpy.run_path('src/chainbench/adam_lesson.py')['trajectory']
           for method in ('gd','momentum','adam'):
               r=trajectory(method)
               print(method, r['settings'])
