@@ -1,0 +1,41 @@
+{
+  "source": "d6be0eea39fe19638ee9d29f235bd8186d3909a0",
+  "files": {
+    "paths.svg": {
+      "bytes": 46297,
+      "sha256": "7754f5da5791ac353288cddce1e938ad7c88555b8174551d88dd57fb0c85fb60"
+    },
+    "progress.png": {
+      "bytes": 195662,
+      "sha256": "a3c8c1bbfaa585382c54fb02e633d005ea7e12be2d422f52304a3fa3327bae3d"
+    },
+    "README.ko.md": {
+      "bytes": 1535,
+      "sha256": "249baf90318335a2bbde89d9a24cb5ff2686bd8c94a1c855b0c0bde47afec6ed"
+    },
+    "proposal.json": {
+      "bytes": 326551,
+      "sha256": "e2e4335ddebc770410e834b0b889e8e15438a426330d4845f7073b7b72b5d65b"
+    },
+    "paths.png": {
+      "bytes": 156105,
+      "sha256": "136168aa8f2efd6e450d595a1429a136f9cf845084bddf648a7f892b107aab18"
+    },
+    "progress.svg": {
+      "bytes": 72841,
+      "sha256": "8b60774836eff32bbc31d36287afb0d567aeab429729d3ad320356d1aba1dc6d"
+    },
+    "candidate-ledger.csv.gz": {
+      "bytes": 2505560,
+      "sha256": "ab4fcc461e0f2e3401842dfb8a86d7c7938808edfbaf7df64b5d0be32edb4233"
+    },
+    "case-summary.csv": {
+      "bytes": 4651,
+      "sha256": "b67ca1aa12ca93999d85b002263120621e2b226600c353142bd8d36e2542a680"
+    },
+    "README.md": {
+      "bytes": 2438,
+      "sha256": "f56c99da8647325ed011d5bc9f3de4805a673c6e0099e9c338753f2345bf8d1b"
+    }
+  }
+}

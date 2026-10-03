@@ -1,5 +1,16 @@
 # Adam: choose the example before remaking the film
 
+**[View the two visual boards](reviews/adam-example/README.md)** ·
+**[한국어 검토본](reviews/adam-example/README.ko.md)**
+
+The proposed unequal-scale quartic reaches the declared target at update **66
+for Adam, 611 for refined Momentum**, while GD has not reached it at update 1200.
+This is a finite-gradient-count comparison on this constructed example. The
+[verified study](https://github.com/chocoemong17/chainbench/actions/runs/37140506924)
+passed all 32 focused checks. The review includes 80,407 candidate records
+(including repeated settings in the refinement and 12,110 failures), exact selected
+paths, nearby starts, and controls where the ranking changes.
+
 The published layout stays in place. This branch studies the numerical example;
 it does not change the lesson or generate a new movie.
 
