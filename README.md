@@ -1,4 +1,27 @@
-# ChainBench v0.6.0: read the tour and inspect the evidence
+# ChainBench v0.7.0: read, choose conditions and replay exact inputs
+
+Start with the [two-page Korean FISTA PDF](https://github.com/chocoemong17/chainbench/releases/download/v0.7.0/chainbench-0.7.0-review.pdf)
+and [complete 25-page offline reading ZIP](https://github.com/chocoemong17/chainbench/releases/download/v0.7.0/chainbench-0.7.0-reading.zip).
+Extract the entire ZIP and open `index.html`; reading requires no Python or server.
+For the added computation workflow, see the [studio review PDF](cloud/studio-8673fc1/ChainBench_studio_review.pdf),
+[published studio guide](https://github.com/chocoemong17/chainbench/blob/v0.7.0/docs/STUDIO.md)
+and [exact-input and replay guide](https://github.com/chocoemong17/chainbench/blob/v0.7.0/docs/STORED_INPUTS.md).
+The studio review preserves its earlier development source; the release PDF and ZIP are bound to the final released source.
+
+The [v0.7.0 experimental alpha](https://github.com/chocoemong17/chainbench/releases/tag/v0.7.0)
+is pinned to `fccd654e85cd544fc1a33d7467df93babd4edd2a`.
+[Release verification and public byte checks](cloud/release-v0.7.0) preserve the separate PR,
+main and publication results, source identities, all eight public asset hashes and the actual installed-package evidence.
+The six compatibility environments each passed 1,680 tests; both distributions,
+eight fault injections, live/offline browser checks and audited reading generation passed.
+All eight prior tags, eight releases and 43 assets remain unchanged.
+
+These are selected published protocols, controlled geometry, finite sampled examples
+and narrowly scoped tight constructions. They are not whole-paper reproduction,
+universal rankings or evidence of independent outside adoption. The local task
+remains below 1 GB; generated reports and validation run on GitHub.
+
+## Previous released tour: v0.6.0
 
 Start with the [two-page Korean FISTA PDF](https://github.com/chocoemong17/chainbench/releases/download/v0.6.0/chainbench-0.6.0-review.pdf)
 and the [complete 25-page offline reading ZIP](https://github.com/chocoemong17/chainbench/releases/download/v0.6.0/chainbench-0.6.0-reading.zip).
@@ -32,7 +55,7 @@ These checks cover selected public protocols and declared synthetic inputs.
 They do not establish whole-paper reproduction, universal rankings or independent
 outside adoption. The archived snapshots below preserve their own source identities.
 
-## Latest development review: browser experiment studio
+## Development review: browser experiment studio
 
 [Open the studio PDF](cloud/studio-8673fc1/ChainBench_studio_review.pdf) and
 [its actual downloads, offline reports and verification](cloud/studio-8673fc1).
@@ -45,7 +68,7 @@ main `617f623`; its tree equals the tested candidate. The [separate main CI](htt
 also passed all nine jobs with 1,680 tests in each of six environments.
 [Main verification](cloud/studio-8673fc1/main-verification.json) preserves the
 source-checked completed logs, eight fault outcomes and separate artifact hashes.
-A new release is not yet claimed.
+The final v0.7.0 source includes this workflow; this development packet retains its original source and checks.
 
 ## Earlier development: exact stored-input replay
 

@@ -1,0 +1,1019 @@
+{
+  "verified_utc": "2026-10-03T07:12:25.150550+00:00",
+  "source_commit": "fccd654e85cd544fc1a33d7467df93babd4edd2a",
+  "release_id": 402382019,
+  "release_url": "https://github.com/chocoemong17/chainbench/releases/tag/v0.7.0",
+  "tag": "v0.7.0",
+  "public_asset_streams": [
+    {
+      "id": 607348946,
+      "name": "build-environment.txt",
+      "bytes": 247,
+      "sha256": "5a51793c6f563204ad9a517601226242b6dfb0d6fa3752d2989022159ec63db8",
+      "url": "https://github.com/chocoemong17/chainbench/releases/download/v0.7.0/build-environment.txt"
+    },
+    {
+      "id": 607348939,
+      "name": "chainbench-0.7.0-py3-none-any.whl",
+      "bytes": 392125,
+      "sha256": "77e6654ab5fbd4647f1776844fbccf6decebbfffd1da9f8609554d590a437b6a",
+      "url": "https://github.com/chocoemong17/chainbench/releases/download/v0.7.0/chainbench-0.7.0-py3-none-any.whl"
+    },
+    {
+      "id": 607348942,
+      "name": "chainbench-0.7.0-reading.zip",
+      "bytes": 44961065,
+      "sha256": "f21ac82500773b532b5e5d61c1e276d563a800d12021a5137eab5904a2ccb901",
+      "url": "https://github.com/chocoemong17/chainbench/releases/download/v0.7.0/chainbench-0.7.0-reading.zip"
+    },
+    {
+      "id": 607348941,
+      "name": "chainbench-0.7.0-review.pdf",
+      "bytes": 286163,
+      "sha256": "d3dba073f103866c958dc9455d77fd63704eb3ed2ceda8fbdbc8520224cf676a",
+      "url": "https://github.com/chocoemong17/chainbench/releases/download/v0.7.0/chainbench-0.7.0-review.pdf"
+    },
+    {
+      "id": 607348954,
+      "name": "chainbench-0.7.0.tar.gz",
+      "bytes": 767800,
+      "sha256": "25e0cc139f604a233b62a5abbcc18fed505f72c8a399c464186db028626b7e40",
+      "url": "https://github.com/chocoemong17/chainbench/releases/download/v0.7.0/chainbench-0.7.0.tar.gz"
+    },
+    {
+      "id": 607348958,
+      "name": "reading-verification.json",
+      "bytes": 567,
+      "sha256": "b758ea0b6fa4012a692f03a5683ac1efe8f673d4951fd36fa193dc06440aee33",
+      "url": "https://github.com/chocoemong17/chainbench/releases/download/v0.7.0/reading-verification.json"
+    },
+    {
+      "id": 607348943,
+      "name": "SHA256SUMS",
+      "bytes": 643,
+      "sha256": "c7baae19894a901eb93574e8b8ae3097e9148f86f28c3e6404fd2ede2a052993",
+      "url": "https://github.com/chocoemong17/chainbench/releases/download/v0.7.0/SHA256SUMS"
+    },
+    {
+      "id": 607348964,
+      "name": "verification.json",
+      "bytes": 28298,
+      "sha256": "b25014cbe6c667c242de439f50d2c58933fff8a10b0171d0f36b962e71ffd286",
+      "url": "https://github.com/chocoemong17/chainbench/releases/download/v0.7.0/verification.json"
+    }
+  ],
+  "checksum_manifest_matches_all_seven_payloads": true,
+  "source_and_asset_bindings_checked": true,
+  "installation_evidence": {
+    "python": "3.12.14",
+    "artifacts": [
+      {
+        "artifact": "chainbench-0.7.0-py3-none-any.whl",
+        "sha256": "77e6654ab5fbd4647f1776844fbccf6decebbfffd1da9f8609554d590a437b6a",
+        "version": "0.7.0",
+        "checks": 8,
+        "slugs": [
+          "gd-baseline",
+          "nesterov-1983",
+          "polyak-1964",
+          "hestenes-stiefel-1952",
+          "jaggi-2013",
+          "rockafellar-1976",
+          "beck-teboulle-2009",
+          "ista-vs-fista"
+        ],
+        "statuses": [
+          "CONSISTENT",
+          "CONSISTENT",
+          "CONSISTENT",
+          "CONSISTENT",
+          "CONSISTENT",
+          "CONSISTENT",
+          "CONSISTENT",
+          "INFO"
+        ],
+        "installed_outside_checkout": true,
+        "pip_check": "passed",
+        "exports": [
+          "html",
+          "markdown",
+          "csv",
+          "json"
+        ],
+        "plot_svg": "passed",
+        "visual_evidence": "matched",
+        "experiments": [
+          {
+            "preset": "quadratic",
+            "config_sha256": "5948d1f18bb4e37c0cc6a1775983d0e45d24f747b863c16108b60c8cdf44347f",
+            "methods": [
+              "gd",
+              "smooth-fista",
+              "heavy-ball",
+              "cg",
+              "proximal-point"
+            ],
+            "rows": 137,
+            "exports": [
+              "json",
+              "csv",
+              "markdown",
+              "html"
+            ],
+            "saved_config_rerun": "matched"
+          },
+          {
+            "preset": "diagonal-lasso",
+            "config_sha256": "fcebaccd5ab774f682042b75ee941611663a387cc80aa9ec7a66db9ad6e26dcb",
+            "methods": [
+              "ista",
+              "fista"
+            ],
+            "rows": 62,
+            "exports": [
+              "json",
+              "csv",
+              "markdown",
+              "html"
+            ],
+            "saved_config_rerun": "matched"
+          },
+          {
+            "preset": "simplex",
+            "config_sha256": "94d543bc70b9494e094388eab757115ba16d86f2a3b9cfcde47172c78e3e7972",
+            "methods": [
+              "frank-wolfe"
+            ],
+            "rows": 31,
+            "exports": [
+              "json",
+              "csv",
+              "markdown",
+              "html"
+            ],
+            "saved_config_rerun": "matched"
+          }
+        ],
+        "instance_controls": {
+          "direct_override": "passed",
+          "seeded_config_sha256": "19a4979b5568006e6492cd19122c62447fa401edfadba8d1d1b271caf555113b"
+        },
+        "advanced_workflows": {
+          "learning": "matched",
+          "sweep": "matched",
+          "replay": "matched",
+          "gd_tight": "matched",
+          "stress": "matched",
+          "landscape": "matched",
+          "shewchuk_reproduction": "matched",
+          "simplex_geometry": "matched",
+          "inspectable_stress": "matched",
+          "proximal_geometry": "matched",
+          "offline_tour": "matched",
+          "fista_deblurring": "matched",
+          "heavy_ball_counterexample": "matched",
+          "noisy_wavelet": "matched",
+          "fw_sparsity": "matched",
+          "extended_tour": "matched",
+          "kaczmarz_expectation": "matched",
+          "nonuniform_sampling": "matched",
+          "cg_spectrum": "matched",
+          "adam_counterexample": "matched",
+          "admm_geometry": "matched",
+          "fista_backtracking": "matched"
+        },
+        "saved_comparison": [
+          {
+            "metric": "gap",
+            "records": 2,
+            "pairs": 1,
+            "plots": 4,
+            "retained_samples": "exact",
+            "shared_recorded_problem": true
+          },
+          {
+            "metric": "stationarity",
+            "records": 2,
+            "pairs": 1,
+            "plots": 4,
+            "retained_samples": "exact",
+            "shared_recorded_problem": true
+          },
+          {
+            "metric": "distance_to_reference",
+            "records": 2,
+            "pairs": 1,
+            "plots": 4,
+            "retained_samples": "exact",
+            "shared_recorded_problem": true
+          },
+          {
+            "metric": "gap",
+            "records": 3,
+            "pairs": 3,
+            "plots": 3,
+            "retained_samples": "exact",
+            "shared_recorded_problem": false
+          },
+          {
+            "metric": "stationarity",
+            "records": 3,
+            "pairs": 3,
+            "plots": 3,
+            "retained_samples": "exact",
+            "shared_recorded_problem": false
+          },
+          {
+            "metric": "distance_to_reference",
+            "records": 3,
+            "pairs": 3,
+            "plots": 3,
+            "retained_samples": "exact",
+            "shared_recorded_problem": false
+          },
+          {
+            "metric": "gap",
+            "records": 4,
+            "pairs": 6,
+            "plots": 4,
+            "retained_samples": "exact",
+            "shared_recorded_problem": false
+          },
+          {
+            "metric": "stationarity",
+            "records": 4,
+            "pairs": 6,
+            "plots": 4,
+            "retained_samples": "exact",
+            "shared_recorded_problem": false
+          },
+          {
+            "metric": "distance_to_reference",
+            "records": 4,
+            "pairs": 6,
+            "plots": 4,
+            "retained_samples": "exact",
+            "shared_recorded_problem": false
+          }
+        ],
+        "stored_instances": [
+          {
+            "case": "generated-quadratic-0",
+            "family": "quadratic",
+            "methods": [
+              "gd",
+              "smooth-fista",
+              "heavy-ball",
+              "cg",
+              "proximal-point"
+            ],
+            "rows": 33,
+            "numeric_audit": true,
+            "exact_inputs": true,
+            "html_samples": true,
+            "replay": "MATCH",
+            "input_sha256": "1b5fbd31926e3b7a33b056780a0b09099bebd7be87dbcbd6e6bb3f6a39db3959",
+            "manifest_sha256": "6a318f0276d4e420d58f49a64ebe112a00c3fb4dd0f1642d765c1c1d4940aa4d"
+          },
+          {
+            "case": "generated-quadratic-7",
+            "family": "quadratic",
+            "methods": [
+              "gd",
+              "smooth-fista",
+              "heavy-ball",
+              "cg",
+              "proximal-point"
+            ],
+            "rows": 33,
+            "numeric_audit": true,
+            "exact_inputs": true,
+            "html_samples": true,
+            "replay": "MATCH",
+            "input_sha256": "233b4040d2ffddc7eb1e3bd8e2df303f3c4bd7188f0474b39f1f3df5ea531882",
+            "manifest_sha256": "d7ba39a1e54224fea0b4cbd2f5584806e6b5056b4ab604bd0705e79345920236"
+          },
+          {
+            "case": "generated-diagonal-lasso-0",
+            "family": "diagonal-lasso",
+            "methods": [
+              "ista",
+              "fista"
+            ],
+            "rows": 14,
+            "numeric_audit": true,
+            "exact_inputs": true,
+            "html_samples": true,
+            "replay": "MATCH",
+            "input_sha256": "be17c3a383000aaa2f482dcf7839581a8a8ea81549d8796280d52f060a100084",
+            "manifest_sha256": "d96a8905b7cc82680456f9e99972f36393ed60eb3ad9967fd805411f84326823"
+          },
+          {
+            "case": "generated-diagonal-lasso-7",
+            "family": "diagonal-lasso",
+            "methods": [
+              "ista",
+              "fista"
+            ],
+            "rows": 14,
+            "numeric_audit": true,
+            "exact_inputs": true,
+            "html_samples": true,
+            "replay": "MATCH",
+            "input_sha256": "9d946279a3b5b8eedf620a216700214bd33cfac517b35e78b790c27586f79dae",
+            "manifest_sha256": "e28a150bfa6eec71f99f57b7edcb29b99df24d14463c75849aec38a544b98351"
+          },
+          {
+            "case": "generated-simplex-0",
+            "family": "simplex",
+            "methods": [
+              "frank-wolfe"
+            ],
+            "rows": 7,
+            "numeric_audit": true,
+            "exact_inputs": true,
+            "html_samples": true,
+            "replay": "MATCH",
+            "input_sha256": "89109a3c73231c0a5417981e2f1725dc020cb9a86a827975a636884542a16cf0",
+            "manifest_sha256": "f68229218d5659a7fcc4ecb9c577c463b314ec456bd8f01a67dbde16a9ac4cb2"
+          },
+          {
+            "case": "generated-simplex-7",
+            "family": "simplex",
+            "methods": [
+              "frank-wolfe"
+            ],
+            "rows": 7,
+            "numeric_audit": true,
+            "exact_inputs": true,
+            "html_samples": true,
+            "replay": "MATCH",
+            "input_sha256": "8eb81aea1b7eb76a681bfcf98479676abdffc34d2d64ffa165300606a25633e5",
+            "manifest_sha256": "3717b6dbe156bf693a7ee860986086399d4267784f398c4cc00560b767ebc3a8"
+          },
+          {
+            "case": "imported-quadratic",
+            "family": "quadratic",
+            "methods": [
+              "gd",
+              "smooth-fista",
+              "heavy-ball",
+              "cg",
+              "proximal-point"
+            ],
+            "rows": 15,
+            "numeric_audit": true,
+            "exact_inputs": true,
+            "html_samples": true,
+            "replay": "MATCH",
+            "input_sha256": "a07c9509522ec19b2cac93e202d4d3f95150dda7c100acbac86a5cb55509f604",
+            "manifest_sha256": "ec830270aef51e9c2b5d174e08964cb8d37deaaafb33bc1df34a0919f559b921"
+          },
+          {
+            "case": "imported-psd",
+            "family": "quadratic",
+            "methods": [
+              "gd",
+              "smooth-fista",
+              "proximal-point"
+            ],
+            "rows": 9,
+            "numeric_audit": true,
+            "exact_inputs": true,
+            "html_samples": true,
+            "replay": "MATCH",
+            "input_sha256": "88384f21ca0637e0fe5ac65b2f41ffb523682c1b032afa03175400505a95fa26",
+            "manifest_sha256": "eb3952c8d6704b5e488defb65de4d31a5b0834ea451e6e66ea750417d662b6dc"
+          },
+          {
+            "case": "imported-lasso",
+            "family": "diagonal-lasso",
+            "methods": [
+              "ista",
+              "fista"
+            ],
+            "rows": 6,
+            "numeric_audit": true,
+            "exact_inputs": true,
+            "html_samples": true,
+            "replay": "MATCH",
+            "input_sha256": "27811725e9cb4fe9aeba65aea3a2484dfcdfc5a604f127023f2bbd4249d4f0d3",
+            "manifest_sha256": "c2a52e2c3f391254abaf41c2608e7da3f2c635a44e788fd453e868320eef3041"
+          },
+          {
+            "case": "imported-simplex",
+            "family": "simplex",
+            "methods": [
+              "frank-wolfe"
+            ],
+            "rows": 3,
+            "numeric_audit": true,
+            "exact_inputs": true,
+            "html_samples": true,
+            "replay": "MATCH",
+            "input_sha256": "aadf43436e82702639886862be8403cfb8bb838d1597dabef1a67b0f5f1adada",
+            "manifest_sha256": "c5083c15e8bbd086d4f1cb49c744e91abd8653d502f45572f79ad53674e40f6d"
+          }
+        ],
+        "studio": {
+          "bind": "127.0.0.1",
+          "ephemeral_port": true,
+          "cases": [
+            {
+              "family": "quadratic",
+              "seed": 0,
+              "methods": [
+                "gd",
+                "smooth-fista",
+                "heavy-ball",
+                "cg",
+                "proximal-point"
+              ],
+              "dimension": 4,
+              "steps": 2,
+              "rows": 15,
+              "numeric_audit": true,
+              "exact_html": true,
+              "input_sha256": "3e3be3f58f411864c9ea59a2730a230ebefb41605791140556244b139ce64d3c",
+              "manifest_sha256": "df8c9a51c4c486ebf39fa514dfe04485b7b7472fd682ea3bfff3ddc7336be516"
+            },
+            {
+              "family": "quadratic",
+              "seed": 7,
+              "methods": [
+                "gd",
+                "smooth-fista",
+                "heavy-ball",
+                "cg",
+                "proximal-point"
+              ],
+              "dimension": 4,
+              "steps": 2,
+              "rows": 15,
+              "numeric_audit": true,
+              "exact_html": true,
+              "input_sha256": "43c90bc3492364cb3ca224e73f31e90bc8099350b9aff2f3fef2d482d481f466",
+              "manifest_sha256": "446faf5eda876620512096efa96756093064b75a3a14b5c5b3fa02421011808a"
+            },
+            {
+              "family": "diagonal-lasso",
+              "seed": 0,
+              "methods": [
+                "ista",
+                "fista"
+              ],
+              "dimension": 4,
+              "steps": 2,
+              "rows": 6,
+              "numeric_audit": true,
+              "exact_html": true,
+              "input_sha256": "52936734d9d28d45d7176df6f927acc6721c20c950dd4970f00691ae7787cc3b",
+              "manifest_sha256": "1b23908629c694cbc7e63c4beb59f221337402f76c574edc3bdf841a48e9bcd3"
+            },
+            {
+              "family": "diagonal-lasso",
+              "seed": 7,
+              "methods": [
+                "ista",
+                "fista"
+              ],
+              "dimension": 4,
+              "steps": 2,
+              "rows": 6,
+              "numeric_audit": true,
+              "exact_html": true,
+              "input_sha256": "0c361d8208a85e2650c009681583b4d1ee04166fcefd97f4ff7b242f94cb59ab",
+              "manifest_sha256": "e72302781337d659134cf47be9f0c6e43df63ae62e3988bcbb64458a7493ef7c"
+            },
+            {
+              "family": "simplex",
+              "seed": 0,
+              "methods": [
+                "frank-wolfe"
+              ],
+              "dimension": 4,
+              "steps": 2,
+              "rows": 3,
+              "numeric_audit": true,
+              "exact_html": true,
+              "input_sha256": "89109a3c73231c0a5417981e2f1725dc020cb9a86a827975a636884542a16cf0",
+              "manifest_sha256": "b8d6cef2720d0ea3d55abfd19f8f0c63c35af3edafa2892a94c037ec6d65e439"
+            },
+            {
+              "family": "simplex",
+              "seed": 7,
+              "methods": [
+                "frank-wolfe"
+              ],
+              "dimension": 4,
+              "steps": 2,
+              "rows": 3,
+              "numeric_audit": true,
+              "exact_html": true,
+              "input_sha256": "8eb81aea1b7eb76a681bfcf98479676abdffc34d2d64ffa165300606a25633e5",
+              "manifest_sha256": "488d14c638939eafd9377dbf32e90f47e3c650bac7b4c9ff5c76232b70fc4389"
+            }
+          ],
+          "rejections": {
+            "host": 403,
+            "origin": 403,
+            "token": 403,
+            "missing-origin": 403,
+            "dimension": 400,
+            "steps": 400,
+            "unknown-path": 404,
+            "unknown-field": 400
+          },
+          "shutdown": true,
+          "no_server_files": true,
+          "no_session_material_in_outputs": true
+        }
+      },
+      {
+        "artifact": "chainbench-0.7.0.tar.gz",
+        "sha256": "25e0cc139f604a233b62a5abbcc18fed505f72c8a399c464186db028626b7e40",
+        "version": "0.7.0",
+        "checks": 8,
+        "slugs": [
+          "gd-baseline",
+          "nesterov-1983",
+          "polyak-1964",
+          "hestenes-stiefel-1952",
+          "jaggi-2013",
+          "rockafellar-1976",
+          "beck-teboulle-2009",
+          "ista-vs-fista"
+        ],
+        "statuses": [
+          "CONSISTENT",
+          "CONSISTENT",
+          "CONSISTENT",
+          "CONSISTENT",
+          "CONSISTENT",
+          "CONSISTENT",
+          "CONSISTENT",
+          "INFO"
+        ],
+        "installed_outside_checkout": true,
+        "pip_check": "passed",
+        "exports": [
+          "html",
+          "markdown",
+          "csv",
+          "json"
+        ],
+        "plot_svg": "passed",
+        "visual_evidence": "matched",
+        "experiments": [
+          {
+            "preset": "quadratic",
+            "config_sha256": "5948d1f18bb4e37c0cc6a1775983d0e45d24f747b863c16108b60c8cdf44347f",
+            "methods": [
+              "gd",
+              "smooth-fista",
+              "heavy-ball",
+              "cg",
+              "proximal-point"
+            ],
+            "rows": 137,
+            "exports": [
+              "json",
+              "csv",
+              "markdown",
+              "html"
+            ],
+            "saved_config_rerun": "matched"
+          },
+          {
+            "preset": "diagonal-lasso",
+            "config_sha256": "fcebaccd5ab774f682042b75ee941611663a387cc80aa9ec7a66db9ad6e26dcb",
+            "methods": [
+              "ista",
+              "fista"
+            ],
+            "rows": 62,
+            "exports": [
+              "json",
+              "csv",
+              "markdown",
+              "html"
+            ],
+            "saved_config_rerun": "matched"
+          },
+          {
+            "preset": "simplex",
+            "config_sha256": "94d543bc70b9494e094388eab757115ba16d86f2a3b9cfcde47172c78e3e7972",
+            "methods": [
+              "frank-wolfe"
+            ],
+            "rows": 31,
+            "exports": [
+              "json",
+              "csv",
+              "markdown",
+              "html"
+            ],
+            "saved_config_rerun": "matched"
+          }
+        ],
+        "instance_controls": {
+          "direct_override": "passed",
+          "seeded_config_sha256": "19a4979b5568006e6492cd19122c62447fa401edfadba8d1d1b271caf555113b"
+        },
+        "advanced_workflows": {
+          "learning": "matched",
+          "sweep": "matched",
+          "replay": "matched",
+          "gd_tight": "matched",
+          "stress": "matched",
+          "landscape": "matched",
+          "shewchuk_reproduction": "matched",
+          "simplex_geometry": "matched",
+          "inspectable_stress": "matched",
+          "proximal_geometry": "matched",
+          "offline_tour": "matched",
+          "fista_deblurring": "matched",
+          "heavy_ball_counterexample": "matched",
+          "noisy_wavelet": "matched",
+          "fw_sparsity": "matched",
+          "extended_tour": "matched",
+          "kaczmarz_expectation": "matched",
+          "nonuniform_sampling": "matched",
+          "cg_spectrum": "matched",
+          "adam_counterexample": "matched",
+          "admm_geometry": "matched",
+          "fista_backtracking": "matched"
+        },
+        "saved_comparison": [
+          {
+            "metric": "gap",
+            "records": 2,
+            "pairs": 1,
+            "plots": 4,
+            "retained_samples": "exact",
+            "shared_recorded_problem": true
+          },
+          {
+            "metric": "stationarity",
+            "records": 2,
+            "pairs": 1,
+            "plots": 4,
+            "retained_samples": "exact",
+            "shared_recorded_problem": true
+          },
+          {
+            "metric": "distance_to_reference",
+            "records": 2,
+            "pairs": 1,
+            "plots": 4,
+            "retained_samples": "exact",
+            "shared_recorded_problem": true
+          },
+          {
+            "metric": "gap",
+            "records": 3,
+            "pairs": 3,
+            "plots": 3,
+            "retained_samples": "exact",
+            "shared_recorded_problem": false
+          },
+          {
+            "metric": "stationarity",
+            "records": 3,
+            "pairs": 3,
+            "plots": 3,
+            "retained_samples": "exact",
+            "shared_recorded_problem": false
+          },
+          {
+            "metric": "distance_to_reference",
+            "records": 3,
+            "pairs": 3,
+            "plots": 3,
+            "retained_samples": "exact",
+            "shared_recorded_problem": false
+          },
+          {
+            "metric": "gap",
+            "records": 4,
+            "pairs": 6,
+            "plots": 4,
+            "retained_samples": "exact",
+            "shared_recorded_problem": false
+          },
+          {
+            "metric": "stationarity",
+            "records": 4,
+            "pairs": 6,
+            "plots": 4,
+            "retained_samples": "exact",
+            "shared_recorded_problem": false
+          },
+          {
+            "metric": "distance_to_reference",
+            "records": 4,
+            "pairs": 6,
+            "plots": 4,
+            "retained_samples": "exact",
+            "shared_recorded_problem": false
+          }
+        ],
+        "stored_instances": [
+          {
+            "case": "generated-quadratic-0",
+            "family": "quadratic",
+            "methods": [
+              "gd",
+              "smooth-fista",
+              "heavy-ball",
+              "cg",
+              "proximal-point"
+            ],
+            "rows": 33,
+            "numeric_audit": true,
+            "exact_inputs": true,
+            "html_samples": true,
+            "replay": "MATCH",
+            "input_sha256": "1b5fbd31926e3b7a33b056780a0b09099bebd7be87dbcbd6e6bb3f6a39db3959",
+            "manifest_sha256": "6a318f0276d4e420d58f49a64ebe112a00c3fb4dd0f1642d765c1c1d4940aa4d"
+          },
+          {
+            "case": "generated-quadratic-7",
+            "family": "quadratic",
+            "methods": [
+              "gd",
+              "smooth-fista",
+              "heavy-ball",
+              "cg",
+              "proximal-point"
+            ],
+            "rows": 33,
+            "numeric_audit": true,
+            "exact_inputs": true,
+            "html_samples": true,
+            "replay": "MATCH",
+            "input_sha256": "233b4040d2ffddc7eb1e3bd8e2df303f3c4bd7188f0474b39f1f3df5ea531882",
+            "manifest_sha256": "d7ba39a1e54224fea0b4cbd2f5584806e6b5056b4ab604bd0705e79345920236"
+          },
+          {
+            "case": "generated-diagonal-lasso-0",
+            "family": "diagonal-lasso",
+            "methods": [
+              "ista",
+              "fista"
+            ],
+            "rows": 14,
+            "numeric_audit": true,
+            "exact_inputs": true,
+            "html_samples": true,
+            "replay": "MATCH",
+            "input_sha256": "be17c3a383000aaa2f482dcf7839581a8a8ea81549d8796280d52f060a100084",
+            "manifest_sha256": "d96a8905b7cc82680456f9e99972f36393ed60eb3ad9967fd805411f84326823"
+          },
+          {
+            "case": "generated-diagonal-lasso-7",
+            "family": "diagonal-lasso",
+            "methods": [
+              "ista",
+              "fista"
+            ],
+            "rows": 14,
+            "numeric_audit": true,
+            "exact_inputs": true,
+            "html_samples": true,
+            "replay": "MATCH",
+            "input_sha256": "9d946279a3b5b8eedf620a216700214bd33cfac517b35e78b790c27586f79dae",
+            "manifest_sha256": "e28a150bfa6eec71f99f57b7edcb29b99df24d14463c75849aec38a544b98351"
+          },
+          {
+            "case": "generated-simplex-0",
+            "family": "simplex",
+            "methods": [
+              "frank-wolfe"
+            ],
+            "rows": 7,
+            "numeric_audit": true,
+            "exact_inputs": true,
+            "html_samples": true,
+            "replay": "MATCH",
+            "input_sha256": "89109a3c73231c0a5417981e2f1725dc020cb9a86a827975a636884542a16cf0",
+            "manifest_sha256": "f68229218d5659a7fcc4ecb9c577c463b314ec456bd8f01a67dbde16a9ac4cb2"
+          },
+          {
+            "case": "generated-simplex-7",
+            "family": "simplex",
+            "methods": [
+              "frank-wolfe"
+            ],
+            "rows": 7,
+            "numeric_audit": true,
+            "exact_inputs": true,
+            "html_samples": true,
+            "replay": "MATCH",
+            "input_sha256": "8eb81aea1b7eb76a681bfcf98479676abdffc34d2d64ffa165300606a25633e5",
+            "manifest_sha256": "3717b6dbe156bf693a7ee860986086399d4267784f398c4cc00560b767ebc3a8"
+          },
+          {
+            "case": "imported-quadratic",
+            "family": "quadratic",
+            "methods": [
+              "gd",
+              "smooth-fista",
+              "heavy-ball",
+              "cg",
+              "proximal-point"
+            ],
+            "rows": 15,
+            "numeric_audit": true,
+            "exact_inputs": true,
+            "html_samples": true,
+            "replay": "MATCH",
+            "input_sha256": "a07c9509522ec19b2cac93e202d4d3f95150dda7c100acbac86a5cb55509f604",
+            "manifest_sha256": "ec830270aef51e9c2b5d174e08964cb8d37deaaafb33bc1df34a0919f559b921"
+          },
+          {
+            "case": "imported-psd",
+            "family": "quadratic",
+            "methods": [
+              "gd",
+              "smooth-fista",
+              "proximal-point"
+            ],
+            "rows": 9,
+            "numeric_audit": true,
+            "exact_inputs": true,
+            "html_samples": true,
+            "replay": "MATCH",
+            "input_sha256": "88384f21ca0637e0fe5ac65b2f41ffb523682c1b032afa03175400505a95fa26",
+            "manifest_sha256": "eb3952c8d6704b5e488defb65de4d31a5b0834ea451e6e66ea750417d662b6dc"
+          },
+          {
+            "case": "imported-lasso",
+            "family": "diagonal-lasso",
+            "methods": [
+              "ista",
+              "fista"
+            ],
+            "rows": 6,
+            "numeric_audit": true,
+            "exact_inputs": true,
+            "html_samples": true,
+            "replay": "MATCH",
+            "input_sha256": "27811725e9cb4fe9aeba65aea3a2484dfcdfc5a604f127023f2bbd4249d4f0d3",
+            "manifest_sha256": "c2a52e2c3f391254abaf41c2608e7da3f2c635a44e788fd453e868320eef3041"
+          },
+          {
+            "case": "imported-simplex",
+            "family": "simplex",
+            "methods": [
+              "frank-wolfe"
+            ],
+            "rows": 3,
+            "numeric_audit": true,
+            "exact_inputs": true,
+            "html_samples": true,
+            "replay": "MATCH",
+            "input_sha256": "aadf43436e82702639886862be8403cfb8bb838d1597dabef1a67b0f5f1adada",
+            "manifest_sha256": "c5083c15e8bbd086d4f1cb49c744e91abd8653d502f45572f79ad53674e40f6d"
+          }
+        ],
+        "studio": {
+          "bind": "127.0.0.1",
+          "ephemeral_port": true,
+          "cases": [
+            {
+              "family": "quadratic",
+              "seed": 0,
+              "methods": [
+                "gd",
+                "smooth-fista",
+                "heavy-ball",
+                "cg",
+                "proximal-point"
+              ],
+              "dimension": 4,
+              "steps": 2,
+              "rows": 15,
+              "numeric_audit": true,
+              "exact_html": true,
+              "input_sha256": "3e3be3f58f411864c9ea59a2730a230ebefb41605791140556244b139ce64d3c",
+              "manifest_sha256": "df8c9a51c4c486ebf39fa514dfe04485b7b7472fd682ea3bfff3ddc7336be516"
+            },
+            {
+              "family": "quadratic",
+              "seed": 7,
+              "methods": [
+                "gd",
+                "smooth-fista",
+                "heavy-ball",
+                "cg",
+                "proximal-point"
+              ],
+              "dimension": 4,
+              "steps": 2,
+              "rows": 15,
+              "numeric_audit": true,
+              "exact_html": true,
+              "input_sha256": "43c90bc3492364cb3ca224e73f31e90bc8099350b9aff2f3fef2d482d481f466",
+              "manifest_sha256": "446faf5eda876620512096efa96756093064b75a3a14b5c5b3fa02421011808a"
+            },
+            {
+              "family": "diagonal-lasso",
+              "seed": 0,
+              "methods": [
+                "ista",
+                "fista"
+              ],
+              "dimension": 4,
+              "steps": 2,
+              "rows": 6,
+              "numeric_audit": true,
+              "exact_html": true,
+              "input_sha256": "52936734d9d28d45d7176df6f927acc6721c20c950dd4970f00691ae7787cc3b",
+              "manifest_sha256": "1b23908629c694cbc7e63c4beb59f221337402f76c574edc3bdf841a48e9bcd3"
+            },
+            {
+              "family": "diagonal-lasso",
+              "seed": 7,
+              "methods": [
+                "ista",
+                "fista"
+              ],
+              "dimension": 4,
+              "steps": 2,
+              "rows": 6,
+              "numeric_audit": true,
+              "exact_html": true,
+              "input_sha256": "0c361d8208a85e2650c009681583b4d1ee04166fcefd97f4ff7b242f94cb59ab",
+              "manifest_sha256": "e72302781337d659134cf47be9f0c6e43df63ae62e3988bcbb64458a7493ef7c"
+            },
+            {
+              "family": "simplex",
+              "seed": 0,
+              "methods": [
+                "frank-wolfe"
+              ],
+              "dimension": 4,
+              "steps": 2,
+              "rows": 3,
+              "numeric_audit": true,
+              "exact_html": true,
+              "input_sha256": "89109a3c73231c0a5417981e2f1725dc020cb9a86a827975a636884542a16cf0",
+              "manifest_sha256": "b8d6cef2720d0ea3d55abfd19f8f0c63c35af3edafa2892a94c037ec6d65e439"
+            },
+            {
+              "family": "simplex",
+              "seed": 7,
+              "methods": [
+                "frank-wolfe"
+              ],
+              "dimension": 4,
+              "steps": 2,
+              "rows": 3,
+              "numeric_audit": true,
+              "exact_html": true,
+              "input_sha256": "8eb81aea1b7eb76a681bfcf98479676abdffc34d2d64ffa165300606a25633e5",
+              "manifest_sha256": "488d14c638939eafd9377dbf32e90f47e3c650bac7b4c9ff5c76232b70fc4389"
+            }
+          ],
+          "rejections": {
+            "host": 403,
+            "origin": 403,
+            "token": 403,
+            "missing-origin": 403,
+            "dimension": 400,
+            "steps": 400,
+            "unknown-path": 404,
+            "unknown-field": 400
+          },
+          "shutdown": true,
+          "no_server_files": true,
+          "no_session_material_in_outputs": true
+        }
+      }
+    ],
+    "source_commit": "fccd654e85cd544fc1a33d7467df93babd4edd2a"
+  },
+  "reading_evidence": {
+    "assets": {
+      "chainbench-0.7.0-reading.zip": {
+        "bytes": 44961065,
+        "sha256": "f21ac82500773b532b5e5d61c1e276d563a800d12021a5137eab5904a2ccb901"
+      },
+      "chainbench-0.7.0-review.pdf": {
+        "bytes": 286163,
+        "sha256": "d3dba073f103866c958dc9455d77fd63704eb3ed2ceda8fbdbc8520224cf676a"
+      }
+    },
+    "bundle_manifest_sha256": "e1051ad6ee3ee134021140c7a53b87b7b5d984bda1a69a593130d21f28a58d47",
+    "kind": "chainbench.reading-assets",
+    "schema_version": 1,
+    "source_commit": "fccd654e85cd544fc1a33d7467df93babd4edd2a",
+    "version": "0.7.0"
+  },
+  "preserved_prior_tags": 8,
+  "preserved_prior_releases": 8,
+  "preserved_prior_assets": 43,
+  "large_assets_written_locally": false,
+  "scope": "Public bytes, metadata and evidence bindings; runtime validation belongs to CI."
+}

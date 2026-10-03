@@ -1,0 +1,68 @@
+{
+  "source_commit": "fccd654e85cd544fc1a33d7467df93babd4edd2a",
+  "tree": "25511845e2a974ef15dd7249edadf3ab2e1bc3ab",
+  "frozen_review_diff_from_v050": "",
+  "scope": "Read-only source/document identity review; no numerical execution or local generation.",
+  "files": {
+    "docs/SHEWCHUK_REPRODUCTION.md": {
+      "bytes": 8626,
+      "sha256": "5b5f8d042375b21c61fb1b0ce26a10013a023a0a6eb28411149df232f24369e1"
+    },
+    "docs/FISTA_DEBLURRING.md": {
+      "bytes": 7400,
+      "sha256": "23a7a6ca0fa157620ae1836caf5b02dbc32698d56d7665bbdcec9d8bd13452ce"
+    },
+    "docs/FISTA_WAVELET.md": {
+      "bytes": 10575,
+      "sha256": "7a7464bbf3373087eee5e6c56188fa2b4ced729733de4141475b6b501d039f7c"
+    },
+    "docs/NONUNIFORM_SAMPLING.md": {
+      "bytes": 9415,
+      "sha256": "64561659ca61cacafe05d6fb8cbaec1fe8d75fbd27b8372aae9372cd1c094595"
+    },
+    "docs/SIMPLEX_GEOMETRY.md": {
+      "bytes": 11257,
+      "sha256": "316823a1c88e0836e13019a09a8c56450f3f199c12404384581bd3d1fbc59d09"
+    },
+    "docs/PROXIMAL_GEOMETRY.md": {
+      "bytes": 12231,
+      "sha256": "eeea95b3451b85d2f4d7436e785d298b316395250688fc9c6391e374a2e7e097"
+    },
+    "docs/ADMM_GEOMETRY.md": {
+      "bytes": 14265,
+      "sha256": "ecded3b34b2e533c5d0cb3e080dac7b4a2ae50296b42da200b550e260efcfddf"
+    },
+    "docs/FISTA_BACKTRACKING.md": {
+      "bytes": 8609,
+      "sha256": "41b85a0bf7c8848bee7a4b5797d53dca1c3acc4cc263e1562dc822f9cae6e527"
+    },
+    "docs/STRESS_SAMPLING.md": {
+      "bytes": 7968,
+      "sha256": "f2244835c82a4bdcb0327de5a7c39a4020aeee7f1bb8a7ec15e3c2803124497f"
+    },
+    "docs/CG_SPECTRUM.md": {
+      "bytes": 6900,
+      "sha256": "b0b6139b8be01070ffe5fb1807350a610607c55e8a4c643334d23e6f5d406563"
+    },
+    "docs/LEARNING_WORKFLOWS.md": {
+      "bytes": 13138,
+      "sha256": "100ea3395d315e4332b6d7ae54c252237a2001a00cfca03b96b161ba5b5fd53e"
+    },
+    "docs/STORED_INPUTS.md": {
+      "bytes": 9985,
+      "sha256": "e3ce5956d1d45ea5e039728840da93ab2c9a99f18899f5fff9bc944670ba4837"
+    },
+    "docs/STUDIO.md": {
+      "bytes": 8636,
+      "sha256": "63d6d248fcbd6a7414b1a2b28b48afa3e7aac99f9f3e565e5147232df4207e55"
+    },
+    "docs/REVIEW_GUIDE.md": {
+      "bytes": 14843,
+      "sha256": "9ca80519b5850d1c744d39c2679a82ba81a449d3c431c979dbbf47611286f6ff"
+    },
+    "docs/RELEASE_NOTES_0.7.0.md": {
+      "bytes": 5670,
+      "sha256": "1da613333f9de3c90dedb4cddfa446cc0b2ce25db037c06a7c1f9cba755609aa"
+    }
+  }
+}

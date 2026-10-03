@@ -1,0 +1,114 @@
+{
+  "observed_utc": "2026-10-03T07:17:44.385454+00:00",
+  "requirements": [
+    {
+      "requirement": "Published experiment scope",
+      "status": "verified in merged implementation",
+      "evidence_locations": "docs/SOURCE_MAP.md; docs/SHEWCHUK_REPRODUCTION.md; docs/FISTA_DEBLURRING.md; docs/FISTA_WAVELET.md; docs/NONUNIFORM_SAMPLING.md",
+      "scope": "PR88 full browser/install/reading gates passed; source locations and changed inputs explicit"
+    },
+    {
+      "requirement": "Meaningful geometry beyond a smooth quadratic",
+      "status": "verified in merged implementation",
+      "evidence_locations": "docs/SIMPLEX_GEOMETRY.md; docs/PROXIMAL_GEOMETRY.md; docs/ADMM_GEOMETRY.md; docs/FISTA_BACKTRACKING.md",
+      "scope": "Actual iterates and local models; existing full browser and independent numerical gates retained"
+    },
+    {
+      "requirement": "Multiple auditable instances",
+      "status": "verified in merged implementation",
+      "evidence_locations": "docs/STRESS_SAMPLING.md; docs/CG_SPECTRUM.md",
+      "scope": "Eight stress topics retain seeds 0–31, explicit strata, hashes and unresolved rows; controlled geometry grids and 18 CG cases"
+    },
+    {
+      "requirement": "Bilingual technical explanations and symbolic flows",
+      "status": "verified in merged implementation",
+      "evidence_locations": "docs/LEARNING_WORKFLOWS.md; src/chainbench/learning.py",
+      "scope": "Eight atlas topics, 25 report links, motivation/assumptions/recurrences/trade-offs/limits; browser and installed evidence"
+    },
+    {
+      "requirement": "Actual inputs, starts and generator-free replay",
+      "status": "verified in merged implementation",
+      "evidence_locations": "docs/STORED_INPUTS.md; examples/instances",
+      "scope": "PR86 and separate main CI all nine pass; actual arrays and distinct schemas; 10 installed cases"
+    },
+    {
+      "requirement": "Optional browser computation",
+      "status": "verified and published",
+      "evidence_locations": "docs/STUDIO.md; release-workflow-verification.json; public-download-verification.json",
+      "scope": "Three families; both distributions each audit six live cases; twelve desktop/mobile browser cases and exact offline downloads; controlled shutdown and request rejection."
+    },
+    {
+      "requirement": "Responsive offline reports and static PDF review",
+      "status": "published; actual bytes and rendered pages verified",
+      "evidence_locations": "release-workflow-verification.json; public-download-verification.json",
+      "scope": "25 HTML pages, 24 numerical records, desktop/mobile/no-script browser checks; actual two-page final PDF previews viewed and payload hashes checked."
+    },
+    {
+      "requirement": "Main integration",
+      "status": "complete; all nine jobs passed",
+      "evidence_locations": "main-verification.json; actions/runs/37104389006",
+      "scope": "Exact PR-tested tree25511845; all nine actual completed logs read/source checked; six environments each1680; final macOS1298.22s."
+    },
+    {
+      "requirement": "Coherent gated v0.7.0 release",
+      "status": "published and publicly verified",
+      "evidence_locations": "release-workflow-verification.json; public-download-verification.json; releases/tag/v0.7.0",
+      "scope": "Final sourcefccd654; nine validation jobs plus publication passed; actual eight public payloads streamed and matched to GitHub/SHA256SUMS and release-run evidence."
+    },
+    {
+      "requirement": "Preserve historical releases and review kit",
+      "status": "verified after publication",
+      "evidence_locations": "public-download-verification.json; source-scope-audit.json",
+      "scope": "Eight prior tag targets, eight release identities and43namedasset records unchanged; review source diff fromv0.5empty."
+    },
+    {
+      "requirement": "Keep local task under1GB",
+      "status": "verified current",
+      "evidence_locations": "work/check_storage.py",
+      "scope": "Approximately97MB; full runtime/build/browser generation on GitHub, public large payloads streamed without disk retention."
+    },
+    {
+      "requirement": "Public identity, no fabricated adoption",
+      "status": "preserved",
+      "evidence_locations": "AGENTS.md; CITATION.cff; docs/REVIEWER_GUIDE.md; issue/28",
+      "scope": "Pseudonym only; seven-person feedback explicitly maintainer-relayed, actual independent reports not fabricated"
+    },
+    {
+      "requirement": "OpenAI application",
+      "status": "not submitted; outside current publication action",
+      "evidence_locations": "ChainBench_Codex_Handoff_v0.5.0.md section5",
+      "scope": "Explicit approval and required personal information needed before submission; official program URL has not been supplied"
+    }
+  ],
+  "completion_proven": true,
+  "remaining": [],
+  "pr89_pdf_review": {
+    "source": "317a53e6a18e3c9d914cb066fe79c50f209baeb4",
+    "pages_viewed": 2,
+    "pdf_sha256": "6563a1bfd7d93a3ca931811d266b399240278bb2bcab4970cca76fed1fd49b39",
+    "artifact_sha256": "1ee769d6ea8e3279de938ba339728198547ae0a19b13ad3fb5e4575282d0e721",
+    "notes": "PDF, HTML and both page previews hash-checked; no clipping observed; public release still pending."
+  },
+  "latest_main": "fccd654e85cd544fc1a33d7467df93babd4edd2a",
+  "main_run": 37104389006,
+  "release_run": 37104389180,
+  "final_pdf_review": {
+    "source": "fccd654e85cd544fc1a33d7467df93babd4edd2a",
+    "pages_viewed": 2,
+    "pdf_sha256": "d3dba073f103866c958dc9455d77fd63704eb3ed2ceda8fbdbc8520224cf676a",
+    "artifact_sha256": "ec4c734ef695e66a5051c98addac0c126f217eb3caec8fd486dc5b89ace165a9",
+    "all_four_payload_hashes_verified": true,
+    "scope": "Actual final source cloud-rendered previews; published PDF SHA-256 matches reviewed packet payload."
+  },
+  "closed_acceptance_issues": [
+    39,
+    40
+  ],
+  "public_release": "https://github.com/chocoemong17/chainbench/releases/tag/v0.7.0",
+  "scope": "Completion of the handoff-driven repository implementation, validation and release; not all literature coverage or OSS selection/application.",
+  "remaining_limits": [
+    "Selected public protocols and declared synthetic inputs, not whole-paper reproduction or universal rankings.",
+    "Independent outside reproduction reports remain tracked separately in issue28; adoption is not fabricated.",
+    "No OpenAI OSS application submitted; official program details and explicit authorization are separate from repository delivery."
+  ]
+}

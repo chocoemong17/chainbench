@@ -1,0 +1,4379 @@
+{
+  "kind": "main-push",
+  "source_commit": "fccd654e85cd544fc1a33d7467df93babd4edd2a",
+  "tree": "25511845e2a974ef15dd7249edadf3ab2e1bc3ab",
+  "run": 37104389006,
+  "status": "success",
+  "pr": 89,
+  "pr_ci": 37103050217,
+  "pr_all_nine_jobs_passed": true,
+  "pr_tree_equals_main": true,
+  "completed_log_rows": [
+    {
+      "id": 111149971348,
+      "name": "audited offline reading assets / reading-bundle",
+      "conclusion": "success",
+      "source": "fccd654e85cd544fc1a33d7467df93babd4edd2a",
+      "source_checked": true,
+      "actual_completed_log_read": true,
+      "proofs": [
+        {
+          "source_commit": "fccd654e85cd544fc1a33d7467df93babd4edd2a",
+          "run_url": "https://github.com/chocoemong17/chainbench/actions/runs/37104389006",
+          "manifest_sha256": "02d01361f149235f961830652205c666f8ac9cedd8a74cf525fdd464ecb07e7e",
+          "numerical_records": 24,
+          "html_pages": 25,
+          "backtracking_runs": 36,
+          "candidate_trials": 790,
+          "accepted_updates_per_run": 18,
+          "renderer_sha256": "f4b458d131d95b77572ad26d0644061faa68da5035925146af6af7667ceb9769",
+          "environment": {
+            "python": "3.12.14",
+            "playwright": "1.63.0",
+            "pymupdf": "1.28.2"
+          },
+          "scope": "Tour record audit and PDF layout only; not full CI or independent review",
+          "browser": "153.0.8010.12",
+          "geometry": [
+            {
+              "bottom": 732.09375,
+              "footer": 743.953125,
+              "left": 45.34375,
+              "right": 1077.171875,
+              "width": 1123
+            },
+            {
+              "bottom": 1403.71875,
+              "footer": 1537.640625,
+              "left": 45.34375,
+              "right": 1077.171875,
+              "width": 1123
+            }
+          ],
+          "pdf_fonts": [
+            [
+              {
+                "name": "AAAAAA+LiberationSans",
+                "type": "Type0",
+                "resource": "F4",
+                "embedded_bytes": 21164
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F5",
+                "glyph_programs": 4,
+                "embedded_bytes": 1147
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F6",
+                "glyph_programs": 10,
+                "embedded_bytes": 4367
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F7",
+                "glyph_programs": 4,
+                "embedded_bytes": 804
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F8",
+                "glyph_programs": 2,
+                "embedded_bytes": 691
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F9",
+                "glyph_programs": 2,
+                "embedded_bytes": 564
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F10",
+                "glyph_programs": 8,
+                "embedded_bytes": 2416
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F11",
+                "glyph_programs": 5,
+                "embedded_bytes": 1633
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F12",
+                "glyph_programs": 6,
+                "embedded_bytes": 2490
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F13",
+                "glyph_programs": 3,
+                "embedded_bytes": 1024
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F14",
+                "glyph_programs": 3,
+                "embedded_bytes": 959
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F15",
+                "glyph_programs": 3,
+                "embedded_bytes": 662
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F16",
+                "glyph_programs": 3,
+                "embedded_bytes": 865
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F17",
+                "glyph_programs": 10,
+                "embedded_bytes": 3403
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F18",
+                "glyph_programs": 19,
+                "embedded_bytes": 8391
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F19",
+                "glyph_programs": 13,
+                "embedded_bytes": 2746
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F20",
+                "glyph_programs": 57,
+                "embedded_bytes": 15424
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F21",
+                "glyph_programs": 7,
+                "embedded_bytes": 1380
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F22",
+                "glyph_programs": 6,
+                "embedded_bytes": 3043
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F23",
+                "glyph_programs": 6,
+                "embedded_bytes": 2023
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F24",
+                "glyph_programs": 12,
+                "embedded_bytes": 4994
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F25",
+                "glyph_programs": 5,
+                "embedded_bytes": 1895
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F26",
+                "glyph_programs": 4,
+                "embedded_bytes": 1392
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F27",
+                "glyph_programs": 6,
+                "embedded_bytes": 2093
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F28",
+                "glyph_programs": 5,
+                "embedded_bytes": 1611
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F29",
+                "glyph_programs": 9,
+                "embedded_bytes": 4410
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F30",
+                "glyph_programs": 2,
+                "embedded_bytes": 627
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F31",
+                "glyph_programs": 2,
+                "embedded_bytes": 669
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F32",
+                "glyph_programs": 2,
+                "embedded_bytes": 819
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F33",
+                "glyph_programs": 2,
+                "embedded_bytes": 734
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F34",
+                "glyph_programs": 4,
+                "embedded_bytes": 1210
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F35",
+                "glyph_programs": 2,
+                "embedded_bytes": 535
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F36",
+                "glyph_programs": 3,
+                "embedded_bytes": 757
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F37",
+                "glyph_programs": 4,
+                "embedded_bytes": 1147
+              },
+              {
+                "name": "DAAAAA+LiberationSerif",
+                "type": "Type0",
+                "resource": "F38",
+                "embedded_bytes": 28832
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F42",
+                "glyph_programs": 4,
+                "embedded_bytes": 1232
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F43",
+                "glyph_programs": 11,
+                "embedded_bytes": 5703
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F44",
+                "glyph_programs": 7,
+                "embedded_bytes": 2195
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F45",
+                "glyph_programs": 5,
+                "embedded_bytes": 1311
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F46",
+                "glyph_programs": 10,
+                "embedded_bytes": 3323
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F47",
+                "glyph_programs": 6,
+                "embedded_bytes": 1935
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F48",
+                "glyph_programs": 3,
+                "embedded_bytes": 894
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F49",
+                "glyph_programs": 9,
+                "embedded_bytes": 3213
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F50",
+                "glyph_programs": 2,
+                "embedded_bytes": 814
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F51",
+                "glyph_programs": 8,
+                "embedded_bytes": 2609
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F52",
+                "glyph_programs": 5,
+                "embedded_bytes": 1605
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F53",
+                "glyph_programs": 12,
+                "embedded_bytes": 7264
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F54",
+                "glyph_programs": 4,
+                "embedded_bytes": 1250
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F55",
+                "glyph_programs": 5,
+                "embedded_bytes": 1918
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F56",
+                "glyph_programs": 3,
+                "embedded_bytes": 896
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F57",
+                "glyph_programs": 6,
+                "embedded_bytes": 1761
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F58",
+                "glyph_programs": 2,
+                "embedded_bytes": 611
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F59",
+                "glyph_programs": 3,
+                "embedded_bytes": 939
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F60",
+                "glyph_programs": 4,
+                "embedded_bytes": 1337
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F61",
+                "glyph_programs": 5,
+                "embedded_bytes": 2922
+              },
+              {
+                "name": "EAAAAA+DejaVuSansMono",
+                "type": "Type0",
+                "resource": "F62",
+                "embedded_bytes": 22268
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F63",
+                "glyph_programs": 2,
+                "embedded_bytes": 819
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F64",
+                "glyph_programs": 4,
+                "embedded_bytes": 1051
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F65",
+                "glyph_programs": 2,
+                "embedded_bytes": 750
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F66",
+                "glyph_programs": 2,
+                "embedded_bytes": 712
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F67",
+                "glyph_programs": 2,
+                "embedded_bytes": 605
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F68",
+                "glyph_programs": 3,
+                "embedded_bytes": 1173
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F69",
+                "glyph_programs": 3,
+                "embedded_bytes": 890
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F70",
+                "glyph_programs": 2,
+                "embedded_bytes": 604
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F71",
+                "glyph_programs": 4,
+                "embedded_bytes": 1397
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F72",
+                "glyph_programs": 2,
+                "embedded_bytes": 693
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F73",
+                "glyph_programs": 8,
+                "embedded_bytes": 3336
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F74",
+                "glyph_programs": 3,
+                "embedded_bytes": 1011
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F75",
+                "glyph_programs": 3,
+                "embedded_bytes": 1097
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F76",
+                "glyph_programs": 2,
+                "embedded_bytes": 396
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F77",
+                "glyph_programs": 3,
+                "embedded_bytes": 1000
+              }
+            ],
+            [
+              {
+                "name": "AAAAAA+LiberationSans",
+                "type": "Type0",
+                "resource": "F4",
+                "embedded_bytes": 21164
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F5",
+                "glyph_programs": 4,
+                "embedded_bytes": 1147
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F6",
+                "glyph_programs": 10,
+                "embedded_bytes": 4367
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F7",
+                "glyph_programs": 4,
+                "embedded_bytes": 804
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F10",
+                "glyph_programs": 8,
+                "embedded_bytes": 2416
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F11",
+                "glyph_programs": 5,
+                "embedded_bytes": 1633
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F12",
+                "glyph_programs": 6,
+                "embedded_bytes": 2490
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F15",
+                "glyph_programs": 3,
+                "embedded_bytes": 662
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F16",
+                "glyph_programs": 3,
+                "embedded_bytes": 865
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F17",
+                "glyph_programs": 10,
+                "embedded_bytes": 3403
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F18",
+                "glyph_programs": 19,
+                "embedded_bytes": 8391
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F19",
+                "glyph_programs": 13,
+                "embedded_bytes": 2746
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F20",
+                "glyph_programs": 57,
+                "embedded_bytes": 15424
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F21",
+                "glyph_programs": 7,
+                "embedded_bytes": 1380
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F22",
+                "glyph_programs": 6,
+                "embedded_bytes": 3043
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F23",
+                "glyph_programs": 6,
+                "embedded_bytes": 2023
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F24",
+                "glyph_programs": 12,
+                "embedded_bytes": 4994
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F25",
+                "glyph_programs": 5,
+                "embedded_bytes": 1895
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F26",
+                "glyph_programs": 4,
+                "embedded_bytes": 1392
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F27",
+                "glyph_programs": 6,
+                "embedded_bytes": 2093
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F28",
+                "glyph_programs": 5,
+                "embedded_bytes": 1611
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F29",
+                "glyph_programs": 9,
+                "embedded_bytes": 4410
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F30",
+                "glyph_programs": 2,
+                "embedded_bytes": 627
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F31",
+                "glyph_programs": 2,
+                "embedded_bytes": 669
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F33",
+                "glyph_programs": 2,
+                "embedded_bytes": 734
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F34",
+                "glyph_programs": 4,
+                "embedded_bytes": 1210
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F36",
+                "glyph_programs": 3,
+                "embedded_bytes": 757
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F37",
+                "glyph_programs": 4,
+                "embedded_bytes": 1147
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F42",
+                "glyph_programs": 4,
+                "embedded_bytes": 1232
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F43",
+                "glyph_programs": 11,
+                "embedded_bytes": 5703
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F44",
+                "glyph_programs": 7,
+                "embedded_bytes": 2195
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F45",
+                "glyph_programs": 5,
+                "embedded_bytes": 1311
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F46",
+                "glyph_programs": 10,
+                "embedded_bytes": 3323
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F47",
+                "glyph_programs": 6,
+                "embedded_bytes": 1935
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F48",
+                "glyph_programs": 3,
+                "embedded_bytes": 894
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F49",
+                "glyph_programs": 9,
+                "embedded_bytes": 3213
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F51",
+                "glyph_programs": 8,
+                "embedded_bytes": 2609
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F52",
+                "glyph_programs": 5,
+                "embedded_bytes": 1605
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F53",
+                "glyph_programs": 12,
+                "embedded_bytes": 7264
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F54",
+                "glyph_programs": 4,
+                "embedded_bytes": 1250
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F55",
+                "glyph_programs": 5,
+                "embedded_bytes": 1918
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F56",
+                "glyph_programs": 3,
+                "embedded_bytes": 896
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F57",
+                "glyph_programs": 6,
+                "embedded_bytes": 1761
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F59",
+                "glyph_programs": 3,
+                "embedded_bytes": 939
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F60",
+                "glyph_programs": 4,
+                "embedded_bytes": 1337
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F61",
+                "glyph_programs": 5,
+                "embedded_bytes": 2922
+              },
+              {
+                "name": "EAAAAA+DejaVuSansMono",
+                "type": "Type0",
+                "resource": "F62",
+                "embedded_bytes": 22268
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F64",
+                "glyph_programs": 4,
+                "embedded_bytes": 1051
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F67",
+                "glyph_programs": 2,
+                "embedded_bytes": 605
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F68",
+                "glyph_programs": 3,
+                "embedded_bytes": 1173
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F69",
+                "glyph_programs": 3,
+                "embedded_bytes": 890
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F71",
+                "glyph_programs": 4,
+                "embedded_bytes": 1397
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F73",
+                "glyph_programs": 8,
+                "embedded_bytes": 3336
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F74",
+                "glyph_programs": 3,
+                "embedded_bytes": 1011
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F75",
+                "glyph_programs": 3,
+                "embedded_bytes": 1097
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F77",
+                "glyph_programs": 3,
+                "embedded_bytes": 1000
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F80",
+                "glyph_programs": 27,
+                "embedded_bytes": 7090
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F81",
+                "glyph_programs": 2,
+                "embedded_bytes": 763
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F82",
+                "glyph_programs": 2,
+                "embedded_bytes": 648
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F83",
+                "glyph_programs": 2,
+                "embedded_bytes": 854
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F84",
+                "glyph_programs": 4,
+                "embedded_bytes": 1270
+              },
+              {
+                "name": "",
+                "type": "Type3",
+                "resource": "F85",
+                "glyph_programs": 2,
+                "embedded_bytes": 711
+              }
+            ]
+          ],
+          "pdf_pages": 2,
+          "files": {
+            "ChainBench_FISTA_review.pdf": {
+              "bytes": 286163,
+              "sha256": "35d821f07478d4822728d7a37c9d8e1817122d4686ac243966a9701255f952f1"
+            },
+            "page-1.png": {
+              "bytes": 83880,
+              "sha256": "8a127bdc291ce58885f58442d6d2f5b0a16613729f972d9b028e5817351aa422"
+            },
+            "page-2.png": {
+              "bytes": 76909,
+              "sha256": "6f477edc0b96d3849f9e8004a08e8699d375e8df6230d8e9f1fe0b4460f06a0b"
+            },
+            "review.html": {
+              "bytes": 66840,
+              "sha256": "225370b1e3c3c18114b92e246c3275f300836f68c10117636cd66bc745dff3f0"
+            }
+          }
+        },
+        {
+          "kind": "chainbench.reading-assets",
+          "schema_version": 1,
+          "version": "0.7.0",
+          "source_commit": "fccd654e85cd544fc1a33d7467df93babd4edd2a",
+          "bundle_manifest_sha256": "2d54cffa0aabd32143ffae6bc161e06b6888f5339c1257938aa93ca6e9231504",
+          "assets": {
+            "chainbench-0.7.0-reading.zip": {
+              "bytes": 44911452,
+              "sha256": "832b64f11aecd05881dbeedf6c01363d02329b3aaada3ce70f427cfd77365873"
+            },
+            "chainbench-0.7.0-review.pdf": {
+              "bytes": 286163,
+              "sha256": "35d821f07478d4822728d7a37c9d8e1817122d4686ac243966a9701255f952f1"
+            }
+          }
+        },
+        {
+          "assets": {
+            "chainbench-0.7.0-reading.zip": {
+              "bytes": 44911452,
+              "sha256": "832b64f11aecd05881dbeedf6c01363d02329b3aaada3ce70f427cfd77365873"
+            },
+            "chainbench-0.7.0-review.pdf": {
+              "bytes": 286163,
+              "sha256": "35d821f07478d4822728d7a37c9d8e1817122d4686ac243966a9701255f952f1"
+            }
+          },
+          "bundle_manifest_sha256": "2d54cffa0aabd32143ffae6bc161e06b6888f5339c1257938aa93ca6e9231504",
+          "kind": "chainbench.reading-assets",
+          "schema_version": 1,
+          "source_commit": "fccd654e85cd544fc1a33d7467df93babd4edd2a",
+          "version": "0.7.0"
+        },
+        {
+          "viewports": [
+            {
+              "width": 1440,
+              "reports_opened": 24,
+              "return_links": "passed",
+              "preview_images": "loaded",
+              "all_seeds": "retained",
+              "unresolved_seed24": "retained",
+              "language": "passed",
+              "overflow": false,
+              "atlas_workflow_links": 25,
+              "case_preserved_table_nodes": {
+                "index.html": 49,
+                "atlas.html": 0,
+                "shewchuk.html": 255,
+                "deblur.html": 0,
+                "heavy-ball.html": 95,
+                "simplex.html": 197,
+                "proximal.html": 193,
+                "landscape.html": 38,
+                "stress-gd-baseline.html": 134,
+                "stress-nesterov-1983.html": 134,
+                "stress-polyak-1964.html": 134,
+                "stress-hestenes-stiefel-1952.html": 134,
+                "stress-jaggi-2013.html": 134,
+                "stress-rockafellar-1976.html": 134,
+                "stress-beck-teboulle-2009.html": 134,
+                "stress-ista-vs-fista.html": 134,
+                "tight-gd.html": 4,
+                "wavelet.html": 13,
+                "fw-sparsity.html": 28,
+                "kaczmarz.html": 1674,
+                "sampling.html": 18,
+                "cg-spectrum.html": 864,
+                "adam.html": 281,
+                "admm.html": 1576,
+                "backtracking.html": 612
+              }
+            },
+            {
+              "width": 390,
+              "reports_opened": 24,
+              "return_links": "passed",
+              "preview_images": "loaded",
+              "all_seeds": "retained",
+              "unresolved_seed24": "retained",
+              "language": "passed",
+              "overflow": false,
+              "atlas_workflow_links": 25,
+              "case_preserved_table_nodes": {
+                "index.html": 49,
+                "atlas.html": 0,
+                "shewchuk.html": 255,
+                "deblur.html": 0,
+                "heavy-ball.html": 95,
+                "simplex.html": 197,
+                "proximal.html": 193,
+                "landscape.html": 38,
+                "stress-gd-baseline.html": 134,
+                "stress-nesterov-1983.html": 134,
+                "stress-polyak-1964.html": 134,
+                "stress-hestenes-stiefel-1952.html": 134,
+                "stress-jaggi-2013.html": 134,
+                "stress-rockafellar-1976.html": 134,
+                "stress-beck-teboulle-2009.html": 134,
+                "stress-ista-vs-fista.html": 134,
+                "tight-gd.html": 4,
+                "wavelet.html": 13,
+                "fw-sparsity.html": 28,
+                "kaczmarz.html": 1674,
+                "sampling.html": 18,
+                "cg-spectrum.html": 864,
+                "adam.html": 281,
+                "admm.html": 1576,
+                "backtracking.html": 612
+              }
+            }
+          ],
+          "network_requests": [],
+          "javascript_errors": [],
+          "browser": "153.0.8010.12",
+          "backtracking_trials": [
+            {
+              "width": 1440,
+              "cases": 36,
+              "states": 790
+            },
+            {
+              "width": 390,
+              "cases": 36,
+              "states": 790
+            }
+          ],
+          "no_script": "index, static figures and local navigation work"
+        }
+      ]
+    },
+    {
+      "id": 111149971333,
+      "name": "test (ubuntu-latest, Python 3.10, current)",
+      "conclusion": "success",
+      "source": "fccd654e85cd544fc1a33d7467df93babd4edd2a",
+      "source_checked": true,
+      "actual_completed_log_read": true,
+      "pytest": [
+        {
+          "passed": 1680,
+          "seconds": 464.92
+        }
+      ],
+      "proofs": [
+        [
+          {
+            "slug": "gd-baseline",
+            "title": "Gradient-descent baseline",
+            "reference": "Beck--Teboulle (2009), ISTA with g=0",
+            "statement": "Smooth-convex GD objective-gap bound on the bundled quadratic.",
+            "metric": "max_k gap_k / bound_k",
+            "observed": 0.04231974364074391,
+            "threshold": 1,
+            "status": "CONSISTENT",
+            "note": "Step=1/L; positive iterations only. This is not a universal numerical proof."
+          },
+          {
+            "slug": "nesterov-1983",
+            "title": "Nesterov-style acceleration (smooth FISTA)",
+            "reference": "Beck--Teboulle (2009), fixed-L FISTA with g=0; Nesterov (1983) historical origin",
+            "statement": "Smooth FISTA iterates satisfy the O(1/k^2) objective-gap bound on this quadratic.",
+            "metric": "max_k gap_k / bound_k",
+            "observed": 0.07520595549209133,
+            "threshold": 1,
+            "status": "CONSISTENT",
+            "note": "Historical CLI slug retained; not a literal reproduction of the 1983 algorithm."
+          },
+          {
+            "slug": "polyak-1964",
+            "title": "Polyak heavy-ball (empirical tail)",
+            "reference": "Polyak (1964), quadratic tuning",
+            "statement": "Compare a finite tail contraction estimate with the spectral-radius prediction.",
+            "metric": "relative error: observed tail ratio vs predicted rho",
+            "observed": 0.016922852738998625,
+            "threshold": 0.08,
+            "status": "CONSISTENT",
+            "note": "alpha=2.77778, beta=0.444444, rho=0.666667; 8% is an empirical tolerance, not a theorem constant. Last up to 20 ratios above error=1e-10 are used."
+          },
+          {
+            "slug": "hestenes-stiefel-1952",
+            "title": "Conjugate gradient",
+            "reference": "Hestenes--Stiefel (1952); bound: Shewchuk (1994), equation (52)",
+            "statement": "Positive-iteration A-norm errors satisfy the classical condition-number envelope.",
+            "metric": "max_k ||e_k||_Q / (2 rho^k ||e_0||_Q)",
+            "observed": 0.4228885412907972,
+            "threshold": 1,
+            "status": "CONSISTENT",
+            "note": "kappa=10; k=0 excluded to avoid its fixed ratio of 0.5."
+          },
+          {
+            "slug": "jaggi-2013",
+            "title": "Frank-Wolfe",
+            "reference": "Jaggi (2013), Algorithm 1 and Theorem 1, delta=0",
+            "statement": "Primal gaps satisfy the curvature-based envelope for k>=1.",
+            "metric": "max_k gap_k / (2 C_f / (k+2))",
+            "observed": 0.36749999999999994,
+            "threshold": 1,
+            "status": "CONSISTENT",
+            "note": "C_f=2 for this simplex quadratic; exact linear minimization oracle."
+          },
+          {
+            "slug": "rockafellar-1976",
+            "title": "Proximal point",
+            "reference": "Rockafellar (1976); quadratic resolvent specialization",
+            "statement": "Successive Euclidean errors satisfy the strongly-convex resolvent contraction.",
+            "metric": "max_k error_(k+1) / (q * error_k)",
+            "observed": 0.9783261220939676,
+            "threshold": 1,
+            "status": "CONSISTENT",
+            "note": "q=0.909091; exact quadratic linear solves, not a general inexact PPA experiment."
+          },
+          {
+            "slug": "beck-teboulle-2009",
+            "title": "FISTA",
+            "reference": "Beck--Teboulle (2009), fixed-L FISTA",
+            "statement": "Composite objective gaps satisfy the O(1/k^2) bound on diagonal LASSO.",
+            "metric": "max_k gap_k / bound_k",
+            "observed": 0.1425623536536782,
+            "threshold": 1,
+            "status": "CONSISTENT",
+            "note": "Exact soft-threshold optimum; stable gap evaluation avoids objective cancellation."
+          },
+          {
+            "slug": "ista-vs-fista",
+            "title": "ISTA vs FISTA (observation)",
+            "reference": "Beck--Teboulle (2009)",
+            "statement": "Compare final objective gaps at the same iteration budget on one fixture.",
+            "metric": "FISTA final gap / ISTA final gap",
+            "observed": 0.009192292285745488,
+            "threshold": null,
+            "status": "INFO",
+            "note": "Informational, not pass/fail: FISTA is not guaranteed to beat ISTA at every iteration."
+          }
+        ]
+      ],
+      "gate_lines": []
+    },
+    {
+      "id": 111149971338,
+      "name": "test (ubuntu-latest, Python 3.11, current)",
+      "conclusion": "success",
+      "source": "fccd654e85cd544fc1a33d7467df93babd4edd2a",
+      "source_checked": true,
+      "actual_completed_log_read": true,
+      "pytest": [
+        {
+          "passed": 1680,
+          "seconds": 423.45
+        }
+      ],
+      "proofs": [
+        [
+          {
+            "slug": "gd-baseline",
+            "title": "Gradient-descent baseline",
+            "reference": "Beck--Teboulle (2009), ISTA with g=0",
+            "statement": "Smooth-convex GD objective-gap bound on the bundled quadratic.",
+            "metric": "max_k gap_k / bound_k",
+            "observed": 0.04231974364074391,
+            "threshold": 1,
+            "status": "CONSISTENT",
+            "note": "Step=1/L; positive iterations only. This is not a universal numerical proof."
+          },
+          {
+            "slug": "nesterov-1983",
+            "title": "Nesterov-style acceleration (smooth FISTA)",
+            "reference": "Beck--Teboulle (2009), fixed-L FISTA with g=0; Nesterov (1983) historical origin",
+            "statement": "Smooth FISTA iterates satisfy the O(1/k^2) objective-gap bound on this quadratic.",
+            "metric": "max_k gap_k / bound_k",
+            "observed": 0.07520595549209133,
+            "threshold": 1,
+            "status": "CONSISTENT",
+            "note": "Historical CLI slug retained; not a literal reproduction of the 1983 algorithm."
+          },
+          {
+            "slug": "polyak-1964",
+            "title": "Polyak heavy-ball (empirical tail)",
+            "reference": "Polyak (1964), quadratic tuning",
+            "statement": "Compare a finite tail contraction estimate with the spectral-radius prediction.",
+            "metric": "relative error: observed tail ratio vs predicted rho",
+            "observed": 0.016922852738998625,
+            "threshold": 0.08,
+            "status": "CONSISTENT",
+            "note": "alpha=2.77778, beta=0.444444, rho=0.666667; 8% is an empirical tolerance, not a theorem constant. Last up to 20 ratios above error=1e-10 are used."
+          },
+          {
+            "slug": "hestenes-stiefel-1952",
+            "title": "Conjugate gradient",
+            "reference": "Hestenes--Stiefel (1952); bound: Shewchuk (1994), equation (52)",
+            "statement": "Positive-iteration A-norm errors satisfy the classical condition-number envelope.",
+            "metric": "max_k ||e_k||_Q / (2 rho^k ||e_0||_Q)",
+            "observed": 0.4228885412907972,
+            "threshold": 1,
+            "status": "CONSISTENT",
+            "note": "kappa=10; k=0 excluded to avoid its fixed ratio of 0.5."
+          },
+          {
+            "slug": "jaggi-2013",
+            "title": "Frank-Wolfe",
+            "reference": "Jaggi (2013), Algorithm 1 and Theorem 1, delta=0",
+            "statement": "Primal gaps satisfy the curvature-based envelope for k>=1.",
+            "metric": "max_k gap_k / (2 C_f / (k+2))",
+            "observed": 0.36749999999999994,
+            "threshold": 1,
+            "status": "CONSISTENT",
+            "note": "C_f=2 for this simplex quadratic; exact linear minimization oracle."
+          },
+          {
+            "slug": "rockafellar-1976",
+            "title": "Proximal point",
+            "reference": "Rockafellar (1976); quadratic resolvent specialization",
+            "statement": "Successive Euclidean errors satisfy the strongly-convex resolvent contraction.",
+            "metric": "max_k error_(k+1) / (q * error_k)",
+            "observed": 0.9783261220939676,
+            "threshold": 1,
+            "status": "CONSISTENT",
+            "note": "q=0.909091; exact quadratic linear solves, not a general inexact PPA experiment."
+          },
+          {
+            "slug": "beck-teboulle-2009",
+            "title": "FISTA",
+            "reference": "Beck--Teboulle (2009), fixed-L FISTA",
+            "statement": "Composite objective gaps satisfy the O(1/k^2) bound on diagonal LASSO.",
+            "metric": "max_k gap_k / bound_k",
+            "observed": 0.1425623536536782,
+            "threshold": 1,
+            "status": "CONSISTENT",
+            "note": "Exact soft-threshold optimum; stable gap evaluation avoids objective cancellation."
+          },
+          {
+            "slug": "ista-vs-fista",
+            "title": "ISTA vs FISTA (observation)",
+            "reference": "Beck--Teboulle (2009)",
+            "statement": "Compare final objective gaps at the same iteration budget on one fixture.",
+            "metric": "FISTA final gap / ISTA final gap",
+            "observed": 0.009192292285745488,
+            "threshold": null,
+            "status": "INFO",
+            "note": "Informational, not pass/fail: FISTA is not guaranteed to beat ISTA at every iteration."
+          }
+        ]
+      ],
+      "gate_lines": []
+    },
+    {
+      "id": 111149971172,
+      "name": "offline interactive reports browser",
+      "conclusion": "success",
+      "source": "fccd654e85cd544fc1a33d7467df93babd4edd2a",
+      "source_checked": true,
+      "actual_completed_log_read": true,
+      "pytest": [],
+      "proofs": [
+        {
+          "source_commit": "fccd654e85cd544fc1a33d7467df93babd4edd2a",
+          "viewports": [
+            {
+              "width": 1440,
+              "cases": [
+                {
+                  "family": "quadratic",
+                  "seed": 0,
+                  "methods": [
+                    "gd",
+                    "smooth-fista",
+                    "heavy-ball",
+                    "cg",
+                    "proximal-point"
+                  ],
+                  "dimension": 4,
+                  "steps": 2,
+                  "rows": 15,
+                  "numeric_audit": true,
+                  "exact_html": true,
+                  "input_sha256": "17f177bae7e05dce83ce8f2ebff11e86da5ed90fa4f51ccc23bf3433283c0561",
+                  "manifest_sha256": "22316a19fbac6ec5b23da7a362b958a5b3c6a6e6f0dcb458a1f703369541f65d"
+                },
+                {
+                  "family": "quadratic",
+                  "seed": 7,
+                  "methods": [
+                    "gd",
+                    "smooth-fista",
+                    "heavy-ball",
+                    "cg",
+                    "proximal-point"
+                  ],
+                  "dimension": 4,
+                  "steps": 2,
+                  "rows": 15,
+                  "numeric_audit": true,
+                  "exact_html": true,
+                  "input_sha256": "06637b83f9e5a2a97888a3f90997a5e23a940ad045f960a262e83dc20f1eefb8",
+                  "manifest_sha256": "de1ea184e016cce27ba12c0641dd63b2a69a5a47e6619008ac427298125c6762"
+                },
+                {
+                  "family": "diagonal-lasso",
+                  "seed": 0,
+                  "methods": [
+                    "ista",
+                    "fista"
+                  ],
+                  "dimension": 4,
+                  "steps": 2,
+                  "rows": 6,
+                  "numeric_audit": true,
+                  "exact_html": true,
+                  "input_sha256": "52936734d9d28d45d7176df6f927acc6721c20c950dd4970f00691ae7787cc3b",
+                  "manifest_sha256": "1b23908629c694cbc7e63c4beb59f221337402f76c574edc3bdf841a48e9bcd3"
+                },
+                {
+                  "family": "diagonal-lasso",
+                  "seed": 7,
+                  "methods": [
+                    "ista",
+                    "fista"
+                  ],
+                  "dimension": 4,
+                  "steps": 2,
+                  "rows": 6,
+                  "numeric_audit": true,
+                  "exact_html": true,
+                  "input_sha256": "0c361d8208a85e2650c009681583b4d1ee04166fcefd97f4ff7b242f94cb59ab",
+                  "manifest_sha256": "e72302781337d659134cf47be9f0c6e43df63ae62e3988bcbb64458a7493ef7c"
+                },
+                {
+                  "family": "simplex",
+                  "seed": 0,
+                  "methods": [
+                    "frank-wolfe"
+                  ],
+                  "dimension": 4,
+                  "steps": 2,
+                  "rows": 3,
+                  "numeric_audit": true,
+                  "exact_html": true,
+                  "input_sha256": "89109a3c73231c0a5417981e2f1725dc020cb9a86a827975a636884542a16cf0",
+                  "manifest_sha256": "b8d6cef2720d0ea3d55abfd19f8f0c63c35af3edafa2892a94c037ec6d65e439"
+                },
+                {
+                  "family": "simplex",
+                  "seed": 7,
+                  "methods": [
+                    "frank-wolfe"
+                  ],
+                  "dimension": 4,
+                  "steps": 2,
+                  "rows": 3,
+                  "numeric_audit": true,
+                  "exact_html": true,
+                  "input_sha256": "8eb81aea1b7eb76a681bfcf98479676abdffc34d2d64ffa165300606a25633e5",
+                  "manifest_sha256": "488d14c638939eafd9377dbf32e90f47e3c650bac7b4c9ff5c76232b70fc4389"
+                }
+              ],
+              "keyboard": true,
+              "language": true,
+              "shutdown": true,
+              "downloads_after_shutdown": true,
+              "method_selection": true,
+              "distinct_seeds": true
+            },
+            {
+              "width": 390,
+              "cases": [
+                {
+                  "family": "quadratic",
+                  "seed": 0,
+                  "methods": [
+                    "gd",
+                    "smooth-fista",
+                    "heavy-ball",
+                    "cg",
+                    "proximal-point"
+                  ],
+                  "dimension": 4,
+                  "steps": 2,
+                  "rows": 15,
+                  "numeric_audit": true,
+                  "exact_html": true,
+                  "input_sha256": "17f177bae7e05dce83ce8f2ebff11e86da5ed90fa4f51ccc23bf3433283c0561",
+                  "manifest_sha256": "22316a19fbac6ec5b23da7a362b958a5b3c6a6e6f0dcb458a1f703369541f65d"
+                },
+                {
+                  "family": "quadratic",
+                  "seed": 7,
+                  "methods": [
+                    "gd",
+                    "smooth-fista",
+                    "heavy-ball",
+                    "cg",
+                    "proximal-point"
+                  ],
+                  "dimension": 4,
+                  "steps": 2,
+                  "rows": 15,
+                  "numeric_audit": true,
+                  "exact_html": true,
+                  "input_sha256": "06637b83f9e5a2a97888a3f90997a5e23a940ad045f960a262e83dc20f1eefb8",
+                  "manifest_sha256": "de1ea184e016cce27ba12c0641dd63b2a69a5a47e6619008ac427298125c6762"
+                },
+                {
+                  "family": "diagonal-lasso",
+                  "seed": 0,
+                  "methods": [
+                    "ista",
+                    "fista"
+                  ],
+                  "dimension": 4,
+                  "steps": 2,
+                  "rows": 6,
+                  "numeric_audit": true,
+                  "exact_html": true,
+                  "input_sha256": "52936734d9d28d45d7176df6f927acc6721c20c950dd4970f00691ae7787cc3b",
+                  "manifest_sha256": "1b23908629c694cbc7e63c4beb59f221337402f76c574edc3bdf841a48e9bcd3"
+                },
+                {
+                  "family": "diagonal-lasso",
+                  "seed": 7,
+                  "methods": [
+                    "ista",
+                    "fista"
+                  ],
+                  "dimension": 4,
+                  "steps": 2,
+                  "rows": 6,
+                  "numeric_audit": true,
+                  "exact_html": true,
+                  "input_sha256": "0c361d8208a85e2650c009681583b4d1ee04166fcefd97f4ff7b242f94cb59ab",
+                  "manifest_sha256": "e72302781337d659134cf47be9f0c6e43df63ae62e3988bcbb64458a7493ef7c"
+                },
+                {
+                  "family": "simplex",
+                  "seed": 0,
+                  "methods": [
+                    "frank-wolfe"
+                  ],
+                  "dimension": 4,
+                  "steps": 2,
+                  "rows": 3,
+                  "numeric_audit": true,
+                  "exact_html": true,
+                  "input_sha256": "89109a3c73231c0a5417981e2f1725dc020cb9a86a827975a636884542a16cf0",
+                  "manifest_sha256": "b8d6cef2720d0ea3d55abfd19f8f0c63c35af3edafa2892a94c037ec6d65e439"
+                },
+                {
+                  "family": "simplex",
+                  "seed": 7,
+                  "methods": [
+                    "frank-wolfe"
+                  ],
+                  "dimension": 4,
+                  "steps": 2,
+                  "rows": 3,
+                  "numeric_audit": true,
+                  "exact_html": true,
+                  "input_sha256": "8eb81aea1b7eb76a681bfcf98479676abdffc34d2d64ffa165300606a25633e5",
+                  "manifest_sha256": "488d14c638939eafd9377dbf32e90f47e3c650bac7b4c9ff5c76232b70fc4389"
+                }
+              ],
+              "keyboard": true,
+              "language": true,
+              "shutdown": true,
+              "downloads_after_shutdown": true,
+              "method_selection": true,
+              "distinct_seeds": true
+            }
+          ],
+          "outside_requests": [],
+          "javascript_errors": [],
+          "offline_downloads": [
+            {
+              "file": "after-shutdown-1440.html",
+              "javascript": true,
+              "readable": true
+            },
+            {
+              "file": "after-shutdown-390.html",
+              "javascript": true,
+              "readable": true
+            },
+            {
+              "file": "diagonal-lasso-0-1440.html",
+              "javascript": true,
+              "readable": true
+            },
+            {
+              "file": "diagonal-lasso-0-390.html",
+              "javascript": true,
+              "readable": true
+            },
+            {
+              "file": "diagonal-lasso-7-1440.html",
+              "javascript": true,
+              "readable": true
+            },
+            {
+              "file": "diagonal-lasso-7-390.html",
+              "javascript": true,
+              "readable": true
+            },
+            {
+              "file": "quadratic-0-1440.html",
+              "javascript": true,
+              "readable": true
+            },
+            {
+              "file": "quadratic-0-390.html",
+              "javascript": true,
+              "readable": true
+            },
+            {
+              "file": "quadratic-7-1440.html",
+              "javascript": true,
+              "readable": true
+            },
+            {
+              "file": "quadratic-7-390.html",
+              "javascript": true,
+              "readable": true
+            },
+            {
+              "file": "simplex-0-1440.html",
+              "javascript": true,
+              "readable": true
+            },
+            {
+              "file": "simplex-0-390.html",
+              "javascript": true,
+              "readable": true
+            },
+            {
+              "file": "simplex-7-1440.html",
+              "javascript": true,
+              "readable": true
+            },
+            {
+              "file": "simplex-7-390.html",
+              "javascript": true,
+              "readable": true
+            },
+            {
+              "file": "after-shutdown-1440.html",
+              "javascript": false,
+              "readable": true
+            },
+            {
+              "file": "after-shutdown-390.html",
+              "javascript": false,
+              "readable": true
+            },
+            {
+              "file": "diagonal-lasso-0-1440.html",
+              "javascript": false,
+              "readable": true
+            },
+            {
+              "file": "diagonal-lasso-0-390.html",
+              "javascript": false,
+              "readable": true
+            },
+            {
+              "file": "diagonal-lasso-7-1440.html",
+              "javascript": false,
+              "readable": true
+            },
+            {
+              "file": "diagonal-lasso-7-390.html",
+              "javascript": false,
+              "readable": true
+            },
+            {
+              "file": "quadratic-0-1440.html",
+              "javascript": false,
+              "readable": true
+            },
+            {
+              "file": "quadratic-0-390.html",
+              "javascript": false,
+              "readable": true
+            },
+            {
+              "file": "quadratic-7-1440.html",
+              "javascript": false,
+              "readable": true
+            },
+            {
+              "file": "quadratic-7-390.html",
+              "javascript": false,
+              "readable": true
+            },
+            {
+              "file": "simplex-0-1440.html",
+              "javascript": false,
+              "readable": true
+            },
+            {
+              "file": "simplex-0-390.html",
+              "javascript": false,
+              "readable": true
+            },
+            {
+              "file": "simplex-7-1440.html",
+              "javascript": false,
+              "readable": true
+            },
+            {
+              "file": "simplex-7-390.html",
+              "javascript": false,
+              "readable": true
+            }
+          ],
+          "pdf_pages": 2,
+          "no_server_files": true,
+          "files": {
+            "ChainBench_studio_review.pdf": {
+              "bytes": 273087,
+              "sha256": "58bbd9730dfec1d30af69bc6f81c2d72093f3c789124cdb0e8b455cc61f0236d"
+            },
+            "after-shutdown-1440.html": {
+              "bytes": 35510,
+              "sha256": "4459a25cd8cc63edbb6ff1b040ecb6c7f0f09180c5d2a31d9ad4c7c5b092fa7b"
+            },
+            "after-shutdown-390.html": {
+              "bytes": 35510,
+              "sha256": "4459a25cd8cc63edbb6ff1b040ecb6c7f0f09180c5d2a31d9ad4c7c5b092fa7b"
+            },
+            "controls-1440.png": {
+              "bytes": 40250,
+              "sha256": "80d4de2e226433424165d3904762f6a55e44764355f9d28e8a22d926dbb3672e"
+            },
+            "controls-390.png": {
+              "bytes": 41782,
+              "sha256": "a1b667cdb217cc680d5ec922da69a256e67f6afab46fa15396859b7b3b8847c4"
+            },
+            "diagonal-lasso-0-1440.html": {
+              "bytes": 38061,
+              "sha256": "61021b5586ac657422016c2508a9061c8806859f8158fa4620ef7036682ac0b8"
+            },
+            "diagonal-lasso-0-1440.input.json": {
+              "bytes": 748,
+              "sha256": "de3a678b4d6f6222799d364a1d5956bdcd81fd417aaf415eeb594365972f0525"
+            },
+            "diagonal-lasso-0-1440.result.json": {
+              "bytes": 3265,
+              "sha256": "2c7c92a026671b22319f4ca24820144ecf096be8de8af0ad39dbc67abbac54e8"
+            },
+            "diagonal-lasso-0-390.html": {
+              "bytes": 38061,
+              "sha256": "61021b5586ac657422016c2508a9061c8806859f8158fa4620ef7036682ac0b8"
+            },
+            "diagonal-lasso-0-390.input.json": {
+              "bytes": 748,
+              "sha256": "de3a678b4d6f6222799d364a1d5956bdcd81fd417aaf415eeb594365972f0525"
+            },
+            "diagonal-lasso-0-390.result.json": {
+              "bytes": 3265,
+              "sha256": "2c7c92a026671b22319f4ca24820144ecf096be8de8af0ad39dbc67abbac54e8"
+            },
+            "diagonal-lasso-7-1440.html": {
+              "bytes": 38143,
+              "sha256": "29f1bcf2f6d020d67e006a11b2c252e993f7ea746aaffa1a53a26598c8d93318"
+            },
+            "diagonal-lasso-7-1440.input.json": {
+              "bytes": 751,
+              "sha256": "ca3f101c56bfa72bb087c748b0c2563fa18df46d6ccffda9a591f60c0c6c64f2"
+            },
+            "diagonal-lasso-7-1440.result.json": {
+              "bytes": 3324,
+              "sha256": "16469934cef0d24f3a7d81f0f773a00a2749c0de9f7d9204db1ba4173d4c7361"
+            },
+            "diagonal-lasso-7-390.html": {
+              "bytes": 38143,
+              "sha256": "29f1bcf2f6d020d67e006a11b2c252e993f7ea746aaffa1a53a26598c8d93318"
+            },
+            "diagonal-lasso-7-390.input.json": {
+              "bytes": 751,
+              "sha256": "ca3f101c56bfa72bb087c748b0c2563fa18df46d6ccffda9a591f60c0c6c64f2"
+            },
+            "diagonal-lasso-7-390.result.json": {
+              "bytes": 3324,
+              "sha256": "16469934cef0d24f3a7d81f0f773a00a2749c0de9f7d9204db1ba4173d4c7361"
+            },
+            "gap-1440.png": {
+              "bytes": 66500,
+              "sha256": "45a1c2e9f979da60b5e3e87944927004ed8872dbf3d2f372e5d66d409856e41c"
+            },
+            "gap-390.png": {
+              "bytes": 15847,
+              "sha256": "181cfcbd50abd7f0c59de092d291024ed5514da4e7a36c9de9d7f2ae60d6562a"
+            },
+            "live-result-1440.png": {
+              "bytes": 111609,
+              "sha256": "d64d7796047712e3074bffa99536778f225f2fee2115c9c49e89e4efab290269"
+            },
+            "live-result-390.png": {
+              "bytes": 84687,
+              "sha256": "a1c2f569bbeac7bead80283dc23e491113bdfb02e77aef5b6c67589e47514846"
+            },
+            "quadratic-0-1440.html": {
+              "bytes": 50716,
+              "sha256": "bf0c763983678ee8fe4f1bcbcb72f300150dfe30a47e751e4f731c87a5715d9a"
+            },
+            "quadratic-0-1440.input.json": {
+              "bytes": 1203,
+              "sha256": "a850a6be443052c1c3a567db563d8a688a3a5cf2b38176a551157cecbb423627"
+            },
+            "quadratic-0-1440.result.json": {
+              "bytes": 6332,
+              "sha256": "5afb66dea74c977ffea56dc9b8d703fe34e746d992ca140d37264618e5e33439"
+            },
+            "quadratic-0-390.html": {
+              "bytes": 50716,
+              "sha256": "bf0c763983678ee8fe4f1bcbcb72f300150dfe30a47e751e4f731c87a5715d9a"
+            },
+            "quadratic-0-390.input.json": {
+              "bytes": 1203,
+              "sha256": "a850a6be443052c1c3a567db563d8a688a3a5cf2b38176a551157cecbb423627"
+            },
+            "quadratic-0-390.result.json": {
+              "bytes": 6332,
+              "sha256": "5afb66dea74c977ffea56dc9b8d703fe34e746d992ca140d37264618e5e33439"
+            },
+            "quadratic-7-1440.html": {
+              "bytes": 51129,
+              "sha256": "4de976bbfd9e90252d8a8f0e6926bb1a769262bd2f9bfd990ebde0c7f50d1e58"
+            },
+            "quadratic-7-1440.input.json": {
+              "bytes": 1196,
+              "sha256": "dc45e7c7059ffaa4ea104395036d5a9bea7699c405771c0ddd13838d73097bf8"
+            },
+            "quadratic-7-1440.result.json": {
+              "bytes": 6306,
+              "sha256": "a11a42678a8fa18e009c22fb558dee215f85280d95256264a43ca0ae1b6e8b4f"
+            },
+            "quadratic-7-390.html": {
+              "bytes": 51129,
+              "sha256": "4de976bbfd9e90252d8a8f0e6926bb1a769262bd2f9bfd990ebde0c7f50d1e58"
+            },
+            "quadratic-7-390.input.json": {
+              "bytes": 1196,
+              "sha256": "dc45e7c7059ffaa4ea104395036d5a9bea7699c405771c0ddd13838d73097bf8"
+            },
+            "quadratic-7-390.result.json": {
+              "bytes": 6306,
+              "sha256": "a11a42678a8fa18e009c22fb558dee215f85280d95256264a43ca0ae1b6e8b4f"
+            },
+            "result-context-1440.png": {
+              "bytes": 62852,
+              "sha256": "bdbb73255f0b5f81d2b052cee90656a1ad8ffa32cda87afeaa96f7c6dd35a6f8"
+            },
+            "result-context-390.png": {
+              "bytes": 61156,
+              "sha256": "e02c028e7d6023da1b880fedbdcbc0a311604ded24e83bd946cf19f79a8924bf"
+            },
+            "review-page-1.png": {
+              "bytes": 66759,
+              "sha256": "1cdb318567f88f11dcdf08f70671934105bf8f97310a58c5bc06e41b8301384f"
+            },
+            "review-page-2.png": {
+              "bytes": 79551,
+              "sha256": "a4c1f6cbe1c1598ae79b71b2505c97832a069155dcc1c13c3b53e3655dfb285e"
+            },
+            "review.html": {
+              "bytes": 144598,
+              "sha256": "cf42962ff24c7acf4c9deabcc788bf127ba4c101213b68e1d56a59ddd730f226"
+            },
+            "simplex-0-1440.html": {
+              "bytes": 34032,
+              "sha256": "816ca0f92770e45ee48cbf6526001df4e408be97b2127c47761183837a7d83b7"
+            },
+            "simplex-0-1440.input.json": {
+              "bytes": 637,
+              "sha256": "d1370377e86b0971dc3b16bdeb4bdeeceee61946c63f9340f4f921d28c39fd26"
+            },
+            "simplex-0-1440.result.json": {
+              "bytes": 2262,
+              "sha256": "e87226d8d76c838317cd520caaa80a5ac79b3033f5e4e636da305468aa441eda"
+            },
+            "simplex-0-390.html": {
+              "bytes": 34032,
+              "sha256": "816ca0f92770e45ee48cbf6526001df4e408be97b2127c47761183837a7d83b7"
+            },
+            "simplex-0-390.input.json": {
+              "bytes": 637,
+              "sha256": "d1370377e86b0971dc3b16bdeb4bdeeceee61946c63f9340f4f921d28c39fd26"
+            },
+            "simplex-0-390.result.json": {
+              "bytes": 2262,
+              "sha256": "e87226d8d76c838317cd520caaa80a5ac79b3033f5e4e636da305468aa441eda"
+            },
+            "simplex-7-1440.html": {
+              "bytes": 34043,
+              "sha256": "eb8d3d76536ac0f8851d2c3c0a5df7e314c58e9b8ed04a232000d20e6203251a"
+            },
+            "simplex-7-1440.input.json": {
+              "bytes": 640,
+              "sha256": "b0c9b26cc5622661888c04c60c1a84faf98c9df00792bf885b9c2021271399d2"
+            },
+            "simplex-7-1440.result.json": {
+              "bytes": 2268,
+              "sha256": "5884a66bfa8a4462136f14c51201e1db267603d394bb47311b700984a10a3127"
+            },
+            "simplex-7-390.html": {
+              "bytes": 34043,
+              "sha256": "eb8d3d76536ac0f8851d2c3c0a5df7e314c58e9b8ed04a232000d20e6203251a"
+            },
+            "simplex-7-390.input.json": {
+              "bytes": 640,
+              "sha256": "b0c9b26cc5622661888c04c60c1a84faf98c9df00792bf885b9c2021271399d2"
+            },
+            "simplex-7-390.result.json": {
+              "bytes": 2268,
+              "sha256": "5884a66bfa8a4462136f14c51201e1db267603d394bb47311b700984a10a3127"
+            }
+          }
+        },
+        {
+          "source_commit": "fccd654e85cd544fc1a33d7467df93babd4edd2a",
+          "audits": [
+            {
+              "case": "generated-quadratic-0",
+              "family": "quadratic",
+              "methods": [
+                "gd",
+                "smooth-fista",
+                "heavy-ball",
+                "cg",
+                "proximal-point"
+              ],
+              "rows": 33,
+              "numeric_audit": true,
+              "exact_inputs": true,
+              "html_samples": true,
+              "replay": "MATCH",
+              "input_sha256": "d1a0979fdaf70c194d0d45ac148951e53e1ace20c44ec0fcb19a757aba5bb060",
+              "manifest_sha256": "be96f656483796a2a1b2e3439974d555d0985f3740422e64d890ee045741b12d"
+            },
+            {
+              "case": "generated-quadratic-7",
+              "family": "quadratic",
+              "methods": [
+                "gd",
+                "smooth-fista",
+                "heavy-ball",
+                "cg",
+                "proximal-point"
+              ],
+              "rows": 33,
+              "numeric_audit": true,
+              "exact_inputs": true,
+              "html_samples": true,
+              "replay": "MATCH",
+              "input_sha256": "1555e289c0408c3e98ccac2a197a8c4c964ee477454a36ad2364cb32a3c69f72",
+              "manifest_sha256": "13ecf294b037c758ad2faea7e3635a441a000f230baa5b6eb993fff6301293ef"
+            },
+            {
+              "case": "generated-diagonal-lasso-0",
+              "family": "diagonal-lasso",
+              "methods": [
+                "ista",
+                "fista"
+              ],
+              "rows": 14,
+              "numeric_audit": true,
+              "exact_inputs": true,
+              "html_samples": true,
+              "replay": "MATCH",
+              "input_sha256": "be17c3a383000aaa2f482dcf7839581a8a8ea81549d8796280d52f060a100084",
+              "manifest_sha256": "d96a8905b7cc82680456f9e99972f36393ed60eb3ad9967fd805411f84326823"
+            },
+            {
+              "case": "generated-diagonal-lasso-7",
+              "family": "diagonal-lasso",
+              "methods": [
+                "ista",
+                "fista"
+              ],
+              "rows": 14,
+              "numeric_audit": true,
+              "exact_inputs": true,
+              "html_samples": true,
+              "replay": "MATCH",
+              "input_sha256": "9d946279a3b5b8eedf620a216700214bd33cfac517b35e78b790c27586f79dae",
+              "manifest_sha256": "e28a150bfa6eec71f99f57b7edcb29b99df24d14463c75849aec38a544b98351"
+            },
+            {
+              "case": "generated-simplex-0",
+              "family": "simplex",
+              "methods": [
+                "frank-wolfe"
+              ],
+              "rows": 7,
+              "numeric_audit": true,
+              "exact_inputs": true,
+              "html_samples": true,
+              "replay": "MATCH",
+              "input_sha256": "89109a3c73231c0a5417981e2f1725dc020cb9a86a827975a636884542a16cf0",
+              "manifest_sha256": "f68229218d5659a7fcc4ecb9c577c463b314ec456bd8f01a67dbde16a9ac4cb2"
+            },
+            {
+              "case": "generated-simplex-7",
+              "family": "simplex",
+              "methods": [
+                "frank-wolfe"
+              ],
+              "rows": 7,
+              "numeric_audit": true,
+              "exact_inputs": true,
+              "html_samples": true,
+              "replay": "MATCH",
+              "input_sha256": "8eb81aea1b7eb76a681bfcf98479676abdffc34d2d64ffa165300606a25633e5",
+              "manifest_sha256": "3717b6dbe156bf693a7ee860986086399d4267784f398c4cc00560b767ebc3a8"
+            },
+            {
+              "case": "imported-quadratic",
+              "family": "quadratic",
+              "methods": [
+                "gd",
+                "smooth-fista",
+                "heavy-ball",
+                "cg",
+                "proximal-point"
+              ],
+              "rows": 15,
+              "numeric_audit": true,
+              "exact_inputs": true,
+              "html_samples": true,
+              "replay": "MATCH",
+              "input_sha256": "a07c9509522ec19b2cac93e202d4d3f95150dda7c100acbac86a5cb55509f604",
+              "manifest_sha256": "ec830270aef51e9c2b5d174e08964cb8d37deaaafb33bc1df34a0919f559b921"
+            },
+            {
+              "case": "imported-psd",
+              "family": "quadratic",
+              "methods": [
+                "gd",
+                "smooth-fista",
+                "proximal-point"
+              ],
+              "rows": 9,
+              "numeric_audit": true,
+              "exact_inputs": true,
+              "html_samples": true,
+              "replay": "MATCH",
+              "input_sha256": "88384f21ca0637e0fe5ac65b2f41ffb523682c1b032afa03175400505a95fa26",
+              "manifest_sha256": "eb3952c8d6704b5e488defb65de4d31a5b0834ea451e6e66ea750417d662b6dc"
+            },
+            {
+              "case": "imported-lasso",
+              "family": "diagonal-lasso",
+              "methods": [
+                "ista",
+                "fista"
+              ],
+              "rows": 6,
+              "numeric_audit": true,
+              "exact_inputs": true,
+              "html_samples": true,
+              "replay": "MATCH",
+              "input_sha256": "27811725e9cb4fe9aeba65aea3a2484dfcdfc5a604f127023f2bbd4249d4f0d3",
+              "manifest_sha256": "c2a52e2c3f391254abaf41c2608e7da3f2c635a44e788fd453e868320eef3041"
+            },
+            {
+              "case": "imported-simplex",
+              "family": "simplex",
+              "methods": [
+                "frank-wolfe"
+              ],
+              "rows": 3,
+              "numeric_audit": true,
+              "exact_inputs": true,
+              "html_samples": true,
+              "replay": "MATCH",
+              "input_sha256": "aadf43436e82702639886862be8403cfb8bb838d1597dabef1a67b0f5f1adada",
+              "manifest_sha256": "c5083c15e8bbd086d4f1cb49c744e91abd8653d502f45572f79ad53674e40f6d"
+            }
+          ],
+          "viewports": [
+            {
+              "case": "generated-quadratic-0",
+              "width": 1440,
+              "plots": 3,
+              "methods": 5,
+              "exact_keyboard_samples": true,
+              "exact_download": true,
+              "page_overflow": false
+            },
+            {
+              "case": "generated-quadratic-7",
+              "width": 1440,
+              "plots": 3,
+              "methods": 5,
+              "exact_keyboard_samples": true,
+              "exact_download": true,
+              "page_overflow": false
+            },
+            {
+              "case": "generated-diagonal-lasso-0",
+              "width": 1440,
+              "plots": 3,
+              "methods": 2,
+              "exact_keyboard_samples": true,
+              "exact_download": true,
+              "page_overflow": false
+            },
+            {
+              "case": "generated-diagonal-lasso-7",
+              "width": 1440,
+              "plots": 3,
+              "methods": 2,
+              "exact_keyboard_samples": true,
+              "exact_download": true,
+              "page_overflow": false
+            },
+            {
+              "case": "generated-simplex-0",
+              "width": 1440,
+              "plots": 3,
+              "methods": 1,
+              "exact_keyboard_samples": true,
+              "exact_download": true,
+              "page_overflow": false
+            },
+            {
+              "case": "generated-simplex-7",
+              "width": 1440,
+              "plots": 3,
+              "methods": 1,
+              "exact_keyboard_samples": true,
+              "exact_download": true,
+              "page_overflow": false
+            },
+            {
+              "case": "imported-quadratic",
+              "width": 1440,
+              "plots": 3,
+              "methods": 5,
+              "exact_keyboard_samples": true,
+              "exact_download": true,
+              "page_overflow": false
+            },
+            {
+              "case": "imported-psd",
+              "width": 1440,
+              "plots": 3,
+              "methods": 3,
+              "exact_keyboard_samples": true,
+              "exact_download": true,
+              "page_overflow": false
+            },
+            {
+              "case": "imported-lasso",
+              "width": 1440,
+              "plots": 3,
+              "methods": 2,
+              "exact_keyboard_samples": true,
+              "exact_download": true,
+              "page_overflow": false
+            },
+            {
+              "case": "imported-simplex",
+              "width": 1440,
+              "plots": 3,
+              "methods": 1,
+              "exact_keyboard_samples": true,
+              "exact_download": true,
+              "page_overflow": false
+            },
+            {
+              "case": "replay",
+              "width": 1440,
+              "plots": 3,
+              "methods": 5,
+              "exact_keyboard_samples": true,
+              "exact_download": true,
+              "page_overflow": false
+            },
+            {
+              "case": "generated-quadratic-0",
+              "width": 390,
+              "plots": 3,
+              "methods": 5,
+              "exact_keyboard_samples": true,
+              "exact_download": true,
+              "page_overflow": false
+            },
+            {
+              "case": "generated-quadratic-7",
+              "width": 390,
+              "plots": 3,
+              "methods": 5,
+              "exact_keyboard_samples": true,
+              "exact_download": true,
+              "page_overflow": false
+            },
+            {
+              "case": "generated-diagonal-lasso-0",
+              "width": 390,
+              "plots": 3,
+              "methods": 2,
+              "exact_keyboard_samples": true,
+              "exact_download": true,
+              "page_overflow": false
+            },
+            {
+              "case": "generated-diagonal-lasso-7",
+              "width": 390,
+              "plots": 3,
+              "methods": 2,
+              "exact_keyboard_samples": true,
+              "exact_download": true,
+              "page_overflow": false
+            },
+            {
+              "case": "generated-simplex-0",
+              "width": 390,
+              "plots": 3,
+              "methods": 1,
+              "exact_keyboard_samples": true,
+              "exact_download": true,
+              "page_overflow": false
+            },
+            {
+              "case": "generated-simplex-7",
+              "width": 390,
+              "plots": 3,
+              "methods": 1,
+              "exact_keyboard_samples": true,
+              "exact_download": true,
+              "page_overflow": false
+            },
+            {
+              "case": "imported-quadratic",
+              "width": 390,
+              "plots": 3,
+              "methods": 5,
+              "exact_keyboard_samples": true,
+              "exact_download": true,
+              "page_overflow": false
+            },
+            {
+              "case": "imported-psd",
+              "width": 390,
+              "plots": 3,
+              "methods": 3,
+              "exact_keyboard_samples": true,
+              "exact_download": true,
+              "page_overflow": false
+            },
+            {
+              "case": "imported-lasso",
+              "width": 390,
+              "plots": 3,
+              "methods": 2,
+              "exact_keyboard_samples": true,
+              "exact_download": true,
+              "page_overflow": false
+            },
+            {
+              "case": "imported-simplex",
+              "width": 390,
+              "plots": 3,
+              "methods": 1,
+              "exact_keyboard_samples": true,
+              "exact_download": true,
+              "page_overflow": false
+            },
+            {
+              "case": "replay",
+              "width": 390,
+              "plots": 3,
+              "methods": 5,
+              "exact_keyboard_samples": true,
+              "exact_download": true,
+              "page_overflow": false
+            }
+          ],
+          "network_requests": [],
+          "javascript_errors": [],
+          "browser": "153.0.8010.12",
+          "no_script": {
+            "reports": 11,
+            "static_plots_and_input_details": true
+          },
+          "pdf": {
+            "pages": 2,
+            "final_section_present": true
+          },
+          "files": {
+            "ChainBench_stored_inputs_review.pdf": {
+              "bytes": 210334,
+              "sha256": "95fae7036481b4312b11b4e271b3b60b3918ce536ba7ce33a176223a19a07c7f"
+            },
+            "generated-diagonal-lasso-0-download-1440.json": {
+              "bytes": 7993,
+              "sha256": "e23191a5e7f1579921825e1a2baf70902556a4f2d66321b4e2e0d61dbdfa22a9"
+            },
+            "generated-diagonal-lasso-0-download-390.json": {
+              "bytes": 7993,
+              "sha256": "e23191a5e7f1579921825e1a2baf70902556a4f2d66321b4e2e0d61dbdfa22a9"
+            },
+            "generated-diagonal-lasso-0-input.json": {
+              "bytes": 751,
+              "sha256": "1b41fb97decaf05938c581a69abef7fe01483c43744b5938b6c085bebfd33134"
+            },
+            "generated-diagonal-lasso-0-result.json": {
+              "bytes": 5204,
+              "sha256": "7d312898cd1af7a12e402627cf2052b1bd5bd60c2948c37780db640b004dfd82"
+            },
+            "generated-diagonal-lasso-0.html": {
+              "bytes": 42186,
+              "sha256": "5237252026355ae778ee45a6157ba64f203a2ec4473d55515dcac44aa6919835"
+            },
+            "generated-diagonal-lasso-7-download-1440.json": {
+              "bytes": 8079,
+              "sha256": "128f795b5e65fc4f4e50b18d51d6664b2bc274059c2143fe2f5f76318a19c8b8"
+            },
+            "generated-diagonal-lasso-7-download-390.json": {
+              "bytes": 8079,
+              "sha256": "128f795b5e65fc4f4e50b18d51d6664b2bc274059c2143fe2f5f76318a19c8b8"
+            },
+            "generated-diagonal-lasso-7-input.json": {
+              "bytes": 754,
+              "sha256": "fdeb4ce6489eb732a402b5529a73021580984609100393e7f3a41d62e53b4b6f"
+            },
+            "generated-diagonal-lasso-7-result.json": {
+              "bytes": 5290,
+              "sha256": "7b31527609bdc6dcfefe498b31a38450d7f0bff50b46d57ad464cdf54d1b28eb"
+            },
+            "generated-diagonal-lasso-7.html": {
+              "bytes": 42166,
+              "sha256": "829ba7f1172f72a0cfd5cec37fd4ba388eb4ec2ab5c0736986aef3eeb8e67839"
+            },
+            "generated-quadratic-0-download-1440.json": {
+              "bytes": 17038,
+              "sha256": "bf8efed8dafda073df4a15e28cfa8046a6e9aed550d876a4ab4677e2770e2af6"
+            },
+            "generated-quadratic-0-download-390.json": {
+              "bytes": 17038,
+              "sha256": "bf8efed8dafda073df4a15e28cfa8046a6e9aed550d876a4ab4677e2770e2af6"
+            },
+            "generated-quadratic-0-input.json": {
+              "bytes": 1210,
+              "sha256": "0120d3aea3356c4a3ea52ed28aac3d8b4519a2854f042ae12e5c4d134d24258d"
+            },
+            "generated-quadratic-0-result.json": {
+              "bytes": 10717,
+              "sha256": "7f26d9a005273c17398dca100b8f441ff0a6d56b7c9b6eec864bfc19999ea61d"
+            },
+            "generated-quadratic-0.html": {
+              "bytes": 61842,
+              "sha256": "c16214bcd154c0e8339c34e56e80fc147a8d81112582419c3176b8ea3b8dceb4"
+            },
+            "generated-quadratic-7-download-1440.json": {
+              "bytes": 17017,
+              "sha256": "3043a93a74ed073d258ae1b76f2eef6c264b41e7d096e2c0878e48208a140c55"
+            },
+            "generated-quadratic-7-download-390.json": {
+              "bytes": 17017,
+              "sha256": "3043a93a74ed073d258ae1b76f2eef6c264b41e7d096e2c0878e48208a140c55"
+            },
+            "generated-quadratic-7-input.json": {
+              "bytes": 1206,
+              "sha256": "6ecfbd9b77dad4224da58247de3ff23464659e9cf15a84a89b8c4434aa639702"
+            },
+            "generated-quadratic-7-result.json": {
+              "bytes": 10696,
+              "sha256": "6ad6acc62e10e7b43347ac33b310bc4fb21333eaf9c8a9432700f9db20f69d91"
+            },
+            "generated-quadratic-7.html": {
+              "bytes": 61661,
+              "sha256": "74955e7de14cd332bd37cba7b987e19b56b39d0ccdf6ea43527e192eaacf3aec"
+            },
+            "generated-simplex-0-download-1440.json": {
+              "bytes": 4695,
+              "sha256": "be3471283027eea6c360e5043d3193cba642e7c75510ded051c4458bf273d1d1"
+            },
+            "generated-simplex-0-download-390.json": {
+              "bytes": 4695,
+              "sha256": "be3471283027eea6c360e5043d3193cba642e7c75510ded051c4458bf273d1d1"
+            },
+            "generated-simplex-0-input.json": {
+              "bytes": 638,
+              "sha256": "7dcb2822802f9501b9a42d49d0584a042afffe6d9ea24eb4df5929ffd3d08634"
+            },
+            "generated-simplex-0-result.json": {
+              "bytes": 3129,
+              "sha256": "5ae0fed8da07acb0569475aa0072ebeab91b23a3e0efc7407f37f277e181d264"
+            },
+            "generated-simplex-0.html": {
+              "bytes": 36230,
+              "sha256": "72e4c52050e0bab6c7a1599d1e46eeb860821bce2f0db0d0a4f79c5dc3e06c80"
+            },
+            "generated-simplex-7-download-1440.json": {
+              "bytes": 4702,
+              "sha256": "5b39b4ebca76ddf316a9d81cab48232e6f3428bcb66fb8b38ade0df801ccdab1"
+            },
+            "generated-simplex-7-download-390.json": {
+              "bytes": 4702,
+              "sha256": "5b39b4ebca76ddf316a9d81cab48232e6f3428bcb66fb8b38ade0df801ccdab1"
+            },
+            "generated-simplex-7-input.json": {
+              "bytes": 641,
+              "sha256": "962ba97954718de54f7da4c1a4102432cf0b3b345bafd872e7f185b8203adede"
+            },
+            "generated-simplex-7-result.json": {
+              "bytes": 3136,
+              "sha256": "2e29efa7d1881b1590f9aeb39decfc0772fb5732d4ef78d583c7ecfe05f5a3b3"
+            },
+            "generated-simplex-7.html": {
+              "bytes": 36243,
+              "sha256": "e3b09c90df8a528095393cfbe1ef23d1f77809a8806bd3c25963712fc566858a"
+            },
+            "imported-lasso-download-1440.json": {
+              "bytes": 3567,
+              "sha256": "b83077e5cf573dc48421a15272257344c4bfaad8ec93c57012ff4f19b3b606fb"
+            },
+            "imported-lasso-download-390.json": {
+              "bytes": 3567,
+              "sha256": "b83077e5cf573dc48421a15272257344c4bfaad8ec93c57012ff4f19b3b606fb"
+            },
+            "imported-lasso-input.json": {
+              "bytes": 426,
+              "sha256": "cb180ec8efba38d8a37c749f907c68d769662270e12d2dd3bb5f1ee02c056c3d"
+            },
+            "imported-lasso-raw.json": {
+              "bytes": 161,
+              "sha256": "3136cd7b8f4252e7805d372d5b6f453d419f941d695de64c8fe9ff2183cc2df2"
+            },
+            "imported-lasso-result.json": {
+              "bytes": 2285,
+              "sha256": "f1c202181e6d93c7c71a3670ecd9b622bcbe48c269d4a30b02688c3123346e07"
+            },
+            "imported-lasso.html": {
+              "bytes": 35883,
+              "sha256": "8b639e3edbf8941a21c4f26bed5c4fcd844127ddb9d110e9d51274e321776d0c"
+            },
+            "imported-psd-context-1440.png": {
+              "bytes": 62927,
+              "sha256": "cf4b8e48f2455676cff252c48a0c2f5f64d8fb6ba14d2599c3a260821fdec4d2"
+            },
+            "imported-psd-context-390.png": {
+              "bytes": 61064,
+              "sha256": "596a2e02045375d3c24c0324020508866237cfc7994ad25ad77104519dd38d03"
+            },
+            "imported-psd-download-1440.json": {
+              "bytes": 4680,
+              "sha256": "b2f364c8faa4a71ca303d6d84d4018b29d3daf340767da02de7cef127c4e92e6"
+            },
+            "imported-psd-download-390.json": {
+              "bytes": 4680,
+              "sha256": "b2f364c8faa4a71ca303d6d84d4018b29d3daf340767da02de7cef127c4e92e6"
+            },
+            "imported-psd-gap-1440.png": {
+              "bytes": 41532,
+              "sha256": "bbead62610a8f718e67b94a98d92e125b59fdf29e6cc548b6c22764abe60fd23"
+            },
+            "imported-psd-gap-390.png": {
+              "bytes": 13255,
+              "sha256": "8eae7546503c99d36a169d2325fdb943d0455aab388dfe0a56167a13a7cb6308"
+            },
+            "imported-psd-input.json": {
+              "bytes": 507,
+              "sha256": "41bede3f12210d18e821ab9ba6adbcc474220ea22803426a1bc55857e7da50a9"
+            },
+            "imported-psd-raw.json": {
+              "bytes": 225,
+              "sha256": "0eac25bfadcd5f89d5fa7dda473600586a50a10169f35f8165ed45727dfae609"
+            },
+            "imported-psd-result.json": {
+              "bytes": 2809,
+              "sha256": "73c449012128448d581c77896588335dad30af1ee303aa66fc87a5625c484ae2"
+            },
+            "imported-psd.html": {
+              "bytes": 40177,
+              "sha256": "50ab4252fc02275803791473bf1edc3c0bacd330e0994c9c240a83fac264847b"
+            },
+            "imported-quadratic-context-1440.png": {
+              "bytes": 63108,
+              "sha256": "bcf5ff8fce267bc1aa9272e8758e4b863564d0a35d625f1799a7da4702889eb2"
+            },
+            "imported-quadratic-context-390.png": {
+              "bytes": 60983,
+              "sha256": "5f5acda83aa254efbe10a9e5591b3d6a4e85927f2a0faa2823ca526c223e272f"
+            },
+            "imported-quadratic-download-1440.json": {
+              "bytes": 7423,
+              "sha256": "bc93ad25201abc47dc213ae3bd29c2c276fcf9a7b21f6ab8b8a735a4bcea7d72"
+            },
+            "imported-quadratic-download-390.json": {
+              "bytes": 7423,
+              "sha256": "bc93ad25201abc47dc213ae3bd29c2c276fcf9a7b21f6ab8b8a735a4bcea7d72"
+            },
+            "imported-quadratic-gap-1440.png": {
+              "bytes": 52441,
+              "sha256": "307148cb76f21e7a68df0ec755404e16c0fea479a215618710bbf5ae2ded7594"
+            },
+            "imported-quadratic-gap-390.png": {
+              "bytes": 13673,
+              "sha256": "c0643e282c5f8da93760a82f4aca67868583d50d2cc46e47fe0abe969c0b462c"
+            },
+            "imported-quadratic-input.json": {
+              "bytes": 557,
+              "sha256": "25d9e219272a1cf952e929f83d725091f70e62d599b64f74993afdc55ebb7b22"
+            },
+            "imported-quadratic-raw.json": {
+              "bytes": 173,
+              "sha256": "accec43fc0d29b5d92d3426fadee7c6df804e52b582fef0a35cb86db794318d3"
+            },
+            "imported-quadratic-result.json": {
+              "bytes": 4551,
+              "sha256": "154104a3853591c03668a83dde9e3fc28526911ac3dea6f55eede249bf1523e3"
+            },
+            "imported-quadratic.html": {
+              "bytes": 47535,
+              "sha256": "99b466fc3e2871475803815c63c242604317b52f1d03243ed22776583dc28231"
+            },
+            "imported-simplex-download-1440.json": {
+              "bytes": 2566,
+              "sha256": "6af38d721aeadedfe34a0d547cb45561a4b043acd1acd53c878043728448ac7b"
+            },
+            "imported-simplex-download-390.json": {
+              "bytes": 2566,
+              "sha256": "6af38d721aeadedfe34a0d547cb45561a4b043acd1acd53c878043728448ac7b"
+            },
+            "imported-simplex-input.json": {
+              "bytes": 399,
+              "sha256": "4f22a8dde5d8a582c42a721cb42a990d737912fd3c90cdd0d0747f54249a1e23"
+            },
+            "imported-simplex-raw.json": {
+              "bytes": 142,
+              "sha256": "2c2973ec0c52db692a0376492a6fe3a794e274293c8833866764f178cb9f3b67"
+            },
+            "imported-simplex-result.json": {
+              "bytes": 1789,
+              "sha256": "6f0365476f2c7c5bdcc4a5368899397df5255c650b768efd8597b641f262dfbf"
+            },
+            "imported-simplex.html": {
+              "bytes": 32664,
+              "sha256": "643389ee447898a2c42ec46beee1f7a7d7bac3c380e1a05877f2c8296af69be7"
+            },
+            "psd-distance.png": {
+              "bytes": 39115,
+              "sha256": "4913ba4aa903e7811b54b8031b9746ffe2ca1bb5722aa935b38f909accc67833"
+            },
+            "replay-download-1440.json": {
+              "bytes": 8881,
+              "sha256": "2370c716060095ce6205d85168167d755668ab9c1857b2fce4aa61ad3932ebf5"
+            },
+            "replay-download-390.json": {
+              "bytes": 8881,
+              "sha256": "2370c716060095ce6205d85168167d755668ab9c1857b2fce4aa61ad3932ebf5"
+            },
+            "replay.html": {
+              "bytes": 50280,
+              "sha256": "83569836f3c02c6524b848d055ed161e47ad54d994db6035a19af50b8947300c"
+            },
+            "review-page-1.png": {
+              "bytes": 70835,
+              "sha256": "ec12ffd979bb4198bca16465f06aa340410ef645924f170519d381b81645b6f7"
+            },
+            "review-page-2.png": {
+              "bytes": 75732,
+              "sha256": "31d6c0820186bf023e54fcb6a785ac1fb2802ac5b39e9e01ab5dad773f94323f"
+            },
+            "review.html": {
+              "bytes": 124675,
+              "sha256": "fc7fd24f4a16caf222e980f1ff80543da3572468489bba26a014d9bfd08d597a"
+            }
+          }
+        },
+        {
+          "source_commit": "fccd654e85cd544fc1a33d7467df93babd4edd2a",
+          "audits": {
+            "matched": {
+              "metric": "gap",
+              "records": 2,
+              "pairs": 1,
+              "plots": 4,
+              "retained_samples": "exact",
+              "shared_recorded_problem": true
+            },
+            "mixed": {
+              "metric": "gap",
+              "records": 4,
+              "pairs": 6,
+              "plots": 4,
+              "retained_samples": "exact",
+              "shared_recorded_problem": false
+            }
+          },
+          "viewports": [
+            {
+              "width": 1440,
+              "case": "matched",
+              "records": 2,
+              "keyboard": "passed",
+              "horizontal_regions": "full width",
+              "download": "exact",
+              "horizontal_page_overflow": false
+            },
+            {
+              "width": 1440,
+              "case": "mixed",
+              "records": 4,
+              "keyboard": "passed",
+              "horizontal_regions": "full width",
+              "download": "exact",
+              "horizontal_page_overflow": false
+            },
+            {
+              "width": 390,
+              "case": "matched",
+              "records": 2,
+              "keyboard": "passed",
+              "horizontal_regions": "keyboard checked",
+              "download": "exact",
+              "horizontal_page_overflow": false
+            },
+            {
+              "width": 390,
+              "case": "mixed",
+              "records": 4,
+              "keyboard": "passed",
+              "horizontal_regions": "keyboard checked",
+              "download": "exact",
+              "horizontal_page_overflow": false
+            }
+          ],
+          "network_requests": [],
+          "javascript_errors": [],
+          "browser": "153.0.8010.12",
+          "no_script": "both reports, diagnostic tables, static curves and native details passed",
+          "pdf": {
+            "pages": 2,
+            "final_section_present": true
+          },
+          "outputs": {
+            "ChainBench_saved_comparison_review.pdf": {
+              "bytes": 109897,
+              "sha256": "7fe72f4f5db6402d34deb57f7b0496b9e141447c7da0965366883eae591dc655"
+            },
+            "input-a.json": {
+              "bytes": 4940,
+              "sha256": "faba5af25f96de95abc841eb732d1eea479fe6420783a7f1bcca8f94c4059529"
+            },
+            "input-b.json": {
+              "bytes": 5875,
+              "sha256": "84d8a58fa2eb0536a237cd6df79fd4086997f647b9fd9c492a09197010932c4f"
+            },
+            "input-c.json": {
+              "bytes": 4925,
+              "sha256": "6bf5a78b53fe4f2e03f80a1698f500f70703b00131888bf2002b88bb7f0a0e5c"
+            },
+            "input-d.json": {
+              "bytes": 5671,
+              "sha256": "b7deb9d6ffe1ecb27c455877c27b856de0f989d8955668c2f57f15f49cbaed7c"
+            },
+            "matched-context-1440.png": {
+              "bytes": 35858,
+              "sha256": "534b59e70964f81070bc2359cbc73433a2700b0ed8eadb7798c8bd9efc1581ae"
+            },
+            "matched-context-390.png": {
+              "bytes": 40192,
+              "sha256": "7889648f22322057bbd79b80430a0a767ff922bb1215859e0089fafcf8febaa4"
+            },
+            "matched-context-print.png": {
+              "bytes": 35889,
+              "sha256": "6ca67894cce6254e9c36eb43487bde56b6859298c2336548dced30b9dd0e25f3"
+            },
+            "matched-context-right-390.png": {
+              "bytes": 39906,
+              "sha256": "f5a2d5d4b4263f12064b42340b8a957932c4974fd99401765aa8ea05b40654fb"
+            },
+            "matched-download-1440.json": {
+              "bytes": 20104,
+              "sha256": "1a21eed40e19e6af1effd8f8e842237844688b53819edb0e6f5e2849df6ffc2b"
+            },
+            "matched-download-390.json": {
+              "bytes": 20104,
+              "sha256": "1a21eed40e19e6af1effd8f8e842237844688b53819edb0e6f5e2849df6ffc2b"
+            },
+            "matched.html": {
+              "bytes": 64442,
+              "sha256": "73fbef314847e30ff5f4e6b2d63d82c18d924ac380f94054d4232d42dec5862b"
+            },
+            "mixed-context-1440.png": {
+              "bytes": 44454,
+              "sha256": "7989c31b4173ff02f5ef00d09d83e1a80936d65de812d83317dc330a43eb9e1e"
+            },
+            "mixed-context-390.png": {
+              "bytes": 45831,
+              "sha256": "6053eec7f0e779c66892dc158abefef65ae130729a62a219e90104b81b7bd3a6"
+            },
+            "mixed-context-print.png": {
+              "bytes": 44439,
+              "sha256": "10e5b9c48de89489f89ffbc5a4e22bc48b5ef087d601345e57d2f3c7a1c27a74"
+            },
+            "mixed-context-right-390.png": {
+              "bytes": 45313,
+              "sha256": "26ee20a2736572d383bce666877427b85fbcd96ee2544eda4705a284bfa2995c"
+            },
+            "mixed-download-1440.json": {
+              "bytes": 45010,
+              "sha256": "88beb8ca2be3ed16df95dcb134c08f2e71fba66740eb46bc0cf777584539aee1"
+            },
+            "mixed-download-390.json": {
+              "bytes": 45010,
+              "sha256": "88beb8ca2be3ed16df95dcb134c08f2e71fba66740eb46bc0cf777584539aee1"
+            },
+            "mixed.html": {
+              "bytes": 119973,
+              "sha256": "2d38238d45cd8d937cd45db38a729a8cbdc5e4b47ae0ac72ae4e7a1fffbe8e82"
+            },
+            "review-page-1.png": {
+              "bytes": 93094,
+              "sha256": "657dd9c14709404d5fce8f1d028a27d23f587de40f5254cb26e483a128ae0c58"
+            },
+            "review-page-2.png": {
+              "bytes": 102731,
+              "sha256": "fa8c9e40f7eb6435b24cfa7160f381f8c6c893c46086d3a6de1e3a52e3a4c056"
+            },
+            "review.html": {
+              "bytes": 141519,
+              "sha256": "8a95a4b9e3603831eb8868d9d110fd29207329c1c5eb512767bf814a5a3ad4b5"
+            },
+            "shared-gd-1440.png": {
+              "bytes": 42381,
+              "sha256": "b7d923422d4ba480b5941a19837ede9db7a87abcbafd268a42e4af81db8fa588"
+            },
+            "shared-gd-390.png": {
+              "bytes": 12643,
+              "sha256": "9e06256d5e77e920c822e332d1c7cb2b37a164a78cd840c419f04d97aef106c9"
+            },
+            "shared-gd-print.png": {
+              "bytes": 24206,
+              "sha256": "bd8244d6e32c3f52ef6c2721bd428b4219e81043bd3942bfed899a6d2583850f"
+            },
+            "shared-gd-right-390.png": {
+              "bytes": 7686,
+              "sha256": "d63d42231e4e6c2b686bfd16e8d327d0bade45eed1e77e3dea201bda51af8239"
+            }
+          }
+        },
+        {
+          "viewports": [
+            {
+              "width": 1440,
+              "overflow": false,
+              "keyboard": "passed",
+              "playback": "passed",
+              "download": "matched",
+              "all_variations": 9,
+              "metric_states": 119,
+              "spectral_states": 119,
+              "source_polynomials": "independent samples matched"
+            },
+            {
+              "width": 390,
+              "overflow": false,
+              "keyboard": "passed",
+              "playback": "passed",
+              "download": "matched",
+              "all_variations": 9,
+              "metric_states": 119,
+              "spectral_states": 119,
+              "source_polynomials": "independent samples matched"
+            }
+          ],
+          "network_requests": [],
+          "javascript_errors": [],
+          "browser": "153.0.8010.12",
+          "no_script": "readable with native details and complete static paths"
+        },
+        {
+          "viewports": [
+            {
+              "width": 1440,
+              "all_cases": 12,
+              "overflow": false,
+              "keyboard": "passed",
+              "markers": "matched",
+              "certificate_steps": 216,
+              "certificate_coordinates_and_readouts": "matched",
+              "segment_frames": 216,
+              "segment_points": 44346,
+              "playback": "passed",
+              "download": "matched"
+            },
+            {
+              "width": 390,
+              "all_cases": 12,
+              "overflow": false,
+              "keyboard": "passed",
+              "markers": "matched",
+              "certificate_steps": 216,
+              "certificate_coordinates_and_readouts": "matched",
+              "segment_frames": 216,
+              "segment_points": 44346,
+              "playback": "passed",
+              "download": "matched"
+            }
+          ],
+          "network_requests": [],
+          "javascript_errors": [],
+          "browser": "153.0.8010.12",
+          "no_script": "complete static paths and native details remain readable"
+        },
+        {
+          "viewports": [
+            {
+              "width": 1440,
+              "all_cases": 16,
+              "ranked_links": "passed",
+              "keyboard": "passed",
+              "overflow": false,
+              "download": "matched"
+            },
+            {
+              "width": 390,
+              "all_cases": 16,
+              "ranked_links": "passed",
+              "keyboard": "passed",
+              "overflow": false,
+              "download": "matched"
+            }
+          ],
+          "network_requests": [],
+          "javascript_errors": [],
+          "browser": "153.0.8010.12",
+          "no_script": "every native case remains available with static charts and inputs"
+        },
+        {
+          "viewports": [
+            {
+              "width": 1440,
+              "all_cases": 9,
+              "both_methods": "passed",
+              "markers": "matched",
+              "keyboard": "passed",
+              "playback": "passed",
+              "zero_coordinate": "verified",
+              "download": "matched",
+              "overflow": false,
+              "upper_model_frames": 324,
+              "upper_model_points": 32752,
+              "dual_frames": 324,
+              "dual_points": 14904,
+              "first_increase": "verified"
+            },
+            {
+              "width": 390,
+              "all_cases": 9,
+              "both_methods": "passed",
+              "markers": "matched",
+              "keyboard": "passed",
+              "playback": "passed",
+              "zero_coordinate": "verified",
+              "download": "matched",
+              "overflow": false,
+              "upper_model_frames": 324,
+              "upper_model_points": 32752,
+              "dual_frames": 324,
+              "dual_points": 14904,
+              "first_increase": "verified"
+            }
+          ],
+          "network_requests": [],
+          "javascript_errors": [],
+          "browser": "153.0.8010.12",
+          "no_script": "full paths, stage tables and every case remain readable"
+        },
+        {
+          "viewports": [
+            {
+              "width": 1440,
+              "all_topics": 8,
+              "comparison_selection": "passed",
+              "keyboard": "passed",
+              "filtered_navigation": "passed",
+              "language": "passed",
+              "download": "matched",
+              "focused": "passed",
+              "overflow": false
+            },
+            {
+              "width": 390,
+              "all_topics": 8,
+              "comparison_selection": "passed",
+              "keyboard": "passed",
+              "filtered_navigation": "passed",
+              "language": "passed",
+              "download": "matched",
+              "focused": "passed",
+              "overflow": false
+            }
+          ],
+          "network_requests": [],
+          "javascript_errors": [],
+          "browser": "153.0.8010.12",
+          "no_script": "all eight comparison cards, flows and lessons readable"
+        },
+        {
+          "viewports": [
+            {
+              "width": 1440,
+              "matched_contexts": {
+                "report": 8,
+                "learning": 1
+              },
+              "expanded_inputs": "matched",
+              "standalone_caption": "passed",
+              "overflow": false
+            },
+            {
+              "width": 390,
+              "matched_contexts": {
+                "report": 8,
+                "learning": 1
+              },
+              "expanded_inputs": "matched",
+              "standalone_caption": "passed",
+              "overflow": false
+            }
+          ],
+          "network_requests": [],
+          "javascript_errors": [],
+          "browser": "153.0.8010.12",
+          "no_script": "visible context and full input details"
+        },
+        {
+          "cases": [
+            {
+              "horizon": 20,
+              "width": 1440,
+              "all_points": 21,
+              "coordinates_readouts_paths": "matched",
+              "keyboard_playback": "passed",
+              "svg_labels": "inside view boxes",
+              "overflow": false,
+              "download": "matched"
+            },
+            {
+              "horizon": 20,
+              "width": 390,
+              "all_points": 21,
+              "coordinates_readouts_paths": "matched",
+              "keyboard_playback": "passed",
+              "svg_labels": "inside view boxes",
+              "overflow": false,
+              "download": "matched"
+            },
+            {
+              "horizon": 500,
+              "width": 1440,
+              "all_points": 501,
+              "coordinates_readouts_paths": "matched",
+              "keyboard_playback": "passed",
+              "svg_labels": "inside view boxes",
+              "overflow": false,
+              "download": "matched"
+            },
+            {
+              "horizon": 500,
+              "width": 390,
+              "all_points": 501,
+              "coordinates_readouts_paths": "matched",
+              "keyboard_playback": "passed",
+              "svg_labels": "inside view boxes",
+              "overflow": false,
+              "download": "matched"
+            }
+          ],
+          "network_requests": [],
+          "javascript_errors": [],
+          "browser": "153.0.8010.12",
+          "no_script": "full path, centre, proof and every stored row available"
+        },
+        {
+          "viewports": [
+            {
+              "width": 1440,
+              "dimension": 3,
+              "verified_states": 41,
+              "bars": "all coordinates",
+              "curves": "all observations including duplicate supports",
+              "dual_full_support": "no invented bound"
+            },
+            {
+              "width": 1440,
+              "dimension": 8,
+              "verified_states": 41,
+              "bars": "all coordinates",
+              "curves": "all observations including duplicate supports",
+              "dual_full_support": "no invented bound"
+            },
+            {
+              "width": 1440,
+              "dimension": 32,
+              "verified_states": 41,
+              "bars": "all coordinates",
+              "curves": "all observations including duplicate supports",
+              "dual_full_support": "no invented bound"
+            },
+            {
+              "width": 1440,
+              "dimension": 128,
+              "verified_states": 41,
+              "bars": "all coordinates",
+              "curves": "all observations including duplicate supports",
+              "dual_full_support": "no invented bound"
+            },
+            {
+              "width": 390,
+              "dimension": 3,
+              "verified_states": 41,
+              "bars": "all coordinates",
+              "curves": "all observations including duplicate supports",
+              "dual_full_support": "no invented bound"
+            },
+            {
+              "width": 390,
+              "dimension": 8,
+              "verified_states": 41,
+              "bars": "all coordinates",
+              "curves": "all observations including duplicate supports",
+              "dual_full_support": "no invented bound"
+            },
+            {
+              "width": 390,
+              "dimension": 32,
+              "verified_states": 41,
+              "bars": "all coordinates",
+              "curves": "all observations including duplicate supports",
+              "dual_full_support": "no invented bound"
+            },
+            {
+              "width": 390,
+              "dimension": 128,
+              "verified_states": 41,
+              "bars": "all coordinates",
+              "curves": "all observations including duplicate supports",
+              "dual_full_support": "no invented bound"
+            }
+          ],
+          "javascript_errors": [],
+          "network_requests": [],
+          "browser": "153.0.8010.12",
+          "no_script": "all four cases, curves and complete tables available"
+        },
+        {
+          "viewports": [
+            {
+              "width": 1440,
+              "case": "cube",
+              "verified_states": 2624
+            },
+            {
+              "width": 1440,
+              "case": "half",
+              "verified_states": 2624
+            },
+            {
+              "width": 1440,
+              "case": "one-in-eight",
+              "verified_states": 2624
+            },
+            {
+              "width": 1440,
+              "case": "one-in-thirty-two",
+              "verified_states": 2624
+            },
+            {
+              "width": 1440,
+              "case": "three-directions",
+              "verified_states": 2624
+            },
+            {
+              "width": 1440,
+              "case": "eight-directions",
+              "verified_states": 2624
+            },
+            {
+              "width": 390,
+              "case": "cube",
+              "verified_states": 2624
+            },
+            {
+              "width": 390,
+              "case": "half",
+              "verified_states": 2624
+            },
+            {
+              "width": 390,
+              "case": "one-in-eight",
+              "verified_states": 2624
+            },
+            {
+              "width": 390,
+              "case": "one-in-thirty-two",
+              "verified_states": 2624
+            },
+            {
+              "width": 390,
+              "case": "three-directions",
+              "verified_states": 2624
+            },
+            {
+              "width": 390,
+              "case": "eight-directions",
+              "verified_states": 2624
+            }
+          ],
+          "javascript_errors": [],
+          "network_requests": [],
+          "browser": "153.0.8010.12",
+          "no_script": "all six cases and every seed table available"
+        },
+        {
+          "viewports": [
+            {
+              "width": 1440,
+              "states": 72,
+              "waveform_points": 75411,
+              "probabilities": 2100,
+              "keyboard": "passed",
+              "labels": "within SVG",
+              "download": "matched",
+              "all_curves": "matched",
+              "overflow": false
+            },
+            {
+              "width": 390,
+              "states": 72,
+              "waveform_points": 75411,
+              "probabilities": 2100,
+              "keyboard": "passed",
+              "labels": "within SVG",
+              "download": "matched",
+              "all_curves": "matched",
+              "overflow": false
+            }
+          ],
+          "network_requests": [],
+          "javascript_errors": [],
+          "browser": "153.0.8010.12",
+          "no_script": "native waveform gallery, all curves, all nodes/counts and current row visible"
+        },
+        {
+          "viewports": [
+            {
+              "width": 1440,
+              "snapshots": 8,
+              "all_pixels": "matched to raw arrays",
+              "all_curves": "matched",
+              "keyboard": "passed",
+              "labels": "inside SVG bounds",
+              "download": "matched",
+              "overflow": false
+            },
+            {
+              "width": 390,
+              "snapshots": 8,
+              "all_pixels": "matched to raw arrays",
+              "all_curves": "matched",
+              "keyboard": "passed",
+              "labels": "inside SVG bounds",
+              "download": "matched",
+              "overflow": false
+            }
+          ],
+          "network_requests": [],
+          "javascript_errors": [],
+          "browser": "153.0.8010.12",
+          "no_script": "full curves and every stored image remain available"
+        },
+        {
+          "viewports": [
+            {
+              "width": 1440,
+              "snapshots": 5,
+              "all_pixels": "matched to raw arrays",
+              "all_curves": "matched",
+              "keyboard": "passed",
+              "labels": "inside SVG bounds",
+              "download": "matched",
+              "overflow": false
+            },
+            {
+              "width": 390,
+              "snapshots": 5,
+              "all_pixels": "matched to raw arrays",
+              "all_curves": "matched",
+              "keyboard": "passed",
+              "labels": "inside SVG bounds",
+              "download": "matched",
+              "overflow": false
+            }
+          ],
+          "network_requests": [],
+          "javascript_errors": [],
+          "browser": "153.0.8010.12",
+          "no_script": "full curves and every stored image remain available"
+        },
+        {
+          "viewports": [
+            {
+              "width": 1440,
+              "cases": 9,
+              "steps_inspected": 459,
+              "coordinates_and_readouts": "matched",
+              "complete_metric_curves": "matched",
+              "keyboard_playback_language_download": "passed",
+              "overflow": false
+            },
+            {
+              "width": 390,
+              "cases": 9,
+              "steps_inspected": 459,
+              "coordinates_and_readouts": "matched",
+              "complete_metric_curves": "matched",
+              "keyboard_playback_language_download": "passed",
+              "overflow": false
+            }
+          ],
+          "network_requests": [],
+          "javascript_errors": [],
+          "browser": "153.0.8010.12",
+          "no_script": "full paths, curves, tables and all cases remain available"
+        },
+        {
+          "cases": [
+            {
+              "file": "landscape.html",
+              "width": 1440,
+              "states": 19,
+              "methods": [
+                "gd",
+                "smooth-fista",
+                "heavy-ball",
+                "cg",
+                "proximal-point"
+              ],
+              "offline": "passed"
+            },
+            {
+              "file": "landscape.html",
+              "width": 390,
+              "states": 19,
+              "methods": [
+                "gd",
+                "smooth-fista",
+                "heavy-ball",
+                "cg",
+                "proximal-point"
+              ],
+              "offline": "passed"
+            },
+            {
+              "file": "landscape-extreme.html",
+              "width": 1440,
+              "states": 81,
+              "methods": [
+                "proximal-point",
+                "cg",
+                "smooth-fista"
+              ],
+              "offline": "passed"
+            },
+            {
+              "file": "landscape-extreme.html",
+              "width": 390,
+              "states": 81,
+              "methods": [
+                "proximal-point",
+                "cg",
+                "smooth-fista"
+              ],
+              "offline": "passed"
+            }
+          ],
+          "network_requests": [],
+          "javascript_errors": [],
+          "browser": "153.0.8010.12"
+        },
+        {
+          "viewports": [
+            {
+              "width": 1440,
+              "reports_opened": 16,
+              "return_links": "passed",
+              "preview_images": "loaded",
+              "all_seeds": "retained",
+              "unresolved_seed24": "retained",
+              "language": "passed",
+              "overflow": false,
+              "atlas_workflow_links": 22,
+              "case_preserved_table_nodes": {
+                "index.html": 12,
+                "atlas.html": 0,
+                "shewchuk.html": 255,
+                "deblur.html": 0,
+                "heavy-ball.html": 95,
+                "simplex.html": 197,
+                "proximal.html": 193,
+                "landscape.html": 38,
+                "stress-gd-baseline.html": 134,
+                "stress-nesterov-1983.html": 134,
+                "stress-polyak-1964.html": 134,
+                "stress-hestenes-stiefel-1952.html": 134,
+                "stress-jaggi-2013.html": 134,
+                "stress-rockafellar-1976.html": 134,
+                "stress-beck-teboulle-2009.html": 134,
+                "stress-ista-vs-fista.html": 134,
+                "tight-gd.html": 4
+              }
+            },
+            {
+              "width": 390,
+              "reports_opened": 16,
+              "return_links": "passed",
+              "preview_images": "loaded",
+              "all_seeds": "retained",
+              "unresolved_seed24": "retained",
+              "language": "passed",
+              "overflow": false,
+              "atlas_workflow_links": 22,
+              "case_preserved_table_nodes": {
+                "index.html": 12,
+                "atlas.html": 0,
+                "shewchuk.html": 255,
+                "deblur.html": 0,
+                "heavy-ball.html": 95,
+                "simplex.html": 197,
+                "proximal.html": 193,
+                "landscape.html": 38,
+                "stress-gd-baseline.html": 134,
+                "stress-nesterov-1983.html": 134,
+                "stress-polyak-1964.html": 134,
+                "stress-hestenes-stiefel-1952.html": 134,
+                "stress-jaggi-2013.html": 134,
+                "stress-rockafellar-1976.html": 134,
+                "stress-beck-teboulle-2009.html": 134,
+                "stress-ista-vs-fista.html": 134,
+                "tight-gd.html": 4
+              }
+            }
+          ],
+          "network_requests": [],
+          "javascript_errors": [],
+          "browser": "153.0.8010.12",
+          "no_script": "index, static figures and local navigation work"
+        },
+        {
+          "viewports": [
+            {
+              "width": 1440,
+              "reports_opened": 24,
+              "return_links": "passed",
+              "preview_images": "loaded",
+              "all_seeds": "retained",
+              "unresolved_seed24": "retained",
+              "language": "passed",
+              "overflow": false,
+              "atlas_workflow_links": 25,
+              "case_preserved_table_nodes": {
+                "index.html": 49,
+                "atlas.html": 0,
+                "shewchuk.html": 255,
+                "deblur.html": 0,
+                "heavy-ball.html": 95,
+                "simplex.html": 197,
+                "proximal.html": 193,
+                "landscape.html": 38,
+                "stress-gd-baseline.html": 134,
+                "stress-nesterov-1983.html": 134,
+                "stress-polyak-1964.html": 134,
+                "stress-hestenes-stiefel-1952.html": 134,
+                "stress-jaggi-2013.html": 134,
+                "stress-rockafellar-1976.html": 134,
+                "stress-beck-teboulle-2009.html": 134,
+                "stress-ista-vs-fista.html": 134,
+                "tight-gd.html": 4,
+                "wavelet.html": 13,
+                "fw-sparsity.html": 28,
+                "kaczmarz.html": 1674,
+                "sampling.html": 18,
+                "cg-spectrum.html": 864,
+                "adam.html": 281,
+                "admm.html": 1576,
+                "backtracking.html": 612
+              }
+            },
+            {
+              "width": 390,
+              "reports_opened": 24,
+              "return_links": "passed",
+              "preview_images": "loaded",
+              "all_seeds": "retained",
+              "unresolved_seed24": "retained",
+              "language": "passed",
+              "overflow": false,
+              "atlas_workflow_links": 25,
+              "case_preserved_table_nodes": {
+                "index.html": 49,
+                "atlas.html": 0,
+                "shewchuk.html": 255,
+                "deblur.html": 0,
+                "heavy-ball.html": 95,
+                "simplex.html": 197,
+                "proximal.html": 193,
+                "landscape.html": 38,
+                "stress-gd-baseline.html": 134,
+                "stress-nesterov-1983.html": 134,
+                "stress-polyak-1964.html": 134,
+                "stress-hestenes-stiefel-1952.html": 134,
+                "stress-jaggi-2013.html": 134,
+                "stress-rockafellar-1976.html": 134,
+                "stress-beck-teboulle-2009.html": 134,
+                "stress-ista-vs-fista.html": 134,
+                "tight-gd.html": 4,
+                "wavelet.html": 13,
+                "fw-sparsity.html": 28,
+                "kaczmarz.html": 1674,
+                "sampling.html": 18,
+                "cg-spectrum.html": 864,
+                "adam.html": 281,
+                "admm.html": 1576,
+                "backtracking.html": 612
+              }
+            }
+          ],
+          "network_requests": [],
+          "javascript_errors": [],
+          "browser": "153.0.8010.12",
+          "backtracking_trials": [
+            {
+              "width": 1440,
+              "cases": 36,
+              "states": 790
+            },
+            {
+              "width": 390,
+              "cases": 36,
+              "states": 790
+            }
+          ],
+          "no_script": "index, static figures and local navigation work"
+        }
+      ],
+      "gate_lines": []
+    },
+    {
+      "id": 111149971328,
+      "name": "test (ubuntu-latest, Python 3.12, current)",
+      "conclusion": "success",
+      "source": "fccd654e85cd544fc1a33d7467df93babd4edd2a",
+      "source_checked": true,
+      "actual_completed_log_read": true,
+      "pytest": [
+        {
+          "passed": 86,
+          "seconds": 16.2
+        },
+        {
+          "passed": 1680,
+          "seconds": 751.23
+        }
+      ],
+      "proofs": [
+        [
+          {
+            "mutation": "missing-studio-publication-gate",
+            "detected_by": [
+              "test_missing_studio_is_rejected[indexes0]",
+              "test_missing_studio_is_rejected[indexes1]",
+              "test_missing_studio_is_rejected[indexes2]"
+            ]
+          },
+          {
+            "mutation": "unsafe-cg-norm",
+            "detected_by": [
+              "test_cg_is_invariant_to_global_system_scale[1e-200]",
+              "test_cg_is_invariant_to_global_system_scale[1e+200]"
+            ]
+          },
+          {
+            "mutation": "missing-fista-momentum",
+            "detected_by": [
+              "test_fista_third_iterate_contains_acceleration_and_l1_threshold"
+            ]
+          },
+          {
+            "mutation": "missing-observation-guard",
+            "detected_by": [
+              "test_missing_or_invalid_observation_is_not_a_result[None]"
+            ]
+          },
+          {
+            "mutation": "missing-install-hash-binding",
+            "detected_by": [
+              "test_reject_distribution_changed_after_smoke_test"
+            ]
+          },
+          {
+            "mutation": "missing-comparison-publication-gate",
+            "detected_by": [
+              "test_missing_saved_comparison_is_rejected[artifact_indexes0]",
+              "test_missing_saved_comparison_is_rejected[artifact_indexes1]",
+              "test_missing_saved_comparison_is_rejected[artifact_indexes2]"
+            ]
+          },
+          {
+            "mutation": "missing-stored-instance-publication-gate",
+            "detected_by": [
+              "test_missing_stored_instances_is_rejected"
+            ]
+          },
+          {
+            "mutation": "missing-reading-publication-gate",
+            "detected_by": [
+              "test_rehashed_reading_bytes_cannot_bypass_publication_audit"
+            ]
+          }
+        ],
+        [
+          {
+            "slug": "gd-baseline",
+            "title": "Gradient-descent baseline",
+            "reference": "Beck--Teboulle (2009), ISTA with g=0",
+            "statement": "Smooth-convex GD objective-gap bound on the bundled quadratic.",
+            "metric": "max_k gap_k / bound_k",
+            "observed": 0.04231974364074391,
+            "threshold": 1,
+            "status": "CONSISTENT",
+            "note": "Step=1/L; positive iterations only. This is not a universal numerical proof."
+          },
+          {
+            "slug": "nesterov-1983",
+            "title": "Nesterov-style acceleration (smooth FISTA)",
+            "reference": "Beck--Teboulle (2009), fixed-L FISTA with g=0; Nesterov (1983) historical origin",
+            "statement": "Smooth FISTA iterates satisfy the O(1/k^2) objective-gap bound on this quadratic.",
+            "metric": "max_k gap_k / bound_k",
+            "observed": 0.07520595549209133,
+            "threshold": 1,
+            "status": "CONSISTENT",
+            "note": "Historical CLI slug retained; not a literal reproduction of the 1983 algorithm."
+          },
+          {
+            "slug": "polyak-1964",
+            "title": "Polyak heavy-ball (empirical tail)",
+            "reference": "Polyak (1964), quadratic tuning",
+            "statement": "Compare a finite tail contraction estimate with the spectral-radius prediction.",
+            "metric": "relative error: observed tail ratio vs predicted rho",
+            "observed": 0.016922852195530688,
+            "threshold": 0.08,
+            "status": "CONSISTENT",
+            "note": "alpha=2.77778, beta=0.444444, rho=0.666667; 8% is an empirical tolerance, not a theorem constant. Last up to 20 ratios above error=1e-10 are used."
+          },
+          {
+            "slug": "hestenes-stiefel-1952",
+            "title": "Conjugate gradient",
+            "reference": "Hestenes--Stiefel (1952); bound: Shewchuk (1994), equation (52)",
+            "statement": "Positive-iteration A-norm errors satisfy the classical condition-number envelope.",
+            "metric": "max_k ||e_k||_Q / (2 rho^k ||e_0||_Q)",
+            "observed": 0.42288854129079717,
+            "threshold": 1,
+            "status": "CONSISTENT",
+            "note": "kappa=10; k=0 excluded to avoid its fixed ratio of 0.5."
+          },
+          {
+            "slug": "jaggi-2013",
+            "title": "Frank-Wolfe",
+            "reference": "Jaggi (2013), Algorithm 1 and Theorem 1, delta=0",
+            "statement": "Primal gaps satisfy the curvature-based envelope for k>=1.",
+            "metric": "max_k gap_k / (2 C_f / (k+2))",
+            "observed": 0.36749999999999994,
+            "threshold": 1,
+            "status": "CONSISTENT",
+            "note": "C_f=2 for this simplex quadratic; exact linear minimization oracle."
+          },
+          {
+            "slug": "rockafellar-1976",
+            "title": "Proximal point",
+            "reference": "Rockafellar (1976); quadratic resolvent specialization",
+            "statement": "Successive Euclidean errors satisfy the strongly-convex resolvent contraction.",
+            "metric": "max_k error_(k+1) / (q * error_k)",
+            "observed": 0.9783261220939676,
+            "threshold": 1,
+            "status": "CONSISTENT",
+            "note": "q=0.909091; exact quadratic linear solves, not a general inexact PPA experiment."
+          },
+          {
+            "slug": "beck-teboulle-2009",
+            "title": "FISTA",
+            "reference": "Beck--Teboulle (2009), fixed-L FISTA",
+            "statement": "Composite objective gaps satisfy the O(1/k^2) bound on diagonal LASSO.",
+            "metric": "max_k gap_k / bound_k",
+            "observed": 0.14256235365367823,
+            "threshold": 1,
+            "status": "CONSISTENT",
+            "note": "Exact soft-threshold optimum; stable gap evaluation avoids objective cancellation."
+          },
+          {
+            "slug": "ista-vs-fista",
+            "title": "ISTA vs FISTA (observation)",
+            "reference": "Beck--Teboulle (2009)",
+            "statement": "Compare final objective gaps at the same iteration budget on one fixture.",
+            "metric": "FISTA final gap / ISTA final gap",
+            "observed": 0.009192292285745486,
+            "threshold": null,
+            "status": "INFO",
+            "note": "Informational, not pass/fail: FISTA is not guaranteed to beat ISTA at every iteration."
+          }
+        ]
+      ],
+      "gate_lines": [],
+      "mutation_outcomes": [
+        {
+          "mutation": "missing-studio-publication-gate",
+          "detected_by": [
+            "test_missing_studio_is_rejected[indexes0]",
+            "test_missing_studio_is_rejected[indexes1]",
+            "test_missing_studio_is_rejected[indexes2]"
+          ]
+        },
+        {
+          "mutation": "unsafe-cg-norm",
+          "detected_by": [
+            "test_cg_is_invariant_to_global_system_scale[1e-200]",
+            "test_cg_is_invariant_to_global_system_scale[1e+200]"
+          ]
+        },
+        {
+          "mutation": "missing-fista-momentum",
+          "detected_by": [
+            "test_fista_third_iterate_contains_acceleration_and_l1_threshold"
+          ]
+        },
+        {
+          "mutation": "missing-observation-guard",
+          "detected_by": [
+            "test_missing_or_invalid_observation_is_not_a_result[None]"
+          ]
+        },
+        {
+          "mutation": "missing-install-hash-binding",
+          "detected_by": [
+            "test_reject_distribution_changed_after_smoke_test"
+          ]
+        },
+        {
+          "mutation": "missing-comparison-publication-gate",
+          "detected_by": [
+            "test_missing_saved_comparison_is_rejected[artifact_indexes0]",
+            "test_missing_saved_comparison_is_rejected[artifact_indexes1]",
+            "test_missing_saved_comparison_is_rejected[artifact_indexes2]"
+          ]
+        },
+        {
+          "mutation": "missing-stored-instance-publication-gate",
+          "detected_by": [
+            "test_missing_stored_instances_is_rejected"
+          ]
+        },
+        {
+          "mutation": "missing-reading-publication-gate",
+          "detected_by": [
+            "test_rehashed_reading_bytes_cannot_bypass_publication_audit"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 111150524285,
+      "name": "wheel and sdist clean installation",
+      "conclusion": "success",
+      "source": "fccd654e85cd544fc1a33d7467df93babd4edd2a",
+      "source_checked": true,
+      "actual_completed_log_read": true,
+      "pytest": [],
+      "proofs": [
+        {
+          "assets": {
+            "chainbench-0.7.0-reading.zip": {
+              "bytes": 44911452,
+              "sha256": "832b64f11aecd05881dbeedf6c01363d02329b3aaada3ce70f427cfd77365873"
+            },
+            "chainbench-0.7.0-review.pdf": {
+              "bytes": 286163,
+              "sha256": "35d821f07478d4822728d7a37c9d8e1817122d4686ac243966a9701255f952f1"
+            }
+          },
+          "bundle_manifest_sha256": "2d54cffa0aabd32143ffae6bc161e06b6888f5339c1257938aa93ca6e9231504",
+          "kind": "chainbench.reading-assets",
+          "schema_version": 1,
+          "source_commit": "fccd654e85cd544fc1a33d7467df93babd4edd2a",
+          "version": "0.7.0"
+        }
+      ],
+      "gate_lines": [
+        "2026-10-03T06:58:47.1741365Z CLEAN INSTALL PASSED: chainbench-0.7.0-py3-none-any.whl",
+        "2026-10-03T07:02:35.2452774Z CLEAN INSTALL PASSED: chainbench-0.7.0.tar.gz",
+        "2026-10-03T07:02:40.4933034Z PUBLICATION EVIDENCE PASSED: 8 verified files"
+      ]
+    },
+    {
+      "id": 111149971289,
+      "name": "test (ubuntu-latest, Python 3.10, minimum)",
+      "conclusion": "success",
+      "source": "fccd654e85cd544fc1a33d7467df93babd4edd2a",
+      "source_checked": true,
+      "actual_completed_log_read": true,
+      "pytest": [
+        {
+          "passed": 1680,
+          "seconds": 867.2
+        }
+      ],
+      "proofs": [
+        [
+          {
+            "slug": "gd-baseline",
+            "title": "Gradient-descent baseline",
+            "reference": "Beck--Teboulle (2009), ISTA with g=0",
+            "statement": "Smooth-convex GD objective-gap bound on the bundled quadratic.",
+            "metric": "max_k gap_k / bound_k",
+            "observed": 0.04231974364074391,
+            "threshold": 1,
+            "status": "CONSISTENT",
+            "note": "Step=1/L; positive iterations only. This is not a universal numerical proof."
+          },
+          {
+            "slug": "nesterov-1983",
+            "title": "Nesterov-style acceleration (smooth FISTA)",
+            "reference": "Beck--Teboulle (2009), fixed-L FISTA with g=0; Nesterov (1983) historical origin",
+            "statement": "Smooth FISTA iterates satisfy the O(1/k^2) objective-gap bound on this quadratic.",
+            "metric": "max_k gap_k / bound_k",
+            "observed": 0.07520595549209133,
+            "threshold": 1,
+            "status": "CONSISTENT",
+            "note": "Historical CLI slug retained; not a literal reproduction of the 1983 algorithm."
+          },
+          {
+            "slug": "polyak-1964",
+            "title": "Polyak heavy-ball (empirical tail)",
+            "reference": "Polyak (1964), quadratic tuning",
+            "statement": "Compare a finite tail contraction estimate with the spectral-radius prediction.",
+            "metric": "relative error: observed tail ratio vs predicted rho",
+            "observed": 0.016922852195530688,
+            "threshold": 0.08,
+            "status": "CONSISTENT",
+            "note": "alpha=2.77778, beta=0.444444, rho=0.666667; 8% is an empirical tolerance, not a theorem constant. Last up to 20 ratios above error=1e-10 are used."
+          },
+          {
+            "slug": "hestenes-stiefel-1952",
+            "title": "Conjugate gradient",
+            "reference": "Hestenes--Stiefel (1952); bound: Shewchuk (1994), equation (52)",
+            "statement": "Positive-iteration A-norm errors satisfy the classical condition-number envelope.",
+            "metric": "max_k ||e_k||_Q / (2 rho^k ||e_0||_Q)",
+            "observed": 0.42288854129079717,
+            "threshold": 1,
+            "status": "CONSISTENT",
+            "note": "kappa=10; k=0 excluded to avoid its fixed ratio of 0.5."
+          },
+          {
+            "slug": "jaggi-2013",
+            "title": "Frank-Wolfe",
+            "reference": "Jaggi (2013), Algorithm 1 and Theorem 1, delta=0",
+            "statement": "Primal gaps satisfy the curvature-based envelope for k>=1.",
+            "metric": "max_k gap_k / (2 C_f / (k+2))",
+            "observed": 0.36749999999999994,
+            "threshold": 1,
+            "status": "CONSISTENT",
+            "note": "C_f=2 for this simplex quadratic; exact linear minimization oracle."
+          },
+          {
+            "slug": "rockafellar-1976",
+            "title": "Proximal point",
+            "reference": "Rockafellar (1976); quadratic resolvent specialization",
+            "statement": "Successive Euclidean errors satisfy the strongly-convex resolvent contraction.",
+            "metric": "max_k error_(k+1) / (q * error_k)",
+            "observed": 0.9783261220939676,
+            "threshold": 1,
+            "status": "CONSISTENT",
+            "note": "q=0.909091; exact quadratic linear solves, not a general inexact PPA experiment."
+          },
+          {
+            "slug": "beck-teboulle-2009",
+            "title": "FISTA",
+            "reference": "Beck--Teboulle (2009), fixed-L FISTA",
+            "statement": "Composite objective gaps satisfy the O(1/k^2) bound on diagonal LASSO.",
+            "metric": "max_k gap_k / bound_k",
+            "observed": 0.14256235365367823,
+            "threshold": 1,
+            "status": "CONSISTENT",
+            "note": "Exact soft-threshold optimum; stable gap evaluation avoids objective cancellation."
+          },
+          {
+            "slug": "ista-vs-fista",
+            "title": "ISTA vs FISTA (observation)",
+            "reference": "Beck--Teboulle (2009)",
+            "statement": "Compare final objective gaps at the same iteration budget on one fixture.",
+            "metric": "FISTA final gap / ISTA final gap",
+            "observed": 0.009192292285745486,
+            "threshold": null,
+            "status": "INFO",
+            "note": "Informational, not pass/fail: FISTA is not guaranteed to beat ISTA at every iteration."
+          }
+        ]
+      ],
+      "gate_lines": []
+    },
+    {
+      "id": 111149971332,
+      "name": "test (windows-latest, Python 3.12, current)",
+      "conclusion": "success",
+      "source": "fccd654e85cd544fc1a33d7467df93babd4edd2a",
+      "source_checked": true,
+      "actual_completed_log_read": true,
+      "pytest": [
+        {
+          "passed": 1680,
+          "seconds": 820.73
+        }
+      ],
+      "proofs": [
+        [
+          {
+            "slug": "gd-baseline",
+            "title": "Gradient-descent baseline",
+            "reference": "Beck--Teboulle (2009), ISTA with g=0",
+            "statement": "Smooth-convex GD objective-gap bound on the bundled quadratic.",
+            "metric": "max_k gap_k / bound_k",
+            "observed": 0.04231974364074391,
+            "threshold": 1,
+            "status": "CONSISTENT",
+            "note": "Step=1/L; positive iterations only. This is not a universal numerical proof."
+          },
+          {
+            "slug": "nesterov-1983",
+            "title": "Nesterov-style acceleration (smooth FISTA)",
+            "reference": "Beck--Teboulle (2009), fixed-L FISTA with g=0; Nesterov (1983) historical origin",
+            "statement": "Smooth FISTA iterates satisfy the O(1/k^2) objective-gap bound on this quadratic.",
+            "metric": "max_k gap_k / bound_k",
+            "observed": 0.07520595549209133,
+            "threshold": 1,
+            "status": "CONSISTENT",
+            "note": "Historical CLI slug retained; not a literal reproduction of the 1983 algorithm."
+          },
+          {
+            "slug": "polyak-1964",
+            "title": "Polyak heavy-ball (empirical tail)",
+            "reference": "Polyak (1964), quadratic tuning",
+            "statement": "Compare a finite tail contraction estimate with the spectral-radius prediction.",
+            "metric": "relative error: observed tail ratio vs predicted rho",
+            "observed": 0.01692285219553202,
+            "threshold": 0.08,
+            "status": "CONSISTENT",
+            "note": "alpha=2.77778, beta=0.444444, rho=0.666667; 8% is an empirical tolerance, not a theorem constant. Last up to 20 ratios above error=1e-10 are used."
+          },
+          {
+            "slug": "hestenes-stiefel-1952",
+            "title": "Conjugate gradient",
+            "reference": "Hestenes--Stiefel (1952); bound: Shewchuk (1994), equation (52)",
+            "statement": "Positive-iteration A-norm errors satisfy the classical condition-number envelope.",
+            "metric": "max_k ||e_k||_Q / (2 rho^k ||e_0||_Q)",
+            "observed": 0.42288854129079717,
+            "threshold": 1,
+            "status": "CONSISTENT",
+            "note": "kappa=10; k=0 excluded to avoid its fixed ratio of 0.5."
+          },
+          {
+            "slug": "jaggi-2013",
+            "title": "Frank-Wolfe",
+            "reference": "Jaggi (2013), Algorithm 1 and Theorem 1, delta=0",
+            "statement": "Primal gaps satisfy the curvature-based envelope for k>=1.",
+            "metric": "max_k gap_k / (2 C_f / (k+2))",
+            "observed": 0.36749999999999994,
+            "threshold": 1,
+            "status": "CONSISTENT",
+            "note": "C_f=2 for this simplex quadratic; exact linear minimization oracle."
+          },
+          {
+            "slug": "rockafellar-1976",
+            "title": "Proximal point",
+            "reference": "Rockafellar (1976); quadratic resolvent specialization",
+            "statement": "Successive Euclidean errors satisfy the strongly-convex resolvent contraction.",
+            "metric": "max_k error_(k+1) / (q * error_k)",
+            "observed": 0.9783261220939676,
+            "threshold": 1,
+            "status": "CONSISTENT",
+            "note": "q=0.909091; exact quadratic linear solves, not a general inexact PPA experiment."
+          },
+          {
+            "slug": "beck-teboulle-2009",
+            "title": "FISTA",
+            "reference": "Beck--Teboulle (2009), fixed-L FISTA",
+            "statement": "Composite objective gaps satisfy the O(1/k^2) bound on diagonal LASSO.",
+            "metric": "max_k gap_k / bound_k",
+            "observed": 0.14256235365367823,
+            "threshold": 1,
+            "status": "CONSISTENT",
+            "note": "Exact soft-threshold optimum; stable gap evaluation avoids objective cancellation."
+          },
+          {
+            "slug": "ista-vs-fista",
+            "title": "ISTA vs FISTA (observation)",
+            "reference": "Beck--Teboulle (2009)",
+            "statement": "Compare final objective gaps at the same iteration budget on one fixture.",
+            "metric": "FISTA final gap / ISTA final gap",
+            "observed": 0.009192292285745488,
+            "threshold": null,
+            "status": "INFO",
+            "note": "Informational, not pass/fail: FISTA is not guaranteed to beat ISTA at every iteration."
+          }
+        ]
+      ],
+      "gate_lines": []
+    },
+    {
+      "id": 111149971342,
+      "name": "test (macos-26-intel, Python 3.12, current)",
+      "conclusion": "success",
+      "source": "fccd654e85cd544fc1a33d7467df93babd4edd2a",
+      "source_checked": true,
+      "actual_completed_log_read": true,
+      "pytest": [
+        {
+          "passed": 1680,
+          "seconds": 1298.22
+        }
+      ],
+      "proofs": [
+        [
+          {
+            "slug": "gd-baseline",
+            "title": "Gradient-descent baseline",
+            "reference": "Beck--Teboulle (2009), ISTA with g=0",
+            "statement": "Smooth-convex GD objective-gap bound on the bundled quadratic.",
+            "metric": "max_k gap_k / bound_k",
+            "observed": 0.0423197436407439,
+            "threshold": 1,
+            "status": "CONSISTENT",
+            "note": "Step=1/L; positive iterations only. This is not a universal numerical proof."
+          },
+          {
+            "slug": "nesterov-1983",
+            "title": "Nesterov-style acceleration (smooth FISTA)",
+            "reference": "Beck--Teboulle (2009), fixed-L FISTA with g=0; Nesterov (1983) historical origin",
+            "statement": "Smooth FISTA iterates satisfy the O(1/k^2) objective-gap bound on this quadratic.",
+            "metric": "max_k gap_k / bound_k",
+            "observed": 0.07520595549209133,
+            "threshold": 1,
+            "status": "CONSISTENT",
+            "note": "Historical CLI slug retained; not a literal reproduction of the 1983 algorithm."
+          },
+          {
+            "slug": "polyak-1964",
+            "title": "Polyak heavy-ball (empirical tail)",
+            "reference": "Polyak (1964), quadratic tuning",
+            "statement": "Compare a finite tail contraction estimate with the spectral-radius prediction.",
+            "metric": "relative error: observed tail ratio vs predicted rho",
+            "observed": 0.01692285236240287,
+            "threshold": 0.08,
+            "status": "CONSISTENT",
+            "note": "alpha=2.77778, beta=0.444444, rho=0.666667; 8% is an empirical tolerance, not a theorem constant. Last up to 20 ratios above error=1e-10 are used."
+          },
+          {
+            "slug": "hestenes-stiefel-1952",
+            "title": "Conjugate gradient",
+            "reference": "Hestenes--Stiefel (1952); bound: Shewchuk (1994), equation (52)",
+            "statement": "Positive-iteration A-norm errors satisfy the classical condition-number envelope.",
+            "metric": "max_k ||e_k||_Q / (2 rho^k ||e_0||_Q)",
+            "observed": 0.4228885412907973,
+            "threshold": 1,
+            "status": "CONSISTENT",
+            "note": "kappa=10; k=0 excluded to avoid its fixed ratio of 0.5."
+          },
+          {
+            "slug": "jaggi-2013",
+            "title": "Frank-Wolfe",
+            "reference": "Jaggi (2013), Algorithm 1 and Theorem 1, delta=0",
+            "statement": "Primal gaps satisfy the curvature-based envelope for k>=1.",
+            "metric": "max_k gap_k / (2 C_f / (k+2))",
+            "observed": 0.36749999999999994,
+            "threshold": 1,
+            "status": "CONSISTENT",
+            "note": "C_f=2 for this simplex quadratic; exact linear minimization oracle."
+          },
+          {
+            "slug": "rockafellar-1976",
+            "title": "Proximal point",
+            "reference": "Rockafellar (1976); quadratic resolvent specialization",
+            "statement": "Successive Euclidean errors satisfy the strongly-convex resolvent contraction.",
+            "metric": "max_k error_(k+1) / (q * error_k)",
+            "observed": 0.9783261220939674,
+            "threshold": 1,
+            "status": "CONSISTENT",
+            "note": "q=0.909091; exact quadratic linear solves, not a general inexact PPA experiment."
+          },
+          {
+            "slug": "beck-teboulle-2009",
+            "title": "FISTA",
+            "reference": "Beck--Teboulle (2009), fixed-L FISTA",
+            "statement": "Composite objective gaps satisfy the O(1/k^2) bound on diagonal LASSO.",
+            "metric": "max_k gap_k / bound_k",
+            "observed": 0.1425623536536782,
+            "threshold": 1,
+            "status": "CONSISTENT",
+            "note": "Exact soft-threshold optimum; stable gap evaluation avoids objective cancellation."
+          },
+          {
+            "slug": "ista-vs-fista",
+            "title": "ISTA vs FISTA (observation)",
+            "reference": "Beck--Teboulle (2009)",
+            "statement": "Compare final objective gaps at the same iteration budget on one fixture.",
+            "metric": "FISTA final gap / ISTA final gap",
+            "observed": 0.009192292285745493,
+            "threshold": null,
+            "status": "INFO",
+            "note": "Informational, not pass/fail: FISTA is not guaranteed to beat ISTA at every iteration."
+          }
+        ]
+      ],
+      "gate_lines": []
+    }
+  ],
+  "pending_jobs": [],
+  "artifact_policy": "Generated reports and large artifacts remain on GitHub; only small necessary review packets may be fetched under the 1 GB task cap.",
+  "observed_utc": "2026-10-03T07:14:26.049Z",
+  "jobs": [
+    {
+      "id": 111149971172,
+      "name": "offline interactive reports browser",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 111149971289,
+      "name": "test (ubuntu-latest, Python 3.10, minimum)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 111149971328,
+      "name": "test (ubuntu-latest, Python 3.12, current)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 111149971332,
+      "name": "test (windows-latest, Python 3.12, current)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 111149971333,
+      "name": "test (ubuntu-latest, Python 3.10, current)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 111149971338,
+      "name": "test (ubuntu-latest, Python 3.11, current)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 111149971342,
+      "name": "test (macos-26-intel, Python 3.12, current)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 111149971348,
+      "name": "audited offline reading assets / reading-bundle",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 111150524285,
+      "name": "wheel and sdist clean installation",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 11268120358,
+      "name": "chainbench-reading-bundle-fccd654e85cd544fc1a33d7467df93babd4edd2a",
+      "size_in_bytes": 44002395,
+      "url": "https://api.github.com/repos/chocoemong17/chainbench/actions/artifacts/11268120358",
+      "archive_download_url": "https://api.github.com/repos/chocoemong17/chainbench/actions/artifacts/11268120358/zip",
+      "expired": false,
+      "created_at": "2026-10-03T06:54:42Z",
+      "expires_at": "2026-10-10T06:54:37Z",
+      "updated_at": "2026-10-03T06:54:42Z",
+      "digest": "sha256:6640f69723297c6bc16dca7227fa2b1b87c2b79c08cd2b3056a527e480c6b238",
+      "workflow_run": {
+        "id": 37104389006,
+        "repository_id": 1392555473,
+        "head_repository_id": 1392555473,
+        "head_branch": "main",
+        "head_sha": "fccd654e85cd544fc1a33d7467df93babd4edd2a"
+      }
+    },
+    {
+      "id": 11268050819,
+      "name": "studio-review-fccd654e85cd544fc1a33d7467df93babd4edd2a",
+      "size_in_bytes": 1036105,
+      "url": "https://api.github.com/repos/chocoemong17/chainbench/actions/artifacts/11268050819",
+      "archive_download_url": "https://api.github.com/repos/chocoemong17/chainbench/actions/artifacts/11268050819/zip",
+      "expired": false,
+      "created_at": "2026-10-03T06:52:32Z",
+      "expires_at": "2026-10-10T06:52:31Z",
+      "updated_at": "2026-10-03T06:52:32Z",
+      "digest": "sha256:fedc5b4112022e3932bff2b875ecfed5743b2e1467e8b635e2fa638899ce9cf0",
+      "workflow_run": {
+        "id": 37104389006,
+        "repository_id": 1392555473,
+        "head_repository_id": 1392555473,
+        "head_branch": "main",
+        "head_sha": "fccd654e85cd544fc1a33d7467df93babd4edd2a"
+      }
+    },
+    {
+      "id": 11267956006,
+      "name": "stored-input-review-fccd654e85cd544fc1a33d7467df93babd4edd2a",
+      "size_in_bytes": 989161,
+      "url": "https://api.github.com/repos/chocoemong17/chainbench/actions/artifacts/11267956006",
+      "archive_download_url": "https://api.github.com/repos/chocoemong17/chainbench/actions/artifacts/11267956006/zip",
+      "expired": false,
+      "created_at": "2026-10-03T06:52:52Z",
+      "expires_at": "2026-10-10T06:52:51Z",
+      "updated_at": "2026-10-03T06:52:52Z",
+      "digest": "sha256:2c74cd753a28b00b5beb197e913c06c7adb0ba30fe6f23785c5e26ff261037a5",
+      "workflow_run": {
+        "id": 37104389006,
+        "repository_id": 1392555473,
+        "head_repository_id": 1392555473,
+        "head_branch": "main",
+        "head_sha": "fccd654e85cd544fc1a33d7467df93babd4edd2a"
+      }
+    },
+    {
+      "id": 11267945575,
+      "name": "chainbench-review-packet-fccd654e85cd544fc1a33d7467df93babd4edd2a",
+      "size_in_bytes": 313171,
+      "url": "https://api.github.com/repos/chocoemong17/chainbench/actions/artifacts/11267945575",
+      "archive_download_url": "https://api.github.com/repos/chocoemong17/chainbench/actions/artifacts/11267945575/zip",
+      "expired": false,
+      "created_at": "2026-10-03T06:54:43Z",
+      "expires_at": "2026-10-10T06:54:42Z",
+      "updated_at": "2026-10-03T06:54:43Z",
+      "digest": "sha256:b3321483892901d90b23949a7bbac8aa906518c7aca3116a753bd9d5a84399a7",
+      "workflow_run": {
+        "id": 37104389006,
+        "repository_id": 1392555473,
+        "head_repository_id": 1392555473,
+        "head_branch": "main",
+        "head_sha": "fccd654e85cd544fc1a33d7467df93babd4edd2a"
+      }
+    },
+    {
+      "id": 11267741275,
+      "name": "saved-comparison-review-fccd654e85cd544fc1a33d7467df93babd4edd2a",
+      "size_in_bytes": 835744,
+      "url": "https://api.github.com/repos/chocoemong17/chainbench/actions/artifacts/11267741275",
+      "archive_download_url": "https://api.github.com/repos/chocoemong17/chainbench/actions/artifacts/11267741275/zip",
+      "expired": false,
+      "created_at": "2026-10-03T06:52:58Z",
+      "expires_at": "2026-10-10T06:52:57Z",
+      "updated_at": "2026-10-03T06:52:58Z",
+      "digest": "sha256:b7303650079206c847670248b8059e00f71468b580aa62c559a86b40a2505ecd",
+      "workflow_run": {
+        "id": 37104389006,
+        "repository_id": 1392555473,
+        "head_repository_id": 1392555473,
+        "head_branch": "main",
+        "head_sha": "fccd654e85cd544fc1a33d7467df93babd4edd2a"
+      }
+    },
+    {
+      "id": 11267670825,
+      "name": "chainbench-reading-release-fccd654e85cd544fc1a33d7467df93babd4edd2a",
+      "size_in_bytes": 44282581,
+      "url": "https://api.github.com/repos/chocoemong17/chainbench/actions/artifacts/11267670825",
+      "archive_download_url": "https://api.github.com/repos/chocoemong17/chainbench/actions/artifacts/11267670825/zip",
+      "expired": false,
+      "created_at": "2026-10-03T06:54:37Z",
+      "expires_at": "2026-10-10T06:54:35Z",
+      "updated_at": "2026-10-03T06:54:37Z",
+      "digest": "sha256:2dbf7bb169f44f97defb6e23b1255b0c9628571dfc22220f2cbc3d9386e887f5",
+      "workflow_run": {
+        "id": 37104389006,
+        "repository_id": 1392555473,
+        "head_repository_id": 1392555473,
+        "head_branch": "main",
+        "head_sha": "fccd654e85cd544fc1a33d7467df93babd4edd2a"
+      }
+    },
+    {
+      "id": 11267557405,
+      "name": "reproduction-browser-37104389006",
+      "size_in_bytes": 117203274,
+      "url": "https://api.github.com/repos/chocoemong17/chainbench/actions/artifacts/11267557405",
+      "archive_download_url": "https://api.github.com/repos/chocoemong17/chainbench/actions/artifacts/11267557405/zip",
+      "expired": false,
+      "created_at": "2026-10-03T07:04:21Z",
+      "expires_at": "2026-10-06T07:04:13Z",
+      "updated_at": "2026-10-03T07:04:21Z",
+      "digest": "sha256:0bb7964b4f92b0acbeb9e9a153b8fafa1f49e8adadcb16c8c9dece93171d6e45",
+      "workflow_run": {
+        "id": 37104389006,
+        "repository_id": 1392555473,
+        "head_repository_id": 1392555473,
+        "head_branch": "main",
+        "head_sha": "fccd654e85cd544fc1a33d7467df93babd4edd2a"
+      }
+    },
+    {
+      "id": 11267407499,
+      "name": "distributions-37104389006",
+      "size_in_bytes": 45440382,
+      "url": "https://api.github.com/repos/chocoemong17/chainbench/actions/artifacts/11267407499",
+      "archive_download_url": "https://api.github.com/repos/chocoemong17/chainbench/actions/artifacts/11267407499/zip",
+      "expired": false,
+      "created_at": "2026-10-03T07:02:43Z",
+      "expires_at": "2026-10-06T07:02:40Z",
+      "updated_at": "2026-10-03T07:02:43Z",
+      "digest": "sha256:7d2ae54bdba60a608c0c45d796b3760a74e168120aaee8ed60b0e4cfb77fb19f",
+      "workflow_run": {
+        "id": 37104389006,
+        "repository_id": 1392555473,
+        "head_repository_id": 1392555473,
+        "head_branch": "main",
+        "head_sha": "fccd654e85cd544fc1a33d7467df93babd4edd2a"
+      }
+    },
+    {
+      "id": 11267246100,
+      "name": "chainbench-extracted-browser-fccd654e85cd544fc1a33d7467df93babd4edd2a",
+      "size_in_bytes": 9326129,
+      "url": "https://api.github.com/repos/chocoemong17/chainbench/actions/artifacts/11267246100",
+      "archive_download_url": "https://api.github.com/repos/chocoemong17/chainbench/actions/artifacts/11267246100/zip",
+      "expired": false,
+      "created_at": "2026-10-03T06:54:44Z",
+      "expires_at": "2026-10-10T06:54:43Z",
+      "updated_at": "2026-10-03T06:54:44Z",
+      "digest": "sha256:2f4e961632d05559deea957ecf7e53f8fd0e0c2fc7c187829610c1ed867018b5",
+      "workflow_run": {
+        "id": 37104389006,
+        "repository_id": 1392555473,
+        "head_repository_id": 1392555473,
+        "head_branch": "main",
+        "head_sha": "fccd654e85cd544fc1a33d7467df93babd4edd2a"
+      }
+    }
+  ],
+  "latest_scope_review": {
+    "frozen_review_unchanged_from_v050": true,
+    "source_scope_record": "v070-source-scope-audit.json",
+    "runtime_dependency": "numpy>=1.24",
+    "maintainer": "chocoemong17",
+    "main_worktree_clean": true
+  },
+  "run_metadata": {
+    "id": 37104389006,
+    "status": "completed",
+    "conclusion": "success",
+    "head_sha": "fccd654e85cd544fc1a33d7467df93babd4edd2a",
+    "run_attempt": 1,
+    "started": "2026-10-03T06:50:56Z",
+    "updated": "2026-10-03T07:13:04Z",
+    "url": "https://github.com/chocoemong17/chainbench/actions/runs/37104389006"
+  },
+  "all_validation_jobs_passed": true,
+  "all_completed_job_logs_read": true,
+  "compatibility_results": [
+    {
+      "id": 111149971333,
+      "name": "test (ubuntu-latest, Python 3.10, current)",
+      "passed": 1680,
+      "seconds": 464.92
+    },
+    {
+      "id": 111149971338,
+      "name": "test (ubuntu-latest, Python 3.11, current)",
+      "passed": 1680,
+      "seconds": 423.45
+    },
+    {
+      "id": 111149971328,
+      "name": "test (ubuntu-latest, Python 3.12, current)",
+      "passed": 1680,
+      "seconds": 751.23
+    },
+    {
+      "id": 111149971289,
+      "name": "test (ubuntu-latest, Python 3.10, minimum)",
+      "passed": 1680,
+      "seconds": 867.2
+    },
+    {
+      "id": 111149971332,
+      "name": "test (windows-latest, Python 3.12, current)",
+      "passed": 1680,
+      "seconds": 820.73
+    },
+    {
+      "id": 111149971342,
+      "name": "test (macos-26-intel, Python 3.12, current)",
+      "passed": 1680,
+      "seconds": 1298.22
+    }
+  ],
+  "mutation_outcomes": [
+    {
+      "mutation": "missing-studio-publication-gate",
+      "detected_by": [
+        "test_missing_studio_is_rejected[indexes0]",
+        "test_missing_studio_is_rejected[indexes1]",
+        "test_missing_studio_is_rejected[indexes2]"
+      ]
+    },
+    {
+      "mutation": "unsafe-cg-norm",
+      "detected_by": [
+        "test_cg_is_invariant_to_global_system_scale[1e-200]",
+        "test_cg_is_invariant_to_global_system_scale[1e+200]"
+      ]
+    },
+    {
+      "mutation": "missing-fista-momentum",
+      "detected_by": [
+        "test_fista_third_iterate_contains_acceleration_and_l1_threshold"
+      ]
+    },
+    {
+      "mutation": "missing-observation-guard",
+      "detected_by": [
+        "test_missing_or_invalid_observation_is_not_a_result[None]"
+      ]
+    },
+    {
+      "mutation": "missing-install-hash-binding",
+      "detected_by": [
+        "test_reject_distribution_changed_after_smoke_test"
+      ]
+    },
+    {
+      "mutation": "missing-comparison-publication-gate",
+      "detected_by": [
+        "test_missing_saved_comparison_is_rejected[artifact_indexes0]",
+        "test_missing_saved_comparison_is_rejected[artifact_indexes1]",
+        "test_missing_saved_comparison_is_rejected[artifact_indexes2]"
+      ]
+    },
+    {
+      "mutation": "missing-stored-instance-publication-gate",
+      "detected_by": [
+        "test_missing_stored_instances_is_rejected"
+      ]
+    },
+    {
+      "mutation": "missing-reading-publication-gate",
+      "detected_by": [
+        "test_rehashed_reading_bytes_cannot_bypass_publication_audit"
+      ]
+    }
+  ]
+}
