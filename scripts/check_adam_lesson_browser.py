@@ -120,6 +120,11 @@ def main():
                     page.screenshot(
                         path=str(args.output / f"{engine}-initial-{width}.png"), full_page=True
                     )
+                    # Use the visible play affordance, not only programmatic playback.
+                    page.locator("#film-start").click()
+                    expect(page.locator("#film-start")).to_be_hidden()
+                    page.wait_for_function('()=>document.querySelector("video").currentTime>.3')
+                    movie.evaluate("v=>v.pause()")
                     decoded = []
                     for seconds in [7, 20, 36]:
                         movie.evaluate("(v,t)=>{v.currentTime=t;}", seconds)

@@ -1,6 +1,6 @@
 'use strict';
 (() => {
-  const $ = id => document.getElementById(id), root = document.documentElement, movie = $('movie');
+  const $ = id => document.getElementById(id), root = document.documentElement, movie = $('movie'), cover = $('film-start');
   let record = null, frame = null;
   const methods = ['gd', 'momentum', 'adam'];
   const colors = {gd:'#3e68a3', momentum:'#8e651f', adam:'#b83e31'};
@@ -19,11 +19,14 @@
     $('language').textContent=ko?'English':'한국어';
     $('language').setAttribute('aria-label',ko?'Switch to English':'한국어로 전환');
     $('iteration').setAttribute('aria-label',ko?'영상 위치':'Video position');
+    cover.setAttribute('aria-label',ko?'48초 영상 재생':'Play the 48-second film');
     document.querySelector('.skip').textContent=ko?'영상으로 바로 가기':'Skip to the film';
     for(const track of movie.textTracks)track.mode=track.language===root.lang?'showing':'disabled';
   }
   $('language').addEventListener('click',()=>{root.lang=root.lang==='en'?'ko':'en';try{localStorage.setItem('chainbench-language',root.lang);}catch(_){}translate();});
   translate(); movie.addEventListener('loadedmetadata',translate);
+  cover.hidden=false;
+  cover.addEventListener('click',()=>movie.play().catch(()=>{}));
   document.querySelector('.watch-link').addEventListener('click',()=>{movie.play().catch(()=>{});});
   function buildChart(metric) {
     const svg=$(metric+'-chart'), left=56, top=18, width=480, height=232;
@@ -54,14 +57,14 @@
   function frameAt(t){return Math.max(0,Math.min(record.frame_iterations.length-1,Math.floor(t*record.fps+1e-6)));}
   function syncAt(t){if(!record)return;const f=frameAt(t);$('iteration').value=String(f);draw(record.frame_iterations[f]);}
   // Seek inside a frame: media clocks may round an exact boundary down by a microsecond.
-  function seekFrame(f){if(!record)return;f=Math.max(0,Math.min(record.frame_iterations.length-1,f));movie.pause();movie.currentTime=(f+0.5)/record.fps;syncAt(movie.currentTime);}
+  function seekFrame(f){if(!record)return;cover.hidden=true;f=Math.max(0,Math.min(record.frame_iterations.length-1,f));movie.pause();movie.currentTime=(f+0.5)/record.fps;syncAt(movie.currentTime);}
   function seek(k){seekFrame(Math.round(timeAt(Math.max(0,Math.min(2400,k)))*record.fps));}
   $('iteration').addEventListener('input',e=>seekFrame(Number(e.target.value)));
   const sync=()=>{syncAt(movie.currentTime);if(!movie.paused&&!movie.ended)frame=requestAnimationFrame(sync);};
-  movie.addEventListener('play',()=>{cancelAnimationFrame(frame);sync();});
+  movie.addEventListener('play',()=>{cover.hidden=true;cancelAnimationFrame(frame);sync();});
   movie.addEventListener('pause',()=>{cancelAnimationFrame(frame);syncAt(movie.currentTime);});
   movie.addEventListener('timeupdate',()=>syncAt(movie.currentTime));
-  movie.addEventListener('seeked',()=>syncAt(movie.currentTime));
+  movie.addEventListener('seeked',()=>{if(movie.currentTime>0)cover.hidden=true;syncAt(movie.currentTime);});
   document.addEventListener('visibilitychange',()=>{if(document.hidden)movie.pause();});
   movie.addEventListener('error',()=>{$('load-status').hidden=false;$('load-status').textContent=root.lang==='ko'?'영상이 재생되지 않으면 아래 MP4 링크를 열어 주세요.':'Video unavailable. Open the MP4 link below.';$('load-status').setAttribute('role','alert');});
   fetch('experiment.json').then(r=>{if(!r.ok)throw Error('No data');return r.json();}).then(data=>{
