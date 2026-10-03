@@ -113,7 +113,8 @@ def main():
                     assert page.evaluate("document.documentElement.scrollWidth<=innerWidth")
                     movie = page.locator("#movie")
                     expect(movie).to_have_js_property("paused", True)
-                    page.wait_for_function('()=>document.querySelector("video").readyState>=2')
+                    page.wait_for_function('()=>document.querySelector("video").readyState>=3')
+                    page.wait_for_timeout(180)
                     assert abs(movie.evaluate("e=>e.duration") - 48) < 0.1
                     # Decode actual frames. Different timestamps must produce different pixels.
                     page.screenshot(
@@ -213,6 +214,8 @@ def main():
                     expect(page.locator("html")).to_have_attribute("lang", "ko")
                     page.goto(origin + "/papers/adam/?lang=en", wait_until="networkidle")
                     expect(page.locator("html")).to_have_attribute("lang", "en")
+                    page.wait_for_function('()=>document.querySelector("video").readyState>=3')
+                    page.wait_for_timeout(180)
                     page.screenshot(
                         path=str(args.output / f"{engine}-en-{width}.png"), full_page=True
                     )
