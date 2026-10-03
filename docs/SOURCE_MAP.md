@@ -293,3 +293,12 @@ this same generator and the same recurrences. It computes new observations in
 Python; the embedded report then inspects stored rows. It adds no algorithm,
 theorem threshold or universal ranking. Its install/browser checks independently
 bind each displayed/downloaded report to the actual numeric input and request.
+
+## Adam single-paper film
+
+The separate `/papers/adam/` visual lesson implements Kingma--Ba
+[arXiv:1412.6980v9](https://arxiv.org/abs/1412.6980v9), Algorithm 1 (PDF p.2),
+including both bias corrections and epsilon outside the square root. Its rotated
+Rosenbrock valley is an authored full-gradient illustration, not original paper
+data or a general performance ranking. It differs from the existing no-debiasing
+Reddi counterexample. [Inputs, recurrence, movie timing and tests](ADAM_FILM.md).
