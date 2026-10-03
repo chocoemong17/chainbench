@@ -39,3 +39,9 @@ ten named generated/imported cases, exact input/manifest fingerprints, independe
 scalar audits, retained HTML samples and actual replay agreement. Missing,
 misordered or malformed cases fail publication; the seventh fault injection
 checks this boundary. [Workflow contract](docs/STORED_INPUTS.md).
+
+Development studio evidence is also mandatory: both installed commands must
+serve six independently audited live cases, reject all eight declared invalid
+requests, shut down and leave no server-created files or session material in
+outputs. Missing or mistyped evidence fails publication. An eighth targeted
+fault injection checks this gate. [Studio contract](docs/STUDIO.md).

@@ -68,6 +68,8 @@ def evidence(tmp_path, monkeypatch, reading_factory):
             ],
         })
     report = {"source_commit": SHA, "artifacts": artifacts}
+    for record in artifacts:
+        record['studio'] = studio_fixture()
     (dist / "verification.json").write_text(json.dumps(report), encoding="utf-8")
     (dist / "build-environment.txt").write_text("test fixture\n", encoding="utf-8")
     write_sums(dist)
@@ -76,6 +78,60 @@ def evidence(tmp_path, monkeypatch, reading_factory):
     module = load_script("publish_release")
     monkeypatch.setattr(module, "ROOT", tmp_path)
     return module, dist, report
+
+
+def studio_fixture():
+    contract = load_script('studio_evidence')
+    return {'bind': '127.0.0.1', 'ephemeral_port': True, 'shutdown': True,
+            'no_server_files': True, 'no_session_material_in_outputs': True,
+            'rejections': dict(contract.REJECTIONS), 'cases': [
+                {'family': family, 'seed': seed, 'methods': methods, 'dimension': 4, 'steps': 2,
+                 'rows': 3*len(methods), 'numeric_audit': True, 'exact_html': True,
+                 'input_sha256': '1'*64, 'manifest_sha256': '2'*64}
+                for family, methods in contract.FAMILIES.items() for seed in (0,7)]}
+
+
+@pytest.mark.parametrize('indexes', [(0,), (1,), (0,1)])
+def test_missing_studio_is_rejected(evidence, indexes):
+    module, dist, report = evidence
+    for index in indexes:
+        del report['artifacts'][index]['studio']
+    (dist/'verification.json').write_text(json.dumps(report), encoding='utf8')
+    write_sums(dist)
+    with pytest.raises(RuntimeError, match='studio'):
+        module.verified_files(VERSION, SHA)
+
+
+@pytest.mark.parametrize('damage', ['empty', 'shutdown', 'bind', 'files', 'missing-case', 'duplicate-case',
+    'seed', 'steps', 'rows', 'numeric', 'html', 'digest', 'extra', 'rejection', 'bool-rejection'])
+def test_corrupt_studio_evidence_is_rejected(evidence, damage):
+    module, dist, report = evidence
+    value = report['artifacts'][1]['studio']
+    if damage == 'empty':
+        value.clear()
+    elif damage == 'shutdown':
+        value['shutdown'] = 1
+    elif damage == 'bind':
+        value['bind'] = '0.0.0.0'
+    elif damage == 'files':
+        value['no_server_files'] = False
+    elif damage == 'missing-case':
+        value['cases'].pop()
+    elif damage == 'duplicate-case':
+        value['cases'][1] = value['cases'][0]
+    elif damage == 'rejection':
+        value['rejections']['token'] = 200
+    elif damage == 'bool-rejection':
+        value['rejections']['token'] = True
+    else:
+        key, replacement = {'seed': ('seed', True), 'steps': ('steps', 3), 'rows': ('rows', 1),
+            'numeric': ('numeric_audit', False), 'html': ('exact_html', False),
+            'digest': ('input_sha256', 'x'*64), 'extra': ('unknown', True)}[damage]
+        value['cases'][0][key] = replacement
+    (dist/'verification.json').write_text(json.dumps(report), encoding='utf8')
+    write_sums(dist)
+    with pytest.raises(RuntimeError, match='studio'):
+        module.verified_files(VERSION, SHA)
 
 
 def test_valid_publication_evidence(evidence):
