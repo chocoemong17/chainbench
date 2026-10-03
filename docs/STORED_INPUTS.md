@@ -1,7 +1,8 @@
 # Run and replay the numbers you saved
 
-**Development source after v0.6.0.** These commands are in the current source and
-its tested CI distributions; the frozen v0.6.0 downloads do not contain them.
+**New in v0.7.0.** Install the [versioned package](../README.md#install-v070)
+after publication, or install this source revision. The frozen v0.6.0 downloads
+predate these commands.
 The existing `experiment`, `replay`, `compare` and their schema-1 records remain
 unchanged. Use `instance` for the separate exact-input workflow below.
 

@@ -34,13 +34,13 @@ python scripts/smoke_install.py
 
 Technical reference for tag matching: [GitHub Git references REST API](https://docs.github.com/en/rest/git/refs). The endpoint is a prefix search; the publisher selects only the exact tag. Release enumeration uses [GitHub CLI pagination](https://cli.github.com/manual/gh_api), so a network error never implies an empty result.
 
-Development stored-input evidence is mandatory for both installed distributions:
+Stored-input evidence is mandatory for both installed distributions:
 ten named generated/imported cases, exact input/manifest fingerprints, independent
 scalar audits, retained HTML samples and actual replay agreement. Missing,
 misordered or malformed cases fail publication; the seventh fault injection
 checks this boundary. [Workflow contract](docs/STORED_INPUTS.md).
 
-Development studio evidence is also mandatory: both installed commands must
+Studio evidence is also mandatory: both installed commands must
 serve six independently audited live cases, reject all eight declared invalid
 requests, shut down and leave no server-created files or session material in
 outputs. Missing or mistyped evidence fails publication. An eighth targeted

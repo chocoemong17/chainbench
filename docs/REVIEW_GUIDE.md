@@ -2,7 +2,7 @@
 
 Start with a question you can inspect in the output. The tour connects published
 examples, controlled geometry, finite breadth and a tight construction, while
-keeping their claims separate. The v0.6.0 reading ZIP packages the complete tour.
+keeping their claims separate. The v0.7.0 reading ZIP packages the complete tour.
 
 ## Download the versioned tour
 
@@ -12,7 +12,21 @@ PDF, source records and publication status. Extract the whole archive and open
 recompute reports. The release assets become available after the main gate passes.
 
 The following archived previews and computation snapshot retain earlier review
-history. Their recorded source and CI outcomes are separate from v0.6.0.
+history. Their recorded source and CI outcomes are separate from the versioned release.
+
+## Change conditions, then preserve the actual input
+
+After reading a report, choose a question from the [studio guide](STUDIO.md#three-questions-to-explore).
+Keep the seed and methods fixed while changing one parameter; use several seeds
+before drawing a broader conclusion. Each press of **Run a new experiment**
+performs a new Python calculation. Report controls inspect its already computed
+rows. Save all three downloads and use [instance replay](STORED_INPUTS.md) when
+you want to rerun the saved arrays and start rather than generate a new problem.
+
+The studio and exact-input CLI require v0.7.0 source/package; the historical
+snapshot below and frozen v0.6.0 package do not contain them. Their downloaded
+reports remain readable offline after Python stops. The original 25-page tour
+is still a precomputed reading route and does not require the studio.
 
 ## Historical previews and pinned development snapshot
 
@@ -51,8 +65,8 @@ git rev-parse HEAD
 python -m chainbench tour --extended --lang ko --output tour
 ```
 
-Open `tour/index.html`. This immutable computation snapshot includes every command
-on this page, including the five-method landscape comparison, CG metric view,
+Open `tour/index.html`. This immutable computation snapshot includes the earlier paper-reading commands,
+including the five-method landscape comparison, CG metric view,
 heavy-ball counterexample and earlier stacked features.
 The [snapshot's tests](https://github.com/chocoemong17/chainbench/actions/runs/36875447704)
 and [reading-bundle generation](https://github.com/chocoemong17/chainbench/actions/runs/36875447467)
@@ -218,7 +232,7 @@ speed ranking; iteration counts do not normalize per-step computational cost.
 The heavy-ball workflow reproduces the selected counterexample, not the paper's
 IQC programs or a claim that all momentum choices fail.
 
-For the versioned toolkit, follow [the v0.6.0 installation](../README.md#install-v060).
+For the versioned toolkit, follow [the v0.7.0 installation](../README.md#install-v070).
 The [v0.5.0 baseline](https://github.com/chocoemong17/chainbench/releases/tag/v0.5.0)
 remains unchanged for historical comparisons.
 It has the earlier workflows and sampler, without the new reproduction, geometry

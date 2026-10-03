@@ -1,15 +1,18 @@
 # Read the complete tour without installing Python
 
-The v0.6.0 alpha provides the full Korean/English reading tour and a short PDF
-guide as named assets on the [GitHub release](https://github.com/chocoemong17/chainbench/releases/tag/v0.6.0).
-The [completed release gate](https://github.com/chocoemong17/chainbench/actions/runs/36934602943)
-validated and published these exact versioned files. Later source additions have
-their own CI records and are not silently included in this frozen download.
+The v0.7.0 alpha packages the full Korean/English reading tour and a short PDF
+guide as named assets on its [GitHub release](https://github.com/chocoemong17/chainbench/releases/tag/v0.7.0).
+The versioned links below become available only after the main-branch gate has
+validated, uploaded and rechecked the assets. Source version metadata alone does
+not mean a release is published. Before that gate completes, use the published
+[v0.6.0 reading assets](https://github.com/chocoemong17/chainbench/releases/tag/v0.6.0).
+Their [completed release gate](https://github.com/chocoemong17/chainbench/actions/runs/36934602943)
+and original contents remain unchanged.
 
-1. Start with the [two-page FISTA PDF](https://github.com/chocoemong17/chainbench/releases/download/v0.6.0/chainbench-0.6.0-review.pdf).
+1. Start with the [two-page FISTA PDF](https://github.com/chocoemong17/chainbench/releases/download/v0.7.0/chainbench-0.7.0-review.pdf).
    It introduces fixed and backtracking steps with an actual rejected proposal,
    two update flows and a comparison table.
-2. Download [chainbench-0.6.0-reading.zip](https://github.com/chocoemong17/chainbench/releases/download/v0.6.0/chainbench-0.6.0-reading.zip).
+2. Download [chainbench-0.7.0-reading.zip](https://github.com/chocoemong17/chainbench/releases/download/v0.7.0/chainbench-0.7.0-reading.zip).
    Extract the **whole archive**, then open `index.html` in a browser. Keep the
    files together so links between the 25 HTML pages continue to work.
 3. Follow the [short reading route](REVIEW_GUIDE.md#a-short-reading-route): image
@@ -27,6 +30,15 @@ The PDF summarizes one comparison. The full tour retains all declared cases and
 24 numerical records across published protocols, changed inputs, illustrations,
 stress samples, counterexamples and sharp constructions. Those categories remain
 explicit: a computed example does not prove a theorem or a universal ranking.
+
+## Compute a new example
+
+The ZIP contains precomputed reports and their offline controls. To choose new
+conditions and calculate trajectories, install the [v0.7.0 Python package](../README.md#install-v070)
+and open the [studio](STUDIO.md). Save its input/result JSON and standalone HTML,
+then use [exact-input replay](STORED_INPUTS.md) to rerun those arrays and start.
+These workflows require Python and are separate from opening the reading ZIP.
+The frozen v0.6.0 package predates them.
 
 ## What the download records
 

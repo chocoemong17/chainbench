@@ -4,7 +4,7 @@ The repository and pull requests are the source of truth. Full tests, clean
 package installation, browser checks and report generation run on GitHub Actions.
 The local task folder has a strict 1 GB ceiling; generated copies are disposable.
 
-The development `studio-review-<commit>` artifact exercises the opt-in loopback
+The `studio-review-<commit>` artifact exercises the opt-in loopback
 studio entirely on the runner. It contains actual browser-downloaded inputs,
 results and offline HTML for three families and two seeds at two viewport sizes,
 selected screenshots, a two-page PDF and source/member verification. Full tests
@@ -113,9 +113,10 @@ The first consolidated remote run passed Linux/macOS, clean installation and
 browser checks but failed 12 Windows tests because test fixtures were decoded
 with cp1252. Explicit UTF-8 fixture reads repair this in the follow-up commit;
 [issue #74](https://github.com/chocoemong17/chainbench/issues/74) preserves the failure.
-See [PR #73](https://github.com/chocoemong17/chainbench/pull/73) for current results.
+See [PR #73](https://github.com/chocoemong17/chainbench/pull/73) for that consolidated run.
+Later changes have their own source-bound CI records.
 
-The development `stored-input-review-<commit>` artifact contains ten generated or
+The `stored-input-review-<commit>` artifact contains ten generated or
 imported numeric instances, their actual HTML/JSON, an exact-input replay page,
 two-page review PDF and independent/browser evidence. Generation and rendering
 run on Actions. Both installed distributions repeat the numeric/input audits;

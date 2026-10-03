@@ -208,8 +208,8 @@ margin-top:26px}.paper,.summary-card{scroll-margin-top:20px}pre{white-space:pre-
         + '<pre id="chainbench-evidence">'
         + escape(json.dumps(record, indent=2, allow_nan=False)) + '</pre></details>'
         '<p class="note">For assumptions, formulas and public references, see '
-        '<a href="https://github.com/chocoemong17/chainbench/blob/v0.6.0/docs/SOURCE_MAP.md">source-to-implementation map</a> and '
-        '<a href="https://github.com/chocoemong17/chainbench/blob/v0.6.0/REFERENCES.md">original references</a>. '
+        '<a href="https://github.com/chocoemong17/chainbench/blob/v0.7.0/docs/SOURCE_MAP.md">source-to-implementation map</a> and '
+        '<a href="https://github.com/chocoemong17/chainbench/blob/v0.7.0/REFERENCES.md">original references</a>. '
         'Source links are opened only when selected; this report loads no external resources.</p></main></body></html>'
     )
 

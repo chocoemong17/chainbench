@@ -12,7 +12,8 @@ Python 3.10+ and NumPy generate the pages; a browser is enough to read or share 
 
 **New here? [Download the offline tour and PDF](docs/OFFLINE_DOWNLOAD.md)**, then
 follow the [short reading route](docs/REVIEW_GUIDE.md#a-short-reading-route).
-The v0.6.0 assets are published with their completed validation records.
+This source targets v0.7.0; the download guide distinguishes the release gate
+from published assets. The preceding v0.6.0 downloads remain available.
 For a quick preview without installation or sign-in, open the
 [two-page FISTA PDF](https://github.com/chocoemong17/chainbench/blob/archive/local-reviews-20261001/cloud/33b6243/ChainBench_FISTA_review.pdf)
 or [five actual geometry views with Korean reading notes](https://github.com/chocoemong17/chainbench/tree/archive/local-reviews-20261001/cloud/33b6243/browser-gallery).
@@ -22,21 +23,24 @@ Already have several saved runs? [Compare two to four experiment records](docs/S
 with `chainbench compare a.json b.json --lang ko --output comparison.html`.
 Inspect changed inputs, settings and environments before reading the actual curves.
 
-Development source also supports [stored numeric inputs and exact replay](docs/STORED_INPUTS.md):
+To **change conditions and compute a new result**, use the
+[experiment studio](docs/STUDIO.md): `chainbench studio --lang ko`.
+Choose quadratic, diagonal LASSO or simplex inputs, select methods, and inspect
+actual computed rows. Download input JSON, result JSON and a standalone report;
+the report works after you stop the studio.
+
+To **keep and rerun the actual numbers**, use
+[stored numeric inputs and exact replay](docs/STORED_INPUTS.md):
 `instance generate`, `instance import`, `instance run` and `instance replay`.
+Save the arrays and starting point, then rerun those same inputs without drawing
+new data. Imported teaching examples include a nondiagonal quadratic and a PSD
+problem where distance to a supplied reference differs from distance to a solution.
 
-To choose conditions in a browser and perform new calculations, run
-`chainbench studio --lang ko` from the current development installation.
-The [experiment studio](docs/STUDIO.md) runs on your own computer, offers three
-problem families and saves standalone reports that work after it stops.
-This development command is separate from the frozen v0.6.0 downloads below.
-Save the actual arrays and starting point, inspect their trajectories, and rerun
-those same numbers. This addition is not in the frozen v0.6.0 downloads.
-
-The v0.6.0 source includes the integrated tour, paper examples, geometry inspectors,
-portability repairs and saved-record comparison. [Release notes](docs/RELEASE_NOTES_0.6.0.md)
-state the numerical migration and validation scope. The frozen v0.5.0 tag and assets
-remain unchanged and do not contain these later workflows.
+These two workflows are new in the v0.7.0 source and require its Python package.
+The reading ZIP contains precomputed paper reports; it does not start a studio
+or contain your future experiments. [Release notes](docs/RELEASE_NOTES_0.7.0.md)
+explain installation, evidence and limits. The frozen v0.6.0 and earlier releases
+retain their original contents.
 
 ## From a paper's experiment to actual pixels
 
@@ -62,9 +66,11 @@ record as the full report, including hashes and attribution.
 
 ## Download a reading bundle from GitHub
 
-Download the [v0.6.0 reading ZIP](https://github.com/chocoemong17/chainbench/releases/download/v0.6.0/chainbench-0.6.0-reading.zip)
-and [two-page PDF](https://github.com/chocoemong17/chainbench/releases/download/v0.6.0/chainbench-0.6.0-review.pdf)
-from the gated prerelease. Extract the whole ZIP and open `index.html`: all 25
+Once the [v0.7.0 release gate](https://github.com/chocoemong17/chainbench/releases/tag/v0.7.0)
+publishes, download its [reading ZIP](https://github.com/chocoemong17/chainbench/releases/download/v0.7.0/chainbench-0.7.0-reading.zip)
+and [two-page PDF](https://github.com/chocoemong17/chainbench/releases/download/v0.7.0/chainbench-0.7.0-review.pdf).
+Before publication, the [v0.6.0 assets](https://github.com/chocoemong17/chainbench/releases/tag/v0.6.0)
+remain the published reading bundle. Extract the whole ZIP and open `index.html`: all 25
 pages, their figures and recorded examples work offline. The named reading ZIP
 contains generated reports; GitHub's automatic source archive contains source code.
 [Download, availability and verification guide](docs/OFFLINE_DOWNLOAD.md).
@@ -145,7 +151,7 @@ python -m pip install .
 python -m chainbench tour --lang ko --output tour
 ```
 
-For the versioned wheel, follow the [installation steps](#install-v060).
+For the versioned wheel, follow the [installation steps](#install-v070).
 Open `tour/index.html`. It connects **17 offline HTML pages**: the reading guide,
 eight-topic atlas, three published-example workflows, three geometry views, eight
 stress reports and one public tight case. Each report keeps its numerical evidence
@@ -281,20 +287,20 @@ compares inputs, trajectories and environments with stated tolerances. A `MATCH`
 is numerical agreement, not author authentication or proof. Equal iteration counts
 need not mean equal work. [Configuration and limits](docs/EXPERIMENTS.md).
 
-## Install v0.6.0
+## Install v0.7.0
 
 Use Python 3.10+ in your preferred environment once the
-[gated prerelease](https://github.com/chocoemong17/chainbench/releases/tag/v0.6.0) is published:
+[gated prerelease](https://github.com/chocoemong17/chainbench/releases/tag/v0.7.0) is published:
 
 ```bash
-python -m pip install https://github.com/chocoemong17/chainbench/releases/download/v0.6.0/chainbench-0.6.0-py3-none-any.whl
+python -m pip install https://github.com/chocoemong17/chainbench/releases/download/v0.7.0/chainbench-0.7.0-py3-none-any.whl
 python -m chainbench --version
 python -m chainbench tour --extended --lang ko --output tour
 ```
 
 The reading ZIP needs no installation. To recompute reports, use the wheel above
 or install a pinned source checkout. Record both the package version and commit
-when comparing results. [Release notes and migration](docs/RELEASE_NOTES_0.6.0.md).
+when comparing results. [Release notes and migration](docs/RELEASE_NOTES_0.7.0.md).
 
 The [frozen v0.5.0 baseline](https://github.com/chocoemong17/chainbench/releases/tag/v0.5.0)
 remains available with its original assets. Earlier development builds also reported

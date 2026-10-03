@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+## 0.7.0
+
+Keep actual problem arrays and starts, recompute them through `instance`, or choose
+conditions in the opt-in browser studio. The 25-page paper-reading tour and its
+FISTA PDF remain available alongside the package.
+[Release notes and migration](docs/RELEASE_NOTES_0.7.0.md).
+
 - Add an opt-in loopback experiment studio with bilingual family/parameter/method
   controls, actual bounded Python computation, exact numeric/HTML downloads and
   explicit shutdown. Require Host/Origin/session-token/protocol checks, child
