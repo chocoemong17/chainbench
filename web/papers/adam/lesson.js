@@ -10,7 +10,7 @@
   const node = (tag, attrs, text) => {const e=document.createElementNS(ns,tag);for(const [k,v] of Object.entries(attrs))e.setAttribute(k,v);if(text!==undefined)e.textContent=text;return e;};
   const timeAt = k => k <= 60 ? 6 + k/6 : 16+(k-60)*24/2340;
   const iterationAt = t => t<=6 ? 0 : t<=16 ? Math.min(60,Math.floor((t-6)*6+1e-8)) : t<40 ? Math.min(2400,60+Math.floor((t-16)*2340/24+1e-8)) : 2400;
-  const fmt = x => x===0?'0':x.toExponential(2).replace('e-0','e-').replace('e+0','e+');
+  const fmt = x => x===0?'0':x.toExponential(2);
   let requested = new URL(location.href).searchParams.get('lang'), saved;
   try {saved=localStorage.getItem('chainbench-language');} catch (_) { /* Storage is optional. */ }
   root.lang=['en','ko'].includes(requested)?requested:['en','ko'].includes(saved)?saved:'en';
