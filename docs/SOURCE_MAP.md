@@ -302,3 +302,10 @@ including both bias corrections and epsilon outside the square root. Its rotated
 Rosenbrock valley is an authored full-gradient illustration, not original paper
 data or a general performance ranking. It differs from the existing no-debiasing
 Reddi counterexample. [Inputs, recurrence, movie timing and tests](ADAM_FILM.md).
+
+The separate [example-selection study](ADAM_EXAMPLE_STUDY.md) explores 27 authored
+quartic/curved/Rosenbrock cases with explicitly searched learning rates and
+Momentum coefficients. Its proposed unequal-scale quartic illustrates Algorithm 1's
+coordinate-wise normalization; target-entry counts are finite observations, not
+source-paper results or a general ranking. This study changes neither the published
+film nor its recurrence. Rotated controls and all tried settings are retained.

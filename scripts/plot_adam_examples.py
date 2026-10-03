@@ -4,7 +4,9 @@ from __future__ import annotations
 
 import argparse
 import csv
+import gzip
 import hashlib
+import io
 import json
 import runpy
 from pathlib import Path
@@ -14,7 +16,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
-from matplotlib.ticker import PercentFormatter
+from matplotlib.ticker import FuncFormatter
 
 MODEL = runpy.run_path(str(Path(__file__).with_name("study_adam_examples.py")))
 COLORS = {"gd": "#507eb6", "momentum": "#b47a24", "adam": "#d55e4d"}
@@ -99,7 +101,7 @@ def progress_board(report, output):
     ax.set_title("Wall-to-wall movement · first 60 updates", loc="left", fontsize=12, pad=18)
     bx.set(yscale="log", xlim=(0, 1200), ylim=(.001, 1.5),
            xlabel="Gradient updates", ylabel="Distance / starting distance")
-    bx.yaxis.set_major_formatter(PercentFormatter(xmax=1))
+    bx.yaxis.set_major_formatter(FuncFormatter(lambda value, _: f"{value*100:g}%"))
     bx.axhline(.01, color=INK, lw=1, ls=(0, (3, 3)))
     bx.text(1175, .012, "1% distance", ha="right", fontsize=9, color=MUTED)
     bx.set_title("Getting close — and staying close", loc="left", fontsize=12, pad=18)
@@ -133,7 +135,28 @@ def write_review(report, output):
         m: dict(tried=len(d["candidates"]), divergent=sum(not c["finite"] for c in d["candidates"]),
                 best=d["candidates"][d["best"]]) for m, d in report["proposal"]["refinement"].items()}
     (output / "proposal.json").write_text(json.dumps(compact, separators=(",", ":"), allow_nan=False), encoding="utf-8")
-    lines = ["# Adam example review", "", "A nonlinear valley with very different scales in its two directions.",
+    # A durable, compact ledger keeps EVERY tried setting, including failed ones.
+    # Selected full paths are in proposal.json; the complete study JSON is in Actions.
+    ledger = io.StringIO(newline="")
+    writer = csv.writer(ledger)
+    writer.writerow(["phase", "case", "method", "candidate", "alpha", "beta", "finite",
+                     "settled", "relative_loss", "relative_distance", "path_length", "early_reversals"])
+    count = 0
+    for phase, cases in (("broad", report["cases"]),
+                         ("refinement", [dict(case=report["proposal"]["case"],
+                                              methods=report["proposal"]["refinement"])])):
+        for case in cases:
+            for method, data in case["methods"].items():
+                for i, r in enumerate(data["candidates"]):
+                    writer.writerow([phase, case["case"]["id"], method, i,
+                                     r["settings"]["alpha"], r["settings"]["beta"], r["finite"],
+                                     r["settled"], r["final_relative_loss"], r["final_relative_distance"],
+                                     r.get("path_length"), r.get("early_direction_reversals")])
+                    count += 1
+    (output / "candidate-ledger.csv.gz").write_bytes(gzip.compress(ledger.getvalue().encode(), mtime=0))
+    lines = ["# Adam example review", "", "English · [한국어](README.ko.md)", "",
+             "A nonlinear valley with very different scales in its two directions.",
+             "Adam adjusts each direction's step size: less wall-to-wall motion, more progress toward the minimum.",
              "", "![Actual first 100 updates](paths.svg)", "", "![Early oscillation and progress](progress.svg)",
              "", "| Method | Updates to the target | Learning rate | Momentum |", "|---|---:|---:|---:|"]
     for method, data in report["proposal"]["methods"].items():
@@ -145,7 +168,8 @@ def write_review(report, output):
               "Adam uses a round learning rate of 0.14; each baseline uses its best found central setting.",
               "This constructed example shows why coordinate-wise normalization can help.",
               "Rotation or a well-scaled function can change the ranking; all 27 cases are in [the table](case-summary.csv).", "",
-              "## Nearby starts with the same settings", "",
+              "<details><summary>Starting points, tuning and exact evidence</summary>", "",
+              "### Nearby starts with the same settings", "",
               "| Start | GD | Momentum | Adam |", "|---|---:|---:|---:|"]
     for row in report["proposal"]["frozen_starts"]:
         values = []
@@ -153,10 +177,45 @@ def write_review(report, output):
             values.append(str(r["settled"]) if r["settled"] is not None else
                           ("> 1,200" if r["finite"] else "diverged"))
         lines.append(f"| {row['case']['start']} | {' | '.join(values)} |")
+    lines += ["", "The aggressive baseline settings selected on the central start can fail elsewhere.",
+              "Retuning each nearby start in the broad grid gives the following results:", "",
+              "| Start | GD | Momentum | Adam |", "|---|---:|---:|---:|"]
+    for row in report["proposal"]["frozen_starts"]:
+        values = [str(r["settled"]) if r["settled"] is not None else "> 1,200"
+                  for r in row["retuned"].values()]
+        lines.append(f"| {row['case']['start']} | {' | '.join(values)} |")
     lines += ["", "These are declared sensitivity checks, not independent training benchmarks.",
+              f"[Full candidate ledger](candidate-ledger.csv.gz): {count:,} tried settings, including failures.",
+              "The broad-grid table precedes central refinement; it is not a claim of globally optimal tuning.",
+              "The quartic coefficients differ by 10,000; this is not a constant global condition number.",
+              "Adam beta1=0.9, beta2=0.999, epsilon=1e-8; both bias corrections; zero initial moments.",
+              "Momentum: b ← beta·b + gradient; x ← x − alpha·b; b starts at zero.",
               "The original paper: [Kingma & Ba, Algorithm 1 and §2.1](https://arxiv.org/abs/1412.6980v9).", "",
-              f"Computed from source `{report['source']}`. [Machine-readable paths and settings](proposal.json).", ""]
+              f"Computed from source `{report['source']}`. [Machine-readable paths and settings](proposal.json).", "",
+              "</details>", ""]
     (output / "README.md").write_text("\n".join(lines), encoding="utf-8")
+    percentages = {m: 100*d["distance"][100]/d["distance"][0]
+                   for m, d in report["proposal"]["methods"].items()}
+    ko = ["# Adam — 새 예시 검토", "", "[English](README.md) · 한국어", "",
+          "**한 방향은 완만하고 다른 방향은 매우 가파른 4차 함수**입니다.",
+          "Adam이 방향마다 보폭을 조절해서 왕복 운동을 줄이고 목표로 이동하는 모습을 보여줍니다.", "",
+          "![같은 출발점에서 실제 100회 이동한 경로](paths.svg)", "",
+          f"같은 100회 계산 후 남은 거리는 GD 약 {percentages['gd']:.1f}%, "
+          f"Momentum 약 {percentages['momentum']:.1f}%, Adam 약 {percentages['adam']:.1f}%입니다.", "",
+          "![첫 60회 왕복 운동 확대와 목표까지의 거리](progress.svg)", "",
+          "| 방법 | 목표 구간에 들어가 유지한 업데이트 횟수 |", "|---|---:|"]
+    for method, data in report["proposal"]["methods"].items():
+        settled = data["summary"]["settled"]
+        ko.append(f"| {LABELS[method]} | {settled if settled is not None else '1,200회 안에 미도달'} |")
+    ko += ["", "목표는 시작 거리의 1% 이하이면서 함수값이 시작값의 0.01% 이하인 구간이며,",
+           "1,200회까지 계속 유지했는지 확인했습니다. 실행 시간이 아닌 **같은 기울기 계산 횟수**의 비교입니다.", "",
+           "다른 방법도 학습률을 탐색했고, Momentum은 관성 계수도 조정했습니다.",
+           "Adam이 항상 가장 빠르다는 뜻은 아닙니다. 이 예시는 방향별 경사 차이를 다루는 장점을 설명합니다.",
+           "함수의 방향을 크게 회전시키거나 경사 차이를 없애면 순위가 달라지는 결과도 함께 남겼습니다.", "",
+           "[조건·주변 시작점·전체 비교 기록](README.md) · "
+           "[원 논문](https://arxiv.org/abs/1412.6980v9)", "",
+           "이번 검토본은 경로와 그래프입니다. 기존 홈페이지 구성은 유지하며, 새 영상은 아직 만들지 않았습니다.", ""]
+    (output / "README.ko.md").write_text("\n".join(ko), encoding="utf-8")
     manifest = {p.name: dict(bytes=p.stat().st_size, sha256=hashlib.sha256(p.read_bytes()).hexdigest())
                 for p in output.iterdir() if p.is_file() and p.name != "manifest.json"}
     (output / "manifest.json").write_text(json.dumps(dict(source=report["source"], files=manifest), indent=2), encoding="utf-8")
