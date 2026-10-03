@@ -89,6 +89,7 @@ def main():
             for engine in ["chromium", "webkit"]:
                 browser = getattr(pw, engine).launch()
                 for width in [1440, 390]:
+                    print(f"Checking Adam film: {engine}, {width}px", flush=True)
                     context = browser.new_context(
                         viewport={"width": width, "height": 1000}, reduced_motion="reduce"
                     )
@@ -170,9 +171,13 @@ def main():
                     # Actual playback, not just setting a timestamp.
                     movie.evaluate("v=>v.play()")
                     start = movie.evaluate("v=>v.currentTime")
-                    page.wait_for_timeout(1000)
-                    assert movie.evaluate("v=>v.currentTime") > start + 0.4
+                    page.wait_for_function(
+                        '(start)=>{const v=document.querySelector("video");return !v.paused&&v.currentTime>start+.4;}',
+                        arg=start,
+                        timeout=10000,
+                    )
                     movie.evaluate("v=>v.pause()")
+                    expect(movie).to_have_js_property("paused", True)
                     # Pointer dragging is bound to encoded frames, never invented optimizer states.
                     slider = page.locator("#iteration")
                     slider.scroll_into_view_if_needed()
