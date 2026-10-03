@@ -8,8 +8,8 @@ import hashlib
 import http.server
 import json
 import re
-import urllib.request
 import threading
+import urllib.request
 from pathlib import Path
 
 from playwright.sync_api import expect, sync_playwright
