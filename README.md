@@ -32,7 +32,19 @@ These checks cover selected public protocols and declared synthetic inputs.
 They do not establish whole-paper reproduction, universal rankings or independent
 outside adoption. The archived snapshots below preserve their own source identities.
 
-## Latest development: exact stored-input replay
+## Latest development review: browser experiment studio
+
+[Open the studio PDF](cloud/studio-8673fc1/ChainBench_studio_review.pdf) and
+[its actual downloads, offline reports and verification](cloud/studio-8673fc1).
+The [PR 88 gate](https://github.com/chocoemong17/chainbench/actions/runs/36947994005)
+passed all nine jobs. The review is pinned to tested merge `a23d54a`, whose tree
+matches candidate `8673fc1`. The packet retains both seeds for all three families,
+mobile/desktop browser evidence and the genuine failed-candidate history.
+All six compatibility logs record 1,680 passed tests. The source is merged as
+main `617f623`; its tree equals the tested candidate. The [separate main CI](https://github.com/chocoemong17/chainbench/actions/runs/37102622981)
+is in progress. A new release is not yet claimed.
+
+## Earlier development: exact stored-input replay
 
 [Read the two-page review PDF](cloud/instances-ca099e7/ChainBench_stored_inputs_review.pdf)
 and [download all ten input cases and eleven offline reports](cloud/instances-ca099e7/reading-review.zip).

@@ -1,0 +1,563 @@
+{
+  "source_commit": "a23d54a72d52516399fa17a668fb1ca336f87579",
+  "viewports": [
+    {
+      "width": 1440,
+      "cases": [
+        {
+          "family": "quadratic",
+          "seed": 0,
+          "methods": [
+            "gd",
+            "smooth-fista",
+            "heavy-ball",
+            "cg",
+            "proximal-point"
+          ],
+          "dimension": 4,
+          "steps": 2,
+          "rows": 15,
+          "numeric_audit": true,
+          "exact_html": true,
+          "input_sha256": "17f177bae7e05dce83ce8f2ebff11e86da5ed90fa4f51ccc23bf3433283c0561",
+          "manifest_sha256": "22316a19fbac6ec5b23da7a362b958a5b3c6a6e6f0dcb458a1f703369541f65d"
+        },
+        {
+          "family": "quadratic",
+          "seed": 7,
+          "methods": [
+            "gd",
+            "smooth-fista",
+            "heavy-ball",
+            "cg",
+            "proximal-point"
+          ],
+          "dimension": 4,
+          "steps": 2,
+          "rows": 15,
+          "numeric_audit": true,
+          "exact_html": true,
+          "input_sha256": "06637b83f9e5a2a97888a3f90997a5e23a940ad045f960a262e83dc20f1eefb8",
+          "manifest_sha256": "de1ea184e016cce27ba12c0641dd63b2a69a5a47e6619008ac427298125c6762"
+        },
+        {
+          "family": "diagonal-lasso",
+          "seed": 0,
+          "methods": [
+            "ista",
+            "fista"
+          ],
+          "dimension": 4,
+          "steps": 2,
+          "rows": 6,
+          "numeric_audit": true,
+          "exact_html": true,
+          "input_sha256": "52936734d9d28d45d7176df6f927acc6721c20c950dd4970f00691ae7787cc3b",
+          "manifest_sha256": "1b23908629c694cbc7e63c4beb59f221337402f76c574edc3bdf841a48e9bcd3"
+        },
+        {
+          "family": "diagonal-lasso",
+          "seed": 7,
+          "methods": [
+            "ista",
+            "fista"
+          ],
+          "dimension": 4,
+          "steps": 2,
+          "rows": 6,
+          "numeric_audit": true,
+          "exact_html": true,
+          "input_sha256": "0c361d8208a85e2650c009681583b4d1ee04166fcefd97f4ff7b242f94cb59ab",
+          "manifest_sha256": "e72302781337d659134cf47be9f0c6e43df63ae62e3988bcbb64458a7493ef7c"
+        },
+        {
+          "family": "simplex",
+          "seed": 0,
+          "methods": [
+            "frank-wolfe"
+          ],
+          "dimension": 4,
+          "steps": 2,
+          "rows": 3,
+          "numeric_audit": true,
+          "exact_html": true,
+          "input_sha256": "89109a3c73231c0a5417981e2f1725dc020cb9a86a827975a636884542a16cf0",
+          "manifest_sha256": "b8d6cef2720d0ea3d55abfd19f8f0c63c35af3edafa2892a94c037ec6d65e439"
+        },
+        {
+          "family": "simplex",
+          "seed": 7,
+          "methods": [
+            "frank-wolfe"
+          ],
+          "dimension": 4,
+          "steps": 2,
+          "rows": 3,
+          "numeric_audit": true,
+          "exact_html": true,
+          "input_sha256": "8eb81aea1b7eb76a681bfcf98479676abdffc34d2d64ffa165300606a25633e5",
+          "manifest_sha256": "488d14c638939eafd9377dbf32e90f47e3c650bac7b4c9ff5c76232b70fc4389"
+        }
+      ],
+      "keyboard": true,
+      "language": true,
+      "shutdown": true,
+      "downloads_after_shutdown": true,
+      "method_selection": true,
+      "distinct_seeds": true
+    },
+    {
+      "width": 390,
+      "cases": [
+        {
+          "family": "quadratic",
+          "seed": 0,
+          "methods": [
+            "gd",
+            "smooth-fista",
+            "heavy-ball",
+            "cg",
+            "proximal-point"
+          ],
+          "dimension": 4,
+          "steps": 2,
+          "rows": 15,
+          "numeric_audit": true,
+          "exact_html": true,
+          "input_sha256": "17f177bae7e05dce83ce8f2ebff11e86da5ed90fa4f51ccc23bf3433283c0561",
+          "manifest_sha256": "22316a19fbac6ec5b23da7a362b958a5b3c6a6e6f0dcb458a1f703369541f65d"
+        },
+        {
+          "family": "quadratic",
+          "seed": 7,
+          "methods": [
+            "gd",
+            "smooth-fista",
+            "heavy-ball",
+            "cg",
+            "proximal-point"
+          ],
+          "dimension": 4,
+          "steps": 2,
+          "rows": 15,
+          "numeric_audit": true,
+          "exact_html": true,
+          "input_sha256": "06637b83f9e5a2a97888a3f90997a5e23a940ad045f960a262e83dc20f1eefb8",
+          "manifest_sha256": "de1ea184e016cce27ba12c0641dd63b2a69a5a47e6619008ac427298125c6762"
+        },
+        {
+          "family": "diagonal-lasso",
+          "seed": 0,
+          "methods": [
+            "ista",
+            "fista"
+          ],
+          "dimension": 4,
+          "steps": 2,
+          "rows": 6,
+          "numeric_audit": true,
+          "exact_html": true,
+          "input_sha256": "52936734d9d28d45d7176df6f927acc6721c20c950dd4970f00691ae7787cc3b",
+          "manifest_sha256": "1b23908629c694cbc7e63c4beb59f221337402f76c574edc3bdf841a48e9bcd3"
+        },
+        {
+          "family": "diagonal-lasso",
+          "seed": 7,
+          "methods": [
+            "ista",
+            "fista"
+          ],
+          "dimension": 4,
+          "steps": 2,
+          "rows": 6,
+          "numeric_audit": true,
+          "exact_html": true,
+          "input_sha256": "0c361d8208a85e2650c009681583b4d1ee04166fcefd97f4ff7b242f94cb59ab",
+          "manifest_sha256": "e72302781337d659134cf47be9f0c6e43df63ae62e3988bcbb64458a7493ef7c"
+        },
+        {
+          "family": "simplex",
+          "seed": 0,
+          "methods": [
+            "frank-wolfe"
+          ],
+          "dimension": 4,
+          "steps": 2,
+          "rows": 3,
+          "numeric_audit": true,
+          "exact_html": true,
+          "input_sha256": "89109a3c73231c0a5417981e2f1725dc020cb9a86a827975a636884542a16cf0",
+          "manifest_sha256": "b8d6cef2720d0ea3d55abfd19f8f0c63c35af3edafa2892a94c037ec6d65e439"
+        },
+        {
+          "family": "simplex",
+          "seed": 7,
+          "methods": [
+            "frank-wolfe"
+          ],
+          "dimension": 4,
+          "steps": 2,
+          "rows": 3,
+          "numeric_audit": true,
+          "exact_html": true,
+          "input_sha256": "8eb81aea1b7eb76a681bfcf98479676abdffc34d2d64ffa165300606a25633e5",
+          "manifest_sha256": "488d14c638939eafd9377dbf32e90f47e3c650bac7b4c9ff5c76232b70fc4389"
+        }
+      ],
+      "keyboard": true,
+      "language": true,
+      "shutdown": true,
+      "downloads_after_shutdown": true,
+      "method_selection": true,
+      "distinct_seeds": true
+    }
+  ],
+  "outside_requests": [],
+  "javascript_errors": [],
+  "offline_downloads": [
+    {
+      "file": "after-shutdown-1440.html",
+      "javascript": true,
+      "readable": true
+    },
+    {
+      "file": "after-shutdown-390.html",
+      "javascript": true,
+      "readable": true
+    },
+    {
+      "file": "diagonal-lasso-0-1440.html",
+      "javascript": true,
+      "readable": true
+    },
+    {
+      "file": "diagonal-lasso-0-390.html",
+      "javascript": true,
+      "readable": true
+    },
+    {
+      "file": "diagonal-lasso-7-1440.html",
+      "javascript": true,
+      "readable": true
+    },
+    {
+      "file": "diagonal-lasso-7-390.html",
+      "javascript": true,
+      "readable": true
+    },
+    {
+      "file": "quadratic-0-1440.html",
+      "javascript": true,
+      "readable": true
+    },
+    {
+      "file": "quadratic-0-390.html",
+      "javascript": true,
+      "readable": true
+    },
+    {
+      "file": "quadratic-7-1440.html",
+      "javascript": true,
+      "readable": true
+    },
+    {
+      "file": "quadratic-7-390.html",
+      "javascript": true,
+      "readable": true
+    },
+    {
+      "file": "simplex-0-1440.html",
+      "javascript": true,
+      "readable": true
+    },
+    {
+      "file": "simplex-0-390.html",
+      "javascript": true,
+      "readable": true
+    },
+    {
+      "file": "simplex-7-1440.html",
+      "javascript": true,
+      "readable": true
+    },
+    {
+      "file": "simplex-7-390.html",
+      "javascript": true,
+      "readable": true
+    },
+    {
+      "file": "after-shutdown-1440.html",
+      "javascript": false,
+      "readable": true
+    },
+    {
+      "file": "after-shutdown-390.html",
+      "javascript": false,
+      "readable": true
+    },
+    {
+      "file": "diagonal-lasso-0-1440.html",
+      "javascript": false,
+      "readable": true
+    },
+    {
+      "file": "diagonal-lasso-0-390.html",
+      "javascript": false,
+      "readable": true
+    },
+    {
+      "file": "diagonal-lasso-7-1440.html",
+      "javascript": false,
+      "readable": true
+    },
+    {
+      "file": "diagonal-lasso-7-390.html",
+      "javascript": false,
+      "readable": true
+    },
+    {
+      "file": "quadratic-0-1440.html",
+      "javascript": false,
+      "readable": true
+    },
+    {
+      "file": "quadratic-0-390.html",
+      "javascript": false,
+      "readable": true
+    },
+    {
+      "file": "quadratic-7-1440.html",
+      "javascript": false,
+      "readable": true
+    },
+    {
+      "file": "quadratic-7-390.html",
+      "javascript": false,
+      "readable": true
+    },
+    {
+      "file": "simplex-0-1440.html",
+      "javascript": false,
+      "readable": true
+    },
+    {
+      "file": "simplex-0-390.html",
+      "javascript": false,
+      "readable": true
+    },
+    {
+      "file": "simplex-7-1440.html",
+      "javascript": false,
+      "readable": true
+    },
+    {
+      "file": "simplex-7-390.html",
+      "javascript": false,
+      "readable": true
+    }
+  ],
+  "pdf_pages": 2,
+  "no_server_files": true,
+  "files": {
+    "ChainBench_studio_review.pdf": {
+      "bytes": 272996,
+      "sha256": "1b414bff451af5b351a80eb57be22f0216c55d39ae41645fcc2cadc7166fcac9"
+    },
+    "after-shutdown-1440.html": {
+      "bytes": 35510,
+      "sha256": "6852774215d854562cd4d53fc4bfc345bd2f1d7bb3ebc8f3c072f51605ecc868"
+    },
+    "after-shutdown-390.html": {
+      "bytes": 35510,
+      "sha256": "6852774215d854562cd4d53fc4bfc345bd2f1d7bb3ebc8f3c072f51605ecc868"
+    },
+    "controls-1440.png": {
+      "bytes": 40250,
+      "sha256": "80d4de2e226433424165d3904762f6a55e44764355f9d28e8a22d926dbb3672e"
+    },
+    "controls-390.png": {
+      "bytes": 41782,
+      "sha256": "a1b667cdb217cc680d5ec922da69a256e67f6afab46fa15396859b7b3b8847c4"
+    },
+    "diagonal-lasso-0-1440.html": {
+      "bytes": 38061,
+      "sha256": "7621bcbf2d469b66bf300983a6b33464a7d34324717070c21442bc73d2740ea2"
+    },
+    "diagonal-lasso-0-1440.input.json": {
+      "bytes": 748,
+      "sha256": "de3a678b4d6f6222799d364a1d5956bdcd81fd417aaf415eeb594365972f0525"
+    },
+    "diagonal-lasso-0-1440.result.json": {
+      "bytes": 3265,
+      "sha256": "2bee2058c4a1de2e0c9f62973999a20e2f383ce819a72aa975c3b5ccea22de5c"
+    },
+    "diagonal-lasso-0-390.html": {
+      "bytes": 38061,
+      "sha256": "7621bcbf2d469b66bf300983a6b33464a7d34324717070c21442bc73d2740ea2"
+    },
+    "diagonal-lasso-0-390.input.json": {
+      "bytes": 748,
+      "sha256": "de3a678b4d6f6222799d364a1d5956bdcd81fd417aaf415eeb594365972f0525"
+    },
+    "diagonal-lasso-0-390.result.json": {
+      "bytes": 3265,
+      "sha256": "2bee2058c4a1de2e0c9f62973999a20e2f383ce819a72aa975c3b5ccea22de5c"
+    },
+    "diagonal-lasso-7-1440.html": {
+      "bytes": 38143,
+      "sha256": "7ff6ae85ac7f7dc5d0d233b784eec5aa03491964f991b16fcc7779cd3b22184a"
+    },
+    "diagonal-lasso-7-1440.input.json": {
+      "bytes": 751,
+      "sha256": "ca3f101c56bfa72bb087c748b0c2563fa18df46d6ccffda9a591f60c0c6c64f2"
+    },
+    "diagonal-lasso-7-1440.result.json": {
+      "bytes": 3324,
+      "sha256": "3aa2862cfd1b93c08655f7408f403c12e01002febe462befaf71c24da8c1197d"
+    },
+    "diagonal-lasso-7-390.html": {
+      "bytes": 38143,
+      "sha256": "7ff6ae85ac7f7dc5d0d233b784eec5aa03491964f991b16fcc7779cd3b22184a"
+    },
+    "diagonal-lasso-7-390.input.json": {
+      "bytes": 751,
+      "sha256": "ca3f101c56bfa72bb087c748b0c2563fa18df46d6ccffda9a591f60c0c6c64f2"
+    },
+    "diagonal-lasso-7-390.result.json": {
+      "bytes": 3324,
+      "sha256": "3aa2862cfd1b93c08655f7408f403c12e01002febe462befaf71c24da8c1197d"
+    },
+    "gap-1440.png": {
+      "bytes": 66500,
+      "sha256": "45a1c2e9f979da60b5e3e87944927004ed8872dbf3d2f372e5d66d409856e41c"
+    },
+    "gap-390.png": {
+      "bytes": 15847,
+      "sha256": "181cfcbd50abd7f0c59de092d291024ed5514da4e7a36c9de9d7f2ae60d6562a"
+    },
+    "live-result-1440.png": {
+      "bytes": 111609,
+      "sha256": "d64d7796047712e3074bffa99536778f225f2fee2115c9c49e89e4efab290269"
+    },
+    "live-result-390.png": {
+      "bytes": 84687,
+      "sha256": "a1c2f569bbeac7bead80283dc23e491113bdfb02e77aef5b6c67589e47514846"
+    },
+    "quadratic-0-1440.html": {
+      "bytes": 50716,
+      "sha256": "9dda19da9f80d1d04d9c0d1ff77c9e149a25649d813ddb16935fa2cbbf23adeb"
+    },
+    "quadratic-0-1440.input.json": {
+      "bytes": 1203,
+      "sha256": "a850a6be443052c1c3a567db563d8a688a3a5cf2b38176a551157cecbb423627"
+    },
+    "quadratic-0-1440.result.json": {
+      "bytes": 6332,
+      "sha256": "eb30e6cb6623a6fa431544e6027f4b97b0880e51483319615764d3aa022300de"
+    },
+    "quadratic-0-390.html": {
+      "bytes": 50716,
+      "sha256": "9dda19da9f80d1d04d9c0d1ff77c9e149a25649d813ddb16935fa2cbbf23adeb"
+    },
+    "quadratic-0-390.input.json": {
+      "bytes": 1203,
+      "sha256": "a850a6be443052c1c3a567db563d8a688a3a5cf2b38176a551157cecbb423627"
+    },
+    "quadratic-0-390.result.json": {
+      "bytes": 6332,
+      "sha256": "eb30e6cb6623a6fa431544e6027f4b97b0880e51483319615764d3aa022300de"
+    },
+    "quadratic-7-1440.html": {
+      "bytes": 51129,
+      "sha256": "a69a18ed0780f6fb1bada8f35b55f9c2ec7f1e5c5d4af44f4dcd76675e1b56ca"
+    },
+    "quadratic-7-1440.input.json": {
+      "bytes": 1196,
+      "sha256": "dc45e7c7059ffaa4ea104395036d5a9bea7699c405771c0ddd13838d73097bf8"
+    },
+    "quadratic-7-1440.result.json": {
+      "bytes": 6306,
+      "sha256": "dd43c98a49a6d66fef8d04963f393de668bf257a401a1d32970dd4a5be8723fa"
+    },
+    "quadratic-7-390.html": {
+      "bytes": 51129,
+      "sha256": "a69a18ed0780f6fb1bada8f35b55f9c2ec7f1e5c5d4af44f4dcd76675e1b56ca"
+    },
+    "quadratic-7-390.input.json": {
+      "bytes": 1196,
+      "sha256": "dc45e7c7059ffaa4ea104395036d5a9bea7699c405771c0ddd13838d73097bf8"
+    },
+    "quadratic-7-390.result.json": {
+      "bytes": 6306,
+      "sha256": "dd43c98a49a6d66fef8d04963f393de668bf257a401a1d32970dd4a5be8723fa"
+    },
+    "result-context-1440.png": {
+      "bytes": 62852,
+      "sha256": "bdbb73255f0b5f81d2b052cee90656a1ad8ffa32cda87afeaa96f7c6dd35a6f8"
+    },
+    "result-context-390.png": {
+      "bytes": 61156,
+      "sha256": "e02c028e7d6023da1b880fedbdcbc0a311604ded24e83bd946cf19f79a8924bf"
+    },
+    "review-page-1.png": {
+      "bytes": 66819,
+      "sha256": "e6608b21108656f15ba33380ceeb36d31d2c03d9e9967a2cd1072b984c0127d5"
+    },
+    "review-page-2.png": {
+      "bytes": 79622,
+      "sha256": "cd35b7d00847d07e8fa2af48f480812077049f0b5fe0ba5394e9913f25169358"
+    },
+    "review.html": {
+      "bytes": 144598,
+      "sha256": "cdd6c383dd8f0565a0f64b88c70be7bd1a97ce695e7f9ad07f4501781701bf96"
+    },
+    "simplex-0-1440.html": {
+      "bytes": 34032,
+      "sha256": "aa3c3c0a646437f0305390fde132610a30834e3ac95441ca311d65c19fa8b4f3"
+    },
+    "simplex-0-1440.input.json": {
+      "bytes": 637,
+      "sha256": "d1370377e86b0971dc3b16bdeb4bdeeceee61946c63f9340f4f921d28c39fd26"
+    },
+    "simplex-0-1440.result.json": {
+      "bytes": 2262,
+      "sha256": "3c57f240ee0b85837457a2a500b22635194bda9f5fb484ef1eca71605418a7c0"
+    },
+    "simplex-0-390.html": {
+      "bytes": 34032,
+      "sha256": "aa3c3c0a646437f0305390fde132610a30834e3ac95441ca311d65c19fa8b4f3"
+    },
+    "simplex-0-390.input.json": {
+      "bytes": 637,
+      "sha256": "d1370377e86b0971dc3b16bdeb4bdeeceee61946c63f9340f4f921d28c39fd26"
+    },
+    "simplex-0-390.result.json": {
+      "bytes": 2262,
+      "sha256": "3c57f240ee0b85837457a2a500b22635194bda9f5fb484ef1eca71605418a7c0"
+    },
+    "simplex-7-1440.html": {
+      "bytes": 34043,
+      "sha256": "ee4941ed5716768687b15295876149031fc81cc283c9d5c541b07d19c207f4d6"
+    },
+    "simplex-7-1440.input.json": {
+      "bytes": 640,
+      "sha256": "b0c9b26cc5622661888c04c60c1a84faf98c9df00792bf885b9c2021271399d2"
+    },
+    "simplex-7-1440.result.json": {
+      "bytes": 2268,
+      "sha256": "6f56a1179307069969a2463a677527a959a8f1d4081cc174f0e7c7a8e340d58d"
+    },
+    "simplex-7-390.html": {
+      "bytes": 34043,
+      "sha256": "ee4941ed5716768687b15295876149031fc81cc283c9d5c541b07d19c207f4d6"
+    },
+    "simplex-7-390.input.json": {
+      "bytes": 640,
+      "sha256": "b0c9b26cc5622661888c04c60c1a84faf98c9df00792bf885b9c2021271399d2"
+    },
+    "simplex-7-390.result.json": {
+      "bytes": 2268,
+      "sha256": "6f56a1179307069969a2463a677527a959a8f1d4081cc174f0e7c7a8e340d58d"
+    }
+  }
+}
