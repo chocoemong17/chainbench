@@ -5,6 +5,8 @@ import json
 from html import escape
 
 from . import __version__
+from ._presentation import CSS as PRESENTATION_CSS
+from ._presentation import SCRIPT as PRESENTATION_SCRIPT
 
 CSS = """
 :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;background:#f3f1ec;
@@ -48,8 +50,16 @@ section,.panel{padding:18px}.cards{grid-template-columns:1fr}h2{font-size:25px}.
 SCRIPT = """
 'use strict';
 const root = document.documentElement;
+// Explicit URL preference wins; otherwise honor an earlier reader choice.
+try {
+ const requested=new URL(location.href).searchParams.get('lang');
+ const saved=localStorage.getItem('chainbench-language');
+ if(['en','ko'].includes(requested)) root.lang=requested;
+ else if(['en','ko'].includes(saved)) root.lang=saved;
+} catch (_) { /* Storage is optional, including file:// and private browsing. */ }
 document.querySelectorAll('[data-action="language"]').forEach(b => b.addEventListener('click', () => {
  root.lang = root.lang === 'ko' ? 'en' : 'ko';
+ try {localStorage.setItem('chainbench-language',root.lang);}catch(_){}
 }));
 const filter = document.getElementById('lesson-filter');
 if(filter) filter.addEventListener('input', () => {
@@ -140,10 +150,10 @@ def page(title: str, subtitle: str, body: str, *, lang: str = "en") -> str:
             '<meta http-equiv="Content-Security-Policy" content="default-src \'none\'; '
             'img-src data:; style-src \'unsafe-inline\'; script-src \'unsafe-inline\'; '
             'connect-src \'none\'; base-uri \'none\'; form-action \'none\'">'
-            f'<title>ChainBench · {escape(title)}</title><style>{CSS}</style></head><body><main>'
+            f'<title>ChainBench · {escape(title)}</title><style>{CSS}{PRESENTATION_CSS}</style></head><body><main>'
             '<header><div class="eyebrow">CHAINBENCH / LEARN · EXPERIMENT · AUDIT</div>'
             f'<h1>{escape(title)}</h1><p>{subtitle}</p>'
-            f'<div class="controls"><span>v{__version__} · local &amp; offline</span>'
+            f'<div class="controls"><span>v{__version__} · interactive paper guide</span>'
             '<button type="button" data-action="language">한국어 / English</button></div></header>'
             f'{body}<footer>{bi("실행 결과는 유한한 수치 관측입니다. 정리의 증명이나 실제 사용자 수를 뜻하지 않습니다.", "Finite numerical observations are not theorem proofs or evidence of adoption.")}'
-            '</footer></main><script>' + SCRIPT + '</script></body></html>')
+            '</footer></main><script>' + SCRIPT + PRESENTATION_SCRIPT + '</script></body></html>')

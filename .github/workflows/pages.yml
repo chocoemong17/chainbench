@@ -1,0 +1,70 @@
+name: publish verified website
+
+on:
+  workflow_run:
+    workflows: [tests]
+    types: [completed]
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push' && github.event.workflow_run.head_repository.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      actions: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Require the successful run to match current main
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EXPECTED_SHA: ${{ github.event.workflow_run.head_sha }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          CURRENT_SHA=$(gh api "repos/$GH_REPO/git/ref/heads/main" --jq .object.sha)
+          test "$CURRENT_SHA" = "$EXPECTED_SHA"
+      - name: Download the exact browser-tested website
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          SOURCE_RUN: ${{ github.event.workflow_run.id }}
+          SOURCE_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: gh run download "$SOURCE_RUN" --repo "$GH_REPO" --name "website-$SOURCE_SHA" --dir website
+      - name: Verify source and every published byte
+        env:
+          SOURCE_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          python - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          root = Path('website')
+          manifest = json.loads((root/'site-manifest.json').read_text())
+          assert manifest['source'] == os.environ['SOURCE_SHA']
+          assert manifest['default_language'] == 'en'
+          actual = {p.relative_to(root).as_posix() for p in root.rglob('*') if p.is_file()}
+          assert actual == set(manifest['files']) | {'site-manifest.json'}
+          for name, info in manifest['files'].items():
+              path = root/name
+              assert path.resolve().is_relative_to(root.resolve()) and not path.is_symlink()
+              data = path.read_bytes()
+              assert len(data) == info['bytes'] and hashlib.sha256(data).hexdigest() == info['sha256']
+          print('Verified', len(actual), 'files for', manifest['source'])
+          PY
+      - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
+      - uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
+        with:
+          path: website
+      - id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4

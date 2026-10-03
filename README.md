@@ -5,6 +5,22 @@
 
 **Read the idea. Follow the iterates. Recompute the evidence.**
 
+### Start in your browser
+
+[**Open the interactive website →**](https://chocoemong17.github.io/chainbench/)
+([deployment status](https://github.com/chocoemong17/chainbench/actions/workflows/pages.yml)).
+For students and developers meeting optimization papers for the first time:
+watch a 30-second explanation, drag the iteration timeline, then connect the
+picture to its equation. The first explorer computes three quadratic examples
+in your browser. No ZIP, Python installation or sign-in is needed.
+
+English opens by default; choose **한국어** to switch. Continue directly into the
+25-page reading tour, including image recovery and 2D/3D geometry. The first
+explorer computes new browser trajectories; paper-report controls inspect their
+recorded results. [What is computed, tested and published](docs/WEBSITE.md).
+The website becomes available after its main-branch gate and GitHub Pages
+deployment succeed; the versioned offline downloads below remain available.
+
 ChainBench connects published optimization methods to their assumptions, update
 rules and actual calculations. Explore 2D contours, 3D objective surfaces, image
 reconstructions and reproducible instance families in local, bilingual reports.

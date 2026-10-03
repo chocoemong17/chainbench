@@ -40,16 +40,35 @@ CSS = ".deblur-inputs,.deblur-outputs{display:grid;grid-template-columns:1fr 1fr
 
 SCRIPT = """(()=>{
  const select=document.querySelector('[data-deblur-select]');if(!select)return;
+ const slider=document.querySelector('[data-deblur-slider]'),play=document.querySelector('[data-deblur-play]'),label=document.querySelector('[data-deblur-label]');
  const result=JSON.parse(document.getElementById('chainbench-evidence').textContent);
+ const checkpoints=result.parameters.snapshot_iterations;let timer=null;
  document.documentElement.classList.add('deblur-js');
- select.addEventListener('change',()=>{
+ const update=()=>{
   const k=Number(select.value);
+  slider.value=String(checkpoints.indexOf(k));label.textContent='k = '+k.toLocaleString('en-US');
+  slider.setAttribute('aria-valuetext','Iteration '+k+'; stored snapshot '+(Number(slider.value)+1)+' of '+checkpoints.length);
   for(const method of ['ista','fista']){
    document.querySelector('[data-deblur-image="'+method+'"]').src=document.querySelector('[data-snapshot="'+method+'-'+k+'"]').src;
    const row=result.runs[method].rows[k];
    document.querySelector('[data-deblur-metrics="'+method+'"]').textContent='k='+k+' · F='+row.objective.toExponential(6)+' · image RMSE='+row.image_rmse.toExponential(6);
   }
+ };
+ const stop=()=>{clearInterval(timer);timer=null;play.setAttribute('aria-pressed','false');play.querySelector('[data-play-icon]').textContent='▶';};
+ select.addEventListener('change',()=>{stop();update();});
+ slider.addEventListener('input',()=>{stop();select.value=String(checkpoints[Number(slider.value)]);update();});
+ play.addEventListener('click',()=>{
+  if(timer){stop();return;}
+  if(Number(slider.value)===checkpoints.length-1){select.value='0';update();}
+  play.setAttribute('aria-pressed','true');play.querySelector('[data-play-icon]').textContent='Ⅱ';
+  timer=setInterval(()=>{
+   const next=Number(slider.value)+1;
+   if(next>=checkpoints.length){stop();return;}
+   select.value=String(checkpoints[next]);update();
+  },900);
  });
+ document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();});
+ update();
 })();"""
 
 
@@ -123,7 +142,18 @@ def deblur_html(result, lang="en"):
         + bi(
             "동일한 반복 수에서 두 복원 보기", "Inspect both reconstructions at the same iteration"
         )
-        + '</h2><div class="deblur-controls"><label for="deblur-snapshot">'
+        + '</h2><p>'
+        + bi('슬라이더를 끌거나 재생해 보세요. 각 위치는 실제 저장한 반복점이며 간격은 균일하지 않습니다.',
+             'Drag the timeline or press Play. Each stop is a recorded iteration; the intervals are not uniform.')
+        + '</p><div class="deblur-controls"><button type="button" data-deblur-play aria-pressed="false"><span data-play-icon>▶</span> '
+        + bi('재생 / 일시정지', 'Play / pause')
+        + '</button><label for="deblur-timeline">'
+        + bi('반복 횟수', 'Iteration')
+        + '</label><input id="deblur-timeline" type="range" data-deblur-slider min="0" max="'
+        + str(len(params['snapshot_iterations']) - 1)
+        + '" step="1" value="' + str(len(params['snapshot_iterations']) - 1)
+        + '" style="flex:1;min-width:160px"><output data-deblur-label for="deblur-timeline"></output></div>'
+        + '<div class="deblur-controls"><label for="deblur-snapshot">'
         + bi("저장한 반복점", "Stored snapshot")
         + '</label><select id="deblur-snapshot" data-deblur-select>'
     )

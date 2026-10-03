@@ -11,6 +11,7 @@ from ._canonical import CSS as INSTANCE_CSS
 from ._canonical import context_html
 from ._learning_paths import CSS as WORKFLOW_CSS
 from ._learning_paths import known_reports, workflow_html, workflow_record
+from ._mathml import bound_math
 from ._pages import bi, evidence, page
 from ._plot_audit import evidence_record, validate_chart_result
 from .checks import CHECKS, run_check
@@ -254,7 +255,7 @@ def learning_html(focus: str | None = None, lang: str = 'en', *, report_links=()
                         + bi('어떤 조건에서?', 'Under which assumptions?') + '</h3><p>' + bi(*lesson['assumptions'])
                         + '</p></div><div><h3>' + bi('어떤 업데이트인가?', 'Which update?')
                         + '</h3><div class="formula">' + escape(lesson['recurrence']) + '</div></div></div>'
-                        + '<div class="formula">' + escape(lesson['formula']) + '</div>'
+                        + '<div class="formula">' + bound_math(slug, lesson['formula']) + '</div>'
                         + '<div class="evidence-banner"><span class="evidence-tag">CANONICAL ILLUSTRATION</span>'
                         + bi('아래 첫 그래프는 논문 그림을 복사한 것이 아니라, 정리 가정 안의 한 deterministic fixture에서 ChainBench가 만든 설명용 예시입니다. 대표성 주장은 stress에서 따로 봅니다.', 'The first plot below is ChainBench-generated on one deterministic fixture inside the assumptions; it is not a copied paper figure. Breadth is checked separately with seeded stress sampling.') + '</div>'
                         + '<div class="deep-grid"><article><h3>' + bi('왜 이 논문/방법이 중요했나?', 'Why it mattered') + '</h3><p>' + bi(*deep['why']) + '</p></article>'

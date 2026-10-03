@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- Add an English-first browser entry point with optional Korean, an actual
+  three-case GD/FISTA browser calculation, a draggable iteration timeline and
+  an on-demand 30-second visual explanation. Link directly to 25 bilingual reports.
+- Typeset atlas bounds with native MathML and improve shared formula typography;
+  add recorded-snapshot dragging and play/pause to image recovery.
+- Gate GitHub Pages on complete main CI and the exact verified website artifact,
+  including Chromium/WebKit numerical, mobile, interaction and language checks.
+
 ## 0.7.0
 
 Keep actual problem arrays and starts, recompute them through `instance`, or choose
