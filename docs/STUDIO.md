@@ -1,15 +1,16 @@
 # Choose, compute and read in a browser
 
-The development `studio` command adds new computation to the existing offline
+The `studio` command in v0.7.0 adds new computation to the existing offline
 reports. Choose a problem family, change its conditions, select methods and press
 **Run a new experiment**. Python generates actual numeric inputs and computes
 their trajectories. The embedded report shows the arrays, start, reference,
 three metrics and every actual update. Downloaded reports remain readable after
 the server stops.
 
-This command is in development source after v0.6.0. The frozen v0.6.0 wheel and
-reading ZIP do not include it. From an environment with the current source
-installed, run:
+Install the [v0.7.0 package](../README.md#install-v070) once its release gate
+publishes, or install this source revision. The frozen v0.6.0 package predates
+this command. Reading ZIPs contain precomputed reports and do not run the studio.
+From the installed environment, run:
 
 ```bash
 chainbench studio --lang ko
@@ -58,7 +59,7 @@ browser. Current downloads remain available after explicit server shutdown.
 JSON downloads retain the original Python serialization, including signed zero
 and float representations used by the sealed hashes. The browser does not
 parse and reserialize those download bytes.
-For an exact-input rerun, use the development CLI:
+For an exact-input rerun, use the CLI:
 
 ```bash
 chainbench instance replay studio-result.json --format html --lang ko --output replay.html

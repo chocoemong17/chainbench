@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "chainbench"
-version = "0.6.0"
+version = "0.7.0"
 description = "Reproducible numerical checks for classic optimization and iterative-method results."
 readme = "README.md"
 requires-python = ">=3.10"

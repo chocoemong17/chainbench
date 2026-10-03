@@ -1,13 +1,17 @@
 # Roadmap: published examples before algorithm counts
 
-## Current v0.6.0 source
+## Current v0.7.0 source
 
-The v0.6.0 release candidate packages the integrated toolkit, portability repairs
-and saved-record comparison into a complete versioned offline tour. Publication
-requires the tested main-branch release gate; source version metadata alone does
-not indicate a published release. [Download guide](docs/OFFLINE_DOWNLOAD.md) and
-[release notes](docs/RELEASE_NOTES_0.6.0.md) explain availability and numerical migration.
-The frozen v0.5.0 baseline stays unchanged.
+The v0.7.0 candidate adds exact numeric-input generation/import/replay and an
+opt-in browser studio to the integrated paper-reading toolkit. The studio
+performs new bounded computations; its downloaded reports retain actual inputs
+and remain usable after shutdown. The CLI can replay saved arrays without drawing
+new data. [Studio](docs/STUDIO.md) and [input contract](docs/STORED_INPUTS.md).
+
+Publication requires the tested main-branch release gate; version metadata alone
+does not indicate a published release. [Download guide](docs/OFFLINE_DOWNLOAD.md)
+and [release notes](docs/RELEASE_NOTES_0.7.0.md) explain availability and migration.
+The published v0.6.0 release and all earlier tags/assets remain unchanged.
 
 The complete extended tour has 25 HTML pages and 24 numerical records. GitHub
 Actions generates the bundle, audits its hashes and numerical evidence, and
@@ -43,6 +47,13 @@ Implemented in this source:
   running a solver. Retain exact samples and provenance, expose input/setup
   differences and overlay only matching recorded problems.
   [Comparison contract](docs/SAVED_COMPARISON.md).
+- **Actual numeric inputs and replay.** Generate three seeded numeric families or
+  import validated arrays with an explicit start. Inspect exact problem/settings
+  hashes, actual trajectories and replay differences; retain PSD and nonvertex
+  teaching examples. [Input contract](docs/STORED_INPUTS.md).
+- **Browser-driven computation.** Choose supported parameters and methods in an
+  opt-in loopback studio. Save input/result/HTML downloads, stop the service and
+  continue reading offline. [Usage and limits](docs/STUDIO.md).
 - **Versioned reading downloads.** Ship all 25 HTML pages and the two-page PDF with
   source/member hashes. Read the extracted ZIP in offline desktop/mobile Chromium,
   then publish the same bytes alongside both verified Python distributions.
@@ -128,8 +139,9 @@ those specific comprehension problems. Do not substitute CI or bot activity for 
 ## Next decisions, not implemented claims
 
 - Resolve concrete reproducible defects and accessibility/interpretation feedback first.
-- Consider arbitrary matrix imports, sparse datasets or a local server only after a
-  clear use case and safe, independently verifiable input contract are specified.
+- The bounded matrix-import and loopback studio contracts are implemented. Consider
+  sparse datasets, arbitrary objectives or broader hosting only with a concrete
+  use case and independently verifiable input and resource contracts.
 - Add another worst-case class only with an exact public theorem-to-code mapping.
 - Keep honest limitations: no production guarantee, original-paper dataset benchmark,
   exhaustive testing, theorem-prover status or support-program acceptance claim.

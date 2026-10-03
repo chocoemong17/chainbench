@@ -106,7 +106,7 @@ def instance_html(result: dict, lang: str = "en", *, replay: dict | None = None)
                  + '</pre></article>')
     body += ('<p class="callout caution">' + bi('이 입력의 유한한 수치 관측입니다. 동일한 업데이트 수는 동일한 연산량이 아닙니다. 해시를 다시 계산한 기록은 작성자나 생성 이력을 증명하지 않습니다.',
               'These are finite observations on this input. Equal updates are not equal work. Recomputed hashes do not prove the author or generation history.')
-             + '</p><p><a href="https://github.com/chocoemong17/chainbench/blob/v0.6.0/docs/SOURCE_MAP.md">'
+             + '</p><p><a href="https://github.com/chocoemong17/chainbench/blob/v0.7.0/docs/SOURCE_MAP.md">'
              + bi('기존 점화식·논문 출처·유한 검사의 대응', 'Implemented recurrences, paper sources and finite-check scope')
              + '</a></p></section>' + evidence(result if replay is None else replay,
                                                 'instance-result.json' if replay is None else 'instance-replay.json'))

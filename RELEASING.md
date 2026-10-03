@@ -2,7 +2,7 @@
 
 ## Release gate
 
-Version metadata lives in `pyproject.toml`, `src/chainbench/__init__.py` and `release-manifest.json`; keep all three aligned. Add matching notes in `docs/RELEASE_NOTES_<version>.md` and update the changelog. Review changes through a pull request and merge only after CI passes.
+Version metadata lives in `pyproject.toml`, `src/chainbench/__init__.py` and `release-manifest.json`; keep all three aligned and update `CITATION.cff` to the same release version. Add matching notes in `docs/RELEASE_NOTES_<version>.md` and update the changelog. Review changes through a pull request and merge only after CI passes.
 
 A change to `release-manifest.json` on `main` triggers the release workflow. Manual dispatch from main is also available. The workflow first reuses all nine validation jobs: six compatibility configurations, offline report-browser checks, audited reading generation and clean package installation. The installation job builds wheel and sdist and installs each in a fresh virtual environment outside the checkout. It runs `pip check`, the installed CLI, all numerical conditions and every export format. It also runs each installed experiment preset, saves/reloads its configuration and checks JSON/CSV/Markdown equivalence. Each distribution must record this evidence before publication.
 
@@ -34,13 +34,13 @@ python scripts/smoke_install.py
 
 Technical reference for tag matching: [GitHub Git references REST API](https://docs.github.com/en/rest/git/refs). The endpoint is a prefix search; the publisher selects only the exact tag. Release enumeration uses [GitHub CLI pagination](https://cli.github.com/manual/gh_api), so a network error never implies an empty result.
 
-Development stored-input evidence is mandatory for both installed distributions:
+Stored-input evidence is mandatory for both installed distributions:
 ten named generated/imported cases, exact input/manifest fingerprints, independent
 scalar audits, retained HTML samples and actual replay agreement. Missing,
 misordered or malformed cases fail publication; the seventh fault injection
 checks this boundary. [Workflow contract](docs/STORED_INPUTS.md).
 
-Development studio evidence is also mandatory: both installed commands must
+Studio evidence is also mandatory: both installed commands must
 serve six independently audited live cases, reject all eight declared invalid
 requests, shut down and leave no server-created files or session material in
 outputs. Missing or mistyped evidence fails publication. An eighth targeted

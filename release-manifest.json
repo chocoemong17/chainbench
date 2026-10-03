@@ -1,5 +1,5 @@
 {
-  "version": "0.6.0",
+  "version": "0.7.0",
   "channel": "alpha",
-  "description": "Versioned offline paper-reading bundle with audited reproductions, linked geometry and saved-run comparison"
+  "description": "Exact numeric-input replay and a bounded browser experiment studio alongside the offline paper-reading tour"
 }
