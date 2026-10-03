@@ -1,6 +1,6 @@
 # Learn, sample many cases, inspect geometry, vary one thing, and replay
 
-These workflows are included in the v0.6.0 source. Start with the
+These workflows remain available in the v0.7.0 source. Start with the
 [versioned offline download](OFFLINE_DOWNLOAD.md) or recompute a report with the
 installed package. For `reproduce shewchuk-1994`, see
 [the published-example guide](SHEWCHUK_REPRODUCTION.md).
@@ -99,7 +99,7 @@ actual link destinations and equality with each linked artifact's manifest
 command. Unknown report filenames are rejected before calculation.
 
 These reading links are included in the [review guide's pinned snapshot](REVIEW_GUIDE.md).
-[PR #73](https://github.com/chocoemong17/chainbench/pull/73) links current remote CI
+[PR #73](https://github.com/chocoemong17/chainbench/pull/73) links that consolidation's remote CI
 and independent clean-install evidence for the consolidated source.
 
 ## 2. Change one field, not everything
@@ -123,6 +123,16 @@ derived matrices, spectral constants and optimizer may change too. Panels have
 independent y ranges; compare tick values, not apparent slope alone. Varying L,
 regularization or dimension can change the objective scale. These are controlled
 observations, not a speed leaderboard or universal solver ranking.
+
+### Compute from browser controls
+
+For new numeric examples, the optional [studio](STUDIO.md) runs the same supported
+methods from browser-selected conditions. The Python service performs the
+calculation; report controls inspect its stored result. Download the actual input,
+result and standalone HTML, then stop the service. The files remain readable.
+Use [exact-input replay](STORED_INPUTS.md) when you want the saved arrays and x0
+rather than the older configuration-based workflow below. Both were added after
+v0.6.0; legacy records keep their original commands and semantics.
 
 ## 3. Replay a saved experiment
 

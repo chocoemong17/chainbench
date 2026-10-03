@@ -14,7 +14,7 @@ No outside review has been inferred from this invitation or from CI activity.
 
 ## Start with the released package
 
-For a new manual review, use the v0.6.0 GitHub prerelease after its gate completes;
+For a new manual review, use the v0.7.0 GitHub prerelease after its gate completes;
 [check download availability and version](OFFLINE_DOWNLOAD.md). Reading its HTML
 ZIP needs no Python installation. The standalone
 `review/` helper is intentionally pinned to v0.2.0 so its historical cross-platform
@@ -37,6 +37,22 @@ The `learn`, `stress`, `landscape`, `sweep`, `replay`, `compare`, `tour`, `geome
 and `reproduce` workflows provide additional review targets.
 See [LEARNING_WORKFLOWS.md](LEARNING_WORKFLOWS.md).
 A replay MATCH does not authenticate who ran the original saved record.
+
+## Check the new input and studio workflows
+
+Use the small explicit [input examples](../examples/instances) to examine a
+nondiagonal quadratic, a PSD reference choice, signed LASSO and a nonvertex
+simplex start. [Import and replay instructions](STORED_INPUTS.md) retain actual
+arrays and the start. Check a computed row against the displayed input and the
+hand-computed example before drawing a broader conclusion.
+
+Run `chainbench studio --lang ko`, open its printed URL on the same computer,
+and try at least two seeds in one family. Save input JSON, result JSON and HTML,
+stop the service and reopen the report. Check its recorded settings and rows;
+changing the browser form does not relabel an old result. A later
+`chainbench instance replay studio-result.json` reruns those saved numbers.
+[Studio questions and boundaries](STUDIO.md). These workflows require v0.7.0;
+the frozen review helper above remains intentionally pinned to v0.2.0.
 
 ## Examine one mathematical connection
 

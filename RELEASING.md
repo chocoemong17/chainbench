@@ -2,7 +2,7 @@
 
 ## Release gate
 
-Version metadata lives in `pyproject.toml`, `src/chainbench/__init__.py` and `release-manifest.json`; keep all three aligned. Add matching notes in `docs/RELEASE_NOTES_<version>.md` and update the changelog. Review changes through a pull request and merge only after CI passes.
+Version metadata lives in `pyproject.toml`, `src/chainbench/__init__.py` and `release-manifest.json`; keep all three aligned and update `CITATION.cff` to the same release version. Add matching notes in `docs/RELEASE_NOTES_<version>.md` and update the changelog. Review changes through a pull request and merge only after CI passes.
 
 A change to `release-manifest.json` on `main` triggers the release workflow. Manual dispatch from main is also available. The workflow first reuses all nine validation jobs: six compatibility configurations, offline report-browser checks, audited reading generation and clean package installation. The installation job builds wheel and sdist and installs each in a fresh virtual environment outside the checkout. It runs `pip check`, the installed CLI, all numerical conditions and every export format. It also runs each installed experiment preset, saves/reloads its configuration and checks JSON/CSV/Markdown equivalence. Each distribution must record this evidence before publication.
 
