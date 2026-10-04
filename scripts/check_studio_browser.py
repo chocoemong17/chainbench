@@ -11,7 +11,7 @@ from html import escape
 from pathlib import Path
 
 import pymupdf
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import expect, sync_playwright
 from smoke_instances import audit_instance_result
 from smoke_studio import audit_response, studio_session
 from studio_evidence import FAMILIES, case_request
@@ -40,7 +40,7 @@ def main():
                 page = context.new_page()
                 page.on('pageerror', lambda error: proof['javascript_errors'].append(str(error)))
                 page.goto(session['url'])
-                page.wait_for_function("!document.getElementById('run').disabled")
+                expect(page.locator('#run')).to_be_enabled(timeout=30000)
                 assert page.url == session['origin']+'/'
                 assert session['token'] not in page.content()
                 page.locator('[data-action="language"]').click()
@@ -71,7 +71,7 @@ def main():
                         value = response.json()
                         request = case_request(family, seed)
                         row = audit_response(value, request)
-                        page.wait_for_function("!document.getElementById('studio-result').hidden")
+                        expect(page.locator('#studio-result')).to_be_visible(timeout=30000)
                         record = value['result']
                         assert page.locator('#studio-hash').inner_text() == record['instance']['input_sha256']
                         if page.locator('#studio-result details').get_attribute('open') is None:
@@ -117,11 +117,11 @@ def main():
                 selected = pending.value.json()
                 assert [r['method'] for r in selected['result']['runs']] == ['gd']
                 audit_instance_result(selected['result'], selected['result']['instance'], selected['html'])
-                page.wait_for_function("!document.getElementById('stop').disabled")
+                expect(page.locator('#stop')).to_be_enabled(timeout=30000)
                 page.locator('#stop').focus()
                 page.keyboard.press('Enter')
                 assert session['process'].wait(timeout=10) == 0
-                page.wait_for_function("document.getElementById('run').disabled")
+                expect(page.locator('#run')).to_be_disabled(timeout=30000)
                 with page.expect_download() as pending_download:
                     page.locator('#download-html').click()
                 after = work/f'after-shutdown-{width}.html'
