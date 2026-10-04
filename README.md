@@ -7,12 +7,19 @@
 
 ### Start in your browser
 
-[**Open the interactive website →**](https://chocoemong17.github.io/chainbench/)
+[**Watch Adam, Attention and ResNet →**](https://chocoemong17.github.io/chainbench/papers/)
 ([deployment status](https://github.com/chocoemong17/chainbench/actions/workflows/pages.yml)).
-For students and developers meeting optimization papers for the first time:
-watch a 30-second explanation, drag the iteration timeline, then connect the
-picture to its equation. The first explorer computes three quadratic examples
-in your browser. No ZIP, Python installation or sign-in is needed.
+Three landmark papers, each with a 48-second film, two interactive graphs and
+a direct link to the original paper. Start with the motion, drag the calculation,
+then explore the source. No ZIP, Python installation or sign-in is needed.
+
+- [Adam](https://chocoemong17.github.io/chainbench/papers/adam/): coordinate-wise steps in a steep valley.
+- [Attention](https://chocoemong17.github.io/chainbench/papers/attention/): query–key matching and a weighted mix.
+- [ResNet](https://chocoemong17.github.io/chainbench/papers/resnet/): an identity shortcut and an added correction.
+
+The films use explicit constructed examples, with computed records and stated
+scope; they do not reproduce full model-training experiments.
+[Sources and checks](docs/VISUAL_PAPERS.md). The [broader explorer and 25 reports](https://chocoemong17.github.io/chainbench/) remain available.
 
 English opens by default; choose **한국어** to switch. Continue directly into the
 25-page reading tour, including image recovery and 2D/3D geometry. The first

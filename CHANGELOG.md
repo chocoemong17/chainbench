@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Add Attention and ResNet to the video-first paper collection, with computed
+  48-second films, two draggable graphs each, English/Korean support, native
+  formulae, precise paper links and independent numerical/browser validation.
+  Link the three-paper gallery prominently from the homepage and README.
+
+
 ### Adam single-paper format study
 
 - Add an isolated video-led Adam lesson: one 48-second film, two synchronized
