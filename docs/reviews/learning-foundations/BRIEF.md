@@ -6,37 +6,103 @@ classroom observation is included in this round.
 
 Audience: first-time learners, around the owner-approved Attention/ResNet
 explanation depth (owner described that level as about 5). Basic multiplication
-is enough for the front-facing story; exact contracts stay…3680 tokens truncated…riority-two)
+is enough for the front-facing story; exact contracts stay here.
 
-## 3. Dropout — 학습할 때 일하는 조합을 바꾸기
+## 1. Backpropagation — priority one
 
-늘 같은 조합에만 기대지 않도록, 학습할 때 일부 특징을 잠깐 쉬게 합니다.
-다음에는 다시 참여할 수 있고, 예측할 때는 모두 사용하며 크기를 조절합니다.
+Takeaway: reuse forward calculations to work out how each weight affects the
+loss; an optimizer then uses these derivatives to change the weights.
+Connects to Adam's update rule and ResNet's backward path.
 
-![전체 연결, 첫 번째 참여 조합, 다른 조합, 모두 복귀하는 예측 단계의 네 장면.](v1/dropout.ko.gif)
+Source: Rumelhart, Hinton & Williams (1986),
+[Learning representations by back-propagating errors](https://doi.org/10.1038/323533a0),
+pp. 533–534, error derivatives propagated backward through layers.
+[Author-hosted paper](https://www.cs.toronto.edu/~hinton/absps/naturebp.pdf).
+This is a representative landmark, not a claim that reverse differentiation
+was first invented in this paper.
 
-<details><summary>정지 그림으로 천천히 보기 — 네 장면 모두</summary>
+| Scene | Visible change | Fixed reference |
+| --- | --- | --- |
+| Prediction | Input 2 passes through weights 1 and 0.5, yielding 1 | Target 2 |
+| Backward signal | Arrows reverse; gradients −1 and −2 appear at their weights | Original forward values reused |
+| Update | Weights become 1.1 and 0.7; output becomes 1.54 | Same input and target |
+| Roles | Backprop and optimizer roles separated | Two operations in the same learning loop |
 
-![1. 네 특징을 모두 합하면 10입니다.](v1/dropout.ko.1.png)
-![2. 선택한 첫 번째 조합에서는 3입니다.](v1/dropout.ko.2.png)
-![3. 다른 조합에서는 7입니다.](v1/dropout.ko.3.png)
-![4. 예측할 때 모두 참여하고 연결을 조절하면, 이 선형 예시의 평균인 5가 됩니다.](v1/dropout.ko.4.png)
+Constructed linear chain: h=w1*x, y=w2*h, L=(y−2)^2/2. No biases/activation.
+At x=2,w1=1,w2=.5: h=2,y=1,L=.5; dL/dw1=−1,dL/dw2=−2.
+One simultaneous gradient-descent update at rate .1 gives L=.1058.
+This illustrates the chain rule but does not reproduce the paper's sigmoid
+network, representation-learning experiment or training-speed results.
+Check both derivatives with central finite differences at four different weight
+pairs, including zero weights. Rate 0 changes nothing; rate 2 increases loss.
+No statement that every update helps or backprop itself chooses the step.
 
-</details>
+After approval: step forward/backward/update separately; drag learning rate and
+observe an oversized-step failure. Keep derivatives folded until requested.
 
-검토할 점: **연결을 영구히 없애는 것이 아니라 학습 중 참여 조합을 바꾼다는 점이 보이나요?**
-승인되면 여러 조합을 살펴보고 예측 모드로 바꾸도록 만듭니다.
-이 작은 모형은 원리를 보여주며, 정확도가 실제로 향상됐다는 실험은 아닙니다.
+## 2. CNN — priority two
 
-[원문](https://jmlr.org/papers/v15/srivastava14a.html) · [예시의 정확한 조건](BRIEF.md#3-dropout--priority-three)
+Takeaway: a learned local detector is reused across positions; different detectors
+make different response maps. Connects to the feature maps used by ResNet.
 
-## 이번에 확인받을 것
+Source: LeCun, Bottou, Bengio & Haffner (1998),
+[Gradient-Based Learning Applied to Document Recognition](https://bottou.org/papers/lecun-98h),
+§II, local receptive fields, shared weights and feature maps.
+We explain this mechanism, not all of LeNet-5 or a full digit recognizer.
 
-각각 **진행해도 됨 / 수정 필요**, 난이도는 **쉬움 / 적당함 / 어려움**으로
-말씀해 주시면 됩니다. 막히는 장면이 있으면 그 부분만 짚어 주세요.
-한 편씩 따로 승인해도 됩니다. **승인된 주제만 완성 영상·화면으로 정교화합니다.**
+| Scene | Visible change | Fixed reference |
+| --- | --- | --- |
+| Local detector | A selected 3×3 patch gives response 6 | Our own 7×9 binary-bar image |
+| Move the image | One-cell input shift moves its response | Same filter |
+| Two detectors | Vertical versus horizontal response maps | Same input |
+| Sharing | 18 shared weights versus 630 position-specific weights | Two 3×3 filters, 35 positions each; bias excluded |
 
-[기여자용 양식](../../templates/LESSON_BRIEF.md) ·
-[수업 추가 절차](../../LESSON_AUTHORING.ko.md) ·
-[피드백과 개선 기록](../../FEEDBACK_ACTIONS.ko.md) ·
-[클라우드 계산·이미지 검증 기록](v1/verification.json)
+Vertical kernel: three rows of [−1,2,−1]; horizontal kernel is its transpose.
+Valid stride-one cross-correlation followed by ReLU, no padding/bias. This modern
+teaching operator is not claimed to be the original LeNet activation/pooling.
+Output is 5×7. Window row2/col1 yields vertical6/horizontal0; row3/col5 yields
+horizontal6/vertical0 (zero-based indices). Verify by direct dot products and a
+one-cell translation in the common valid interior. No claim of full translation
+invariance, superiority to all dense networks or measured accuracy. Filters are
+hand-set here; a real CNN learns them.
+
+After approval: drag the window, move the input and switch filters; then a second
+small comparison for shared parameters. Avoid adding a whole classifier now.
+
+## 3. Dropout — priority three
+
+Takeaway: temporarily vary which units participate during training, reducing
+reliance on a fixed combination; use all units with appropriate scaling at test.
+Connects to generalization after learning and feature extraction.
+
+Source: Srivastava et al. (2014),
+[Dropout: A Simple Way to Prevent Neural Networks from Overfitting](https://jmlr.org/papers/v15/srivastava14a.html),
+§§2,4–5 and Figure2. Use the paper's unscaled training / test-time weight scaling
+convention. Do not mix it with inverted dropout's train-time scaling.
+
+| Scene | Visible change | Fixed reference |
+| --- | --- | --- |
+| Full network | Four features feed one sum, output10 | Features [1,2,3,4], unit weights |
+| One training mask | Gates [1,1,0,0], output3 | Same features and weights |
+| Another mask | Gates [0,0,1,1], output7 | Same features and weights |
+| Test mode | All return, outgoing weights ×.5, output5 | Retention probability p=.5 |
+
+These are two chosen masks, not a simulation claiming exactly half always stay.
+Every gate is independent Bernoulli(p); all16 combinations are possible. Enumerate
+all16 and their probabilities: expected linear sum=10p; at p=.5 it is5.
+Test scaling matches this linear expectation. It does not exactly average an
+arbitrary nonlinear network: mean ReLU(sum−6) is nonzero while ReLU(mean(sum)−6)=0.
+No weights are trained here; the masks do not demonstrate an accuracy gain.
+Units are not permanently pruned and the changing output is not measured uncertainty.
+
+After approval: inspect masks and retention probability, then switch to prediction
+mode. Keep the purpose of reducing co-adaptation visible without inventing a
+before/after accuracy chart.
+
+## Common review gate
+
+Ask the owner about **mechanism visibility, amount of explanation and difficulty**
+for each topic. A response may approve one and request changes to another.
+Maintain separate statuses. Only approved concepts advance to polished videos.
+Cloud arithmetic, text bounds/glyph coverage and image decoding are technical
+checks; the owner has not yet approved these scenes or their difficulty.
