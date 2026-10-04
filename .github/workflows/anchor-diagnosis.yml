@@ -1,59 +1,39 @@
-name: Diagnose comparison anchor
+name: Read classroom review evidence
 on:
   push:
     branches: [diagnose/classroom-anchors]
 permissions:
   contents: read
+  actions: read
 jobs:
   inspect:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 5
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-        with:
-          ref: f1f0ec578314e381d7965cd101499233165d2b37
-          persist-credentials: false
-      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
-        with:
-          python-version: '3.12'
-      - run: python -m pip install . 'playwright==1.63.0' 'pymupdf==1.28.2'
-      - run: python -m playwright install --with-deps chromium
-      - run: sudo apt-get install -y fonts-noto-cjk
-      - name: Add failure diagnostics without changing the assertion
+      - name: Read the exact successful PR review artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run download 37203567652 --repo chocoemong17/chainbench --name website-review-bc532d13d054efd880ec4e29d9e73fbdbb1a0608 --dir review
+      - name: Emit only the eight classroom screenshots and browser proof
         run: |
           python - <<'PY'
+          import base64, hashlib, json
           from pathlib import Path
-          p = Path('scripts/check_comparison_browser.py')
-          s = p.read_text()
-          needle = "                expect(page.locator('#record-A')).to_be_in_viewport()"
-          lines = [
-              "                print('ANCHOR CASE', width, name, page.url, flush=True)",
-              "                try:",
-              "                    expect(page.locator('#record-A')).to_be_in_viewport()",
-              "                except AssertionError:",
-              "                    diagnostic = page.evaluate('''() => ({url:location.href, scrollY, active:document.activeElement.outerHTML, target:document.querySelector('#record-A').getBoundingClientRect().toJSON(), link:document.querySelector('nav a[href=\"#record-A\"]').getBoundingClientRect().toJSON(), rootScroll:document.documentElement.scrollTop, bodyScroll:document.body.scrollTop})''')",
-              "                    print('ANCHOR FAILURE', json.dumps(diagnostic), flush=True)",
-              "                    (args.output/'anchor-failure.json').write_text(json.dumps(diagnostic, indent=2))",
-              "                    page.screenshot(path=str(args.output/'anchor-failure.png'))",
-              "                    raise",
-          ]
-          assert s.count(needle) == 1
-          p.write_text(s.replace(needle, '\n'.join(lines)))
+          root = Path('review')
+          proof = json.loads((root/'papers/verification.json').read_text())
+          assert proof['source'] == 'bc532d13d054efd880ec4e29d9e73fbdbb1a0608'
+          assert not proof['errors'] and not proof['external_requests']
+          print('CLASSROOM_PROOF ' + json.dumps(proof), flush=True)
+          total = 0
+          for slug in ('attention','resnet'):
+              for width in (1440,390):
+                  for lang in ('en','ko'):
+                      name = f'{slug}-chromium-{width}-{lang}-practice.png'
+                      data = (root/'papers'/name).read_bytes()
+                      total += len(data)
+                      assert total < 8_000_000
+                      encoded = base64.b64encode(data).decode()
+                      print('CLASSROOM_IMAGE ' + json.dumps({'name':name,'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest()}), flush=True)
+                      for i in range(0,len(encoded),24000):
+                          print('CLASSROOM_CHUNK ' + json.dumps({'name':name,'offset':i,'data':encoded[i:i+24000]}), flush=True)
           PY
-      - name: Three independent diagnostic attempts
-        run: |
-          python - <<'PY'
-          import subprocess, sys
-          failures = []
-          for i in range(1, 4):
-              result = subprocess.run([sys.executable, 'scripts/check_comparison_browser.py', '--output', f'anchor-diagnosis/attempt-{i}'])
-              print('DIAGNOSTIC ATTEMPT', i, 'EXIT', result.returncode, flush=True)
-              failures.append(result.returncode)
-          sys.exit(int(any(failures)))
-          PY
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
-        if: always()
-        with:
-          name: anchor-diagnosis
-          path: anchor-diagnosis/
-          retention-days: 3
