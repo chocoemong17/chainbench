@@ -97,7 +97,7 @@ def backprop(lang, scene):
         ("Backprop computes the signals. Adam can choose the steps.", "역전파는 변화 신호를 구하고, Adam은 이동할 보폭을 정할 수 있습니다."),
     ]
     b = Board(lang, "Backpropagation / 역전파" if ko else "Backpropagation", scene, captions[scene][ko])
-    w1, w2 = model.update() if scene == 2 else (1.0, .5)
+    w1, w2 = model.update() if scene >= 2 else (1.0, .5)
     hidden, output, loss = model.forward(w1, w2)
     for x, value, label in [(130, 2, "입력" if ko else "Input"),
                              (475, hidden, "중간 값" if ko else "Hidden value"),
@@ -123,7 +123,8 @@ def backprop(lang, scene):
     elif scene == 2:
         b.text("연결 값  1 → 1.1     /     0.5 → 0.7" if ko else "Weights  1 → 1.1     /     0.5 → 0.7",
                70, 435, 30)
-        b.text(f"Loss  0.5000 → {loss:.4f}", 70, 500, 36, color=GREEN)
+        label = "오차 지표" if ko else "Loss"
+        b.text(f"{label}  0.5000 → {loss:.4f}", 70, 500, 36, color=GREEN)
         b.banner("One gradient-descent step, rate 0.1. A step that is too large can fail.",
                  "경사하강 한 번, 보폭 계수 0.1. 너무 크게 움직이면 오차가 커질 수 있습니다.")
     elif scene == 3:
@@ -138,8 +139,8 @@ def backprop(lang, scene):
                  "중간 계산을 재사용하면서, 여러 연결의 변화 신호를 함께 구합니다.")
     else:
         b.text("예측과 목표의 차이  −1" if ko else "Prediction minus target  −1", 80, 445, 29)
-        b.text("Loss  0.5", 80, 510, 37, color=ORANGE)
-        b.banner("Changing every weight blindly gives no useful direction.",
+        b.text("오차 지표  0.5" if ko else "Loss  0.5", 80, 510, 37, color=ORANGE)
+        b.banner("Find how each weight affects the loss to calculate a direction for change.",
                  "연결마다 오차에 미치는 영향을 알면, 고칠 방향을 계산할 수 있습니다.")
     b.note("Chosen two-weight linear chain; squared loss. Not the paper's sigmoid experiment.",
            "직접 정한 두 연결의 선형 모형·제곱 오차. 원문의 sigmoid 실험 재현은 아닙니다.")
@@ -212,8 +213,8 @@ def dropout(lang, scene):
          "학습할 때 일부 특징을 잠깐 쉬게 합니다."),
         ("A new training case can use a different combination.",
          "다음 학습에서는 다른 조합이 일하도록 바꿉니다."),
-        ("At prediction time, use all units with the paper's scaled weights.",
-         "예측할 때는 모두 사용하고, 원문의 방식대로 연결의 크기를 조절합니다."),
+        ("At prediction time, use all units and scale their outgoing weights.",
+         "예측할 때는 모두 사용하고, 연결의 크기를 조절합니다."),
     ]
     b = Board(lang, "Dropout", scene, captions[scene][ko])
     masks = ((1, 1, 1, 1), (1, 1, 0, 0), (0, 0, 1, 1), (1, 1, 1, 1))
@@ -261,7 +262,6 @@ def main():
     proof.update(source=args.source, status="concept-pending-owner-review", size=SIZE,
                  frame_ms=5000, files={})
     args.output.mkdir(parents=True, exist_ok=False)
-    contacts = []
     for lang in ("en", "ko"):
         for name, renderer in (("backprop", backprop), ("cnn", cnn), ("dropout", dropout)):
             frames = [renderer(lang, scene) for scene in range(4)]
@@ -273,7 +273,6 @@ def main():
             for i, frame in enumerate(frames):
                 contact.paste(frame.resize((600, 380)), ((i % 2)*600, (i // 2)*380))
             contact.save(args.output / f"{name}.{lang}.contact.png")
-            contacts.append(contact)
     for path in sorted(args.output.glob("*")):
         with Image.open(path) as decoded:
             count = getattr(decoded, "n_frames", 1)
