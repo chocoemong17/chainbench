@@ -21,6 +21,10 @@ The films use explicit constructed examples, with computed records and stated
 scope; they do not reproduce full model-training experiments.
 [Sources and checks](docs/VISUAL_PAPERS.md). The [broader explorer and 25 reports](https://chocoemong17.github.io/chainbench/) remain available.
 
+Teaching a class? Use the [short preparation and activity guide](docs/TEACHING_GUIDE.md)
+([한국어](docs/TEACHING_GUIDE.ko.md)). [Field notes from five middle-school sessions](docs/CLASSROOM_PILOT.md)
+report 150 post-session responses, their limits, and the changes made in response.
+
 English opens by default; choose **한국어** to switch. Continue directly into the
 25-page reading tour, including image recovery and 2D/3D geometry. The first
 explorer computes new browser trajectories; paper-report controls inspect their
