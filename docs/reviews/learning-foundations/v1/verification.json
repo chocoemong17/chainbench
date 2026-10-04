@@ -1,0 +1,294 @@
+{
+  "scope": "constructed linear chain, hand-set filters, fixed-feature dropout; no accuracy claim",
+  "backprop": {
+    "gradients": [
+      -1.0,
+      -2.0
+    ],
+    "updated_weights": [
+      1.1,
+      0.7
+    ],
+    "before_loss": 0.5,
+    "after_output": 1.54,
+    "after_loss": 0.10579999999999998,
+    "finite_difference_points": 4,
+    "oversized_step_control": "passed"
+  },
+  "cnn": {
+    "vertical_map": [
+      [
+        0,
+        4,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        6,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        6,
+        0,
+        0,
+        1,
+        0,
+        1
+      ],
+      [
+        0,
+        6,
+        0,
+        0,
+        1,
+        0,
+        1
+      ],
+      [
+        0,
+        4,
+        0,
+        0,
+        1,
+        0,
+        1
+      ]
+    ],
+    "horizontal_map": [
+      [
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        2,
+        4,
+        6,
+        4
+      ],
+      [
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "shared_weights": 18,
+    "unshared_local_weights": 630,
+    "translation_scope": "one-cell shift, common valid interior only"
+  },
+  "dropout": {
+    "all_16_outputs": [
+      0.0,
+      4.0,
+      3.0,
+      7.0,
+      2.0,
+      6.0,
+      5.0,
+      9.0,
+      1.0,
+      5.0,
+      4.0,
+      8.0,
+      3.0,
+      7.0,
+      6.0,
+      10.0
+    ],
+    "linear_mean": 5.0,
+    "test_time_output": 5.0,
+    "nonlinear_counterexample_mean": 0.6875,
+    "nonlinear_of_mean": 0.0
+  },
+  "source": "19c48bd27e637a25e54166df630f2a216e884b5c",
+  "status": "concept-pending-owner-review",
+  "size": [
+    1200,
+    760
+  ],
+  "frame_ms": 5000,
+  "files": {
+    "backprop.en.1.png": {
+      "bytes": 47941,
+      "sha256": "cb4b93a221abb54e604ff7bfabbd9ef51d1c56a3f2f99c291c92b5fe9ccb3964"
+    },
+    "backprop.en.2.png": {
+      "bytes": 47054,
+      "sha256": "013952a90636eedd5f8fbc1b3dbab8368e62322699865c5fb2aa9635fb037536"
+    },
+    "backprop.en.3.png": {
+      "bytes": 49227,
+      "sha256": "8117ea4e0f8d9f07ea6963340f44e59a5e7a1fbd31455594812f4ab42706db5a"
+    },
+    "backprop.en.4.png": {
+      "bytes": 50436,
+      "sha256": "8df9121f86af718ffdfd0befcca7971698b36dd1c2a0a9206800c32300d190e6"
+    },
+    "backprop.en.contact.png": {
+      "bytes": 119123,
+      "sha256": "ecf14b946cb53deb926dbc3a0951af8cb7856336997d11e4ab000f64f7015765"
+    },
+    "backprop.en.gif": {
+      "bytes": 139132,
+      "sha256": "9382e009120243fa4b4e28ab38aaf1d56a984892195d7d45013427c1a233b941"
+    },
+    "backprop.ko.1.png": {
+      "bytes": 60690,
+      "sha256": "e9b8dcfd6caf3edd181f05e280b6bb3b82086d2eee6445af0813fad7c8e56d09"
+    },
+    "backprop.ko.2.png": {
+      "bytes": 61582,
+      "sha256": "7ec0973edd3954e4e5d30d4bd4911890fa8c4249adf4872b79131f25a4eefdb0"
+    },
+    "backprop.ko.3.png": {
+      "bytes": 64513,
+      "sha256": "dc681fe1d1a6b4b052c15fdc058a20b1a7549e436ed257cae6cf43caebcf59fc"
+    },
+    "backprop.ko.4.png": {
+      "bytes": 69509,
+      "sha256": "ee807bab92b8be4c425919cc499283f947593a75c92fd26987e7d8474d024a50"
+    },
+    "backprop.ko.contact.png": {
+      "bytes": 145753,
+      "sha256": "96dc227cd3e6ebaef991f2b8641244db9c3d8c3ddd7d0a1bc75ac5590391ff6c"
+    },
+    "backprop.ko.gif": {
+      "bytes": 146271,
+      "sha256": "16ce914bee9fe3c148589df0ae1f9c550480e9851cac5a61288464dc8e1fd622"
+    },
+    "cnn.en.1.png": {
+      "bytes": 37563,
+      "sha256": "10d1df7a04abc3a498d15db21daebbfc6d8d488aefed7c3c1d955a195ae961a6"
+    },
+    "cnn.en.2.png": {
+      "bytes": 35095,
+      "sha256": "825d2d2fee2c1fda6e7c421a4610cbe6f45f87600bba1b911be80cee1998c677"
+    },
+    "cnn.en.3.png": {
+      "bytes": 35017,
+      "sha256": "c9df91402f095a5f64373fbd516fb4ae3243abb444ec99ac100d97e2aadbaea6"
+    },
+    "cnn.en.4.png": {
+      "bytes": 45453,
+      "sha256": "924e0bc8fca66da06076a94ef84d31d09522ded007c324d0ea1a38b06aa9a497"
+    },
+    "cnn.en.contact.png": {
+      "bytes": 109866,
+      "sha256": "61d59c5c774ca57835717dc8bfc9aceda03dd797e45ca70ee85e2a01b81d7b1e"
+    },
+    "cnn.en.gif": {
+      "bytes": 127500,
+      "sha256": "0f1527c376e2baa3f01b41f388eef36d8a653551eec8bd8ef1489923503d8308"
+    },
+    "cnn.ko.1.png": {
+      "bytes": 53169,
+      "sha256": "eaca6fa83a19423057c319862b6e1694a2eb21cb17694269fcab93aad20d6b3e"
+    },
+    "cnn.ko.2.png": {
+      "bytes": 47651,
+      "sha256": "1a8435324df7124ff23c04715be210e00efc84cb440409c8e6f6768bf4c01b9f"
+    },
+    "cnn.ko.3.png": {
+      "bytes": 43752,
+      "sha256": "a74e7996c017ae8c0f8ebdffa6baf0cb70a63be33387e8af5f2dfae690aebec4"
+    },
+    "cnn.ko.4.png": {
+      "bytes": 62565,
+      "sha256": "d575c94dfa99f3193f03f823dd639f2bda2e22e35f72f83d949a9db22e570a3c"
+    },
+    "cnn.ko.contact.png": {
+      "bytes": 130388,
+      "sha256": "3cc353ad71d38544f8fb686216ccdf5e56bb589bd6a3fdb3439256ed09660856"
+    },
+    "cnn.ko.gif": {
+      "bytes": 137930,
+      "sha256": "92c1a233cd6ab594050692db8e373b5a3f86b4a0aa689587683077cf11cddf97"
+    },
+    "dropout.en.1.png": {
+      "bytes": 36550,
+      "sha256": "907523a8d16b70857840d3a4403efbf200a3b20cb825451ad3303cdc0203ad2e"
+    },
+    "dropout.en.2.png": {
+      "bytes": 46254,
+      "sha256": "0b6550f8691cdbba0b3499cf0611ccfd377135112ce47afb57a174d9827864cd"
+    },
+    "dropout.en.3.png": {
+      "bytes": 46460,
+      "sha256": "4a09c83fd74d518539af8102c3e6020bcc34e02f5e892007c222d46bd7ce1627"
+    },
+    "dropout.en.4.png": {
+      "bytes": 41748,
+      "sha256": "8540e9453c8bc6abb4ed8eebf3dd990209a9c43a9e893ff805aead743160958c"
+    },
+    "dropout.en.contact.png": {
+      "bytes": 116117,
+      "sha256": "38d409d469a2d646c36d211de1f03118a02a2184b3f6f4499086472eb368f2c4"
+    },
+    "dropout.en.gif": {
+      "bytes": 116163,
+      "sha256": "7997f8a33a9ff9750792f6b9f488cdeb56b5c539593ef7cde2dbe2e1c9eac947"
+    },
+    "dropout.ko.1.png": {
+      "bytes": 53026,
+      "sha256": "a2a5dcb720915333a33d525fd92c948ea7648ef9870543e7e525a6efaa3d27d8"
+    },
+    "dropout.ko.2.png": {
+      "bytes": 59303,
+      "sha256": "390b1ad0a26d44d9a81c1796d4f960b057749615c1dd7a92c30df73ed7bbf5e2"
+    },
+    "dropout.ko.3.png": {
+      "bytes": 59042,
+      "sha256": "62e29e87e88ea775a754ed3511d4a9564a107fdf4b1c1f9e7adda1f3a0fe34c3"
+    },
+    "dropout.ko.4.png": {
+      "bytes": 55338,
+      "sha256": "4c60a9e0ee05c973e751afee62e1394fbe78729bb48ef4a3d5c4cd99575086de"
+    },
+    "dropout.ko.contact.png": {
+      "bytes": 139557,
+      "sha256": "587d4a3ab5cea88d63744e0a3308371e4acb1ec5cbc6314477236d8fe5125462"
+    },
+    "dropout.ko.gif": {
+      "bytes": 125957,
+      "sha256": "30a0a32a0b3cc2f5151644ec19690a43639ec96310456f8fddaa341c284fec01"
+    }
+  }
+}
