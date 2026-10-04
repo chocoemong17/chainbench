@@ -1,67 +1,98 @@
-# Method concepts — review before refinement
+# Attention and ResNet — explanation review, revision 2
 
 [한국어](README.ko.md)
 
-These are rough scene proposals. Please judge **what the method does**, not the
-visual finish. The production lessons have not been replaced.
+Each method now has **four connected scenes**: what problem it addresses, how it
+works, and why its mechanism helps. These are review storyboards; refinement
+still waits for your approval. The loops last 30 seconds. Open the numbered
+still images below to read at your own pace.
 
-## Attention: change the question, change the information retrieved
+## Attention: how a question changes the information used
 
-The three records stay fixed. Ask about Ava, then Mia: the thick route switches
-to a different record. A fixed average cannot make that switch.
+![Four-stage Attention explanation](v2/attention.en.gif)
 
-![Rough loop: the question changes and attention routes to another record](attention.en.gif)
+| Scene | What to understand |
+| --- | --- |
+| [1 · Q, K and V](v2/attention.en.1.png) | Q is what we seek; K is what we compare against; V is the information we collect. |
+| [2 · Scores and softmax](v2/attention.en.2.png) | Compare Q with every K; scale the scores; turn them into nonnegative weights summing to one. |
+| [3 · Weighted sum](v2/attention.en.3.png) | Multiply every V by its weight and add. Attention returns features, not a hard database lookup. |
+| [4 · Self-attention and heads](v2/attention.en.4.png) | Each token produces its own Q/K/V through learned projections. Heads use separate projections to gather information. |
 
-[Still image](attention.en.png)
+The example asks where Mia is. Her key receives the largest score, so Studio
+information contributes most to the output. Changing Q to Ava changes the
+mixture while K and V stay fixed. The first three scenes compute one head;
+the fourth connects that calculation to the Transformer architecture.
 
-**Does the change in which information is used explain attention more clearly?**
+## ResNet: residual learning and the backward path
 
-## ResNet: carry the input forward, add only the change
+![Four-stage ResNet explanation including backpropagation](v2/resnet.en.gif)
 
-The lower route carries the original feature grid. The upper route contributes
-only the changed cells. With zero correction, adding more of these blocks
-preserves this nonnegative input exactly.
+| Scene | What to understand |
+| --- | --- |
+| [1 · Learn a correction](v2/resnet.en.1.png) | The branch learns H(x)−x; the shortcut carries x. Preserving useful features corresponds to zero residual. |
+| [2 · Forward pass](v2/resnet.en.2.png) | Input 2.0 plus correction 0.1 gives prediction 2.1, below the target 2.2. |
+| [3 · Backpropagation](v2/resnet.en.3.png) | A gradient says how a small change affects loss. At the addition it flows through both paths; the contributions sum at the earlier feature. |
+| [4 · Depth](v2/resnet.en.4.png) | A declared scalar example shows how products of local derivatives affect the signal reaching earlier features. |
 
-![Rough loop: original grid plus a separate residual correction](resnet.en.gif)
+In scene 3, a gradient of −0.10 arrives from the loss. The shortcut contributes
+−0.10; the branch contributes +0.01. Their sum is −0.09. Backprop also computes
+branch-weight gradients: it does not skip learning the branch. This direct
+route helps avoid depending entirely on products of small learned derivatives.
+It is not a guarantee that gradients can never vanish or explode.
 
-[Still image](resnet.en.png)
+**Review:** do the four Attention scenes now explain how the weights arise and
+what they do? Does the backward ResNet scene explain what the shortcut helps
+deliver? Please approve each direction or identify the scene that needs revision.
 
-**Can you distinguish what the shortcut carries from what the residual adds?**
-
-Please approve or request changes for each scene. Finished films and production
-implementation wait for that approval.
-
-<a id="exact-meaning-and-sources"></a>
 <details>
-<summary>Exact meaning and sources</summary>
+<summary>Exact calculations, conditions and primary sources</summary>
 
-- Attention uses Vaswani et al., [§3.2.1, Eq. (1)](https://arxiv.org/html/1706.03762v7#S3.SS2.SSS1):
-  `softmax(q Kᵀ / sqrt(3)) V`. Keys are the three basis vectors, and the query
-  is `4 sqrt(3)` times the selected person's basis vector. Values are one-hot
-  location vectors. The matching weight is `exp(4)/(exp(4)+2)`; each other weight
-  is `1/(exp(4)+2)`. The displayed answer is the largest component of the weighted
-  location vector, not a hard selection inside attention. Percentages are weights,
-  not confidence or accuracy. Name embeddings are assigned, not learned language.
-  This illustrates one attention head, not the complete Transformer, multi-head
-  attention, or a trained question-answering system. The reference is specifically
-  a fixed mean of those value vectors, not a claim about all other architectures.
-- ResNet uses He et al., [§§3.1–3.2, Eq. (1)](https://arxiv.org/html/1512.03385v1#S3):
-  a learned branch is parameterized as a residual relative to an identity shortcut.
-  Our feature grid is a schematic; its chosen correction removes one cell and
-  adds two. For this storyboard we prescribe `F(x)=a·delta`, with `a=0,0.5,1`;
-  we compute `ReLU(x+F(x))` but do **not** train or claim to implement a full
-  residual CNN. All sums here are nonnegative. Exact preservation with zero
-  residual assumes matching dimensions and nonnegative input for this post-add
-  ReLU block. A direct mapping can preserve the input too, by learning identity;
-  a residual branch needs zero for that same task. This is a parameterization
-  comparison, not a measured training-speed or accuracy advantage. The source's
-  motivation is degradation when depth increases, not only vanishing gradients.
-- The loops use discrete storyboard poses. The correction slider is not a
-  training clock. No measured learning curves or claims of universal superiority
-  are included. After concept approval, any learning comparison would require
-  a separate declared experiment and review of the actual results.
-- [Rendering script](../../../scripts/render_method_concepts.py) computes every
-  shown grid and weight. GitHub Actions checks the arithmetic and text bounds,
-  then renders these small review assets. No production site assets are changed.
+### Attention
+[Vaswani et al., §3.2.1 Eq. (1), §§3.2.2–3.2.3](https://arxiv.org/html/1706.03762v7#S3.SS2).
+
+Keys are the 3D basis vectors; location values are one-hot vectors in the order
+Library, Garden, Studio. For Mia, Q=√3·[0,0,4], giving scaled scores [0,0,4].
+Stable softmax gives [1,1,exp(4)]/(2+exp(4)); these weights are not confidence.
+Percentages are rounded, so displayed values may not add to exactly 100%.
+The name/location vectors are assigned for explanation, not learned language.
+Scene 4 is an architecture schematic, not measured attention on “The cat sleeps”.
+Self-attention uses a common input sequence for Q/K/V; separate learned W
+projections determine their roles. Multi-head outputs are concatenated and
+projected. No full Transformer training or semantic benchmark is claimed.
+
+### ResNet
+[He et al. (2015), §§3.1–3.2 Eq. (1)](https://arxiv.org/html/1512.03385v1#S3)
+motivates residual learning through the degradation problem as depth increases.
+[He et al. (2016), §2 Eqs. (3)–(5)](https://arxiv.org/html/1603.05027v3#S2)
+explains the direct forward/backward terms under identity shortcuts and identity
+after-addition activation. The original post-add ReLU has an additional gate.
+Our numerical examples have strictly positive preactivations, making that gate
+one locally; we also check an inactive gate and cancellation as controls.
+
+Scene 1 uses an authored feature-grid target differing at three cells.
+Scenes 2–3 use F(x)=w2·ReLU(w1·x+b1)+b2 with
+(w1,b1,w2,b2)=(1,0,−0.1,0.3), x=2, target=2.2,
+y=ReLU(x+F(x)) and L=(y−target)²/2.
+Thus F=0.1, y=2.1, L=0.005, dL/dy=−0.1, dL/dx=−0.09 and dL/dw2=−0.20.
+For this scalar active-ReLU block, dL/dx=(dL/dy)·(1+F′).
+In a vector block the corresponding gradient uses the transposed Jacobian.
+
+Scene 4 is a **separate controlled local-derivative illustration**, not a
+training comparison. Eight plain blocks use ReLU(−0.1x+1.1); eight residual
+blocks use ReLU(x+(−0.1x+0.1)). At x=1, both chains output 1 and have active
+ReLUs. The branch slopes are −0.1; biases are chosen separately to match this
+forward point. These are different full mappings, not matched trained networks.
+For L=x_final²/2, the terminal gradient is 1; the initial feature gradients are
+(−0.1)^8=10^−8 and (1−0.1)^8≈0.430. The chart shows absolute gradients on a log
+axis, not accuracy, learning speed or a universal ResNet advantage.
+
+Checks include closed-form arithmetic, central finite differences for input
+and weight gradients, both deep-chain derivatives, F′=−1 cancellation, and
+inactive post-add ReLU. The last two controls produce zero despite a shortcut.
+A larger gradient is not automatically a better gradient.
+
+[Rendering and checking code](../../../scripts/render_method_explanations.py);
+[numerical record and file hashes](v2/verification.json). Rendered in GitHub Actions.
+These small review assets are durable on this branch; the production site is unchanged.
 
 </details>

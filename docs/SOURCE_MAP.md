@@ -322,3 +322,21 @@ the subsequent ReLU, using a declared two-unit branch and an original two-tone
 pattern. The slider varies chosen weights, not training time. Its contrast
 target is constructed; no ImageNet or plain-network performance claim is made.
 [Exact inputs, display semantics, timing and independent checks](VISUAL_PAPERS.md).
+
+### Review-only explanatory storyboards
+
+`docs/reviews/method-concepts/` revision 2 explains Vaswani §3.2.1 Eq. (1),
+§3.2.2 and §3.2.3: assigned Q/K/V arithmetic, then schematic learned projections,
+self-attention and multiple heads. The name/location example is not a trained
+language model. The self-attention scene has no fabricated semantic weights.
+
+ResNet scenes follow He (2015), §§3.1–3.2, plus He et al. (2016),
+[Identity Mappings in Deep Residual Networks](https://arxiv.org/html/1603.05027v3),
+§2 Eqs. (3)–(5) for direct backward propagation. The latter derivation assumes
+identity shortcuts and identity after-addition activation. The review's original
+post-add ReLU blocks are evaluated at strictly positive preactivations, so the
+local gate derivative is one. Inactive-ReLU and cancellation controls remain explicit.
+Computed scalar gradients are not ImageNet/CIFAR results or a training benchmark.
+The eight-block plain and residual toys have the same forward value at x=1,
+with independently chosen biases and a declared common branch slope -0.1;
+their different full mappings are disclosed. [Inputs and scope](reviews/method-concepts/README.md).
