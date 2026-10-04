@@ -60,7 +60,10 @@ vertical dashed projections of the current points show the depth. Dashed lines
 are display guides, not optimizer steps. The height guide is labeled with original
 objective values at their logarithmic heights. The floor is highlighted and the
 minimum has a light cross. Outlined paths and their markers are drawn above the
-background for visibility. The camera, axes and visual height transform stay
+background for visibility. The complete history remains as a faint trace; the
+latest 60 updates are bright. This preserves early struggle without burying the
+current point in an opaque tangle. Near-wall mesh profiles are projected above
+the surface image so artist-level depth sorting cannot accidentally hide them. The camera, axes and visual height transform stay
 fixed throughout the film; nothing auto-zooms to favor one method.
 
 The right-side readout is remaining distance as a percentage of initial distance.

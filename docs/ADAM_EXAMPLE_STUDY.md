@@ -11,8 +11,10 @@ passed all 32 focused checks. The review includes 80,407 candidate records
 (including repeated settings in the refinement and 12,110 failures), exact selected
 paths, nearby starts, and controls where the ranking changes.
 
-The published layout stays in place. This branch studies the numerical example;
-it does not change the lesson or generate a new movie.
+This document records the selection stage, before the approved example was
+applied to the lesson. The archived study generated graphs and no movie. The
+[lesson now uses this fixture](ADAM_FILM.md) with a cutaway depth view; the original
+review files below remain an unchanged snapshot of the selection evidence.
 
 ## Question and protocol declared before results
 

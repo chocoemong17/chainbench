@@ -51,14 +51,6 @@ def background(record):
     # The entire near wall is retained geometrically but shown only as a mesh.
     near = -np.unique(np.r_[0, .025, .05, .1, .2, .35, .55, .8, 1.1, 1.5, 2, 2.7])[::-1]
     near_dense = -ys[::-1]
-    for xx in np.linspace(-3.6, .8, 10):
-        ax.plot(np.full_like(near_dense, xx), near_dense, height(xx, near_dense),
-                color="#95aca5", alpha=.42, lw=.8)
-    for yy in near:
-        ax.plot(xs, np.full_like(xs, yy), height(xs, yy), color="#95aca5", alpha=.36, lw=.7)
-    for xx in np.linspace(-3.6, .8, 9):
-        ax.plot(np.full_like(ys, xx), ys, height(xx, ys)+.015, color="#405f61", alpha=.4, lw=.7)
-    ax.plot(xs, np.zeros_like(xs), height(xs, 0)+.015, color="#b3efdb", lw=2.1)
     # A sparse base grid and vertical drop lines give an unambiguous depth cue.
     for xx in (-3, -2, -1, 0):
         ax.plot([xx, xx], [-2.7, 2.7], [-.12, -.12], color="#405159", lw=.65)
@@ -85,6 +77,16 @@ def background(record):
         "target": project(record["target"]), "start": project(record["start"]),
         "height_ticks": [(f, project((.95, 2.7), math.log1p(f))) for f in (0, 100, 10000, 100000)],
     }
+    # Matplotlib sorts entire line artists behind surfaces. Draw the transparent
+    # cutaway mesh in projected screen space so the intended near wall stays visible.
+    wire = ImageDraw.Draw(img)
+    for xx in np.linspace(-3.6, .8, 7):
+        wire.line([project((xx, yy)) for yy in ys], fill="#648887", width=1)
+        wire.line([project((xx, yy)) for yy in near_dense], fill="#546c70", width=1)
+    for yy in near:
+        wire.line([project((xx, yy)) for xx in xs], fill="#435c62", width=1)
+    wire.line([project((xx, 0)) for xx in xs], fill="#b3efdb", width=2)
+    wire.line([project((.8, yy)) for yy in np.r_[near_dense, ys[1:]]], fill="#96b3b0", width=2)
     plt.close(fig)
     return img, view
 
@@ -114,8 +116,11 @@ def paint(base, view, record, index):
         dashed(draw, pts[-1], foot, "#728788")
         draw.ellipse((foot[0]-3, foot[1]-3, foot[0]+3, foot[1]+3), outline="#849793", width=1)
         if len(pts) > 1:
-            draw.line(pts, fill="#13262f", width=7, joint="curve")
-            draw.line(pts, fill=color, width=3, joint="curve")
+            faded = tuple(round(int(color[i:i+2], 16)*.38 + int(BG[i:i+2], 16)*.62)
+                          for i in (1, 3, 5))
+            draw.line(pts, fill=faded, width=2, joint="curve")
+            draw.line(pts[-61:], fill="#13262f", width=7, joint="curve")
+            draw.line(pts[-61:], fill=color, width=3, joint="curve")
         px, py = pts[-1]
         draw.ellipse((px-8, py-8, px+8, py+8), fill=color, outline="#eef4df", width=2)
     tx, ty = view["target"]
@@ -174,6 +179,7 @@ def build_film(output: Path, source: str, review=None, preview_only=False):
         "near_wall": "wireframe cutaway",
         "depth_cues": "height colors, floor grid, height ticks, vertical current-point projections",
         "paths": "projected actual iterates",
+        "trails": "entire history faint; latest 60 updates bright",
         "frame_mapping": "each video frame selects one computed iterate; no interpolation",
     }
     base, view = background(record)
