@@ -19,7 +19,7 @@ from matplotlib.colors import LinearSegmentedColormap
 from mpl_toolkits.mplot3d import proj3d
 from PIL import Image, ImageDraw, ImageFont
 
-from chainbench.adam_lesson import ANGLE, experiment, iteration_at
+from chainbench.adam_lesson import SCALE, experiment, iteration_at, objective
 
 SIZE = (1280, 720)
 BG = "#172127"
@@ -27,103 +27,138 @@ FONT = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
 
 
 def background(record):
-    """One fixed camera keeps paths comparable throughout the film."""
+    """An open near wall and a tall fixed camera make the valley floor visible."""
     fig = plt.figure(figsize=(12.8, 7.2), dpi=100, facecolor=BG)
-    ax = fig.add_axes([-0.08, -0.1, 1.00, 1.11], projection="3d", facecolor=BG)
-    x, y = np.meshgrid(np.linspace(-1.85, 0.9, 135), np.linspace(-0.45, 1.9, 135))
-    c, s = math.cos(ANGLE), math.sin(ANGLE)
-    u, v = c * x + s * y, -s * x + c * y
-    f = (1 - u) ** 2 + 100 * (v - u * u) ** 2
-    z = np.log1p(f)
-    cmap = LinearSegmentedColormap.from_list("valley", ["#274544", "#55726b", "#8a9a87", "#c4c9af"])
-    ax.plot_surface(
-        x,
-        y,
-        z,
-        rcount=100,
-        ccount=100,
-        cmap=cmap,
-        alpha=0.90,
-        edgecolor="none",
-        antialiased=True,
-        shade=True,
-    )
-    ax.contour(
-        x,
-        y,
-        z,
-        levels=[0.02, 0.1, 0.3, 0.7, 1.3, 2.3, 3.5, 5.0, 6.5],
-        zdir="z",
-        offset=-0.12,
-        colors="#60746d",
-        linewidths=0.7,
-        alpha=0.7,
-    )
-    ax.set(xlim=(-1.85, 0.9), ylim=(-0.45, 1.9), zlim=(-0.12, 7.8))
-    ax.set_box_aspect((2.75, 2.35, 1.55))
-    ax.view_init(elev=43, azim=-72)
+    ax = fig.add_axes([-0.07, -0.09, 1.0, 1.10], projection="3d", facecolor=BG)
+    xs = np.linspace(-3.6, 0.8, 100)
+    # Resolve the bottom of the narrow valley explicitly, rather than bridging it
+    # with a coarse uniform mesh. The optimizer coordinates are never rescaled.
+    ys = np.unique(np.r_[0, np.geomspace(.001, .2, 45), np.linspace(.2, 2.7, 70)])
+    cmap = LinearSegmentedColormap.from_list(
+        "depth", ["#247f86", "#5c9e9b", "#a8bbb0", "#e0d5ac"])
+
+    def height(x, y):
+        return np.log1p(x*x/2 + x**4/4 + SCALE*(y*y/2 + y**4/4))
+
+    def filled_side(y):
+        x, y = np.meshgrid(xs, y)
+        z = height(x, y)
+        ax.plot_surface(x, y, z, rcount=len(y), ccount=len(xs), cmap=cmap,
+                        vmin=0, vmax=12, linewidth=0, antialiased=True, alpha=.96)
+
+    filled_side(ys)
+    filled_side(np.linspace(-.045, 0, 24))
+    # The entire near wall is retained geometrically but shown only as a mesh.
+    near = -np.unique(np.r_[0, .025, .05, .1, .2, .35, .55, .8, 1.1, 1.5, 2, 2.7])[::-1]
+    for xx in np.linspace(-3.6, .8, 10):
+        ax.plot(np.full_like(near, xx), near, height(xx, near), color="#819b98", alpha=.26, lw=.65)
+    for yy in near:
+        ax.plot(xs, np.full_like(xs, yy), height(xs, yy), color="#819b98", alpha=.22, lw=.6)
+    for xx in np.linspace(-3.6, .8, 9):
+        ax.plot(np.full_like(ys, xx), ys, height(xx, ys)+.015, color="#405f61", alpha=.4, lw=.7)
+    ax.plot(xs, np.zeros_like(xs), height(xs, 0)+.015, color="#b3efdb", lw=2.1)
+    # A sparse base grid and vertical drop lines give an unambiguous depth cue.
+    for xx in (-3, -2, -1, 0):
+        ax.plot([xx, xx], [-2.7, 2.7], [-.12, -.12], color="#405159", lw=.65)
+    for yy in (-2, -1, 0, 1, 2):
+        ax.plot([-3.6, .8], [yy, yy], [-.12, -.12], color="#405159", lw=.65)
+    ax.set(xlim=(-3.6, 1.0), ylim=(-2.7, 2.7), zlim=(-.15, 12.2))
+    ax.set_box_aspect((4.6, 5.4, 3.8))
+    ax.view_init(elev=27, azim=-56)
     ax.set_axis_off()
     fig.canvas.draw()
     img = Image.fromarray(np.asarray(fig.canvas.buffer_rgba())[:, :, :3].copy())
     projection = ax.get_proj()
 
-    def project(point):
+    def project(point, level=None):
         px, py = point
-        uu, vv = c * px + s * py, -s * px + c * py
-        height = math.log1p((1 - uu) ** 2 + 100 * (vv - uu * uu) ** 2)
-        sx, sy, _ = proj3d.proj_transform(px, py, height, projection)
+        z = math.log1p(objective(point)) if level is None else level
+        sx, sy, _ = proj3d.proj_transform(px, py, z, projection)
         a, b = ax.transData.transform((sx, sy))
         return (float(a), float(SIZE[1] - b))
 
-    projected = {
-        m: [project(r["point"]) for r in trace["rows"]] for m, trace in record["traces"].items()
+    view = {
+        "paths": {m: [project(r["point"]) for r in t["rows"]] for m, t in record["traces"].items()},
+        "footprints": {m: [project(r["point"], 0) for r in t["rows"]] for m, t in record["traces"].items()},
+        "target": project(record["target"]), "start": project(record["start"]),
+        "height_ticks": [(f, project((.95, 2.7), math.log1p(f))) for f in (0, 100, 10000, 100000)],
     }
-    target, start = project(record["target"]), project(record["start"])
     plt.close(fig)
-    return img, projected, target, start
+    return img, view
 
 
-def paint(base, projected, target, start, record, index):
+def dashed(draw, a, b, color):
+    length = math.dist(a, b)
+    for distance in range(0, int(length), 10):
+        lo, hi = distance / length, min(distance + 4, length) / length
+        draw.line((a[0]+(b[0]-a[0])*lo, a[1]+(b[1]-a[1])*lo,
+                   a[0]+(b[0]-a[0])*hi, a[1]+(b[1]-a[1])*hi), fill=color, width=1)
+
+
+def paint(base, view, record, index):
     img = base.copy()
     draw = ImageDraw.Draw(img)
-    small = ImageFont.truetype(FONT, 24)
-    medium = ImageFont.truetype(FONT, 32)
-    large = ImageFont.truetype(FONT, 44)
-    # The film itself contains only numerical labels and method names; the
-    # language-specific explanation is in selectable caption tracks.
-    draw.text((42, 28), "ADAM  /  01", font=small, fill="#c4ccc1")
-    draw.text((42, 52), f"k = {index:,}", font=large, fill="#f1f3e9")
-    draw.text((1110, 35), "2,400", font=medium, fill="#bac8bd")
-    draw.line((42, 111, 1238, 111), fill="#36444a", width=1)
+    small = ImageFont.truetype(FONT, 22)
+    medium = ImageFont.truetype(FONT, 29)
+    large = ImageFont.truetype(FONT, 42)
+    draw.text((42, 24), "ADAM  /  01", font=small, fill="#c4ccc1")
+    draw.text((42, 48), f"k = {index:,}", font=large, fill="#f1f3e9")
+    draw.text((1110, 34), f"{record['steps']:,}", font=medium, fill="#bac8bd")
+    draw.line((42, 104, 1238, 104), fill="#36444a", width=1)
     for method, trace in record["traces"].items():
         color = trace["settings"]["color"]
-        pts = projected[method][: index + 1]
+        pts = view["paths"][method][:index+1]
+        foot = view["footprints"][method][index]
+        dashed(draw, pts[-1], foot, "#728788")
+        draw.ellipse((foot[0]-3, foot[1]-3, foot[0]+3, foot[1]+3), outline="#849793", width=1)
         if len(pts) > 1:
+            draw.line(pts, fill="#13262f", width=7, joint="curve")
             draw.line(pts, fill=color, width=3, joint="curve")
         px, py = pts[-1]
-        draw.ellipse((px - 8, py - 8, px + 8, py + 8), fill=color, outline="#162027", width=2)
-    tx, ty = target
-    draw.ellipse((tx - 8, ty - 8, tx + 8, ty + 8), outline="#fff5d3", width=2)
-    draw.line((tx - 13, ty, tx + 13, ty), fill="#fff5d3", width=1)
-    draw.line((tx, ty - 13, tx, ty + 13), fill="#fff5d3", width=1)
-    sx, sy = start
-    draw.ellipse((sx - 8, sy - 8, sx + 8, sy + 8), outline="#d2d8c9", width=1)
-    # A compact numerical ledger leaves the terrain as the main visual.
+        draw.ellipse((px-8, py-8, px+8, py+8), fill=color, outline="#eef4df", width=2)
+    tx, ty = view["target"]
+    draw.line((tx-11, ty, tx+11, ty), fill="#fff5d3", width=2)
+    draw.line((tx, ty-11, tx, ty+11), fill="#fff5d3", width=2)
+    sx, sy = view["start"]
+    draw.ellipse((sx-8, sy-8, sx+8, sy+8), outline="#d2d8c9", width=1)
+    ticks = view["height_ticks"]
+    draw.line((ticks[0][1], ticks[-1][1]), fill="#9aaea4", width=1)
+    for value, (x, y) in ticks:
+        draw.line((x-4, y, x+4, y), fill="#c4d3c4", width=1)
+        draw.text((x+8, y-11), {0:"0", 100:"10²", 10000:"10⁴", 100000:"10⁵"}[value],
+                  font=small, fill="#c4d3c4")
+    draw.text((994, 222), "Distance left", font=small, fill="#b8c8bf")
     for j, (method, trace) in enumerate(record["traces"].items()):
-        y = 208 + j * 101
+        y = 263 + j * 100
         color = trace["settings"]["color"]
-        draw.line((1001, y + 10, 1021, y + 10), fill=color, width=3)
         label = "GD" if method == "gd" else trace["settings"]["label"]
-        draw.text((1032, y), label, font=medium, fill=color)
-        draw.text(
-            (1001, y + 35), f"f = {trace['rows'][index]['loss']:.2e}", font=small, fill="#d6dcd0"
-        )
-    draw.text((42, 634), "z = log(1 + f)", font=small, fill="#bcc9bf")
-    draw.text((42, 658), "f* = 0", font=small, fill="#bcc9bf")
+        draw.text((994, y), label, font=medium, fill=color)
+        percentage = 100 * trace["rows"][index]["distance"] / trace["rows"][0]["distance"]
+        draw.text((994, y+36), f"{percentage:.1f}%", font=small, fill="#e1e7d7")
+        settled = record["target_test"]["settled"][method]
+        if settled is not None and index >= settled:
+            draw.text((1090, y+36), f"k {settled}", font=small, fill=color)
+    draw.text((42, 635), "Height = log(1 + f)  ·  near wall: wireframe", font=small, fill="#bdcdc2")
+    draw.text((42, 665), "+ minimum   ·   dashed lines show depth", font=small, fill="#bdcdc2")
     return img
 
 
-def build_film(output: Path, source: str):
+def review_frames(output, source, record, base, view):
+    output.mkdir(parents=True, exist_ok=True)
+    for k in (0, 10, 30, 66, 100, 611, 1200):
+        paint(base, view, record, k).save(output / f"depth-k{k}.png")
+    proof = {"source": source, "camera": {"elevation": 27, "azimuth": -56},
+             "height": "log1p(objective)", "near_wall": "wireframe; no optimizer coordinates changed",
+             "path_bounds": {m: [min(x for x, y in pts), max(x for x, y in pts),
+                                  min(y for x, y in pts), max(y for x, y in pts)]
+                             for m, pts in view["paths"].items()},
+             "height_ticks": view["height_ticks"], "target": view["target"],
+             "settled": record["target_test"]["settled"]}
+    (output / "depth-verification.json").write_text(json.dumps(proof, indent=2)+"\n")
+    print(json.dumps({"depth_review": proof}))
+
+
+def build_film(output: Path, source: str, review=None, preview_only=False):
     if not re.fullmatch("[0-9a-f]{40}", source):
         raise ValueError("A complete source commit is required")
     output.mkdir(parents=True, exist_ok=True)
@@ -133,21 +168,28 @@ def build_film(output: Path, source: str):
     record["render"] = {
         "size": list(SIZE),
         "height": "log1p(objective)",
-        "camera": {"elevation": 43, "azimuth": -72},
+        "camera": {"elevation": 27, "azimuth": -56},
+        "near_wall": "wireframe cutaway",
+        "depth_cues": "height colors, floor grid, height ticks, vertical current-point projections",
         "paths": "projected actual iterates",
         "frame_mapping": "each video frame selects one computed iterate; no interpolation",
     }
-    base, projected, target, start = background(record)
+    base, view = background(record)
+    if review is not None:
+        review_frames(review, source, record, base, view)
     # Fail on clipped numerical paths, rather than hiding out-of-frame behavior.
-    for points in projected.values():
-        assert all(20 < x < 990 and 115 < y < 632 for x, y in points), (
+    for points in view["paths"].values():
+        assert all(20 < x < 980 and 155 < y < 628 for x, y in points), (
             "Path leaves film view",
             min(x for x, y in points),
             max(x for x, y in points),
             min(y for x, y in points),
             max(y for x, y in points),
         )
-    paint(base, projected, target, start, record, 0).save(output / "poster.jpg", quality=93)
+    assert math.dist(view["height_ticks"][0][1], view["height_ticks"][-1][1]) > 140
+    if preview_only:
+        return
+    paint(base, view, record, 0).save(output / "poster.jpg", quality=93)
     args = [
         "ffmpeg",
         "-hide_banner",
@@ -194,7 +236,7 @@ def build_film(output: Path, source: str):
     process = subprocess.Popen(args, stdin=subprocess.PIPE)
     try:
         for index in frames:
-            process.stdin.write(paint(base, projected, target, start, record, index).tobytes())
+            process.stdin.write(paint(base, view, record, index).tobytes())
         process.stdin.close()
         if process.wait() != 0:
             raise RuntimeError("Film encoding failed")
@@ -249,5 +291,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--source", required=True)
+    parser.add_argument("--review", type=Path)
+    parser.add_argument("--preview-only", action="store_true")
     args = parser.parse_args()
-    build_film(args.output, args.source)
+    build_film(args.output, args.source, args.review, args.preview_only)

@@ -8,8 +8,14 @@
   const ns = 'http://www.w3.org/2000/svg';
   const charts = {};
   const node = (tag, attrs, text) => {const e=document.createElementNS(ns,tag);for(const [k,v] of Object.entries(attrs))e.setAttribute(k,v);if(text!==undefined)e.textContent=text;return e;};
-  const timeAt = k => k <= 60 ? 6 + k/6 : 16+(k-60)*24/2340;
-  const iterationAt = t => t<=6 ? 0 : t<=16 ? Math.min(60,Math.floor((t-6)*6+1e-8)) : t<40 ? Math.min(2400,60+Math.floor((t-16)*2340/24+1e-8)) : 2400;
+  const timeAt = k => {
+    for(let i=1;i<record.timing.length;i++){const [t0,k0]=record.timing[i-1],[t1,k1]=record.timing[i];if(k1>k0&&k<=k1)return t0+(k-k0)*(t1-t0)/(k1-k0);}
+    return 42;
+  };
+  const iterationAt = t => {
+    for(let i=1;i<record.timing.length;i++){const [t0,k0]=record.timing[i-1],[t1,k1]=record.timing[i];if(t<=t1)return Math.max(k0,Math.min(k1,k0+Math.floor((t-t0)*(k1-k0)/(t1-t0)+1e-8)));}
+    return record.steps;
+  };
   const fmt = x => x===0?'0':x.toExponential(2);
   let requested = new URL(location.href).searchParams.get('lang'), saved;
   try {saved=localStorage.getItem('chainbench-language');} catch (_) { /* Storage is optional. */ }
@@ -32,10 +38,10 @@
     const svg=$(metric+'-chart'), left=56, top=18, width=480, height=232;
     const high=Math.ceil(Math.log10(Math.max(...methods.flatMap(m=>record.traces[m].rows.map(r=>r[metric])))));
     const minimum=Math.min(...methods.flatMap(m=>record.traces[m].rows.map(r=>r[metric])));
-    const low=Math.max(-12,Math.floor(Math.log10(Math.max(1e-12,minimum)))), px=k=>left+k/2400*width;
+    const low=Math.max(-12,Math.floor(Math.log10(Math.max(1e-12,minimum)))), px=k=>left+k/record.steps*width;
     const py=v=>top+(high-Math.log10(Math.max(1e-12,v)))/(high-low)*height;
-    for(let power=high;power>=low;power-=2){const y=py(10**power);svg.append(node('line',{x1:left,x2:left+width,y1:y,y2:y,class:'grid'}),node('text',{x:left-10,y:y+4,'text-anchor':'end'},'10'+({'-12':'⁻¹²','-11':'⁻¹¹','-10':'⁻¹⁰','-9':'⁻⁹','-8':'⁻⁸','-7':'⁻⁷','-6':'⁻⁶','-5':'⁻⁵','-4':'⁻⁴','-3':'⁻³','-2':'⁻²','-1':'⁻¹','0':'⁰','1':'¹','2':'²','3':'³'}[power]??'^'+power)));}
-    for(const k of [0,600,1200,1800,2400])svg.append(node('text',{x:px(k),y:278,'text-anchor':'middle'},k.toLocaleString('en')));
+    for(let power=high;power>=low;power-=2){const y=py(10**power);svg.append(node('line',{x1:left,x2:left+width,y1:y,y2:y,class:'grid'}),node('text',{x:left-10,y:y+4,'text-anchor':'end'},'10'+String(power).replace(/[-0-9]/g,c=>c==='-'?'⁻':'⁰¹²³⁴⁵⁶⁷⁸⁹'[Number(c)])));}
+    for(const k of [0,300,600,900,1200])svg.append(node('text',{x:px(k),y:278,'text-anchor':'middle'},k.toLocaleString('en')));
     for(const m of methods){svg.append(node('path',{d:record.traces[m].rows.map((r,k)=>(k?'L':'M')+px(k).toFixed(2)+','+py(r[metric]).toFixed(2)).join(''),stroke:colors[m],class:'trace','data-method':m}));}
     const cursor=node('line',{x1:left,x2:left,y1:top,y2:top+height,class:'cursor'});svg.append(cursor);
     const dots=Object.fromEntries(methods.map(m=>{const e=node('circle',{cx:left,cy:py(record.traces[m].rows[0][metric]),r:4,fill:colors[m],stroke:'#f7f6f2','stroke-width':2});svg.append(e);return [m,e];}));
@@ -43,14 +49,14 @@
     for(const m of methods){const span=document.createElement('span');span.className=m;span.append(labels[m]);const b=document.createElement('b');b.id=metric+'-'+m;span.append(b);$(metric+'-values').append(span);}
     charts[metric]={cursor,dots,px,py};
     let dragging=false;
-    const seekEvent=e=>{const rect=svg.getBoundingClientRect();seek(Math.round(((e.clientX-rect.left)/rect.width*560-left)/width*2400));};
+    const seekEvent=e=>{const rect=svg.getBoundingClientRect();seek(Math.round(((e.clientX-rect.left)/rect.width*560-left)/width*record.steps));};
     svg.addEventListener('pointerdown',e=>{dragging=true;svg.setPointerCapture(e.pointerId);seekEvent(e);});
     svg.addEventListener('pointermove',e=>{if(dragging)seekEvent(e);});
     svg.addEventListener('pointerup',()=>{dragging=false;});svg.addEventListener('pointercancel',()=>{dragging=false;});
   }
   function draw(k) {
     if(!record)return;
-    k=Math.max(0,Math.min(2400,k));$('iteration-value').textContent=k.toLocaleString('en');$('iteration').setAttribute('aria-valuetext','k = '+k);
+    k=Math.max(0,Math.min(record.steps,k));$('iteration-value').textContent=k.toLocaleString('en');$('iteration').setAttribute('aria-valuetext','k = '+k);
     for(const metric of ['loss','distance']){const c=charts[metric];c.cursor.setAttribute('x1',c.px(k));c.cursor.setAttribute('x2',c.px(k));for(const m of methods){const v=record.traces[m].rows[k][metric];c.dots[m].setAttribute('cx',c.px(k));c.dots[m].setAttribute('cy',c.py(v));$(metric+'-'+m).textContent=fmt(v);}}
     window.adamLesson={source:record.source,k,record,timeAt,iterationAt};
   }
@@ -58,7 +64,7 @@
   function syncAt(t){if(!record)return;const f=frameAt(t);$('iteration').value=String(f);draw(record.frame_iterations[f]);}
   // Seek inside a frame: media clocks may round an exact boundary down by a microsecond.
   function seekFrame(f){if(!record)return;cover.hidden=true;f=Math.max(0,Math.min(record.frame_iterations.length-1,f));movie.pause();movie.currentTime=(f+0.5)/record.fps;syncAt(movie.currentTime);}
-  function seek(k){seekFrame(Math.round(timeAt(Math.max(0,Math.min(2400,k)))*record.fps));}
+  function seek(k){seekFrame(Math.round(timeAt(Math.max(0,Math.min(record.steps,k)))*record.fps));}
   $('iteration').addEventListener('input',e=>seekFrame(Number(e.target.value)));
   const sync=()=>{syncAt(movie.currentTime);if(!movie.paused&&!movie.ended)frame=requestAnimationFrame(sync);};
   movie.addEventListener('play',()=>{cover.hidden=true;cancelAnimationFrame(frame);sync();});
@@ -68,7 +74,7 @@
   document.addEventListener('visibilitychange',()=>{if(document.hidden)movie.pause();});
   movie.addEventListener('error',()=>{$('load-status').hidden=false;$('load-status').textContent=root.lang==='ko'?'영상이 재생되지 않으면 아래 MP4 링크를 열어 주세요.':'Video unavailable. Open the MP4 link below.';$('load-status').setAttribute('role','alert');});
   fetch('experiment.json').then(r=>{if(!r.ok)throw Error('No data');return r.json();}).then(data=>{
-    if(data.steps!==2400||data.duration!==48||methods.some(m=>data.traces[m].rows.length!==2401))throw Error('Invalid record');
+    if(data.fixture!=='unequal-scale-quartic-v1'||data.steps!==1200||data.duration!==48||methods.some(m=>data.traces[m].rows.length!==1201))throw Error('Invalid record');
     record=data;$('iteration').max=String(data.frame_iterations.length-1);buildChart('loss');buildChart('distance');syncAt(movie.currentTime);$('iteration').disabled=false;$('load-status').hidden=true;
   }).catch(()=>{$('load-status').hidden=false;$('load-status').textContent=root.lang==='ko'?'비교 데이터를 불러오지 못했습니다. 새로고침해 주세요.':'The comparison did not load. Please reload.';$('load-status').setAttribute('role','alert');});
 })();

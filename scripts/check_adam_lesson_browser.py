@@ -71,6 +71,9 @@ def main():
     args = parser.parse_args()
     args.output.mkdir(parents=True, exist_ok=True)
     record = json.loads((args.site / "papers/adam/experiment.json").read_text())
+    assert record["fixture"] == "unequal-scale-quartic-v1"
+    assert record["target_test"]["settled"] == {"gd": None, "momentum": 611, "adam": 66}
+    assert record["render"]["near_wall"] == "wireframe cutaway"
     server = http.server.ThreadingHTTPServer(
         ("127.0.0.1", 0), functools.partial(QuietHandler, directory=str(args.site.resolve()))
     )
@@ -163,11 +166,20 @@ def main():
                         decoded.append(hashlib.sha256(pixels.encode()).hexdigest())
                         k = record["frame_iterations"][int(seconds * record["fps"])]
                         assert page.evaluate("window.adamLesson.k") == k
-                        for m in ["gd", "momentum", "adam"]:
-                            displayed = page.locator("#loss-" + m).text_content()
-                            want = record["traces"][m]["rows"][k]["loss"]
-                            assert abs(float(displayed) - want) <= abs(want) * 0.006 + 1e-15
+                        for metric in ("loss", "distance"):
+                            for m in ["gd", "momentum", "adam"]:
+                                displayed = page.locator("#" + metric + "-" + m).text_content()
+                                want = record["traces"][m]["rows"][k][metric]
+                                assert abs(float(displayed) - want) <= abs(want) * 0.006 + 1e-300
                     assert len(set(decoded)) == 3
+                    # The shared JSON clock includes a deliberate hold at k=66.
+                    movie.evaluate("v=>{v.currentTime=25;}")
+                    page.wait_for_function('()=>!document.querySelector("video").seeking&&window.adamLesson.k===66')
+                    for k0 in (0, 10, 60, 66, 100, 611, 1200):
+                        got = page.evaluate("k=>window.adamLesson.iterationAt(window.adamLesson.timeAt(k))", k0)
+                        assert abs(got - k0) <= 1
+                    movie.evaluate("v=>{v.currentTime=36;}")
+                    page.wait_for_function('()=>!document.querySelector("video").seeking')
                     # Actual playback, not just setting a timestamp.
                     start = movie.evaluate("v=>v.currentTime")
                     print({"resume_from": start, "engine": engine, "width": width}, flush=True)
@@ -217,7 +229,7 @@ def main():
                     chart.scroll_into_view_if_needed()
                     b = chart.bounding_box()
                     page.mouse.click(b["x"] + 0.6 * b["width"], b["y"] + 0.5 * b["height"])
-                    assert 1100 < page.evaluate("window.adamLesson.k") < 1600
+                    assert abs(page.evaluate("window.adamLesson.k") - 7*record["steps"]/12) <= 6
                     page.locator("#language").click()
                     expect(page.locator("html")).to_have_attribute("lang", "ko")
                     assert (
