@@ -1,21 +1,22 @@
 WEBVTT
 
-00:00.000 --> 00:06.000 line:18% position:40% size:74% align:center
-좁은 골짜기에서 이동 방향이 계속 바뀝니다.
-세 방법은 같은 점에서 출발합니다.
+00:00.000 --> 00:04.000 line:7% position:54% size:68% align:center
+바닥까지 보이는 골짜기
 
-00:06.000 --> 00:16.000 line:18% position:40% size:74% align:center
-GD는 지금의 기울기를 따릅니다.
-Momentum은 이전 이동도 이어갑니다.
+00:04.000 --> 00:14.000 line:7% position:54% size:68% align:center
+Momentum의 왕복 운동
 
-00:16.000 --> 00:27.000 line:18% position:40% size:74% align:center
-Adam은 기울기와 그 제곱을 기억합니다.
-좌표마다 보폭을 따로 조절합니다.
+00:14.000 --> 00:24.000 line:7% position:54% size:68% align:center
+방향마다 보폭 조절
 
-00:27.000 --> 00:40.000 line:18% position:40% size:74% align:center
-도착점뿐 아니라 굽이를 보세요.
-같은 골짜기에서도 경로가 달라집니다.
+00:24.000 --> 00:27.000 line:7% position:54% size:68% align:center
+Adam 도달: 66회
 
-00:40.000 --> 00:48.000 line:18% position:40% size:74% align:center
-보폭을 조절해도 항상 지름길은 아닙니다.
-아래 두 그래프에서 비교해 보세요.
+00:27.000 --> 00:35.000 line:7% position:54% size:68% align:center
+같은 기울기 계산 횟수
+
+00:35.000 --> 00:42.000 line:7% position:54% size:68% align:center
+Momentum 도달: 611회
+
+00:42.000 --> 00:48.000 line:7% position:54% size:68% align:center
+경사 차이를 다루는 Adam

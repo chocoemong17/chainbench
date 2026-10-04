@@ -6,8 +6,11 @@
 
 - Add an isolated video-led Adam lesson: one 48-second film, two synchronized
   graphs, English/Korean captions and a short route to the source paper.
-- Use a declared rotated Rosenbrock valley with GD, momentum and bias-corrected
-  Adam; retain actual numerical rows and encode movies only on GitHub Actions.
+- Use the reviewed unequal-scale quartic with tuned GD/Momentum baselines and
+  bias-corrected Adam; retain all example-selection evidence and actual iterates.
+- Reveal the valley floor through a wireframe near wall, height colors/ticks,
+  ground grid and vertical depth guides; slow early updates and pause at Adam's
+  recorded target entry. Keep the accepted page layout and paper link.
 
 
 - Add an English-first browser entry point with optional Korean, an actual

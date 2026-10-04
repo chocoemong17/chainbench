@@ -1,21 +1,22 @@
 WEBVTT
 
-00:00.000 --> 00:06.000 line:18% position:40% size:74% align:center
-A narrow valley. A changing direction.
-All three methods start together.
+00:00.000 --> 00:04.000 line:7% position:54% size:68% align:center
+See the valley floor.
 
-00:06.000 --> 00:16.000 line:18% position:40% size:74% align:center
-GD follows the current slope.
-Momentum also carries the previous motion.
+00:04.000 --> 00:14.000 line:7% position:54% size:68% align:center
+Momentum swings.
 
-00:16.000 --> 00:27.000 line:18% position:40% size:74% align:center
-Adam remembers gradients and their squared sizes.
-It adjusts the step separately for each coordinate.
+00:14.000 --> 00:24.000 line:7% position:54% size:68% align:center
+Adam adjusts each step.
 
-00:27.000 --> 00:40.000 line:18% position:40% size:74% align:center
-Watch the turn, not just the finish.
-The same valley produces different paths.
+00:24.000 --> 00:27.000 line:7% position:54% size:68% align:center
+Adam: target at k = 66.
 
-00:40.000 --> 00:48.000 line:18% position:40% size:74% align:center
-An adaptive step is not always a shortcut.
-Compare the two graphs below.
+00:27.000 --> 00:35.000 line:7% position:54% size:68% align:center
+Same gradient budget.
+
+00:35.000 --> 00:42.000 line:7% position:54% size:68% align:center
+Momentum: k = 611.
+
+00:42.000 --> 00:48.000 line:7% position:54% size:68% align:center
+Adapt to each direction.
