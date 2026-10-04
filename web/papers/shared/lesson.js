@@ -11,7 +11,7 @@
   const make=(tag,attrs={},text)=>{const e=document.createElementNS(ns,tag);for(const [k,v] of Object.entries(attrs))e.setAttribute(k,v);if(text!==undefined)e.textContent=text;return e;};
   const label=(svg,x,y,text,color=ink,size=21,anchor='start')=>{const e=make('text',{x,y,'text-anchor':anchor},text);e.style.fill=color;e.style.fontSize=size+'px';svg.append(e);};
   const rect=(svg,x,y,w,h,fill,id)=>{const a={x,y,width:Math.max(0,w),height:h,fill,rx:5};if(id)a.id=id;const el=make('rect',a);svg.append(el);return el;};
-  const line=(svg,points,color,width=3,marker=false)=>svg.append(make('polyline',{points:points.map(p=>p.join(',')).join(' '),fill:'none',stroke:color,'stroke-width':width,...(marker?{'marker-end':'url(#arrow)'}:{})}));
+  const line=(svg,points,color,width=3,marker=false)=>svg.append(make('polyline',{points:points.map(p=>p.join(',')).join(' '),fill:'none',stroke:color,'stroke-width':width,...(marker?{'marker-end':'url(#'+(typeof marker==='string'?marker:'arrow')+')'}:{})}));
   function readout(id,items){
     const box=$(id);box.replaceChildren();
     for(const [name,value,text] of items){const b=document.createElement('span');b.id=name;b.dataset.value=value;b.textContent=text;box.append(b);}
@@ -53,10 +53,10 @@
       a.setAttribute('aria-label',tr(back?'Backward learning signal through branch and shortcut':'Forward input plus correction',back?'가지와 지름길로 돌아오는 학습 신호':'원래 정보와 수정분의 순전파'));
       b.setAttribute('aria-label',tr(`Signal magnitudes after ${depth} blocks`,`${depth}개 블록을 지난 신호 크기`));
       const defs=make('defs'),marker=make('marker',{id:'arrow',viewBox:'0 0 10 10',refX:9,refY:5,markerWidth:6,markerHeight:6,orient:'auto-start-reverse'});
-      marker.append(make('path',{d:'M 0 0 L 10 5 L 0 10 z',fill:back?red:green}));defs.append(marker);a.append(defs);
+      marker.append(make('path',{d:'M 0 0 L 10 5 L 0 10 z',fill:back?red:green}));defs.append(marker);const bypass=marker.cloneNode(true);bypass.id='arrow-blue';bypass.querySelector('path').setAttribute('fill',blue);defs.append(bypass);a.append(defs);
       const paths=[[[72,167],[135,167],[135,83],[196,83]],[[354,83],[420,83],[420,152]],[[437,167],[508,167]]];
       for(const points of paths)line(a,back?[...points].reverse():points,back?red:green,3,true);
-      line(a,back?[[420,184],[420,287],[135,287],[135,167]]:[[135,167],[135,287],[420,287],[420,184]],blue,4);
+      line(a,back?[[420,184],[420,287],[135,287],[135,167]]:[[135,167],[135,287],[420,287],[420,184]],blue,4,'arrow-blue');
       rect(a,196,44,158,80,'#e7ede4');label(a,275,73,tr('Branch','학습하는 가지'),green,22,'middle');
       label(a,275,106,back?tr('Find adjustment','수정 방향 계산'):'+'+row.correction.toFixed(2),ink,19,'middle');
       a.append(make('circle',{cx:420,cy:167,r:18,fill:'#f7f6f2',stroke:ink,'stroke-width':2}));label(a,420,174,'+',ink,24,'middle');
