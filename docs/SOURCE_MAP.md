@@ -340,3 +340,10 @@ Computed scalar gradients are not ImageNet/CIFAR results or a training benchmark
 The eight-block plain and residual toys have the same forward value at x=1,
 with independently chosen biases and a declared common branch slope -0.1;
 their different full mappings are disclosed. [Inputs and scope](reviews/method-concepts/README.md).
+
+Revision 3 lowers the explanation difficulty without changing those numeric
+examples. The visible attention shares are rounded to [2,2,96] percent. The
+depth scene uses a linear magnitude scale, with initial gradient magnitude
+normalized to 100 (plain <1; residual about43). Exact calculations remain in
+folded details. The cat/sofa/sleep scene illustrates possible relationships;
+it does not assign fixed head roles or claim measured semantic attention.

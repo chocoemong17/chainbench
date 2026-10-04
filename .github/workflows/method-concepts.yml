@@ -5,6 +5,7 @@ on:
     paths:
       - scripts/render_method_concepts.py
       - scripts/render_method_explanations.py
+      - scripts/render_method_intuition.py
       - .github/workflows/method-concepts.yml
 permissions:
   contents: read
@@ -25,7 +26,7 @@ jobs:
       - run: python -m pip install 'Pillow==11.3.0'
       - run: sudo apt-get install -y fonts-noto-cjk fonts-dejavu-core
       - name: Check arithmetic and render rough storyboards only
-        run: python scripts/render_method_explanations.py --output concept-review --source "$GITHUB_SHA"
+        run: python scripts/render_method_intuition.py --output concept-review --source "$GITHUB_SHA"
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: method-concepts-${{ github.sha }}

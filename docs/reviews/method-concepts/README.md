@@ -1,49 +1,43 @@
-# Attention and ResNet — explanation review, revision 2
+# Attention and ResNet — follow the idea, then explore the math
 
 [한국어](README.ko.md)
 
-Each method now has **four connected scenes**: what problem it addresses, how it
-works, and why its mechanism helps. These are review storyboards; refinement
-still waits for your approval. The loops last 30 seconds. Open the numbered
-still images below to read at your own pace.
+Revision 3 aims for the middle difficulty you requested: the mechanism stays,
+with concrete examples and short explanations on screen. **Equations are in
+the optional details below.** Each 30-second storyboard has four scenes;
+open any numbered still to read at your own pace.
 
-## Attention: how a question changes the information used
+## Attention · what should I look at, and how much?
 
-![Four-stage Attention explanation](v2/attention.en.gif)
+![Four scenes explaining attention through a concrete example](v3/attention.en.gif)
 
-| Scene | What to understand |
+| Scene | Main idea |
 | --- | --- |
-| [1 · Q, K and V](v2/attention.en.1.png) | Q is what we seek; K is what we compare against; V is the information we collect. |
-| [2 · Scores and softmax](v2/attention.en.2.png) | Compare Q with every K; scale the scores; turn them into nonnegative weights summing to one. |
-| [3 · Weighted sum](v2/attention.en.3.png) | Multiply every V by its weight and add. Attention returns features, not a hard database lookup. |
-| [4 · Self-attention and heads](v2/attention.en.4.png) | Each token produces its own Q/K/V through learned projections. Heads use separate projections to gather information. |
+| [1 · Q, K, V](v3/attention.en.1.png) | A query, a matching label, and the information to retrieve. |
+| [2 · How much to use](v3/attention.en.2.png) | A closer match gets a larger share. Softmax converts scores into shares. |
+| [3 · Gather information](v3/attention.en.3.png) | Collect more relevant content and smaller amounts of other content; changing the question changes the mixture. |
+| [4 · Words and context](v3/attention.en.4.png) | Words refer to one another. Multiple heads can attend to different relationships. |
 
-The example asks where Mia is. Her key receives the largest score, so Studio
-information contributes most to the output. Changing Q to Ava changes the
-mixture while K and V stay fixed. The first three scenes compute one head;
-the fourth connects that calculation to the Transformer architecture.
+Keep one idea in mind: **the question changes how much of each piece of information is used.**
 
-## ResNet: residual learning and the backward path
+## ResNet · what should change, and how does the learning signal return?
 
-![Four-stage ResNet explanation including backpropagation](v2/resnet.en.gif)
+![Four scenes explaining corrections and the backward shortcut](v3/resnet.en.gif)
 
-| Scene | What to understand |
+| Scene | Main idea |
 | --- | --- |
-| [1 · Learn a correction](v2/resnet.en.1.png) | The branch learns H(x)−x; the shortcut carries x. Preserving useful features corresponds to zero residual. |
-| [2 · Forward pass](v2/resnet.en.2.png) | Input 2.0 plus correction 0.1 gives prediction 2.1, below the target 2.2. |
-| [3 · Backpropagation](v2/resnet.en.3.png) | A gradient says how a small change affects loss. At the addition it flows through both paths; the contributions sum at the earlier feature. |
-| [4 · Depth](v2/resnet.en.4.png) | A declared scalar example shows how products of local derivatives affect the signal reaching earlier features. |
+| [1 · Learn the correction](v3/resnet.en.1.png) | Carry existing features forward and learn what to add or remove. |
+| [2 · Predict and compare](v3/resnet.en.2.png) | Adding 0.1 to 2.0 gives 2.1, a little below the target 2.2. |
+| [3 · Send feedback backward](v3/resnet.en.3.png) | A gradient tells each layer how changes affect the error; the shortcut adds a direct route back. |
+| [4 · Reach earlier layers](v3/resnet.en.4.png) | A simple numerical example shows how the shortcut can help the signal reach farther back. |
 
-In scene 3, a gradient of −0.10 arrives from the loss. The shortcut contributes
-−0.10; the branch contributes +0.01. Their sum is −0.09. Backprop also computes
-branch-weight gradients: it does not skip learning the branch. This direct
-route helps avoid depending entirely on products of small learned derivatives.
-It is not a guarantee that gradients can never vanish or explode.
+The shortcut carries useful features forward **and helps the learning signal travel backward**.
+The branch still learns. Signal preservation is not guaranteed in every setting.
 
-**Review:** do the four Attention scenes now explain how the weights arise and
-what they do? Does the backward ResNet scene explain what the shortcut helps
-deliver? Please approve each direction or identify the scene that needs revision.
+**Review:** is this explanation level closer to what you wanted? Please point
+to any scene that still feels too easy or too difficult. Refinement waits for approval.
 
+<a id="exact-calculations"></a>
 <details>
 <summary>Exact calculations, conditions and primary sources</summary>
 
@@ -53,9 +47,9 @@ deliver? Please approve each direction or identify the scene that needs revision
 Keys are the 3D basis vectors; location values are one-hot vectors in the order
 Library, Garden, Studio. For Mia, Q=√3·[0,0,4], giving scaled scores [0,0,4].
 Stable softmax gives [1,1,exp(4)]/(2+exp(4)); these weights are not confidence.
-Percentages are rounded, so displayed values may not add to exactly 100%.
+The displayed whole-number percentages are [2,2,96], rounded from the exact weights. This particular rounded triple sums to 100; weights are still computed at full precision.
 The name/location vectors are assigned for explanation, not learned language.
-Scene 4 is an architecture schematic, not measured attention on “The cat sleeps”.
+Scene 4 illustrates possible “who” and “where” relationships in a cat/sofa/sleep sentence. These are authored explanatory relationships, not measured attention or fixed head roles. Actual head roles arise through training. This scene describes unmasked self-attention; causal masks restrict access in a decoder.
 Self-attention uses a common input sequence for Q/K/V; separate learned W
 projections determine their roles. Multi-head outputs are concatenated and
 projected. No full Transformer training or semantic benchmark is claimed.
@@ -70,7 +64,7 @@ Our numerical examples have strictly positive preactivations, making that gate
 one locally; we also check an inactive gate and cancellation as controls.
 
 Scene 1 uses an authored feature-grid target differing at three cells.
-Scenes 2–3 use F(x)=w2·ReLU(w1·x+b1)+b2 with
+The underlying example for scenes 2–3 uses F(x)=w2·ReLU(w1·x+b1)+b2 with
 (w1,b1,w2,b2)=(1,0,−0.1,0.3), x=2, target=2.2,
 y=ReLU(x+F(x)) and L=(y−target)²/2.
 Thus F=0.1, y=2.1, L=0.005, dL/dy=−0.1, dL/dx=−0.09 and dL/dw2=−0.20.
@@ -83,16 +77,15 @@ blocks use ReLU(x+(−0.1x+0.1)). At x=1, both chains output 1 and have active
 ReLUs. The branch slopes are −0.1; biases are chosen separately to match this
 forward point. These are different full mappings, not matched trained networks.
 For L=x_final²/2, the terminal gradient is 1; the initial feature gradients are
-(−0.1)^8=10^−8 and (1−0.1)^8≈0.430. The chart shows absolute gradients on a log
-axis, not accuracy, learning speed or a universal ResNet advantage.
+(−0.1)^8=10^−8 and (1−0.1)^8≈0.430. The main scene shows absolute gradient magnitudes relative to a starting value of 100: less than 1 for the plain chain, and approximately 43 for the residual chain. Bar lengths use exact unrounded magnitudes on a linear scale. These are not accuracy, learning speed or a universal ResNet advantage.
 
 Checks include closed-form arithmetic, central finite differences for input
 and weight gradients, both deep-chain derivatives, F′=−1 cancellation, and
 inactive post-add ReLU. The last two controls produce zero despite a shortcut.
 A larger gradient is not automatically a better gradient.
 
-[Rendering and checking code](../../../scripts/render_method_explanations.py);
-[numerical record and file hashes](v2/verification.json). Rendered in GitHub Actions.
+[Rendering and checking code](../../../scripts/render_method_intuition.py);
+[numerical record and file hashes](v3/verification.json). Rendered in GitHub Actions.
 These small review assets are durable on this branch; the production site is unchanged.
 
 </details>
