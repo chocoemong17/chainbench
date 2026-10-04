@@ -1,0 +1,151 @@
+{
+  "attention_matching_weight": 0.9646631559719039,
+  "fixed_mean": [
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333
+  ],
+  "residual_changed_cells": 3,
+  "zero_residual_identity_blocks": 8,
+  "scope": "assigned vectors and prescribed corrections; no training benchmark",
+  "checks": "attention normalization, closed form, lookup and permutation; residual addition, signed changes, range and eight-block zero-residual preservation",
+  "single_block": {
+    "x": 2.0,
+    "h": 2.0,
+    "f": 0.09999999999999998,
+    "y": 2.1,
+    "loss": 0.005000000000000009,
+    "incoming": -0.10000000000000009,
+    "shortcut": -0.10000000000000009,
+    "branch": 0.010000000000000009,
+    "total": -0.09000000000000008,
+    "w2_grad": -0.20000000000000018
+  },
+  "depth": {
+    "plain": {
+      "output": 1.0,
+      "gradients": [
+        1.0,
+        -0.1,
+        0.010000000000000002,
+        -0.0010000000000000002,
+        0.00010000000000000003,
+        -1.0000000000000004e-05,
+        1.0000000000000004e-06,
+        -1.0000000000000005e-07,
+        1.0000000000000005e-08
+      ],
+      "finite_difference": 9.999945316252479e-09
+    },
+    "residual": {
+      "output": 1.0,
+      "gradients": [
+        1.0,
+        0.9,
+        0.81,
+        0.7290000000000001,
+        0.6561000000000001,
+        0.5904900000000002,
+        0.5314410000000002,
+        0.47829690000000014,
+        0.43046721000000016
+      ],
+      "finite_difference": 0.4304672099999518
+    }
+  },
+  "gradient_checks": "chain rule, central differences, cancellation and inactive-ReLU controls",
+  "source": "5397ef264f05daa7f73d866b705422b2785dca14",
+  "size": [
+    1200,
+    840
+  ],
+  "frames": 4,
+  "frame_duration_ms": [
+    6500,
+    8000,
+    8000,
+    7500
+  ],
+  "files": {
+    "attention.en.1.png": {
+      "bytes": 68043,
+      "sha256": "e40927bc8fe1b4dfcd14346168b903c6726a65c3cbe7bb6680f1d5bb901d2b18"
+    },
+    "attention.en.2.png": {
+      "bytes": 64914,
+      "sha256": "debcc4596dfba102e63b6b5268859cc50ec0c8781ef7806e87bbbe070e312f16"
+    },
+    "attention.en.3.png": {
+      "bytes": 75967,
+      "sha256": "80b2e219c9f5d322ab4ebd165b48517da04b4bce44a502d0dfdaa0ce6976b6fc"
+    },
+    "attention.en.4.png": {
+      "bytes": 75814,
+      "sha256": "d0db225dfa6425fb466d3faeff6fdf28fe778bb1181fd898c5c7dbeb93d1b055"
+    },
+    "attention.en.gif": {
+      "bytes": 182350,
+      "sha256": "ba057d7b40e49bf23f25a5dc600530a6ae82f3753c768bb1c88caf23e420c42e"
+    },
+    "attention.ko.1.png": {
+      "bytes": 68733,
+      "sha256": "ee89b24874f18d1370efc81ce7eec8b2c49835b7890f47bcefe83eaca669e887"
+    },
+    "attention.ko.2.png": {
+      "bytes": 72901,
+      "sha256": "4b64cce20c3c46e9213338ac27ea3809fae43f3f69ccd0e8c8fa93b09a6bc182"
+    },
+    "attention.ko.3.png": {
+      "bytes": 82122,
+      "sha256": "7049a23a6af2bd28e9f61b9051c9a0c48e9b1c3f8672dfc0d5d4bbf84b040a43"
+    },
+    "attention.ko.4.png": {
+      "bytes": 87176,
+      "sha256": "3c9462246f1174b5719b219a44ca05159570fdd0f629d9237b35c6a620f70475"
+    },
+    "attention.ko.gif": {
+      "bytes": 175946,
+      "sha256": "2b181cac761f0296bfede8158d000770c1bfa6e2893f9ee88141a4929513e7c8"
+    },
+    "resnet.en.1.png": {
+      "bytes": 59497,
+      "sha256": "642d5fbe0bac6e1abca49c1e7330b51551d2e704a65e91b467c6e9447538f754"
+    },
+    "resnet.en.2.png": {
+      "bytes": 51743,
+      "sha256": "794941f084e51841da5b2c2f7901c8cc8837b3422f2e33a9f818d453b96961b3"
+    },
+    "resnet.en.3.png": {
+      "bytes": 59677,
+      "sha256": "d4e5ec014ab4025653fb0a8355eaec5b88e456ba00399b0486ee402c2f33ac73"
+    },
+    "resnet.en.4.png": {
+      "bytes": 60443,
+      "sha256": "ea88f4dafd54613553b4862cfcbc0a5d7a0f470eed9d2152d86d05b1f65082df"
+    },
+    "resnet.en.gif": {
+      "bytes": 154393,
+      "sha256": "2c734deb1d8e1aca55416cc9d47a1448fb54dd5dea8060862cf1147993d91d31"
+    },
+    "resnet.ko.1.png": {
+      "bytes": 65841,
+      "sha256": "875af01ce5d5f4d5ef42611dd03e7f11666743d6a383f12b0ece53fc0609b2ac"
+    },
+    "resnet.ko.2.png": {
+      "bytes": 55234,
+      "sha256": "9ee49a6fddc9b409744f2a6b066398b8764a4b69d9ee80462ffaa2f76864f93c"
+    },
+    "resnet.ko.3.png": {
+      "bytes": 69145,
+      "sha256": "f2b7a3a99664ebb64d1b36de85d8b64255396406facd27ea9c8fcc63fcca9c76"
+    },
+    "resnet.ko.4.png": {
+      "bytes": 72860,
+      "sha256": "a04000ec8596c1bd673102790533b144e40626e21b58e0afcf52f330bba395b2"
+    },
+    "resnet.ko.gif": {
+      "bytes": 148036,
+      "sha256": "abb5eb69117fe78c48d60c3f24d54bbcab46a92ef6de741e4c88274ee7345f57"
+    }
+  }
+}
