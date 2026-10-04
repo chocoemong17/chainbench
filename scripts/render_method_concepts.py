@@ -219,7 +219,7 @@ def residual_board(lang, alpha):
     b.arrow([(855, 422), (969, 422)], INK, 4)
     b.grid(INPUT, 70, 350)
     b.text("입력 특징 x" if ko else "Input features x", 142, 307, 23, width=240, center=True)
-    b.grid(correction, 480, 219)
+    b.grid(correction, 480, 219, signed=True)
     b.text(
         "수정분 F(x)" if ko else "Residual F(x)", 552, 179, 24, width=300, center=True, color=GREEN
     )
