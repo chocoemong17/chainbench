@@ -1,5 +1,10 @@
 # Source-to-experiment map
 
+The review-only Backpropagation, CNN and Dropout concepts have a separate
+[source and numerical contract](reviews/learning-foundations/BRIEF.md). They use
+constructed examples, not original-paper benchmarks or completed public lessons.
+Their pending educational review is separate from arithmetic verification.
+
 The standalone `reproduce reddi-2018` implements Reddi–Kale–Kumar's
 Theorem 1 / Appendix A period-three online linear-loss counterexample,
 with Algorithm 1's no-debiasing analysis variant and Algorithm 2's max-memory

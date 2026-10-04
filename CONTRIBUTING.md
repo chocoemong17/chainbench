@@ -1,5 +1,9 @@
 # Contributing
 
+For a visual lesson, start with the [concept-first authoring guide](docs/LESSON_AUTHORING.md)
+([한국어](docs/LESSON_AUTHORING.ko.md)) and [brief template](docs/templates/LESSON_BRIEF.md).
+The explanation and difficulty need owner review before finished films are made.
+
 ChainBench reproduces public, published optimization results.
 
 A good contribution includes:
