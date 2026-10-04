@@ -1,86 +1,89 @@
-# Attention and ResNet: one core operation, one film
+# Attention and ResNet: from approved concept to interactive explanation
 
-The public collection at `/papers/` contains Adam, Attention and ResNet. Each
-lesson keeps the accepted video-first layout: one 48-second film, two draggable
-plots, a brief explanation, and a direct paper link. English is the default;
-Korean copy and native captions are optional. The existing 25 reports remain
-available. The homepage links prominently to the film collection.
+Each lesson keeps the accepted layout: a 48-second film, two interactive diagrams,
+a short takeaway and the paper link. Four twelve-second chapters follow the
+owner-approved revision3 of the review on branch `study/method-concepts` (74ce5f6).
+The explanation level was approved as sufficient; equations stay folded. Adam,
+the 25 numerical reports and all publication gates remain unchanged.
 
-## Attention: exact operation and authored inputs
+English is the default. Korean changes both the page and the actual film labels,
+preserving playback time. Each language has MP4/WebM, poster and native captions.
+Chapter buttons and the film slider pause/seek; the two exploration diagrams have
+separate controls so readers can experiment without jumping around the movie.
+No autoplay, audio, remote fonts, trackers, third-party videos or runtime packages.
 
-Vaswani et al., *Attention Is All You Need*, NeurIPS 2017,
-[arXiv:1706.03762v7](https://arxiv.org/html/1706.03762v7), §3.2.1, Eq. (1):
-`softmax(Q K^T / sqrt(d_k)) V`.
+## Attention: match first, then collect information
 
-The lesson implements a single query with `d_k=2`. Its length is 4 and its angle
-sweeps from 0 to 180 degrees in one-degree samples. The four keys are `(1,0)`,
-`(0,1)`, `(-1,0)`, `(0,-1)`. RGB values, independently chosen from the keys, are
-`(.88,.25,.20)`, `(.22,.68,.47)`, `(.23,.45,.85)`, `(.89,.65,.22)`.
-A max-shifted softmax computes the weights and the actual weighted output.
-The diagram's query direction, percentages, connection widths and output color
-all use those computed values. The two plots show all four weights and all
-three output channels as the angle varies. Both plots seek the same film state.
-The scale division is retained; the range slider changes the query angle, not
-softmax temperature or a training iteration.
+Vaswani et al., [Attention Is All You Need](https://arxiv.org/html/1706.03762v7),
+§3.2.1 Eq.(1), §§3.2.2–3.2.3. We compute `softmax(Q K^T / sqrt(3)) V`.
+Three keys are the basis vectors e0,e1,e2, labeled Ava, Ben, Mia. Values are the
+same basis vectors with different labels: Library, Garden, Studio. For a selected
+name j, Q = sqrt(3)*s*ej. The slider varies the selected scaled score s from0 to4,
+not model training or a measured semantic similarity. At4 the exact selected
+share is exp(4)/(exp(4)+2) ≈.964663, the others ≈.017668. Main display rounds to
+[2,2,96]% for Mia; readouts give one decimal place. Independently rounded shares
+need not always total exactly100. They are not answer-confidence probabilities.
 
-These are constructed color vectors. Colors do not claim learned language
-semantics or attention explanations of a real language model. This is the
-scaled dot-product core, not an implementation of the complete Transformer,
-learned Q/K/V projections, multiple heads, masking, positional encoding or
-paper translation experiments. No figures or video footage are copied.
+Chapters: Q/K/V roles → softmax shares → weighted collection as Mia's query moves
+to Ava's → self-attention/multiple heads in a sentence. In chapter3,
+Q=sqrt(3)*4*[u,0,1-u], where u is a smooth interpolation from0 to1. Every displayed
+weight and output is recomputed from that query. Movement along links indicates
+information flow, not a measured runtime or magnitude; bar lengths encode weights.
+Interactive name selection and match strength use the same computation/fixtures.
 
-## ResNet: identity shortcut and a chosen residual branch
+The cat/sofa/sleeps scene is an explicitly authored relationship diagram. It does
+not report trained attention weights or assert fixed “who/where” head roles.
+Actual Transformer Q/K/V are learned projections of representations. Full training,
+masking, positional encoding and translation benchmark reproduction are outside
+this illustration. Original diagrams only; no paper figures or video are copied.
 
-He et al., *Deep Residual Learning for Image Recognition*, CVPR 2016,
-[arXiv:1512.03385v1](https://arxiv.org/html/1512.03385v1), §3.2, Eq. (1) and the
-post-addition ReLU described immediately below it. The branch uses two hidden
-ReLU units, with W1=[[1],[0]], b1=[0,1], W2=a[.8,-.4], b2=0.
-For each input pixel x, `F(x)=a(.8 ReLU(x)-.4 ReLU(1))`, and output is
-`ReLU(x+F(x))`. Biases are explicit additions to the simplified source notation.
+## ResNet: preserve, correct, then send learning signals backward
 
-The original 32×32 binary ring/diagonal pattern generates low-contrast inputs
-`.25 + .5 pattern` and a declared contrast target `.05 + .9 pattern`.
-The same branch is applied independently to every pixel. Parameter a sweeps
-from 0 to 1 in increments .01; these weights are authored, not fitted.
-At a=0 the nonnegative input passes unchanged; at a=1 the output matches this
-target up to rounding. Final ReLU remains present. Zero F does not preserve
-negative input through that ReLU, and the code/tests explicitly retain this
-limitation. This is one small residual block, not a trained convolutional ResNet,
-ImageNet reproduction or comparison with independently trained plain networks.
+He et al., [Deep Residual Learning](https://arxiv.org/html/1512.03385v1), §§3.1–3.2,
+Eq.(1) and post-add ReLU; [Identity Mappings](https://arxiv.org/html/1603.05027v3),
+§2 Eqs.(3)–(5). The2016 derivation assumes identity after addition. Our post-add
+ReLU scalar examples are locally active (gate derivative1). Neither source makes
+the blanket claim that shortcuts always preserve gradients.
 
-Input and output are grayscale; the residual uses a signed colormap with teal
-for positive changes, orange for negative changes, and neutral gray at zero.
-Its scale is fixed ±.2 throughout the film. The first graph inspects row 16
-(zero-based) of input, residual and output. Dragging that spatial graph selects
-a pixel, not a time. The second graph shows actual full-image RMSE against the
-declared target, with a as its horizontal axis. Dragging it or the slider seeks
-the film. Neither axis is labeled as training time or a neural-network benchmark.
+The first film scene illustrates the residual learning target using an original
+9×9 house grid. Two cells are added ([5,3],[5,5]) and one removed ([6,4]); the
+correction interpolates from0 to this signed grid. This is a feature illustration,
+not an image-restoration experiment. Zero residual preserves nonnegative inputs
+through the final ReLU; negative inputs can still be clipped.
 
-## Shared motion, accessibility and verification
+The next two scenes use x=2, F(x)=−.1 ReLU(x)+.3, y=ReLU(x+F(x)), target2.2,
+L=.5(y−target)^2. Thus F=.1, y=2.1, loss=.005. Incoming gradient−.1 splits into
+shortcut−.1 and branch+.01; the input receives−.09. The branch's output-weight
+gradient is−.2. Qualitative reverse arrows explain how gradients guide changes;
+backprop calculates derivatives, and an optimizer updates weights afterward.
+The first interactive diagram lets the reader switch directions and scale both
+branch weights/bias by a in[0,1]. It is a parameter sweep, not a training run.
 
-Both films use 1280×720 pixels, 24 fps, and 1,152 frames. The shared timing knots
-are (0,0), (4,0), (22,half), (25,half), (41,last), (48,last). Each frame selects
-an actual computed parameter sample; every sample appears, with holds at the
-start, middle and end. The recorded mapping drives all browser seeking.
-Native captions occupy the reserved top header and are tested against the
-same paused film with captions hidden; no caption pixels may cover the diagram.
-No audio or autoplay. A visible poster/play control, native media controls,
-keyboard-operable range, reduced-motion behavior, data-failure notice and
-no-JavaScript MP4 access are preserved. Formulae in the folded details use
-native MathML, not raw LaTeX.
+The depth scene is a SEPARATE chosen local-derivative comparison. Plain maps:
+ReLU(−.1x+1.1). Residual maps: ReLU(x−.1x+.1). Both keep x=1 at1; all gates active;
+terminal loss .5*y² supplies gradient1. After n blocks the signed initial gradients
+are (−.1)^n and .9^n. The bars show MAGNITUDES normalized to100 on a fixed linear
+scale. At n=8: .000001 versus43.046721, displayed “<1” and “43”. The film progresses
+from0 to8 blocks; the second diagram explores0–16. The two full mappings differ,
+with independently chosen biases. This is not an equal-budget trained-network
+benchmark, speed/accuracy result, or guarantee. A branch slope−1 cancels the direct
+term; an inactive final ReLU also blocks the signal. Larger is not always better.
 
-Tests compare attention with independent NumPy matrix arithmetic, check
-normalization, permutation behavior, zero query and stable softmax, and reject
-invalid inputs. Residual checks independently evaluate the two-layer network,
-all 101 full-image outputs and RMSEs, zero-branch behavior and final activation.
-The film build verifies decoded frame counts/dimensions/duration with FFprobe.
-Chromium and WebKit each check both lessons at 1440 and 390 pixels: actual
-playback/decoded colors, every graph path coordinate, numerical readouts,
-pointer/keyboard seeking, spatial pixel selection, English/Korean, caption
-occlusion, gallery navigation, offline assets, no-script and data-failure paths.
+## Implementation and evidence
 
-All numerical execution, movie rendering and browser tests run on GitHub
-Actions. Full PR/main validation and the existing gated Pages workflow remain
-required. The exact browser-tested site artifact is hashed before publication.
-Source records, media and website manifests are publicly inspectable. Existing
-releases and immutable Adam selection evidence remain unchanged.
+`src/chainbench/visual_papers.py` owns pure numerical fixtures and frame states.
+The renderer creates1,152 frames at1280×720/24fps per language per paper. Actual
+BT.709 conversion and metadata are retained. Each frame's dots move along the
+declared paths; numeric bars/grids evolve according to the fixtures. Scene holds
+leave reading time. All generated media are hashed in experiment.json and the
+website manifest; binaries live in Actions/Pages, not the source tree.
+
+Cloud tests independently check NumPy attention arithmetic, normalization and
+permutation behavior, grid changes, forward values, finite-difference input and
+weight gradients, signed deep-chain derivatives and cancellation/gate controls.
+Chromium/WebKit ×1440/390 verify both languages: decoded numeric colors/boundaries,
+within-scene motion, unobscured captions, all chapter controls, range keyboard and
+pointer drags, numerical SVG widths/readouts, localization with playback-time
+retention, collapsed MathML, gallery/no-script/error states and no external requests.
+Selected cloud screenshots receive manual visual review before publication.
+Full PR/main tests and gated exact-artifact Pages publication remain mandatory.

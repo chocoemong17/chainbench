@@ -312,13 +312,16 @@ unchanged. Rotated controls and all tried settings are retained.
 
 ## Attention and ResNet visual lessons
 
-The separate `/papers/attention/` lesson follows Vaswani et al.
-[arXiv:1706.03762v7](https://arxiv.org/html/1706.03762v7), §3.2.1, Eq. (1),
-including the square-root key-dimension scaling. Authored query/key/RGB value
-vectors illustrate one head; they are not learned word meanings or a complete
-Transformer reproduction. `/papers/resnet/` follows He et al.
-[arXiv:1512.03385v1](https://arxiv.org/html/1512.03385v1), §3.2 Eq. (1) and
-the subsequent ReLU, using a declared two-unit branch and an original two-tone
-pattern. The slider varies chosen weights, not training time. Its contrast
-target is constructed; no ImageNet or plain-network performance claim is made.
-[Exact inputs, display semantics, timing and independent checks](VISUAL_PAPERS.md).
+The approved four-scene explanations use Vaswani et al.
+[arXiv:1706.03762v7](https://arxiv.org/html/1706.03762v7), §3.2.1 Eq.(1),
+§§3.2.2–3.2.3. Assigned name/location basis vectors demonstrate scaled dot-product
+attention. The sentence/head scene is schematic, not trained semantic attention.
+ResNet follows He et al. [arXiv:1512.03385v1](https://arxiv.org/html/1512.03385v1),
+§§3.1–3.2 Eq.(1) with post-add ReLU, and the direct backward path from
+[Identity Mappings](https://arxiv.org/html/1603.05027v3), §2 Eqs.(3)–(5).
+The latter assumes identity after addition; our scalar ReLU examples are locally
+active, so the gate derivative is1. Cancellation and inactive-gate controls are
+explicit. Separate feature-grid, scalar-block and depth toys are declared; no
+ImageNet, trained-network performance or universally preserved gradient claim.
+[Exact fixtures, assumptions, animation semantics and checks](VISUAL_PAPERS.md).
+The owner approved revision3 on `study/method-concepts` before this refinement.

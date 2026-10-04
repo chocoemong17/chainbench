@@ -1,22 +1,13 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:04.000 line:7% position:54% size:68% align:center
-잘 맞는 정보를 찾습니다.
+00:00:00.000 --> 00:00:12.000 line:7% position:54% size:68% align:center
+Q는 질문, K는 이름표, V는 내용입니다.
 
-00:00:04.000 --> 00:00:12.000 line:7% position:54% size:68% align:center
-질문과 네 키를 비교합니다.
+00:00:12.000 --> 00:00:24.000 line:7% position:54% size:68% align:center
+더 잘 맞는 정보에 더 주목합니다.
 
-00:00:12.000 --> 00:00:22.000 line:7% position:54% size:68% align:center
-잘 맞을수록 비중이 커집니다.
+00:00:24.000 --> 00:00:36.000 line:7% position:54% size:68% align:center
+질문을 바꾸면 모이는 정보도 바뀝니다.
 
-00:00:22.000 --> 00:00:25.000 line:7% position:54% size:68% align:center
-그 비중대로 값을 섞습니다.
-
-00:00:25.000 --> 00:00:34.000 line:7% position:54% size:68% align:center
-질문 방향을 바꿔 보세요.
-
-00:00:34.000 --> 00:00:41.000 line:7% position:54% size:68% align:center
-주목이 바뀌면 결과도 바뀝니다.
-
-00:00:41.000 --> 00:00:48.000 line:7% position:54% size:68% align:center
-Attention은 정보를 모읍니다.
+00:00:36.000 --> 00:00:48.000 line:7% position:54% size:68% align:center
+단어들이 서로 참고해 문맥을 만듭니다.

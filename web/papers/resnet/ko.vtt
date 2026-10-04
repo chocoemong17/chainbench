@@ -1,22 +1,13 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:04.000 line:7% position:54% size:68% align:center
-입력을 그대로 전달합니다.
+00:00:00.000 --> 00:00:12.000 line:7% position:54% size:68% align:center
+쓸 만한 정보에 수정분을 배워 더합니다.
 
-00:00:04.000 --> 00:00:12.000 line:7% position:54% size:68% align:center
-지름길로 입력을 보냅니다.
+00:00:12.000 --> 00:00:24.000 line:7% position:54% size:68% align:center
+앞으로: 원래 정보에 수정분을 더합니다.
 
-00:00:12.000 --> 00:00:22.000 line:7% position:54% size:68% align:center
-다른 경로가 변화량을 더합니다.
+00:00:24.000 --> 00:00:36.000 line:7% position:54% size:68% align:center
+뒤로: 두 길이 학습 신호를 전합니다.
 
-00:00:22.000 --> 00:00:25.000 line:7% position:54% size:68% align:center
-입력에 변화량을 더합니다.
-
-00:00:25.000 --> 00:00:34.000 line:7% position:54% size:68% align:center
-변화량을 키워 보세요.
-
-00:00:34.000 --> 00:00:41.000 line:7% position:54% size:68% align:center
-기존 정보에 변화를 보탭니다.
-
-00:00:41.000 --> 00:00:48.000 line:7% position:54% size:68% align:center
-잔차 연결의 작은 예시입니다.
+00:00:36.000 --> 00:00:48.000 line:7% position:54% size:68% align:center
+지름길은 앞쪽까지 신호가 닿도록 돕습니다.

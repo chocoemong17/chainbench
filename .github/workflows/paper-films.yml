@@ -1,7 +1,7 @@
 name: Paper films review
 on:
   push:
-    branches: [feat/attention-resnet-films]
+    branches: [feat/attention-resnet-films, feat/attention-resnet-explanations]
 permissions:
   contents: read
 concurrency:
@@ -10,7 +10,7 @@ concurrency:
 jobs:
   films:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:

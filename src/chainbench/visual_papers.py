@@ -1,19 +1,30 @@
-"""Small, explicit illustrations of Attention Eq. (1) and ResNet Eq. (1).
-
-Authored inputs and weights, not trained models or source-paper benchmarks.
-See docs/VISUAL_PAPERS.md for the scope of each display.
-"""
+"""Approved teaching fixtures; authored inputs, not trained-model benchmarks."""
 
 from __future__ import annotations
 
 import math
 import re
 
-COLORS = ("#df5545", "#398c68", "#4979bf", "#b88b2d")
-NAMES = ("Red", "Green", "Blue", "Gold")
-KEYS = ((1.0, 0.0), (0.0, 1.0), (-1.0, 0.0), (0.0, -1.0))
-VALUES = ((0.88, 0.25, 0.20), (0.22, 0.68, 0.47), (0.23, 0.45, 0.85), (0.89, 0.65, 0.22))
 DURATION, FPS = 48, 24
+NAMES = ("Ava", "Ben", "Mia")
+PLACES = {"en": ("Library", "Garden", "Studio"), "ko": ("도서관", "정원", "작업실")}
+KEYS = tuple(tuple(float(i == j) for j in range(3)) for i in range(3))
+VALUES = KEYS
+GRID = (
+    "000000000",
+    "000010000",
+    "000111000",
+    "001000100",
+    "011111110",
+    "010000010",
+    "010010010",
+    "010000010",
+    "011111110",
+)
+INPUT = [[float(v) for v in row] for row in GRID]
+DELTA = [[0.0] * 9 for _ in range(9)]
+DELTA[6][4] = -1.0
+DELTA[5][3] = DELTA[5][5] = 1.0
 
 
 def attention(query, keys, values):
@@ -33,91 +44,116 @@ def attention(query, keys, values):
     return {"scores": scores, "weights": weights, "output": output}
 
 
-def residual_block(x, strength):
-    """Two ReLU hidden units [ReLU(x), ReLU(1)], then add x and ReLU.
+def query_case(selected=2, focus=4.0):
+    """Assigned basis keys/values; focus is the selected scaled match score."""
+    if selected not in (0, 1, 2) or not math.isfinite(focus) or not 0 <= focus <= 4:
+        raise ValueError("Known name and focus in [0,4] required")
+    query = [math.sqrt(3) * focus * (i == selected) for i in range(3)]
+    return {"query": query, **attention(query, KEYS, VALUES)}
 
-    W1=[[1],[0]], b1=[0,1], W2=strength*[.8,-.4], b2=0.
-    Zero branch preserves nonnegative x; final ReLU still clips negative x.
+
+def residual_example(x=2.0, w2=-0.1, b2=0.3, target=2.2):
+    """F=w2 ReLU(x)+b2, then ReLU(x+F). Derivatives away from kinks."""
+    if not all(math.isfinite(v) for v in (x, w2, b2, target)):
+        raise ValueError("Finite inputs required")
+    hidden = max(0.0, x)
+    delta = w2 * hidden + b2
+    pre = x + delta
+    y = max(0.0, pre)
+    incoming = (y - target) * (pre > 0)
+    slope = w2 * (x > 0)
+    return dict(
+        x=x,
+        correction=delta,
+        y=y,
+        target=target,
+        loss=0.5 * (y - target) ** 2,
+        incoming=incoming,
+        shortcut=incoming,
+        branch=incoming * slope,
+        dx=incoming * (1 + slope),
+        dw2=incoming * hidden,
+    )
+
+
+def depth_case(depth, shortcut, slope=-0.1):
+    """Chosen scalar maps at x=1, active ReLUs; distinct full mappings.
+
+    Plain ReLU(slope*x+1-slope), residual ReLU(x+slope*x-slope).
+    Terminal loss .5*y**2 has derivative1 at the shared forward point y=1.
+    Returns SIGNED gradients. Displays explicitly show magnitudes.
     """
-    if not math.isfinite(x) or not math.isfinite(strength) or not 0 <= strength <= 1:
-        raise ValueError("Finite x and strength in [0,1] required")
-    correction = strength * (0.8 * max(0.0, x) - 0.4)
-    return correction, max(0.0, x + correction)
+    if not isinstance(depth, int) or not 0 <= depth <= 16 or not math.isfinite(slope):
+        raise ValueError("Depth in [0,16] and finite slope required")
+    factor = slope + int(shortcut)
+    return [factor**n for n in range(depth + 1)]
 
 
-def pattern(size=32):
-    """An original binary ring and diagonal, no image downloads."""
-    return [
-        [
-            float(
-                0.18 < math.hypot((c + 0.5) / size - 0.5, (r + 0.5) / size - 0.5) < 0.35
-                or abs(r - c) < 2
-            )
-            for c in range(size)
-        ]
-        for r in range(size)
-    ]
+def grid_case(alpha):
+    if not math.isfinite(alpha) or not 0 <= alpha <= 1:
+        raise ValueError("Correction strength in [0,1] required")
+    correction = [[alpha * d for d in row] for row in DELTA]
+    output = [[max(0.0, x + d) for x, d in zip(xs, ds)] for xs, ds in zip(INPUT, correction)]
+    return dict(correction=correction, output=output)
 
 
-def timing(steps):
-    return [(0, 0), (4, 0), (22, steps // 2), (25, steps // 2), (41, steps), (48, steps)]
+def smooth(t):
+    u = max(0.0, min(1.0, t))
+    return u * u * (3 - 2 * u)
 
 
-def frame_steps(steps):
-    knots = timing(steps)
-    result = []
-    for frame in range(DURATION * FPS):
-        t = frame / FPS
-        for (a, ka), (b, kb) in zip(knots, knots[1:]):
-            if t <= b:
-                result.append(ka + math.floor((kb - ka) * (t - a) / (b - a) + 1e-8))
-                break
-    return result
+def film_state(slug, frame):
+    """Four twelve-second chapters with reading holds and continuous motion."""
+    if (
+        slug not in ("attention", "resnet")
+        or not isinstance(frame, int)
+        or not 0 <= frame < DURATION * FPS
+    ):
+        raise ValueError("Known film and valid frame required")
+    scene, local = divmod(frame / FPS, 12)
+    state = dict(scene=int(scene), local=local, phase=(local / 3) % 1)
+    if slug == "attention":
+        # The third scene moves the query continuously from Mia to Ava.
+        blend = smooth((local - 3) / 4) if scene == 2 else 0
+        focus = 4 * smooth((local - 1) / 5) if scene == 1 else 4
+        query = [math.sqrt(3) * focus * blend, 0.0, math.sqrt(3) * focus * (1 - blend)]
+        state.update(query=query, blend=blend, focus=focus, **attention(query, KEYS, VALUES))
+    else:
+        alpha = smooth((local - 2) / 5)
+        depth = min(8, max(0, int((local - 1) * 8 / 7)))
+        state.update(alpha=alpha, depth=depth, **grid_case(alpha))
+    return state
 
 
 def experiment(slug, source):
     if slug not in ("attention", "resnet") or not re.fullmatch("[a-f0-9]{40}", source):
         raise ValueError("Known lesson and full source commit required")
-    steps = 180 if slug == "attention" else 100
-    record = {
-        "kind": "chainbench.visual-paper.v1",
-        "slug": slug,
-        "source": source,
-        "steps": steps,
-        "duration": DURATION,
-        "fps": FPS,
-        "timing": timing(steps),
-        "frame_steps": frame_steps(steps),
-        "rows": [],
-    }
+    record = dict(
+        kind="chainbench.visual-paper.v2",
+        slug=slug,
+        source=source,
+        duration=DURATION,
+        fps=FPS,
+        chapters=[0, 12, 24, 36],
+    )
     if slug == "attention":
         record.update(
             keys=KEYS,
             values=VALUES,
             names=NAMES,
-            colors=COLORS,
+            places=PLACES,
+            cases=[[query_case(i, k / 25) for k in range(101)] for i in range(3)],
             paper="https://arxiv.org/abs/1706.03762v7",
-            query_norm=4.0,
         )
-        for k in range(steps + 1):
-            query = [4 * math.cos(math.radians(k)), 4 * math.sin(math.radians(k))]
-            record["rows"].append({"k": k, "query": query, **attention(query, KEYS, VALUES)})
     else:
-        mask = pattern()
-        pixels = [[0.25 + 0.5 * v for v in row] for row in mask]
-        target = [[0.05 + 0.9 * v for v in row] for row in mask]
         record.update(
-            input=pixels, target=target, row_index=16, paper="https://arxiv.org/abs/1512.03385v1"
+            input=INPUT,
+            delta=DELTA,
+            block=residual_example(),
+            grids=[grid_case(k / 100) for k in range(101)],
+            blocks=[residual_example(w2=-0.1 * k / 100, b2=0.3 * k / 100) for k in range(101)],
+            plain=depth_case(16, False),
+            residual=depth_case(16, True),
+            paper="https://arxiv.org/abs/1512.03385v1",
         )
-        for k in range(steps + 1):
-            pairs = [[residual_block(x, k / steps) for x in row] for row in pixels]
-            delta = [[p[0] for p in row] for row in pairs]
-            output = [[p[1] for p in row] for row in pairs]
-            error = math.sqrt(
-                math.fsum((y - z) ** 2 for ys, zs in zip(output, target) for y, z in zip(ys, zs))
-                / 1024
-            )
-            record["rows"].append(
-                {"k": k, "strength": k / steps, "delta": delta, "output": output, "rmse": error}
-            )
     return record
