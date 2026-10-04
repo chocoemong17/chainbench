@@ -1,0 +1,52 @@
+{
+  "attention_matching_weight": 0.9646631559719039,
+  "fixed_mean": [
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333
+  ],
+  "residual_changed_cells": 3,
+  "zero_residual_identity_blocks": 8,
+  "scope": "assigned vectors and prescribed corrections; no training benchmark",
+  "checks": "attention normalization, closed form, lookup and permutation; residual addition, signed changes, range and eight-block zero-residual preservation",
+  "source": "4a787363edc903e903fe45f307d89db9803ecc27",
+  "size": [
+    1200,
+    840
+  ],
+  "duration_ms": 2400,
+  "files": {
+    "attention.en.png": {
+      "bytes": 62894,
+      "sha256": "d9c542d83d0e6c7c8cd44b49bb0a20b0f67687152338532afe7eb005df2ec1ee"
+    },
+    "attention.en.gif": {
+      "bytes": 123199,
+      "sha256": "307bff326140fbaef312c931baba1559305b93764d243bde42690a266fbb0169"
+    },
+    "resnet.en.png": {
+      "bytes": 52181,
+      "sha256": "06f07455c1e03eafd3c889fc7c4bb31b5020c2eb6a9151f0e0a2d815742a2797"
+    },
+    "resnet.en.gif": {
+      "bytes": 112638,
+      "sha256": "eedd25bb62c5f1f6acfcfc2bfa2b8489c47a0955480a1991def647e44b3f566d"
+    },
+    "attention.ko.png": {
+      "bytes": 65272,
+      "sha256": "c81dc582b5283323f0bd0d0c868eb1b54526797c0eba13b84688f4af2c35ffd0"
+    },
+    "attention.ko.gif": {
+      "bytes": 111782,
+      "sha256": "f7d8d4fdd601d51bc95116fd5eef166220b76765294e6a8757dce17ac1952e38"
+    },
+    "resnet.ko.png": {
+      "bytes": 53039,
+      "sha256": "d798b043ec3b5f8a2d1ce5768165e101131fe18b417168e16b4a068feddebd0f"
+    },
+    "resnet.ko.gif": {
+      "bytes": 106822,
+      "sha256": "d7c7b52d300f51ddfd9295692ac1c428e9ed449f940c99384f6c98891b351796"
+    }
+  }
+}
