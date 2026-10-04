@@ -267,7 +267,7 @@ def friendly_block(b, backwards=False):
         color=GREEN,
     )
     b.text(
-        ("가중치를 조정" if ko else "Adjust weights")
+        ("가중치의 수정 방향" if ko else "Find how to adjust")
         if backwards
         else ("수정분 +0.1" if ko else "Correction +0.1"),
         570,
@@ -397,10 +397,20 @@ def resnet_reach(lang):
         22,
         width=1090,
     )
+    b.text(
+        "막대 전체 = 출발 100 · 색 있는 부분 = 앞쪽에 도착한 신호"
+        if ko
+        else "Full track = starting 100; colored part = signal reaching earlier layers",
+        55,
+        246,
+        17,
+        width=1090,
+        color=GRAY,
+    )
     for row, skip in enumerate((False, True)):
         y = 290 + 184 * row
         magnitude = abs(depth_case(skip)[1][-1])
-        color = BLUE if skip else GRAY
+        color = BLUE if skip else RED
         b.box((55, y - 10, 1145, y + 134), fill=PALE)
         b.text(
             ("지름길 있는 경우" if skip else "직접 매핑만 있는 경우")
