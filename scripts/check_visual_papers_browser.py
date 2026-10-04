@@ -156,6 +156,31 @@ def main():
                                 )
                                 assert abs(movie.evaluate("v=>v.currentTime") - old) < 0.1
                                 expect(page.locator("html")).to_have_attribute("lang", "ko")
+                            # Optional classroom prompts stay folded, work by keyboard,
+                            # and never change the experiment or seek the film.
+                            practice = page.locator("#practice")
+                            state = page.evaluate("window.paperLesson")
+                            position = movie.evaluate("v=>v.currentTime")
+                            assert not practice.evaluate("e=>e.open")
+                            practice.locator(":scope > summary").focus()
+                            practice.locator(":scope > summary").press("Enter")
+                            expect(practice).to_have_js_property("open", True)
+                            expect(practice.locator(f"ol [lang={lang}]").first).to_be_visible()
+                            other = "ko" if lang == "en" else "en"
+                            expect(practice.locator(f"ol [lang={other}]").first).to_be_hidden()
+                            result = practice.locator(".practice-result")
+                            assert not result.evaluate("e=>e.open")
+                            result.locator("summary").click()
+                            expect(result.locator(f"p[lang={lang}]")).to_be_visible()
+                            assert page.evaluate("document.documentElement.scrollWidth<=innerWidth")
+                            assert page.evaluate("window.paperLesson") == state
+                            assert movie.evaluate("v=>v.currentTime") == position
+                            practice.screenshot(
+                                path=str(args.output / f"{slug}-{engine}-{width}-{lang}-practice.png")
+                            )
+                            result.locator("summary").click()
+                            practice.locator(":scope > summary").press("Enter")
+                            expect(practice).to_have_js_property("open", False)
                             hashes = []
                             for seconds in (9, 21, 33, 45):
                                 seek(page, seconds)
@@ -310,6 +335,7 @@ def main():
                                 captions="passed",
                                 pointer_keyboard="passed",
                                 diagram_quantities="passed",
+                                classroom_activity="passed",
                             )
                         )
                 for slug in ("attention", "resnet"):
@@ -317,6 +343,10 @@ def main():
                     page = context.new_page()
                     page.goto(origin + f"/papers/{slug}/")
                     expect(page.locator(".noscript")).to_be_visible()
+                    page.locator("#practice > summary").click()
+                    expect(page.locator("#practice")).to_have_js_property("open", True)
+                    page.locator(".practice-result > summary").click()
+                    expect(page.locator(".practice-result p[lang=en]")).to_be_visible()
                     context.close()
                     for malformed in (False, True):
                         context = browser.new_context()

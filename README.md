@@ -21,6 +21,10 @@ The films use explicit constructed examples, with computed records and stated
 scope; they do not reproduce full model-training experiments.
 [Sources and checks](docs/VISUAL_PAPERS.md). The [broader explorer and 25 reports](https://chocoemong17.github.io/chainbench/) remain available.
 
+Teaching a class? Use the [short preparation and activity guide](docs/TEACHING_GUIDE.md)
+([한국어](docs/TEACHING_GUIDE.ko.md)). [Field notes from five middle-school sessions](docs/CLASSROOM_PILOT.md)
+report 150 post-session responses, their limits, and the changes made in response.
+
 English opens by default; choose **한국어** to switch. Continue directly into the
 25-page reading tour, including image recovery and 2D/3D geometry. The first
 explorer computes new browser trajectories; paper-report controls inspect their
@@ -35,8 +39,9 @@ Python 3.10+ and NumPy generate the pages; a browser is enough to read or share 
 
 **Prefer an offline copy? [Download the offline tour and PDF](docs/OFFLINE_DOWNLOAD.md)**, then
 follow the [short reading route](docs/REVIEW_GUIDE.md#a-short-reading-route).
-This source targets v0.7.0; the download guide distinguishes the release gate
-from published assets. The preceding v0.6.0 downloads remain available.
+The published v0.7.0 alpha includes the offline reading tour and Python package;
+the live website also includes subsequent visual-lesson improvements.
+The preceding v0.6.0 downloads remain available.
 For a quick preview without installation or sign-in, open the
 [two-page FISTA PDF](https://github.com/chocoemong17/chainbench/blob/archive/local-reviews-20261001/cloud/33b6243/ChainBench_FISTA_review.pdf)
 or [five actual geometry views with Korean reading notes](https://github.com/chocoemong17/chainbench/tree/archive/local-reviews-20261001/cloud/33b6243/browser-gallery).
@@ -89,11 +94,11 @@ record as the full report, including hashes and attribution.
 
 ## Download a reading bundle from GitHub
 
-Once the [v0.7.0 release gate](https://github.com/chocoemong17/chainbench/releases/tag/v0.7.0)
-publishes, download its [reading ZIP](https://github.com/chocoemong17/chainbench/releases/download/v0.7.0/chainbench-0.7.0-reading.zip)
+The published [v0.7.0 alpha release](https://github.com/chocoemong17/chainbench/releases/tag/v0.7.0)
+provides a [reading ZIP](https://github.com/chocoemong17/chainbench/releases/download/v0.7.0/chainbench-0.7.0-reading.zip)
 and [two-page PDF](https://github.com/chocoemong17/chainbench/releases/download/v0.7.0/chainbench-0.7.0-review.pdf).
-Before publication, the [v0.6.0 assets](https://github.com/chocoemong17/chainbench/releases/tag/v0.6.0)
-remain the published reading bundle. Extract the whole ZIP and open `index.html`: all 25
+The [v0.6.0 assets](https://github.com/chocoemong17/chainbench/releases/tag/v0.6.0)
+remain available as an earlier snapshot. Extract the whole ZIP and open `index.html`: all 25
 pages, their figures and recorded examples work offline. The named reading ZIP
 contains generated reports; GitHub's automatic source archive contains source code.
 [Download, availability and verification guide](docs/OFFLINE_DOWNLOAD.md).
@@ -312,8 +317,8 @@ need not mean equal work. [Configuration and limits](docs/EXPERIMENTS.md).
 
 ## Install v0.7.0
 
-Use Python 3.10+ in your preferred environment once the
-[gated prerelease](https://github.com/chocoemong17/chainbench/releases/tag/v0.7.0) is published:
+Use Python 3.10+ in your preferred environment to install the
+[published alpha](https://github.com/chocoemong17/chainbench/releases/tag/v0.7.0):
 
 ```bash
 python -m pip install https://github.com/chocoemong17/chainbench/releases/download/v0.7.0/chainbench-0.7.0-py3-none-any.whl

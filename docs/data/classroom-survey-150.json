@@ -1,0 +1,252 @@
+{
+  "kind": "chainbench.classroom-survey.aggregate.v1",
+  "respondent_records": 150,
+  "collection": "Maintainer-supplied post-session self-report; no individual records published.",
+  "question_mapping": "Final ten-question Korean questionnaire supplied for the sessions; source workbook has numbered columns rather than full wording.",
+  "session_context": {
+    "source": "Maintainer account",
+    "session_count": 5,
+    "presenter_led_sessions": [
+      1,
+      5
+    ],
+    "student_led_sessions": [
+      2,
+      3,
+      4
+    ],
+    "dates": null,
+    "lesson_coverage_by_session": null,
+    "row_to_session_mapping": "Not independently supplied; no statistics inferred from row order.",
+    "educator_feedback": "Maintainer reports positive conversations about using the material and the need for teacher preparation; not independently documented deployments."
+  },
+  "questions": [
+    {
+      "number": 1,
+      "question": "오늘 배운 내용을 수업 전에 얼마나 알고 있었나요?",
+      "options": [
+        "처음 듣는 내용이었다",
+        "이름만 들어본 적 있었다",
+        "조금 알고 있었다",
+        "어느 정도 알고 있었다",
+        "잘 알고 있었다"
+      ],
+      "counts": [
+        146,
+        4,
+        0,
+        0,
+        0
+      ],
+      "denominator": 150
+    },
+    {
+      "number": 2,
+      "question": "오늘 설명을 듣고 내용을 얼마나 이해했다고 느끼나요?",
+      "options": [
+        "거의 이해하지 못했다",
+        "조금 이해했다",
+        "절반 정도 이해했다",
+        "대부분 이해했다",
+        "거의 다 이해했다"
+      ],
+      "counts": [
+        0,
+        1,
+        10,
+        62,
+        77
+      ],
+      "denominator": 150
+    },
+    {
+      "number": 3,
+      "question": "오늘 설명의 난이도는 어땠나요?",
+      "options": [
+        "매우 쉬웠다",
+        "조금 쉬웠다",
+        "나에게 적당했다",
+        "조금 어려웠다",
+        "매우 어려웠다"
+      ],
+      "counts": [
+        12,
+        67,
+        52,
+        19,
+        0
+      ],
+      "denominator": 150
+    },
+    {
+      "number": 4,
+      "question": "오늘 다룬 내용은 얼마나 재미있었나요?",
+      "options": [
+        "전혀 재미없었다",
+        "별로 재미없었다",
+        "보통이었다",
+        "조금 재미있었다",
+        "매우 재미있었다"
+      ],
+      "counts": [
+        8,
+        30,
+        39,
+        60,
+        13
+      ],
+      "denominator": 150
+    },
+    {
+      "number": 5,
+      "question": "영상에서 무엇이 어떻게 움직이는지 알아보기 쉬웠나요?",
+      "options": [
+        "매우 어려웠다",
+        "조금 어려웠다",
+        "보통이었다",
+        "조금 쉬웠다",
+        "매우 쉬웠다"
+      ],
+      "counts": [
+        0,
+        1,
+        8,
+        12,
+        129
+      ],
+      "denominator": 150
+    },
+    {
+      "number": 6,
+      "question": "오늘 가장 재미있었던 부분은 무엇인가요?",
+      "options": [
+        "영상에서 움직이는 모습을 보는 것",
+        "그래프의 값을 바꾸면 결과가 달라지는 것을 보는 것",
+        "일상생활의 예시를 듣는 것",
+        "특별히 재미있었던 부분은 없었다",
+        "잘 모르겠다"
+      ],
+      "counts": [
+        22,
+        73,
+        55,
+        0,
+        0
+      ],
+      "denominator": 150
+    },
+    {
+      "number": 7,
+      "question": "오늘 가장 이해하기 어려웠던 부분은 무엇인가요?",
+      "options": [
+        "처음 듣는 단어나 이름",
+        "그래프가 나타내는 뜻",
+        "결과가 왜 그렇게 나오는지에 대한 설명",
+        "특별히 어려운 부분은 없었다",
+        "잘 모르겠다"
+      ],
+      "counts": [
+        14,
+        21,
+        0,
+        115,
+        0
+      ],
+      "denominator": 150
+    },
+    {
+      "number": 8,
+      "question": "오늘 사이트를 주로 어떤 방식으로 체험했나요?",
+      "options": [
+        "선생님이 보여 주는 화면을 봤다",
+        "친구가 조작하는 화면을 함께 봤다",
+        "친구와 함께 내가 직접 조작해 봤다",
+        "혼자 직접 조작해 봤다",
+        "화면을 제대로 보거나 체험하지 못했다"
+      ],
+      "counts": [
+        60,
+        30,
+        0,
+        60,
+        0
+      ],
+      "denominator": 150
+    },
+    {
+      "number": 9,
+      "question": "이런 방식으로 다른 주제도 배워 보고 싶나요?",
+      "options": [
+        "전혀 배우고 싶지 않다",
+        "별로 배우고 싶지 않다",
+        "아직 잘 모르겠다",
+        "조금 배우고 싶다",
+        "매우 배우고 싶다"
+      ],
+      "counts": [
+        1,
+        10,
+        85,
+        49,
+        5
+      ],
+      "denominator": 150
+    },
+    {
+      "number": 10,
+      "question": "다음 수업에서 가장 늘어났으면 하는 것은 무엇인가요?",
+      "options": [
+        "움직이는 영상",
+        "내가 직접 조작해 보는 시간",
+        "쉬운 예시를 들어 설명하는 시간",
+        "지금 정도가 좋다",
+        "잘 모르겠다"
+      ],
+      "counts": [
+        0,
+        60,
+        0,
+        90,
+        0
+      ],
+      "denominator": 150
+    }
+  ],
+  "display_mode_groups": [
+    {
+      "choice": 1,
+      "n": 60,
+      "interest_positive": 30,
+      "more_control_time": 60
+    },
+    {
+      "choice": 2,
+      "n": 30,
+      "interest_positive": 17,
+      "more_control_time": 0
+    },
+    {
+      "choice": 3,
+      "n": 0,
+      "interest_positive": 0,
+      "more_control_time": 0
+    },
+    {
+      "choice": 4,
+      "n": 60,
+      "interest_positive": 26,
+      "more_control_time": 0
+    },
+    {
+      "choice": 5,
+      "n": 0,
+      "interest_positive": 0,
+      "more_control_time": 0
+    }
+  ],
+  "limits": [
+    "Perceived understanding is not measured learning gain.",
+    "No randomized comparison, site-only effect, retention or repeat-use measurement.",
+    "Changes made in response have not been evaluated yet."
+  ]
+}
