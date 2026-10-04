@@ -29,7 +29,7 @@ FONT = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
 def background(record):
     """An open near wall and a tall fixed camera make the valley floor visible."""
     fig = plt.figure(figsize=(12.8, 7.2), dpi=100, facecolor=BG)
-    ax = fig.add_axes([-0.07, -0.09, 1.0, 1.10], projection="3d", facecolor=BG)
+    ax = fig.add_axes([-0.07, -0.06, 1.0, .95], projection="3d", facecolor=BG)
     xs = np.linspace(-3.6, 0.8, 100)
     # Resolve the bottom of the narrow valley explicitly, rather than bridging it
     # with a coarse uniform mesh. The optimizer coordinates are never rescaled.
@@ -44,16 +44,18 @@ def background(record):
         x, y = np.meshgrid(xs, y)
         z = height(x, y)
         ax.plot_surface(x, y, z, rcount=len(y), ccount=len(xs), cmap=cmap,
-                        vmin=0, vmax=12, linewidth=0, antialiased=True, alpha=.96)
+                        vmin=0, vmax=12, linewidth=0, edgecolor="none", antialiased=False)
 
     filled_side(ys)
     filled_side(np.linspace(-.045, 0, 24))
     # The entire near wall is retained geometrically but shown only as a mesh.
     near = -np.unique(np.r_[0, .025, .05, .1, .2, .35, .55, .8, 1.1, 1.5, 2, 2.7])[::-1]
+    near_dense = -ys[::-1]
     for xx in np.linspace(-3.6, .8, 10):
-        ax.plot(np.full_like(near, xx), near, height(xx, near), color="#819b98", alpha=.26, lw=.65)
+        ax.plot(np.full_like(near_dense, xx), near_dense, height(xx, near_dense),
+                color="#95aca5", alpha=.42, lw=.8)
     for yy in near:
-        ax.plot(xs, np.full_like(xs, yy), height(xs, yy), color="#819b98", alpha=.22, lw=.6)
+        ax.plot(xs, np.full_like(xs, yy), height(xs, yy), color="#95aca5", alpha=.36, lw=.7)
     for xx in np.linspace(-3.6, .8, 9):
         ax.plot(np.full_like(ys, xx), ys, height(xx, ys)+.015, color="#405f61", alpha=.4, lw=.7)
     ax.plot(xs, np.zeros_like(xs), height(xs, 0)+.015, color="#b3efdb", lw=2.1)
@@ -179,7 +181,7 @@ def build_film(output: Path, source: str, review=None, preview_only=False):
         review_frames(review, source, record, base, view)
     # Fail on clipped numerical paths, rather than hiding out-of-frame behavior.
     for points in view["paths"].values():
-        assert all(20 < x < 980 and 155 < y < 628 for x, y in points), (
+        assert all(20 < x < 980 and 180 < y < 628 for x, y in points), (
             "Path leaves film view",
             min(x for x, y in points),
             max(x for x, y in points),
