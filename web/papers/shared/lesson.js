@@ -86,7 +86,13 @@
   function captions(){for(const t of movie.textTracks)t.mode=t.language===root.lang?'showing':'disabled';}
   function translate(){
     $('language').textContent=tr('한국어','English');$('language').setAttribute('aria-label',tr('Switch to Korean','Switch to English'));
-    if(!movie)return;
+    if(!movie){
+      for(const paper of ['attention','resnet']){
+        const img=document.querySelector('img[src^="'+paper+'/poster"]');
+        if(img)img.src=paper+'/poster'+(root.lang==='ko'?'.ko':'')+'.jpg';
+      }
+      return;
+    }
     $('iteration').setAttribute('aria-label',tr('Video position','영상 위치'));cover.setAttribute('aria-label',tr('Play the 48-second film','48초 영상 재생'));
     document.querySelector('.skip').textContent=tr('Skip to the film','영상으로 바로 가기');
     document.querySelector('.chapters').setAttribute('aria-label',tr('Film chapters','영상 장면'));

@@ -143,6 +143,10 @@ def main():
                         page.locator("#film-start").click()
                         page.wait_for_function('()=>document.querySelector("video").currentTime>.3')
                         movie.evaluate("v=>v.pause()")
+                        # Compare the actual film/captions without transient native player
+                        # controls or a buffering spinner entering the image-difference mask.
+                        # Native controls were exercised above and are restored below.
+                        movie.evaluate("v=>v.controls=false")
                         for lang in ("en", "ko"):
                             if lang == "ko":
                                 old = movie.evaluate("v=>v.currentTime")
@@ -216,14 +220,25 @@ def main():
                             )
                             w, h = diff.size
                             assert diff.crop((0, 0, w, round(106 * h / 720))).getbbox() is not None
-                            assert (
-                                diff.crop(
-                                    (0, round(115 * h / 720), w, round(580 * h / 720))
-                                ).getbbox()
-                                is None
-                            ), "Caption overlaps diagram"
+                            overlap = diff.crop(
+                                (0, round(115 * h / 720), w, round(580 * h / 720))
+                            ).getbbox()
+                            if overlap:
+                                (
+                                    args.output
+                                    / f"{slug}-{engine}-{width}-{lang}-caption-shown.png"
+                                ).write_bytes(shown)
+                                (
+                                    args.output
+                                    / f"{slug}-{engine}-{width}-{lang}-caption-hidden.png"
+                                ).write_bytes(hidden)
+                                diff.save(
+                                    args.output / f"{slug}-{engine}-{width}-{lang}-caption-diff.png"
+                                )
+                            assert overlap is None, ("Caption overlaps diagram", overlap)
                             assert page.evaluate("document.documentElement.scrollWidth<=innerWidth")
                             audit_diagrams(page, record)
+                        movie.evaluate("v=>v.controls=true")
                         # Real pointer/keyboard control; independent toy does not seek the film.
                         old = movie.evaluate("v=>v.currentTime")
                         drag(page, "#first-chart", 0.37)
