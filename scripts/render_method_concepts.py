@@ -69,7 +69,7 @@ class Board:
     def text(self, value, x, y, size=22, width=1120, color=INK, center=False):
         path = (
             "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc"
-            if self.lang == "ko" or any(ord(c) > 0x3000 for c in value)
+            if any(ord(c) > 0x3000 for c in value)
             else "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
         )
         for actual in range(size, 13, -1):
@@ -78,6 +78,13 @@ class Board:
                 break
         else:
             raise ValueError(f"Text does not fit: {value}")
+        missing = font.getmask(chr(0x10FFFF))
+        for char in set(value):
+            if ord(char) <= 127 or char.isspace():
+                continue
+            glyph = font.getmask(char)
+            if glyph.size == missing.size and bytes(glyph) == bytes(missing):
+                raise ValueError(f"Missing glyph U+{ord(char):04X} in {value!r}")
         anchor = "mt" if center else "lt"
         bounds = self.d.textbbox((x, y), value, font=font, anchor=anchor)
         assert bounds[0] >= 0 and bounds[1] >= 0 and bounds[2] <= 1200 and bounds[3] <= 840

@@ -181,7 +181,7 @@ def attention_values(lang):
         "실제 모델에서는 다음 층이 이렇게 모은 특징을 사용합니다."
         if ko
         else "In a model, the next layer uses these aggregated features.",
-        "O = softmax(QKᵀ / √dₖ)V · 모든 V의 가중합입니다."
+        "O = softmax(QK^T / √d_k)V · 모든 V의 가중합입니다."
         if ko
         else "O = softmax(QKᵀ / √dₖ)V. Every V contributes to the weighted sum.",
     )
@@ -432,7 +432,7 @@ def resnet_backward(lang):
         "지름길은 학습 신호를 직접 전달하고, 가지의 가중치도 계속 학습합니다."
         if ko
         else "The shortcut carries a direct signal; the branch weights still learn as well.",
-        "신호는 기울기입니다. dL/dw₂ = −0.20. 더 큰 기울기가 항상 더 좋은 것은 아닙니다."
+        "신호는 기울기입니다. dL/dw2 = −0.20. 더 큰 기울기가 항상 더 좋은 것은 아닙니다."
         if ko
         else "Signals are gradients. dL/dw₂ = −0.20. Larger gradients are not always better.",
     )
