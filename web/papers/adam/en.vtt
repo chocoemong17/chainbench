@@ -1,29 +1,22 @@
 WEBVTT
 
-00:00.000 --> 00:04.000 line:18% position:40% size:74% align:center
-A steep wall. A narrow floor.
-The front wall is shown as a wireframe.
+00:00.000 --> 00:04.000 line:7% position:54% size:68% align:center
+See the valley floor.
 
-00:04.000 --> 00:14.000 line:18% position:40% size:74% align:center
-Momentum swings across the valley.
-Watch the depth of each move.
+00:04.000 --> 00:14.000 line:7% position:54% size:68% align:center
+Momentum swings.
 
-00:14.000 --> 00:24.000 line:18% position:40% size:74% align:center
-Adam adjusts the step in each direction.
-Less bouncing. More progress.
+00:14.000 --> 00:24.000 line:7% position:54% size:68% align:center
+Adam adjusts each step.
 
-00:24.000 --> 00:27.000 line:18% position:40% size:74% align:center
-Adam reaches the target at update 66.
-The other paths are still moving.
+00:24.000 --> 00:27.000 line:7% position:54% size:68% align:center
+Adam: target at k = 66.
 
-00:27.000 --> 00:35.000 line:18% position:40% size:74% align:center
-Each method gets the same gradient budget.
-Watch how much distance remains.
+00:27.000 --> 00:35.000 line:7% position:54% size:68% align:center
+Same gradient budget.
 
-00:35.000 --> 00:42.000 line:18% position:40% size:74% align:center
-Momentum settles at update 611.
-GD still has a long way to go.
+00:35.000 --> 00:42.000 line:7% position:54% size:68% align:center
+Momentum: k = 611.
 
-00:42.000 --> 00:48.000 line:18% position:40% size:74% align:center
-Here, Adam handles the scale difference well.
-Explore the two graphs below.
+00:42.000 --> 00:48.000 line:7% position:54% size:68% align:center
+Adapt to each direction.

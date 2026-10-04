@@ -1,29 +1,22 @@
 WEBVTT
 
-00:00.000 --> 00:04.000 line:18% position:40% size:74% align:center
-가파른 벽 사이로 좁은 바닥이 이어집니다.
-앞쪽 벽을 선으로 표시해 안쪽까지 보여줍니다.
+00:00.000 --> 00:04.000 line:7% position:54% size:68% align:center
+바닥까지 보이는 골짜기
 
-00:04.000 --> 00:14.000 line:18% position:40% size:74% align:center
-Momentum이 골짜기를 가로질러 왕복합니다.
-이동할 때마다 높이가 얼마나 달라지는지 보세요.
+00:04.000 --> 00:14.000 line:7% position:54% size:68% align:center
+Momentum의 왕복 운동
 
-00:14.000 --> 00:24.000 line:18% position:40% size:74% align:center
-Adam은 방향마다 보폭을 조절합니다.
-왕복을 줄이고 목표로 전진합니다.
+00:14.000 --> 00:24.000 line:7% position:54% size:68% align:center
+방향마다 보폭 조절
 
-00:24.000 --> 00:27.000 line:18% position:40% size:74% align:center
-Adam은 66회부터 목표 구간에 머뭅니다.
-다른 경로는 아직 이동 중입니다.
+00:24.000 --> 00:27.000 line:7% position:54% size:68% align:center
+Adam 도달: 66회
 
-00:27.000 --> 00:35.000 line:18% position:40% size:74% align:center
-세 방법 모두 같은 횟수만큼 기울기를 계산합니다.
-남은 거리를 비교해 보세요.
+00:27.000 --> 00:35.000 line:7% position:54% size:68% align:center
+같은 기울기 계산 횟수
 
-00:35.000 --> 00:42.000 line:18% position:40% size:74% align:center
-Momentum은 611회부터 목표 구간에 머뭅니다.
-GD는 아직 갈 길이 남았습니다.
+00:35.000 --> 00:42.000 line:7% position:54% size:68% align:center
+Momentum 도달: 611회
 
-00:42.000 --> 00:48.000 line:18% position:40% size:74% align:center
-이 예시에서 Adam은 방향별 경사 차이를 잘 다룹니다.
-아래 두 그래프를 직접 움직여 보세요.
+00:42.000 --> 00:48.000 line:7% position:54% size:68% align:center
+경사 차이를 다루는 Adam

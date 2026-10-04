@@ -95,7 +95,10 @@ middle of an encoded frame. Both methods of seeking remain draggable.
 
 The graphs show actual objective and Euclidean distance on log axes; values below
 1e-12 sit at the floor, while exact numbers remain in the readouts and JSON.
-English/Korean captions explain the same sequence. No audio or autoplay.
+Short, single-line English/Korean captions sit in the reserved upper header
+(line7%, position54%, size68%) with responsive font sizing, outside the numerical
+path region. No audio or autoplay. Browser screenshots with captions shown/hidden
+are compared at both viewport sizes; terrain pixels must remain unchanged.
 
 ## Build and checks
 

@@ -6,12 +6,14 @@ import argparse
 import functools
 import hashlib
 import http.server
+import io
 import json
 import re
 import threading
 import urllib.request
 from pathlib import Path
 
+from PIL import Image, ImageChops
 from playwright.sync_api import expect, sync_playwright
 
 
@@ -112,6 +114,8 @@ def main():
                     expect(page.locator("html")).to_have_attribute("lang", "en")
                     expect(page.locator("#iteration")).to_be_enabled()
                     assert page.locator("video").count() == 1
+                    # The Korean first heading must not strand its final syllable.
+                    assert "가파른 길," in page.locator("h1").text_content()
                     assert page.locator(".chart-svg").count() == 2
                     assert not page.locator(".details").evaluate("e=>e.open")
                     assert page.evaluate("document.documentElement.scrollWidth<=innerWidth")
@@ -150,12 +154,32 @@ def main():
                         page.wait_for_timeout(180)
                         assert movie.evaluate("""v=>{
                             const cue=[...v.textTracks].find(t=>t.language==='en').activeCues[0];
-                            return cue.line===18&&cue.position===40&&cue.size===74;
+                            return cue.line===7&&cue.position===54&&cue.size===68&&!cue.text.includes('\\n');
                         }"""), "Captions must leave the lower trajectory unobstructed"
                         png = movie.screenshot(
                             path=str(args.output / f"{engine}-{width}-frame-{seconds}.png")
                         )
                         assert png
+                        if seconds == 7:
+                            # Compare the same paused movie with captions on/off.
+                            # All actual paths lie within film rows180–600. Caption
+                            # pixels must stay in the reserved header, at both sizes.
+                            movie.evaluate("v=>[...v.textTracks].forEach(t=>t.mode='hidden')")
+                            page.wait_for_timeout(120)
+                            hidden_png = movie.screenshot()
+                            movie.evaluate("v=>[...v.textTracks].forEach(t=>t.mode=t.language==='en'?'showing':'disabled')")
+                            page.wait_for_timeout(120)
+                            shown = Image.open(io.BytesIO(png)).convert("RGB")
+                            hidden = Image.open(io.BytesIO(hidden_png)).convert("RGB")
+                            difference = ImageChops.difference(shown, hidden)
+                            w, h = shown.size
+                            boundary, bottom = round(180*h/720), round(600*h/720)
+                            header_box = difference.crop((0, 0, w, boundary)).getbbox()
+                            scene_box = difference.crop((0, boundary, w, bottom)).getbbox()
+                            assert header_box is not None, "Visible captions must change header pixels"
+                            assert scene_box is None, ("Captions cover the terrain", engine, width, scene_box)
+                            print({"caption_pixels": {"engine": engine, "width": width,
+                                                      "header_box": header_box, "scene_box": scene_box}}, flush=True)
                         pixels = movie.evaluate("""v=>{
                             const c=document.createElement('canvas');c.width=320;c.height=180;
                             const g=c.getContext('2d');g.drawImage(v,0,0,320,180);
@@ -255,6 +279,7 @@ def main():
                             "decoded_video": "passed",
                             "pointer_keyboard_chart_scrub": "passed",
                             "captions_language": "passed",
+                            "captions_clear_of_terrain_pixels": "passed",
                             "overflow": False,
                         }
                     )
