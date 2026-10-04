@@ -79,7 +79,7 @@ def attention_frame(record, k):
         key = record["keys"][i]
         arrow(d, (435, y + 35), (435 + 20 * key[0], y + 35 - 20 * key[1]), color, 2)
         text(d, (473, y + 18), name, 26)
-        text(d, (687, y + 20), f"{weight:.0%}", 22, MUTED, "ra")
+        text(d, (687, y + 20), f"{weight:.1%}", 22, MUTED, "ra")
         d.rounded_rectangle((709, y + 20, 735, y + 46), radius=4, fill=rgb(record["values"][i]))
     d.rounded_rectangle(
         (950, 270, 1150, 470), radius=20, fill=rgb(row["output"]), outline=INK, width=2
@@ -113,11 +113,11 @@ def resnet_frame(record, k):
     img, d = base(record, k)
     row = record["rows"][k]
     # The bypass carries x unchanged. A lower path feeds x to the residual branch.
-    d.line([(212, 245), (212, 181), (1034, 181), (1034, 245)], fill=TEAL, width=4)
-    arrow(d, (1034, 218), (1034, 245), TEAL, 4)
+    d.line([(88, 340), (64, 340), (64, 181), (1180, 181), (1180, 340)], fill=TEAL, width=4)
+    arrow(d, (1180, 340), (1158, 340), TEAL, 4)
     text(d, (626, 139), "identity shortcut", 22, TEAL, "ma")
-    d.line([(212, 532), (212, 567), (624, 567), (624, 532)], fill="#8da39b", width=3)
-    arrow(d, (624, 567), (624, 532), "#8da39b", 3)
+    d.line([(212, 512), (212, 567), (624, 567), (624, 512)], fill="#8da39b", width=3)
+    arrow(d, (624, 567), (624, 512), "#8da39b", 3)
     for x, label, values, signed in [
         (88, "INPUT  x", record["input"], False),
         (500, "CHANGE  F(x)", row["delta"], True),
@@ -162,6 +162,16 @@ def build(output, slug, source, review=None, preview_only=False):
         "24",
         "-i",
         "pipe:0",
+        "-vf",
+        "scale=out_color_matrix=bt709:out_range=tv",
+        "-colorspace",
+        "bt709",
+        "-color_primaries",
+        "bt709",
+        "-color_trc",
+        "bt709",
+        "-color_range",
+        "tv",
         "-an",
         "-c:v",
         "libx264",
@@ -174,6 +184,16 @@ def build(output, slug, source, review=None, preview_only=False):
         "-movflags",
         "+faststart",
         str(output / "film.mp4"),
+        "-vf",
+        "scale=out_color_matrix=bt709:out_range=tv",
+        "-colorspace",
+        "bt709",
+        "-color_primaries",
+        "bt709",
+        "-color_trc",
+        "bt709",
+        "-color_range",
+        "tv",
         "-an",
         "-c:v",
         "libvpx-vp9",
@@ -215,7 +235,7 @@ def build(output, slug, source, review=None, preview_only=False):
                     "v:0",
                     "-count_frames",
                     "-show_entries",
-                    "stream=width,height,nb_read_frames:format=duration",
+                    "stream=width,height,nb_read_frames,color_space,color_transfer,color_primaries,color_range:format=duration",
                     "-of",
                     "json",
                     str(output / filename),
@@ -225,6 +245,13 @@ def build(output, slug, source, review=None, preview_only=False):
         stream = probe["streams"][0]
         assert (stream["width"], stream["height"]) == SIZE
         assert int(stream["nb_read_frames"]) == 1152
+        assert (
+            stream["color_space"]
+            == stream["color_transfer"]
+            == stream["color_primaries"]
+            == "bt709"
+        )
+        assert stream["color_range"] == "tv"
         assert abs(float(probe["format"]["duration"]) - 48) < 0.1
     record["media"] = {
         name: {
