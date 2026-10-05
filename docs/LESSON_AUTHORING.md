@@ -11,12 +11,12 @@ on the `study/learning-foundations` review branch. They are not six finished les
    but does not automatically explain a neural-network architecture.
 2. Declare a small example, what changes, what stays fixed, and what it cannot
    prove. Verify displayed numbers using an independent calculation. For example,
-   [the foundations fixtures](../review/learning_foundations.py) check gradients
-   against finite differences and enumerate all 16 dropout masks.
-3. Prepare four plain scenes. Use one sentence per scene, English by default,
+   [the foundations fixtures](../review/learning_foundations_v2.py) check gradients
+   against finite differences and compare the complete convolution with its unrolled matrix.
+3. Prepare as many plain scenes as the mechanism needs. Use one sentence per scene, English by default,
    equivalent Korean, and still images alongside a slow storyboard. No finished
    video is required. The [filled brief](reviews/learning-foundations/BRIEF.md)
-   shows the exact scope and four-scene plans for this round.
+   shows the exact scope and variable-length plans for this round.
 4. Run the branch's focused Actions workflow and inspect every scene in both
    languages. Share the GitHub-rendered review README; the reviewer needs no ZIP,
    local Python or Actions artifact download. Record requested changes and the
@@ -32,7 +32,7 @@ on the `study/learning-foundations` review branch. They are not six finished les
 
 The concept workflow pins Pillow and renders in GitHub Actions. Locally only edit
 small sources; reuse the shared program directory if any local tool is needed.
-The generated review bundle is capped at 5 MB and GitHub retains it on the review
+The generated review bundle is capped at 12 MB per revision and GitHub retains it on the review
 branch. Do not add dependencies, media caches, private student data or paper PDFs.
 
 Feedback belongs in the [feedback-to-change record](FEEDBACK_ACTIONS.md).

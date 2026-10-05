@@ -1,101 +1,151 @@
-# Three next lessons — concept review, revision 1
+# Revised concepts v2 — branches, moving filters and multiple layers
 
-[한국어](README.ko.md) · [Existing finished lessons](https://chocoemong17.github.io/chainbench/papers/)
+[한국어](README.ko.md)
 
-**Review the idea and difficulty before we make the finished films.** These are
-four-scene sketches, 20 seconds each, with a five-second hold per scene. The
-images below open directly in GitHub; no download or installation is needed.
-Open “Read at your own pace” for stills if animation is too fast or distracting.
+The four-scene limit is removed. Backprop has 10 stages, CNN has 9 explanation chapters and 82 scan positions, and Dropout has 8 chapters. Watch each storyboard, then open the full-size stills to read at your own pace. **Explanation and difficulty review; final films have not started.**
 
-| Order | Proposed addition | What it helps explain | Status |
-| --- | --- | --- | --- |
-| 1 | Backpropagation | Where Adam's change signals come from; ResNet's backward route | Awaiting your review |
-| 2 | CNN | Local pattern detection and shared weights; ResNet's visual features | Awaiting your review |
-| 3 | Dropout | Varying the participating units while learning | Awaiting your review |
+## 1. Backpropagation: AB + CDE
 
-Adam, Attention and ResNet are the **three finished lessons**. These sketches are
-not new finished lessons or additional classroom-tested material.
+Five variables feed AB+CDE. The loss signal travels backward through the addition and both product branches to all five gradients, followed by a real update.
 
-## 1. Backpropagation — find what to change
+![Backpropagation: AB + CDE — animated concept](v2/backprop.en.gif)
 
-A prediction misses its target. Reusing the forward calculations tells us how
-each connection affects the loss. An optimizer then makes a small update.
+<details><summary>Read full-size stills at your own pace</summary>
 
-![Four rough scenes: prediction, backward gradients, weight update, and separation of backprop from the optimizer.](v1/backprop.en.gif)
+**1. Five inputs and two branches**
 
-<details><summary>Read at your own pace — all four scenes</summary>
+![Five inputs and two branches](v2/backprop.en.1.png)
 
-![1. Input 2 produces prediction 1 while the target is 2.](v1/backprop.en.1.png)
-![2. A backward signal gives weight gradients minus 1 and minus 2.](v1/backprop.en.2.png)
-![3. One gradient-descent update moves the prediction to 1.54.](v1/backprop.en.3.png)
-![4. Backprop computes derivatives; an optimizer uses them to choose an update.](v1/backprop.en.4.png)
+**2. Compute AB and CD**
 
-</details>
+![Compute AB and CD](v2/backprop.en.2.png)
 
-Review focus: **Can you see why a backward calculation is useful, and how it
-differs from Adam?** If approved, the final lesson will let you step through the
-process and vary the update size, including a size that makes the loss worse.
+**3. Finish CDE, output and loss**
 
-[Original paper](https://doi.org/10.1038/323533a0) ·
-[Exact example and limits](BRIEF.md#1-backpropagation--priority-one)
+![Finish CDE, output and loss](v2/backprop.en.3.png)
 
-## 2. CNN — recognize a pattern at different positions
+**4. Start backward**
 
-The same small detector moves over a picture. Its response follows the pattern;
-another detector finds a different pattern. Reusing weights reduces how many
-separate values must be learned.
+![Start backward](v2/backprop.en.4.png)
 
-![Four rough scenes: local filter, shifted pattern, two response maps, and shared parameter counts.](v1/cnn.en.gif)
+**5. Send to both branches at addition**
 
-<details><summary>Read at your own pace — all four scenes</summary>
+![Send to both branches at addition](v2/backprop.en.5.png)
 
-![1. A three-by-three vertical detector gives response 6.](v1/cnn.en.1.png)
-![2. Moving the input right moves its response right.](v1/cnn.en.2.png)
-![3. Vertical and horizontal filters produce different maps.](v1/cnn.en.3.png)
-![4. This example needs 18 shared weights rather than 630 separate local weights.](v1/cnn.en.4.png)
+**6. Back through AB**
+
+![Back through AB](v2/backprop.en.6.png)
+
+**7. Back through CDE**
+
+![Back through CDE](v2/backprop.en.7.png)
+
+**8. Back through CD**
+
+![Back through CD](v2/backprop.en.8.png)
+
+**9. All five gradients**
+
+![All five gradients](v2/backprop.en.9.png)
+
+**10. One update**
+
+![One update](v2/backprop.en.10.png)
 
 </details>
 
-Review focus: **Does reusing the same detector across positions make sense?**
-If approved, drag the window and move the pattern in the final lesson. These
-filters are chosen for explanation; a real CNN learns its filters.
+## 2. CNN: moving windows and layers
 
-[Original paper, author's page](https://bottou.org/papers/lecun-98h) ·
-[Exact example and limits](BRIEF.md#2-cnn--priority-two)
+A moving 3×3 filter fills the output map cell by cell. A second filter, stride 2, stacked channels, the next convolution layer and final scores follow. The first CNN layer is then unrolled into the exact same matrix calculation before comparing parameter counts. **This compares structures, not equal measured accuracy.**
 
-## 3. Dropout — let different combinations take part
+![CNN: moving windows and layers — animated concept](v2/cnn.en.gif)
 
-During training, temporarily omit some units so the network cannot always rely
-on one fixed team. Units can return next time. Prediction uses all units with
-the paper's weight scaling.
+<details><summary>Read full-size stills at your own pace</summary>
 
-![Four rough scenes: full network, two different masks, and scaled full-network prediction.](v1/dropout.en.gif)
+**1. Calculate one patch**
 
-<details><summary>Read at your own pace — all four scenes</summary>
+![Calculate one patch](v2/cnn.en.1.png)
 
-![1. Four feature values contribute to a sum of 10.](v1/dropout.en.1.png)
-![2. A selected training mask gives a sum of 3.](v1/dropout.en.2.png)
-![3. Another selected mask gives a sum of 7.](v1/dropout.en.3.png)
-![4. All units return, with weight scaling giving the linear average of 5.](v1/dropout.en.4.png)
+**2. Scan the first filter**
+
+![Scan the first filter](v2/cnn.en.2.png)
+
+**3. Scan the second filter**
+
+![Scan the second filter](v2/cnn.en.3.png)
+
+**4. Compare stride 2**
+
+![Compare stride 2](v2/cnn.en.4.png)
+
+**5. Stack feature channels**
+
+![Stack feature channels](v2/cnn.en.5.png)
+
+**6. Combine channels in the next layer**
+
+![Combine channels in the next layer](v2/cnn.en.6.png)
+
+**7. Compute final scores**
+
+![Compute final scores](v2/cnn.en.7.png)
+
+**8. Unroll as a matrix**
+
+![Unroll as a matrix](v2/cnn.en.8.png)
+
+**9. Compare independent parameter counts**
+
+![Compare independent parameter counts](v2/cnn.en.9.png)
 
 </details>
 
-Review focus: **Is it clear that this changes participation during training,
-and does not permanently delete units?** If approved, inspect different masks
-and switch to prediction mode. This small sum shows the mechanism; it does not
-demonstrate a measured accuracy improvement.
+## 3. Dropout: 5 → 10 → 5 → 2
 
-[Original paper](https://jmlr.org/papers/v15/srivastava14a.html) ·
-[Exact example and limits](BRIEF.md#3-dropout--priority-three)
+In a5→10→5→2 network, both hidden layers change their participating units and paths. Follow the surviving paths, switch masks, then restore all units at prediction time.
 
-## What to review
+![Dropout: 5 → 10 → 5 → 2 — animated concept](v2/dropout.en.gif)
 
-For each topic: **approve / needs a change**, plus **too easy / about right / too
-hard**. A short note about a confusing scene is enough. Topics can be approved
-separately. No final video or production-page work starts for a topic until its
-explanation and difficulty are approved.
+<details><summary>Read full-size stills at your own pace</summary>
 
-[Contributor template](../../templates/LESSON_BRIEF.md) ·
-[Authoring steps](../../LESSON_AUTHORING.md) ·
-[Feedback and changes](../../FEEDBACK_ACTIONS.md) ·
-[Cloud calculation and image checks](v1/verification.json)
+**1. The full network**
+
+![The full network](v2/dropout.en.1.png)
+
+**2. Hide some first-layer units**
+
+![Hide some first-layer units](v2/dropout.en.2.png)
+
+**3. Hide some next-layer units**
+
+![Hide some next-layer units](v2/dropout.en.3.png)
+
+**4. Follow participating paths**
+
+![Follow participating paths](v2/dropout.en.4.png)
+
+**5. Change the mask**
+
+![Change the mask](v2/dropout.en.5.png)
+
+**6. Change both layers again**
+
+![Change both layers again](v2/dropout.en.6.png)
+
+**7. Prediction with all units**
+
+![Prediction with all units](v2/dropout.en.7.png)
+
+**8. Why vary the team?**
+
+![Why vary the team?](v2/dropout.en.8.png)
+
+</details>
+
+## Review this revision
+
+Can you follow the backward branches, the moving CNN filters and layered/matrix views, and the changing dropout subnetworks? For each topic: approve, revise the explanation, or adjust the difficulty. Only approved topics move to refinement.
+
+[계산 조건·원문 / source contract](BRIEF.md) · [검증 / verification](v2/verification.json)
+
+Adam, Attention and ResNet remain the three finished lessons. [Live collection](https://chocoemong17.github.io/chainbench/papers/)

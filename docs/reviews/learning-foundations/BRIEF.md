@@ -1,108 +1,140 @@
-# Filled concept brief: learning foundations, revision 1
+# Learning foundations — revised concept contract, revision 2
 
-**Status: waiting for owner review.** Existing Adam, Attention and ResNet remain
-the only completed visual lessons. No final film, production route or new
-classroom observation is included in this round.
+**Owner review pending.** Revision 1 was reviewed as too sparse. On 2026-10-05 the
+owner requested branching over five variables, moving CNN windows, stacked feature
+volumes, a matrix-based parameter comparison, and dropout in several hidden layers.
+The four-scene restriction is removed. No finished lessons or production pages are
+added. [Previous contract](BRIEF.v1.md) and `v1/` assets remain available.
 
-Audience: first-time learners, around the owner-approved Attention/ResNet
-explanation depth (owner described that level as about 5). Basic multiplication
-is enough for the front-facing story; exact contracts stay here.
-
-## 1. Backpropagation — priority one
-
-Takeaway: reuse forward calculations to work out how each weight affects the
-loss; an optimizer then uses these derivatives to change the weights.
-Connects to Adam's update rule and ResNet's backward path.
+## Backpropagation: AB + CDE, ten stages
 
 Source: Rumelhart, Hinton & Williams (1986),
 [Learning representations by back-propagating errors](https://doi.org/10.1038/323533a0),
-pp. 533–534, error derivatives propagated backward through layers.
+pp. 533–534, forward values and backward error derivatives.
 [Author-hosted paper](https://www.cs.toronto.edu/~hinton/absps/naturebp.pdf).
-This is a representative landmark, not a claim that reverse differentiation
-was first invented in this paper.
+This constructed expression illustrates the chain rule, not the paper's sigmoid
+experiment, historical priority for reverse differentiation, or measured speed.
 
-| Scene | Visible change | Fixed reference |
-| --- | --- | --- |
-| Prediction | Input 2 passes through weights 1 and 0.5, yielding 1 | Target 2 |
-| Backward signal | Arrows reverse; gradients −1 and −2 appear at their weights | Original forward values reused |
-| Update | Weights become 1.1 and 0.7; output becomes 1.54 | Same input and target |
-| Roles | Backprop and optimizer roles separated | Two operations in the same learning loop |
+Inputs/adjustable variables: A=2, B=3, C=2, D=−1, E=2. Target 4.
+Intermediate values u=AB=6, v=CD=−2, w=vE=−4, y=u+w=2.
+Loss L=(y−4)^2/2=2. Seed g_y=−2. Addition passes g_u=g_w=−2.
+Product u=AB gives g_A=g_u*B=−6 and g_B=g_u*A=−4.
+Product w=vE gives g_v=g_w*E=−4 and g_E=g_w*v=+4.
+Product v=CD gives g_C=g_v*D=+4 and g_D=g_v*C=−8.
 
-Constructed linear chain: h=w1*x, y=w2*h, L=(y−2)^2/2. No biases/activation.
-At x=2,w1=1,w2=.5: h=2,y=1,L=.5; dL/dw1=−1,dL/dw2=−2.
-One simultaneous gradient-descent update at rate .1 gives L=.1058.
-This illustrates the chain rule but does not reproduce the paper's sigmoid
-network, representation-learning experiment or training-speed results.
-Check both derivatives with central finite differences at four different weight
-pairs, including zero weights. Rate 0 changes nothing; rate 2 increases loss.
-No statement that every update helps or backprop itself chooses the step.
+| Stage | What changes |
+| --- | --- |
+| 1 | Five inputs and the branching graph; uncomputed nodes show question marks |
+| 2 | AB and CD are computed independently |
+| 3 | CDE, the sum, and loss are computed |
+| 4 | Backward signal starts at output from the loss |
+| 5 | Addition sends the same signal down both branches |
+| 6 | AB sends two differently scaled signals to A and B |
+| 7 | CDE sends signals to CD and E |
+| 8 | CD sends signals to C and D |
+| 9 | All five derivatives are visible together |
+| 10 | One simultaneous gradient-descent update uses them |
 
-After approval: step forward/backward/update separately; drag learning rate and
-observe an oversized-step failure. Keep derivatives folded until requested.
+Rate 0.02 gives [2.12,3.08,1.92,−0.84,1.92], y=3.433024 and
+L≈0.160730. Three-significant-digit graph readouts are rounded; the verification
+record retains computed values. A rate 0.5 control increases the loss. All 20
+components at four distinct input sets are checked with central finite differences.
+Addition distributes a derivative to its input branches; it does not split it in
+half. Reusing one variable on multiple paths would instead require accumulating
+its incoming derivatives; this particular graph has five distinct input leaves.
 
-## 2. CNN — priority two
-
-Takeaway: a learned local detector is reused across positions; different detectors
-make different response maps. Connects to the feature maps used by ResNet.
+## CNN: nine chapters with 35/35/12 scan positions
 
 Source: LeCun, Bottou, Bengio & Haffner (1998),
 [Gradient-Based Learning Applied to Document Recognition](https://bottou.org/papers/lecun-98h),
-§II, local receptive fields, shared weights and feature maps.
-We explain this mechanism, not all of LeNet-5 or a full digit recognizer.
+§II: receptive fields, shared weights, feature maps and multiple layers.
+Hand-set filters and modern ReLU are teaching choices, not a trained LeNet-5.
 
-| Scene | Visible change | Fixed reference |
-| --- | --- | --- |
-| Local detector | A selected 3×3 patch gives response 6 | Our own 7×9 binary-bar image |
-| Move the image | One-cell input shift moves its response | Same filter |
-| Two detectors | Vertical versus horizontal response maps | Same input |
-| Sharing | 18 shared weights versus 630 position-specific weights | Two 3×3 filters, 35 positions each; bias excluded |
+Our own 7×9 one-channel binary bars enter two 3×3 filters. Vertical filter: three
+rows [−1,2,−1]; horizontal filter: its transpose. Valid cross-correlation followed
+by ReLU, stride 1, no bias, produces 5×7×2 (height×width×channels).
+Each scan shows the selected patch, coefficient-wise multiplication summarized
+by three row sums, raw sum, ReLU output, and the corresponding newly filled cell.
+The window visits all 35 positions in row-major order for each filter. The stride 2
+comparison visits 12 positions and produces 3×4 per filter. Unknown cells are gray;
+computed zeros are white. A dark cell is a larger response, not probability.
 
-Vertical kernel: three rows of [−1,2,−1]; horizontal kernel is its transpose.
-Valid stride-one cross-correlation followed by ReLU, no padding/bias. This modern
-teaching operator is not claimed to be the original LeNet activation/pooling.
-Output is 5×7. Window row2/col1 yields vertical6/horizontal0; row3/col5 yields
-horizontal6/vertical0 (zero-based indices). Verify by direct dot products and a
-one-cell translation in the common valid interior. No claim of full translation
-invariance, superiority to all dense networks or measured accuracy. Filters are
-hand-set here; a real CNN learns them.
+The next layer has two 3×3×2 filters, stride 1/no padding/no bias. Output filter 0
+uses 1/9 for each coefficient in channel 0 and 1/18 in channel 1; filter 1 reverses
+those channel coefficients. Sum all 18 contributions, then ReLU, yielding 3×5×2.
+Each output map is averaged over its 15 positions. A final chosen 2×2 matrix
+[[1,−0.5],[−0.5,1]] combines the means into two illustrative scores. They are not
+class probabilities or evidence of correct recognition. Isometric stacks encode
+actual channel counts and shapes; no fabricated learned feature labels.
 
-After approval: drag the window, move the input and switch filters; then a second
-small comparison for shared parameters. Avoid adding a whole classifier now.
+| Chapter | Visible mechanism |
+| --- | --- |
+| 1 | One 3×3 patch with its actual multiply-and-add |
+| 2 | Vertical filter moves; first output map fills, all 35 positions |
+| 3 | Horizontal filter moves; second map fills, all 35 positions |
+| 4 | Stride 2 moves two cells; a smaller map fills at 12 positions |
+| 5 | 3D schematic: input → two maps → deeper two maps |
+| 6 | A 3×3×2 filter combines both input-channel patches |
+| 7 | Pool deeper maps and mix them into two computed scores |
+| 8 | The first convolution unrolled as a 70×63 matrix |
+| 9 | Large side-by-side counts and a fully free Dense matrix schematic |
 
-## 3. Dropout — priority three
+**Parameter comparison is only for the FIRST layer, bias excluded.** A general
+63→70 Dense layer has 4410 independent weights. Two 3×3 convolution filters have 18.
+The exact unrolled convolution matrix has 630 nonzero entries; repeated entries
+are tied to those 18 filter coefficients. Writing a CNN as a matrix does NOT turn
+these copies into 4410 trainable parameters. A locally connected unshared variant
+would have 630. Chapter 8 shows actual tied matrix entries and computed outputs;
+chapter 9 shows empty Dense parameter slots and dimensions, not made-up weights
+or outputs. Dense/CNN have the same input/output dimensions, not a claimed
+equal accuracy. The tied matrix and convolution output agree numerically on
+three complete inputs, including zero and signed data, after the same ReLU.
+Two-layer shapes, constant-channel sums and stride 2/stride 1 subsampling are checked.
 
-Takeaway: temporarily vary which units participate during training, reducing
-reliance on a fixed combination; use all units with appropriate scaling at test.
-Connects to generalization after learning and feature extraction.
+## Dropout: 5 → 10 → 5 → 2, eight chapters
 
 Source: Srivastava et al. (2014),
 [Dropout: A Simple Way to Prevent Neural Networks from Overfitting](https://jmlr.org/papers/v15/srivastava14a.html),
-§§2,4–5 and Figure2. Use the paper's unscaled training / test-time weight scaling
-convention. Do not mix it with inverted dropout's train-time scaling.
+§§2,4–5 and Figure 2. Use the original paper's unscaled training/test-time weight
+scaling convention throughout, not inverted dropout.
 
-| Scene | Visible change | Fixed reference |
-| --- | --- | --- |
-| Full network | Four features feed one sum, output10 | Features [1,2,3,4], unit weights |
-| One training mask | Gates [1,1,0,0], output3 | Same features and weights |
-| Another mask | Gates [0,0,1,1], output7 | Same features and weights |
-| Test mode | All return, outgoing weights ×.5, output5 | Retention probability p=.5 |
+Five fixed inputs [1,.5,1.5,.75,1.25] pass through two ReLU hidden layers (10 and 5
+units) and two linear outputs. Deterministic signed weights, zero biases, exact
+formulas in `review/learning_foundations_v2.py`. Inputs and outputs are not dropped.
+Hidden gates are independent Bernoulli(.5), generated by Random(23), five masks.
+The actual number retained varies; exactly half is not enforced. The final
+seeded draw drops all five units of the second hidden layer; its zero outputs
+are explicitly explained on screen rather than presented as a typical half mask.
 
-These are two chosen masks, not a simulation claiming exactly half always stay.
-Every gate is independent Bernoulli(p); all16 combinations are possible. Enumerate
-all16 and their probabilities: expected linear sum=10p; at p=.5 it is5.
-Test scaling matches this linear expectation. It does not exactly average an
-arbitrary nonlinear network: mean ReLU(sum−6) is nonzero while ReLU(mean(sum)−6)=0.
-No weights are trained here; the masks do not demonstrate an accuracy gain.
-Units are not permanently pruned and the changing output is not measured uncertainty.
+| Chapter | Visible mechanism |
+| --- | --- |
+| 1 | All four layers, 110 connections, and two calculated scores |
+| 2 | Some first-hidden-layer nodes and their incident paths are omitted |
+| 3 | Second-hidden-layer nodes are also omitted |
+| 4 | Pulses follow participating paths through the layers |
+| 5 | Two subsequent mask combinations change the participating network |
+| 6 | Two more combinations change both hidden layers again |
+| 7 | Prediction restores all nodes; both hidden outgoing matrices are scaled |
+| 8 | The objective: reduce reliance on a fixed team of units |
 
-After approval: inspect masks and retention probability, then switch to prediction
-mode. Keep the purpose of reducing co-adaptation visible without inventing a
-before/after accuracy chart.
+Node numbers identify positions, not activations. X marks dropout, not a zero
+ReLU value. Line thickness does not encode the learned weight. Pulses indicate
+flow only; scores are computed from the full deterministic network. Gray paths
+are inactive in the shown mask. Weights remain fixed to isolate gating; this is
+not an actual learning run or measured generalization improvement.
+At prediction, W1 stays unchanged; W2 and W3 are each multiplied by 0.5. No claim
+that this nonlinear network exactly equals an ensemble average. All-dropped
+hidden-layer controls give zero scores, and independent path sums verify outputs.
+In this zero-bias positively homogeneous example, test scores happen to be 0.25
+times the unmasked score; that is not a general identity for arbitrary networks.
 
-## Common review gate
+## Review and delivery
 
-Ask the owner about **mechanism visibility, amount of explanation and difficulty**
-for each topic. A response may approve one and request changes to another.
-Maintain separate statuses. Only approved concepts advance to polished videos.
-Cloud arithmetic, text bounds/glyph coverage and image decoding are technical
-checks; the owner has not yet approved these scenes or their difficulty.
+Ten/nine/eight chapters are intentional; count follows the explanation, not a
+fixed template. Scan frames run quickly; explanatory stages hold longer. Every
+chapter has a full-size static image for reading at one's own pace. EN and KO
+have equivalent scope. GIF duration, decoded frame count, and every decoded frame's pixels are verified in CI.
+The review bundle has a 12 MB cap and is generated only in GitHub Actions.
+
+Review these revised explanations and their difficulty before any polished video
+or production interaction. The current live collection remains three lessons.

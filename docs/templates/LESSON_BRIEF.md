@@ -9,14 +9,15 @@ Status: **concept pending review**. No completed-film or learner-approval claim.
 - Connection to an existing lesson:
 - Named paper, authors, year, primary link, exact section/equation:
 
-## Four rough scenes
+## Rough scenes — use as many as needed
 
 | Scene | What visibly changes? | What stays fixed? | One short caption | Reader's likely misunderstanding |
 | --- | --- | --- | --- | --- |
 | 1. Problem | | | | |
 | 2. Mechanism | | | | |
 | 3. Consequence | | | | |
-| 4. Takeaway | | | | |
+| … Add mechanism steps as needed | | | | |
+| Last. Takeaway | | | | |
 
 ## Numerical contract
 
