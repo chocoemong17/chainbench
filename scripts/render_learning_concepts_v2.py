@@ -182,7 +182,8 @@ def cnn(lang, chapter, step=None):
                                             (c["one"], 365, 325, 19, "Layer 1", "5×7×2"),
                                             (c["two"], 725, 332, 25, "Layer 2", "3×5×2")]:
             volume(b, maps, x, y, size)
-            b.text(name, x, 211, 28, width=250)
+            b.text({"Input": "입력", "Layer 1": "첫 층", "Layer 2": "다음 층"}.get(name, name)
+                   if b.ko else name, x, 211, 28, width=250)
             b.text(dims, x, 489, 30, width=220)
         b.arrow([(249, 364), (339, 364)])
         b.arrow([(552, 364), (697, 364)])
@@ -198,7 +199,8 @@ def cnn(lang, chapter, step=None):
             subtotal = sum(c["one"][ch][r][col] for r in range(3) for col in range(3)) / (9 if ch == 0 else 18)
             terms.append(subtotal)
             b.say(f"Channel {ch+1}", f"채널 {ch+1}", x, 209, 28)
-            b.text("3×3 × " + ("1/9" if ch == 0 else "1/18"), x, 486, 25, width=285)
+            factor = "1/9" if ch == 0 else "1/18"
+            b.say("Patch sum × " + factor, "창의 합 × " + factor, x, 486, 25, width=285)
             b.text(f"≈ {subtotal:.3f}", x, 532, 27, color=BLUE)
         b.text("+", 336, 356, 35, width=50)
         b.arrow([(669, 365), (813, 365)])
@@ -217,7 +219,8 @@ def cnn(lang, chapter, step=None):
             b.text(f"{mean:.3f}", 618, 316+i*110, 32, width=190, center=True)
             for j in range(2):
                 b.arrow([(737, 332+i*110), (904, 332+j*110)], BLUE if i == j else ORANGE, 3)
-            b.text(f"Score {i+1}: {c['scores'][i]:.3f}", 929, 318+i*110, 24, width=256)
+            b.text(f"{'점수' if b.ko else 'Score'} {i+1}: {c['scores'][i]:.3f}",
+                   929, 318+i*110, 24, width=256)
         b.banner("The final small matrix mixes these features into scores. These are not probabilities.",
                  "마지막 작은 행렬이 모은 특징을 섞어 점수를 만듭니다. 이 숫자는 정답 확률이 아닙니다.")
     else:
@@ -228,23 +231,37 @@ def cnn(lang, chapter, step=None):
         b.say("Two shared 3×3 filters", "공유하는 3×3 필터 2개", 63, 457, 24, width=490)
         b.text("18", 271, 509, 54, width=200, center=True, color=BLUE)
         b.d.line((585, 187, 585, 585), fill=LINE, width=2)
-        b.say("Unroll the SAME convolution", "같은 CNN 계산을 펼치기", 620, 193, 24, width=525)
-        mat = m.matrix()
-        b.grid(mat, 620, 252, 4.6, 2)
-        b.text("70 × 63", 708, 222, 20, width=180)
-        flat = [[v] for row in m.v1.picture() for v in row]
-        b.grid(flat, 977, 268, 4.6, 1)
-        b.text("×", 943, 372, 28, width=30)
-        b.arrow([(1003, 407), (1063, 407)])
-        b.grid([[v] for ch in c["one"] for row in ch for v in row], 1098, 252, 4.6, 6)
-        b.text("ReLU", 1011, 446, 19, width=90)
-        b.say("63 inputs → 70 outputs", "63개 입력 → 70개 출력", 750, 582, 20, width=410)
         if chapter == 7:
+            b.say("Unroll the SAME convolution", "같은 CNN 계산을 펼치기", 620, 193, 24, width=525)
+            b.grid(m.matrix(), 620, 246, 4.6, 2)
+            b.text("70 × 63", 708, 218, 20, width=180)
+            flat = [[v] for row in m.v1.picture() for v in row]
+            b.grid(flat, 977, 262, 4.6, 1)
+            b.text("×", 943, 366, 28, width=30)
+            b.arrow([(1003, 401), (1063, 401)])
+            b.grid([[v] for ch in c["one"] for row in ch for v in row], 1098, 246, 4.6, 6)
+            b.text("ReLU", 1011, 440, 19, width=90)
+            b.say("63 inputs → 70 outputs", "63개 입력 → 70개 출력", 750, 574, 20, width=410)
             b.banner("Repeated entries in this matrix are TIED to the same 18 filter coefficients.",
                      "펼친 행렬의 반복되는 칸들은 같은 필터 값에 묶입니다. 이 CNN의 독립적인 값은 18개입니다.")
         else:
-            b.banner("If a Dense layer learns every matrix entry freely: 70×63 = 4,410 parameters; CNN: 18.",
-                     "행렬의 모든 칸을 독립 학습하는 Dense: 70×63 = 4,410개. CNN: 18개. 편향은 제외합니다.")
+            b.say("Dense: learn each entry freely", "Dense: 모든 칸을 독립 학습", 620, 193, 24, width=525)
+            # Uniform empty slots depict parameter positions, not invented weights or predictions.
+            for r in range(70):
+                for col in range(63):
+                    left, top = 666+col*3.2, 255+r*3.2
+                    b.d.rectangle((left, top, left+2.3, top+2.3), fill="#91a9c8")
+            b.text("70 × 63", 712, 220, 22, width=190)
+            b.text("×", 900, 352, 28, width=40)
+            for n, x in ((63, 971), (70, 1122)):
+                for i in range(n):
+                    b.d.rectangle((x, 255+i*3.2, x+11, 257+i*3.2), fill=LINE)
+            b.arrow([(1003, 368), (1090, 368)])
+            b.text("63", 963, 220, 20, width=64)
+            b.text("70", 1113, 220, 20, width=64)
+            b.text("4,410", 873, 509, 54, width=360, center=True, color=ORANGE)
+            b.banner("Same input/output sizes: CNN 18, Dense 4,410 trainable weights. Biases excluded.",
+                     "같은 입력·출력 크기에서 학습할 값: CNN 18개, Dense 4,410개. 편향은 제외합니다.")
     b.note("Chosen filters, two computed layers; no equal-accuracy claim. First-layer parameter comparison only.",
            "직접 정한 필터로 두 층을 계산한 모형. 정확도 비교가 아니며 파라미터 비교는 첫 층만 다룹니다.")
     return b.image
@@ -294,6 +311,7 @@ def dropout(lang, chapter, variant=None, pulse=None):
             b.d.ellipse((x-18, y-18, x+18, y+18), fill="white", outline=BLUE if active else GRAY, width=3)
             if not active:
                 b.d.line((x-18, y-18, x+18, y+18), fill=ORANGE, width=4)
+                b.d.line((x-18, y+18, x+18, y-18), fill=ORANGE, width=4)
             else:
                 b.text(str(i+1), x, y-11, 19, width=33, center=True, color=BLUE)
             if layer == 3:
@@ -301,6 +319,9 @@ def dropout(lang, chapter, variant=None, pulse=None):
     if chapter == 0:
         b.banner("The two hidden layers extract and combine features before producing two scores.",
                  "두 중간층이 특징을 만들고 조합한 뒤 점수 두 개로 보냅니다. 노드 안 숫자는 번호입니다.")
+    elif chapter <= 5 and sum(mask2) == 0:
+        b.banner("This draw omits ALL of hidden 2: both scores are zero. The next draw can reopen paths.",
+                 "이번 조합은 중간층 2가 전부 빠져 점수가 모두 0입니다. 다음 조합에서는 길이 다시 열립니다.")
     elif chapter <= 5:
         b.banner(f"Participating: hidden 1 {sum(mask1)}/10, hidden 2 {sum(mask2)}/5. × = temporarily omitted.",
                  f"이번 참여: 중간층 1 {sum(mask1)}/10개, 중간층 2 {sum(mask2)}/5개. ×는 잠시 제외한 노드입니다.")
@@ -317,6 +338,7 @@ def build(args):
     proof.update(source=args.source, revision=2, status="concept-pending-owner-review", size=SIZE,
                  files={}, animations={}, chapter_counts={"backprop": 10, "cnn": 9, "dropout": 8})
     args.output.mkdir(parents=True, exist_ok=False)
+    frame_hashes = {}
     # A shared palette keeps colors stable and lets GIF store only changed regions.
     colors = [(r, g, b) for r in range(0, 256, 51) for g in range(0, 256, 51)
               for b in range(0, 256, 51)]
@@ -354,6 +376,8 @@ def build(args):
                     times.append(4000)
             name = f"{topic}.{lang}.gif"
             frames = [frame.quantize(palette=palette, dither=Image.Dither.NONE) for frame in frames]
+            frame_hashes[name] = [hashlib.sha256(frame.convert("RGB").tobytes()).hexdigest()
+                                  for frame in frames]
             frames[0].save(args.output / name, save_all=True, append_images=frames[1:],
                            duration=times, loop=0, disposal=1, optimize=True)
             proof["animations"][name] = {"authored_frames": len(frames), "duration_ms": sum(times)}
@@ -371,10 +395,14 @@ def build(args):
                 decoded.seek(i)
                 decoded.load()
                 duration += decoded.info.get("duration", 0)
+                if path.suffix == ".gif":
+                    actual = hashlib.sha256(decoded.convert("RGB").tobytes()).hexdigest()
+                    assert actual == frame_hashes[path.name][i], f"GIF pixels differ: {path.name}, {i}"
             if path.suffix == ".gif":
                 assert duration == proof["animations"][path.name]["duration_ms"]
                 assert frames == proof["animations"][path.name]["authored_frames"]
                 proof["animations"][path.name]["decoded_frames"] = frames
+                proof["animations"][path.name]["all_frame_pixels_verified"] = True
         raw = path.read_bytes()
         proof["files"][path.name] = {"bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest()}
     assert len(proof["files"]) == 76
