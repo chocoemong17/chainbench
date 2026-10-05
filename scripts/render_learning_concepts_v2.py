@@ -317,12 +317,21 @@ def build(args):
     proof.update(source=args.source, revision=2, status="concept-pending-owner-review", size=SIZE,
                  files={}, animations={}, chapter_counts={"backprop": 10, "cnn": 9, "dropout": 8})
     args.output.mkdir(parents=True, exist_ok=False)
+    # A shared palette keeps colors stable and lets GIF store only changed regions.
+    colors = [(r, g, b) for r in range(0, 256, 51) for g in range(0, 256, 51)
+              for b in range(0, 256, 51)]
+    colors += [(round(i*255/31),)*3 for i in range(32)]
+    colors += [tuple(int(color[k:k+2], 16) for k in (1, 3, 5))
+               for color in (INK, GRAY, LINE, BLUE, GREEN, ORANGE)]
+    colors += [(255, 255, 255)]*(256-len(colors))
+    palette = Image.new("P", (1, 1))
+    palette.putpalette([v for color in colors for v in color])
     for lang in ("en", "ko"):
         for topic, count, renderer in (("backprop", 10, backprop), ("cnn", 9, cnn), ("dropout", 8, dropout)):
             frames, times, stills = [], [], []
             for chapter in range(count):
                 still = renderer(lang, chapter)
-                still.save(args.output / f"{topic}.{lang}.{chapter+1}.png")
+                still.save(args.output / f"{topic}.{lang}.{chapter+1}.png", optimize=True)
                 stills.append(still)
                 if topic == "cnn" and chapter in (1, 2, 3):
                     steps = 12 if chapter == 3 else 35
@@ -344,14 +353,15 @@ def build(args):
                     frames.append(still)
                     times.append(4000)
             name = f"{topic}.{lang}.gif"
+            frames = [frame.quantize(palette=palette, dither=Image.Dither.NONE) for frame in frames]
             frames[0].save(args.output / name, save_all=True, append_images=frames[1:],
-                           duration=times, loop=0, disposal=2, optimize=True)
+                           duration=times, loop=0, disposal=1, optimize=True)
             proof["animations"][name] = {"authored_frames": len(frames), "duration_ms": sum(times)}
             for start in range(0, count, 4):
                 contact = Image.new("RGB", SIZE, "white")
                 for j, still in enumerate(stills[start:start+4]):
                     contact.paste(still.resize((600, 380)), ((j % 2)*600, (j//2)*380))
-                contact.save(args.output / f"{topic}.{lang}.contact{start//4+1}.png")
+                contact.save(args.output / f"{topic}.{lang}.contact{start//4+1}.png", optimize=True)
     for path in sorted(args.output.iterdir()):
         with Image.open(path) as decoded:
             assert decoded.size == SIZE
@@ -368,7 +378,9 @@ def build(args):
         raw = path.read_bytes()
         proof["files"][path.name] = {"bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest()}
     assert len(proof["files"]) == 76
-    assert sum(row["bytes"] for row in proof["files"].values()) < 12_000_000
+    total_bytes = sum(row["bytes"] for row in proof["files"].values())
+    assert total_bytes < 12_000_000, f"Bundle is {total_bytes} bytes"
+    proof["total_bytes"] = total_bytes
     (args.output / "verification.json").write_text(json.dumps(proof, indent=2)+"\n", encoding="utf8")
     print(json.dumps({"files": len(proof["files"]), "source": args.source,
                       "animations": proof["animations"]}, indent=2))
