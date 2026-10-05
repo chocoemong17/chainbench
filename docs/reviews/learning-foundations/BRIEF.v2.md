@@ -1,13 +1,12 @@
-# Learning foundations — revised concept contract, revision 3
+# Learning foundations — revised concept contract, revision 2
 
-**Follow-up revision for owner review.** The owner liked the v2 explanation flow
-and requested three focused changes: repeated backprop updates approaching the
-target, nonzero numbers in the colored CNN cells, and a smaller 3→5→5→2 dropout
-network. The main explanation is retained; this is still the concept stage.
+**Owner review pending.** Revision 1 was reviewed as too sparse. On 2026-10-05 the
+owner requested branching over five variables, moving CNN windows, stacked feature
+volumes, a matrix-based parameter comparison, and dropout in several hidden layers.
 The four-scene restriction is removed. No finished lessons or production pages are
-added. [Previous contract](BRIEF.v2.md), [initial contract](BRIEF.v1.md), and `v1/`/`v2/` assets remain available.
+added. [Previous contract](BRIEF.v1.md) and `v1/` assets remain available.
 
-## Backpropagation: AB + CDE, twelve stages
+## Backpropagation: AB + CDE, ten stages
 
 Source: Rumelhart, Hinton & Williams (1986),
 [Learning representations by back-propagating errors](https://doi.org/10.1038/323533a0),
@@ -34,23 +33,12 @@ Product v=CD gives g_C=g_v*D=+4 and g_D=g_v*C=−8.
 | 7 | CDE sends signals to CD and E |
 | 8 | CD sends signals to C and D |
 | 9 | All five derivatives are visible together |
-| 10 | First simultaneous update, with an output-to-target scale |
-| 11 | Updates 2–6: quick forward → backward → update cycles; fresh gradients each time |
-| 12 | All seven output values (initial plus six updates) approach target 4 on one chart |
+| 10 | One simultaneous gradient-descent update uses them |
 
 Rate 0.02 gives [2.12,3.08,1.92,−0.84,1.92], y=3.433024 and
-L≈0.160730. Graph readouts are rounded; the verification
+L≈0.160730. Three-significant-digit graph readouts are rounded; the verification
 record retains computed values. A rate 0.5 control increases the loss. All 20
 components at four distinct input sets are checked with central finite differences.
-The same rate 0.02 and target 4 are retained for six simultaneous updates.
-The full trace, current-state gradients, target distance and loss are exported.
-All six displayed updates reduce both distance and loss; this is checked for
-this finite example, not claimed for arbitrary objectives or step sizes. Another
-35 central-difference components verify the gradients at all seven trace states.
-The first update still matches revision 2 exactly. The fast cycle shows the old
-state during forward/backward and the newly updated state only during update.
-The final chart and small target scale use the actual calculated output values.
-
 Addition distributes a derivative to its input branches; it does not split it in
 half. Reusing one variable on multiple paths would instead require accumulating
 its incoming derivatives; this particular graph has five distinct input leaves.
@@ -70,14 +58,6 @@ by three row sums, raw sum, ReLU output, and the corresponding newly filled cell
 The window visits all 35 positions in row-major order for each filter. The stride 2
 comparison visits 12 positions and produces 3×4 per filter. Unknown cells are gray;
 computed zeros are white. A dark cell is a larger response, not probability.
-Readable grids (cell width at least 30 px) now show their nonzero values; input
-bars read 1, filter coefficients retain their signs, and every completed output
-cell keeps its number. Zero cells are blank, including the current window. The
-separate calculation caption still states the current numeric result, even zero.
-Noninteger feature-map labels are rounded to one decimal; full values remain in
-the verification record. Tiny volume and 70×63 matrix schematics stay unlabelled. In overlapping
-volume stacks only the unobstructed front plane receives numbers, so no back-plane
-number is partly covered.
 
 The next layer has two 3×3×2 filters, stride 1/no padding/no bias. Output filter 0
 uses 1/9 for each coefficient in channel 0 and 1/18 in channel 1; filter 1 reverses
@@ -111,27 +91,24 @@ equal accuracy. The tied matrix and convolution output agree numerically on
 three complete inputs, including zero and signed data, after the same ReLU.
 Two-layer shapes, constant-channel sums and stride 2/stride 1 subsampling are checked.
 
-## Dropout: 3 → 5 → 5 → 2, eight chapters
+## Dropout: 5 → 10 → 5 → 2, eight chapters
 
 Source: Srivastava et al. (2014),
 [Dropout: A Simple Way to Prevent Neural Networks from Overfitting](https://jmlr.org/papers/v15/srivastava14a.html),
 §§2,4–5 and Figure 2. Use the original paper's unscaled training/test-time weight
 scaling convention throughout, not inverted dropout.
 
-Three fixed inputs [1,.5,1.5] pass through two ReLU hidden layers (5 and 5
+Five fixed inputs [1,.5,1.5,.75,1.25] pass through two ReLU hidden layers (10 and 5
 units) and two linear outputs. Deterministic signed weights, zero biases, exact
-formulas in `review/learning_foundations_v3.py`. Inputs and outputs are not dropped.
+formulas in `review/learning_foundations_v2.py`. Inputs and outputs are not dropped.
 Hidden gates are independent Bernoulli(.5), generated by Random(23), five masks.
-The actual number retained varies; exactly half is not enforced. The same
-Random(23) seed now generates two five-unit masks for each of five draws. The third draw
-omits all first-hidden units; the renderer explicitly explains the zero outputs.
-The same explanation handles either hidden layer being entirely omitted.
-The two hidden layers remain present; only the network size is reduced. There
-are 15+25+10=50 connections rather than revision 2's 110.
+The actual number retained varies; exactly half is not enforced. The final
+seeded draw drops all five units of the second hidden layer; its zero outputs
+are explicitly explained on screen rather than presented as a typical half mask.
 
 | Chapter | Visible mechanism |
 | --- | --- |
-| 1 | All four layers, 50 connections, and two calculated scores |
+| 1 | All four layers, 110 connections, and two calculated scores |
 | 2 | Some first-hidden-layer nodes and their incident paths are omitted |
 | 3 | Second-hidden-layer nodes are also omitted |
 | 4 | Pulses follow participating paths through the layers |
@@ -153,8 +130,8 @@ times the unmasked score; that is not a general identity for arbitrary networks.
 
 ## Review and delivery
 
-Twelve/nine/eight chapters are intentional; count follows the explanation, not a
-fixed template. Scan frames and repeated forward/backward cycles run quickly; explanatory stages hold longer. Every
+Ten/nine/eight chapters are intentional; count follows the explanation, not a
+fixed template. Scan frames run quickly; explanatory stages hold longer. Every
 chapter has a full-size static image for reading at one's own pace. EN and KO
 have equivalent scope. GIF duration, decoded frame count, and every decoded frame's pixels are verified in CI.
 The review bundle has a 12 MB cap and is generated only in GitHub Actions.

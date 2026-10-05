@@ -30,3 +30,7 @@ and published through the usual checks.
 ## 2026-10-05 concept revision
 
 The owner found revision1 too sparse. Revision2 adds five-variable AB+CDE branches, scanning CNN windows with actual output filling, stacked layers and matrix comparison, and dropout through multiple hidden layers. The four-scene cap is removed. [Revised concepts](reviews/learning-foundations/README.md) await a new owner decision; no follow-up learner evaluation or accuracy gain is claimed.
+
+## 2026-10-05 v3
+
+The owner liked the v2 flow and requested a focused follow-up: six backprop updates toward the same target, visible nonzero CNN cell values, and a smaller 3→5→5→2 dropout network. The revision keeps the accepted explanations and remains a concept review, with no new learner outcome or performance claim.

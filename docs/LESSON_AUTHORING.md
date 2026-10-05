@@ -11,7 +11,7 @@ on the `study/learning-foundations` review branch. They are not six finished les
    but does not automatically explain a neural-network architecture.
 2. Declare a small example, what changes, what stays fixed, and what it cannot
    prove. Verify displayed numbers using an independent calculation. For example,
-   [the foundations fixtures](../review/learning_foundations_v2.py) check gradients
+   [the foundations fixtures](../review/learning_foundations_v3.py) check gradients
    against finite differences and compare the complete convolution with its unrolled matrix.
 3. Prepare as many plain scenes as the mechanism needs. Use one sentence per scene, English by default,
    equivalent Korean, and still images alongside a slow storyboard. No finished
