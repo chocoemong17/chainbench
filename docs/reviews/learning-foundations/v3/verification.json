@@ -479,7 +479,7 @@
     ]
   },
   "scope": "authored calculations; no trained classifier, equal-accuracy or generalization result",
-  "source": "1996daf118efb1241d20e244956b11e2f636bcef",
+  "source": "0c40b0c04ca3e73da9c731d9134774164b966ef4",
   "revision": 3,
   "status": "concept-pending-owner-review",
   "size": [
@@ -549,7 +549,7 @@
     },
     "backprop.en.gif": {
       "bytes": 388869,
-      "sha256": "87b10173091e08e46ac0245460a02c91db63a99681f674029a1d91733ca6b8e7"
+      "sha256": "ca3729270dd05700bdb77e2bd9b5db66628a4cf129f03ea193a8bd987b0bc5df"
     },
     "backprop.ko.1.png": {
       "bytes": 55025,
@@ -613,7 +613,7 @@
     },
     "backprop.ko.gif": {
       "bytes": 388709,
-      "sha256": "e22cb7a9e75aeb9375bc1273cf0a84e1c56c85d65939e25f536efd6e19e90461"
+      "sha256": "250177b0cdaa564f9133f48c249481dbbab7a634b94de330cbe562e9f92d5609"
     },
     "cnn.en.1.png": {
       "bytes": 51247,
@@ -811,7 +811,7 @@
   "animations": {
     "backprop.en.gif": {
       "authored_frames": 26,
-      "duration_ms": 54000,
+      "duration_ms": 59000,
       "decoded_frames": 26,
       "all_frame_pixels_verified": true
     },
@@ -829,7 +829,7 @@
     },
     "backprop.ko.gif": {
       "authored_frames": 26,
-      "duration_ms": 54000,
+      "duration_ms": 59000,
       "decoded_frames": 26,
       "all_frame_pixels_verified": true
     },
