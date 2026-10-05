@@ -201,7 +201,10 @@ def volume(b, maps, x, y, cell=16):
     high = max(1., max(abs(v) for ch in maps for row in ch for v in row))
     for z in reversed(range(depth)):
         left, top = x+z*26, y-z*22
-        b.grid(maps[z], left, top, cell, high)
+        if z == 0:
+            b.grid(maps[z], left, top, cell, high)
+        else:
+            Board.grid(b, maps[z], left, top, cell, high)
         b.d.rectangle((left, top, left+w*cell, top+h*cell), outline=INK, width=2)
     if depth > 1:
         for dx, dy in ((0, 0), (w*cell, 0), (w*cell, h*cell)):
@@ -409,9 +412,10 @@ def dropout(lang, chapter, variant=None, pulse=None):
     if chapter == 0:
         b.banner("The two hidden layers extract and combine features before producing two scores.",
                  "두 중간층이 특징을 만들고 조합한 뒤 점수 두 개로 보냅니다. 노드 안 숫자는 번호입니다.")
-    elif chapter <= 5 and sum(mask2) == 0:
-        b.banner("This draw omits ALL of hidden 2: both scores are zero. The next draw can reopen paths.",
-                 "이번 조합은 중간층 2가 전부 빠져 점수가 모두 0입니다. 다음 조합에서는 길이 다시 열립니다.")
+    elif chapter <= 5 and (sum(mask1) == 0 or sum(mask2) == 0):
+        layer = 1 if sum(mask1) == 0 else 2
+        b.banner(f"This draw omits ALL of hidden {layer}: both scores are zero. The next draw can reopen paths.",
+                 f"이번 조합은 중간층 {layer}이 전부 빠져 점수가 모두 0입니다. 다음 조합에서는 길이 다시 열립니다.")
     elif chapter <= 5:
         b.banner(f"Participating: hidden 1 {sum(mask1)}/5, hidden 2 {sum(mask2)}/5. × = temporarily omitted.",
                  f"이번 참여: 중간층 1 {sum(mask1)}/5개, 중간층 2 {sum(mask2)}/5개. ×는 잠시 제외한 노드입니다.")
