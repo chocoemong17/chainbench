@@ -451,9 +451,12 @@ def build(args):
                 stills.append(still)
                 if topic == "backprop" and chapter == 10:
                     for iteration in range(2, 7):
-                        for phase, duration in (("forward", 550), ("backward", 550), ("update", 900)):
+                        for phase, duration in (("forward", 700), ("backward", 700), ("update", 1200)):
                             frames.append(backprop_repeat(lang, chapter, iteration, phase))
                             times.append(duration)
+                elif topic == "backprop" and chapter == 11:
+                    frames.append(still)
+                    times.append(6000)
                 elif topic == "cnn" and chapter in (1, 2, 3):
                     steps = 12 if chapter == 3 else 35
                     for step in range(steps):

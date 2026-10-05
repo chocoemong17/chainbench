@@ -161,3 +161,13 @@ The review bundle has a 12 MB cap and is generated only in GitHub Actions.
 
 Review these revised explanations and their difficulty before any polished video
 or production interaction. The current live collection remains three lessons.
+
+## Pacing adjustment after v3 review
+
+The owner accepted CNN and Dropout and requested slower backprop closing scenes,
+with the whole animation under one minute. Preserve the first ten 4-second
+chapters (40 seconds). Updates 2–6 now each spend 0.7 seconds forward, 0.7 seconds
+backward, and 1.2 seconds showing the update (13 seconds total, formerly 10).
+The final convergence chart holds for 6 seconds (formerly 4). Total: 59 seconds
+(formerly 54). All frames and numerical results are unchanged. CNN and Dropout
+retain their approved v3 content and pacing.

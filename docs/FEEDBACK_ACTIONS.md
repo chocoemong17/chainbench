@@ -34,3 +34,7 @@ The owner found revision1 too sparse. Revision2 adds five-variable AB+CDE branch
 ## 2026-10-05 v3
 
 The owner liked the v2 flow and requested a focused follow-up: six backprop updates toward the same target, visible nonzero CNN cell values, and a smaller 3→5→5→2 dropout network. The revision keeps the accepted explanations and remains a concept review, with no new learner outcome or performance claim.
+
+## 2026-10-05 — pacing / 재생 속도
+
+The owner accepted CNN and Dropout. Backprop now spends 13 seconds on repeated updates and 6 seconds on the final chart, for 59 seconds overall. Only playback timing changes; the example and calculations stay the same.

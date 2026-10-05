@@ -6,7 +6,7 @@ Updated from your v2 feedback: repeated updates toward the target, numbers in co
 
 ## 1. Backpropagation: AB + CDE
 
-Five variables feed AB+CDE. The loss signal travels backward through the addition and both product branches to all five gradients, followed by six real updates. After the detailed first update, fast forward/backward/update cycles show the prediction approaching target 4; a final chart collects the progress.
+Five variables feed AB+CDE. The loss signal travels backward through the addition and both product branches to all five gradients, followed by six real updates. After the detailed first update, fast forward/backward/update cycles show the prediction approaching target 4; a final chart collects the progress. The repeated cycles now take 13 seconds and the final chart stays for 6 seconds, for **59 seconds** in total.
 
 ![Backpropagation: AB + CDE — animated concept](v3/backprop.en.gif)
 
