@@ -172,13 +172,14 @@ def backprop_repeat(lang, chapter, iteration=2, phase="update"):
     for a, z in edges:
         x, y = points[a]
         u, v = points[z]
-        ends = [(x+65, y), (u-66, v)]
+        ends = [(x+65, y), (u-(81 if z == "L" else 66), v)]
         b.arrow(ends[::-1] if phase == "backward" else ends, color, 4)
     for key, (x, y) in points.items():
         value = row["values"]["ABCDE".index(key)] if key in tuple("ABCDE") else row["loss" if key == "L" else key]
-        label = f"{key}={value:.4g}"
-        b.box((x-64, y-27, x+64, y+27), outline=color)
-        b.text(label, x, y-12, 23, width=119, center=True)
+        label = f"L≈{value:.6f}" if key == "L" else f"{key}={value:.4g}"
+        half_width = 80 if key == "L" else 64
+        b.box((x-half_width, y-27, x+half_width, y+27), outline=color)
+        b.text(label, x, y-12, 23, width=2*half_width-9, center=True)
     b.say("Target 4", "목표 4", 1088, 276, 22, width=180, center=True, color=GREEN)
     if phase == "backward":
         b.say("Fresh gradients", "현재의 기울기", 735, 398, 21, width=425, color=ORANGE)
