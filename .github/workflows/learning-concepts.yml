@@ -5,8 +5,10 @@ on:
     paths:
       - review/learning_foundations.py
       - review/learning_foundations_v2.py
+      - review/learning_foundations_v3.py
       - scripts/render_learning_concepts.py
       - scripts/render_learning_concepts_v2.py
+      - scripts/render_learning_concepts_v3.py
       - scripts/publish_learning_review.py
       - .github/workflows/learning-concepts.yml
 permissions:
@@ -31,7 +33,7 @@ jobs:
       - run: ruff check review/learning_foundations*.py scripts/render_learning_concepts*.py scripts/publish_learning_review.py
       - run: sudo apt-get install -y fonts-noto-cjk fonts-dejavu-core
       - name: Verify arithmetic, render and decode all EN and KO scenes
-        run: python scripts/render_learning_concepts_v2.py --output learning-review --source "$GITHUB_SHA"
+        run: python scripts/render_learning_concepts_v3.py --output learning-review --source "$GITHUB_SHA"
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: learning-concepts-${{ github.sha }}

@@ -12,7 +12,7 @@ from pathlib import Path
 
 REPO = "chocoemong17/chainbench"
 BRANCH = "study/learning-foundations"
-DESTINATION = "docs/reviews/learning-foundations/v2/"
+DESTINATION = "docs/reviews/learning-foundations/v3/"
 
 
 def api(route, payload=None, method=None):
@@ -37,12 +37,12 @@ def main():
     root = Path("learning-review")
     proof = json.loads((root / "verification.json").read_text(encoding="utf8"))
     assert proof["source"] == source and proof["status"] == "concept-pending-owner-review"
-    assert proof["revision"] == 2 and len(proof["files"]) == 76
+    assert proof["revision"] == 3 and len(proof["files"]) == 80
     assert {p.name for p in root.iterdir()} == set(proof["files"]) | {"verification.json"}
     assert sum(row["bytes"] for row in proof["files"].values()) < 12_000_000
     rows = []
     for name, info in proof["files"].items():
-        if not re.fullmatch(r"(backprop|cnn|dropout)\.(en|ko)\.(gif|(?:[1-9]|10)\.png|contact[1-3]\.png)", name):
+        if not re.fullmatch(r"(backprop|cnn|dropout)\.(en|ko)\.(gif|(?:[1-9]|1[0-2])\.png|contact[1-3]\.png)", name):
             raise ValueError("Unexpected asset name")
         raw = (root / name).read_bytes()
         assert len(raw) == info["bytes"] and hashlib.sha256(raw).hexdigest() == info["sha256"]
