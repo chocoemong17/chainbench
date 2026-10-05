@@ -10,8 +10,7 @@ import re
 from pathlib import Path
 
 from PIL import Image
-
-from render_learning_concepts import BLUE, GRAY, GREEN, INK, LINE, ORANGE, PALE, SIZE, Board
+from render_learning_concepts import BLUE, GRAY, GREEN, INK, LINE, ORANGE, SIZE, Board
 
 ROOT = Path(__file__).resolve().parents[1]
 SPEC = importlib.util.spec_from_file_location("foundations_v2", ROOT / "review/learning_foundations_v2.py")
@@ -121,7 +120,7 @@ CNN_CAPTIONS = [
     ("A 3×3 patch and a 3×3 filter produce ONE output value.", "3×3 창과 필터를 곱해 더하면 출력 값 하나가 만들어집니다."),
     ("Stride 1: move one cell, compute one value, fill the next cell.", "스트라이드 1: 한 칸 이동하고 계산해서, 다음 출력 칸을 채웁니다."),
     ("A second filter scans the SAME input and builds another map.", "다른 필터도 같은 입력을 훑어 별도의 반응 지도를 만듭니다."),
-    ("Stride 2 skips two input cells per move, giving a smaller output.", "스트라이드 2는 두 칸씩 이동하므로 출력 지도가 더 작아집니다."),
+    ("Stride 2 moves two input cells per step, giving a smaller output.", "스트라이드 2는 두 칸씩 이동하므로 출력 지도가 더 작아집니다."),
     ("Feature maps become the channels of the NEXT layer.", "여러 반응 지도가 다음 층에 들어가는 채널이 됩니다."),
     ("A deeper filter spans ALL incoming channels, then adds their contributions.", "다음 층의 필터는 입력 채널 전체를 보고, 채널별 계산을 더합니다."),
     ("Combine the deeper features to obtain two output scores.", "다음 층에서 모은 특징을 합쳐 마지막 출력 점수 두 개를 만듭니다."),
@@ -263,8 +262,10 @@ DO_CAPTIONS = [
 ]
 
 
-def dropout(lang, chapter, variant=0, pulse=None):
+def dropout(lang, chapter, variant=None, pulse=None):
     b = Scene(lang, "Dropout · 5 → 10 → 5 → 2", chapter+1, 8, DO_CAPTIONS[chapter][lang == "ko"])
+    if variant is None:
+        variant = 2 if chapter == 4 else 4 if chapter == 5 else 0
     selected = m.masks()[min(4, variant if chapter >= 4 else 0)]
     mask1 = selected[0] if 1 <= chapter <= 5 else [1]*10
     mask2 = selected[1] if 2 <= chapter <= 5 else [1]*5
