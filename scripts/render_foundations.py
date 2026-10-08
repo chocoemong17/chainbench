@@ -21,7 +21,6 @@ from PIL import Image
 
 from chainbench.foundations import FPS, TOPICS, experiment, verify
 
-
 CAPTIONS = {
     'backprop': BP_CAPTIONS + [
         ('Calculate, send gradients back, update. Repeat.', '다시 계산하고, 기울기를 돌려보내고, 갱신합니다.'),
