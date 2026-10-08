@@ -87,7 +87,7 @@
   function translate(){
     $('language').textContent=tr('한국어','English');$('language').setAttribute('aria-label',tr('Switch to Korean','Switch to English'));
     if(!movie){
-      for(const paper of ['attention','resnet']){
+      for(const paper of ['attention','resnet','backprop','cnn','dropout']){
         const img=document.querySelector('img[src^="'+paper+'/poster"]');
         if(img)img.src=paper+'/poster'+(root.lang==='ko'?'.ko':'')+'.jpg';
       }

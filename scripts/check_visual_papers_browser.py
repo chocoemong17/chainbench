@@ -317,7 +317,7 @@ def main():
                         )
                         page.goto(origin + "/papers/")
                         expect(page.locator("html")).to_have_attribute("lang", "ko")
-                        assert page.locator(".paper-card").count() == 3
+                        assert page.locator(".paper-card").count() == 6
                         for img in page.locator(".paper-card img").all():
                             expect(img).to_have_js_property("complete", True)
                             assert img.evaluate("i=>i.naturalWidth>0")
