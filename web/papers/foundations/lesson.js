@@ -129,7 +129,7 @@
     document.querySelectorAll('[data-mode]').forEach(e=>e.setAttribute('aria-pressed',String(e.dataset.mode===mode)));
     window.foundationLesson={record,parameter,mode,filter,stride,depth};
   }
-  function captions(){for(const t of movie.textTracks)t.mode=t.language===root.lang?'showing':'disabled';}
+  function captions(){const enabled=[...movie.textTracks].some(t=>t.mode==='showing');for(const t of movie.textTracks)t.mode=enabled&&t.language===root.lang?'showing':'disabled';}
   function translate(){
     $('language').textContent=tr('한국어','English');$('language').setAttribute('aria-label',tr('Switch to Korean','Switch to English'));
     document.querySelector('.skip').textContent=tr('Skip to the film','영상으로 바로 가기');
