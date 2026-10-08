@@ -4,6 +4,11 @@
 
 ### Project and teaching entry points
 
+- Publish a reading translation of all ten classroom questions and every choice
+  count, while preserving the original Korean aggregate unchanged.
+- Keep the existing WebKit playback assertion bounded even when a post-seek
+  `play()` promise remains pending; actual advancing video time is still required.
+
 - Add a bilingual two-minute route connecting all six lessons to classroom
   aggregates, teacher notes, contribution guidance and maintenance priorities.
 - Update both teaching guides for the three new foundations; keep the earlier

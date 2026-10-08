@@ -36,6 +36,8 @@ The analysis maps question numbers to the ten-question questionnaire supplied fo
 these sessions; the workbook contains numbers rather than the full question text.
 The original Korean wording and all five choices, including zero-count options,
 are retained in the [aggregate record](data/classroom-survey-150.json).
+An [English reading translation with all 50 choice counts](CLASSROOM_QUESTIONNAIRE.md)
+helps readers inspect the instrument; it is not a separately administered English survey.
 
 | Question and grouping | Responses | Share of 150 |
 | --- | ---: | ---: |
