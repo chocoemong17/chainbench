@@ -65,3 +65,18 @@ Dropout. The new foundations films run 59s, 44.72s and 30s. Each has two draggab
 diagrams and English/Korean media. [Exact sources and verification](FOUNDATIONS.md).
 The complete website gate also runs the foundations browser audit on Chromium
 and WebKit, desktop and mobile, before the tested artifact can be published.
+
+## Project and classroom entry point
+
+`about/` provides a bilingual two-minute route, links to the six-lesson teaching
+guide and a balanced classroom summary. `scripts/build_project_pages.py` derives
+the displayed counts from the public aggregate JSON, copies that same JSON for
+inspection, and stamps the actual website source. It does not access student rows.
+The page distinguishes self-reported understanding from measured learning gains
+and the earlier classroom material from the three newly refined lessons.
+
+The nine main entry pages have canonical/share metadata and a sitemap. Their
+images are existing locally served posters. No analytics, remote font, third-party
+script or new runtime dependency is introduced. The project browser check covers
+both languages, mobile/desktop layout, keyboard navigation, aggregate numbers,
+internal links and no-script reading before publication.

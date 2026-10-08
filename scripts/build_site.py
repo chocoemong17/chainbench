@@ -11,6 +11,7 @@ import re
 import shutil
 from pathlib import Path
 
+from build_project_pages import build_project_pages
 from render_adam_film import build_film
 from render_foundations import build as build_foundation_film
 from render_visual_papers import build as build_visual_film
@@ -59,6 +60,7 @@ def build(tour: Path, output: Path, source: str):
         build_visual_film(output / 'papers' / slug, slug, source)
     for slug in ('backprop', 'cnn', 'dropout'):
         build_foundation_film(output / 'papers' / slug, slug, source)
+    build_project_pages(output, source)
     (output / '.nojekyll').touch()
     inventory = {}
     for path in sorted(output.rglob('*')):

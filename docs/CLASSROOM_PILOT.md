@@ -8,6 +8,11 @@ sessions and supplied 150 anonymous, ten-question response records. This is an
 informal classroom-use case with a post-session self-report survey. It measures
 perceived understanding, interest and preferences, not tested learning gains.
 
+The survey describes the previously shown material. Backpropagation, CNN and
+Dropout were subsequently refined and added; these 150 responses do not evaluate
+those three new lessons. A [short bilingual project overview](https://chocoemong17.github.io/chainbench/about/)
+connects the current six-lesson collection to this earlier evidence.
+
 ## How the sessions were run
 
 The maintainer clarified that sessions 1 and 5 were led by the presenter, while

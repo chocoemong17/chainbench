@@ -1,0 +1,43 @@
+name: Project entry and classroom review
+on:
+  push:
+    branches: [docs/submission-readiness]
+permissions:
+  contents: read
+concurrency:
+  group: project-review-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.12'
+      - run: python -m pip install 'ruff>=0.6' 'playwright==1.63.0'
+      - run: ruff check .
+      - run: python -m playwright install --with-deps chromium webkit
+      - run: sudo apt-get install -y fonts-noto-cjk
+      - name: Build project page only for early visual review
+        env:
+          SOURCE: ${{ github.sha }}
+        run: |
+          PYTHONPATH=scripts python - <<'PY'
+          import os, shutil
+          from pathlib import Path
+          from build_project_pages import build_project_pages
+          shutil.copytree('web', 'project-site')
+          build_project_pages(Path('project-site'), os.environ['SOURCE'])
+          PY
+      - run: python scripts/check_project_browser.py --site project-site --output project-review
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        if: always()
+        with:
+          name: project-review-${{ github.sha }}
+          path: project-review/
+          retention-days: 7
+          if-no-files-found: warn

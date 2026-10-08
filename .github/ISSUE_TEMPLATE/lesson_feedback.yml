@@ -1,0 +1,34 @@
+name: A confusing step in a lesson
+description: Tell us where an explanation or control became hard to follow
+title: "[lesson] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: "A concrete confusing step is useful feedback. Please do not include student names, contact information, private class records or account details. Positive reviews are not required."
+  - type: dropdown
+    id: lesson
+    attributes:
+      label: Lesson
+      options: [Adam, Attention, ResNet, Backpropagation, CNN, Dropout, Other report]
+    validations:
+      required: true
+  - type: dropdown
+    id: language
+    attributes:
+      label: Language
+      options: [English, Korean]
+    validations:
+      required: true
+  - type: textarea
+    id: observation
+    attributes:
+      label: Where did you get stuck?
+      description: A video time, control, graph label or short passage is enough. What did you expect, and what did you see?
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Browser or device, if relevant
+      description: Optional. No personal details needed.

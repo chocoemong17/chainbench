@@ -1,6 +1,30 @@
 # Contributing
 
-ChainBench reproduces public, published optimization results.
+ChainBench explains public machine-learning papers and reproduces scoped
+optimization results. Contributions can improve an explanation, translation,
+control or numerical example; adding another algorithm is not required.
+
+## Start with a small contribution
+
+- Report a [confusing lesson step](https://github.com/chocoemong17/chainbench/issues/new?template=lesson_feedback.yml),
+  including the topic, language and video time or control. No learner identities.
+- Correct a translation or inaccessible label with the old wording, proposed
+  wording and the page where it appears. Keep mathematical meaning unchanged.
+- Propose a new explanation using the [outline and filled example](docs/LESSON_PROPOSAL.md).
+  Submit a rough scene sequence first. Wait for mechanism/difficulty review before
+  polishing media; accepted numerical results alone do not approve a teaching design.
+
+Existing lesson HTML lives in `web/papers/`; pure computed fixtures live in
+`src/chainbench/visual_papers.py` and `src/chainbench/foundations.py`. The latter
+three lessons share `web/papers/foundations/lesson.js`. Source and convention notes
+are in [VISUAL_PAPERS](docs/VISUAL_PAPERS.md), [FOUNDATIONS](docs/FOUNDATIONS.md),
+and [SOURCE_MAP](docs/SOURCE_MAP.md).
+
+Keep videos under one minute, preserve pause/seek/caption access and keyboard
+alternatives to dragging, and supply English plus Korean wording where practical.
+Use original or appropriately licensed assets; link papers instead of copying PDFs.
+
+## Numerical changes
 
 A good contribution includes:
 1. a public paper or textbook reference,
