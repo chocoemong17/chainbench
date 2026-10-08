@@ -57,3 +57,11 @@ The repository's **Settings → Pages → Build and deployment → Source** must
 **GitHub Actions** once, using an account with repository administration access.
 The expected URL is `https://chocoemong17.github.io/chainbench/`; consider it live
 only after the deployment succeeds and the public URL is checked.
+
+## Six visual paper lessons
+
+The paper collection includes Adam, Attention, ResNet, Backpropagation, CNN and
+Dropout. The new foundations films run 59s, 44.72s and 30s. Each has two draggable
+diagrams and English/Korean media. [Exact sources and verification](FOUNDATIONS.md).
+The complete website gate also runs the foundations browser audit on Chromium
+and WebKit, desktop and mobile, before the tested artifact can be published.

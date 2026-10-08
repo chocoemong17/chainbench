@@ -26,7 +26,7 @@
   function backprop(a,b){
     const row=record.trace[parameter],back=mode==='backward';
     text(a,20,30,back?tr('Backward · how does the loss change?','역방향 · 오차는 얼마나 변할까요?'):tr('Forward · y = AB + CDE','순방향 · y = AB + CDE'),back?red:blue,21);
-    const positions={A:[52,90],B:[52,159],C:[52,240],D:[52,309],E:[52,382],AB:[205,128],CD:[205,270],CDE:[337,319],y:[440,208],L:[509,107]};
+    const positions={A:[52,90],B:[52,159],C:[52,240],D:[52,309],E:[52,370],AB:[205,128],CD:[205,270],CDE:[337,319],y:[440,208],L:[509,107]};
     const edges=[['A','AB'],['B','AB'],['C','CD'],['D','CD'],['CD','CDE'],['E','CDE'],['AB','y'],['CDE','y'],['y','L']];
     for(const [x,z] of edges){const p=positions[x],q=positions[z],start=[p[0]+28,p[1]],end=[q[0]-29,q[1]];arrow(a,back?end:start,back?start:end,back?red:blue);}
     const g=row.y-4,gv={A:row.gradients[0],B:row.gradients[1],C:row.gradients[2],D:row.gradients[3],E:row.gradients[4],AB:g,CD:g*row.values[4],CDE:g,y:g,L:1};

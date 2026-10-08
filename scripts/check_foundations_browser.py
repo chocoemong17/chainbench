@@ -118,6 +118,8 @@ def check(args):
                             slider.press('ArrowRight')
                             assert page.evaluate('window.foundationLesson.parameter')==1
                             audit(page)
+                            clipped=page.locator('.chart-svg').evaluate_all('''svgs=>svgs.flatMap(s=>[...s.querySelectorAll('text')].filter(t=>{const b=t.getBBox();return b.x < -1 || b.y < -1 || b.x+b.width > 561 || b.y+b.height > 421;}).map(t=>t.textContent))''')
+                            assert not clipped,clipped
                             # Decode every chapter in both browser engines and both languages.
                             for seconds in record['chapters']:
                                 seek(page,seconds+.12)
@@ -150,7 +152,7 @@ def check(args):
                     for body in (None,'{"kind":"chainbench.foundation.v1"}'):
                         context=browser.new_context()
                         page=context.new_page()
-                        page.route('**/experiment.json',lambda route,body=body:route.abort() if body is None else route.fulfill(status=200,content_type='application/json',body=body))
+                        page.route('**/experiment.json',lambda route,_request,body=body:route.abort() if body is None else route.fulfill(status=200,content_type='application/json',body=body))
                         page.goto(origin+f'/papers/{slug}/')
                         expect(page.locator('#load-status')).to_have_attribute('role','alert')
                         expect(page.locator('#parameter')).to_be_disabled()
