@@ -131,9 +131,15 @@ def check(args):
                             page.locator('#iteration').press('End')
                             page.wait_for_function('(d)=>document.querySelector("video").currentTime>d-1',arg=record['duration'])
                             seek(page,2)
-                            movie.evaluate('v=>v.play()')
-                            page.wait_for_timeout(200)
-                            assert not movie.evaluate('v=>v.paused')
+                            start=movie.evaluate('v=>v.currentTime')
+                            # A post-seek play() promise can remain pending in WebKit.
+                            # Require real clock advancement within a bounded wait.
+                            movie.evaluate('''v=>{
+                                delete v.dataset.playError;
+                                v.play().catch(e=>{v.dataset.playError=e.name+': '+e.message;});
+                            }''')
+                            page.wait_for_function('start=>{const v=document.querySelector("video");return !v.paused && v.currentTime>start+.4;}',arg=start,timeout=10000)
+                            assert movie.get_attribute('data-play-error') is None
                             movie.evaluate('v=>v.pause()')
                             page.locator('.comparison').screenshot(path=str(args.output/f'{slug}-{engine}-{width}-{lang}.png'))
                             if engine=='chromium':

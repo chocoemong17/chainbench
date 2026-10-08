@@ -1,12 +1,13 @@
 # A short route for teaching with ChainBench
 
-[한국어](TEACHING_GUIDE.ko.md) · [Open the three lessons](https://chocoemong17.github.io/chainbench/papers/)
+[한국어](TEACHING_GUIDE.ko.md) · [Open the six lessons](https://chocoemong17.github.io/chainbench/papers/)
 
-Choose **one** paper for a 30-minute session. Watch its 48-second film, rehearse
+Choose **one** paper for a 30-minute session. Watch its film (30–59 seconds), rehearse
 the control sequence below, and read its misconception note before presenting.
 You do not need to derive the equations; the original paper and mathematical
 scope remain available for follow-up. English is the default; the language button
-also changes the Attention and ResNet film labels and captions.
+changes the localized films where available and the captions. Adam uses the
+same visual film with localized page text and captions.
 
 ## Attention — change what you are looking for
 
@@ -75,6 +76,77 @@ Using coordinate-wise history can help here; it is not knowledge of the destinat
 **Avoid:** Claiming Adam always wins. This is a selected constructed example with
 disclosed settings, not a reproduction of a full training benchmark.
 
+## Backpropagation — calculate how each variable affects the error
+
+[Open Backpropagation](https://chocoemong17.github.io/chainbench/papers/backprop/)
+
+**Say:** Send values forward, trace the error backward, then use the resulting
+sensitivities to change the variables toward a target.
+
+**Try:** Watch the 59-second film. Set completed updates to 0 and switch between
+Forward and Backward. Follow both branches of `AB + CDE`. Move the update slider
+to 1, then slowly to 6; the second diagram follows the same selected update.
+
+**Notice:** The target is 4. Output starts at 2, becomes about 3.4330 after the
+first update and 3.9965 after the sixth. Gradients are recalculated each time and
+all five variables change together; the chart is a computed trace.
+
+**Connect:** When a recipe misses a target, knowing which ingredients affect the
+result helps choose adjustments. This example makes those sensitivities explicit.
+
+**Avoid:** Saying backpropagation alone changes the weights, splitting an
+addition's incoming derivative in half, or promising every step size reduces
+error. Backprop computes gradients; gradient descent with the chosen rate 0.02
+produces these six updates. This five-variable fixture is not a trained network.
+
+## CNN — reuse one filter across locations
+
+[Open CNN](https://chocoemong17.github.io/chainbench/papers/cnn/)
+
+**Say:** Slide the same small filter over an image, record a response at each
+location, then combine response maps through later layers.
+
+**Try:** Move the scan from the first to the last position. Compare the vertical
+and horizontal filters; inspect the numbered input patch, multiplication and
+output. Switch stride 1 to 2. In the second diagram, move layer depth from 0 to 2.
+
+**Notice:** Stride 1 produces 35 positions per filter; stride 2 produces 12.
+Two filters make two maps. The deeper illustration always uses stride 1 and
+combines both channels. Nonzero cells show numbers; gray output cells are not
+visited yet. Zero cells are blank.
+
+**Connect:** The same small pattern can occur anywhere in an image. Reusing the
+filter lets a network check for that pattern at many positions.
+
+**Avoid:** Saying 18 shared weights and 4,410 independent dense weights have the
+same accuracy. The comparison matches first-layer input/output shapes, excludes
+bias and uses stride 1; stride 2 changes the dense count to 1,512. Filters here
+are chosen for demonstration; scores are not trained class probabilities.
+
+## Dropout — change which hidden units participate
+
+[Open Dropout](https://chocoemong17.github.io/chainbench/papers/dropout/)
+
+**Say:** During training, randomly omit some hidden units so the network cannot
+always rely on the same combination. At prediction, use all units with the
+chosen scaling convention.
+
+**Try:** Move through all five training draws in the 3→5→5→2 network. Follow
+crossed-out units and their inactive connections. Select Prediction and observe
+all hidden units return; compare both displayed scores.
+
+**Notice:** There are 50 connections and two hidden layers. Draw 3 happens to
+omit the entire first hidden layer, so both scores are zero. The example keeps
+this outcome. Prediction scales the outgoing weights of each hidden layer by
+0.5, matching the original paper's convention.
+
+**Connect:** Practising with changing teammates can illustrate why one fixed
+combination should not be the only available route.
+
+**Avoid:** Claiming these fixed-weight mask changes demonstrate improved accuracy,
+permanently delete neurons, or equal the exact average of all nonlinear networks.
+The original training/prediction convention differs from modern inverted dropout.
+
 ## A 30-minute student-led session
 
 | Minutes | Activity |
@@ -100,6 +172,7 @@ and response distributions. Participation is optional; report findings as
 perceived understanding and interest. Prefer aggregate results for sharing.
 
 Use [Attention/ResNet sources and exact scope](VISUAL_PAPERS.md),
-[Adam's example](ADAM_FILM.md), and the original-paper links on each lesson when
+[Adam's example](ADAM_FILM.md), [the three foundations](FOUNDATIONS.md),
+and the original-paper links on each lesson when
 preparing for a deeper question. Report an unclear explanation through the
 repository's existing issue templates, including the lesson and language.

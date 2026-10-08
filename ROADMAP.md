@@ -1,6 +1,43 @@
 # Roadmap: published examples before algorithm counts
 
-## Current v0.7.0 source
+## Current public project — October 2026
+
+[Six visual lessons](https://chocoemong17.github.io/chainbench/papers/) are live:
+Adam, Attention, ResNet, Backpropagation, CNN and Dropout. Each has a film under
+one minute, two interactive diagrams, English/Korean access and original sources.
+The broader explorer and 25-page numerical reading tour remain available. The published
+v0.7.0 package and offline bundle are an earlier snapshot, not a download of all
+six current films; previous tags and release assets stay fixed.
+
+The [classroom record](docs/CLASSROOM_PILOT.md) contains 150 responses about earlier
+material. [Feedback and changes](docs/IMPROVEMENTS.md) distinguishes completed
+improvements from educational outcomes that have not been measured.
+
+## Six-month maintenance plan
+
+This is a proposed sequence, not a record of completed work or promised adoption.
+Actual defects and review feedback take priority over a topic quota.
+
+| Period | Work | Reviewable output |
+| --- | --- | --- |
+| Months 1–2 | Triage numerical, playback, translation and mobile/keyboard defects in the six lessons; reduce each confirmed defect before fixing it. | Linked issue → correction → numerical/browser validation; maintained bilingual teaching notes. |
+| Months 3–4 | Review rough proposals for additional landmark papers; test whether each sketch reveals its distinctive mechanism before rendering. | Public source map, computed fixture, scene sequence and explicit content/difficulty approval. No promise to publish an unapproved lesson. |
+| Months 5–6 | Refine approved concepts, extend teacher preparation, and maintain dependency/release checks. | Reviewed bilingual lesson or documented reason to defer; tested source and matching deployed assets. |
+
+Codex support would be used for issue reproduction, code review, independent test
+construction, English/Korean consistency checks and release preparation. Human
+review remains responsible for mathematical claims, educational examples and
+publication. API-backed automation is optional future work; the public lessons
+currently run without an API key or paid backend.
+
+Progress is judged by resolved defects, clear source mappings, usable reviewed
+explanations and reproducible releases. CI runs and maintainer commits are not
+counted as independent adoption. Classroom findings are updated only when real
+new evidence arrives; no participant recruitment is required to maintain the site.
+
+[Contribution entry points](CONTRIBUTING.md) · [Rough proposal template](docs/LESSON_PROPOSAL.md)
+
+## Historical v0.7.0 source scope
 
 The v0.7.0 candidate adds exact numeric-input generation/import/replay and an
 opt-in browser studio to the integrated paper-reading toolkit. The studio

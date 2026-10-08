@@ -3,7 +3,12 @@
 [![tests](https://github.com/chocoemong17/chainbench/actions/workflows/tests.yml/badge.svg)](https://github.com/chocoemong17/chainbench/actions/workflows/tests.yml)
 ![status](https://img.shields.io/badge/status-alpha-informational.svg)
 
-**Read the idea. Follow the iterates. Recompute the evidence.**
+**Landmark machine-learning papers, explained through motion and interactive examples.**
+
+For curious beginners and educators: six short visual lessons in English and Korean,
+with source-linked calculations for deeper study.
+[Project & classroom use — a two-minute route](https://chocoemong17.github.io/chainbench/about/) ·
+[한국어 소개](https://chocoemong17.github.io/chainbench/about/?lang=ko)
 
 ### Start in your browser
 
@@ -23,18 +28,21 @@ then explore the source. No ZIP, Python installation or sign-in is needed.
 The films use explicit constructed examples, with computed records and stated
 scope; they do not reproduce full model-training experiments.
 [Adam, Attention and ResNet sources](docs/VISUAL_PAPERS.md) ·
-[Backpropagation, CNN and Dropout sources](docs/FOUNDATIONS.md). The [broader explorer and 25 reports](https://chocoemong17.github.io/chainbench/) remain available.
+[Backpropagation, CNN and Dropout sources](docs/FOUNDATIONS.md). The [broader explorer and 25-page reading tour](https://chocoemong17.github.io/chainbench/) remain available.
 
 Teaching a class? Use the [short preparation and activity guide](docs/TEACHING_GUIDE.md)
 ([한국어](docs/TEACHING_GUIDE.ko.md)). [Field notes from five middle-school sessions](docs/CLASSROOM_PILOT.md)
-report 150 post-session responses, their limits, and the changes made in response.
+report 150 post-session responses: 139 reported understanding most or almost all,
+73 reported positive interest, and 54 wanted another topic. These are self-reports
+about earlier material, not measured learning gains or an evaluation of the three
+new lessons. [Feedback and resulting changes](docs/IMPROVEMENTS.md).
 
 English opens by default; choose **한국어** to switch. Continue directly into the
 25-page reading tour, including image recovery and 2D/3D geometry. The first
 explorer computes new browser trajectories; paper-report controls inspect their
 recorded results. [What is computed, tested and published](docs/WEBSITE.md).
-The website becomes available after its main-branch gate and GitHub Pages
-deployment succeed; the versioned offline downloads below remain available.
+Each website update is published only after its complete main-branch checks pass.
+The versioned offline downloads below remain available.
 
 ChainBench connects published optimization methods to their assumptions, update
 rules and actual calculations. Explore 2D contours, 3D objective surfaces, image

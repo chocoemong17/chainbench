@@ -207,10 +207,16 @@ def main():
                     # Actual playback, not just setting a timestamp.
                     start = movie.evaluate("v=>v.currentTime")
                     print({"resume_from": start, "engine": engine, "width": width}, flush=True)
-                    movie.evaluate("v=>v.play()")
+                    # WebKit can keep the play() promise pending after a seek.
+                    # Do not await that promise indefinitely: the bounded check
+                    # below still requires actual playback and clock advancement.
+                    movie.evaluate("""v=>{
+                        delete v.dataset.playError;
+                        v.play().catch(e=>{v.dataset.playError=e.name+': '+e.message;});
+                    }""")
                     print(
                         movie.evaluate(
-                            "v=>({afterPlay:v.currentTime,paused:v.paused,ended:v.ended,ready:v.readyState})"
+                            "v=>({afterPlay:v.currentTime,paused:v.paused,ended:v.ended,ready:v.readyState,error:v.dataset.playError})"
                         ),
                         flush=True,
                     )
@@ -219,6 +225,7 @@ def main():
                         arg=start,
                         timeout=10000,
                     )
+                    assert movie.get_attribute('data-play-error') is None
                     movie.evaluate("v=>v.pause()")
                     expect(movie).to_have_js_property("paused", True)
                     # Pointer dragging is bound to encoded frames, never invented optimizer states.

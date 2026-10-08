@@ -1,8 +1,11 @@
-name: Propose a literature check
-description: Suggest a public optimization result to reproduce
+name: Propose a paper explanation or literature check
+description: Start with a rough mechanism, example and scene sequence
 title: "[paper] "
 labels: ["enhancement"]
 body:
+  - type: markdown
+    attributes:
+      value: "Start with a rough sketch, before polished media. Follow docs/LESSON_PROPOSAL.md for the outline and a filled example."
   - type: input
     id: citation
     attributes:
@@ -13,8 +16,8 @@ body:
   - type: textarea
     id: result
     attributes:
-      label: Result to reproduce
-      description: State the published quantitative or qualitative prediction.
+      label: Mechanism or result to explain
+      description: State the audience, one central idea, and the published quantitative or qualitative prediction.
     validations:
       required: true
   - type: textarea
@@ -24,3 +27,8 @@ body:
       description: Explain how the reference value or optimum can be verified independently.
     validations:
       required: true
+  - type: textarea
+    id: scenes
+    attributes:
+      label: Rough scenes and interactions
+      description: What moves, what can the reader change, and what should they notice? State the limits of this example.
