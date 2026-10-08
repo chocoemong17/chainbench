@@ -14,19 +14,19 @@
   const path=(s,points,color=blue,width=2,attrs={})=>s.append(make('polyline',{points:points.map(p=>p.join(',')).join(' '),fill:'none',stroke:color,'stroke-width':width,...attrs}));
   function arrow(s,a,b,color){path(s,[a,b],color,2);const theta=Math.atan2(b[1]-a[1],b[0]-a[0]);s.append(make('polygon',{points:[b,...[-1,1].map(k=>[b[0]-9*Math.cos(theta+k*.5),b[1]-9*Math.sin(theta+k*.5)])].map(p=>p.join(',')).join(' '),fill:color}));}
   function readout(id,entries){$(id).replaceChildren();for(const [key,value,label] of entries){const e=document.createElement('span');e.id=key;e.dataset.value=String(value);e.textContent=label;$(id).append(e);}}
-  function grid(s,data,x,y,cell,max=1,active=null,until=Infinity,kind='cell'){
+  function grid(s,data,x,y,cell,max=1,active=null,until=Infinity,kind='cell',labels=true){
     for(let r=0;r<data.length;r++)for(let c=0;c<data[r].length;c++){
       const v=data[r][c],known=r*data[r].length+c<=until;
       const strength=Math.min(1,Math.abs(v)/max),fill=!known?'#d4dbd3':v===0?'#fafbf8':v<0?red:blue;
       rect(s,x+c*cell,y+r*cell,cell-1,cell-1,fill,'none',{'data-kind':kind,'data-row':r,'data-col':c,'data-value':known?v:'unknown','fill-opacity':known&&v!==0?.35+.65*strength:1,rx:2});
-      if(known&&v!==0&&cell>=20)text(s,x+(c+.5)*cell,y+(r+.69)*cell,Number.isInteger(v)?v.toString():v.toFixed(1),strength>.4?'white':ink,Math.min(16,cell*.62),'middle');
+      if(labels&&known&&v!==0&&cell>=20)text(s,x+(c+.5)*cell,y+(r+.69)*cell,Number.isInteger(v)?v.toString():v.toFixed(1),strength>.4?'white':ink,Math.min(16,cell*.62),'middle');
     }
     if(active)rect(s,x+active[1]*cell,y+active[0]*cell,cell*active[2],cell*active[2],'none',red,{'stroke-width':3,rx:0});
   }
   function backprop(a,b){
     const row=record.trace[parameter],back=mode==='backward';
     text(a,20,30,back?tr('Backward · how does the loss change?','역방향 · 오차는 얼마나 변할까요?'):tr('Forward · y = AB + CDE','순방향 · y = AB + CDE'),back?red:blue,21);
-    const positions={A:[52,90],B:[52,159],C:[52,240],D:[52,309],E:[52,370],AB:[205,128],CD:[205,270],CDE:[337,319],y:[440,208],L:[509,107]};
+    const positions={A:[52,80],B:[52,152],C:[52,224],D:[52,296],E:[52,368],AB:[205,116],CD:[205,260],CDE:[337,319],y:[440,208],L:[509,107]};
     const edges=[['A','AB'],['B','AB'],['C','CD'],['D','CD'],['CD','CDE'],['E','CDE'],['AB','y'],['CDE','y'],['y','L']];
     for(const [x,z] of edges){const p=positions[x],q=positions[z],start=[p[0]+28,p[1]],end=[q[0]-29,q[1]];arrow(a,back?end:start,back?start:end,back?red:blue);}
     const g=row.y-4,gv={A:row.gradients[0],B:row.gradients[1],C:row.gradients[2],D:row.gradients[3],E:row.gradients[4],AB:g,CD:g*row.values[4],CDE:g,y:g,L:1};
@@ -34,7 +34,7 @@
       const v=key.length===1&&'ABCDE'.includes(key)?row.values['ABCDE'.indexOf(key)]:key==='L'?row.loss:row[key];
       rect(a,x-31,y-27,62,48,'#fafbf8',back?red:blue,{'data-node':key,'data-value':v});
       text(a,x,y-9,key,gray,14,'middle');text(a,x,y+11,v.toFixed(key==='L'?3:2),ink,15,'middle');
-      if(back)text(a,x,y+40,'g '+gv[key].toFixed(3),red,13,'middle').setAttribute('data-gradient',key);
+      if(back)text(a,x,y+35,'g '+gv[key].toFixed(3),red,13,'middle').setAttribute('data-gradient',key);
     }
     text(b,24,32,tr('Prediction after each update','갱신마다 달라지는 예측'),ink,22);
     const x=k=>48+k*76,y=v=>326-(v-2)*120;
@@ -50,7 +50,11 @@
   }
   function volume(s,maps,x,y,cell,selected){
     const max=Math.max(1,...maps.flat(2).map(Math.abs)),h=maps[0].length,w=maps[0][0].length;
-    for(let z=maps.length-1;z>=0;z--){grid(s,maps[z],x+z*14,y-z*15,cell,max,null,Infinity,'volume');rect(s,x+z*14,y-z*15,w*cell,h*cell,'none',selected?green:gray,{'stroke-width':selected?2.5:1,rx:0});}
+    for(let z=maps.length-1;z>=0;z--){
+      rect(s,x+z*14,y-z*15,w*cell,h*cell,'#fafbf8','none',{rx:0});
+      grid(s,maps[z],x+z*14,y-z*15,cell,max,null,Infinity,'volume',z===0);
+      rect(s,x+z*14,y-z*15,w*cell,h*cell,'none',selected?green:gray,{'stroke-width':selected?2.5:1,rx:0});
+    }
     if(maps.length>1)for(const [dx,dy] of [[0,0],[w*cell,0],[w*cell,h*cell]])path(s,[[x+dx,y+dy],[x+dx+14,y+dy-15]],gray,1);
   }
   function cnn(a,b){
