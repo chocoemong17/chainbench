@@ -87,3 +87,6 @@ pointer drags, numerical SVG widths/readouts, localization with playback-time
 retention, collapsed MathML, gallery/no-script/error states and no external requests.
 Selected cloud screenshots receive manual visual review before publication.
 Full PR/main tests and gated exact-artifact Pages publication remain mandatory.
+
+The additional Backpropagation, CNN and Dropout lessons have their own
+[source and numerical contract](FOUNDATIONS.md).

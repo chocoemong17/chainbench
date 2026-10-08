@@ -1,0 +1,45 @@
+name: Foundations films and interaction review
+on:
+  push:
+    branches: [feat/learning-foundations]
+permissions:
+  contents: read
+concurrency:
+  group: foundations-films-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  films:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.12'
+      - run: python -m pip install '.[dev]' 'playwright==1.63.0' 'Pillow==11.3.0'
+      - run: ruff check .
+      - run: python -m pytest tests/test_foundations.py
+      - run: python -m playwright install --with-deps chromium webkit
+      - run: sudo apt-get install -y fonts-noto-cjk fonts-dejavu-core ffmpeg
+      - name: Build only the new approved films for early review
+        run: |
+          python -c "import shutil; shutil.copytree('web','foundation-site')"
+          python scripts/render_foundations.py --output foundation-site/papers --review foundation-preview --source "$GITHUB_SHA"
+      - run: python scripts/check_foundations_browser.py --site foundation-site --output foundation-browser
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        if: always()
+        with:
+          name: foundation-review-${{ github.sha }}
+          path: |
+            foundation-preview/
+            foundation-browser/
+          retention-days: 7
+          if-no-files-found: warn
+      - name: Publish review images to the separate review branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/publish_foundation_preview.py

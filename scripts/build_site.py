@@ -12,6 +12,7 @@ import shutil
 from pathlib import Path
 
 from render_adam_film import build_film
+from render_foundations import build as build_foundation_film
 from render_visual_papers import build as build_visual_film
 
 from chainbench.landscape import run_landscape
@@ -56,6 +57,8 @@ def build(tour: Path, output: Path, source: str):
     build_film(output / 'papers' / 'adam', source)
     for slug in ('attention', 'resnet'):
         build_visual_film(output / 'papers' / slug, slug, source)
+    for slug in ('backprop', 'cnn', 'dropout'):
+        build_foundation_film(output / 'papers' / slug, slug, source)
     (output / '.nojekyll').touch()
     inventory = {}
     for path in sorted(output.rglob('*')):

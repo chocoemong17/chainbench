@@ -1,5 +1,9 @@
 # Source-to-experiment map
 
+The Backpropagation, CNN and Dropout visual lessons retain their approved constructed
+examples. Their sources, exact numbers, timing and limitations are documented in
+[Learning foundations](FOUNDATIONS.md). These are not trained paper benchmarks.
+
 The standalone `reproduce reddi-2018` implements Reddi–Kale–Kumar's
 Theorem 1 / Appendix A period-three online linear-loss counterexample,
 with Algorithm 1's no-debiasing analysis variant and Algorithm 2's max-memory

@@ -7,19 +7,23 @@
 
 ### Start in your browser
 
-[**Watch Adam, Attention and ResNet →**](https://chocoemong17.github.io/chainbench/papers/)
+[**Explore six visual paper lessons →**](https://chocoemong17.github.io/chainbench/papers/)
 ([deployment status](https://github.com/chocoemong17/chainbench/actions/workflows/pages.yml)).
-Three landmark papers, each with a 48-second film, two interactive graphs and
+Six landmark papers, each with a film under one minute, two interactive diagrams and
 a direct link to the original paper. Start with the motion, drag the calculation,
 then explore the source. No ZIP, Python installation or sign-in is needed.
 
 - [Adam](https://chocoemong17.github.io/chainbench/papers/adam/): coordinate-wise steps in a steep valley.
 - [Attention](https://chocoemong17.github.io/chainbench/papers/attention/): query–key matching and a weighted mix.
 - [ResNet](https://chocoemong17.github.io/chainbench/papers/resnet/): an identity shortcut and an added correction.
+- [Backpropagation](https://chocoemong17.github.io/chainbench/papers/backprop/): branched gradients and six updates toward a target.
+- [CNN](https://chocoemong17.github.io/chainbench/papers/cnn/): moving numbered filters, channel stacks and weight sharing.
+- [Dropout](https://chocoemong17.github.io/chainbench/papers/dropout/): changing participation across two hidden layers.
 
 The films use explicit constructed examples, with computed records and stated
 scope; they do not reproduce full model-training experiments.
-[Sources and checks](docs/VISUAL_PAPERS.md). The [broader explorer and 25 reports](https://chocoemong17.github.io/chainbench/) remain available.
+[Adam, Attention and ResNet sources](docs/VISUAL_PAPERS.md) ·
+[Backpropagation, CNN and Dropout sources](docs/FOUNDATIONS.md). The [broader explorer and 25 reports](https://chocoemong17.github.io/chainbench/) remain available.
 
 Teaching a class? Use the [short preparation and activity guide](docs/TEACHING_GUIDE.md)
 ([한국어](docs/TEACHING_GUIDE.ko.md)). [Field notes from five middle-school sessions](docs/CLASSROOM_PILOT.md)
