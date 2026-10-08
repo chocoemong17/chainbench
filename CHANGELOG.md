@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+### Project and teaching entry points
+
+- Add a bilingual two-minute route connecting all six lessons to classroom
+  aggregates, teacher notes, contribution guidance and maintenance priorities.
+- Update both teaching guides for the three new foundations; keep the earlier
+  150-response survey separate from unevaluated new lessons.
+- Add canonical/share metadata and aggregate, keyboard, language and mobile checks.
+- Refresh pinned Pages actions for Node 24 and preserve hidden files explicitly
+  so the published artifact retains the verified `.nojekyll` marker.
+
+
 - Add Attention and ResNet to the video-first paper collection, with computed
   48-second films, two draggable graphs each, English/Korean support, native
   formulae, precise paper links and independent numerical/browser validation.
