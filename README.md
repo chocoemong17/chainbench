@@ -28,7 +28,7 @@ then explore the source. No ZIP, Python installation or sign-in is needed.
 The films use explicit constructed examples, with computed records and stated
 scope; they do not reproduce full model-training experiments.
 [Adam, Attention and ResNet sources](docs/VISUAL_PAPERS.md) ·
-[Backpropagation, CNN and Dropout sources](docs/FOUNDATIONS.md). The [broader explorer and 25 reports](https://chocoemong17.github.io/chainbench/) remain available.
+[Backpropagation, CNN and Dropout sources](docs/FOUNDATIONS.md). The [broader explorer and 25-page reading tour](https://chocoemong17.github.io/chainbench/) remain available.
 
 Teaching a class? Use the [short preparation and activity guide](docs/TEACHING_GUIDE.md)
 ([한국어](docs/TEACHING_GUIDE.ko.md)). [Field notes from five middle-school sessions](docs/CLASSROOM_PILOT.md)

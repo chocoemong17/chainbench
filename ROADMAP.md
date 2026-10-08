@@ -5,7 +5,7 @@
 [Six visual lessons](https://chocoemong17.github.io/chainbench/papers/) are live:
 Adam, Attention, ResNet, Backpropagation, CNN and Dropout. Each has a film under
 one minute, two interactive diagrams, English/Korean access and original sources.
-The broader explorer and 25 numerical reports remain available. The published
+The broader explorer and 25-page numerical reading tour remain available. The published
 v0.7.0 package and offline bundle are an earlier snapshot, not a download of all
 six current films; previous tags and release assets stay fixed.
 
