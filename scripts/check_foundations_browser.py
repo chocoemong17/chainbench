@@ -67,7 +67,7 @@ def check(args):
                         context=browser.new_context(viewport={'width':width,'height':1000},reduced_motion='reduce')
                         page=context.new_page()
                         page.on('pageerror',lambda e:proof['errors'].append(str(e)))
-                        page.on('request',lambda r:proof['external_requests'].append(r.url) if not r.url.startswith(origin) else None)
+                        page.on('request',lambda r:proof['external_requests'].append(r.url) if not r.url.startswith((origin+'/', 'blob:'+origin+'/')) else None)
                         assert page.goto(origin+f'/papers/{slug}/',wait_until='networkidle').status==200
                         page.wait_for_function('()=>Boolean(window.foundationLesson)')
                         expect(page.locator('html')).to_have_attribute('lang','en')
@@ -158,9 +158,10 @@ def check(args):
                         expect(page.locator('#parameter')).to_be_disabled()
                         context.close()
                 browser.close()
+        proof['status']='failed' if proof['errors'] or proof['external_requests'] else 'passed'
+        (args.output/'verification.json').write_text(json.dumps(proof,indent=2)+'\n')
         assert not proof['errors'],proof['errors']
         assert not proof['external_requests'],proof['external_requests']
-        (args.output/'verification.json').write_text(json.dumps(proof,indent=2)+'\n')
         print(json.dumps(proof),flush=True)
     finally:
         server.shutdown()
