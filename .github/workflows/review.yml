@@ -50,7 +50,7 @@ jobs:
           python review/review.py collect --output review-output/second.json
           python review/review.py compare review-output/first.json review-output/second.json > review-output/repeat-comparison.json
           python review/review.py summary review-output/first.json > review-output/summary.md
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:
           name: frozen-release-review-${{ matrix.os }}-${{ github.run_id }}
@@ -91,7 +91,7 @@ jobs:
             if [ "$status" -ne 0 ] && [ "$status" -ne 3 ]; then failed=1; fi
           done
           test "$failed" -eq 0
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:
           name: frozen-release-comparisons-${{ github.run_id }}

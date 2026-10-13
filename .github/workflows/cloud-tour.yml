@@ -36,25 +36,25 @@ jobs:
           python scripts/reading_release.py extract --directory reading-release --output extracted-reading --source "$GITHUB_SHA"
       - name: Read the extracted ZIP offline on desktop and mobile
         run: python scripts/check_tour_browser.py --tour extracted-reading --output extracted-browser
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: chainbench-reading-release-${{ github.sha }}
           path: reading-release/
           if-no-files-found: error
           retention-days: 7
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: chainbench-reading-bundle-${{ github.sha }}
           path: reading-bundle/
           if-no-files-found: error
           retention-days: 7
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: chainbench-review-packet-${{ github.sha }}
           path: review-packet/
           if-no-files-found: error
           retention-days: 7
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: chainbench-extracted-browser-${{ github.sha }}
           path: extracted-browser/
