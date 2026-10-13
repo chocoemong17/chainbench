@@ -25,7 +25,7 @@ jobs:
       - run: cp -R web playback-site
       - run: python scripts/render_adam_film.py --output playback-site/papers/adam --source "$GITHUB_SHA"
       - run: python scripts/check_adam_lesson_browser.py --site playback-site --output playback-review
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         if: always()
         with:
           name: playback-review-${{ github.sha }}
@@ -58,7 +58,7 @@ jobs:
           build_project_pages(Path('project-site'), os.environ['SOURCE'])
           PY
       - run: python scripts/check_project_browser.py --site project-site --output project-review
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         if: always()
         with:
           name: project-review-${{ github.sha }}

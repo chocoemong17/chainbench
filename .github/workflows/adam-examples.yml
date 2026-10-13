@@ -26,13 +26,13 @@ jobs:
       - run: python -m pytest tests/test_adam_examples.py
       - run: python scripts/study_adam_examples.py --source "$GITHUB_SHA" --output adam-example-study
       - run: python scripts/plot_adam_examples.py --input adam-example-study/study.json --output adam-example-review
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: adam-example-study-${{ github.sha }}
           path: adam-example-study/
           if-no-files-found: error
           retention-days: 14
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: adam-example-review-${{ github.sha }}
           path: adam-example-review/

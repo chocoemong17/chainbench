@@ -31,7 +31,7 @@ jobs:
           PY
           python scripts/render_adam_film.py --output lesson-site/papers/adam --source "$GITHUB_SHA"
           python scripts/render_visual_papers.py --output lesson-site/papers --review paper-preview --source "$GITHUB_SHA"
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         if: always()
         with:
           name: paper-preview-${{ github.sha }}
@@ -39,7 +39,7 @@ jobs:
           retention-days: 7
           if-no-files-found: warn
       - run: python scripts/check_visual_papers_browser.py --site lesson-site --output paper-review
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         if: always()
         with:
           name: paper-review-${{ github.sha }}
